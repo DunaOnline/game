@@ -1,0 +1,22 @@
+<% title "Imperialni kartografie" %>
+
+<table class="tab0">
+	<tr>	
+		<td>
+		</td>
+		<td class="tdd">
+			<ul class="menud">
+				<li>	<a title="Filtrováním přenastavíte zobrazená data.">Zobrazit »</a> 
+					<ul>
+						<li><%= link_to "Mapa Impéria", systems_path %>
+						<li><%= link_to "Planety k osídlení", planets_path %>
+					</ul>
+				</li>
+			</ul>		
+		</td>
+	</tr>
+</table>
+
+<%= render :partial => 'mapa_imperia', :locals => {:systems => @systems} %>
+
+

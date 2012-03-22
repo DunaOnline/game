@@ -1,0 +1,64 @@
+<%= form_for @building do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :population_bonus %><br />
+    <%= f.text_field :population_bonus %>
+  </p>
+  <p>
+    <%= f.label :pop_limit_bonus %><br />
+    <%= f.text_field :pop_limit_bonus %>
+  </p>
+  <p>
+    <%= f.label :melange_bonus %><br />
+    <%= f.text_field :melange_bonus %>
+  </p>
+  <p>
+    <%= f.label :material_bonus %><br />
+    <%= f.text_field :material_bonus %>
+  </p>
+  <p>
+    <%= f.label :solar_bonus %><br />
+    <%= f.text_field :solar_bonus %>
+  </p>
+  <p>
+    <%= f.label :exp_bonus %><br />
+    <%= f.text_field :exp_bonus %>
+  </p>
+  <p>
+    <%= f.label :population_cost %><br />
+    <%= f.text_field :population_cost %>
+  </p>
+  <p>
+    <%= f.label :melange_cost %><br />
+    <%= f.text_field :melange_cost %>
+  </p>
+  <p>
+    <%= f.label :material_cost %><br />
+    <%= f.text_field :material_cost %>
+  </p>
+  <p>
+    <%= f.label :solar_cost %><br />
+    <%= f.text_field :solar_cost %>
+  </p>
+  <p>
+    <%= f.label :exp_cost %><br />
+    <%= f.text_field :exp_cost %>
+  </p>
+  <p>
+    <%= f.label :prerequisity_1 %><br />
+    <%= f.number_field :prerequisity_1 %>
+  </p>
+  <p>
+    <%= f.label :prerequisity_2 %><br />
+    <%= f.number_field :prerequisity_2 %>
+  </p>
+  <p>
+    <%= f.label :prerequisity_3 %><br />
+    <%= f.number_field :prerequisity_3 %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

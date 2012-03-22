@@ -1,0 +1,94 @@
+<% title "Velkorod #{@house.name}" %>
+
+<table class="tab0">
+	<tr>
+		<td>
+			<a href="index.htm" title="Home">⌂</a>  
+			» <a href="stat-databaze.htm">Imperiální databáze</a>
+			» <a href="stat-databaze-narod.htm">Statistika národa</a> 
+		</td>
+
+		<td class="tdd">
+		<ul class="menud">
+			<li><a title="Filtrováním přenastavíte zobrazená data.">Změnit národ »</a> 
+				<ul>
+					<% for rod in @rody do %>
+						<li><%= link_to rod.name, rod %></li>
+					<% end %>
+				</ul>
+			</li>
+		</ul>		
+	    </td>
+
+        <td class="tdd">
+		<ul class="menud">
+			<li><a title="Filtrováním přenastavíte zobrazená data.">Filtrovat databazi »</a> 
+				<ul>
+					<li><a href="stat-databaze.htm">Databáze hráčů</a>
+					<li><a href="stat-databaze-malorod.htm">Vybrat Malorod</a>
+					<li><a href="stat-databaze-narod.htm">Vybrat národ</a>
+					<li><a href="stat-databaze-narody.htm">Databáze národů</a>
+					<li><a href="stat-databaze-malorody.htm">Databáze Malorodů</a>
+					<li><a href="stat-databaze-boje.htm">Databáze bojů</a>
+				</ul>
+			</li>
+		</ul>		
+	      </td>
+    </tr>
+</table>
+
+	<table class="tab1">
+	<tr>
+		<td class="tdpl" rowspan="2" style="background-image: url(<%= asset_path cesta_budovy(@house.name, "erb") %>)">
+			<li><h2><%= @house.name %></h2>
+			<li><b>Vliv: </b> 7820 (17%)
+			<li><b>Planet: </b><%= @house.planets.count %>
+			<li><b>Členů: </b><%= @house.users.count %>
+			<li><b>Projekt: </b> 0%
+			<br><br>
+			<li>	<input type="button" value="Národní útok" class="ok3">
+				<input type="button" value="Diplomatická pošta" class="ok3">
+		</td>
+		<th><%= @house.leader %></th>
+		<th>Vrcholní politici</th>
+		<th class="r">Poslanci</th>
+	</tr>
+
+	<tr>
+		<td>
+			<%= link_to @vudce.nick, @vudce if @vudce %>
+		</td>
+		<td>
+			<% for user in @mentate do %>
+				<li><%= link_to user.nick, user, :class => "mentat" %></li>
+			<% end %>
+			<% for user in @army_mentate do %>
+				<li><%= link_to user.nick, user, :class => "army_mentat" %></li>
+			<% end %>
+			<% for user in @diplomate do %>
+				<li><%= link_to user.nick, user, :class => "diplomat" %></li>
+			<% end %>
+		</td>
+		<td>
+			<% for user in @poslanci do %>
+				<li><%= link_to user.nick, user, :class => "poslanec" %></li>
+			<% end %>
+		</td>
+	</tr>
+</table>
+
+  <table class="tab2">
+	<tr>
+		<th class="l">Jméno hráče</th>
+		<th>Malorod</th>
+		<th style="width:35px">Daň</th>
+		<th>Pozemní síla</th>
+        <th>Vesmírná síla</th>
+		<th style="width:80px">Vliv</th>
+		<th style="width:80px">Počet lén</th>
+		<th class="r" width="48px">Akce</th>
+	</tr>
+	<% for user in @hraci do %>
+		<%= render :partial => 'line_hrac', :locals => {:user => user} %>
+	<% end %>
+  </table>

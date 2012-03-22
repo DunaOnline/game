@@ -1,0 +1,9 @@
+<%= form_tag hlasovat_path(:user_id => :user) do %>
+	<%= select_tag("volit_id]", options_for_select(:user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %>
+	<%= submit_tag 'Hlasuj', :name => :koho %>
+	<p>voleno: <%= :user.koho_jsem_volil(:koho) %></p>
+	<h3>Aktuální pořadí</h3>
+	<% for user in :user.house.poradi_hlasu(:koho) %>
+		<li><%= user[0].nick %> - <%= user[1] %></li>
+	<% end %>
+<% end %>

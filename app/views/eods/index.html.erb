@@ -1,0 +1,55 @@
+<% title "Eods" %>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Field</th>
+    <th>Date</th>
+    <th>Solar Income</th>
+    <th>Exp Income</th>
+    <th>Material Income</th>
+    <th>Population Income</th>
+    <th>Solar Expense</th>
+    <th>Exp Expense</th>
+    <th>Material Expense</th>
+    <th>Population Expense</th>
+    <th>Melange Income</th>
+    <th>Melange Expense</th>
+    <th>Solar Store</th>
+    <th>Exp Store</th>
+    <th>Material Store</th>
+    <th>Population Store</th>
+    <th>Melange Store</th>
+    <th>Imperator</th>
+    <th>Arrakis</th>
+    <th>Leader</th>
+    <th>Mentats</th>
+  </tr>
+  <% for eod in @eods %>
+    <tr>
+      <td><%= eod.user_id %></td>
+      <td><%= eod.field_id %></td>
+      <td><%= eod.date %></td>
+      <td><%= eod.solar_income %></td>
+      <td><%= eod.exp_income %></td>
+      <td><%= eod.material_income %></td>
+      <td><%= eod.population_income %></td>
+      <td><%= eod.solar_expense %></td>
+      <td><%= eod.exp_expense %></td>
+      <td><%= eod.material_expense %></td>
+      <td><%= eod.population_expense %></td>
+      <td><%= eod.melange_income %></td>
+      <td><%= eod.melange_expense %></td>
+      <td><%= eod.solar_store %></td>
+      <td><%= eod.exp_store %></td>
+      <td><%= eod.material_store %></td>
+      <td><%= eod.population_store %></td>
+      <td><%= eod.melange_store %></td>
+      <td><%= eod.imperator %></td>
+      <td><%= eod.arrakis %></td>
+      <td><%= eod.leader %></td>
+      <td><%= eod.mentats %></td>
+    </tr>
+  <% end %>
+</table>
+

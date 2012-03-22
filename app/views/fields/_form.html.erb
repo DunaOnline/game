@@ -1,0 +1,20 @@
+<%= form_for @field do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :planet_id %><br />
+    <%= f.number_field :planet_id %>
+  </p>
+  <p>
+    <%= f.label :pos_x %><br />
+    <%= f.text_field :pos_x %>
+  </p>
+  <p>
+    <%= f.label :pos_y %><br />
+    <%= f.text_field :pos_y %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

@@ -1,0 +1,25 @@
+<%= form_tag kolonizuj_path(:house => @house, :cena_mel => @cena_planety_mel, :cena_sol => @cena_planety_sol) do %>
+<table class="tab1">
+	<tr>
+		<td class="tdpl" rowspan="2" style="width:270px">
+		<li>
+			<h2>Kolonizace planety</h2>
+		<li>
+			<b>Národ: </b><%= @house.name %>
+		<li>
+			<b>Melanz: </b><%= format_mena(@house.melange, 'mg') %>
+			<b>Solary: </b><%= format_mena(@house.solar, 'S') %>
+		<li>
+			<b>Planet: </b><%= @house.pocet_planet %>
+		<li>
+			<b>Členů: </b><%= @house.users.count %>
+		<li>
+			<b>Cena nové planety: </b><%= format_mena(@cena_planety_mel, 'mg') %> a <%= format_mena(@cena_planety_sol, 'S', false) %>
+			<br>
+			<br>
+		<li>
+			<%= submit_tag "Kolonizuj" %>
+		</td>
+	</tr>
+</table>
+<% end %> 

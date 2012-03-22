@@ -1,0 +1,29 @@
+<% title "Planet Types" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Population Bonus</th>
+    <th>Pop Limit Bonus</th>
+    <th>Melange Bonus</th>
+    <th>Material Bonus</th>
+    <th>Solar Bonus</th>
+    <th>Exp Bonus</th>
+  </tr>
+  <% for planet_type in @planet_types %>
+    <tr>
+      <td><%= planet_type.name %></td>
+      <td><%= planet_type.population_bonus %></td>
+      <td><%= planet_type.pop_limit_bonus %></td>
+      <td><%= planet_type.melange_bonus %></td>
+      <td><%= planet_type.material_bonus %></td>
+      <td><%= planet_type.solar_bonus %></td>
+      <td><%= planet_type.exp_bonus %></td>
+      <td><%= link_to "Show", planet_type %></td>
+      <td><%= link_to "Edit", edit_planet_type_path(planet_type) %></td>
+      <td><%= link_to "Destroy", planet_type, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Planet Type", new_planet_type_path %></p>

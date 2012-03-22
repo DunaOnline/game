@@ -1,0 +1,112 @@
+<% title "User" %>
+    <table class="tab0">	   
+	<tr>	<td>
+			<a href="index.htm" title="Home">⌂</a>  
+			» <a href="stat-databaze.htm">Imperiální databáze</a>
+			» <a href="stat-databaze-profil.htm">Profily</a> 
+		</td>
+			
+		<td class="tdd">
+			<ul class="menud">
+				<li><a title="Filtrováním přenastavíte zobrazená data.">Filtrovat databazi »</a> 
+					<ul>
+						<li><a href="stat-databaze.htm">Databáze hráčů</a>
+						<li><a href="stat-databaze-malorod.htm">Vybrat Malorod</a>
+						<li><a href="stat-databaze-narod.htm">Vybrat národ</a>
+						<li><a href="stat-databaze-narody.htm">Databáze národů</a>
+						<li><a href="stat-databaze-malorody.htm">Databáze Malorodů</a>
+						<li><a href="stat-databaze-boje.htm">Databáze bojů</a>
+						<li><a href="stat-databaze-profil.htm">Profily hráčů</a>
+					</ul>
+				</li>
+			</ul>		
+		</td>
+	</tr>
+	</table>
+	
+	<div class="all">
+	
+	<table class="tab0">
+		<tr>
+			<th class="m" colspan="3">
+				
+				<h2><%= @user.nick %></h2>
+				
+			</th>
+			
+			<td style="text-align:right;">
+				<input class="tab3_input" type="text" name="adresat" size="25" title="Adresát" style="background-image: url(image/cssimage/adresat.png)">
+				<input type="button" value="Hledat profil" title="Hledat profil" class="ok4" >
+			</td>		
+		</tr>
+		<tr>
+			<td style="width:120px;vertical-align: top;">
+				<img src = "image/avatar/id0.png" alt="">
+			</td>
+			
+			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
+					<li>Profil zmražen: 
+					<li>Profil založen: 
+					<br><br>
+					<li>Narod: <%= @user.house.name %>
+					<li>Funkce v národě: 
+					<li>Diplomacie s národem: 
+					<li>Malorod: 
+					<li>Funkce v Malorodě:  : 
+					<li>Vliv hráče: 
+					<li>Počet hráčovích lén: 
+					<br><br>
+					<li>Celková pozemní síla: 
+					<li>Celková vesmírná síla	
+					<li>Vítězství: 
+					<li>Porážek:
+					<li>Zaútočit na hráče:
+					<br><br>	
+					<li>Webové stránky:
+					<li>ICQ: 
+					<li>Jabber: 
+					<li>gTalk: 
+					<li>Skype: 
+					<br><br>
+					<li>Prezentace: 
+			</td>
+			
+			<td style="width:10px"></td>
+				
+			<td style="text-align:left; vertical-align: top;">
+					<li> Ne
+					<li> 12.1.2012
+					<br><br>
+					<li> <%= link_to @user.house.name, @user.house %>
+					<li> <%= @user.najdi_hodnosti %>
+					<li> Mír
+					<li> Eridani
+					<li> Generál [<a href="sprava-malorod.htm">Nastavit</a>] """Nastavit vidí jen hráč s právy"""
+					<li> 7673 (5%)
+					<li> 12
+					<br><br>
+					<li> 10002
+					<li> 2898
+					<li> 3
+					<li> 1
+					<li> <a href="army-utok.htm">Možno</a>
+					<br><br>
+					<li> --- 
+					<li> ---
+					<li> --- 
+					<li> --- 
+					<li> --- 
+					<br><br>
+					<li> Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  
+					Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  
+					Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text. 
+					Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  
+					Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text. 
+			</td>
+				
+			</td>
+		</tr>
+	</table>
+	
+</div>
+	

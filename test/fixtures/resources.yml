@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  field_id: 1
+  population: 9.99
+  material: 9.99
+
+two:
+  user_id: 1
+  field_id: 1
+  population: 9.99
+  material: 9.99

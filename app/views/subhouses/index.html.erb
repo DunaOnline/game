@@ -1,0 +1,27 @@
+<% title "Subhouses" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>House</th>
+    <th>Solar</th>
+    <th>Melange</th>
+    <th>Material</th>
+    <th>Exp</th>
+  </tr>
+  <% for subhouse in @subhouses %>
+    <tr>
+      <td><%= subhouse.name %></td>
+      <td><%= subhouse.house_id %></td>
+      <td><%= subhouse.solar %></td>
+      <td><%= subhouse.melange %></td>
+      <td><%= subhouse.material %></td>
+      <td><%= subhouse.exp %></td>
+      <td><%= link_to "Show", subhouse %></td>
+      <td><%= link_to "Edit", edit_subhouse_path(subhouse) %></td>
+      <td><%= link_to "Destroy", subhouse, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Subhouse", new_subhouse_path %></p>

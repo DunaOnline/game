@@ -1,0 +1,102 @@
+<% title "Hrac - sprava" %>
+      <table class="tab1">
+		<tr>	
+			<td class="tdpl" rowspan="2" style="width:100px">
+				<li><h2>Sklad hráče</h2>
+				<li><b>Vliv: </b> 120 (1%)
+				<li><b>Planet: </b><%= @planets.count %>
+				<li><b>Poli: </b><%= @user.fields.count %>
+				<br><br>
+				<li>	<input type="button" value="Poslat" class="ok">
+			</td>
+			<th>Stav skladu</th>
+			<th>Poslat Malorodu</th>
+			<th>Daň Malorodu [%]</th>
+			<th>Poslat Národu</th>
+			<th class="r">Projekt [%]</th>
+		</tr>
+		<tr >
+			<td>
+				<li><%= img_solary %><%= format_mena(@user.solar, 'S', false) %> 
+				<li><%= img_material %><%= format_mena(@user.celkovy_material, 'kg') %>
+				<li><%= img_melanz %><%= format_mena(@user.melange, 'mg') %>
+				<li><%= img_zkusenosti %><%= format_mena(@user.exp, 'exp', false) %>
+				<li><%= img_populace %><%= format_mena(@user.celkova_populace, 'k', false) %>
+			</td>
+			<td>
+				<li><%= img_solary %><input type="text" size="3" title="Zadejte množství">
+				<li><%= img_material %><input type="text" size="3" title="Zadejte množství">		
+				<li><%= img_melanz %><input type="text" size="3" title="Zadejte množství"> 
+				<li><%= img_zkusenosti %><input type="text" size="3" title="Zadejte množství"> 
+			</td>
+			<td>
+				<li><%= img_solary %><input type="text" size="3" title="Nastavte daň">
+				<li><%= img_material %><input type="text" size="3" title="Nastavte daň">		
+				<li><%= img_melanz %><input type="text" size="3" title="Nastavte daň"> 
+				<li><%= img_zkusenosti %><input type="text" size="3" title="Nastavte daň"> 
+			</td>
+			<td>
+				<li><%= img_solary %><input type="text" size="3" title="Zadejte množství">
+				<li><%= img_material %><input type="text" size="3" title="Zadejte množství">		
+				<li><%= img_melanz %><input type="text" size="3" title="Zadejte množství"> 
+				<li><%= img_zkusenosti %><input type="text" size="3" title="Zadejte množství"> 
+			</td>
+			<td>
+				<li><%= img_solary %><input type="text" size="3" title="Nastavte odvod">
+				<li><%= img_material %><input type="text" size="3" title="Nastavte odvod">		
+				<li><%= img_melanz %><input type="text" size="3" title="Nastavte odvod"> 
+				<li><%= img_zkusenosti %><input type="text" size="3" title="Nastavte odvod"> 
+			</td>
+		</tr>
+	</table>
+	
+	<table class="tab1">
+		<tr>	
+			<th class="l">Volba Guvernéra</th>
+			<th>Volba vůdce</th>
+			<th>Volba poslance</th>
+			<th class="r">Volba Imperátora</th>
+		</tr>	<tr>	
+			<td>
+				Nick <input type="text" size="20" Style="width:100px" title="Zadejte důvod"> 
+				<h3>Aktuální pořadí</h3>
+				<li>Vévoda [12]
+				<li>Vévoda [10]
+				<li>Vévoda [4]
+				<li>Vévoda [2]
+				<li>Vévoda [2]
+			</td>	
+			<td>
+				<%= form_tag hlasovat_path(:user_id => @user) do %>
+					<%= select_tag("volit_id]", options_for_select(@user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %>
+					<%= submit_tag 'Hlasuj', :name => 'leader' %>
+					<p>voleno: <%= @user.koho_jsem_volil('leader') %></p>
+					<h3>Aktuální pořadí</h3>
+					  <% for user in @user.house.poradi_hlasu('leader') %>
+						<li><%= user[0].nick %> - <%= user[1] %></li>
+					  <% end %>
+				<% end %>
+			</td>	
+			<td>
+				<%= form_tag hlasovat_path(:user_id => @user) do %>
+					<%= select_tag("volit_id]", options_for_select(@user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %>
+					<%= submit_tag 'Hlasuj', :name => 'poslanec' %>
+					<p>voleno: <%= @user.koho_jsem_volil('poslanec') %></p>
+					<h3>Aktuální pořadí</h3>
+					  <% for user in @user.house.poradi_hlasu('poslanec') %>
+						<li><%= user[0].nick %> - <%= user[1] %></li>
+					  <% end %>
+				<% end %>
+			</td>	
+			<td>
+				Nick <input type="text" size="20" Style="width:100px" title="Zadejte důvod"> 
+				<h3>Aktuální pořadí</h3>
+				<li>Vévoda [12]
+				<li>Vévoda [10]
+				<li>Vévoda [4]
+				<li>Vévoda [2]
+				<li>Vévoda [2]
+			</td>			
+		</tr>			
+	</table>                       
+

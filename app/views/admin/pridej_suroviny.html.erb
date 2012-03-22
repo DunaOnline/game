@@ -1,0 +1,56 @@
+<%= form_tag :pridej_suroviny do %>
+	<table>
+	  <tr>
+        <td colspan="2" class="tdh1"><h3>komu suroviny poslat:</h3></td>
+      </tr>
+      <tr>
+        <td class="tdh1"><%= radio_button_tag "komu", "hraci" %>Hraci</td>
+        <td class="tdh1"><%= radio_button_tag "komu", "rodu" %>Rodu</td>
+      </tr>
+    </table>
+	
+    <table>
+    	<tr>
+    		<th>Zvol hrace a suroviny:</th>
+    	</tr>
+      <tr>
+        <td colspan="3">
+        	<%= select_tag :user_id_suroviny, options_for_select(User.order(:username).all.collect { |p| [p.id.to_s + " - " + p.username + " - " + p.nick, p.id] }, {:include_blank => true}) %>
+        </td>
+      </tr>
+      <tr>
+      	<td>Solary</td>
+      	<td>Melange</td>
+      	<td>Expy</td>
+      </tr>
+      <tr>
+      	<td><%= text_field_tag "solary_user" %></td>
+      	<td><%= text_field_tag "melange_user" %></td>
+      	<td><%= text_field_tag "expy_user" %></td>
+      </tr>
+    </table>
+    
+    <table>
+    	<tr>
+    		<th>Zvol narod a suroviny:</th>
+    	</tr>
+      <tr>
+        <td colspan="4">
+        	<%= select_tag :house_id_suroviny, options_for_select(House.order(:name).all.collect { |p| [p.id.to_s + " - " + p.name, p.id] }, {:include_blank => true}) %>
+        </td>
+      </tr>
+      <tr>
+      	<td>Solary</td>
+      	<td>Melange</td>
+      	<td>Material</td>
+      	<td>Expy</td>
+      </tr>
+      <tr>
+      	<td><%= text_field_tag "solary_narod" %></td>
+      	<td><%= text_field_tag "melange_narod" %></td>
+      	<td><%= text_field_tag "material_narod" %></td>
+      	<td><%= text_field_tag "expy_narod" %></td>
+      </tr>
+    </table>
+    <%= submit_tag "Proved" %>
+<% end %>

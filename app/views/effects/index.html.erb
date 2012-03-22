@@ -1,0 +1,41 @@
+<% title "Effects" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Population Bonus</th>
+    <th>Pop Limit Bonus</th>
+    <th>Melange Bonus</th>
+    <th>Material Bonus</th>
+    <th>Solar Bonus</th>
+    <th>Exp Bonus</th>
+    <th>Duration</th>
+    <th>Population Cost</th>
+    <th>Melange Cost</th>
+    <th>Material Cost</th>
+    <th>Solar Cost</th>
+    <th>Exp Cost</th>
+  </tr>
+  <% for effect in @effects %>
+    <tr>
+      <td><%= effect.name %></td>
+      <td><%= effect.population_bonus %></td>
+      <td><%= effect.pop_limit_bonus %></td>
+      <td><%= effect.melange_bonus %></td>
+      <td><%= effect.material_bonus %></td>
+      <td><%= effect.solar_bonus %></td>
+      <td><%= effect.exp_bonus %></td>
+      <td><%= effect.duration %></td>
+      <td><%= effect.population_cost %></td>
+      <td><%= effect.melange_cost %></td>
+      <td><%= effect.material_cost %></td>
+      <td><%= effect.solar_cost %></td>
+      <td><%= effect.exp_cost %></td>
+      <td><%= link_to "Show", effect %></td>
+      <td><%= link_to "Edit", edit_effect_path(effect) %></td>
+      <td><%= link_to "Destroy", effect, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Effect", new_effect_path %></p>

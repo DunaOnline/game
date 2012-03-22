@@ -1,0 +1,211 @@
+<% title "Velkorod #{@house.name}" %>
+	<table class="tab1">
+		<tr>	
+			<td class="tdpl" rowspan="2" style="width:170px">
+				<li><h2>Národní sklad</h2>
+				<li><b>Národ: </b><%= @house.name %>
+				<li><b>Vůdce: </b><%= link_to @vudce.nick, @vudce if @vudce%>
+				<li><b>Vliv: </b> 11820 (27%)
+				<li><b>Planet: </b><%= @house.pocet_planet %>
+				<li><b>Členů: </b><%= @house.users.count %>
+				<br><br>
+				<li><input type="button" value="Poslat" class="ok">
+			</td>
+
+			<th>Stav skladu</th>
+			<th>Zaslat hráči</th>
+			<th>Zaslat Malorodu</th>
+			<th class="r">Zaslat Velkorodu</th>
+		</tr>
+
+		<tr >
+			<td>
+				<li><%= img_solary %><%= format_mena(@house.solar, 'S', false) %> 
+				<li><%= img_material %><%= format_mena(@house.material, 'kg') %>
+				<li><%= img_melanz %><%= format_mena(@house.melange, 'mg') %>
+				<li><%= img_zkusenosti %><%= format_mena(@house.exp, 'exp', false) %>
+				<li><%= img_populace('Celkova populace') %><%= format_mena(@house.celkova_populace, 'k', false) %>
+			</td>
+			<td>
+				<li><%= img_solary %><input type="text" size="3" title="Zadejte množství">
+				<li><%= img_material %><input type="text" size="3" title="Zadejte množství">		
+				<li><%= img_melanz %><input type="text" size="3" title="Zadejte množství"> 
+				<li><%= img_zkusenosti %><input type="text" size="3" title="Zadejte množství"> 
+				<li><img src = "image/cssimage/j1.png" alt="Národní jednotka typu 1" title="Národní jednotka typu 1"><input type="text" size="3" title="Zadejte množství">
+				<li><img src = "image/cssimage/j1.png" alt="Národní jednotka typu 2" title="Národní jednotka typu 2"><input type="text" size="3" title="Zadejte množství"> 
+				<li>Nick <input type="text" size="3" title="Jméno hráče"> 
+			</td>
+			<td>
+				<li><%= img_solary %><input type="text" size="3" title="Zadejte množství">
+				<li><%= img_material %><input type="text" size="3" title="Zadejte množství">		
+				<li><%= img_melanz %><input type="text" size="3" title="Zadejte množství"> 
+				<li><%= img_zkusenosti %><input type="text" size="3" title="Zadejte množství"> 
+				<li>	<select class="vyber" name="Vyberte Malorod">
+						 <option value="p1">Eridani</option>
+						 <option value="p1">Malorod</option>
+						 <option value="p1">Malorod</option>
+					</select>
+			</td>
+			<td>
+				<li><%= img_solary %><input type="text" size="3" title="Zadejte množství">
+				<li><%= img_material %><input type="text" size="3" title="Zadejte množství">		
+				<li><%= img_melanz %><input type="text" size="3" title="Zadejte množství"> 
+				<li><%= img_zkusenosti %><input type="text" size="3" title="Zadejte množství"> 
+				<li>	<select class="vyber" name="Vyberte Velkorod">
+						 <option value="p1">Atreides</option>
+						 <option value="p1">Corrino</option>
+						 <option value="p1">Ekaz</option>
+						 <option value="p1">Harkonnenové</option>
+						 <option value="p1">Moritani</option>
+						 <option value="p1">Riches</option>
+						 <option value="p1">Vernio</option>
+					</select>
+			</td>
+		</tr>	
+	</table>
+
+	<table class="tab4">
+		<tr>
+			<th class="thf" colspan="4">
+				Přehled vašich národních jednotek
+			</th>	
+		</tr>
+		<tr>
+			<!--<th style="background-image: url(image/8/jedp1.png)"> -->
+			<th>
+				<a href="army-sablony.htm">Kyborg</a>
+				<li>	
+					<input title="Útok" style="margin-top: 100px; background-image: url(<%= asset_path cesta_ikona("utok-pozemni") %>)" value="9">
+					<input title="Obrana" style="margin-top: 100px; background-image: url(<%= asset_path cesta_ikona("obrana-pozemni") %>)" value="5">
+				</li>
+			</th>
+			<td>
+				<li>Elitní národní jednotka, která je určena pro pozemní boj.
+				<li>Ve službě je 10 jednotek.
+				<h3>Žold</h3>
+				<li><%= img_solary %> -1.4
+				<h3>Výbava:</h3>
+				<li>	
+					<input title="Pěchotní zbraně" style="background-image: url(<%= asset_path cesta_ikona("utok-pozemni") %>)" value="2">
+					<input title="Rychlopalné zbraně" style="background-image: url(<%= asset_path cesta_ikona("obrana-pozemni") %>)" value="1">
+					<input title="Kybernetické náhrady" style="background-image: url(<%= asset_path cesta_ikona("obrana-pozemni") %>)" value="1">
+				</li>
+			</td>
+			<!--<th style="background-image: url(image/8/jedv1.png)"> -->
+			<th>
+				<a href="army-sablony.htm">Obranný satelit</a>
+				<li>	
+					<input title="Útok" style="margin-top: 100px; background-image: url(<%= asset_path cesta_ikona("utok-vesmir") %>)" value="100">
+					<input title="Obrana" style="margin-top: 100px; background-image: url(<%= asset_path cesta_ikona("obrana-vesmir") %>)" value="100">
+				</li>
+			</th>
+			<td>
+				<li>Národní jednotka, sloužící o obraně orbity planet.
+				<li>Ve službě je 10 jednotek.
+				<h3>Žold</h3>
+				<li><%= img_solary %> -20
+				<h3>Výbava:</h3>
+				<li>	
+					<input title="Pěchotní zbraně" style="background-image: url(<%= asset_path cesta_ikona("utok-pozemni") %>)" value="2">
+					<input title="Rychlopalné zbraně" style="background-image: url(<%= asset_path cesta_ikona("obrana-pozemni") %>)" value="1">
+					<input title="Kybernetické náhrady" style="background-image: url(<%= asset_path cesta_ikona("obrana-pozemni") %>)" value="1">
+					<input title="Kybernetické náhrady" style="background-image: url(<%= asset_path cesta_ikona("obrana-pozemni") %>)" value="1">
+				</li>
+			</td>
+		</tr>
+	</table>
+
+	<table class="tab4">
+		<tr>
+			<th class="thf" colspan="4">
+				<%= link_to "Kolonizuj planetu", kolonizuj_path %>
+			</th>	
+		</tr>
+	</table>
+	<br>
+	<table class="tab1">
+		<tr>	
+			<th class="l">Mentat</th>
+			<th>Vojenský mentat</th>
+			<th class="r">Diplomat</th>
+		</tr>
+		<tr>
+			<td>
+				<% if can? User, :pridel_pravo %>
+					<li>
+						<%= form_tag :pridel_pravo do %>
+      						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
+      						<%= submit_tag 'Mentat' %>
+    					<% end %>
+					</li>
+				<% end %>
+				<li><h3>Držitelé práv</h3>
+				<% for user in @mentate do %>
+					<li>
+						<%= link_to user.nick, user, :class => "mentat" %>
+						<% if can? User, :odeber_pravo %>
+							<%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Mentat" %>
+						<% end %>
+					</li>
+				<% end %>
+			</td>
+
+			<td>
+				<% if can? User, :pridel_pravo %>
+					<li>
+						<%= form_tag :pridel_pravo do %>
+      						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
+      						<%= submit_tag 'ArmyMentat' %>
+    					<% end %>
+					</li>
+				<% end %>
+				<li><h3>Držitelé práv</h3>
+				<% for user in @army_mentate do %>
+					<li>
+						<%= link_to user.nick, user, :class => "army_mentat" %>
+						<% if can? User, :odeber_pravo %>
+							<%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "ArmyMentat" %>
+						<% end %>
+					</li>
+				<% end %>
+			</td>
+
+			<td>
+				<% if can? User, :pridel_pravo %>
+					<li>
+						<%= form_tag :pridel_pravo do %>
+      						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
+      						<%= submit_tag 'Diplomat' %>
+    					<% end %>
+					</li>
+				<% end %>
+				<li><h3>Držitelé práv</h3>
+				<% for user in @diplomate do %>
+					<li>
+						<%= link_to user.nick, user, :class => "diplomat" %>
+						<% if can? User, :odeber_pravo %>
+							<%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Diplomat" %>
+						<% end %>
+					</li>
+				<% end %>
+			</td>
+		</tr>	
+		<tr>
+			<th class="l">Generál</th>
+			<th>Poslanec</th>
+			<th class="r"></th>
+		</tr>
+		<tr>
+			<td>
+				<% for user in @generalove do %>
+					<li><%= link_to user.nick, user, :class => "general" %></li>
+				<% end %>
+			</td>
+			<td>
+				<% for user in @poslanci do %>
+					<li><%= link_to user.nick, user, :class => "poslanec" %></li>
+				<% end %>
+			</td>
+		</tr>
+	</table>
+

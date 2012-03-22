@@ -1,0 +1,36 @@
+<% title "Planet Type" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @planet_type.name %>
+</p>
+<p>
+  <strong>Population Bonus:</strong>
+  <%= @planet_type.population_bonus %>
+</p>
+<p>
+  <strong>Pop Limit Bonus:</strong>
+  <%= @planet_type.pop_limit_bonus %>
+</p>
+<p>
+  <strong>Melange Bonus:</strong>
+  <%= @planet_type.melange_bonus %>
+</p>
+<p>
+  <strong>Material Bonus:</strong>
+  <%= @planet_type.material_bonus %>
+</p>
+<p>
+  <strong>Solar Bonus:</strong>
+  <%= @planet_type.solar_bonus %>
+</p>
+<p>
+  <strong>Exp Bonus:</strong>
+  <%= @planet_type.exp_bonus %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_planet_type_path(@planet_type) %> |
+  <%= link_to "Destroy", @planet_type, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", planet_types_path %>
+</p>

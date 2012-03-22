@@ -1,0 +1,47 @@
+one:
+  user_id: 1
+  field_id: 1
+  date: 2012-03-20
+  solar_income: 1
+  exp_income: 1
+  material_income: 9.99
+  population_income: 1
+  solar_expense: 1
+  exp_expense: 1
+  material_expense: 9.99
+  population_expense: 1
+  melange_income: 9.99
+  melange_expense: 9.99
+  solar_store: 1
+  exp_store: 1
+  material_store: 9.99
+  population_store: 1
+  melange_store: 9.99
+  imperator: 1
+  arrakis: 1
+  leader: 1
+  mentats: MyString
+
+two:
+  user_id: 1
+  field_id: 1
+  date: 2012-03-20
+  solar_income: 1
+  exp_income: 1
+  material_income: 9.99
+  population_income: 1
+  solar_expense: 1
+  exp_expense: 1
+  material_expense: 9.99
+  population_expense: 1
+  melange_income: 9.99
+  melange_expense: 9.99
+  solar_store: 1
+  exp_store: 1
+  material_store: 9.99
+  population_store: 1
+  melange_store: 9.99
+  imperator: 1
+  arrakis: 1
+  leader: 1
+  mentats: MyString

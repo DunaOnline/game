@@ -1,0 +1,1564 @@
+body {
+	color:#fff;
+	background-color:#000; 
+	background-image: url(<%= asset_path 'css/bg.jpg' %>);   
+	font-family: Calibri, Arial, Verdana;
+	font-size: 13px;
+	text-align: justify;
+	text-shadow: 0.05em 0.05em #000 !important;
+	}
+	
+/* ++++++++++++++++++++ Hlavn? t?lo webu ++++++++++++++++++++ */
+
+#body_wrapper {
+  width: 1100px;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+#body_container {
+	position: relative;
+	top: -280px;
+	margin: 0px auto; 
+	z-index: 1;
+	background-image: url(<%= asset_path 'css/tseda.png' %>);   
+	border: solid 1px #a2a2a2;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+}
+
+#body_container_b {
+	width: 1100px;
+	z-index: 1;
+	min-width:500px;
+}
+
+.planet {
+	position: relative;
+	left: -50px;
+	top: -40px;
+	background-image: url(<%= asset_path 'css/arrakis.png' %>);   
+	background-repeat: no-repeat;
+	background-position: right;
+	z-index: 0 !important;
+	width: 1200px;
+	height: 400px;
+	border: 0;
+}
+
+.header {
+	position: relative;
+	left: -1px;
+	top: -120px;
+	background-image: url(<%= asset_path 'css/head0.png' %>);   
+	background-repeat: no-repeat;
+	background-position: right;
+	z-index: 1;
+	width: 1100px;
+	height: 180px;
+	border: 0;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+}
+
+.stred  {
+	z-index: 2;
+	min-height: 430px;
+	margin-top:0px;
+}
+
+#page_content {
+	width: 1104px;
+	font-size: 1em;
+	margin: -120px 0 0 -23px;
+	padding: 0 20px 15px 20px;
+	min-height: 500px;
+	z-index: 2;
+}
+
+td.left {width: 15%; vertical-align: top;}
+	
+
+td.stred {
+	width: 70%;
+	vertical-align: top;
+}
+
+td.prava {
+	width: 15%;
+	vertical-align: top;
+}
+
+.footer {
+	width: 1100px;
+	height: 30px;
+	font-size: 0.9em;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: bottom;
+}
+
+/* ++++++++++++++++++++ Menu + hlavi?ka ++++++++++++++++++++ */
+
+div.suroviny {
+	position: absolute; top: 128px; left:260px;
+	width: 635px;
+	height: 20px;
+	border: 0px;
+	z-index: 4;
+	font-size: 1.2em;
+	vertical-align: middle;
+}
+		div.suroviny img  {
+			width: 24px;
+			height: 24px;
+			margin-right: 3px;
+			margin-left: 10px;
+			vertical-align: middle;
+			border: solid 1px #a9a9a9;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+		}
+
+div.inf {
+	position: absolute; top: 21px; left:0px;
+	width: 253px;
+	height: 90px;
+	background-image: url(<%= asset_path 'css/tseda.png' %>);    
+	z-index: 3;
+	font-size: 1em;
+	padding: 7px 0px 7px 0px;
+	vertical-align: middle;
+	border: solid 1px #a9a9a9;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+}
+		div.inf img  {
+			float: left;
+			width: 70px;
+			height: 80px;
+			margin-right: 7px;
+			margin-left:-1px;
+			vertical-align: middle;
+			border: solid 1px #a9a9a9;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+		}
+		div.inf a  {
+		text-decoration: none;
+		color: #fff;
+		}
+		div.inf a:hover  {
+		color: #ffdb30;
+		}
+		.a1  {
+		text-decoration: none;
+		color: #ffdb30 !important;
+		}
+		.a1:hover  {
+		text-decoration: underline;
+		}
+		
+a.menukomunikace {
+	position: absolute; top: 6px; left:15px;
+	z-index: 2;
+	background-image: url(<%= asset_path 'css/diplomacie.png' %>);   
+	width: 42px;
+	height: 42px;
+	background-repeat: no-repeat;
+	border:0;
+}
+		a.menukomunikace:hover  {
+			z-index: 4;
+			background-image: url(<%= asset_path 'css/diplomacie2.png' %>);   
+		}
+
+a.menupolitika {
+	position: absolute; top: 6px; left:61px;
+	z-index: 2;
+	background-image: url(<%= asset_path 'css/diplomacie.png' %>);   
+	width: 42px;
+	height: 42px;
+	background-repeat: no-repeat;
+	border:0;
+}
+		a.menupolitika:hover  {
+			position: absolute; top: 6px; left:61px;
+			z-index: 4;
+			background-image: url(<%= asset_path 'css/diplomacie2.png' %>);   
+		}
+
+a.menuvyzkum  {
+	position: absolute; top: 6px; left:107px;
+	z-index: 2;
+	background-image: url(<%= asset_path 'css/vyzkum.png' %>);   
+	width: 42px;
+	height: 42px;
+	background-repeat: no-repeat;
+	border:0;
+}
+		a.menuvyzkum:hover  {
+			z-index: 4;
+			background-image: url(<%= asset_path 'css/vyzkum2.png' %>);   
+		}
+
+a.menuarmada {
+	position: absolute; top: 6px; left:153px;
+	z-index: 2;
+	background-image: url(<%= asset_path 'css/armada.png' %>);   
+	width: 42px;
+	height: 42px;
+	background-repeat: no-repeat;
+	border:0;
+}
+		a.menuarmada:hover {
+			z-index: 4;
+			background-image: url(<%= asset_path 'css/armada2.png' %>);   
+		}
+
+a.menugalaxy {
+	position: absolute; top: 6px; left:199px;
+	z-index: 2;
+	background-image: url(<%= asset_path 'css/galaxy.png' %>);   
+	width: 42px;
+	height: 42px;
+	background-repeat: no-repeat;
+	border:0;
+}
+		a.menugalaxy:hover {
+			z-index: 4;
+			background-image: url(<%= asset_path 'css/galaxy2.png' %>);   
+		}
+
+#nava {
+	position: absolute;
+	top: 119px;
+	left: -1px;
+	z-index: 3;
+	width: 1102px;
+	height:50px;
+	background-image: url(<%= asset_path 'css/head1102.png' %>);   
+	background-position: top;
+	background-repeat: no-repeat;
+	border-bottom: solid 0px #3399ff;
+}
+#nava2 {
+	top: 4px;
+	left: 2px;
+	z-index: 3;
+	height: 35px;
+}
+	#nava2 td:hover{
+		z-index: 3;
+		color: #ffffff !important; 
+		border: 0;
+		background-repeat: repeat-x;
+	}
+	#nava2 a:hover{
+		z-index: 2;
+		color: #fff; 
+	}
+	
+.menu {
+	padding: 2px 5px 0 5px;  
+	margin: 0;
+	list-style-type: none; 
+	display:block;
+}
+		.menu ul {
+			position: absolute; 
+			visibility: hidden; 
+			font-size: 0.9em !important;
+			padding: 10px 5px 5px 5px; 
+			margin: 28px 0 0 0;
+			list-style-type: none;
+			background-image: url(<%= asset_path 'css/tcerna2.png' %>);    
+			border: solid 1px #a2a2a2;
+			border-top:0;
+			-webkit-border-bottom-right-radius: 4px;
+			-webkit-border-bottom-left-radius: 4px;
+			-moz-border-radius-bottomright: 4px;
+			-moz-border-radius-bottomleft: 4px;
+			border-bottom-right-radius: 4px;
+			border-bottom-left-radius: 4px;
+			}
+		.menu li {
+			float: left; 
+			padding: 2px 0px 2px 0px;  
+			white-space: nowrap;
+			}
+		.menu a {
+			padding: 3px 3px 5px 3px; 
+			text-align: left;  
+			color: #3399ff; 
+			display: block; 
+			text-decoration: none; 
+			font-weight: bold;
+			}
+		.menu li a {
+			font-size: 1.1em;
+			color: #3399ff;
+			text-decoration: none;
+			text-shadow: silver;
+			font-weight: bold;
+			}
+		.menu ul a:link {
+			color: #fff;
+			border-bottom: none; 
+			margin: 2px 5px 2px 5px ; 
+			}
+		.menu ul a:visited {
+			color: #fff; 
+			border-bottom: none; 
+			}
+		.menu ul a:hover {
+			color: #ffdb30;
+			}
+		.menu li:hover ul, ul.menu li.hover ul { visibility: visible;}
+		.menu li li {float: none; border: none; padding: 0; margin: 0;}
+
+/* ++++++++++++++++++++ Form?tov?n? obr?zku ++++++++++++++++++++ */
+	
+img.l {
+	float: left;
+	padding: 20px;
+	border:0;
+	}
+img.r {
+	float: right;
+	padding: 10px 0 10px 20px;
+	border:0;
+	}
+	
+div.lh {
+	color:#ffdb30;
+	font-weight: bolder;
+	width: 150px;
+	padding: 7px 10px 7px 15px;
+	margin: 0px 20px 0px -1px;
+	border: 1px solid #a2a2a2;
+	border-bottom: 1px solid #ffdb30;
+	background-image: url(<%= asset_path 'css/td1.png' %>);   
+-webkit-border-top-right-radius: 4px;
+-moz-border-radius-topright: 4px;
+border-top-right-radius: 4px;
+	}
+div.l {
+	color:#fff;
+	width: 150px;
+	padding: 10px 10px 10px 15px;
+	margin: 0px 20px 15px -1px;
+	border: 1px solid #a2a2a2;
+	border-top: 0px;
+	background-image: url(<%= asset_path 'css/tseda.png' %>);   
+-webkit-border-bottom-right-radius: 4px;
+-moz-border-radius-bottomright: 4px;
+border-bottom-right-radius: 4px;
+	}
+	
+div.la {
+	color:#fff;
+	width: 150px;
+	padding: 10px 10px 10px 15px;
+	margin: 0px 20px 15px -1px;
+	border: 1px solid #a2a2a2;
+	background-image: url(<%= asset_path 'css/tseda.png' %>);   
+-webkit-border-top-right-radius: 4px;
+-webkit-border-bottom-right-radius: 4px;
+-moz-border-radius-topright: 4px;
+-moz-border-radius-bottomright: 4px;
+border-top-right-radius: 4px;
+border-bottom-right-radius: 4px;
+	}
+
+div.rh {
+	color:#ffdb30;
+	font-weight: bolder;
+	width: 155px;
+	padding: 7px 10px 7px 10px;
+	margin: 0px -1px 0px 20px;
+	border: 1px solid #a2a2a2;
+	border-bottom: 1px solid #ffdb30;
+	background-image: url(<%= asset_path 'css/td1.png' %>);   
+-webkit-border-top-left-radius: 4px;
+-moz-border-radius-topleft: 4px;
+border-top-left-radius: 4px;
+	}
+	
+div.r {
+	color:#fff;
+	width: 155px;
+	padding: 10px 10px 10px 10px;
+	margin: 0px -1px 20px 20px;
+	border: 1px solid #a2a2a2;
+	border-top:0;
+	background-image: url(<%= asset_path 'css/tseda.png' %>);   
+-webkit-border-bottom-left-radius: 4px;
+-moz-border-radius-bottomleft: 4px;
+border-bottom-left-radius: 4px;
+	}
+	
+div.ra {
+	color:#fff;
+	width: 155px;
+	padding: 10px;
+	margin: 0px -1px 20px 20px;
+	border: 1px solid #a2a2a2;
+	background-image: url(<%= asset_path 'css/tseda.png' %>);   
+-webkit-border-top-left-radius: 4px;
+-webkit-border-bottom-left-radius: 4px;
+-moz-border-radius-topleft: 4px;
+-moz-border-radius-bottomleft: 4px;
+border-top-left-radius: 4px;
+border-bottom-left-radius: 4px;
+	}
+	
+/* ++++++++++++++++++++ Tlac?tka a formula?e ++++++++++++++++++++ */	
+
+.ok {
+	margin: 2px 0 2px 0;
+	padding: 2px 5px 2px 5px;
+	background-color: transparent;
+	background-image: url(<%= asset_path 'css/td1.png' %>);   
+	width: auto !important;
+	font-size: 12px !important;
+	color: #a2a2a2;	
+	text-decoration: none;
+	font-weight: bold !important;
+	vertical-align: middle;
+	text-align: center;
+	border: 1px solid #a2a2a2;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+		.ok:hover {color:#ffdb30; border:#ffdb30 1px solid;}
+		
+.ok2 {
+	margin: 2px 0 2px 0;
+	padding: 2px 3px 2px 3px !important;
+	width: 100px !important;
+	background-color: transparent;
+	background-image: url(<%= asset_path 'css/td1.png' %>);   
+	font-size: 10px !important;
+	color: #a2a2a2;	
+	text-decoration: none;
+	font-weight: bold !important;
+	vertical-align: middle;
+	text-align: center;
+	border: 1px solid #a2a2a2;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+		.ok2:hover {color:#ffdb30; border:#ffdb30 1px solid;}
+
+.ok3 {
+	margin: 6px 0 2px 0 !important;
+	padding: 2px 3px 2px 3px !important;
+	width: auto !important;
+	background-color: transparent;
+	background-image: url(<%= asset_path 'css/tcerna2.png' %>);   
+	font-size: 9px !important;
+	color: #a2a2a2;	
+	text-decoration: none;
+	font-weight: bold !important;
+	vertical-align: middle;
+	text-align: center;
+	border: 1px solid #a2a2a2;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+		.ok3:hover {color:#ffdb30; border:#ffdb30 1px solid;}
+
+.ok4 {
+	margin: 7px 2px 5px 2px !important;
+	padding: 3px 5px 3px 5px !important;
+	width: auto !important;
+	background-color: transparent;
+	background-image: url(<%= asset_path 'css/td1.png' %>);   
+	font-size: 11px !important;
+	color: #a2a2a2;	
+	text-decoration: none;
+	font-weight: bold !important;
+	vertical-align: middle;
+	text-align: center;
+	border: 1px solid #a2a2a2;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+		.ok4:hover {color:#ffdb30; border:#ffdb30 1px solid;}
+		
+.ok5 {	
+	margin: 2px 2px 5px 2px !important;
+	padding: 3px 5px 3px 5px !important;
+	width: auto !important;
+	background-color: transparent;
+	background-image: url(<%= asset_path 'css/td1.png' %>);   
+	background-position: top !important;
+	background-repeat: repeat !important;
+	font-size: 11px !important;
+	color: #a2a2a2;	
+	text-decoration: none;
+	font-weight: bold !important;
+	vertical-align: middle;
+	text-align: center;
+	border: 1px solid #a2a2a2;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+		.ok5:hover {color:#ffdb30; border:#ffdb30 1px solid;}
+				
+/* ++++++++++++++++++++ Form?tov?n? textu ++++++++++++++++++++ */	
+h1 {
+	font-size: 1.5em;
+	font-stretch: wider;
+	font-weight: bold;
+	color: #ff8c00;
+	padding: 5px 0 5px 0;
+	margin: 15px 0 0 0;
+	text-decoration: none;
+	border-bottom: 1px solid #ffdb30;
+	}
+		
+h2 {
+	font-size: 1.3em;
+	font-stretch: wider;
+	font-weight: bold;
+	color: #ffdb30;
+	padding: 5px 0 5px 0;
+	margin: 10px 0 0 0;
+	text-decoration: none;
+	}	
+	
+h3 {
+	font-size: 1em;
+	font-weight: bold;
+	color: #ffdb30;
+	padding: 5px 0 5px 0;
+	margin:0px;
+	text-decoration: none;
+	}	
+	
+h5 {
+	font-size: 0.7em !important;
+	font-weight: normal !important;
+	text-decoration: none !important;
+	}	
+	
+p { padding-bottom:5px; margin:0px; font-weight: normal;	}	
+a { text-decoration:none; padding-bottom:5px; margin:0px; color:#ffdb30;	}		
+	a:hover{text-decoration:underline;}
+
+a.emperor { text-decoration:none; margin:0px; color:#da70d6;	}		
+	a.emperor:hover{text-decoration:underline;}	
+
+a.regent { text-decoration:none; margin:0px; color:#da70d6;	}		
+	a.regent:hover{text-decoration:underline;}	
+	
+a.duce { text-decoration:none;  margin:0px; color:#ff0000;	}		
+	a.duce:hover{text-decoration:underline;}	
+	
+a.poslanec { text-decoration:none; margin:0px; color:#40e0d0;	}		
+	a.poslanec:hover{text-decoration:underline;}	
+	
+a.diplomat { text-decoration:none; margin:0px; color:#fffafa;	}		
+	a.diplomat:hover{text-decoration:underline;}	
+	
+a.army_mentat { text-decoration:none; margin:0px; color: 	#6b8e23;	}		
+	a.army_mentat:hover{text-decoration:underline;}	
+	
+a.mentat { text-decoration:none; margin:0px; color:#9acd32;	}		
+	a.mentat:hover{text-decoration:underline;}	
+	
+a.general { text-decoration:none; margin:0px; color:	#ff4500;	}		
+	a.general:hover{text-decoration:underline;}	
+
+.zelena{
+	color: #7cfc00;
+}
+
+.cervena{
+	color: #ff0000;
+}
+
+.oranzova{
+	color: #ffd700 !important;
+}
+
+/* ++++++++++++++++++++ V?suvn? menu statistik ++++++++++++++++++++ */
+
+td.tdd {
+	margin: 0 !important;
+	width: 120px !important;
+	padding: 2px 5px 2px 5px !important; 
+	background-image: url(<%= asset_path 'css/tcerna2.png' %>);    
+	border: solid 1px #a2a2a2;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.menud {
+	color: #000000; 
+	padding: 0;  
+	margin: 0;
+	list-style-type: none; 
+	display:block;
+	font-size: 13px;
+}
+		.menud ul {
+			position: absolute; 
+			visibility: hidden; 
+			width:120px;
+			font-size: 0.9em !important;
+			padding: 10px 5px 5px 5px; 
+			margin: 2px 0 0 -6px;
+			list-style-type: none;
+			background-color: transparent;
+			background-image: url(<%= asset_path 'css/tcerna2.png' %>);    
+			border: solid 1px #a2a2a2;
+			border-top:0;
+			-webkit-border-bottom-right-radius: 4px;
+			-webkit-border-bottom-left-radius: 4px;
+			-moz-border-radius-bottomright: 4px;
+			-moz-border-radius-bottomleft: 4px;
+			border-bottom-right-radius: 4px;
+			border-bottom-left-radius: 4px;
+			}
+		.menud li {
+			float: left; 
+			padding: 2px 0px 2px 0px;  
+			white-space: nowrap;
+			}
+		.menud a {
+			padding: 3px 3px 5px 3px; 
+			text-align: left;  
+			color: #3399ff; 
+			display: block; 
+			text-decoration: none; 
+			}
+		.menud li a {
+			font-size: 1.1em;
+			color: #ffdb30;
+			text-decoration: none;
+			text-shadow: silver;
+			font-weight: bolder;
+			}
+		.menud ul a:link {
+			color: #fff;
+			border-bottom: none; 
+			margin: 0 ; 
+			}
+		.menud ul a:visited {
+			color: #fff; 
+			border-bottom: none; 
+			}
+		.menud ul a:hover {
+			color: #ffdb30;
+			}
+		.menud li:hover ul, ul.menu li.hover ul { visibility: visible; }
+		.menud li li {float: none; border: none; padding: 0; margin: 0;}
+		
+td.tdd2{
+	width: 20%;
+	padding: 0px 5px 3px 5px !important;
+	border-top:0;
+	color: #a9a9a9;
+	font-size: 1.0em !important;
+	text-align: center !important;
+	font-weight: bold !important;
+	background-image: url(<%= asset_path 'css/tcerna2.png' %>);    
+	border: solid 1px #a2a2a2;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+	td.tdd2 a{text-decoration:none; color:#a9a9a9; font-size: 1.2em !important;}
+	td.tdd2 a:hover{text-decoration:none; color: #ffdb30;}
+	td.tdd2 select{background-color:transparent; color:#ffdb30; border:0; width:auto;}
+	td.tdd2 option{
+		font-size: 12px;
+		color: #fff;
+		background-color: #000;
+		text-align: left;
+	}
+
+/* ++++++++++++++++++++ Tabulky - univerzaln? ++++++++++++++++++++ */
+
+div.all{
+		padding: 0 15px 15px 15px;
+		background-image: url(image/cssimage/tseda.png);
+		text-align: justify;
+		font-size: 1.0 em;
+		border: 1px solid #696969;
+		vertical-align: top;
+		margin-top: 20px;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+}
+
+		div.all li{
+			list-style: none;
+		}
+		
+.tdpimg{
+	width: 150px;
+	height: auto;
+	border: 1px solid #696969;
+}
+
+td.tdpl{
+	max-width: 30%;
+	background-position: center;
+	background-color: #000;
+	background-repeat: no-repeat;
+	text-shadow: 0.1em 0.1em #000 !Important;
+	border: 1px solid #696969;
+	vertical-align: top;
+	padding: 5px 10px 5px 15px !Important;
+-webkit-border-top-left-radius: 4px;
+-webkit-border-bottom-left-radius: 4px;
+-moz-border-radius-topleft: 4px;
+-moz-border-radius-bottomleft: 4px;
+border-top-left-radius: 4px;
+border-bottom-left-radius: 4px;
+}
+		td.tdpl li{
+			list-style: none;
+		}
+		td.tdpl h2{
+			margin: 0 0 1px 0 !important;
+			text-shadow: 0.1em 0.1em #000;
+		}
+		
+td.tdpr{
+	max-width: 30%;
+	background-position: center;
+	background-color: #000;
+	background-repeat: no-repeat;
+	text-shadow: 0.1em 0.1em #000 !Important;
+	border: 1px solid #696969;
+	vertical-align: top;
+	padding: 5px 10px 5px 15px !Important;
+-webkit-border-top-right-radius: 4px;
+-webkit-border-bottom-right-radius: 4px;
+-moz-border-radius-topright: 4px;
+-moz-border-radius-bottomright: 4px;
+border-top-right-radius: 4px;
+border-bottom-right-radius: 4px;
+}
+		td.tdpr li{
+			list-style: none;
+		}
+		td.tdpr h2{
+			margin: 0 0 1px 0 !important;
+			text-shadow: 0.1em 0.1em #000;
+		}
+		
+td.tdpl2{
+	max-width: 30%;
+	background-position: center;
+	background-color: #000;
+	background-repeat: no-repeat;
+	text-shadow: 0.1em 0.1em #000 !Important;
+	border: 1px solid #696969;
+	vertical-align: top;
+	padding: 5px 10px 5px 15px !Important;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+}
+		td.tdpl2 li{
+			list-style: none;
+		}
+		td.tdpl2 h2{
+			margin: 0 0 1px 0 !important;
+			text-shadow: 0.1em 0.1em #000;
+		}
+		
+.ctr{
+	text-align: center !important;
+}
+
+.r{
+				DOPLNIT! border radius!
+}
+
+.m{
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+}
+
+.lr{
+-webkit-border-top-left-radius: 4px;
+-webkit-border-top-right-radius: 4px;
+-moz-border-radius-topleft: 4px;
+-moz-border-radius-topright: 4px;
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+}
+
+.thr{
+		border: 1px solid #696969 !important;
+		border-right: 1px solid #ffdb30 !important;
+}
+
+.thf{
+		color:#ffdb30 !important;
+		font-weight: bold !important;
+		padding: 6px 3px 5px 3px !important;
+		margin: 5px -6px 0px -6px !important;
+		text-align: center !important;
+		font-size: 1.1em !important;
+		background-image: url(<%= asset_path 'css/td1.png' %>);    
+		background-repeat: repeat !important;
+		background-color: transparent !important;
+		border: 1px solid #696969 !important;
+		border-bottom: 1px solid #ffdb30 !important;
+}
+
+td.ava{
+		border: none !important;
+		width: 50px;	
+		padding: none !important;
+		margin-bottom:20px;
+}
+	td.ava img{
+		width:50px;
+		height: auto;
+		margin: 0;
+		border: 0;
+	}
+
+.none{
+	background: none !important;
+	border: none !important;
+}
+
+.td1{
+		color:#ffdb30 !important;
+		font-weight: bold !important;
+		padding: 3px 0 3px 0 !important;
+		margin: 10px -6px 5px -6px !important;
+		text-align: center !important;
+		font-size: 12 px !important;
+		background-image: url(<%= asset_path 'css/td1.png' %>)!important;
+		background-repeat: repeat !important;
+		background-color: transparent !important;
+		border: 1px solid #696969 !important;
+}
+	
+/* ++++++++++++++++++++ Tabulky - TAB0 = Drobe?kov? navigace ++++++++++++++++++++ */	
+
+table.tab0 {
+	width: 100%;
+	border: 0;
+}
+
+	table.tab0 td {
+		color: #fff; 
+		text-align: left;
+		padding: 0 0 10px 0;  
+		margin: 0;
+		font-size: 13px;
+		vertical-align: middle;
+	}
+	table.tab0 a {
+		color: #fff;
+		text-decoration: none;
+		font-weight: border;
+		font-size: 1em;			
+	}
+	table.tab0 a:hover {
+		color: #ffdb30;
+		text-decoration: none;
+	}
+		
+/* ++++++++++++++++++++ Tabulky - TAB1 ++++++++++++++++++++ */	
+
+table.tab1 {
+	width: 100%;
+	border: 0;
+	font-size: 12px;
+}
+	table.tab1 th{
+		color:#ffdb30;
+		font-weight: bold;
+		white-space: nowrap;
+		padding: 6px 5px 5px 5px;
+		margin: 5px -6px 2px -6px;
+		text-align: center;
+		font-size: 1.1em;
+		background-image: url(<%= asset_path 'css/td1.png' %>);   
+		border: 1px solid #696969;
+		border-bottom: 1px solid #ffdb30;
+	}
+	table.tab1 td{
+		padding: 5px;
+		background-image: url(<%= asset_path 'css/tseda.png' %>);   
+		text-align: justify;
+		font-size: 1.0 em;
+		border: 1px solid #696969;
+		vertical-align: top;
+	}
+	table.tab1 li{
+		list-style: none;
+	}
+	table.tab1 img{
+		width: 20px;
+		height: 20px;
+		margin: 2px 3px 2px 0;
+		vertical-align: middle;
+		border: solid 1px #a9a9a9;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+	}
+	table.tab1 input {
+		margin: 2px 3px 2px 0;
+		width: 60px;
+		padding: 3px 5px 2px 5px;
+		background-color: transparent;
+		background-image: url(<%= asset_path 'css/tcerna.png' %>);   
+		font-size: 1.0 em;
+		color: #a2a2a2;	
+		text-decoration: none;
+		vertical-align: middle;
+		text-align: center;
+		border: 1px solid #a2a2a2;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+	}
+	table.tab1 select{
+		font-size: 12px;
+		color: #fff;
+		padding: 2px;
+		background-color: #1d1d1d;
+		text-align: left;
+		border: 1px solid #a2a2a2;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+	}
+
+/* ++++++++++++++++++++ Tabulky - TAB2 ++++++++++++++++++++ */	
+
+table.tab2 {
+	width: 100%;
+	border: 0;
+	font-size: 12px;
+}
+	table.tab2 th{
+		color:#ffdb30;
+		font-weight: bold;
+		padding: 6px 3px 5px 3px;
+		margin: 5px -6px 2px -6px;
+		text-align: center;
+		font-size: 1.1em;
+		background-image: url(<%= asset_path 'css/td1.png' %>);   
+		border: 1px solid #696969;
+		border-bottom: 1px solid #ffdb30;
+	}
+	table.tab2 td{
+		padding: 5px;
+		background-image: url(<%= asset_path 'css/tseda.png' %>);   
+		text-align: justify;
+		font-size: 1.0 em;
+		border: 1px solid #696969;
+		vertical-align: top;
+	}
+	table.tab2 li{
+		list-style: none;
+	}
+	table.tab2 img{
+		width: 15px;
+		height: 15px;
+		margin: 2px 3px 2px 0;
+		vertical-align: middle;
+		border: solid 1px #a9a9a9;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+	}
+	table.tab2 input {
+		width: 92px;
+		margin: 1px 0 1px 0;
+		padding: 2px 3px 2px 3px;
+		font-size: 0.8em;
+		background-color: transparent;
+		background-image: url(<%= asset_path 'css/tcerna.png' %>);   
+		color: #a2a2a2;	
+		text-decoration: none;
+		vertical-align: middle;
+		text-align: center;
+		border: 1px solid #a2a2a2;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+	}
+	table.tab2 select{
+		width: 100px !important;
+		margin: 1px 0 1px 0;
+		padding: 1px 2px 1px 1px;
+		font-size: 0.8em;
+		color: #fff;
+		background-color: #1d1d1d;
+		text-align: left;
+		border: 1px solid #a2a2a2;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+	}
+
+/* ++++++++++++++++++++ Tabulky - TAB3 ++++++++++++++++++++ */	
+
+table.tab3 {
+	width: 100%;
+	border: 0;
+	font-size: 12px;
+}
+		table.tab3 th{
+		padding: 1px 5px 1px 5px;
+		text-shadow: 0.1em 0.1em #000 !important;
+		text-align: left;
+		vertical-align: baseline;
+		background-image: url(<%= asset_path 'css/td1.png' %>);   
+		border: solid 1px #696969;
+		border-bottom: solid 1px #ffdb30;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 2px;
+		}
+		table.tab3 li{
+		list-style: none;
+		}	
+		table.tab3 input{
+			margin: 7px 2px 5px 2px;
+			padding: 3px 5px 3px 25px;
+			width:100px;
+			font-size: 11px !important;
+			color: #ffdb30;
+			vertical-align: middle;
+			background: transparent;
+			background-position: left;
+			background-repeat: no-repeat;
+			border: solid 1px #696969;
+				-webkit-border-radius: 2px;
+				-moz-border-radius: 2px;
+				border-radius: 2px;
+		}
+			table.tab3 input:hover{border: solid 1px #ffdb30 !important;}
+		
+		.tab3_input{
+			margin: 7px 2px 5px 2px;
+			padding: 3px 5px 3px 25px;
+			width:100px;
+			font-size: 11px !important;
+			color: #ffdb30;
+			vertical-align: middle;
+			background: transparent;
+			background-position: left;
+			background-repeat: no-repeat;
+			border: solid 1px #696969;
+				-webkit-border-radius: 2px;
+				-moz-border-radius: 2px;
+				border-radius: 2px;
+		}
+			.tab3_input:hover{border: solid 1px #ffdb30 !important;}
+		
+		table.tab3 select{
+			margin: 7px 2px 5px 2px;
+			padding: 2px 5px 2px 25px;
+			width:100px;
+			font-size: 11px !important;
+			color: #ffdb30;
+			vertical-align: middle;
+			background-color: #292929;
+			background-position: left;
+			background-repeat: no-repeat;
+			border: solid 1px #696969;
+				-webkit-border-radius: 2px;
+				-moz-border-radius: 2px;
+				border-radius: 2px;
+		}
+			table.tab3 select:hover{border: solid 1px #ffdb30 !important;}
+			
+		table.tab3 td{
+			padding: 5px;
+			background-image: url(<%= asset_path 'css/tseda.png' %>);   
+			text-align: justify;
+			font-size: 1.0 em;
+			border: 1px solid #696969;
+			vertical-align: top;
+		}
+		
+		table.tab3 textarea{
+			padding: none;
+			margin: none;
+			background: transparent;
+			color: #fff;
+			text-align: justify;
+			font-size: 1.0 em;
+			border: none;
+			vertical-align: top;
+			width: 676px;
+			max-width:676;
+			height: 100px;
+		}
+
+		
+/* ++++++++++++++++++++ Tabulky - TAB4 ++++++++++++++++++++ */	
+
+table.tab4 {
+	width: 100%;
+	border: 0;
+	font-size: 12px;
+	margin-top: 10px;
+}	
+	table.tab4 th{
+		width: 120px;
+		min-height: 120px;
+		background-color: #000;
+		background-repeat: no-repeat;
+		text-shadow: 0.1em 0.1em #000;
+		vertical-align: top;
+		border: 1px solid #696969;
+		padding: 5px 10px 5px 10px;
+	}
+	table.tab4 td{
+		padding: 5px;
+		width: 260px;
+		background-image: url(<%= asset_path 'css/tseda.png' %>);   
+		text-align: justify;
+		font-size: 1.0 em;
+		border: 1px solid #696969;
+		vertical-align: top;
+	}
+		
+	table.tab4 li{
+		list-style: none;
+	}
+	table.tab4 a{
+		font-size: 1.2em !important;
+		margin: 0 0 3px 0 !important;
+		text-shadow: 0.1em 0.1em #000;
+	}
+	table.tab4 img{
+		width: 16px;
+		height: 16px;
+		margin: 2px 3px 2px 0;
+		vertical-align: middle;
+		border: solid 1px #a9a9a9;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+	}
+	table.tab4 input{
+		width: 44px;
+		margin: 2px 2px 5px 2px;
+		padding: 3px 5px 3px 5px;
+		font-size: 11px;
+		color: #fff;
+		text-shadow: 0.1em 0.1em #000;
+		text-align: right;
+		vertical-align: middle;
+		background-color: #292929;
+		background-position: left;
+		background-repeat: no-repeat;
+		border: solid 1px #a9a9a9;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+	}
+/* ++++++++++++++++++++ Tabulky - Mapa ++++++++++++++++++++ */	
+	
+table.map {
+	width:700px; 
+	/* +++++++ height: 54px +++++++ */	
+	height: 324px;		
+	margin: 10px 0 10px 0;
+	background-image: url(<%= asset_path 'css/galax.png' %>);   
+	background-position: top;
+	border: solid 3px #000;
+			-webkit-border-radius: 3px;
+			-moz-border-radius: 3px;
+			border-radius: 3px;
+	}
+	
+		table.map td{
+		padding:1px;
+		font-size: 0.7em;
+		text-align: right;
+		vertical-align: baseline;
+		width: 20px;		
+		height: 20px;
+		border: solid 1px #a9a9a9;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 2px;
+		}
+				table.map td:hover{border: solid 1px #ffdb30;}
+				
+		table.map input{
+           padding:1px;
+           color: #ffffff;
+                                         font-size: 11px;
+                                         text-align: right;
+           width: 100%;
+           height: 100%;
+           border: none;
+           background: none;
+           }
+        		table.map input:hover{color: #ffdb30;}
+
+/* ++++++++++++++++++++ Tabulky - V?zkum ++++++++++++++++++++ */	
+				
+table.vyzkum {
+	width:700px; 
+	/* +++++++ height: 54px +++++++ */	
+	margin: 10px 0 10px 0;
+	border: 0;
+	}
+		
+		table.vyzkum th{
+		padding:5px 3px 0 3px;
+		width: 200px !important;
+		font-size: 1 em;
+		text-shadow: 0.1em 0.1em #000 !important;
+		text-align: right;
+		vertical-align: baseline;
+		border: solid 1px #a9a9a9;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 2px;
+		}
+			table.vyzkum th:hover{border: solid 1px #ffdb30; color:#ffdb30;}
+		
+		table.vyzkum td{
+		padding: 3px;
+		font-size: 0.8em;
+		text-align: right;
+		vertical-align: baseline;
+		width: 20px !important;		
+		height: 25px !important;
+		background-image: url(<%= asset_path 'css/td3.png' %>);   
+		border: solid 1px #a9a9a9;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 2px;
+		}
+
+/* ++++++++++++++++++++ Tabulky - V?roba ++++++++++++++++++++ */	
+
+
+td.v{
+	font-weight: bold !important;
+	vertical-align: top !important;
+	text-align: left !important;
+	padding: 5px 0 0 5px !important;
+	text-shadow: 0.1em 0.1em #000 !Important;
+}
+		
+table.vyroba {
+	width:700px; 
+	/* +++++++ height: 54px +++++++ */	
+	margin: 10px 0 10px 0;
+	border: 0;
+	}
+		
+		table.vyroba th{
+			color:#ffdb30;
+			font-weight: bold;
+			padding: 5px !important;
+			height: 20px !important;
+			width: 100px !important;
+			white-space: nowrap !important;
+			text-align: center !important;
+			background-image: url(<%= asset_path 'css/td1.png' %>); 
+			border: 1px solid #696969 !important;
+			border-bottom: 1px solid #ffdb30 !important;
+				-webkit-border-radius: 2px;
+				-moz-border-radius: 2px;
+				border-radius: 2px;
+		}
+		
+		table.vyroba td{
+		padding:3px;
+		height: 27px;
+		font-size: 0.9em;
+		text-align: center;
+		white-space: nowrap;
+		background-image: url(<%= asset_path 'css/td3.png' %>);   
+		border: solid 1px #a9a9a9;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 2px;
+		}
+		
+		table.vyroba img{
+		padding:0;
+		margin: 3px;
+		width: 20px;
+		height: auto;
+		vertical-align: middle;
+		border: solid 1px #a9a9a9;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 2px;
+		}
+		
+		table.vyroba input{
+		padding:3px;
+		margin:0px;
+		height: 22px;
+		font-size: 0.9em;
+		color: #ffdb30;
+		vertical-align: middle;
+		background: transparent;
+		border: solid 1px #a9a9a9;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 2px;
+		}
+			table.vyroba input:hover{border: solid 1px #ffdb30 !important;}
+					
+		.v1{
+		padding: 3px;
+		font-size: 0.8em;
+		text-align: right;
+		vertical-align: baseline;
+		width: 20px !important;		
+		height: 25px !important;
+		background-image: url(<%= asset_path 'css/td1.png' %>) !important;
+		border: solid 1px #a9a9a9;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 2px;
+		}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+td.td{
+	width: 20%;
+	padding: 5px;
+	background-image: url(<%= asset_path 'css/tseda.png' %>);   
+	border: 1px solid #696969;
+	border-top:0;
+	text-align: left;
+	vertical-align: top;
+	-webkit-border-bottom-right-radius: 4px;
+-webkit-border-bottom-left-radius: 4px;
+-moz-border-radius-bottomright: 4px;
+-moz-border-radius-bottomleft: 4px;
+border-bottom-right-radius: 4px;
+border-bottom-left-radius: 4px;
+}
+		td.td li{
+			list-style: none;
+		}
+		td.td img{
+		width: 28px;
+		height: 28px;
+		margin-right:5px;
+		margin-bottom: 3px;
+		vertical-align: middle;
+		border: solid 1px #a9a9a9;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 2px;
+		}
+		.tdimg{
+		width: 100px !important;
+		height: 100px !important;
+		margin: 10px;
+		margin-top: 0;
+		vertical-align: middle;
+		border: solid 1px #a9a9a9;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 2px;
+		}	
+		.tdimg2{
+		width: 100px !important;
+		height: 100px !important;
+		margin: 10px;
+		margin-top: 0;
+		vertical-align: middle;
+		border: 0 !important;
+		}
+		td.td input {
+			margin: 2px 0 2px 0;
+			padding: 2px 3px 2px 3px;
+			background-color: transparent;
+			background-image: url(<%= asset_path 'css/tcerna.png' %>);   
+			font-size: 12px;
+			color: #a2a2a2;	
+			text-decoration: none;
+			vertical-align: middle;
+			text-align: center;
+			border: 1px solid #a2a2a2;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		}
+		.input2 {width:112px;}
+		
+		td.td select {
+			margin: 2px 0 2px 0;
+			width:120px;
+			padding: 2px 5px 2px 0px;
+			background-color: #1d1d1d;
+			font-size: 12px;
+			color: #a2a2a2;	
+			text-decoration: none;
+			vertical-align: middle;
+			text-align: center;
+			border: 1px solid #a2a2a2;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		}
+		td.td option{
+			font-size: 12px;
+			color: #fff;
+			background-color: #000;
+			text-align: left;
+		}
+		option.h3{
+			font-size: 12px;
+			color: #fff;
+			background-color: #000;
+			background-image: url(<%= asset_path 'css/toranzova2.png' %>);   
+			text-align: left;
+		}
+		option.h3dp{
+			font-size: 12px;
+			color: #fff;
+			background-color: #800000 !important;
+			text-align: left;
+		}
+		
+td.tdh1{
+	width: auto;
+	padding: 5px 10px 5px 10px;
+	color: #ffdb30;
+	font-size: 1.4em;
+	font-weight: bold;
+	text-align: right;
+}
+
+
+		
+td.tdo {
+	width: 120px;
+	height: 100px;
+	background-position: top;
+	background-repeat: no-repeat;
+	background-color: #000;
+	border-top:0;
+	text-align: left;
+	border: solid 1px #ffdb30;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+}
+
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+#container {
+  width: 75%;
+  margin: 0 auto;
+  background-color: #FFF;
+  padding: 20px 40px;
+  border: solid 1px black;
+  margin-top: 20px;
+}
+
+#flash_notice, #flash_error, #flash_alert {
+  padding: 5px 8px;
+  margin: 10px 0;
+  color: #000;
+}
+
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6;
+}
+
+#flash_error, #flash_alert {
+  background-color: #FCC;
+  border: solid 1px #C66;
+}
+
+.fieldWithErrors {
+  display: inline;
+}
+
+.error_messages {
+  width: 400px;
+  border: 2px solid #CF0000;
+  padding: 0px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  font-size: 12px;
+}
+
+.error_messages h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 10px;
+  font-size: 12px;
+  margin: 0;
+  background-color: #c00;
+  color: #fff;
+}
+
+.error_messages p {
+  margin: 8px 10px;
+}
+
+.error_messages ul {
+  margin: 0;
+}

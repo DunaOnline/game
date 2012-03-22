@@ -1,0 +1,24 @@
+<%= form_for @planet do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :planet_type_id %><br />
+    <%= f.number_field :planet_type_id %>
+  </p>
+  <p>
+    <%= f.label :house_id %><br />
+    <%= f.number_field :house_id %>
+  </p>
+  <p>
+    <%= f.label :available_to_all %><br />
+    <%= f.check_box :available_to_all %>
+  </p>
+  <p>
+    <%= f.label :discovered_at %><br />
+    <%= f.date_select :discovered_at %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

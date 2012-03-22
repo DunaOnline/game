@@ -1,0 +1,11 @@
+one:
+  user_id: 1
+  planet_id: 1
+  pos_x: 9.99
+  pos_y: 9.99
+
+two:
+  user_id: 1
+  planet_id: 1
+  pos_x: 9.99
+  pos_y: 9.99

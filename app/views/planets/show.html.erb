@@ -1,0 +1,102 @@
+<% title "Planet" %>
+	<table class="tab1">
+		<tr>
+			<td  width="180px"></td>
+			<td class="td1">Informace o planetě</td>
+			<td class="td1" width="110px">Bonusy planety</td>
+			<td class="td1" width="100px">Osídlení</td>
+		</tr>
+		<tr>
+		<td class="tdpl" style="background-image: url(<%= asset_path @planet.background %>)">
+			<li><h2><%= @planet.name %></h2>
+			<li><%= link_to @planet.system_name, @planet.system %>
+			<li><%= @planet.oznaceni %>
+			<li><%= @planet.obsazenost %>
+		</td>
+		<td class="tdpt">
+			<li><b>Typ planety: </b><%= @planet.planet_type.name %>
+			<% if @planet.house %>
+				<li><b>Objevitele: </b><%= @planet.house.name %>
+			<% end %>
+			<li><b>Dominantní národ: </b><a href="stat-databaze-narod.htm">Riches</a>
+				<br /><br />
+			<% if @planet.domovska? %>
+			
+			<% elsif @planet.arrakis? %>
+			
+			<% else %>
+ 				<% if @planet.osidlitelna?(current_user) %>
+					<li><%= link_to "Osidlit pole (#{format_mena(@cena_noveho_lena_melanz, 'mg')} a #{format_mena(@cena_noveho_lena_solary, 'S', false)})", :action => "osidlit_pole", :id => @planet, :cena_mel => @cena_noveho_lena_melanz, :cena_sol => @cena_noveho_lena_solray %>
+				<% else %>
+					<li>Vesmírná Gilda planetu ještě nezahrnula do pravidelných cest.</li>
+				<% end %>
+			<% end %>
+		</td>
+		<td class="tdp">
+			<% pt = @planet.planet_type %>
+			<li><%= img_solary "Bonus soláry" %><font class="<%= trida_barvy(pt.solar_bonus) %>"><%= format_mena(pt.solar_bonus, "%") %></font>
+			<li><%= img_material "Bonus materiál" %><font class="<%= trida_barvy(pt.material_bonus) %>"><%= format_mena(pt.material_bonus, "%") %></font>		
+			<li><%= img_populace "Bonus populace" %><font class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%") %></font>
+			<li><%= img_zkusenosti "Bonus zkušenosti" %><font class="<%= trida_barvy(pt.exp_bonus) %>"><%= format_mena(pt.exp_bonus, "%") %></font>
+			<li><%= img_kasarna %><font class="cervena"> + 0%</font>
+		</td>
+		<td class="tdpt">
+			<center>
+			<li><select class="vyber" name="Vyberte komoditu" title="Vyberte komoditu k transportu">
+				<option value="material">Materiál</option>
+				<option value="populaci">Populaci</option>
+				<option value="populaci">Jednotka1</option>
+				<option value="populaci">Jednotka2</option>
+				<option value="populaci">Jednotka3</option>
+				<option value="populaci">Jednotka4</option>
+				<option value="populaci">Jednotka5</option>
+				<option value="populaci">Jednotka6</option>
+				<option value="populaci">Jednotka7</option>
+				<option value="populaci">Jednotka8</option>
+				<option value="populaci">Jednotka9</option>
+				<option value="populaci">Jednotka10</option>
+			</select>
+			<select class="vyber" name="Vyberte planetu" title="Zvolte odchozí planetu">
+			    <option class="sez-b" value="p1">Giedy Prime</option>
+			    <option value="p2">Lakviel</option>
+			    <option value="p3">P3</option>
+			    <option value="p4">P4</option>
+			    <option value="p5">P5</option>
+			</select>
+			<li><input class="input2" type="text" size=15 title="Zadejte množství">
+			<li><input type="button" value="Odeslat" class="ok2"> 
+			</center>
+		</td>
+		</tr>
+	</table>
+
+	<table class="tab1">
+	<tr>	
+		<td class="td1">Název obsazeného léna</td>
+		<td class="td1" width="100px">Souřadnice</td>
+		<td class="td1">Držitel léna</td>
+		<td class="td1">Národnost</td>
+		<td class="td1" width="100px">Akce</td>
+	</tr>
+	<% for field in @planet.fields do %>
+	<tr>	
+		<td class="tdp">
+			<% if field.drzitel(current_user) %>
+				<%= link_to field.name, field %>
+			<% else %>
+				<%= field.name %>
+			<% end %>
+		</td>
+		<td class="tdp"><%= field.oznaceni %></td>
+		<td class="tdp"><%= link_to field.user.nick, field.user %></td>
+		<td class="tdp"><%= link_to field.user.house.name, field.user.house %></td>
+		<td class="tdpa">
+			<a href="kom-poslat.htm" alt="Pošta"><%= img_posta %></a>
+			<a href="stat-databaze-profil.htm" alt="Útok"><%= img_utok %></a>
+		</td>
+	</tr>
+	<% end %>
+	
+</table>
+
+	

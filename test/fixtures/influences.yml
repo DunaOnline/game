@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  effect_id: 1
+  field_id: 1
+  started_at: 2011-11-10
+
+two:
+  effect_id: 1
+  field_id: 1
+  started_at: 2011-11-10

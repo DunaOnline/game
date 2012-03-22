@@ -1,0 +1,118 @@
+# encoding: utf-8
+class Planet < ActiveRecord::Base
+  attr_accessible :name, :planet_type_id, :house_id, :available_to_all, :discovered_at, :system_name, :position
+
+  belongs_to :house
+  belongs_to :planet_type
+  belongs_to :system, :primary_key => 'system_name', :foreign_key => 'system_name'
+  has_many :fields
+  
+  def vytvor_pole(user)
+    Field.new(
+      :planet_id => self.id,
+      :name => self.name + " - " + user.nick + " - " + (self.vlastni_pole(user).count + 1).to_s,
+      :user_id => user.id,
+      :pos_x => user.house.id,
+      :pos_y => user.id
+    )
+  end
+  
+  def oznaceni
+    self.system.id.to_s + "." + self.position.to_s
+  end
+  
+  def arrakis?
+    self.name == "Arrakis"
+  end
+
+  def obsazenost
+    max = self.max_poli
+    aktualne = self.aktualne_obsazeno
+    aktualne.to_s + "/" + max.to_s
+  end
+
+  def max_poli
+    if self.planet_type.name == "Domovská"
+      max_poli = "-"
+    else
+      max_poli = self.planet_type.fields
+    end
+    max_poli
+  end
+
+  def aktualne_obsazeno
+    self.fields.count
+  end
+
+  def background
+    if self.name == "Arrakis"
+      "planety/arrakis.png"
+    else
+      case self.planet_type.name
+      when "Měsíc"
+        "planety/1.png"
+      when "Typ Vesuvia"
+        "planety/2.png"
+      when "Pengaranský typ"
+        "planety/3.png"
+      when "Teranský typ"
+        "planety/4.png"
+      when "Dyrovský typ"
+        "planety/5.png"
+      when "Marganský typ"
+        "planety/6.png"
+      when "Domovská"
+        rod = self.house.name
+        if rod == "Titáni"
+          "planety/dpl-Titani.png"
+        elsif rod == "Renegáti"
+          "planety/dpl-renegati.png"
+        else
+          "planety/dpl-" + rod + ".png"
+        end
+      else
+      "planety/neznama.png"
+      end
+    end
+  end
+  
+  def vlastni_pole(user)
+    self.fields.where(:user_id => user.id)
+  end
+  
+  def zastoupeni_rodu
+    self.fields.joins(:user, :house).includes(:house).count(:id, :group => 'houses.name')
+    #self.fields.joins(:user, :house).count(:id, :group => :house)
+  end
+  
+  def cena_noveho_lena_mel
+    Vypocty.cena_noveho_lena_melanz(self)
+  end
+  def cena_noveho_lena_sol
+    Vypocty.cena_noveho_lena_solary(self)
+  end
+  
+  def vynos(user, ceho)
+    vynos = 0.0
+    for field in self.fields.vlastnik(user).includes(:buildings) do
+      vynos += field.vynos(ceho)
+    end
+    vynos
+  end
+  
+  def osidlitelna?(user)
+    self.house == user.house || self.available_to_all
+  end
+  
+  def domovska?
+    self.planet_type_id == PlanetType.find_by_name("Domovská").id
+  end
+  
+  scope :domovska, lambda { |user| where(:house_id => user.house.id, :planet_type_id => PlanetType.find_by_name("Domovská"))}
+  scope :domovske, where(:planet_type_id => PlanetType.find_by_name("Domovská"))
+  scope :osidlitelna, where(:available_to_all => true)
+  scope :objevene, where("available_to_all = ? AND planet_type_id <> ? AND name <> ?", false, PlanetType.find_by_name("Domovská").id, 'Arrakis')
+  #scope :objevena, where(:available_to_all => false, :planet_type_id => PlanetType.find_by_name("Domovská"))
+  scope :viditelna, lambda { |house| where(:house_id => house.id, :available_to_all => false)}
+
+end

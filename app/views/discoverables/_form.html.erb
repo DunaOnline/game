@@ -1,0 +1,20 @@
+<%= form_for @discoverable do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :planet_type_id %><br />
+    <%= f.number_field :planet_type_id %>
+  </p>
+  <p>
+    <%= f.label :system %><br />
+    <%= f.text_field :system %>
+  </p>
+  <p>
+    <%= f.label :discovered %><br />
+    <%= f.check_box :discovered %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

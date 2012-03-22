@@ -1,0 +1,7 @@
+<div class="suroviny">
+	<%= img_solary %><%= format_mena(current_user.solar, 'S', false) %>
+	<%= img_material %><%= format_mena(current_user.celkovy_material, 'kg') %>
+	<%= img_melanz %><%= format_mena(current_user.melange, 'mg') %>
+	<%= img_zkusenosti %><%= format_mena(current_user.exp, 'exp', false) %>
+	<%= img_populace %><%= format_mena(current_user.celkova_populace, 'k', false) %>
+</div>

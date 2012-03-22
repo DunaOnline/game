@@ -1,0 +1,11 @@
+one:
+  name: MyString
+  planet_type_id: 1
+  system: MyString
+  discovered: false
+
+two:
+  name: MyString
+  planet_type_id: 1
+  system: MyString
+  discovered: false

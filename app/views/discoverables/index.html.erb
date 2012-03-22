@@ -1,0 +1,28 @@
+<% title "discoverables" %>
+
+<table>
+  <tr>
+    <td class="tdh1" colspan="10">Prehled objevitelnych planet</td>
+  </tr>
+  <tr>
+    <td class="td1">Name</td>
+    <td class="td1">Planet Type</td>
+    <td class="td1">System</td>
+    <td class="td1">Discovered</td>
+    <td class="td1"></td>
+  </tr>
+  <% for discoverable in @discoverables %>
+    <tr>
+      <td class="tdp"><%= link_to discoverable.name, discoverable %></td>
+      <td class="tdp"><%= discoverable.planet_type.name %></td>
+      <td class="tdp"><%= discoverable.system %></td>
+      <td class="tdp"><%= discoverable.discovered %></td>
+      <td class="tdp">
+        <%= link_to "Edit", edit_discoverable_path(discoverable) %>
+        <%= link_to "Destroy", discoverable, :confirm => 'Are you sure?', :method => :delete %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New discoverable", new_discoverable_path %></p>

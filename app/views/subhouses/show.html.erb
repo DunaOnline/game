@@ -1,0 +1,32 @@
+<% title "Subhouse" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @subhouse.name %>
+</p>
+<p>
+  <strong>House:</strong>
+  <%= @subhouse.house_id %>
+</p>
+<p>
+  <strong>Solar:</strong>
+  <%= @subhouse.solar %>
+</p>
+<p>
+  <strong>Melange:</strong>
+  <%= @subhouse.melange %>
+</p>
+<p>
+  <strong>Material:</strong>
+  <%= @subhouse.material %>
+</p>
+<p>
+  <strong>Exp:</strong>
+  <%= @subhouse.exp %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_subhouse_path(@subhouse) %> |
+  <%= link_to "Destroy", @subhouse, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", subhouses_path %>
+</p>

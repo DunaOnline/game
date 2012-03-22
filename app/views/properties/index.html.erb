@@ -1,0 +1,41 @@
+<% title "Properties" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Population Bonus</th>
+    <th>Pop Limit Bonus</th>
+    <th>Melange Bonus</th>
+    <th>Material Bonus</th>
+    <th>Solar Bonus</th>
+    <th>Exp Bonus</th>
+    <th>Duration</th>
+    <th>Population Cost</th>
+    <th>Melange Cost</th>
+    <th>Material Cost</th>
+    <th>Solar Cost</th>
+    <th>Exp Cost</th>
+  </tr>
+  <% for property in @properties %>
+    <tr>
+      <td><%= property.name %></td>
+      <td><%= property.population_bonus %></td>
+      <td><%= property.pop_limit_bonus %></td>
+      <td><%= property.melange_bonus %></td>
+      <td><%= property.material_bonus %></td>
+      <td><%= property.solar_bonus %></td>
+      <td><%= property.exp_bonus %></td>
+      <td><%= property.duration %></td>
+      <td><%= property.population_cost %></td>
+      <td><%= property.melange_cost %></td>
+      <td><%= property.material_cost %></td>
+      <td><%= property.solar_cost %></td>
+      <td><%= property.exp_cost %></td>
+      <td><%= link_to "Show", property %></td>
+      <td><%= link_to "Edit", edit_property_path(property) %></td>
+      <td><%= link_to "Destroy", property, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Property", new_property_path %></p>

@@ -1,0 +1,60 @@
+<% title "Property" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @property.name %>
+</p>
+<p>
+  <strong>Population Bonus:</strong>
+  <%= @property.population_bonus %>
+</p>
+<p>
+  <strong>Pop Limit Bonus:</strong>
+  <%= @property.pop_limit_bonus %>
+</p>
+<p>
+  <strong>Melange Bonus:</strong>
+  <%= @property.melange_bonus %>
+</p>
+<p>
+  <strong>Material Bonus:</strong>
+  <%= @property.material_bonus %>
+</p>
+<p>
+  <strong>Solar Bonus:</strong>
+  <%= @property.solar_bonus %>
+</p>
+<p>
+  <strong>Exp Bonus:</strong>
+  <%= @property.exp_bonus %>
+</p>
+<p>
+  <strong>Duration:</strong>
+  <%= @property.duration %>
+</p>
+<p>
+  <strong>Population Cost:</strong>
+  <%= @property.population_cost %>
+</p>
+<p>
+  <strong>Melange Cost:</strong>
+  <%= @property.melange_cost %>
+</p>
+<p>
+  <strong>Material Cost:</strong>
+  <%= @property.material_cost %>
+</p>
+<p>
+  <strong>Solar Cost:</strong>
+  <%= @property.solar_cost %>
+</p>
+<p>
+  <strong>Exp Cost:</strong>
+  <%= @property.exp_cost %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_property_path(@property) %> |
+  <%= link_to "Destroy", @property, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", properties_path %>
+</p>

@@ -1,0 +1,24 @@
+<% title "discoverable" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @discoverable.name %>
+</p>
+<p>
+  <strong>Planet Type:</strong>
+  <%= @discoverable.planet_type_id %>
+</p>
+<p>
+  <strong>System:</strong>
+  <%= @discoverable.system %>
+</p>
+<p>
+  <strong>Discovered:</strong>
+  <%= @discoverable.discovered %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_discoverable_path(@discoverable) %> |
+  <%= link_to "Destroy", @discoverable, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", discoverables_path %>
+</p>

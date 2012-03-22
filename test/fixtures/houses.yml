@@ -1,0 +1,13 @@
+one:
+  name: MyString
+  solar: 1
+  melange: 9.99
+  material: 9.99
+  exp: 1
+
+two:
+  name: MyString
+  solar: 1
+  melange: 9.99
+  material: 9.99
+  exp: 1

@@ -1,0 +1,92 @@
+<%= form_for @eod do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :field_id %><br />
+    <%= f.number_field :field_id %>
+  </p>
+  <p>
+    <%= f.label :date %><br />
+    <%= f.date_select :date %>
+  </p>
+  <p>
+    <%= f.label :solar_income %><br />
+    <%= f.number_field :solar_income %>
+  </p>
+  <p>
+    <%= f.label :exp_income %><br />
+    <%= f.number_field :exp_income %>
+  </p>
+  <p>
+    <%= f.label :material_income %><br />
+    <%= f.text_field :material_income %>
+  </p>
+  <p>
+    <%= f.label :population_income %><br />
+    <%= f.number_field :population_income %>
+  </p>
+  <p>
+    <%= f.label :solar_expense %><br />
+    <%= f.number_field :solar_expense %>
+  </p>
+  <p>
+    <%= f.label :exp_expense %><br />
+    <%= f.number_field :exp_expense %>
+  </p>
+  <p>
+    <%= f.label :material_expense %><br />
+    <%= f.text_field :material_expense %>
+  </p>
+  <p>
+    <%= f.label :population_expense %><br />
+    <%= f.number_field :population_expense %>
+  </p>
+  <p>
+    <%= f.label :melange_income %><br />
+    <%= f.text_field :melange_income %>
+  </p>
+  <p>
+    <%= f.label :melange_expense %><br />
+    <%= f.text_field :melange_expense %>
+  </p>
+  <p>
+    <%= f.label :solar_store %><br />
+    <%= f.number_field :solar_store %>
+  </p>
+  <p>
+    <%= f.label :exp_store %><br />
+    <%= f.number_field :exp_store %>
+  </p>
+  <p>
+    <%= f.label :material_store %><br />
+    <%= f.text_field :material_store %>
+  </p>
+  <p>
+    <%= f.label :population_store %><br />
+    <%= f.number_field :population_store %>
+  </p>
+  <p>
+    <%= f.label :melange_store %><br />
+    <%= f.text_field :melange_store %>
+  </p>
+  <p>
+    <%= f.label :imperator %><br />
+    <%= f.number_field :imperator %>
+  </p>
+  <p>
+    <%= f.label :arrakis %><br />
+    <%= f.number_field :arrakis %>
+  </p>
+  <p>
+    <%= f.label :leader %><br />
+    <%= f.number_field :leader %>
+  </p>
+  <p>
+    <%= f.label :mentats %><br />
+    <%= f.text_field :mentats %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

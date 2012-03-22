@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  building_id: 1
+  field_id: 1
+
+two:
+  building_id: 1
+  field_id: 1

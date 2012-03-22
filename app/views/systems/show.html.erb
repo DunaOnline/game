@@ -1,0 +1,69 @@
+<% title "Sektor #{@system.id.to_s} - #{@system.system_name}" %>
+
+<table class="tab0">
+	<tr>	
+		<td>
+		</td>
+		<td class="tdd">
+			<ul class="menud">
+				<li>	<a title="Filtrováním přenastavíte zobrazená data.">Zobrazit »</a> 
+					<ul>
+						<li><%= link_to "Mapa Impéria", systems_path %>
+						<li><%= link_to "Planety k osídlení", planets_path %>
+					</ul>
+				</li>
+			</ul>		
+		</td>
+	</tr>
+</table>
+
+<%= render :partial => 'mapa_imperia', :locals => {:systems => @systems} %>
+
+<h2>Sektoru <%= @system.id.to_s + " - " + @system.system_name %>:</h3>
+
+<table class="tab1">
+	<tr>	
+		<th class="none" style="width:200px"></th>
+		<th class="l">Popis planety</th>
+		<th>Ekonomický bonus</th>
+		<th class="r">Vojenský bonus</th>
+	</tr>
+	<% for planeta in @planets do %>
+		<% pt = planeta.planet_type %>
+	<tr>	
+		<td class="tdpl" style="background-image: url(<%= asset_path planeta.background %>)">
+			<li><h2><%= link_to planeta.name, planeta %></h2>
+			<li><%= planeta.system_name %>
+			<li>[<%= planeta.oznaceni %>]
+			<li><%= planeta.obsazenost %>
+			
+		</td>
+		<td>
+			<li><b>Typ planety: </b><%= pt.name %>
+			<% if planeta.house %>
+				<li><b>Objevitele: </b><%= planeta.house.name %>
+			<% end %>
+			<li><b>Dominantní národ: </b><a href="stat-databaze-narod.htm">Riches (33)</a>
+			<li><b>Další národy:</b> Atreides (12), Corrino (10), Ekaz (7), Harkonnenové (2)
+			<li><b>Vaše léna:</b> 
+				<% for field in planeta.fields.where(:user_id => current_user) do %>
+					<%= link_to field.name, field %>;
+				<% end %>
+			<br><br>
+			<li><a href="stat-kartografie-majitele.htm">Seznam vlastníků lén na planetě</a>		</td>
+		<td>
+			<li><%= img_solary "Bonus soláry" %><font class="<%= trida_barvy(pt.solar_bonus) %>"><%= format_mena(pt.solar_bonus, "%") %></font>
+			<li><%= img_material "Bonus materiál" %><font class="<%= trida_barvy(pt.material_bonus) %>"><%= format_mena(pt.material_bonus, "%") %></font>		
+			<li><%= img_populace "Bonus populace" %><font class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%") %></font>
+			<li><%= img_zkusenosti "Bonus zkušenosti" %><font class="<%= trida_barvy(pt.exp_bonus) %>"><%= format_mena(pt.exp_bonus, "%") %></font>
+		</td>
+		<td>
+			<li><%= img_vyrobky "Bonus výroby" %><font class="cervena"> + 0%</font>
+			<li><%= img_kasarna "Navýšení kapacity kasáren" %><font class="cervena"> + 0%</font>
+			<li><%= img_kosmodrom "Navýšení kapacity kosmodromů" %><font class="cervena"> + 0%</font>
+			<li><%= img_po "Navýšení obrany" %><font class="cervena"> + 0%</font>
+		</td>
+	</tr>
+	<% end %>
+</table>
+

@@ -1,0 +1,20 @@
+<table class="tab1">
+	<tr>
+		<td class="tdh1">Setting</td>
+		<td class="tdh1">Value (boolean)</td>
+		<td class="tdh1">Datum</td>
+		<td class="tdh1">Slovo</td>
+		<td class="tdh1">Cislo</td>
+		<td></td>
+	</tr>
+	<% for global in @globals do %>
+		<tr>
+			<td class="tdh1"><%= global.setting %></td>
+			<td class="tdd"><%= global.value %></td>
+			<td class="tdd"><%= format_date(global.datum) %></td>
+			<td class="tdd"><%= global.slovo %></td>
+			<td class="tdd"><%= global.cislo %></td>
+			<td class="tdd"><%= link_to "edit", global_path(:id => global) %></td>
+		</tr>
+	<% end %>
+</table>

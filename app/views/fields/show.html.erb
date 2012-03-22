@@ -1,0 +1,107 @@
+<% title "Léno #{@field.name}" %>
+	<table class="tab0">
+	<tr>	
+		<td>
+		</td>
+		<td class="tdd">
+			<ul class="menud">
+				<li><a title="Filtrováním přenastavíte zobrazená data.">Spravovat jiné léno »</a> 
+					<ul>
+						<% for planet in @owner.osidlene_planety do %>
+							<li><%= link_to planet.name, planet, :class => "oranzova" %>
+								<% for field in planet.vlastni_pole(@owner) do %>
+									<li><%= link_to field.name, field %></li>
+								<% end %>
+						<% end %>
+					</ul>
+				</li>
+			</ul>		
+		</td>
+	</table>
+
+  	 <table class="tab2">
+		<tr>	
+			<th class="lr" style="width:120px">Popis léna</th>
+			<th class="none"  style="width:140px"></th>
+			<th class="l" >Popis stavby</th>
+			<th style="width:100px">Náklady na stavbu</th>
+			<th class="r" style="width:70px">Náklady vylepšení</th>
+		</tr>
+		<tr>	
+			<td rowspan="21">
+			<center>
+				<li><img class="tdimg2" src = "<%= asset_path @planet.background %>">
+				<li><h3><%= link_to @planet.name, @planet %></h3>
+				<li><h3><%= @field.name %></h3></li>
+				<li><%= @field.oznaceni %></font>
+				<div class="td1">Zástavba planety</div>
+				<%= @planet.obsazenost %>
+				<div class="td1">Zástavba léna</div>
+				<%= @field.zastavba %>
+				<div class="td1">Populace léna</div>
+				<%= @resource.population %>
+				<div class="td1">Material na léne</div>
+				<%= @resource.material %>
+				<div class="td1">Gildovní transport</div>
+				<br> 
+				<li><select class="vyber" name="Vyberte komoditu" title="Vyberte komoditu k transportu">
+					<option value="material">Materiál</option>
+					<option value="populaci">Populaci</option>
+					<option value="populaci">Jednotka1</option>
+					<option value="populaci">Jednotka2</option>
+					<option value="populaci">Jednotka3</option>
+					<option value="populaci">Jednotka4</option>
+					<option value="populaci">Jednotka5</option>
+					<option value="populaci">Jednotka6</option>
+					<option value="populaci">Jednotka7</option>
+					<option value="populaci">Jednotka8</option>
+					<option value="populaci">Jednotka9</option>
+					<option value="populaci">Jednotka10</option>
+				</select>
+				<select class="vyber" name="Vyberte planetu" title="Zvolte cílovou planetu">
+					<option class="sez-b" value="p1">Giedy Prime</option>
+					<option value="p2">Lakviel</option>
+					<option value="p3">P3</option>
+					<option value="p4">P4</option>
+					<option value="p5">P5</option>
+				</select>
+				<li><input class="input2" type="text" size=15 title="Zadejte množství">
+				<li><input type="button" value="Odeslat" class="ok2"> 
+				<br /><br /><br />
+				<div class="td1">Přejmenuj léno</div>
+				<%= form_tag prejmenuj_pole_path(:id => @field) do %>
+					<%= text_field_tag :jmeno_pole, @field.name %><br />
+					<%= submit_tag "Přejmenuj" %>
+				<% end %>
+			</center>
+			</td>
+		<% for budova in @owner.dovolene_budovy('L') do %>
+			<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'L', :obr => 'mes'} %>
+		<% end %>
+		</tr>
+		<% for budova in @owner.dovolene_budovy('S') do %>
+			<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'S', :obr => 'trh'} %>
+		<% end %>
+		
+		<% for budova in @owner.dovolene_budovy('M') do %>
+			<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'M', :obr => 'dul'} %>
+		<% end %>
+		
+		<% for budova in @owner.dovolene_budovy('E') do %>
+			<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'E', :obr => 'lab'} %>
+		<% end %>
+		
+		<% for budova in @owner.dovolene_budovy('V') do %>
+			<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'V', :obr => 'tov'} %>
+		<% end %>
+		
+		<% for budova in @owner.dovolene_budovy('O') do %>
+			<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'O', :obr => 'pob'} %>
+		<% end %>
+		
+		<% if @planet.arrakis? %>
+			<% for budova in @owner.dovolene_budovy('J') do %>
+				<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'J', :obr => 'pob'} %>
+			<% end %>
+		<% end %>
+	  </table>

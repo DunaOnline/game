@@ -1,0 +1,24 @@
+<%= form_for @global do |f| %>
+	<%= f.error_messages %>
+	<p>
+	  <%= f.label :setting %><br />
+	  <%= f.text_field :setting %>
+	</p>
+	<p>
+      <%= f.label :value %><br />
+      <%= f.check_box :value %>
+	</p>
+	<p>
+	  <%= f.label :datum %><br />
+	  <%= f.text_field :datum %>
+	</p>
+	<p>
+	  <%= f.label :slovo %><br />
+	  <%= f.text_field :slovo %>
+	</p>
+	<p>
+	  <%= f.label :cislo %><br />
+	  <%= f.text_field :cislo %>
+	</p>
+	<p><%= f.submit "Save" %></p>
+<% end %>

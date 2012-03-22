@@ -1,0 +1,20 @@
+<%= form_for @vote do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :house_id %><br />
+    <%= f.number_field :house_id %>
+  </p>
+  <p>
+    <%= f.label :elector %><br />
+    <%= f.number_field :elector %>
+  </p>
+  <p>
+    <%= f.label :elective %><br />
+    <%= f.number_field :elective %>
+  </p>
+  <p>
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

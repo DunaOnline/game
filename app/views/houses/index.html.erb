@@ -1,0 +1,25 @@
+<% title "Houses" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Solar</th>
+    <th>Melange</th>
+    <th>Material</th>
+    <th>Exp</th>
+  </tr>
+  <% for house in @houses %>
+    <tr>
+      <td><%= house.name %></td>
+      <td><%= house.solar %></td>
+      <td><%= house.melange %></td>
+      <td><%= house.material %></td>
+      <td><%= house.exp %></td>
+      <td><%= link_to "Show", house %></td>
+      <td><%= link_to "Edit", edit_house_path(house) %></td>
+      <td><%= link_to "Destroy", house, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New House", new_house_path %></p>

@@ -1,0 +1,21 @@
+  <div class="lh">
+  Administrace
+  </div>
+  <div class="l">
+    <h3>Prihlasovani: <%= link_to Aplikace.prihlaseni_povoleno?.to_s, :controller => "admin", :action => "prepni_povoleni_prihlasovani" %></h3>
+    <h3>Zakladani: <%= link_to Aplikace.zakladani_hracu_povoleno?.to_s, :controller => "admin", :action => "prepni_povoleni_zakladani" %></h3>
+    <h3><%= link_to "Zamkni hru", zamkni_hru_path %></h3>
+    <h3><%= link_to "Spust prepocet", kompletni_prepocet_path %></h3>
+    <h3>Admin hracu</h3>
+    <%= form_tag :zmen_prava do %>
+      <%= select_tag :user_id_prava, options_for_select(User.order(:username).all.collect { |p| [p.username, p.id] }, {:include_blank => false}) %>
+      <%= submit_tag 'Vyber' %>
+    <% end %>
+    <h3><%= link_to "Pridej suroviny", pridej_suroviny_path %></h3>
+    <h3><%= link_to "Prehled globals", global_index_path %></h3>
+    <h3>Online hraci</h3>
+    <% for user in online_users %>
+      <%= link_to user.username, user %>
+    <% end %>
+
+  </div>

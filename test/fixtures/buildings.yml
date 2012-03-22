@@ -1,0 +1,33 @@
+one:
+  name: MyString
+  population_bonus: 9.99
+  pop_limit_bonus: 9.99
+  melange_bonus: 9.99
+  material_bonus: 9.99
+  solar_bonus: 9.99
+  exp_bonus: 9.99
+  population_cost: 9.99
+  melange_cost: 9.99
+  material_cost: 9.99
+  solar_cost: 9.99
+  exp_cost: 9.99
+  prerequisity_1: 1
+  prerequisity_2: 1
+  prerequisity_3: 1
+
+two:
+  name: MyString
+  population_bonus: 9.99
+  pop_limit_bonus: 9.99
+  melange_bonus: 9.99
+  material_bonus: 9.99
+  solar_bonus: 9.99
+  exp_bonus: 9.99
+  population_cost: 9.99
+  melange_cost: 9.99
+  material_cost: 9.99
+  solar_cost: 9.99
+  exp_cost: 9.99
+  prerequisity_1: 1
+  prerequisity_2: 1
+  prerequisity_3: 1

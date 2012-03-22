@@ -1,0 +1,45 @@
+<% title "Buildings" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Population Bonus</th>
+    <th>Pop Limit Bonus</th>
+    <th>Melange Bonus</th>
+    <th>Material Bonus</th>
+    <th>Solar Bonus</th>
+    <th>Exp Bonus</th>
+    <th>Population Cost</th>
+    <th>Melange Cost</th>
+    <th>Material Cost</th>
+    <th>Solar Cost</th>
+    <th>Exp Cost</th>
+    <th>Prerequisity 1</th>
+    <th>Prerequisity 2</th>
+    <th>Prerequisity 3</th>
+  </tr>
+  <% for building in @buildings %>
+    <tr>
+      <td><%= building.name %></td>
+      <td><%= building.population_bonus %></td>
+      <td><%= building.pop_limit_bonus %></td>
+      <td><%= building.melange_bonus %></td>
+      <td><%= building.material_bonus %></td>
+      <td><%= building.solar_bonus %></td>
+      <td><%= building.exp_bonus %></td>
+      <td><%= building.population_cost %></td>
+      <td><%= building.melange_cost %></td>
+      <td><%= building.material_cost %></td>
+      <td><%= building.solar_cost %></td>
+      <td><%= building.exp_cost %></td>
+      <td><%= building.prerequisity_1 %></td>
+      <td><%= building.prerequisity_2 %></td>
+      <td><%= building.prerequisity_3 %></td>
+      <td><%= link_to "Show", building %></td>
+      <td><%= link_to "Edit", edit_building_path(building) %></td>
+      <td><%= link_to "Destroy", building, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Building", new_building_path %></p>
