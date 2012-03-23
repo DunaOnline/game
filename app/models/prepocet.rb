@@ -92,7 +92,8 @@ class Prepocet
           n_vudce = new_vudce.nick
         end
         puts "Menim vudce #{o_vudce} na #{n_vudce}"
-      end      house.eod_zapis_vudce(order, new_vudce)
+      end
+      house.eod_zapis_vudce(order, new_vudce)
     end
     puts "vudcove zmeneni"
   end
