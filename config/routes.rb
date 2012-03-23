@@ -1,5 +1,6 @@
 DuneOnline::Application.routes.draw do
   resources :eods
+  match 'zobraz_eod' => 'eods#zobraz_eod', :as => :zobraz_eod
 
   resources :systems
 

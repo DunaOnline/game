@@ -4,44 +4,7 @@ class EodsController < ApplicationController
   end
 
   def show
-    if params[:kam] == "prev"
-      if params[:order] == 1
-        date = params[:date] - 1
-        order = current_user.eods.where(:date => date).maximum(:order)
-      else
-        date = params[:date]
-        order = params[:order].to_i - 1
-      end
-    elsif params[:kam] == "next"
-      max_order = current_user.eods.where(:date => params[:date]).maximum(:order)
-      if params[:order] == max_order
-        date = params[:date] + 1
-        order = 1
-      else
-        date = params[:date]
-        order = params[:order].to_i + 1
-      end
-    else
-      date = Date.today
-      order = current_user.eods.where(:date => date).maximum(:order)
-    end
     
-    @eods_global = current_user.eods.where(:date => date, :order => order, :field_id => nil).first
-    @eods_fields = current_user.eods.where(:date => date, :order => order)
-    if @eods_global && @eods_fields
-      @imperator = User.find(@eods_global.imperator).includes(:house) if @eods_global.imperator
-      @arrakis = User.find(@eods_global.arrakis).includes(:house) if @eods_global.arrakis
-      @leader = User.find(@eods_global.leader) if @eods_global.leader
-      if @eods_global.mentats
-        mentats = []
-        @eods_global.mentats.split('').each do |id|
-          mentats << id.to_i
-        end
-        @mentats = User.where(:id => mentats) 
-      end
-    else
-      redirect_to :back, :notice => "Toto je krajni prepocet."
-    end    
   end
 
   def new
@@ -74,5 +37,61 @@ class EodsController < ApplicationController
     @eod = Eod.find(params[:id])
     @eod.destroy
     redirect_to eods_url, :notice => "Successfully destroyed eod."
+  end
+  
+  def zobraz_eod
+    if params[:kam] == "prev"
+      if params[:order].to_i == 1
+        date = params[:date].to_date - 1
+        order = current_user.eods.where(:date => date).maximum(:order)
+      else
+        date = params[:date].to_date
+        order = params[:order].to_i - 1
+      end
+    elsif params[:kam] == "next"
+      max_order = current_user.eods.where(:date => params[:date]).maximum(:order).to_i
+      if params[:order].to_i == max_order
+        date = params[:date].to_date + 1
+        order = 1
+      else
+        date = params[:date].to_date
+        order = params[:order].to_i + 1
+      end
+    else
+      date = Date.today
+      order = current_user.eods.where(:date => date).maximum(:order)
+    end
+    
+    puts "********************************\ndate: #{date}     order: #{order}\n*******************************"
+    
+    @eods_global = current_user.eods.where(:date => date, :order => order, :field_id => nil).first
+    @eods_fields = current_user.eods.where(:date => date, :order => order)
+    if @eods_global && @eods_fields
+      @imperator = User.find(@eods_global.imperator).includes(:house) if @eods_global.imperator
+      @arrakis = User.find(@eods_global.arrakis).includes(:house) if @eods_global.arrakis
+      @leader = User.find(@eods_global.leader) if @eods_global.leader
+      if @eods_global.mentats
+        mentats = []
+        @eods_global.mentats.split('').each do |id|
+          mentats << id.to_i
+        end
+        @mentats = User.where(:id => mentats) 
+      end
+      
+      @solar_income = 0.0
+      @exp_income = 0.0
+      @material_income = 0.0
+      @population_income = 0.0
+      
+      for eod in @eods_fields do
+        @solar_income += eod.solar_income
+        @exp_income += eod.exp_income
+        @material_income += eod.material_income
+        @population_income += eod.population_income
+      end 
+      
+    else
+      redirect_to :back, :notice => "Toto je krajni prepocet."
+    end    
   end
 end
