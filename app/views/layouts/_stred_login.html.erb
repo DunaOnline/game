@@ -1,0 +1,52 @@
+<div class="all">
+		
+	<h2> Hra je ve vývoji!</h2>
+
+	<li>Vážení návštěvníci!
+
+	<li>Vítám Vás u vstupního portálu do herního světa Duny, jejímž stvořitelem je americký spisovatel Frank Herbert. Ve své fantasii vytvořil epos o pouštní planetě Arrakis (jinak známe jako Duna), zahrnující vesmír s kvalitou minimálně na úrovni Tolkienovi Středozemě. 
+
+	<li>Tyto stránky mají ambici navázat na tradiční českou hru dunaonline.com a to v novém kabátě a s novými možnostmi - jak pro jednotlivé hráče, tak i pro jejich vedení.
+
+	<li>Pro členství ve hře se stačí pouze bezplatně zaregistrovat! Jménem admin týmu vám přeji příjemnou zábavu a hru.	
+
+</div>
+
+<table class="tab1">
+	<tr>
+		<th>
+			Screeny ze hry
+		</th>
+	</tr>	
+	
+	<tr>
+		<td style="text-align:center">
+			<%= image_tag("img/screen1_mini.png", class: "screen", alt: "Screen") %>
+			<%= image_tag("img/screen2_mini.png", class: "screen", alt: "Screen") %>
+			<%= image_tag("img/screen3_mini.png", class: "screen", alt: "Screen") %>
+			<%= image_tag("img/screen4_mini.png", class: "screen", alt: "Screen") %>
+			<%= image_tag("img/screen5_mini.png", class: "screen", alt: "Screen") %>
+			<%= image_tag("img/screen6_mini.png", class: "screen", alt: "Screen") %>
+			<%= image_tag("img/screen7_mini.png", class: "screen", alt: "Screen") %>
+			<%= image_tag("img/screen8_mini.png", class: "screen", alt: "Screen") %>
+					
+		</td>
+	</tr>						
+
+</table>
+	
+<% title "Log in" %>
+
+<p>Don't have an account? <%= link_to "Sign up!", signup_path %></p>	
+
+<%= form_tag sessions_path do %>
+  <p>
+    <%= label_tag :login, "Username or Email Address" %><br />
+    <%= text_field_tag :login, params[:login] %>
+  </p>
+  <p>
+    <%= label_tag :password %><br />
+    <%= password_field_tag :password %>
+  </p>
+  <p><%= submit_tag "Log in" %></p>
+<% end %>

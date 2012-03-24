@@ -40,7 +40,7 @@ border-radius: 4px;
 }
 
 div.inf_i {
-	position: absolute; top: 55px; left: 254px;
+	position: absolute; top: 31px; left: 254px;
 	width: 818px;
 	height: 128px;
 	background-image: url(<%= asset_path 'css/logo.png' %>); 
@@ -54,6 +54,34 @@ div.inf_i {
 border-radius: 5px;
 }
 
+img.screen {
+	width: 155px !important;
+	height: auto !important;
+	margin: 2px !important;
+}
+
+input.i_email {background-image: url(<%= asset_path 'css/email2.png' %>) !important;}
+input.i_login {background-image: url(<%= asset_path 'css/adresat.png' %>) !important;}
+input.i_nick {background-image: url(<%= asset_path 'css/adresat.png' %>) !important;}
+input.i_pass {background-image: url(<%= asset_path 'css/key.png' %>) !important;}
+
+	
+	div.l select{
+		margin: 7px 2px 5px 2px;
+		padding: 2px 5px 2px 25px;
+		width:100px;
+		font-size: 11px !important;
+		color: #ffdb30;
+		vertical-align: middle;
+		background-color: #292929;
+		background-position: left;
+		background-repeat: no-repeat;
+		border: solid 1px #696969;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 2px;
+	}
+		div.l select:hover{border: solid 1px #ffdb30 !important;}
 
 
 
@@ -396,8 +424,10 @@ div.lh {
 -moz-border-radius-topright: 4px;
 border-top-right-radius: 4px;
 	}
+	
 div.l {
-	color:#fff;
+	color:#fffff;
+	font-size:12px;
 	width: 150px;
 	padding: 10px 10px 10px 15px;
 	margin: 0px 20px 15px -1px;
@@ -409,9 +439,29 @@ div.l {
 border-bottom-right-radius: 4px;
 	}
 	
+	div.l li{list-style: none;}
+	
+	div.l input {margin: 7px 2px 5px 2px;
+		padding: 3px 5px 3px 25px;
+		width:100px;
+		font-size: 11px !important;
+		color: #ffdb30;
+		vertical-align: middle;
+		background: transparent;
+		background-position: left;
+		background-repeat: no-repeat;
+		border: solid 1px #696969;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 2px;
+}
+	div.l input:hover{border: solid 1px #ffdb30 !important;}
+
+		
 div.la {
 	color:#fff;
 	width: 150px;
+	font-size:12px;
 	padding: 10px 10px 10px 15px;
 	margin: 0px 20px 15px -1px;
 	border: 1px solid #a2a2a2;
@@ -451,6 +501,8 @@ div.r {
 border-bottom-left-radius: 4px;
 	}
 	
+	div.r li{list-style: none;}
+	
 div.ra {
 	color:#fff;
 	width: 155px;
@@ -470,9 +522,10 @@ border-bottom-left-radius: 4px;
 
 .ok {
 	margin: 2px 0 2px 0;
-	padding: 2px 5px 2px 5px;
+	padding: 2px 5px 2px 5px !important;
 	background-color: transparent;
-	background-image: url(<%= asset_path 'css/td1.png' %>);   
+	background-image: url(<%= asset_path 'css/td1.png' %>) !important;  
+	background-repeat: repeat !important;	
 	width: auto !important;
 	font-size: 12px !important;
 	color: #a2a2a2;	
@@ -492,7 +545,8 @@ border-radius: 3px;
 	padding: 2px 3px 2px 3px !important;
 	width: 100px !important;
 	background-color: transparent;
-	background-image: url(<%= asset_path 'css/td1.png' %>);   
+	background-image: url(<%= asset_path 'css/td1.png' %>) !important; 
+	background-repeat: repeat !important;	
 	font-size: 10px !important;
 	color: #a2a2a2;	
 	text-decoration: none;
@@ -511,7 +565,8 @@ border-radius: 3px;
 	padding: 2px 3px 2px 3px !important;
 	width: auto !important;
 	background-color: transparent;
-	background-image: url(<%= asset_path 'css/tcerna2.png' %>);   
+	background-image: url(<%= asset_path 'css/tcerna2.png' %>) !important; 
+	background-repeat: repeat !important;
 	font-size: 9px !important;
 	color: #a2a2a2;	
 	text-decoration: none;
@@ -530,7 +585,8 @@ border-radius: 3px;
 	padding: 3px 5px 3px 5px !important;
 	width: auto !important;
 	background-color: transparent;
-	background-image: url(<%= asset_path 'css/td1.png' %>);   
+	background-image: url(<%= asset_path 'css/td1.png' %>) !important;   
+	background-repeat: repeat !important;
 	font-size: 11px !important;
 	color: #a2a2a2;	
 	text-decoration: none;
@@ -549,9 +605,9 @@ border-radius: 3px;
 	padding: 3px 5px 3px 5px !important;
 	width: auto !important;
 	background-color: transparent;
-	background-image: url(<%= asset_path 'css/td1.png' %>);   
-	background-position: top !important;
+	background-image: url(<%= asset_path 'css/td1.png' %>) !important;   
 	background-repeat: repeat !important;
+	background-position: top !important;
 	font-size: 11px !important;
 	color: #a2a2a2;	
 	text-decoration: none;
@@ -744,7 +800,7 @@ td.tdd2{
 
 div.all{
 		padding: 0 15px 15px 15px;
-		background-image: url(image/cssimage/tseda.png);
+		background-image: url(<%= asset_path 'css/tseda.png' %>); 
 		text-align: justify;
 		font-size: 1.0 em;
 		border: 1px solid #696969;
@@ -946,6 +1002,7 @@ table.tab1 {
 	width: 100%;
 	border: 0;
 	font-size: 12px;
+	margin-top: 15px;
 }
 	table.tab1 th{
 		color:#ffdb30;
@@ -1011,9 +1068,10 @@ table.tab1 {
 /* ++++++++++++++++++++ Tabulky - TAB2 ++++++++++++++++++++ */	
 
 table.tab2 {
-	width: 100%;
+	width: 100% !important;
 	border: 0;
 	font-size: 12px;
+	margin-top: 15px;
 }
 	table.tab2 th{
 		color:#ffdb30;
@@ -1083,6 +1141,7 @@ table.tab3 {
 	width: 100%;
 	border: 0;
 	font-size: 12px;
+	margin-top: 15px;
 }
 		table.tab3 th{
 		padding: 1px 5px 1px 5px;
@@ -1180,7 +1239,7 @@ table.tab4 {
 	width: 100%;
 	border: 0;
 	font-size: 12px;
-	margin-top: 10px;
+	margin-top: 15px;
 }	
 	table.tab4 th{
 		width: 120px;
