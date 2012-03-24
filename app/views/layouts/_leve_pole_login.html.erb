@@ -5,7 +5,7 @@
 	
 		<%= form_tag sessions_path do %>
 			<li><%= text_field_tag :login , params[:login], title: "Registrační e-mail nebo Login", class: "i_email" %>
-			<li><%= password_field_tag :password , class: "i_pass",  title: "Vstupní heslo" %>
+			<li><%= password_field_tag :password , class: "i_key",  title: "Vstupní heslo" %>
 			<li><%= submit_tag "Vstoupit do hry", class: "ok2" %>
 		<% end %>
 
@@ -15,8 +15,8 @@
 	Rychlá registrace
 </div>
 	<div class="l">
-	
 		
+
 	</div>
 		
 
@@ -29,6 +29,13 @@
 		<li>Aktivních profilů:	0
 		<li>Online hráčů:	0
 		<li>Denní průměr:	0
-		<li>Probíhá:	<font class="cervena">Hra uzavřena</font>
+		<li>Probíhá:   
+		
+			<% if Aplikace.prihlaseni_povoleno? %>
+				<font class="zelena">Hra je otevřena</font>
+			<% else %>
+				<font class="oranzova">Hra uzavřena</font>
+			<% end %>
+			
 	</div>
 		
