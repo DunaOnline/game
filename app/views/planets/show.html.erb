@@ -1,10 +1,10 @@
 <% title "Planet" %>
 	<table class="tab1">
 		<tr>
-			<td  width="180px"></td>
+			<td  class="none" width="180px"></td>
 			<td class="td1">Informace o planetě</td>
 			<td class="td1" width="110px">Bonusy planety</td>
-			<td class="td1" width="100px">Osídlení</td>
+			<td class="td1" width="100px">Transport</td>
 		</tr>
 		<tr>
 		<td class="tdpl" style="background-image: url(<%= asset_path @planet.background %>)">
@@ -38,7 +38,7 @@
 			<li><%= img_material "Bonus materiál" %><font class="<%= trida_barvy(pt.material_bonus) %>"><%= format_mena(pt.material_bonus, "%") %></font>		
 			<li><%= img_populace "Bonus populace" %><font class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%") %></font>
 			<li><%= img_zkusenosti "Bonus zkušenosti" %><font class="<%= trida_barvy(pt.exp_bonus) %>"><%= format_mena(pt.exp_bonus, "%") %></font>
-			<li><%= img_kasarna %><font class="cervena"> + 0%</font>
+			<li><%= img_kasarna "Bonus ke kapacitě kasáren a kosmodromů" %><font class="cervena"> + 0%</font>
 		</td>
 		<td class="tdpt">
 			<center>

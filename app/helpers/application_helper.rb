@@ -32,7 +32,7 @@ module ApplicationHelper
   end
 
   def img_solary(title = "Soláry")
-    image_tag("css/solery.png",  :alt => title, :title => title)
+    image_tag("css/solary.png",  :alt => title, :title => title)
   end
 
   def img_material(title = "Materiál")
@@ -59,12 +59,12 @@ module ApplicationHelper
     image_tag("css/vyrobky.png",  :alt => title, :title => title)
   end
 
-  def img_kasarna(title = "Kapacita kasáren")
+  def img_kasarna(title = "Celková kapacita kasáren")
     image_tag("css/vybavenost.png",  :alt => title, :title => title)
   end
 
-  def img_kosmodrom(title = "Kapacita kosmodromů")
-    image_tag("css/vybavenost-vesmir.png",  :alt => title, :title => title)
+  def img_kosmodrom(title = "Celková kapacita kosmodromů")
+    image_tag("css/vybavenostv.png",  :alt => title, :title => title)
   end
 
   def img_po(title = "PO")

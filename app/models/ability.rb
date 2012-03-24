@@ -34,12 +34,13 @@ class Ability
         cannot [:update, :delete], Global
         can [:read, :update], User
         #can [:update], User, :id => user.id
-        can [:read], Planet
+        can [:read, :osidlit_pole], Planet
         can [:read], House
-        can [:read, :update], Field, :user_id => user.id
+        can [:read, :update, :prejmenuj_pole, :postavit_budovu], Field, :user_id => user.id
         can [:read, :update], Resource
         can [:read, :create], Vote
         can [:update], Vote, :elector => user.id
+        can [:zobraz_eod], Eod, :user_id => user.id
       
         if user.emperor?
         elsif user.regent?
