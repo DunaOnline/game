@@ -7,7 +7,56 @@ body {
 	text-align: justify;
 	text-shadow: 0.05em 0.05em #000 !important;
 	}
-	
+
+/* ++++++++++++++++++++ Index + Login ++++++++++++++++++++ */
+
+#header_i {
+	position: relative;
+	left: -1px;
+	top: -120px;
+	background-image: url(<%= asset_path 'css/head_login.png' %>);   
+	background-repeat: no-repeat;
+	background-position: right;
+	z-index: 1;
+	width: 1100px;
+	height: 180px;
+	border: 0;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+}
+
+#nava_i {
+	position: absolute;
+	top: 119px;
+	left: -1px;
+	z-index: 3;
+	width: 1102px;
+	height:50px;
+	background-image: url(<%= asset_path 'css/head1102i.png' %>);   
+	background-position: top;
+	background-repeat: no-repeat;
+	border-bottom: solid 0px #3399ff;
+}
+
+div.inf_i {
+	position: absolute; top: 55px; left: 254px;
+	width: 818px;
+	height: 128px;
+	background-image: url(<%= asset_path 'css/logo.png' %>); 
+	z-index: 3;
+	font-size: 1em;
+	padding: 7px 0px 7px 0px;
+	vertical-align: middle;
+	border: solid 1px #a9a9a9;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+}
+
+
+
+
 /* ++++++++++++++++++++ Hlavn? t?lo webu ++++++++++++++++++++ */
 
 #body_wrapper {
@@ -165,9 +214,9 @@ div.inf {
 		}
 		
 a.menukomunikace {
-	position: absolute; top: 6px; left:15px;
+	position: absolute; top: 5px; left:15px;
 	z-index: 2;
-	background-image: url(<%= asset_path 'css/diplomacie.png' %>);   
+	background-image: url(<%= asset_path 'css/komunikace.png' %>);   
 	width: 42px;
 	height: 42px;
 	background-repeat: no-repeat;
@@ -175,11 +224,11 @@ a.menukomunikace {
 }
 		a.menukomunikace:hover  {
 			z-index: 4;
-			background-image: url(<%= asset_path 'css/diplomacie2.png' %>);   
+			background-image: url(<%= asset_path 'css/komunikace2.png' %>);   
 		}
 
 a.menupolitika {
-	position: absolute; top: 6px; left:61px;
+	position: absolute; top: 5px; left:61px;
 	z-index: 2;
 	background-image: url(<%= asset_path 'css/diplomacie.png' %>);   
 	width: 42px;
@@ -187,14 +236,13 @@ a.menupolitika {
 	background-repeat: no-repeat;
 	border:0;
 }
-		a.menupolitika:hover  {
-			position: absolute; top: 6px; left:61px;
-			z-index: 4;
+		a.menupolitika:hover  {	
+			z-index: 4;		
 			background-image: url(<%= asset_path 'css/diplomacie2.png' %>);   
 		}
 
 a.menuvyzkum  {
-	position: absolute; top: 6px; left:107px;
+	position: absolute; top: 5px; left:107px;
 	z-index: 2;
 	background-image: url(<%= asset_path 'css/vyzkum.png' %>);   
 	width: 42px;
@@ -208,7 +256,7 @@ a.menuvyzkum  {
 		}
 
 a.menuarmada {
-	position: absolute; top: 6px; left:153px;
+	position: absolute; top: 5px; left:153px;
 	z-index: 2;
 	background-image: url(<%= asset_path 'css/armada.png' %>);   
 	width: 42px;
@@ -222,7 +270,7 @@ a.menuarmada {
 		}
 
 a.menugalaxy {
-	position: absolute; top: 6px; left:199px;
+	position: absolute; top: 5px; left:199px;
 	z-index: 2;
 	background-image: url(<%= asset_path 'css/galaxy.png' %>);   
 	width: 42px;
@@ -843,6 +891,13 @@ td.ava{
 
 .none{
 	background: none !important;
+	bakground-image: none !important;
+	border: none !important;
+}
+
+td.none{
+	background: none !important;
+	bakground-image: none !important;
 	border: none !important;
 }
 
