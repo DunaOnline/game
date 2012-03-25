@@ -1,5 +1,5 @@
 class HousesController < ApplicationController
-  authorize_resource # CanCan
+  #authorize_resource # CanCan
   
   def index
     @houses = House.all
