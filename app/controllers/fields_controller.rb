@@ -85,8 +85,8 @@ class FieldsController < ApplicationController
           flash[:error] = "Tolik budov nelze postavit."
           redirect_to @field
         else
-          current_user.update_attribute(:solar, current_user.solar - cena_sol)
-          @field.resource.update_attribute(:material, mat_na_poli - cena_mat)
+          current_user.update_attribute(:solar, current_user.solar - (cena_sol * pocet_budov))
+          @field.resource.update_attribute(:material, mat_na_poli - (cena_mat * pocet_budov))
           @field.postav(@budova, pocet_budov)
           redirect_to @field#, :notice => notice
         end
@@ -95,8 +95,8 @@ class FieldsController < ApplicationController
           flash[:error] = "Tolik budov nelze prodat."
           redirect_to @field
         else
-          current_user.update_attribute(:solar, current_user.solar + cena_sol/2)
-          @field.resource.update_attribute(:material, mat_na_poli + cena_mat/2)
+          current_user.update_attribute(:solar, current_user.solar + ((cena_sol / 2) * pocet_budov))
+          @field.resource.update_attribute(:material, mat_na_poli + ((cena_mat/2) * pocet_budov))
           @field.postav(@budova, pocet_budov)
           redirect_to @field#, :notice => notice
         end
