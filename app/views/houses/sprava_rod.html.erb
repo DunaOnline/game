@@ -73,7 +73,7 @@
 		</tr>
 		<tr>
 			<!--<th style="background-image: url(image/8/jedp1.png)"> -->
-			<th>
+			<th class="w_pechota">
 				<a href="army-sablony.htm">Kyborg</a>
 				<li>	
 					<input title="Útok" style="margin-top: 100px; background-image: url(<%= asset_path cesta_ikona("utok-pozemni") %>)" value="9">
@@ -87,13 +87,14 @@
 				<li><%= img_solary %> -1.4
 				<h3>Výbava:</h3>
 				<li>	
-					<input title="Pěchotní zbraně" style="background-image: url(<%= asset_path cesta_ikona("utok-pozemni") %>)" value="2">
-					<input title="Rychlopalné zbraně" style="background-image: url(<%= asset_path cesta_ikona("obrana-pozemni") %>)" value="1">
-					<input title="Kybernetické náhrady" style="background-image: url(<%= asset_path cesta_ikona("obrana-pozemni") %>)" value="1">
+					<input title="Pěchotní zbraň" style="background-image: url(<%= asset_path cesta_ikona("pechotni_zbran") %>)" value="2">
+					<input title="Rychlopalná zbran" style="background-image: url(<%= asset_path cesta_ikona("rychlopalna_zbran") %>)" value="1">
+					<input title="Výzbroj" style="background-image: url(<%= asset_path cesta_ikona("vyzbroj") %>)" value="1">
+					<input title="Kybernetická náhrada" style="background-image: url(<%= asset_path cesta_ikona("kyberneticka_nahrada") %>)" value="1">
 				</li>
 			</td>
 			<!--<th style="background-image: url(image/8/jedv1.png)"> -->
-			<th>
+			<th class="w_pechota">
 				<a href="army-sablony.htm">Obranný satelit</a>
 				<li>	
 					<input title="Útok" style="margin-top: 100px; background-image: url(<%= asset_path cesta_ikona("utok-vesmir") %>)" value="100">
@@ -107,10 +108,11 @@
 				<li><%= img_solary %> -20
 				<h3>Výbava:</h3>
 				<li>	
-					<input title="Pěchotní zbraně" style="background-image: url(<%= asset_path cesta_ikona("utok-pozemni") %>)" value="2">
-					<input title="Rychlopalné zbraně" style="background-image: url(<%= asset_path cesta_ikona("obrana-pozemni") %>)" value="1">
-					<input title="Kybernetické náhrady" style="background-image: url(<%= asset_path cesta_ikona("obrana-pozemni") %>)" value="1">
-					<input title="Kybernetické náhrady" style="background-image: url(<%= asset_path cesta_ikona("obrana-pozemni") %>)" value="1">
+					<input title="Trup - fregata" style="background-image: url(<%= asset_path cesta_ikona("trup_fregata") %>)" value="2">
+					<input title="Vesmírná zbraň" style="background-image: url(<%= asset_path cesta_ikona("vesmirna_zbran") %>)" value="2">
+					<input title="Hypervodič" style="background-image: url(<%= asset_path cesta_ikona("hypervodic") %>)" value="1">
+					<input title="Pancéřování" style="background-image: url(<%= asset_path cesta_ikona("pancerovani") %>)" value="1">
+					<input title="Chromatická plastocel" style="background-image: url(<%= asset_path cesta_ikona("chromaticka_plastocel") %>)" value="1">
 				</li>
 			</td>
 		</tr>
@@ -136,7 +138,7 @@
 					<li>
 						<%= form_tag :pridel_pravo do %>
       						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-      						<%= submit_tag 'Mentat' %>
+      						<%= submit_tag 'Mentat', :class => 'oktab_auto' %>
     					<% end %>
 					</li>
 				<% end %>
@@ -156,7 +158,7 @@
 					<li>
 						<%= form_tag :pridel_pravo do %>
       						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-      						<%= submit_tag 'ArmyMentat' %>
+      						<%= submit_tag 'ArmyMentat', :class => 'oktab_auto' %>
     					<% end %>
 					</li>
 				<% end %>
@@ -176,7 +178,7 @@
 					<li>
 						<%= form_tag :pridel_pravo do %>
       						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-      						<%= submit_tag 'Diplomat' %>
+      						<%= submit_tag 'Diplomat', :class => 'oktab_auto' %>
     					<% end %>
 					</li>
 				<% end %>
