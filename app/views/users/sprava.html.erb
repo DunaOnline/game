@@ -58,7 +58,7 @@
 			<th class="r">Volba Imperátora</th>
 		</tr>	<tr>	
 			<td>
-				Nick <input type="text" size="20" Style="width:100px" title="Zadejte důvod"> 
+				Nick <input type="text" size="20" Style="width:100px" title="Zadejte důvod" :class => 'tab' > 
 				<h3>Aktuální pořadí</h3>
 				<li>Vévoda [12]
 				<li>Vévoda [10]
@@ -69,8 +69,8 @@
 			<td>
 				<%= form_tag hlasovat_path(:user_id => @user) do %>
 					<%= select_tag("volit_id]", options_for_select(@user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %>
-					<%= submit_tag 'Hlasuj', :name => 'leader' %>
-					<p>voleno: <%= @user.koho_jsem_volil('leader') %></p>
+					<%= submit_tag 'Hlasuj', :name => 'leader', :class => 'oktab'  %>
+					<p>Váš hlas: <%= @user.koho_jsem_volil('leader') %></p>
 					<h3>Aktuální pořadí</h3>
 					  <% for user in @user.house.poradi_hlasu('leader') %>
 						<li><%= user[0].nick %> - <%= user[1] %></li>
@@ -80,8 +80,8 @@
 			<td>
 				<%= form_tag hlasovat_path(:user_id => @user) do %>
 					<%= select_tag("volit_id]", options_for_select(@user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %>
-					<%= submit_tag 'Hlasuj', :name => 'poslanec' %>
-					<p>voleno: <%= @user.koho_jsem_volil('poslanec') %></p>
+					<%= submit_tag 'Hlasuj', :name => 'poslanec', :class => 'oktab'  %>
+					<p>Váš hlas: <%= @user.koho_jsem_volil('poslanec') %></p>
 					<h3>Aktuální pořadí</h3>
 					  <% for user in @user.house.poradi_hlasu('poslanec') %>
 						<li><%= user[0].nick %> - <%= user[1] %></li>
