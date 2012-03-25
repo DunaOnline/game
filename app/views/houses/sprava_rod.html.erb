@@ -1,7 +1,7 @@
 <% title "Velkorod #{@house.name}" %>
 	<table class="tab1">
 		<tr>	
-			<td class="tdpl" rowspan="2" style="width:170px">
+			<td class="tdpl" rowspan="2" style="width:160px">
 				<li><h2>Národní sklad</h2>
 				<li><b>Národ: </b><%= @house.name %>
 				<li><b>Vůdce: </b><%= link_to @vudce.nick, @vudce if @vudce%>
@@ -12,9 +12,9 @@
 				<li><input type="button" value="Poslat" class="ok">
 			</td>
 
-			<th>Stav skladu</th>
-			<th>Zaslat hráči</th>
-			<th>Zaslat Malorodu</th>
+			<th style="width:120px">Stav skladu</th>
+			<th style="width:120px">Zaslat hráči</th>
+			<th style="width:120px">Zaslat Malorodu</th>
 			<th class="r">Zaslat Velkorodu</th>
 		</tr>
 
@@ -51,7 +51,8 @@
 				<li><%= img_material %><input type="text" size="3" title="Zadejte množství">		
 				<li><%= img_melanz %><input type="text" size="3" title="Zadejte množství"> 
 				<li><%= img_zkusenosti %><input type="text" size="3" title="Zadejte množství"> 
-				<li>	<select class="vyber" name="Vyberte Velkorod">
+				<li>	
+					<select class="vyber" name="Vyberte Velkorod">
 						 <option value="p1">Atreides</option>
 						 <option value="p1">Corrino</option>
 						 <option value="p1">Ekaz</option>
