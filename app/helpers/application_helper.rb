@@ -46,7 +46,7 @@ module ApplicationHelper
   def img_populace(title = "Populace")
     image_tag("css/populace.png",  :alt => title, :title => title)
   end
-
+  
   def img_zkusenosti(title = "Zkušenosti")
     image_tag("css/zkusenosti.png",  :alt => title, :title => title)
   end

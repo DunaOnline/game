@@ -398,7 +398,12 @@ a.menugalaxy {
 		.menu li li {float: none; border: none; padding: 0; margin: 0;}
 
 /* ++++++++++++++++++++ Form?tov?n? obr?zku ++++++++++++++++++++ */
-	
+
+
+.img_l{
+	padding: 10px !important;
+}
+
 img.l {
 	float: left;
 	padding: 20px;
@@ -622,21 +627,22 @@ border-radius: 3px;
 
 
 select.tab {
-		margin: 2px 2px 4px 2px !important;
+		margin: 2px !important;
 		padding: 2px 5px 2px 5px !important;
 		width: 120px !important;
 		font-size: 11px !important;
 	}
-
+		
 input.tab {
-		margin: 2px 2px 4px 2px !important;
+		margin: 2px !important;
 		padding: 3px 5px 3px 5px !important;
 		width: 108px !important;
 		font-size: 11px !important;
+		appearance: none;
 	}
 	
 input.oktab {
-		margin: 2px 2px 4px 2px !important; 
+		margin: 2px !important; 
 		padding: 3px 5px 3px 5px !important;
 		width: 120px !important;
 		font-size: 11px !important;
@@ -649,7 +655,7 @@ input.oktab {
 	input.oktab:hover {color:#ffdb30; border:#ffdb30 1px solid;}
 	
 input.oktab_auto {
-		margin: 2px 2px 4px 2px !important; 
+		margin: 2px !important; 
 		padding: 3px 5px 3px 5px !important;
 		width: auto !important;
 		font-size: 11px !important;
@@ -660,6 +666,19 @@ input.oktab_auto {
 		background-position: top !important;
 	}
 	input.oktab_auto:hover {color:#ffdb30; border:#ffdb30 1px solid;}
+	
+input.oktab_95 {
+		margin: 2px !important; 
+		padding: 3px 5px 3px 5px !important;
+		width: 95px !important;
+		font-size: 11px !important;
+		font-weight: bold !important;
+		background-color: transparent;
+		background-image: url(<%= asset_path 'css/td1.png' %>) !important;   
+		background-repeat: repeat !important;
+		background-position: top !important;
+	}
+	input.oktab_95:hover {color:#ffdb30; border:#ffdb30 1px solid;}
 
 
 /* ++++++++++++++++++++ Form?tov?n? textu ++++++++++++++++++++ */	
@@ -738,6 +757,8 @@ a.general { text-decoration:none; margin:0px; color:	#ff4500;	}
 .oranzova{
 	color: #ffd700 !important;
 }
+
+
 
 /* ++++++++++++++++++++ V?suvn? menu statistik ++++++++++++++++++++ */
 
@@ -1147,10 +1168,10 @@ table.tab2 {
 		border-radius: 2px;
 	}
 	table.tab2 input {
-		width: 92px;
-		margin: 1px 0 1px 0;
-		padding: 2px 3px 2px 3px;
-		font-size: 0.8em;
+		margin: 2px;
+		padding: 3px 5px 3px 5px ;
+		width: 83px ;
+		font-size: 11px ;
 		background-color: transparent;
 		background-image: url(<%= asset_path 'css/tcerna.png' %>);   
 		color: #a2a2a2;	
@@ -1163,10 +1184,11 @@ table.tab2 {
 		border-radius: 3px;
 	}
 	table.tab2 select{
-		width: 100px !important;
-		margin: 1px 0 1px 0;
-		padding: 1px 2px 1px 1px;
-		font-size: 0.8em;
+		margin: 2px;
+		padding: 2px 5px 2px 5px ;
+		width: 50px;
+		font-size: 11px;
+		appearance: none;
 		color: #fff;
 		background-color: #1d1d1d;
 		text-align: left;
@@ -1175,7 +1197,7 @@ table.tab2 {
 		-moz-border-radius: 3px;
 		border-radius: 3px;
 	}
-
+	
 /* ++++++++++++++++++++ Tabulky - TAB3 ++++++++++++++++++++ */	
 
 table.tab3 {

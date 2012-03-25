@@ -2,16 +2,15 @@
 	<td class="tdpl"  style="background-image: url(<%= asset_path cesta_budovy(@owner.house.name, obr) %>)"></td>
 	<td>
 		<h3><%= budova.name %> (<%= budova.level %>)</h3> 
-		<li><%= img_budovy %> <%= field.postaveno(budova) %></li>
 		<li><%= budova.description %>
-		<li><%= img_populace %> <font class="zelena">+ 10 000</font> 
+		<li><%= img_budovy %> <%= field.postaveno(budova) %> <%= img_populace %> <font class="zelena">+ 10 000</font> 
 	</td>
 	<td>
 		<li><%= img_solary %><%= format_mena(budova.naklady_stavba_solary, 'S', false) %>  
 		<li><%= img_material %><%= format_mena(budova.naklady_stavba_material, 'kg') %> 
 		<%= form_tag postavit_budovu_path(:field => field, :budova => budova) do %>
 			<li><%= number_field_tag :pocet_budov_stavba, nil, :in => -10...10, :step => 1 %></li> 
-			<li><%= submit_tag "Postavit" %>
+			<li><%= submit_tag "Postavit" , :class => "oktab_95" %>
 		<% end %>
 	</td>
 	<td>

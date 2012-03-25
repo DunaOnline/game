@@ -43,8 +43,7 @@
 				<div class="td1">Material na léne</div>
 				<%= @resource.material %>
 				<div class="td1">Gildovní transport</div>
-				<br> 
-				<li><select class="vyber" name="Vyberte komoditu" title="Vyberte komoditu k transportu">
+				<li><select class="tab" name="Vyberte komoditu k transportu" title="Vyberte komoditu k transportu">
 					<option value="material">Materiál</option>
 					<option value="populaci">Populaci</option>
 					<option value="populaci">Jednotka1</option>
@@ -58,20 +57,20 @@
 					<option value="populaci">Jednotka9</option>
 					<option value="populaci">Jednotka10</option>
 				</select>
-				<select class="vyber" name="Vyberte planetu" title="Zvolte cílovou planetu">
+				<select class="tab" name="Vyberte planetu" title="Zvolte cílovou planetu">
 					<option class="sez-b" value="p1">Giedy Prime</option>
 					<option value="p2">Lakviel</option>
 					<option value="p3">P3</option>
 					<option value="p4">P4</option>
 					<option value="p5">P5</option>
 				</select>
-				<li><input class="input2" type="text" size=15 title="Zadejte množství">
-				<li><input type="button" value="Odeslat" class="ok2"> 
-				<br /><br /><br />
+				<li><input class="tab" type="text" size=15 title="Zadejte množství">
+				<li><input class="oktab" type="button" value="Odeslat"> 
+				<br />
 				<div class="td1">Přejmenuj léno</div>
 				<%= form_tag prejmenuj_pole_path(:id => @field) do %>
-					<%= text_field_tag :jmeno_pole, @field.name %><br />
-					<%= submit_tag "Přejmenuj" %>
+					<%= text_field_tag :jmeno_pole, @field.name , :class => "tab" %><br />
+					<%= submit_tag "Přejmenuj" , :class => "oktab" %>
 				<% end %>
 			</center>
 			</td>
