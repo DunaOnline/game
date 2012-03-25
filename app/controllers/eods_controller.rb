@@ -62,8 +62,6 @@ class EodsController < ApplicationController
       order = current_user.eods.where(:date => date).maximum(:order)
     end
     
-    puts "********************************\ndate: #{date}     order: #{order}\n*******************************"
-    
     @eods_global = current_user.eods.where(:date => date, :order => order, :field_id => nil).first
     @eods_fields = current_user.eods.where(:date => date, :order => order)
     if @eods_global && @eods_fields

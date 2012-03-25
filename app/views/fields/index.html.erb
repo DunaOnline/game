@@ -3,21 +3,28 @@
 <table class="tab2">
 <tr>
 	<td class="none"></td>
-	<th class="l" style="width:100px">Vaše léna</th>
-	<th style="width:100px">Produkce</th>
+	<th class="l" style="width:150px">Vaše léna</th>
 	<th style="width:100px">Kapacita</th>
-	<th class="r" style="width:100px">Podnebí</th>
+	<th style="width:100px">Produkce</th>
+	<th class="r" style="width:100px">Bonus planety</th>
 </tr>
 
 <tr>
 	<td class="tdpl" style="background-image: url(<%= asset_path @domovska.background %>)">
 		<li><h2><%= link_to @domovska.name, @domovska %></h2>
 		<li><%= @domovska.system_name %>
-		<li>[23.3]
+		<li><%= @domovska.oznaceni %>
 	</td>
 	
 	<td>
 		<li><%= link_to @pole_domovska.name, @pole_domovska %>
+	</td>
+	
+	<td>
+		<li><%= img_populace "Celková kapacita měst" %> 1000000
+		<li><%= img_vyrobky "Celková kapacita výroby" %> 200	
+		<li><%= img_kasarna "Celková kapacita kasáren" %> 1000
+		<li><%= img_kosmodrom "Celková kapacita kosmodromů" %> 1000
 	</td>
 	
 	<td>
@@ -26,14 +33,7 @@
 		<li><%= img_populace "Výnos populace" %><font class="<%= trida_barvy(@domovska.vynos(current_user, 'population')) %>"><%= format_mena(@domovska.vynos(current_user, 'population'), "k") %></font>
 		<li><%= img_zkusenosti "Výnos zkušenosti" %><font class="<%= trida_barvy(@domovska.vynos(current_user, 'exp')) %>"><%= format_mena(@domovska.vynos(current_user, 'exp'), "exp") %></font>
 	</td>
-	
-	<td>
-		<li><img src = "image/cssimage/populace.png" alt="Populace" title="Populace"> 1000000
-		<li><img src = "image/cssimage/vyrobky.png" alt="Volná kapacita" title="Výrobky"> 200	
-		<li><img src = "image/cssimage/Zarmy.png" alt="Kapacita kasaren" title="Kapacita kasaren"> 1000
-		<li><img src = "image/cssimage/Zflyt.png" alt="Kapacita kosmodromů" title="Kapacita kosmodromů"> 1000
-	</td>
-	
+		
 	<td>
 		<% pt = @domovska.planet_type %>
 		<li><%= img_solary "Bonus soláry" %><font class="<%= trida_barvy(pt.solar_bonus) %>"><%= format_mena(pt.solar_bonus, "%") %></font>

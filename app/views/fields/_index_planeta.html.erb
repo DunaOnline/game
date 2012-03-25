@@ -1,7 +1,7 @@
 <tr>
 <td class="tdpl" style="background-image: url(<%= asset_path planet.background %>)">
 	<li><h2><%= link_to planet.name, planet %></h2>
-	<li><%= planet.system_name %>
+	<li><%= planet.system_name %>  <%= planet.oznaceni %>
 	<li><%= planet.obsazenost %>
 </td>
 <td>
@@ -10,17 +10,17 @@
 	<% end %>
 </td>
 	<td>
+		<li><%= img_populace "Celková kapacita měst" %> 1000000
+		<li><%= img_vyrobky "Celková kapacita výroby" %> 200	
+		<li><%= img_kasarna "Celková kapacita kasáren" %> 1000
+		<li><%= img_kosmodrom "Celková kapacita kosmodromů" %> 1000
+	</td>
+	
+	<td>
 		<li><%= img_solary "Výnos soláry" %><font class="<%= trida_barvy(planet.vynos(current_user, 'solar')) %>"><%= format_mena(planet.vynos(current_user, 'solar'), "S") %></font>
 		<li><%= img_material "Výnos materiál" %><font class="<%= trida_barvy(planet.vynos(current_user, 'material')) %>"><%= format_mena(planet.vynos(current_user, 'material'), "kg") %></font>		
 		<li><%= img_populace "Výnos populace" %><font class="<%= trida_barvy(planet.vynos(current_user, 'population')) %>"><%= format_mena(planet.vynos(current_user, 'population'), "k") %></font>
 		<li><%= img_zkusenosti "Výnos zkušenosti" %><font class="<%= trida_barvy(planet.vynos(current_user, 'exp')) %>"><%= format_mena(planet.vynos(current_user, 'exp'), "exp") %></font>
-	</td>
-	
-	<td>
-		<li><img src = "image/cssimage/populace.png" alt="Populace" title="Populace"> 1000000
-		<li><img src = "image/cssimage/vyrobky.png" alt="Volná kapacita" title="Výrobky"> 200	
-		<li><img src = "image/cssimage/Zarmy.png" alt="Kapacita kasaren" title="Kapacita kasaren"> 1000
-		<li><img src = "image/cssimage/Zflyt.png" alt="Kapacita kosmodromů" title="Kapacita kosmodromů"> 1000
 	</td>
 	
 	<td>
