@@ -174,7 +174,7 @@
 			</td>
 
 			<td>
-				<% if can? User, :pridel_pravo %>
+				<% if can? :pridel_pravo, User %>
 					<li>
 						<%= form_tag :pridel_pravo do %>
       						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
@@ -186,7 +186,7 @@
 				<% for user in @diplomate do %>
 					<li>
 						<%= link_to user.nick, user, :class => "diplomat" %>
-						<% if can? User, :odeber_pravo %>
+						<% if can? :odeber_pravo, User %>
 							<%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Diplomat" %>
 						<% end %>
 					</li>
