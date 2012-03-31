@@ -68,6 +68,7 @@
 				<li><input class="oktab" type="button" value="Odeslat"> 
 				<br />
 				<div class="td1">Přejmenuj léno</div>
+                  <%= best_in_place @field, :name %>
 				<%= form_tag prejmenuj_pole_path(:id => @field) do %>
 					<%= text_field_tag :jmeno_pole, @field.name , :class => "tab" %><br />
 					<%= submit_tag "Přejmenuj" , :class => "oktab" %>

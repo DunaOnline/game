@@ -41,13 +41,17 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  respond_to :html, :json
   def update
+    #@user = current_user
+    #if @user.update_attributes(params[:user])
+    #  redirect_to root_url, :notice => "Your profile has been updated."
+    #else
+    #  render :action => 'edit'
+    #end
     @user = current_user
-    if @user.update_attributes(params[:user])
-      redirect_to root_url, :notice => "Your profile has been updated."
-    else
-      render :action => 'edit'
-    end
+    @user.update_attributes(params[:user])
+    respond_with @user
   end
 
   def zmen_prava

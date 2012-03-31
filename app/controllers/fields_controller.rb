@@ -40,13 +40,17 @@ class FieldsController < ApplicationController
     @field = Field.find(params[:id])
   end
 
+  respond_to :html, :json
   def update
+    #@field = Field.find(params[:id])
+    #if @field.update_attributes(params[:field])
+    #  redirect_to @field, :notice  => "Successfully updated field."
+    #else
+    #  render :action => 'edit'
+    #end
     @field = Field.find(params[:id])
-    if @field.update_attributes(params[:field])
-      redirect_to @field, :notice  => "Successfully updated field."
-    else
-      render :action => 'edit'
-    end
+    @field.update_attributes(params[:field])
+    respond_with @field
   end
 
   def destroy
