@@ -59,7 +59,7 @@ class Prepocet
         :population_income => population
       ).save
     end
-    puts "suroviny vyprodukovany"
+    puts "suroviny vyprodukovany "
   end
 
   def self.zpristupni_planety
