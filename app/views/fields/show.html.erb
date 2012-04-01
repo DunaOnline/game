@@ -32,8 +32,8 @@
 			<center>
 				<li><img class="tdimg2" src = "<%= asset_path @planet.background %>">
 				<li><h3><%= link_to @planet.name, @planet %></h3>
-				<li><h3><%= @field.name %></h3></li>
-				<li><%= @field.oznaceni %></font>
+				<li><h3><%= best_in_place @field, :name %></h3></li>
+				<li><%= @field.oznaceni %>
 				<div class="td1">Zástavba planety</div>
 				<%= @planet.obsazenost %>
 				<div class="td1">Zástavba léna</div>
@@ -67,12 +67,6 @@
 				<li><input class="tab" type="text" size=15 title="Zadejte množství">
 				<li><input class="oktab" type="button" value="Odeslat"> 
 				<br />
-				<div class="td1">Přejmenuj léno</div>
-                  <%= best_in_place @field, :name %>
-				<%= form_tag prejmenuj_pole_path(:id => @field) do %>
-					<%= text_field_tag :jmeno_pole, @field.name , :class => "tab" %><br />
-					<%= submit_tag "Přejmenuj" , :class => "oktab" %>
-				<% end %>
 			</center>
 			</td>
 		<% for budova in @owner.dovolene_budovy('L') do %>

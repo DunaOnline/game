@@ -52,7 +52,7 @@ class Field < ActiveRecord::Base
       if pop > building.nutna_pop 
         vynos += building.send(attr) * pocet
       else
-        vynos += building.send(attr) * pocet * Constant::VYNOS_BEZ_POP
+        vynos += building.send(attr) * pocet * Constant.vynos_bez_pop
       end
     end
     vynos
@@ -74,7 +74,7 @@ class Field < ActiveRecord::Base
   end
 
   def max_budov
-    Constant::BUDOV_NA_LENO.to_i
+    Constant.budov_na_leno.to_i
   end
 
   def aktualne_zastaveno

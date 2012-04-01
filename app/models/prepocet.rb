@@ -65,7 +65,7 @@ class Prepocet
   def self.zpristupni_planety
     puts "Zpristupnuji planety"
     for planeta in Planet.objevene do
-      if planeta.discovered_at < Constant::PLANETA_DOSTUPNA_PO.days.ago.to_date
+      if planeta.discovered_at < Constant.planeta_dostupna_po.days.ago.to_date
         planeta.update_attribut(:available_for_all, true)
         puts "Zpristupnena planeta #{planeta.name}/#{planeta.systema_name}"
       end
