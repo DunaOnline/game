@@ -70,18 +70,19 @@ class FieldsController < ApplicationController
   
   def postavit_budovu
     @field = Field.find(params[:field])
+    @resource = @field.resource
     @budova = Building.find(params[:budova])
     
     cena_sol = @budova.naklady_stavba_solary.to_f
     cena_mat = @budova.naklady_stavba_material.to_f
-    mat_na_poli = @field.resource.material
+    mat_na_poli = @resource.material
     pocet_budov = params[:pocet_budov_stavba].to_i
     
     if cena_sol > current_user.solar
-      flash[:error] = "Nedostatek Solaru (chybi #{cena_sol - current_user.solar} S)."
+      flash[:error] = "Nedostatek Solaru (chybi #{cena_sol * pocet_budov - current_user.solar} S)."
       redirect_to @field
     elsif cena_mat > mat_na_poli
-      flash[:error] = "Nedostatek materialu (chybi #{cena_mat - mat_na_poli} kg)."
+      flash[:error] = "Nedostatek materialu (chybi #{cena_mat * pocet_budov - mat_na_poli} kg)."
       redirect_to @field
     else
       if pocet_budov > 0
@@ -90,7 +91,7 @@ class FieldsController < ApplicationController
           redirect_to @field
         else
           current_user.update_attribute(:solar, current_user.solar - (cena_sol * pocet_budov))
-          @field.resource.update_attribute(:material, mat_na_poli - (cena_mat * pocet_budov))
+          @resource.update_attribute(:material, mat_na_poli - (cena_mat * pocet_budov))
           @field.postav(@budova, pocet_budov)
           redirect_to @field#, :notice => notice
         end
@@ -100,13 +101,66 @@ class FieldsController < ApplicationController
           redirect_to @field
         else
           current_user.update_attribute(:solar, current_user.solar + ((cena_sol / 2) * pocet_budov))
-          @field.resource.update_attribute(:material, mat_na_poli + ((cena_mat/2) * pocet_budov))
+          @resource.update_attribute(:material, mat_na_poli + ((cena_mat / 2) * pocet_budov))
           @field.postav(@budova, pocet_budov)
           redirect_to @field#, :notice => notice
         end
       end
       
     end
+  end
+  
+  def postavit_arrakis
+    @spravce = User.spravce_arrakis
+    if @spravce == current_user
+      @arrakis = Planet.arrakis
+      @arrakis_field = Field.find_by_planet_id(@arrakis)
+      @arrakis_resource = @arrakis_field.resource
+      #@arraken = Building.where(:kind => "A", :level => [1]).first
+      @harvester = Building.where(:kind => "J", :level => [1]).first
+    
+      #@field = Field.find(params[:field])
+      #@budova = Building.find(params[:budova])
+    
+      cena_sol = @harvester.naklady_stavba_solary.to_f
+      cena_mat = @harvester.naklady_stavba_material.to_f
+      mat_na_poli = @arrakis_resource.material
+      pocet_budov = params[:pocet_budov_stavba].to_i
+    
+      if cena_sol > current_user.solar
+        flash[:error] = "Nedostatek Solaru (chybi #{cena_sol * pocet_budov - current_user.solar} S)."
+        redirect_to zobraz_arrakis_path
+      elsif cena_mat > mat_na_poli
+        flash[:error] = "Nedostatek materialu (chybi #{cena_mat * pocet_budov - mat_na_poli} kg)."
+        redirect_to zobraz_arrakis_path
+      else
+        if pocet_budov > 0
+          # TODO mozna zrusit... tezit se muze jak chce ale poleze nespkojenost fremenu a utoky cervu...
+          if pocet_budov > @arrakis_field.volne_misto
+            flash[:error] = "Tolik budov nelze postavit."
+            redirect_to zobraz_arrakis_path
+          else
+            current_user.update_attribute(:solar, current_user.solar - (cena_sol * pocet_budov))
+            @arrakis_resource.update_attribute(:material, mat_na_poli - (cena_mat * pocet_budov))
+            @arrakis_field.postav(@harvester, pocet_budov)
+            redirect_to zobraz_arrakis_path
+          end
+        else
+          if pocet_budov.abs > @field.postaveno(@harvester)
+            flash[:error] = "Tolik budov nelze prodat."
+            redirect_to zobraz_arrakis_path
+          else
+            current_user.update_attribute(:solar, current_user.solar + ((cena_sol / 2) * pocet_budov))
+            @arrakis_resource.update_attribute(:material, mat_na_poli + ((cena_mat / 2) * pocet_budov))
+            @arrakis_field.postav(@harvester, pocet_budov)
+            redirect_to zobraz_arrakis_path
+          end
+        end
+      end
+    else
+      redirect @arrakis
+    end
+    
   end
   
 end

@@ -15,18 +15,21 @@ DuneOnline::Application.routes.draw do
   resources :fields
   match 'prejmenuj_pole' => 'fields#prejmenuj_pole', :as => :prejmenuj_pole
   match 'postavit_budovu' => 'fields#postavit_budovu', :as => :postavit_budovu
+  match 'postavit_arrakis' => 'fields#postavit_arrakis', :as => :postavit_arrakis
 
   resources :properties
 
   resources :planets
   match 'list_osidlitelnych' => 'planets#list_osidlitelnych', :as => :list_osidlitelnych
   match 'osidlit_pole' => 'planets#osidlit_pole', :as => :osidlit_pole
+  match 'zobraz_arrakis' => 'planets#zobraz_arrakis', :as => :zobraz_arrakis
 
   resources :subhouses
 
   resources :houses
   match 'kolonizuj' => 'houses#kolonizuj', :as => :kolonizuj
   match 'sprava_rod' => 'houses#sprava_rod', :as => :sprava_rod
+  match 'posli_rodove_suroviny' => 'houses#posli_rodove_suroviny', :as => :posli_rodove_suroviny
 
   resources :discoverables
   
@@ -46,6 +49,7 @@ DuneOnline::Application.routes.draw do
   match 'sprava' => 'users#sprava', :as => :sprava
   match 'pridel_pravo' => 'users#pridel_pravo', :as => :pridel_pravo
   match 'odeber_pravo' => 'users#odeber_pravo', :as => :odeber_pravo
+  match 'posli_suroviny' => 'users#posli_suroviny', :as => :posli_suroviny
 
 #  resources :admin
   match 'prepni_prihlasovani' => 'admin#prepni_povoleni_prihlasovani'

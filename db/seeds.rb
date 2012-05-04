@@ -7,15 +7,16 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 puts 'START SEED'
-House.create(:name => 'Titáni', :leader => 'The Oraculum of Time', :solar => 10000000.0, :melange => 5000.0, :material => 5000000.0, :exp => 1000.0, :playable => false)
-House.create(:name => 'Renegáti', :leader => '', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :playable => false)
-House.create(:name => 'Atreides', :leader => 'Vévoda', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0)
-House.create(:name => 'Corrino', :leader => 'Padišáh', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0)
-House.create(:name => 'Harkonnen', :leader => 'Baron', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0)
-House.create(:name => 'Ekaz', :leader => 'Arcivévoda', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0)
-House.create(:name => 'Morritani', :leader => 'Vikomt', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0)
-House.create(:name => 'Riches', :leader => 'Vévoda', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0)
-House.create(:name => 'Vernio', :leader => 'Hrabě', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0)
+House.create(:name => 'Titáni', :leader => 'The Oraculum of Time', :solar => 10000000.0, :melange => 5000.0, :material => 5000000.0, :exp => 1000.0, :playable => false, :melange_percent => 0.0)
+House.create(:name => 'Impérium', :leader => 'Imperátor', :solar => 1000.0, :melange => 500.0, :material => 50000.0, :exp => 100.0, :playable => false, :melange_percent => 5.0)
+House.create(:name => 'Renegáti', :leader => '', :solar => 100.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :playable => false, :melange_percent => 0.0)
+House.create(:name => 'Atreides', :leader => 'Vévoda', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
+House.create(:name => 'Corrino', :leader => 'Padišáh', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
+House.create(:name => 'Harkonnen', :leader => 'Baron', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
+House.create(:name => 'Ekaz', :leader => 'Arcivévoda', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
+House.create(:name => 'Morritani', :leader => 'Vikomt', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
+House.create(:name => 'Riches', :leader => 'Vévoda', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
+House.create(:name => 'Vernio', :leader => 'Hrabě', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
 puts 'House done'
 
 PlanetType.create(:name => 'Měsíc', :fields => 20, :population_bonus => -25.0, :melange_bonus => 2.0, :material_bonus => 2.0, :solar_bonus => 0.0, :exp_bonus => 5.0)
@@ -41,17 +42,26 @@ sest = PlanetType.find_by_name('Marganský typ')
 titani = House.find_by_name('Titáni')
 
 Planet.create(:name => 'Titánia', :planet_type_id => domovska.id, :house_id => titani.id, :available_to_all => false, :discovered_at => Date.today, :position => 1, :system_name => "Titanum")
+Planet.create(:name => 'Kaitan', :planet_type_id => domovska.id, :house_id => House.find_by_name('Impérium').id, :available_to_all => false, :discovered_at => Date.today, :position => 2, :system_name => "Alpha Piscium")
 Planet.create(:name => 'Caladan', :planet_type_id => domovska.id, :house_id => House.find_by_name('Atreides').id, :available_to_all => false, :discovered_at => Date.today, :position => 3, :system_name => "Delta Pavonis")
-Planet.create(:name => 'Kaitan', :planet_type_id => domovska.id, :house_id => House.find_by_name('Corrino').id, :available_to_all => false, :discovered_at => Date.today, :position => 2, :system_name => "Alpha Piscium")
+Planet.create(:name => 'Salusa Secundus', :planet_type_id => domovska.id, :house_id => House.find_by_name('Corrino').id, :available_to_all => false, :discovered_at => Date.today, :position => 2, :system_name => "Salusa Centra")
 Planet.create(:name => 'Giedi Prime', :planet_type_id => domovska.id, :house_id => House.find_by_name('Harkonnen').id, :available_to_all => false, :discovered_at => Date.today, :position => 1, :system_name => "Ophiuchi B 36")
 Planet.create(:name => 'Ekaz', :planet_type_id => domovska.id, :house_id => House.find_by_name('Ekaz').id, :available_to_all => false, :discovered_at => Date.today, :position => 4, :system_name => "Alpha Centauri B")
 Planet.create(:name => 'Gruman', :planet_type_id => domovska.id, :house_id => House.find_by_name('Morritani').id, :available_to_all => false, :discovered_at => Date.today, :posi0tion => 2, :system_name => "Niushe")
 Planet.create(:name => 'Riches', :planet_type_id => domovska.id, :house_id => House.find_by_name('Riches').id, :available_to_all => false, :discovered_at => Date.today, :position => 4, :system_name => "Eridani A")
 Planet.create(:name => 'Iks', :planet_type_id => domovska.id, :house_id => House.find_by_name('Vernio').id, :available_to_all => false, :discovered_at => Date.today, :position => 10, :system_name => "Rolande")
 Planet.create(:name => 'Tulapin V', :planet_type_id => domovska.id, :house_id => House.find_by_name('Renegáti').id, :available_to_all => false, :discovered_at => Date.today, :position => 5, :system_name => "Tulapin Centra")
-Planet.create(:name => 'Arrakis', :planet_type_id => 3, :house_id => nil, :available_to_all => false, :discovered_at => Date.today, :position => 1, :system_name => "Arrakis")
+Planet.create(:name => 'Arrakis', :planet_type_id => sest.id, :house_id => House.find_by_name('Impérium').id, :available_to_all => false, :discovered_at => Date.today, :position => 1, :system_name => "Mu Draconis")
 puts 'Planet done'
+
 titania = Planet.find_by_name('Titánia')
+arrakis = Planet.arrakis
+arrakis.fields << Field.new(:name => "Leno Arrakis",
+      :user_id => nil,
+      :pos_x => 1,
+      :pos_y => 1
+    )
+puts "Leno Arrakis done"
 
 Global.create(:setting => 'login', :value => true)
 Global.create(:setting => 'signup', :value => true)
@@ -76,6 +86,8 @@ Global.create(:setting => 'k_exp_vynos', :cislo => 1.0)
 Global.create(:setting => 'k_population_vynos', :cislo => 1000.0)
 Global.create(:setting => 'bezvladi_arrakis', :datum => Date.today)
 Global.create(:setting => 'budov_na_leno', :cislo => 20.0)
+Global.create(:setting => 'gilda_melanz_procenta', :cislo => 15.0)
+Global.create(:setting => 'gilda_melanz_pevna_castka', :cislo => 100.0)
 puts 'Global done'
 
 User.create(:username => 'Norma_Cenva', :nick => 'Norma Cenva', :email => 'normacenva@spojka.vg', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
@@ -114,10 +126,21 @@ Building.create(:kind => "M", :level => 3, :name => "Hlubinná těžba", :descri
 Building.create(:kind => "E", :level => 1, :name => "Laboratoř", :description => "Laboratoře jsou určeny k produkci zkušeností (expů), ty jsou dále využity pro výzkum technologii.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 10.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 40.0, :solar_cost => 30.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 Building.create(:kind => "E", :level => 2, :name => "Univerzita", :description => "Univerzity jsou určeny k produkci zkušeností (expů), ty jsou dále využity pro výzkum technologii.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 14.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 42.0, :solar_cost => 31.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 Building.create(:kind => "E", :level => 3, :name => "Chrám vědy", :description => "Chramy vedy jsou určeny k produkci zkušeností (expů), ty jsou dále využity pro výzkum technologii.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 18.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 44.0, :solar_cost => 32.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
-Building.create(:kind => "J", :level => 1, :name => "Továrna na koření", :description => "Produkuje koreni.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 1000.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 3.0, :material_cost => 100.0, :solar_cost => 100.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
+
+Building.create(:kind => "J", :level => 1, :name => "Továrna na koření", :description => "Produkuje koreni.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 100.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 20.0, :melange_cost => 3.0, :material_cost => 50.0, :solar_cost => 100.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
+
 Building.create(:kind => "O", :level => 1, :name => "PO", :description => "Planetarni obrana.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 1.0, :material_cost => 70.0, :solar_cost => 100.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 Building.create(:kind => "V", :level => 1, :name => "Továrna", :description => "Produkuje vyrobky.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 2.0, :material_cost => 75.0, :solar_cost => 50.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
+
+Building.create(:kind => "JL", :level => 1, :name => "Arraken", :description => "Sídelní město, astroport.", :population_bonus => 10.0, :pop_limit_bonus => 0.0, :melange_bonus => 300.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 0.0, :melange_cost => 0.0, :material_cost => 0.0, :solar_cost => 0.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 puts 'budovy done'
+
+arrakis_field = Field.find_by_planet_id(arrakis)
+arraken = Building.where(:name => "Arraken").first
+arrakis_field.postav(arraken, 1)
+harvester = Building.where(:name => "Továrna na koření").first
+arrakis_field.postav(harvester, 10)
+puts "Budovy na Arrakis postaveny"
 
 Discoverable.create(:name => 'Titánia', :planet_type_id => 5, :discovered => true, :system_name => "Titanum", :position => 1)
 Discoverable.create(:name => 'Aclin', :planet_type_id => 1, :discovered => false, :system_name => "Aclin Neutra", :position => 1)
@@ -259,7 +282,7 @@ Discoverable.create(:name => 'Musca', :planet_type_id => 1, :discovered => false
 Discoverable.create(:name => 'Octans', :planet_type_id => 1, :discovered => false, :system_name => "Microscopium", :position => 4)
 Discoverable.create(:name => 'Rossak', :planet_type_id => 5, :discovered => false, :system_name => "Piscis Austrinus", :position => 1)
 Discoverable.create(:name => 'Salusa Primus', :planet_type_id => 2, :discovered => false, :system_name => "Salusa Centra", :position => 1)
-Discoverable.create(:name => 'Salusa Secundus', :planet_type_id => 3, :discovered => false, :system_name => "Salusa Centra", :position => 2)
+Discoverable.create(:name => 'Salusa Secundus', :planet_type_id => 3, :discovered => true, :system_name => "Salusa Centra", :position => 2)
 Discoverable.create(:name => 'Semba I', :planet_type_id => 2, :discovered => false, :system_name => "Semba", :position => 1)
 Discoverable.create(:name => 'Semba II', :planet_type_id => 1, :discovered => false, :system_name => "Semba", :position => 2)
 Discoverable.create(:name => 'Semba III', :planet_type_id => 1, :discovered => false, :system_name => "Semba", :position => 3)
@@ -356,7 +379,11 @@ for house in House.all do
 end
 puts 'Vychozi planety objeveny'
 
+doktor.jmenuj_spravcem
+
 Prepocet.kompletni_prepocet
 puts 'Prepocet spusten'
+
+#doktor.odeber_spravcovstvi
 
 puts 'KONEC SEED'

@@ -44,6 +44,8 @@ class Field < ActiveRecord::Base
       kind = 'E'
     when 'population'
       kind = 'L'
+    when 'melange'
+      kind = 'J'
     end
     pop = self.resource.population
     for building in self.buildings.where('kind LIKE ?', '%'+kind+'%') do

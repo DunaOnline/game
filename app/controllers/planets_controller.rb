@@ -74,4 +74,12 @@ class PlanetsController < ApplicationController
     end
     
   end
+  
+  def zobraz_arrakis
+    @arrakis = Planet.arrakis
+    @arrakis_field = Field.find_by_planet_id(@arrakis)
+    @arrakis_resource = @arrakis_field.resource
+    @arraken = Building.where(:name => "Arraken", :level => [1]).first
+    @harvester = Building.where(:kind => "J", :level => [1]).first
+  end
 end

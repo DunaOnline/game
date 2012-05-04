@@ -92,10 +92,4 @@
 		<% for budova in @owner.dovolene_budovy('O') do %>
 			<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'O', :obr => 'pob'} %>
 		<% end %>
-		
-		<% if @planet.arrakis? %>
-			<% for budova in @owner.dovolene_budovy('J') do %>
-				<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'J', :obr => 'pob'} %>
-			<% end %>
-		<% end %>
 	  </table>

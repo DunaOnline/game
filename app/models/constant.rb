@@ -95,4 +95,13 @@ class Constant
     0.1
   end
 
+  # Gilda
+  def self.gilda_melanz_pevna
+    Global.vrat('gilda_melanz_pevna_castka', 4)
+  end
+  
+  def self.gilda_melanz_procenta
+    Global.vrat('gilda_melanz_procenta', 4)
+  end
+
 end

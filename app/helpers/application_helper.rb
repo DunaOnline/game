@@ -82,6 +82,15 @@ module ApplicationHelper
   def img_budovy(title = "Postaveno")
     image_tag("css/budovy.png",  :alt => title, :title => title)
   end
+  
+  def img_fremeni(title = "Fremeni")
+    image_tag("css/fremeni.png",  :alt => title, :title => title)
+  end
+  
+  def img_arraken(title = "Arraken")
+    image_tag("planety/arrakis_arraken.png",  :alt => title, :title => title)
+  end
+  
     
   def online_users
     @online_users = []

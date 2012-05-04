@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
   end
   
   def dovolene_budovy(kind)
-    # dovolene budovy podle tech levelu
+    # TODO dovolene budovy podle tech levelu
     Building.where(:kind => kind, :level => [1]).all
   end
   
@@ -121,6 +121,24 @@ class User < ActiveRecord::Base
   
   def prestat_byt(cim)  # cim = presne nazev attributu
     self.update_attribute(cim, false)
+  end
+  
+  def melange_bonus
+    # bonus z vyzkumu
+    1.0
+  end
+  
+  def self.spravce_arrakis
+    User.find_by_arrakis(true)
+  end
+  
+  def jmenuj_spravcem
+    self.stat_se('arrakis')
+    Global.prepni('bezvladi_arrakis', 2, nil)
+  end
+  def odeber_spravcovstvi
+    self.prestat_byt('arrakis')
+    Global.prepni('bezvladi_arrakis', 2, 3.days.since)
   end
 
   private

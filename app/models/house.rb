@@ -1,5 +1,6 @@
+# encoding: utf-8
 class House < ActiveRecord::Base
-  attr_accessible :name, :leader, :solar, :melange, :material, :exp, :playable
+  attr_accessible :name, :leader, :solar, :melange, :material, :exp, :playable, :melange_percent
 
   has_many :users
   has_many :fields, :through => :users
@@ -81,6 +82,10 @@ class House < ActiveRecord::Base
         eod.update_attribute(:leader, vudce.id)
       end
     end
+  end
+  
+  def self.imperium
+    House.find_by_name('Impérium')
   end
 
   scope :playable, where(:playable => true)

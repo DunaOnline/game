@@ -108,6 +108,23 @@ class Planet < ActiveRecord::Base
     self.planet_type_id == PlanetType.find_by_name("Domovská").id
   end
   
+  def self.arrakis
+    Planet.find_by_name("Arrakis")
+  end
+  
+  def melange_bonus
+    if vlastnik = User.spravce_arrakis
+      vlastnik.melange_bonus
+    else
+      0.0
+    end
+  end
+  
+  def agresivita_fremenu
+    # TODO jak pocitat???
+    10.0
+  end
+  
   scope :domovska, lambda { |user| where(:house_id => user.house.id, :planet_type_id => PlanetType.find_by_name("Domovská"))}
   scope :domovske, where(:planet_type_id => PlanetType.find_by_name("Domovská"))
   scope :osidlitelna, where(:available_to_all => true)

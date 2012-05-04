@@ -136,7 +136,7 @@ ActiveRecord::Schema.define(:version => 20) do
   add_index "estates", ["field_id"], :name => "index_estates_on_field_id"
 
   create_table "fields", :force => true do |t|
-    t.integer  "user_id",                     :null => false
+    t.integer  "user_id"
     t.integer  "planet_id",                   :null => false
     t.string   "name",                        :null => false
     t.decimal  "pos_x",      :default => 0.0
@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(:version => 20) do
     t.decimal  "material",   :precision => 12, :scale => 4, :default => 0.0
     t.decimal  "exp",        :precision => 12, :scale => 4, :default => 0.0
     t.boolean  "playable",                                  :default => true
+    t.decimal  "melange_percent",         :precision => 12, :scale => 4, :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

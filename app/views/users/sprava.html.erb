@@ -1,5 +1,6 @@
-<% title "Hrac - sprava" %>
+<% title "#{@user.nick} - sprava" %>
       <table class="tab1">
+      	<%= form_tag :posli_suroviny do %>
 		<tr>	
 			<td class="tdpl" rowspan="2" style="width:100px">
 				<li><h2>Sklad hráče</h2>
@@ -7,7 +8,7 @@
 				<li><b>Planet: </b><%= @planets.count %>
 				<li><b>Poli: </b><%= @user.fields.count %>
 				<br><br>
-				<li>	<input type="button" value="Poslat" class="ok">
+				<li>	<%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok' %>
 			</td>
 			<th>Stav skladu</th>
 			<th>Poslat Malorodu</th>
@@ -36,10 +37,10 @@
 				<li><%= img_zkusenosti %><input type="text" size="3" title="Nastavte daň"> 
 			</td>
 			<td>
-				<li><%= img_solary %><input type="text" size="3" title="Zadejte množství">
-				<li><%= img_material %><input type="text" size="3" title="Zadejte množství">		
-				<li><%= img_melanz %><input type="text" size="3" title="Zadejte množství"> 
-				<li><%= img_zkusenosti %><input type="text" size="3" title="Zadejte množství"> 
+				<li><%= img_solary %><%= text_field_tag 'rod_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
+				<li><%= img_material %><%= text_field_tag 'rod_material', '0.00', :size => "3", :title => "Zadejte množství" %>	
+				<li><%= img_melanz %><%= text_field_tag 'rod_melanz', '0.00', :size => "3", :title => "Zadejte množství" %>
+				<li><%= img_zkusenosti %><%= text_field_tag 'rod_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %>
 			</td>
 			<td>
 				<li><%= img_solary %><input type="text" size="3" title="Nastavte odvod">
@@ -48,6 +49,7 @@
 				<li><%= img_zkusenosti %><input type="text" size="3" title="Nastavte odvod"> 
 			</td>
 		</tr>
+		<% end %>
 	</table>
 	
 	<table class="tab1">

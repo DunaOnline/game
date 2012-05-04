@@ -34,7 +34,7 @@ class Ability
         cannot [:update, :delete], Global
         can [:read, :update], User
         #can [:update], User, :id => user.id
-        can [:read, :osidlit_pole], Planet
+        can [:read, :osidlit_pole, :zobraz_arrakis], Planet
         can [:read], House
         can [:read, :update, :prejmenuj_pole, :postavit_budovu], Field, :user_id => user.id
         can [:read, :update], Resource
