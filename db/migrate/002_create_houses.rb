@@ -8,6 +8,7 @@ class CreateHouses < ActiveRecord::Migration
       t.decimal :material, :precision => 12, :scale => 4, :default => 0.0
       t.decimal :exp, :precision => 12, :scale => 4, :default => 0.0
       t.boolean :playable, :default => true
+      t.decimal :melange_percent, :precision => 12, :scale => 4, :default => 0.0
       t.timestamps
     end
 

@@ -3,7 +3,11 @@
 	<% 6.times do %>
 		<tr>
 			<% 13.times do %>
-				<td><%= link_to(content_tag(:input, nil, :value => "#{i}", :type => "button", :title => "Detail sektoru #{systems[i-1].system_name}"), systems[i-1]) if systems[i-1]%></td>
+				<td>
+					<%= link_to(content_tag(:input, nil, :value => "#{i}", :type => "button", :title => "Detail sektoru #{systems[i-1].system_name}"), systems[i-1]) if systems[i-1]%>
+					<br />
+					<%= systems[i-1].pocet_objevenych_planet if systems[i-1]%>
+				</td>
 				<% i += 1 %>
 			<% end %>
 		</tr>

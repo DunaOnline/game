@@ -5,3 +5,4 @@ tmp/
 .sass-cache/
 exporty/
 config/database.yml
+.idea

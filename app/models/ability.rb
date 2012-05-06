@@ -34,7 +34,7 @@ class Ability
         cannot [:update, :delete], Global
         can [:read, :update], User
         #can [:update], User, :id => user.id
-        can [:read, :osidlit_pole], Planet
+        can [:read, :osidlit_pole, :zobraz_arrakis], Planet
         can [:read], House
         can [:read, :update, :prejmenuj_pole, :postavit_budovu], Field, :user_id => user.id
         can [:read, :update], Resource
@@ -43,18 +43,29 @@ class Ability
         can [:zobraz_eod], Eod, :user_id => user.id
       
         if user.emperor?
-        elsif user.regent?
-        elsif user.leader?
-          can [:kolonizuj, :sprava_rod, :pridel_pravo, :odeber_pravo], House, :id => user.house_id
-        elsif user.army_mentat?
+        end
+        if user.regent?
+        end
+        if user.leader?
+          can [:kolonizuj, :sprava_rod], House do |house|
+            user.try(:house) == house
+          end 
+          #:id => user.house_id
+          can [:pridel_pravo, :odeber_pravo], User do |hrac|
+            hrac.house == user.house
+          end
+        end
+        if user.army_mentat?
           can [:sprava_rod], House, :id => user.house_id
-        elsif user.mentat?
+        end
+        if user.mentat?
           can [:kolonizuj, :sprava_rod], House, :id => user.house_id
-        elsif user.diplomat?
-        elsif user.general?
-        elsif user.vicegeneral?
-        else
-      
+        end
+        if user.diplomat?
+        end
+        if user.general?
+        end
+        if user.vicegeneral?
         end
       end
     else

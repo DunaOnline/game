@@ -2,15 +2,17 @@
 class Prepocet
   def self.kompletni_prepocet
     puts a = Time.now
+    puts "PREPOCET"
     Prepocet.zamkni
     order = Prepocet.vytvor_eody
     Prepocet.zmen_vudce(order)
     Prepocet.zpristupni_planety
     Prepocet.produkce_suroviny(order)
+    Prepocet.produkce_melanz(order)
     Prepocet.odemkni
     puts b = Time.now
   end
-  
+
   def self.vytvor_eody
     order = User.find(1).eods.where(:date => Date.today).maximum(:order)
     if order
@@ -33,41 +35,90 @@ class Prepocet
   def self.produkce_suroviny(order)
     for field in Field.includes(:user, :buildings, :resource).all do
       vlastnik = field.user
-      
-      solar = field.vynos('solar')
-      exp = field.vynos('exp')
-      material = field.vynos('material')
-      population = field.vynos('population')
-      
-      vlastnik.update_attributes(
-        :solar => vlastnik.solar + solar,
-        :exp => vlastnik.exp + exp,
-      )
-      field.resource.update_attributes(
-        :material => field.resource.material + material,
-        :population => field.resource.population + population
-      )
-      Eod.new(
-        :user_id => vlastnik.id,
-        :field_id => field.id,
-        :date => Date.today, 
-        :time => Time.now, 
-        :order => order,
-        :solar_income => solar, 
-        :exp_income => exp, 
-        :material_income => material, 
-        :population_income => population
-      ).save
+      if field.planet == Planet.arrakis
+        
+      else
+        solar = field.vynos('solar')
+        exp = field.vynos('exp')
+        material = field.vynos('material')
+        population = field.vynos('population')
+
+        vlastnik.update_attributes(
+          :solar => vlastnik.solar + solar,
+          :exp => vlastnik.exp + exp,
+        )
+        field.resource.update_attributes(
+          :material => field.resource.material + material,
+          :population => field.resource.population + population
+        )
+        Eod.new(
+          :user_id => vlastnik.id,
+          :field_id => field.id,
+          :date => Date.today,
+          :time => Time.now,
+          :order => order,
+          :solar_income => solar,
+          :exp_income => exp,
+          :material_income => material,
+          :population_income => population
+        ).save
+      end
     end
-    puts "suroviny vyprodukovany"
+    puts "suroviny vyprodukovany "
+  end
+  
+  def self.produkce_melanz(order)
+    puts "PRODUKUJI MELANZ"
+    arrakis = Planet.arrakis
+    leno = Field.find_by_planet_id(arrakis)
+    vlastnik = User.spravce_arrakis
+    if vlastnik
+      melange = leno.vynos('melange')
+    else
+      melange = 0.0
+    end
+    Prepocet.rozdel_melanz(melange, order)
+  end
+  
+  def self.rozdel_melanz(melange, order)
+    puts "ROZDELUJI MELANZ = " << melange.to_s
+    #pocet = House.playable.count
+    #podil = (melange / pocet).round(2)
+    gilde = Prepocet.melanz_gilde(melange)
+    puts "Dano gilde = " << gilde.to_s
+    melange -= gilde
+    odevzdano = 0.0
+    for house in House.all do
+      rodu = melange * (house.melange_percent / 100.0)
+      odevzdano += rodu
+      house.update_attribute(:melange, house.melange + rodu)
+      
+      # TODO dodelat update vsem userum rodu
+      #for eod in user.eods.where(:date => Date.today, :field_id => nil, :order => order).all do
+      #  eod.update_attribute(:melange_income, podil)
+      #end
+    end
+    imperiu = melange - odevzdano
+    imperium = House.imperium
+    imperium.update_attribute(:melange, imperium.melange + imperiu)
+  end
+  
+  def self.melanz_gilde(melange)
+    gilde = melange * (Constant.gilda_melanz_procenta / 100.0)
+    if gilde < Constant.gilda_melanz_pevna
+      return Constant.gilda_melanz_pevna
+    else
+      return gilde
+    end  
   end
 
   def self.zpristupni_planety
     puts "Zpristupnuji planety"
+    dostupno = Constant.planeta_dostupna_po.days.ago.to_date
     for planeta in Planet.objevene do
-      if planeta.discovered_at < Constant::PLANETA_DOSTUPNA_PO.days.ago.to_date
-        planeta.update_attribut(:available_for_all, true)
-        puts "Zpristupnena planeta #{planeta.name}/#{planeta.systema_name}"
+      if planeta.discovered_at < dostupno
+        planeta.update_attribute(:available_to_all, true)
+        puts "Zpristupnena planeta #{planeta.name}/#{planeta.system_name}"
       end
     end
   end
@@ -79,17 +130,17 @@ class Prepocet
       old_vudce = house.users.where(:leader => true).first
       new_vudce = house.kdo_je_vitez('leader')
       if old_vudce == new_vudce
-        
-      else
+
+        else
         o_vudce = 'nikdo'
         n_vudce = 'nikdo'
         if old_vudce
           old_vudce.update_attribute(:leader, false)
-          o_vudce = old_vudce.nick
+        o_vudce = old_vudce.nick
         end
         unless new_vudce.blank?
           new_vudce.update_attribute(:leader, true)
-          n_vudce = new_vudce.nick
+        n_vudce = new_vudce.nick
         end
         puts "Menim vudce #{o_vudce} na #{n_vudce}"
       end

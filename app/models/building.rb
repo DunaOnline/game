@@ -7,15 +7,15 @@ class Building < ActiveRecord::Base
   has_many :estates
   
   def naklady_stavba_solary
-    self.sum_bonus * self.solar_cost * Constant::KSV
+    self.sum_bonus * self.solar_cost * Constant.ksv
   end
   
   def naklady_stavba_material
-    self.sum_bonus * self.material_cost * Constant::KMAV
+    self.sum_bonus * self.material_cost * Constant.kmav
   end
   
   def naklady_stavba_populace
-    self.sum_bonus * self.population_cost * Constant::KPV
+    self.sum_bonus * self.population_cost * Constant.kpv
   end
   
   def sum_bonus
@@ -23,23 +23,23 @@ class Building < ActiveRecord::Base
   end
   
   def vynos_population
-    self.population_bonus * Constant::KVYNOSP * Constant::KPP
+    self.population_bonus * Constant.kvynosp * Constant.kpp
   end
   def vynos_solar
-    self.solar_bonus * Constant::KVYNOSS * Constant::KSP
+    self.solar_bonus * Constant.kvynoss * Constant.ksp
   end
   def vynos_material
-    self.material_bonus * Constant::KVYNOSMA * Constant::KMAP
+    self.material_bonus * Constant.kvynosma * Constant.kmap
   end
   def vynos_exp
-    self.exp_bonus * Constant::KVYNOSE * Constant::KEP
+    self.exp_bonus * Constant.kvynose * Constant.kep
   end
   def vynos_melange
-    self.melange_bonus * Constant::KVYNOSME * Constant::KMEP
+    self.melange_bonus * Constant.kvynosme * Constant.kmep
   end
   
   def nutna_pop
-    self.population_cost * Constant::KPV
+    self.population_cost * Constant.kpv
   end
   
 end

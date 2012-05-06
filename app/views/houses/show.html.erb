@@ -56,7 +56,7 @@
 
 	<tr>
 		<td>
-			<%= link_to @vudce.nick, @vudce if @vudce %>
+			<%= link_to @vudce.nick, @vudce, :class => "leader" if @vudce %>
 		</td>
 		<td>
 			<% for user in @mentate do %>

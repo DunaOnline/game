@@ -41,13 +41,17 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  respond_to :html, :json
   def update
+    #@user = current_user
+    #if @user.update_attributes(params[:user])
+    #  redirect_to root_url, :notice => "Your profile has been updated."
+    #else
+    #  render :action => 'edit'
+    #end
     @user = current_user
-    if @user.update_attributes(params[:user])
-      redirect_to root_url, :notice => "Your profile has been updated."
-    else
-      render :action => 'edit'
-    end
+    @user.update_attributes(params[:user])
+    respond_with @user
   end
 
   def zmen_prava
@@ -113,5 +117,29 @@ class UsersController < ApplicationController
     end
     
     redirect_to :back
+  end
+  
+  def posli_suroviny
+    rod = current_user.house
+    msg = "Poslano rodu #{rod.name} " if params[:rod_solary].to_i > 0.0 || params[:rod_melanz].to_f > 0.0 || params[:rod_zkusenosti].to_i > 0.0
+    
+    if params[:rod_solary].to_i > 0.0 && params[:rod_solary].to_i <= current_user.solar
+      rod.update_attribute(:solar, rod.solar + params[:rod_solary].to_i)
+      current_user.update_attribute(:solar, current_user.solar - params[:rod_solary].to_i)
+      msg << "solary: #{params[:user_solary]} "
+    end
+    if params[:rod_melanz].to_f > 0.0 && params[:rod_melanz].to_f <= current_user.melange
+      rod.update_attribute(:melange, rod.melange + params[:rod_melanz].to_f)
+      current_user.update_attribute(:melange, current_user.melange - params[:rod_melanz].to_f)
+      msg << "melanz: #{params[:user_melanz]} "
+    end 
+    if params[:rod_zkusenosti].to_i > 0.0 && params[:rod_zkusenosti].to_i <= current_user.exp
+      rod.update_attribute(:exp, rod.exp + params[:rod_zkusenosti].to_i)
+      current_user.update_attribute(:exp, current_user.exp - params[:rod_zkusenosti].to_i)
+      msg << "expy: #{params[:user_zkusenosti]} "
+    end
+    
+    flash[:notice] = msg
+    redirect_to sprava_path(:id => current_user)
   end
 end

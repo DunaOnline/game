@@ -1,7 +1,7 @@
 class CreateFields < ActiveRecord::Migration
   def self.up
     create_table :fields do |t|
-      t.integer :user_id, :null => false
+      t.integer :user_id#, :null => false
       t.integer :planet_id, :null => false
       t.string :name, :null => false
       t.decimal :pos_x, :default => 0.0

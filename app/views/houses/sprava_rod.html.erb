@@ -1,5 +1,6 @@
 <% title "Velkorod #{@house.name}" %>
 	<table class="tab1">
+		<%= form_tag :posli_rodove_suroviny do %>
 		<tr>	
 			<td class="tdpl" rowspan="2" style="width:160px">
 				<li><h2>Národní sklad</h2>
@@ -9,7 +10,7 @@
 				<li><b>Planet: </b><%= @house.pocet_planet %>
 				<li><b>Členů: </b><%= @house.users.count %>
 				<br><br>
-				<li><input type="button" value="Poslat" class="ok">
+				<li><%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok' %>
 			</td>
 
 			<th style="width:120px">Stav skladu</th>
@@ -27,13 +28,11 @@
 				<li><%= img_populace('Celkova populace') %><%= format_mena(@house.celkova_populace, 'k', false) %>
 			</td>
 			<td>
-				<li><%= img_solary %><input type="text" size="3" title="Zadejte množství">
-				<li><%= img_material %><input type="text" size="3" title="Zadejte množství">		
-				<li><%= img_melanz %><input type="text" size="3" title="Zadejte množství"> 
-				<li><%= img_zkusenosti %><input type="text" size="3" title="Zadejte množství"> 
-				<li><img src = "image/cssimage/j1.png" alt="Národní jednotka typu 1" title="Národní jednotka typu 1"><input type="text" size="3" title="Zadejte množství">
-				<li><img src = "image/cssimage/j1.png" alt="Národní jednotka typu 2" title="Národní jednotka typu 2"><input type="text" size="3" title="Zadejte množství"> 
-				<li>Nick <input type="text" size="3" title="Jméno hráče"> 
+				<li><%= img_solary %><%= text_field_tag 'user_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
+				<li><%= img_material %><%= text_field_tag 'user_material', '0.00', :size => "3", :title => "Zadejte množství" %>	
+				<li><%= img_melanz %><%= text_field_tag 'user_melanz', '0.00', :size => "3", :title => "Zadejte množství" %>
+				<li><%= img_zkusenosti %><%= text_field_tag 'user_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %> 
+				<li><%= select_tag :user_id_suroviny, options_for_select(@house.users.order(:nick).all.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :class => "tab" %> 
 			</td>
 			<td>
 				<li><%= img_solary %><input type="text" size="3" title="Zadejte množství">
@@ -47,22 +46,14 @@
 					</select>
 			</td>
 			<td>
-				<li><%= img_solary %><input type="text" size="3" title="Zadejte množství">
-				<li><%= img_material %><input type="text" size="3" title="Zadejte množství">		
-				<li><%= img_melanz %><input type="text" size="3" title="Zadejte množství"> 
-				<li><%= img_zkusenosti %><input type="text" size="3" title="Zadejte množství"> 
-				<li>	
-					<select class="vyber" name="Vyberte Velkorod">
-						 <option value="p1">Atreides</option>
-						 <option value="p1">Corrino</option>
-						 <option value="p1">Ekaz</option>
-						 <option value="p1">Harkonnenové</option>
-						 <option value="p1">Moritani</option>
-						 <option value="p1">Riches</option>
-						 <option value="p1">Vernio</option>
-					</select>
+				<li><%= img_solary %><%= text_field_tag 'rodu_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
+				<li><%= img_material %><%= text_field_tag 'rodu_material', '0.00', :size => "3", :title => "Zadejte množství" %>	
+				<li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %>
+				<li><%= img_zkusenosti %><%= text_field_tag 'rodu_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %> 
+				<li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}) , :class => "tab" %> 
 			</td>
 		</tr>	
+		<% end %>
 	</table>
 
 	<table class="tab4">
@@ -134,7 +125,7 @@
 		</tr>
 		<tr>
 			<td>
-				<% if can? User, :pridel_pravo %>
+				<% if can? :pridel_pravo, User %>
 					<li>
 						<%= form_tag :pridel_pravo do %>
       						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
@@ -146,7 +137,7 @@
 				<% for user in @mentate do %>
 					<li>
 						<%= link_to user.nick, user, :class => "mentat" %>
-						<% if can? User, :odeber_pravo %>
+						<% if can? :odeber_pravo, User %>
 							<%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Mentat" %>
 						<% end %>
 					</li>
@@ -154,7 +145,7 @@
 			</td>
 
 			<td>
-				<% if can? User, :pridel_pravo %>
+				<% if can? :pridel_pravo, User %>
 					<li>
 						<%= form_tag :pridel_pravo do %>
       						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
@@ -166,7 +157,7 @@
 				<% for user in @army_mentate do %>
 					<li>
 						<%= link_to user.nick, user, :class => "army_mentat" %>
-						<% if can? User, :odeber_pravo %>
+						<% if can? :odeber_pravo, User %>
 							<%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "ArmyMentat" %>
 						<% end %>
 					</li>
@@ -174,7 +165,7 @@
 			</td>
 
 			<td>
-				<% if can? User, :pridel_pravo %>
+				<% if can? :pridel_pravo, User %>
 					<li>
 						<%= form_tag :pridel_pravo do %>
       						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
@@ -186,7 +177,7 @@
 				<% for user in @diplomate do %>
 					<li>
 						<%= link_to user.nick, user, :class => "diplomat" %>
-						<% if can? User, :odeber_pravo %>
+						<% if can? :odeber_pravo, User %>
 							<%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Diplomat" %>
 						<% end %>
 					</li>

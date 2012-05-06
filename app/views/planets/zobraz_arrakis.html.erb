@@ -1,0 +1,108 @@
+<% title "Arrakis" %>
+	<table class="tab2">
+		<tr>
+			<td class="tdpl" style="background-image: url(<%= asset_path @arrakis.background %>); width:170px" rowspan="2">
+				<li><h2><%= @arrakis.name %></h2>
+				<li><%= link_to @arrakis.system_name, @arrakis.system %>
+				<li><%= @arrakis.oznaceni %>
+			</td>
+			<th>Bonusy</td>
+			<th>Produkce</td>
+			<th style="width:110px">Přítomno</th>
+			<th class="r" style="width:100px">CHOAM [%]</th>
+		</tr>
+		<tr>
+			<td>
+				<% pt = @arrakis.planet_type %>
+				<li><%= img_melanz "Bonus melanž" %><font class="<%= trida_barvy(@arrakis.melange_bonus) %>"><%= format_mena(@arrakis.melange_bonus, "%") %></font>
+				<li><%= img_populace "Bonus populace" %><font class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%") %></font>
+				<h3>Agresivita Fremenů</h3>
+				<li><%= img_fremeni "Agresivita Fremenů" %><font class="<%= trida_barvy(@arrakis.agresivita_fremenu * -1) %>"><%= format_mena(@arrakis.agresivita_fremenu, "%") %></font>
+
+			</td>
+			<td>
+				<li><%= img_melanz "Melanž" %> 100.00 mg
+				<li><%= img_populace "Bonus populace" %> 100.000k		
+				
+			</td>
+			<td>
+				<li><%= img_populace "Populace" %> <%= @arrakis_resource.population %>
+				<li><%= img_material "Materiál" %> <%= @arrakis_resource.material %>  		
+				
+			</td>
+			<td> 
+				<center>
+				<li><select class="tab" name="Vyberte komoditu" title="Vyberte komoditu k transportu">
+					<option value="material">Materiál</option>
+					<option value="populaci">Populaci</option>
+					<option value="populaci">Jednotka1</option>
+					<option value="populaci">Jednotka2</option>
+					<option value="populaci">Jednotka3</option>
+					<option value="populaci">Jednotka4</option>
+					<option value="populaci">Jednotka5</option>
+					<option value="populaci">Jednotka6</option>
+					<option value="populaci">Jednotka7</option>
+					<option value="populaci">Jednotka8</option>
+					<option value="populaci">Jednotka9</option>
+					<option value="populaci">Jednotka10</option>
+				</select>
+				<select class="tab" name="Vyberte planetu" title="Zvolte odchozí planetu">
+				    <option class="sez-b" value="p1">Giedy Prime</option>
+				    <option value="p2">Lakviel</option>
+				    <option value="p3">P3</option>
+				    <option value="p4">P4</option>
+			    	<option value="p5">P5</option>
+				</select>
+				<li><input class="tab" type="text" size=15 title="Zadejte množství">
+				<li><input class="oktab" type="button" value="Odeslat" > 
+				</center>
+			</td>
+		</tr>
+	
+	</table>
+	
+	<table class="tab2">
+		<tr>	
+			<th class="none" style="width:170px"></th>
+			<th class="l">Popis budovy</th>
+			<th style="width:110px">Náklady na stavbu</th>
+			<th class="r" style="width:100px">Budování</th>
+		</tr>
+		
+		<tr>
+			<td class="tdpl"  style="background-image: url(<%= asset_path "planety/arrakis_arraken.png" %>)"></td>
+			<td>
+				<h3><%= @arraken.name %></h3> 
+				<li><%= @arraken.description %>
+				<li><%= img_budovy %> <%= @arrakis_field.postaveno(@arraken) %> <%= img_populace %> <font class="zelena">+ 10 000</font> 
+			</td>
+			<td>
+				
+			</td>
+			<td>
+			
+			</td>
+		</tr>
+		<tr>
+			<td class="tdpl"  style="background-image: url(<%= asset_path "planety/harvester.png" %>)"></td>
+			<td>
+				<h3><%= @harvester.name %></h3> 
+				<li><%= @harvester.description %>
+				<li><%= img_budovy %> <%= @arrakis_field.postaveno(@harvester) %> 
+				<li></li><%= img_melanz %> <font class="zelena"><%= @arrakis_field.vynos("melange") %></font> 
+			</td>
+			<td>
+				<li><%= img_solary %><%= format_mena(@harvester.naklady_stavba_solary, 'S', false) %>  
+				<li><%= img_material %><%= format_mena(@harvester.naklady_stavba_material, 'kg') %> 
+				<%= form_tag postavit_arrakis_path do %>
+					<li><%= number_field_tag :pocet_budov_stavba, nil, :in => -10...10, :step => 1 %></li> 
+					<li><%= submit_tag "Postavit" , :class => "oktab_95" %>
+				<% end %>
+			</td>
+			<td>
+			
+			</td>
+		</tr>
+	</table>
+
+	
