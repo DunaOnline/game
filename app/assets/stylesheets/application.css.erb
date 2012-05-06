@@ -82,7 +82,52 @@ input.i_key {background-image: url(<%= asset_path 'css/key.png' %>) !important;}
 	}
 		div.l select:hover{border: solid 1px #ffdb30 !important;}
 
-
+/* ++++++++++++++++++++ Lista ++++++++++++++++++++ */	
+  
+div.lista{
+	position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: auto;
+  padding: 2px 0 3px 0;
+	font-size: 9px !important;
+	text-shadow: 0.1em 0.1em #000 !important;
+	text-align: right;
+  vertical-align: middle;
+	background-image: url(<%= asset_path 'css/td1.png' %>);
+	border: 0;
+	border-bottom: solid 1px #696969;
+	border-top: solid 1px #696969;
+	z-index: 3 !important;
+}
+    div.lista a{
+		  border: 0 !important;
+		}	
+    
+		div.lista li{
+		list-style: none;
+		}	
+		div.lista input{
+      	float: right;
+      	padding: 2px 4px 2px 4px !important;
+        margin: 0 1px 0 1px;
+      	width: auto !important;
+      	background-color: transparent;
+      	background-image: url(<%= asset_path 'css/td1.png' %>);
+      	color: #a2a2a2;	
+        font-size: 9px !important;
+      	text-decoration: none !important;
+      	font-weight: bold !important;
+      	vertical-align: middle;
+      	text-align: center;
+      	border: 1px solid #696969;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      }
+		div.lista input:hover {color:#ffdb30; border:#ffdb30 1px solid; text-decoration: none !important;}
+    		
 
 /* ++++++++++++++++++++ Hlavn? t?lo webu ++++++++++++++++++++ */
 

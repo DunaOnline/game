@@ -8,6 +8,14 @@
     <%= yield(:head) %>
   </head>
   <body>
+  
+  <% if current_user -%>
+    <%= render 'layouts/lista' -%>
+  <% else %>
+    <%= render 'layouts/lista_login' -%>
+  <% end -%>
+          
+
     <div id="body_wrapper">
       <div class="planet"></div>
       <div id="body_container">
