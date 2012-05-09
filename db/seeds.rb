@@ -90,28 +90,33 @@ Global.create(:setting => 'gilda_melanz_procenta', :cislo => 15.0)
 Global.create(:setting => 'gilda_melanz_pevna_castka', :cislo => 100.0)
 puts 'Global done'
 
-User.create(:username => 'Norma_Cenva', :nick => 'Norma Cenva', :email => 'normacenva@spojka.vg', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
+User.create(:username => 'Norma_Cenva', :nick => 'Norma Cenva', :email => 'normacenva@spojka.vg', :house_id => titani.id, :password => 'doktoros', :password_confirmation => 'doktoros', :admin => true)
 User.create(:username => 'Doktor', :nick => 'Doktor', :email => 'admin@dunaonline.cz', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
 User.create(:username => 'Gilbertus_Albans', :nick => 'Gilbertus Albans', :email => 'administr@dunaonline.cz', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
+User.create(:username => 'Simi', :nick => 'Simi', :email => 'administrator@dunaonline.cz', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
 puts 'User done'
 
 norma = User.find_by_username('Norma_Cenva')
 doktor = User.find_by_username('Doktor')
 gilbertus = User.find_by_username('Gilbertus_Albans')
+simi = User.find_by_username('Simi')
 
 Field.create(:user_id => norma.id, :planet_id => titania.id, :name => "Prvni", :pos_x => 1, :pos_y => 1)
 Field.create(:user_id => doktor.id, :planet_id => titania.id, :name => "Druha", :pos_x => 1, :pos_y => 2)
 Field.create(:user_id => gilbertus.id, :planet_id => titania.id, :name => "Treti", :pos_x => 2, :pos_y => 1)
+Field.create(:user_id => simi.id, :planet_id => titania.id, :name => "Ctvrta", :pos_x => 2, :pos_y => 2)
 puts 'Field done'
 
 norma.napln_suroviny
 doktor.napln_suroviny
 gilbertus.napln_suroviny
+simi.napln_suroviny
 puts 'Suroviny done'
 
 norma.hlasuj(norma,'leader')
 doktor.hlasuj(norma,'leader')
 gilbertus.hlasuj(norma,'leader')
+simi.hlasuj(norma,'leader')
 puts 'hlasy done'
 
 Building.create(:kind => "L", :level => 1, :name => "Město", :description => "Města slouží k ubytování vaší populace.", :population_bonus => 20.0, :pop_limit_bonus => 20.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 35.0, :solar_cost => 30.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")

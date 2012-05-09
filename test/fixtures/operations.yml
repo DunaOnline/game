@@ -1,0 +1,15 @@
+one:
+  user_id: 1
+  house_id: 1
+  kind: MyString
+  content: MyString
+  date: 2012-05-05
+  time: 2012-05-05 09:39:16
+
+two:
+  user_id: 1
+  house_id: 1
+  kind: MyString
+  content: MyString
+  date: 2012-05-05
+  time: 2012-05-05 09:39:16

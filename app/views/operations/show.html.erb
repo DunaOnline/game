@@ -1,0 +1,32 @@
+<% title "Operation" %>
+
+<p>
+  <strong>User:</strong>
+  <%= @operation.user_id %>
+</p>
+<p>
+  <strong>House:</strong>
+  <%= @operation.house_id %>
+</p>
+<p>
+  <strong>Kind:</strong>
+  <%= @operation.kind %>
+</p>
+<p>
+  <strong>Content:</strong>
+  <%= @operation.content %>
+</p>
+<p>
+  <strong>Date:</strong>
+  <%= @operation.date %>
+</p>
+<p>
+  <strong>Time:</strong>
+  <%= @operation.time %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_operation_path(@operation) %> |
+  <%= link_to "Destroy", @operation, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", operations_path %>
+</p>

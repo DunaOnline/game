@@ -1,0 +1,27 @@
+<% title "Operations" %>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>House</th>
+    <th>Kind</th>
+    <th>Content</th>
+    <th>Date</th>
+    <th>Time</th>
+  </tr>
+  <% for operation in @operations %>
+    <tr>
+      <td><%= operation.user_id %></td>
+      <td><%= operation.house_id %></td>
+      <td><%= operation.kind %></td>
+      <td><%= operation.content %></td>
+      <td><%= operation.date %></td>
+      <td><%= operation.time %></td>
+      <td><%= link_to "Show", operation %></td>
+      <td><%= link_to "Edit", edit_operation_path(operation) %></td>
+      <td><%= link_to "Destroy", operation, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Operation", new_operation_path %></p>
