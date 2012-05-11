@@ -7,7 +7,7 @@ class CreateOperations < ActiveRecord::Migration
       t.string :kind
       t.string :content
       t.date :date, :default => Date.today
-      t.time :time, :default => TIme.now
+      t.time :time, :default => Time.now
       t.timestamps
     end
   end

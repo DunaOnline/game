@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20) do
+ActiveRecord::Schema.define(:version => 21) do
 
   create_table "app_logy", :force => true do |t|
     t.datetime "cas",                      :null => false
@@ -159,14 +159,14 @@ ActiveRecord::Schema.define(:version => 20) do
   end
 
   create_table "houses", :force => true do |t|
-    t.string   "name",                                                        :null => false
+    t.string   "name",                                                             :null => false
     t.string   "leader"
-    t.decimal  "solar",      :precision => 12, :scale => 4, :default => 0.0
-    t.decimal  "melange",    :precision => 12, :scale => 4, :default => 0.0
-    t.decimal  "material",   :precision => 12, :scale => 4, :default => 0.0
-    t.decimal  "exp",        :precision => 12, :scale => 4, :default => 0.0
-    t.boolean  "playable",                                  :default => true
-    t.decimal  "melange_percent",         :precision => 12, :scale => 4, :default => 0.0
+    t.decimal  "solar",           :precision => 12, :scale => 4, :default => 0.0
+    t.decimal  "melange",         :precision => 12, :scale => 4, :default => 0.0
+    t.decimal  "material",        :precision => 12, :scale => 4, :default => 0.0
+    t.decimal  "exp",             :precision => 12, :scale => 4, :default => 0.0
+    t.boolean  "playable",                                       :default => true
+    t.decimal  "melange_percent", :precision => 12, :scale => 4, :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -184,6 +184,18 @@ ActiveRecord::Schema.define(:version => 20) do
   add_index "influences", ["effect_id"], :name => "index_influences_on_effect_id"
   add_index "influences", ["field_id"], :name => "index_influences_on_field_id"
   add_index "influences", ["started_at"], :name => "index_influences_on_started_at"
+
+  create_table "operations", :force => true do |t|
+    t.integer  "user_id",                                        :null => false
+    t.integer  "house_id",                                       :null => false
+    t.integer  "subhouse_id",                                    :null => false
+    t.string   "kind"
+    t.string   "content"
+    t.date     "date",        :default => '2012-05-11'
+    t.time     "time",        :default => '2000-01-01 09:50:43'
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "planet_types", :force => true do |t|
     t.string   "name",                                                             :null => false
