@@ -192,7 +192,7 @@ ActiveRecord::Schema.define(:version => 21) do
     t.string   "kind"
     t.string   "content"
     t.date     "date",        :default => '2012-05-11'
-    t.time     "time",        :default => '2000-01-01 09:50:43'
+    t.time     "time",        :default => '2000-01-01 10:12:15'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
