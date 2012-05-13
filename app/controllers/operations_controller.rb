@@ -1,10 +1,21 @@
 class OperationsController < ApplicationController
+  authorize_resource # CanCan
+  
   def index
-    @operations = Operation.all
+    case params[:jake]
+    when 'hrac'
+      @hrac = current_user
+      @operations = @hrac.operations.seradit.page(params[:page])
+      @title = "Operace hrace #{@hrac.nick}"
+    when 'narod'
+      @narod = current_user.house
+      @operations = @narod.operations.seradit.page(params[:page])
+      @title = "Operace rodu #{@narod.name}"
+    end
   end
 
   def show
-    @operation = Operation.find(params[:id])
+    @operation = current_user.operations.find(params[:id])
   end
 
   def new

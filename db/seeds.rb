@@ -14,7 +14,7 @@ House.create(:name => 'Atreides', :leader => 'Vévoda', :solar => 10000.0, :mela
 House.create(:name => 'Corrino', :leader => 'Padišáh', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
 House.create(:name => 'Harkonnen', :leader => 'Baron', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
 House.create(:name => 'Ekaz', :leader => 'Arcivévoda', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
-House.create(:name => 'Morritani', :leader => 'Vikomt', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
+House.create(:name => 'Moritani', :leader => 'Vikomt', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
 House.create(:name => 'Riches', :leader => 'Vévoda', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
 House.create(:name => 'Vernio', :leader => 'Hrabě', :solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
 puts 'House done'
@@ -47,7 +47,7 @@ Planet.create(:name => 'Caladan', :planet_type_id => domovska.id, :house_id => H
 Planet.create(:name => 'Salusa Secundus', :planet_type_id => domovska.id, :house_id => House.find_by_name('Corrino').id, :available_to_all => false, :discovered_at => Date.today, :position => 2, :system_name => "Salusa Centra")
 Planet.create(:name => 'Giedi Prime', :planet_type_id => domovska.id, :house_id => House.find_by_name('Harkonnen').id, :available_to_all => false, :discovered_at => Date.today, :position => 1, :system_name => "Ophiuchi B 36")
 Planet.create(:name => 'Ekaz', :planet_type_id => domovska.id, :house_id => House.find_by_name('Ekaz').id, :available_to_all => false, :discovered_at => Date.today, :position => 4, :system_name => "Alpha Centauri B")
-Planet.create(:name => 'Gruman', :planet_type_id => domovska.id, :house_id => House.find_by_name('Morritani').id, :available_to_all => false, :discovered_at => Date.today, :posi0tion => 2, :system_name => "Niushe")
+Planet.create(:name => 'Gruman', :planet_type_id => domovska.id, :house_id => House.find_by_name('Moritani').id, :available_to_all => false, :discovered_at => Date.today, :posi0tion => 2, :system_name => "Niushe")
 Planet.create(:name => 'Riches', :planet_type_id => domovska.id, :house_id => House.find_by_name('Riches').id, :available_to_all => false, :discovered_at => Date.today, :position => 4, :system_name => "Eridani A")
 Planet.create(:name => 'Iks', :planet_type_id => domovska.id, :house_id => House.find_by_name('Vernio').id, :available_to_all => false, :discovered_at => Date.today, :position => 10, :system_name => "Rolande")
 Planet.create(:name => 'Tulapin V', :planet_type_id => domovska.id, :house_id => House.find_by_name('Renegáti').id, :available_to_all => false, :discovered_at => Date.today, :position => 5, :system_name => "Tulapin Centra")

@@ -91,7 +91,7 @@
 				<% end %>
 			</td>	
 			<td>
-				Nick <input type="text" size="20" Style="width:100px" title="Zadejte důvod"> 
+				Nick <input type="text" size="20" style="width:100px" title="Zadejte důvod"> 
 				<h3>Aktuální pořadí</h3>
 				<li>Vévoda [12]
 				<li>Vévoda [10]
@@ -100,5 +100,24 @@
 				<li>Vévoda [2]
 			</td>			
 		</tr>			
-	</table>                       
+	</table>         
+	
+	<table class="tab1">
+	  <tr>
+	  	<th colspan="2">Prehled poslednich akci</th>
+	  	<th><%= link_to 'Vsechny akce', operations_path(:jake => 'hrac') %></th>
+	  </tr>
+	  <tr>
+    	<th>Obsah akce</th>
+	    <th style="width:80px">Datum</th>
+    	<th style="width:80px">Cas</th>
+	  </tr>
+	  <% for operation in @operations %>
+    	<tr>
+    	  <td><%= operation.content %></td>
+	      <td><%= format_date(operation.date) %></td>
+    	  <td><%= format_time(operation.time) %></td>
+    	</tr>
+  	  <% end %>
+  	</table>              
 

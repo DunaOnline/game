@@ -186,9 +186,9 @@ ActiveRecord::Schema.define(:version => 21) do
   add_index "influences", ["started_at"], :name => "index_influences_on_started_at"
 
   create_table "operations", :force => true do |t|
-    t.integer  "user_id",                                        :null => false
-    t.integer  "house_id",                                       :null => false
-    t.integer  "subhouse_id",                                    :null => false
+    t.integer  "user_id",                                        :null => true
+    t.integer  "house_id",                                       :null => true
+    t.integer  "subhouse_id",                                    :null => true
     t.string   "kind"
     t.string   "content"
     t.date     "date",        :default => '2012-05-11'

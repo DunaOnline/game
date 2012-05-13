@@ -86,6 +86,7 @@ class UsersController < ApplicationController
       @user = current_user
     end
     @planets = @user.najdi_planety
+    @operations = @user.operations.uzivatelske.seradit.limit(5)
 
   end
   
@@ -100,7 +101,8 @@ class UsersController < ApplicationController
       komu.stat_se("diplomat")
       
     end
-    
+    current_user.house.zapis_operaci("#{current_user.nick} jmenoval hrace #{komu.nick} na pozici #{params[:commit]}.")
+    komu.zapis_operaci("#{current_user.nick} me jmenoval na pozici #{params[:commit]}.")
     redirect_to :back
   end
   
@@ -115,7 +117,8 @@ class UsersController < ApplicationController
       komu.prestat_byt("diplomat")
       
     end
-    
+    current_user.house.zapis_operaci("#{current_user.nick} odvolal hrace #{komu.nick} z pozice #{params[:pravo]}.")
+    komu.zapis_operaci("#{current_user.nick} me odvolal z pozice #{params[:pravo]}.")
     redirect_to :back
   end
   
@@ -126,20 +129,22 @@ class UsersController < ApplicationController
     if params[:rod_solary].to_i > 0.0 && params[:rod_solary].to_i <= current_user.solar
       rod.update_attribute(:solar, rod.solar + params[:rod_solary].to_i)
       current_user.update_attribute(:solar, current_user.solar - params[:rod_solary].to_i)
-      msg << "solary: #{params[:user_solary]} "
+      msg << "solary: #{params[:rod_solary]} "
     end
     if params[:rod_melanz].to_f > 0.0 && params[:rod_melanz].to_f <= current_user.melange
       rod.update_attribute(:melange, rod.melange + params[:rod_melanz].to_f)
       current_user.update_attribute(:melange, current_user.melange - params[:rod_melanz].to_f)
-      msg << "melanz: #{params[:user_melanz]} "
+      msg << "melanz: #{params[:rod_melanz]} "
     end 
     if params[:rod_zkusenosti].to_i > 0.0 && params[:rod_zkusenosti].to_i <= current_user.exp
       rod.update_attribute(:exp, rod.exp + params[:rod_zkusenosti].to_i)
       current_user.update_attribute(:exp, current_user.exp - params[:rod_zkusenosti].to_i)
-      msg << "expy: #{params[:user_zkusenosti]} "
+      msg << "expy: #{params[:rod_zkusenosti]} "
     end
     
+    current_user.zapis_operaci(msg)
     flash[:notice] = msg
+    rod.zapis_operaci(msg.gsub("Poslano rodu #{rod.name} ", "Obdrzeno od hrace #{current_user.nick} "))
     redirect_to sprava_path(:id => current_user)
   end
 end

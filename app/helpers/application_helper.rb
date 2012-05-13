@@ -8,6 +8,14 @@ module ApplicationHelper
       cas.strftime('%d.%m.%Y %H:%M')
     end
   end
+  
+  def format_time(cas = Time.now)
+    if cas==nil
+      ''
+    else
+      cas.strftime('%H:%M:%S')
+    end
+  end
 
   def format_date(cas = Time.now)
     if cas==nil

@@ -39,6 +39,9 @@ class Ability
         can [:read, :update, :prejmenuj_pole, :postavit_budovu], Field, :user_id => user.id
         can [:read, :update], Resource
         can [:read, :create], Vote
+        cannot [:update, :delete], Operation
+        #can [:read], Operation, :user_id => user.id
+        #can [:read], Operation, :house_id => user.house.id
         can [:update], Vote, :elector => user.id
         can [:zobraz_eod], Eod, :user_id => user.id
       

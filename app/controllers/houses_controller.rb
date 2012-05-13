@@ -23,6 +23,7 @@ class HousesController < ApplicationController
     @generalove = @house.generalove
     @hraci = @house.users.order(:nick)
     @rody = House.playable.order(:name)
+    @operations = @house.operations.narodni.seradit.limit(5)
   end
 
   def new
@@ -149,6 +150,8 @@ class HousesController < ApplicationController
     end
     
     flash[:notice] = msg
+    rod.zapis_operaci(msg + " hracem #{current_user.nick}.")
+    current_user.zapis_operaci(msg.gsub("Poslano hraci #{komu.nick} ", "Obdrzeno "))
     redirect_to sprava_rod_path(:id => rod)
   end
 end

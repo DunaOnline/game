@@ -39,7 +39,7 @@ end
 
 gem 'cancan'
 #gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions', :branch => 'rails3'
-#gem 'kaminari', '0.10.4'
+gem 'kaminari'#, '0.10.4'
 #gem "calendar_date_select", :git => 'http://github.com/paneq/calendar_date_select.git', :branch => 'rails3test'
 gem 'decent_exposure'
 

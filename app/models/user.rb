@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :fields
   has_many :votes, :foreign_key => 'elective'
   
+  has_many :operations
+  
   has_many :eods
 
   validates :username, :presence => true, :uniqueness => true
@@ -65,8 +67,10 @@ class User < ActiveRecord::Base
 
   def hlasuj(koho, typ)
     if vote = Vote.where(:house_id => self.house.id, :elector => self.id, :typ => typ).first
+      self.zapis_operaci("Ve volbe na pozici #{typ} jsi zmenil hlas z #{User.find(vote.elective).nick} na #{User.find(koho).nick}")
       vote.update_attribute(:elective, koho.id)
     else
+      self.zapis_operaci("Ve volbe na pozici #{typ} jsi hlasoval pro #{User.find(koho).nick}")
       Vote.new(:house_id => self.house.id, :elector => self.id, :elective => koho.id, :typ => typ).save
     end
   end
@@ -116,10 +120,12 @@ class User < ActiveRecord::Base
   end
   
   def stat_se(cim)  # cim = presne nazev attributu
+    #self.zapis_operaci("Od ted jsem #{cim}.")
     self.update_attribute(cim, true)
   end
   
   def prestat_byt(cim)  # cim = presne nazev attributu
+    #self.zapis_operaci("Uz dale nejsem #{cim}.")
     self.update_attribute(cim, false)
   end
   
@@ -139,6 +145,10 @@ class User < ActiveRecord::Base
   def odeber_spravcovstvi
     self.prestat_byt('arrakis')
     Global.prepni('bezvladi_arrakis', 2, 3.days.since)
+  end
+  
+  def zapis_operaci(content, kind = "U")
+    self.operations << Operation.new(:kind => kind, :content => content, :date => Date.today, :time => Time.now)
   end
 
   private

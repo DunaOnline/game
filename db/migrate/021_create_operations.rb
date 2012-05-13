@@ -1,9 +1,9 @@
 class CreateOperations < ActiveRecord::Migration
   def self.up
     create_table :operations do |t|
-      t.integer :user_id, :null => false
-      t.integer :house_id, :null => false
-      t.integer :subhouse_id, :null => false
+      t.integer :user_id, :null => true
+      t.integer :house_id, :null => true
+      t.integer :subhouse_id, :null => true
       t.string :kind
       t.string :content
       t.date :date, :default => Date.today

@@ -6,6 +6,7 @@ class House < ActiveRecord::Base
   has_many :fields, :through => :users
   has_many :planets
   has_many :votes
+  has_many :operations
   
   def poradi_hlasu(typ,pocet = 5)
     hlasy = secti_hlasy(typ, pocet)
@@ -73,6 +74,7 @@ class House < ActiveRecord::Base
       :available_to_all => false,
       :discovered_at => Date.today)
     disc.update_attribute(:discovered, true)
+    self.zapis_operaci("Kolonizovana planeta #{planet.name}.")
     planet
   end
   
@@ -86,6 +88,10 @@ class House < ActiveRecord::Base
   
   def self.imperium
     House.find_by_name('Impérium')
+  end
+  
+  def zapis_operaci(content, kind = "N")
+    self.operations << Operation.new(:kind => kind, :content => content, :date => Date.today, :time => Time.now)
   end
 
   scope :playable, where(:playable => true)

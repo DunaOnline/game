@@ -92,3 +92,22 @@
 		<%= render :partial => 'line_hrac', :locals => {:user => user} %>
 	<% end %>
   </table>
+  
+	<table class="tab1">
+	  <tr>
+	  	<th colspan="2">Prehled poslednich akci rodu</th>
+	  	<th><%= link_to 'Vsechny akce', operations_path(:jake => 'narod') %></th>
+	  </tr>
+	  <tr>
+    	<th>Obsah akce</th>
+	    <th style="width:80px">Datum</th>
+    	<th style="width:80px">Cas</th>
+	  </tr>
+	  <% for operation in @operations %>
+    	<tr>
+    	  <td><%= operation.content %></td>
+	      <td><%= format_date(operation.date) %></td>
+    	  <td><%= format_time(operation.time) %></td>
+    	</tr>
+  	  <% end %>
+  	</table> 

@@ -77,6 +77,7 @@ class Prepocet
     else
       melange = 0.0
     end
+    Imperium.zapis_operaci("Bylo vytezeno #{melange} mg melanze.")
     Prepocet.rozdel_melanz(melange, order)
   end
   
@@ -85,12 +86,13 @@ class Prepocet
     #pocet = House.playable.count
     #podil = (melange / pocet).round(2)
     gilde = Prepocet.melanz_gilde(melange)
-    puts "Dano gilde = " << gilde.to_s
+    Imperium.zapis_operaci("Vesmirne Gilde bylo odeslano #{gilde} mg melanze.")
     melange -= gilde
     odevzdano = 0.0
-    for house in House.all do
+    for house in House.playable.all do
       rodu = melange * (house.melange_percent / 100.0)
       odevzdano += rodu
+      house.zapis_operaci("Obdrzeno #{rodu} mg melanze.")
       house.update_attribute(:melange, house.melange + rodu)
       
       # TODO dodelat update vsem userum rodu
@@ -99,6 +101,7 @@ class Prepocet
       #end
     end
     imperiu = melange - odevzdano
+    Imperium.zapis_operaci("Do imperialnich skladu bylo odeslano #{imperiu} mg melanze.")
     imperium = House.imperium
     imperium.update_attribute(:melange, imperium.melange + imperiu)
   end
@@ -118,7 +121,7 @@ class Prepocet
     for planeta in Planet.objevene do
       if planeta.discovered_at < dostupno
         planeta.update_attribute(:available_to_all, true)
-        puts "Zpristupnena planeta #{planeta.name}/#{planeta.system_name}"
+        Imperium.zapis_operaci("Zpristupnena planeta #{planeta.name}/#{planeta.system_name}.")
       end
     end
   end
@@ -131,17 +134,18 @@ class Prepocet
       new_vudce = house.kdo_je_vitez('leader')
       if old_vudce == new_vudce
 
-        else
+      else
         o_vudce = 'nikdo'
         n_vudce = 'nikdo'
         if old_vudce
           old_vudce.update_attribute(:leader, false)
-        o_vudce = old_vudce.nick
+          o_vudce = old_vudce.nick
         end
         unless new_vudce.blank?
           new_vudce.update_attribute(:leader, true)
-        n_vudce = new_vudce.nick
+          n_vudce = new_vudce.nick
         end
+        house.zapis_operaci("Zvolen novy vudce #{n_vudce}.") unless n_vudce == 'nikdo'
         puts "Menim vudce #{o_vudce} na #{n_vudce}"
       end
       house.eod_zapis_vudce(order, new_vudce)
