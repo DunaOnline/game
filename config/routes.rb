@@ -61,6 +61,9 @@ DuneOnline::Application.routes.draw do
   match 'pridej_suroviny' => 'admin#pridej_suroviny', :as => :pridej_suroviny
   match 'global_index' => 'admin#global_index', :as => :global_index
   match 'update_global/:id' => 'admin#update_global', :as => :global
+  
+  match 'show' => 'imperium#show', :as => :imperium
+  match 'sprava_imperia' => 'imperium#sprava', :as => :sprava_imperia
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

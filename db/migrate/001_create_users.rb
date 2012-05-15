@@ -21,6 +21,8 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :arrakis, :default => false
       t.boolean :emperor, :default => false
       t.boolean :regent, :default => false
+      t.boolean :court, :default => false
+      t.boolean :vezir, :default => false
       t.boolean :admin, :default => false
       t.timestamps
     end

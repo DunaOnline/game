@@ -11,6 +11,10 @@ class OperationsController < ApplicationController
       @narod = current_user.house
       @operations = @narod.operations.seradit.page(params[:page])
       @title = "Operace rodu #{@narod.name}"
+    when 'imperium'
+      #@narod = current_user.house
+      @operations = Operation.imperialni.seradit.page(params[:page])
+      @title = "Operace Imperia"
     end
   end
 

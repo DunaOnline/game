@@ -1,0 +1,1 @@
+<td>	<% for house in @houses do %>		<li>			<%= obrazek_budovy(house.name, 'erb') %>			<%= format_mena(house.melange_percent, '%') %>/<%= format_mena((house.melange_percent / 100.0) * (@melange - @gilde), 'mg') %>		</li>	<% end %></td>

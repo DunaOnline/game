@@ -99,6 +99,12 @@ class UsersController < ApplicationController
       komu.stat_se("army_mentat")
     when "Diplomat"
       komu.stat_se("diplomat")
+    when "Dvoran"
+      komu.stat_se("court")
+      Imperium.zapis_operaci("#{current_user.nick} jmenoval hrace #{komu.nick} na pozici #{params[:commit]}.")
+    when "Vezir"
+      komu.stat_se("vezir")
+      Imperium.zapis_operaci("#{current_user.nick} jmenoval hrace #{komu.nick} na pozici #{params[:commit]}.")
       
     end
     current_user.house.zapis_operaci("#{current_user.nick} jmenoval hrace #{komu.nick} na pozici #{params[:commit]}.")
@@ -115,7 +121,13 @@ class UsersController < ApplicationController
       komu.prestat_byt("army_mentat")
     when "Diplomat"
       komu.prestat_byt("diplomat")
-      
+    when "Court"
+      komu.prestat_byt("court")
+      Imperium.zapis_operaci("#{current_user.nick} odvolal hrace #{komu.nick} z pozice Dvoran.")
+    when "Vezir"
+      komu.prestat_byt("vezir")
+      Imperium.zapis_operaci("#{current_user.nick} odvolal hrace #{komu.nick} z pozice #{params[:pravo]}.")
+        
     end
     current_user.house.zapis_operaci("#{current_user.nick} odvolal hrace #{komu.nick} z pozice #{params[:pravo]}.")
     komu.zapis_operaci("#{current_user.nick} me odvolal z pozice #{params[:pravo]}.")

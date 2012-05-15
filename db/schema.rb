@@ -308,6 +308,8 @@ ActiveRecord::Schema.define(:version => 21) do
     t.boolean  "arrakis",                                      :default => false
     t.boolean  "emperor",                                      :default => false
     t.boolean  "regent",                                       :default => false
+    t.boolean  "court",                                        :default => false
+    t.boolean  "vezir",                                        :default => false
     t.boolean  "admin",                                        :default => false
     t.datetime "created_at"
     t.datetime "updated_at"

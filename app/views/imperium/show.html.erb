@@ -1,0 +1,36 @@
+<% title @title %>
+
+<table class="tab1">
+	<tr>
+		<td class="tdpl" rowspan="2" style="width:300px; background-image: url(image/imgplanety/arrakis.png)">
+		<li>
+			<h2>Imperium</h2>
+		<li>
+			<b>Imperátor: </b> <%= link_to @imperator.nick, @imperator if @imperator %>
+		<li>
+			<b>Držitel pololéna: </b> <%= link_to @spravce.nick, @spravce if @spravce %>
+		<li>
+			<b>Planet: </b> <%= Planet.count %>
+		<li>
+			<b>Hráčů: </b> <%= User.count %>
+			<br>
+			<br>
+		<li>
+			<input type="button" value="Potvrdit" class="ok">
+		</td>
+		<th>Přepočet</th>
+		<th class="r">Podíl [%]</th>
+	</tr>
+	<tr>
+		<%= render :partial => 'melange_flow' %>
+
+		<%= render :partial => 'rody_podil' %>
+	</tr>
+</table>
+
+	<table class="tab1">
+		<%= render :partial => 'dvur' %>
+	</table>
+
+
+	<%= render :partial => 'imperium_operace' %>

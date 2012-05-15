@@ -44,10 +44,13 @@ class Ability
         #can [:read], Operation, :house_id => user.house.id
         can [:update], Vote, :elector => user.id
         can [:zobraz_eod], Eod, :user_id => user.id
+        can [:show], Imperium
       
         if user.emperor?
+          can [:sprava], Imperium
         end
         if user.regent?
+          can [:sprava], Imperium
         end
         if user.leader?
           can [:kolonizuj, :sprava_rod], House do |house|

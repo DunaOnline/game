@@ -32,7 +32,10 @@
               	<% if can? :sprava_rod, House %>
               <li><%= link_to 'Správa Velkorodu', sprava_rod_path(:id => current_user.house) %>
               	<% end %>
-              <li><a href="sprava-imperium.htm"> Správa Impéria* </a>
+              	<% if can? :sprava, Imperium %>
+              <li><%= link_to 'Správa Impéria', sprava_imperia_path %></li>
+              	<% end %>
+              <li><%= link_to 'Prehled Imperia', imperium_path %></li>
               <li><a href="sprava-zasedani.htm"> Zasedání Landsraadu* </a>
                 <br>
               <li><a href="stat-utok.htm"> Imperiální boje*</a>
