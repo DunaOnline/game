@@ -70,7 +70,9 @@ class PlanetsController < ApplicationController
       field = @planet.vytvor_pole(current_user)
       field.save
       current_user.update_attributes(:melange => current_user.melange - cena_mel, :solar => current_user.solar - cena_sol)
-      redirect_to field, :notice => "Uspesne osidleno (cena: #{cena_mel} mg melanze, #{cena_sol} Solaru)."
+      msg = "Uspesne osidleno (cena: #{cena_mel} mg melanze, #{cena_sol} Solaru)."
+      current_user.zapis_operaci(msg)
+      redirect_to field, :notice => msg
     end
     
   end

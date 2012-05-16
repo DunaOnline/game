@@ -64,6 +64,7 @@ DuneOnline::Application.routes.draw do
   
   match 'show' => 'imperium#show', :as => :imperium
   match 'sprava_imperia' => 'imperium#sprava', :as => :sprava_imperia
+  match 'posli_imperialni_suroviny' => 'imperium#posli_imperialni_suroviny', :as => :posli_imperialni_suroviny
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

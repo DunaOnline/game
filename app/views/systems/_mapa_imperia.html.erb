@@ -3,7 +3,7 @@
 	<% 6.times do %>
 		<tr>
 			<% 13.times do %>
-				<td>
+				<td background="<%= asset_path(cesta_budovy(systems[i-1].dominantni_rod, 'dom')) if systems[i-1] %>">
 					<%= link_to(content_tag(:input, nil, :value => "#{i}", :type => "button", :title => "Detail sektoru #{systems[i-1].system_name}"), systems[i-1]) if systems[i-1]%>
 					<br />
 					<%= systems[i-1].pocet_objevenych_planet if systems[i-1]%>

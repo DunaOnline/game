@@ -6,4 +6,49 @@ class System < ActiveRecord::Base
   def pocet_objevenych_planet
     self.planets.count
   end
+  
+  def zastoupene_rody
+    # TODO silene!!!! predelat!!!!
+    #max_poli = 0
+    #for house in House.all do
+    #  poli = house.fields.where(:planet_id => self.planets).count
+    #  if poli > max_poli
+    #    max_poli = poli
+    #    dom_rod = house
+    #  end
+    #end
+    #return dom_rod
+    a = []
+    b = []
+    
+    for planet in self.planets do
+      puts '**************************' << planet.name + planet.id.to_s if planet
+      a << planet.zastoupene_rody
+    end
+    
+    puts 'zastoupene rody : ' << a.to_s
+    
+    for zastupce in a do
+      unless zastupce == []
+        puts 'zastupce ' << zastupce.to_s
+        if b.assoc(zastupce[0]) == nil
+          b << [zastupce[0], zastupce[1]]
+        else
+          b.assoc(zastupce[0])[1] += zastupce[1]
+        end
+      end
+    end
+    
+    b.sort! { |a,b| a[1] <=> b[1] }
+    return b
+  end
+  
+  def dominantni_rod
+    a = self.zastoupene_rody
+    if a[0]
+      a[0][0][0]
+    else
+      ''
+    end
+  end
 end

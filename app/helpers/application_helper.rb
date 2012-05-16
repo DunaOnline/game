@@ -35,7 +35,7 @@ module ApplicationHelper
   end
   
   def img_cancel_s
-    # maly obrazek cancel, asi nejaky krizek
+    # TODO maly obrazek cancel, asi nejaky krizek
     "X"
   end
 
@@ -141,6 +141,8 @@ module ApplicationHelper
       cesta += "Vernio/"
     when "Titáni"
       cesta += "Titani/"
+    when "Impérium"
+      cesta += "Imperium/"
     end
     cesta += typ + ".png"
     #cesta += typ

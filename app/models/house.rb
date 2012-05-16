@@ -74,7 +74,7 @@ class House < ActiveRecord::Base
       :available_to_all => false,
       :discovered_at => Date.today)
     disc.update_attribute(:discovered, true)
-    self.zapis_operaci("Kolonizovana planeta #{planet.name}.")
+    self.zapis_operaci("Kolonizovana planeta #{planet.name} v systemu #{planet.system_name} (#{planet.system.id}).")
     planet
   end
   
@@ -87,7 +87,7 @@ class House < ActiveRecord::Base
   end
   
   def self.imperium
-    House.find_by_name('Impérium')
+    @imperium ||= House.find_by_name('Impérium')
   end
   
   def zapis_operaci(content, kind = "N")

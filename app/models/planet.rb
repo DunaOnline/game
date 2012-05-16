@@ -109,7 +109,7 @@ class Planet < ActiveRecord::Base
   end
   
   def self.arrakis
-    Planet.find_by_name("Arrakis")
+    @duna ||= Planet.find_by_name("Arrakis")
   end
   
   def melange_bonus
@@ -123,6 +123,33 @@ class Planet < ActiveRecord::Base
   def agresivita_fremenu
     # TODO jak pocitat???
     10.0
+  end
+  
+  def zastoupene_rody
+    a = []
+    for field in self.fields.includes(:user, :house) do
+      if self == Planet.arrakis
+        rod = House.imperium.name
+      else
+        rod = field.user.house.name
+      end
+      if a.assoc(rod) == nil
+        a << [rod, 1]
+      else
+        a.assoc(rod)[1] += 1
+      end
+    end
+    a.sort! { |a,b| a[1] <=> b[1] }
+    return a
+  end
+  
+  def dominantni_rod
+    a = self.zastoupene_rody
+    if a[0]
+      a[0]
+    else
+      ''
+    end
   end
   
   scope :domovska, lambda { |user| where(:house_id => user.house.id, :planet_type_id => PlanetType.find_by_name("Domovská"))}
