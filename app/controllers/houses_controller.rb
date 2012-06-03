@@ -84,8 +84,9 @@ class HousesController < ApplicationController
         planeta = house.kolonizuj_planetu
         planeta.save
         house.update_attributes(:melange => house.melange - cena_mel, :solar => house.solar - cena_sol)
+        redirect_to planeta
       end
-      redirect_to planeta
+      
     else
       @house = current_user.house
       @cena_planety_mel = Vypocty.cena_nove_planety_melanz

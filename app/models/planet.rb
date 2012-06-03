@@ -112,6 +112,10 @@ class Planet < ActiveRecord::Base
     @duna ||= Planet.find_by_name("Arrakis")
   end
   
+  def self.kaitan
+    @kaitan ||= Planet.find_by_name("Kaitan")
+  end
+  
   def melange_bonus
     if vlastnik = User.spravce_arrakis
       vlastnik.melange_bonus
@@ -128,7 +132,7 @@ class Planet < ActiveRecord::Base
   def zastoupene_rody
     a = []
     for field in self.fields.includes(:user, :house) do
-      if self == Planet.arrakis
+      if self == Planet.arrakis || self == Planet.kaitan
         rod = House.imperium.name
       else
         rod = field.user.house.name

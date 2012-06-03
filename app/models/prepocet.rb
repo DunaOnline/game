@@ -121,13 +121,13 @@ class Prepocet
     for planeta in Planet.objevene do
       if planeta.discovered_at < dostupno
         planeta.update_attribute(:available_to_all, true)
-        Imperium.zapis_operaci("Zpristupnena planeta #{planeta.name}/#{planeta.system_name}.")
+        Imperium.zapis_operaci("Zpristupnena planeta #{planeta.name} v systemu #{planeta.system_name} (#{planeta.system.id}).")
       end
     end
   end
 
   def self.zmen_vudce(order)
-    houses = House.where('name NOT IN (?)', 'Renegáti').includes(:users, :votes)
+    houses = House.where('name NOT IN (?)', 'Renegáti, Impérium').includes(:users, :votes)
     for house in houses do
       puts "Delam #{house.name}"
       old_vudce = house.users.where(:leader => true).first

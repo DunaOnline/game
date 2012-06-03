@@ -22,7 +22,6 @@ class System < ActiveRecord::Base
     b = []
     
     for planet in self.planets do
-      puts '**************************' << planet.name + planet.id.to_s if planet
       a << planet.zastoupene_rody
     end
     
@@ -30,7 +29,6 @@ class System < ActiveRecord::Base
     
     for zastupce in a do
       unless zastupce == []
-        puts 'zastupce ' << zastupce.to_s
         if b.assoc(zastupce[0]) == nil
           b << [zastupce[0], zastupce[1]]
         else
