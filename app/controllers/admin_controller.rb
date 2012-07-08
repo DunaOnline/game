@@ -33,6 +33,11 @@ class AdminController < ApplicationController
     redirect_to :back
   end
   
+  def prepocti_vliv
+    Prepocet.prepocti_vliv
+    redirect_to :back
+  end
+  
   def pridej_suroviny
     if params[:commit] == "Proved"
       case params[:komu]

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 21) do
+ActiveRecord::Schema.define(:version => 22) do
 
   create_table "app_logy", :force => true do |t|
     t.datetime "cas",                      :null => false
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(:version => 21) do
     t.decimal  "melange_percent", :precision => 12, :scale => 4, :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "influence"
   end
 
   add_index "houses", ["name"], :name => "index_houses_on_name"
@@ -186,9 +187,9 @@ ActiveRecord::Schema.define(:version => 21) do
   add_index "influences", ["started_at"], :name => "index_influences_on_started_at"
 
   create_table "operations", :force => true do |t|
-    t.integer  "user_id",                                        :null => true
-    t.integer  "house_id",                                       :null => true
-    t.integer  "subhouse_id",                                    :null => true
+    t.integer  "user_id"
+    t.integer  "house_id"
+    t.integer  "subhouse_id"
     t.string   "kind"
     t.string   "content"
     t.date     "date",        :default => '2012-05-11'
@@ -313,6 +314,7 @@ ActiveRecord::Schema.define(:version => 21) do
     t.boolean  "admin",                                        :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "influence"
   end
 
   add_index "users", ["house_id"], :name => "index_users_on_house_id"

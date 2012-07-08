@@ -16,10 +16,7 @@
       <td><%= house.material %></td>
       <td><%= house.exp %></td>
       <td><%= link_to "Show", house %></td>
-      <td><%= link_to "Edit", edit_house_path(house) %></td>
-      <td><%= link_to "Destroy", house, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
 
-<p><%= link_to "New House", new_house_path %></p>

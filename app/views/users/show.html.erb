@@ -49,11 +49,11 @@
 					<li>Profil zmražen: 
 					<li>Profil založen: 
 					<br><br>
-					<li>Narod: <%= @user.house.name %>
+					<li>Narod:
 					<li>Funkce v národě: 
 					<li>Diplomacie s národem: 
 					<li>Malorod: 
-					<li>Funkce v Malorodě:  : 
+					<li>Funkce v Malorodě: 
 					<li>Vliv hráče: 
 					<li>Počet hráčovích lén: 
 					<br><br>
@@ -83,7 +83,7 @@
 					<li> Mír
 					<li> Eridani
 					<li> Generál [<a href="sprava-malorod.htm">Nastavit</a>] """Nastavit vidí jen hráč s právy"""
-					<li> 7673 (5%)
+					<li> <%= @user.influence %>
 					<li> 12
 					<br><br>
 					<li> 10002

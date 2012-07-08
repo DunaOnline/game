@@ -162,4 +162,19 @@ class Prepocet
     Aplikace.zamkni_hru
     puts "hra uzamcena"
   end
+  
+  #######################################
+  
+  def self.prepocti_vliv
+    for h in House.playable.all do
+      for u in h.users do
+        vliv_hrace = u.vliv
+        u.update_attribute(:influence, vliv_hrace)
+        u.zapis_operaci("Muj vliv je nyni: #{vliv_hrace}")
+      end
+      vliv_rodu = h.vliv
+      h.update_attribute(:influence, vliv_rodu)
+      h.zapis_operaci("Vliv naroda je nyni: #{vliv_rodu}")
+    end
+  end
 end

@@ -57,6 +57,7 @@ DuneOnline::Application.routes.draw do
   match 'prepni_prihlasovani' => 'admin#prepni_povoleni_prihlasovani'
   match 'prepni_zakladani' => 'admin#prepni_povoleni_zakladani'
   match 'zamkni_hru' => 'admin#zamkni_hru', :as => :zamkni_hru
+  match 'prepocti_vliv' => 'admin#prepocti_vliv', :as => :prepocti_vliv
   match 'kompletni_prepocet' => 'admin#kompletni_prepocet', :as => :kompletni_prepocet
   match 'pridej_suroviny' => 'admin#pridej_suroviny', :as => :pridej_suroviny
   match 'global_index' => 'admin#global_index', :as => :global_index

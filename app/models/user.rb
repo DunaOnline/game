@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation, :house_id, :subhouse_id, :solar, :melange
   attr_accessible :exp, :leader, :mentat, :army_mentat, :diplomat, :general, :vicegeneral, :landsraad, :arrakis
-  attr_accessible :emperor, :regent, :court, :vezir, :admin, :nick
+  attr_accessible :emperor, :regent, :court, :vezir, :admin, :nick, :influence
 
   attr_accessor :password
   before_save :prepare_password
@@ -153,6 +153,10 @@ class User < ActiveRecord::Base
   
   def zapis_operaci(content, kind = "U")
     self.operations << Operation.new(:kind => kind, :content => content, :date => Date.today, :time => Time.now)
+  end
+  
+  def vliv
+    Vypocty.vliv_hrace(self)
   end
 
   private

@@ -5,6 +5,7 @@
     <h3>Prihlasovani: <%= link_to Aplikace.prihlaseni_povoleno?.to_s, :controller => "admin", :action => "prepni_povoleni_prihlasovani" %></h3>
     <h3>Zakladani: <%= link_to Aplikace.zakladani_hracu_povoleno?.to_s, :controller => "admin", :action => "prepni_povoleni_zakladani" %></h3>
     <h3><%= link_to "Zamkni hru", zamkni_hru_path %></h3>
+    <h3><%= link_to "Prepocti vliv", prepocti_vliv_path %></h3>
     <h3><%= link_to "Spust prepocet", kompletni_prepocet_path %></h3>
     <hr />
     <h3>Admin hracu</h3>

@@ -41,7 +41,7 @@
 	<tr>
 		<td class="tdpl" rowspan="2" style="background-image: url(<%= asset_path cesta_budovy(@house.name, "erb") %>)">
 			<li><h2><%= @house.name %></h2>
-			<li><b>Vliv: </b> 7820 (17%)
+			<li><b>Vliv: </b><%= @house.influence %>
 			<li><b>Planet: </b><%= @house.planets.count %>
 			<li><b>Členů: </b><%= @house.users.count %>
 			<li><b>Projekt: </b> 0%

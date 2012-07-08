@@ -1,6 +1,7 @@
 # encoding: utf-8
 class House < ActiveRecord::Base
   attr_accessible :name, :leader, :solar, :melange, :material, :exp, :playable, :melange_percent
+  attr_accessible :influence
 
   has_many :users
   has_many :fields, :through => :users
@@ -92,6 +93,10 @@ class House < ActiveRecord::Base
   
   def zapis_operaci(content, kind = "N")
     self.operations << Operation.new(:kind => kind, :content => content, :date => Date.today, :time => Time.now)
+  end
+  
+  def vliv
+    self.users.sum(:influence)
   end
 
   scope :playable, where(:playable => true)
