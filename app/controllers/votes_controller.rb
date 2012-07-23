@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  authorize_resources # CanCan
+  authorize_resource # CanCan
   
   def index
     @votes = Vote.all

@@ -88,6 +88,8 @@ Global.create(:setting => 'bezvladi_arrakis', :datum => Date.today)
 Global.create(:setting => 'budov_na_leno', :cislo => 20.0)
 Global.create(:setting => 'gilda_melanz_procenta', :cislo => 15.0)
 Global.create(:setting => 'gilda_melanz_pevna_castka', :cislo => 100.0)
+Global.create(:setting => 'volba_imperatora', :value => true)
+Global.create(:setting => 'konec_volby_imperatora', :datum => 10.days.from_now)
 puts 'Global done'
 
 User.create(:username => 'Norma_Cenva', :nick => 'Norma Cenva', :email => 'normacenva@spojka.vg', :house_id => titani.id, :password => 'doktoros', :password_confirmation => 'doktoros', :admin => true)

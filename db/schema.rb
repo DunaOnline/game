@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 22) do
+ActiveRecord::Schema.define(:version => 24) do
 
   create_table "app_logy", :force => true do |t|
     t.datetime "cas",                      :null => false
@@ -186,6 +186,20 @@ ActiveRecord::Schema.define(:version => 22) do
   add_index "influences", ["field_id"], :name => "index_influences_on_field_id"
   add_index "influences", ["started_at"], :name => "index_influences_on_started_at"
 
+  create_table "laws", :force => true do |t|
+    t.string   "label",      :null => false
+    t.string   "title",      :null => false
+    t.text     "content"
+    t.string   "state",      :null => false
+    t.integer  "position"
+    t.integer  "submitter",  :null => false
+    t.datetime "submitted"
+    t.datetime "enacted"
+    t.datetime "signed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "operations", :force => true do |t|
     t.integer  "user_id"
     t.integer  "house_id"
@@ -228,6 +242,14 @@ ActiveRecord::Schema.define(:version => 22) do
   add_index "planets", ["house_id"], :name => "index_planets_on_house_id"
   add_index "planets", ["name"], :name => "index_planets_on_name"
   add_index "planets", ["planet_type_id"], :name => "index_planets_on_planet_type_id"
+
+  create_table "polls", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "law_id"
+    t.string   "choice",     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "properties", :force => true do |t|
     t.string   "name",                                                             :null => false

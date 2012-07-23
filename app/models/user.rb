@@ -12,10 +12,13 @@ class User < ActiveRecord::Base
   belongs_to :house
   has_many :fields
   has_many :votes, :foreign_key => 'elective'
-  
+
   has_many :operations
-  
+
   has_many :eods
+
+  has_many :polls
+  has_many :laws, :through => :polls
 
   validates :username, :presence => true, :uniqueness => true
   validates :password, :presence => true, :on => :create
@@ -25,7 +28,6 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
 
   validates_length_of :password, :minimum => 4, :allow_blank => true
-  
   # login can be either username or email address
   def self.authenticate(login, pass)
     user = User.find_by_username(login) || User.find_by_email(login)
@@ -53,9 +55,11 @@ class User < ActiveRecord::Base
     hodnosti = []
     hodnosti << "Emperor" if self.emperor
     hodnosti << "Regent" if self.regent
+    hodnosti << "Clen dvora" if self.court
+    hodnosti << "Vezir" if self.vezir
     hodnosti << "Leader" if self.leader
     hodnosti << "Mentat" if self.mentat
-    hodnosti << "Army Mentat" if self.army_mentat
+    hodnosti << "Vojensky Mentat" if self.army_mentat
     hodnosti << "Diplomat" if self.diplomat
     hodnosti << "General" if self.general
     hodnosti << "ViceGeneral" if self.vicegeneral
@@ -67,16 +71,37 @@ class User < ActiveRecord::Base
 
   def hlasuj(koho, typ)
     if vote = Vote.where(:house_id => self.house.id, :elector => self.id, :typ => typ).first
-      self.zapis_operaci("Ve volbe na pozici #{typ} jsi zmenil hlas z #{User.find(vote.elective).nick} na #{User.find(koho).nick}")
+      self.zapis_operaci("Ve volbe na pozici #{typ} jsi zmenil hlas z #{User.find(vote.elective).nick} na #{User.find(koho).nick}.")
       vote.update_attribute(:elective, koho.id)
     else
-      self.zapis_operaci("Ve volbe na pozici #{typ} jsi hlasoval pro #{User.find(koho).nick}")
+      self.zapis_operaci("Ve volbe na pozici #{typ} jsi hlasoval pro #{User.find(koho).nick}.")
       Vote.new(:house_id => self.house.id, :elector => self.id, :elective => koho.id, :typ => typ).save
     end
   end
-  
+
   def koho_jsem_volil(typ)
     voleno = self.house.votes.where(:typ => typ, :elector => self.id).first
+    if voleno
+      User.find(voleno.elective).nick
+    else
+      'nikdo'
+    end
+  end
+
+  def vol_imperatora(koho)
+    imp = House.imperium
+    typ = 'imperator'
+    if vote = Vote.where(:house_id => imp.id, :elector => self.id, :typ => typ).first
+      #self.zapis_operaci("Ve volbe na pozici Imperatora jsi zmenil hlas z #{User.find(vote.elective).nick} na #{User.find(koho).nick}.")
+      vote.update_attribute(:elective, koho.id)
+    else
+      #self.zapis_operaci("Ve volbe na pozici Imperatora jsi hlasoval pro #{User.find(koho).nick}.")
+      Vote.new(:house_id => imp.id, :elector => self.id, :elective => koho.id, :typ => typ).save
+    end
+  end
+
+  def koho_jsem_volil_imperatorem
+    voleno = House.imperium.votes.where(:typ => 'imperator', :elector => self.id).first
     if voleno
       User.find(voleno.elective).nick
     else
@@ -89,7 +114,7 @@ class User < ActiveRecord::Base
     self.update_attributes(:solar => 5000.0, :melange => 20.0, :exp => 100)
     self.fields.first.resource.update_attributes(:population => 200000, :material => 50000.0)
   end
-  
+
   def celkovy_material
     mat = 0.0
     for field in self.fields.includes(:resource) do
@@ -97,7 +122,7 @@ class User < ActiveRecord::Base
     end
     mat
   end
-  
+
   def celkova_populace
     pop = 0
     for field in self.fields.includes(:resource) do
@@ -105,7 +130,7 @@ class User < ActiveRecord::Base
     end
     pop
   end
-  
+
   def osidlene_planety
     plt_id = []
     for field in self.fields do
@@ -113,48 +138,53 @@ class User < ActiveRecord::Base
     end
     plt_id.sort!
   end
-  
+
   def dovolene_budovy(kind)
     # TODO dovolene budovy podle tech levelu
     Building.where(:kind => kind, :level => [1]).all
   end
-  
+
   def stat_se(cim)  # cim = presne nazev attributu
     #self.zapis_operaci("Od ted jsem #{cim}.")
     self.update_attribute(cim, true)
   end
-  
+
   def prestat_byt(cim)  # cim = presne nazev attributu
     #self.zapis_operaci("Uz dale nejsem #{cim}.")
     self.update_attribute(cim, false)
   end
-  
+
   def melange_bonus
     # TODO bonus z vyzkumu
     1.0
   end
-  
+
   def self.spravce_arrakis
     User.find_by_arrakis(true)
   end
-  
+
   def self.imperator
     User.find_by_emperor(true)
   end
   
+  def self.regenti
+    User.find_by_regent(true)
+  end
+
   def jmenuj_spravcem
     self.stat_se('arrakis')
     Global.prepni('bezvladi_arrakis', 2, nil)
   end
+
   def odeber_spravcovstvi
     self.prestat_byt('arrakis')
     Global.prepni('bezvladi_arrakis', 2, 3.days.since)
   end
-  
+
   def zapis_operaci(content, kind = "U")
     self.operations << Operation.new(:kind => kind, :content => content, :date => Date.today, :time => Time.now)
   end
-  
+
   def vliv
     Vypocty.vliv_hrace(self)
   end
@@ -167,7 +197,8 @@ class User < ActiveRecord::Base
       self.password_hash = encrypt_password(password)
     end
   end
-  
+
   scope :dvorane, where(:court => true)
   scope :veziri, where(:vezir => true)
+  scope :poslanci, where(:landsraad => true)
 end

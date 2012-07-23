@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Label:</b>
+  <%= @law.label %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @law.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @law.content %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @law.state %>
+</p>
+
+<p>
+  <b>Submitter:</b>
+  <%= @law.submitter %>
+</p>
+
+<p>
+  <b>Submitted:</b>
+  <%= @law.submitted %>
+</p>
+
+<p>
+  <b>Enacted:</b>
+  <%= @law.enacted %>
+</p>
+
+<p>
+  <b>Signed:</b>
+  <%= @law.signed %>
+</p>
+
+
+<%= link_to 'Edit', edit_law_path(@law) %> |
+<%= link_to 'Back', laws_path %>

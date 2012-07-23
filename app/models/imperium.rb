@@ -5,4 +5,16 @@ class Imperium
     Operation.new(:kind => kind, :content => content, :date => Date.today, :time => Time.now).save
   end
   
+  def self.kandidati_na_imperatora
+    User.where(:admin => false).order(:nick)
+  end
+  
+  def self.volba_imperatora?
+    Constant.volba_imperatora
+  end
+  
+  def self.konec_volby_imperatora
+    Constant.konec_volby_imperatora
+  end
+  
 end

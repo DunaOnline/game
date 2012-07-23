@@ -1,0 +1,27 @@
+<h1>Listing polls</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Law</th>
+    <th>Choice</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @polls.each do |poll| %>
+  <tr>
+    <td><%= poll.user_id %></td>
+    <td><%= poll.law_id %></td>
+    <td><%= poll.choice %></td>
+    <td><%= link_to 'Show', poll %></td>
+    <td><%= link_to 'Edit', edit_poll_path(poll) %></td>
+    <td><%= link_to 'Destroy', poll, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Poll', new_poll_path %>

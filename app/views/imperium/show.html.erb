@@ -1,5 +1,4 @@
 <% title @title %>
-
 <table class="tab1">
 	<tr>
 		<td class="tdpl" rowspan="2" style="width:300px; background-image: url(image/imgplanety/arrakis.png)">
@@ -13,10 +12,10 @@
 			<b>Planet: </b> <%= Planet.count %>
 		<li>
 			<b>Hráčů: </b> <%= User.count %>
-			<br>
-			<br>
 		<li>
-			<input type="button" value="Potvrdit" class="ok">
+			<b>Celkový vliv: </b> <%= @imperium.influence %>
+			<br>
+			<br>
 		</td>
 		<th>Přepočet</th>
 		<th class="r">Podíl [%]</th>
@@ -27,10 +26,7 @@
 		<%= render :partial => 'rody_podil' %>
 	</tr>
 </table>
-
-	<table class="tab1">
-		<%= render :partial => 'dvur' %>
-	</table>
-
-
-	<%= render :partial => 'imperium_operace' %>
+<table class="tab1">
+	<%= render :partial => 'dvur' %>
+</table>
+<%= render :partial => 'imperium_operace' %>

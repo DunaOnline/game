@@ -104,4 +104,16 @@ class Constant
     Global.vrat('gilda_melanz_procenta', 4)
   end
 
+  # Volby
+  def self.pristi_volby
+    Global.vrat('pristi_volby', 2)
+  end
+  
+  def self.volba_imperatora
+    Global.vrat('volba_imperatora', 1)
+  end
+  
+  def self.konec_volby_imperatora
+    Global.vrat('konec_volby_imperatora', 2)
+  end
 end

@@ -40,17 +40,23 @@ class Ability
         can [:read, :update], Resource
         can [:read, :create], Vote
         cannot [:update, :delete], Operation
-        #can [:read], Operation, :user_id => user.id
-        #can [:read], Operation, :house_id => user.house.id
+        can [:read], Operation, :user_id => user.id
+        can [:read], Operation, :house_id => user.house.id
         can [:update], Vote, :elector => user.id
         can [:zobraz_eod], Eod, :user_id => user.id
         can [:show], Imperium
+        can [:show], Landsraad
+        can [:read], Law
+        can [:read], Poll
       
         if user.emperor?
-          can [:sprava], Imperium
+          can [:sprava, :posli_imperialni_suroviny], Imperium
+          can [:create], Law
+          can [:create, :edit], Poll
+          can [:jednani], Landsraad
         end
         if user.regent?
-          can [:sprava], Imperium
+          can [:sprava, :posli_imperialni_suroviny], Imperium
         end
         if user.leader?
           can [:kolonizuj, :sprava_rod], House do |house|
@@ -60,6 +66,8 @@ class Ability
           can [:pridel_pravo, :odeber_pravo], User do |hrac|
             hrac.house == user.house
           end
+          can [:create], Law
+          can [:jednani], Landsraad
         end
         if user.army_mentat?
           can [:sprava_rod], House, :id => user.house_id
@@ -72,6 +80,18 @@ class Ability
         if user.general?
         end
         if user.vicegeneral?
+        end
+        if user.arrakis?
+        end
+        if user.landsraad?
+          can [:create], Law
+          can [:create, :edit], Poll
+          can [:jednani], Landsraad
+        end
+        if user.court?
+        end
+        if user.vezir?
+          can [:sprava, :posli_imperialni_suroviny], Imperium
         end
       end
     else

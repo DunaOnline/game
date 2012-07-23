@@ -10,7 +10,6 @@ class ImperiumController < ApplicationController
     
     @arrakis = Planet.arrakis
     @leno = Field.find_by_planet_id(@arrakis)
-    @spravce = User.spravce_arrakis
     if @spravce
       @melange = @leno.vynos('melange')
     else
@@ -32,7 +31,6 @@ class ImperiumController < ApplicationController
     
     @arrakis = Planet.arrakis
     @leno = Field.find_by_planet_id(@arrakis)
-    @spravce = User.spravce_arrakis
     if @spravce
       @melange = @leno.vynos('melange')
     else

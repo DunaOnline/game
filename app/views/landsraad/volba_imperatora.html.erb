@@ -1,0 +1,51 @@
+<% title @title %>
+<table class="land">
+	<tr>
+		<td class="none" colspan="4"></td>
+		<td background="image/	8	/imperator.png" rowspan="2" colspan ="2"></td>
+		<td class="none" colspan="4"></td>
+		<td class="none" rowspan="9" style="width:4px !important;"></td>
+		<td class="tdpr" rowspan="9" style="width:70px !important;">
+		<li>
+			<h2><%= @title %></h2>
+		<li>
+			<b>Držitel pololéna: </b><%= link_to @spravce.nick, @spravce if @spravce %>
+		<li>
+			<b>Poslanci: </b>
+			<% for poslanec in @poslanci do %>
+			<%= link_to poslanec.nick, poslanec %>
+			<% end %>
+			<br>
+			
+		</td>
+	</tr>
+	<tr>
+		<% 8.times do %> <td background="<%= asset_path(cesta_budovy('Atreides', 'dom')) %>"></td>
+		<% end %>
+	</tr>
+</table>
+
+<table class="tab1">
+	<tr>
+		<th colspan="10">Volba Imperatora</th>
+	</tr>
+	<tr>
+		<td>
+		<%= form_tag hlasovat_path(:user_id => @user) do %>
+			<%= select_tag("volit_id]", options_for_select(@kandidati.collect { |p| [p.nick, p.id] })) %>
+			<%= submit_tag 'Hlasuj', :name => 'imperator', :class => 'oktab'  %>
+			<p>
+				Váš hlas: <%= @user.koho_jsem_volil_imperatorem %>
+			</p>
+		</td>
+		<td>
+			<h3>Aktuální pořadí</h3>
+			<% for user in @imperium.poradi_hlasu('imperator', 6) %>
+				<li>
+					<%= user[0].nick %> - <%= user[1] %>
+				</li>
+			<% end %>
+		<% end %> 
+		</td>
+	</tr>
+</table>

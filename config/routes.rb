@@ -1,4 +1,8 @@
 DuneOnline::Application.routes.draw do
+  resources :laws
+
+  resources :polls
+
   resources :operations
 
   resources :eods
@@ -67,6 +71,11 @@ DuneOnline::Application.routes.draw do
   match 'sprava_imperia' => 'imperium#sprava', :as => :sprava_imperia
   match 'posli_imperialni_suroviny' => 'imperium#posli_imperialni_suroviny', :as => :posli_imperialni_suroviny
 
+  match 'landsraad_show' => 'landsraad#show', :as => :landsraad_show
+  match 'landsraad_jednani' => 'landsraad#jednani', :as => :landsraad_jednani
+  match 'volba_imperatora' => 'landsraad#volba_imperatora', :as => :volba_imperatora
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

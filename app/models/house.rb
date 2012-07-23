@@ -98,6 +98,25 @@ class House < ActiveRecord::Base
   def vliv
     self.users.sum(:influence)
   end
+  
+  def pomer_vlivu
+    celk_vl = House.imperium.influence
+    vl = self.influence
+    vl / celk_vl
+  end
+  
+  def pocet_poslancu
+    pomer = self.pomer_vlivu
+    poslancu = Landsraad.pocet_poslancu * pomer
+    zaokrouhlene = poslancu.round(0)
+    if poslancu < zaokrouhlene
+      zaokrouhlene -= 1
+    else
+      zaokrouhlene += 1
+    end
+    
+    return zaokrouhlene
+  end
 
   scope :playable, where(:playable => true)
 end

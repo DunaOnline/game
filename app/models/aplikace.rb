@@ -1,6 +1,8 @@
 # encoding: utf-8
 class Aplikace
   include ApplicationHelper
+  
+  VEK = '1'
 
   def self.prihlaseni_povoleno?
     Global.vrat('login', 1)

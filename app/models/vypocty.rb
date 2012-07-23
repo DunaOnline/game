@@ -33,6 +33,9 @@ class Vypocty
     pp += 0.01 if user.court?
     pp += 0.01 if user.vezir?
     pp += 0.05 if user.arrakis?
+    pp += 0.02 if user.leader?
+    pp += 0.01 if user.mentat?
+    pp += 0.01 if user.army_mentat?
     return pp
   end
   

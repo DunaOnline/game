@@ -9,6 +9,19 @@ class Prepocet
     Prepocet.zpristupni_planety
     Prepocet.produkce_suroviny(order)
     Prepocet.produkce_melanz(order)
+    
+    Prepocet.kontrola_zakonu
+    
+    if Constant.pristi_volby == Date.today
+      Prepocet.zvol_poslance
+    end
+    
+    if Imperium.konec_volby_imperatora == Date.today
+      Prepocet.zvol_imperatora
+    end
+    
+    Prepocet.prepocti_vliv
+    
     Prepocet.odemkni
     puts b = Time.now
   end
@@ -139,10 +152,18 @@ class Prepocet
         n_vudce = 'nikdo'
         if old_vudce
           old_vudce.update_attribute(:leader, false)
+          old_vudce.zapis_operaci("Byl jsem sesazen z postu vudce.")
+          unless house.poradi_hlasu('poslanec', house.pocet_poslancu).include?(old_vudce)
+            old_vudce.update_attribute(:landsraad, true)
+            old_vudce.zapis_operaci("Nadale nemam pristup do Landsraadu.")
+          end
           o_vudce = old_vudce.nick
         end
         unless new_vudce.blank?
           new_vudce.update_attribute(:leader, true)
+          new_vudce.zapis_operaci("Byl jsem zvolen novym vudcem.")
+          new_vudce.update_attribute(:landsraad, true)
+          new_vudce.zapis_operaci("Mam pristup do Landsraadu.")
           n_vudce = new_vudce.nick
         end
         house.zapis_operaci("Zvolen novy vudce #{n_vudce}.") unless n_vudce == 'nikdo'
@@ -166,9 +187,9 @@ class Prepocet
   #######################################
   
   def self.prepocti_vliv
-    for h in House.playable.all do
+    for h in House.playable do
       for u in h.users do
-        vliv_hrace = u.vliv
+        vliv_hrace = u.vliv.round(2)
         u.update_attribute(:influence, vliv_hrace)
         u.zapis_operaci("Muj vliv je nyni: #{vliv_hrace}")
       end
@@ -176,5 +197,77 @@ class Prepocet
       h.update_attribute(:influence, vliv_rodu)
       h.zapis_operaci("Vliv naroda je nyni: #{vliv_rodu}")
     end
+    celkovy_vliv = House.playable.sum(:influence).round(2)
+    imp = House.imperium
+    imp.update_attribute(:influence, celkovy_vliv)
+    Imperium.zapis_operaci("Celkový vliv Impéria nyní činí #{celkovy_vliv}.")
   end
+  
+  def self.zvol_poslance
+    houses = House.playable
+    for h in houses do
+      pocet_poslancu = h.pocet_poslancu
+      for u in h.poslanci do
+        unless u.leader?
+          u.update_attribute(:landsraad, false)
+          u.zapis_operaci("Jiz nejsem poslancem.")
+        end
+      end
+      for u in h.poradi_hlasu('poslanec', pocet_poslancu) do
+        u[0].update_attribute(:landsraad, true)
+        u[0].zapis_operaci("Nyni jsem poslancem.")
+      end
+    end
+    Global.prepni('pristi_volby', 2, 4.weeks.from_now)
+  end
+  
+  def self.kontrola_zakonu
+    Prepocet.ukonci_hlasovani
+    Prepocet.zarad_zakony
+  end
+  
+  def self.ukonci_hlasovani
+    puts "Ukoncuji hlasovani"
+    for law in Law.projednavane do
+      if law.submitted.to_date == 3.days.ago.to_date
+        law.vyhodnot_zakon
+      end
+    end
+  end
+  
+  def self.zarad_zakony
+    until Law.projednavane.count == 3 || Law.zarazene.count == 0
+      Law.zarazene.order(:position).first.update_attributes(:state => Law::STATE[1], :submitted => Date.today)
+    end
+  end
+  
+  def self.zvol_imperatora
+    old_imp = User.imperator
+    old_reg = User.regenti
+    
+    if old_imp
+      old_imp.update_attribute(:imperator, false)
+      old_imp.zapis_operaci('Jiz dale nejsem Imperatorem.')
+    end
+    if old_reg
+      for u in old_reg do
+        u.update_attribute(:regent, false)
+        u.zapis_operaci('Jiz dale nejsem Regentem.')
+      end
+    end
+    
+    imperium = House.imperium
+    new_imp = imperium.poradi_hlasu('imperator', 3)
+    pocet_hlasujicich = imperium.votes.where(:typ => 'imperator').count
+    if new_imp[1] > pocet_hlasujicich * 0.6
+      new_imp[0].update_attribute(:imperator, true)
+      new_imp[0].zapis_operaci('Byl jsi zvolen Imperatorem.')
+    else
+      for u in new_imp do
+        u[0].update_attribute(:regent, true)
+        u[0].zapis_operaci("Byl jsem zvolen Regentem.")
+      end
+    end
+  end
+  
 end

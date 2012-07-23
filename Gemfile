@@ -47,6 +47,8 @@ group :development do
   gem 'nifty-generators'
 end
 
+gem 'whenever', :require => false
+
 gem 'best_in_place'
 
 gem 'active_record_or'
