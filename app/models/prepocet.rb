@@ -259,9 +259,9 @@ class Prepocet
     imperium = House.imperium
     new_imp = imperium.poradi_hlasu('imperator', 3)
     pocet_hlasujicich = imperium.votes.where(:typ => 'imperator').count
-    if new_imp[1] > pocet_hlasujicich * 0.6
-      new_imp[0].update_attribute(:imperator, true)
-      new_imp[0].zapis_operaci('Byl jsi zvolen Imperatorem.')
+    if new_imp[0][1] > pocet_hlasujicich * 0.6
+      new_imp[0][0].update_attribute(:emperor, true)
+      new_imp[0][0].zapis_operaci('Byl jsi zvolen Imperatorem.')
     else
       for u in new_imp do
         u[0].update_attribute(:regent, true)
