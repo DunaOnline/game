@@ -246,7 +246,7 @@ class Prepocet
     old_reg = User.regenti
     
     if old_imp
-      old_imp.update_attribute(:imperator, false)
+      old_imp.update_attribute(:emperor, false)
       old_imp.zapis_operaci('Jiz dale nejsem Imperatorem.')
     end
     if old_reg
@@ -267,6 +267,10 @@ class Prepocet
         u[0].update_attribute(:regent, true)
         u[0].zapis_operaci("Byl jsem zvolen Regentem.")
       end
+    end
+    
+    if new_imp
+      Global.prepni('konec_volby_imperatora', 2, 1.week.from_now)
     end
   end
   
