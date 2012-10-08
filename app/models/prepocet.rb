@@ -271,6 +271,7 @@ class Prepocet
     
     if new_imp
       Global.prepni('konec_volby_imperatora', 2, 1.week.from_now)
+      Global.prepni('volba_imperatora', 1, false)
     end
   end
   
