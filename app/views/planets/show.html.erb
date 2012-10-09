@@ -18,7 +18,7 @@
 			<% if @planet.house %>
 				<li><b>Objevitele: </b><%= @planet.house.name %>
 			<% end %>
-			<li><b>Dominantní národ: </b><a href="stat-databaze-narod.htm">Riches</a>
+			<li><b>Dominantní národ: </b><a href="stat-databaze-narod.htm">Riches *</a>
 				<br /><br />
 			<% if @planet.domovska? %>
 			
@@ -91,8 +91,8 @@
 		<td class="tdp"><%= link_to field.user.nick, field.user %></td>
 		<td class="tdp"><%= link_to field.user.house.name, field.user.house %></td>
 		<td class="tdpa">
-			<a href="kom-poslat.htm" alt="Pošta"><%= img_posta %></a>
-			<a href="stat-databaze-profil.htm" alt="Útok"><%= img_utok %></a>
+			<a href="kom-poslat.htm" alt="Pošta"><%= img_posta %> *</a>
+			<a href="stat-databaze-profil.htm" alt="Útok"><%= img_utok %> *</a>
 		</td>
 	</tr>
 	<% end %>

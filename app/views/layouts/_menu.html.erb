@@ -5,16 +5,16 @@
         <ul class="menu">
           <li><a class="menukomunikace" title="Komunikace"></a>
             <ul>
-              <li><a href="kom-dorucena.htm"> Doručená pošta*</a>
-              <li><a href="kom-odeslana.htm"> Odeslaná pošta* </a>
-              <li><a href="kom-poslat.htm"> Poslat poštu* </a>
+              <li><a href="kom-dorucena.htm"> Doručená pošta *</a>
+              <li><a href="kom-odeslana.htm"> Odeslaná pošta *</a>
+              <li><a href="kom-poslat.htm"> Poslat poštu *</a>
                 <br>
-              <li><a href="kom-malorod.htm"> Malorodní Syselaad* </a>
-              <li><a href="kom-narod.htm"> Národní Syselaad* </a>
-              <li><a href="kom-imperium.htm"> Mezinárodní fórum* </a>
-              <li><a href="kom-kolonizace.htm"> Landsraadní fórum* </a>
-              <li><a href="kom-multi.htm"> Multifórum* </a>
-              <li><a href="kom-system.htm"> Systémové fórum* </a>
+              <li><a href="kom-malorod.htm"> Malorodní Syselaad *</a>
+              <li><a href="kom-narod.htm"> Národní Syselaad *</a>
+              <li><a href="kom-imperium.htm"> Mezinárodní fórum *</a>
+              <li><a href="kom-kolonizace.htm"> Landsraadní fórum *</a>
+              <li><a href="kom-multi.htm"> Multifórum *</a>
+              <li><a href="kom-system.htm"> Systémové fórum *</a>
               <li><%= link_to "Odhlasit", logout_path %></li>
             </ul>
           </li>
@@ -26,7 +26,7 @@
           <li><a class="menupolitika" title="Politika"></a>
             <ul>
               <li><%= link_to "Statistika přepočtů", zobraz_eod_path %>
-              <li><a href="sprava-diplomacie.htm"> Mezinárodní diplomacie* </a>
+              <li><a href="sprava-diplomacie.htm"> Mezinárodní diplomacie *</a>
               <li><%= link_to 'Správa hráče', sprava_path(:id => current_user) %>
               <li><a href="sprava-malorod.htm"> Správa Malorodu* </a>
               	<% if can? :sprava_rod, House %>
@@ -43,10 +43,10 @@
               	<% end %>
               	<li><%= link_to 'Zákoník', laws_path %></li>
                 <br>
-              <li><a href="stat-utok.htm"> Imperiální boje*</a>
-              <li><a href="stat-databaze.htm"> Imperialní databáze*</a>
+              <li><a href="stat-utok.htm"> Imperiální boje *</a>
+              <li><a href="stat-databaze.htm"> Imperialní databáze *</a>
               <li><%= link_to "Imperialní kartografie", systems_path %>
-              <li><a href="stat-narodni.htm"> Národní databáze*</a>
+              <li><a href="stat-narodni.htm"> Národní databáze *</a>
             </ul>
           </li>
         </ul>
@@ -56,11 +56,11 @@
         <ul class="menu">
           <li><a class="menuvyzkum"  title="Ekonomika a výzkum"></a>
             <ul>
-              <li><a href="vyzkum-vyzkum-e.htm"> Ekonomický výzkum*</a>
-              <li><a href="vyzkum-vyzkum-p.htm"> Pozemní výzkum*</a>
-              <li><a href="vyzkum-vyzkum-v.htm"> Vesmírný výzkum*</a>
-              <li><a href="vyzkum-vyroba.htm"> Výroba* </a>
-              <li><a href="vyzkum-obchod.htm"> Obchod* </a>
+              <li><a href="vyzkum-vyzkum-e.htm"> Ekonomický výzkum *</a>
+              <li><a href="vyzkum-vyzkum-p.htm"> Pozemní výzkum *</a>
+              <li><a href="vyzkum-vyzkum-v.htm"> Vesmírný výzkum *</a>
+              <li><a href="vyzkum-vyroba.htm"> Výroba *</a>
+              <li><a href="vyzkum-obchod.htm"> Obchod *</a>
             </ul>
         </ul>
       </td>
@@ -69,13 +69,13 @@
         <ul class="menu">
           <li><a class="menuarmada"  title="Armádní velitelství"></a>
             <ul>
-              <li><a href="army.htm"> Armádní statistiky* </a>
-              <li><a href="army-verbovani.htm"> Verbování jednotek*</a>
-              <li><a href="army-presun.htm"> Přesun jednotek* </a>
-              <li><a href="army-sablony.htm"> Správa šablon jednotek* </a>
-              <li><a href="army-utok.htm"> Vyslat útok* </a>
+              <li><a href="army.htm"> Armádní statistiky *</a>
+              <li><a href="army-verbovani.htm"> Verbování jednotek *</a>
+              <li><a href="army-presun.htm"> Přesun jednotek *</a>
+              <li><a href="army-sablony.htm"> Správa šablon jednotek *</a>
+              <li><a href="army-utok.htm"> Vyslat útok *</a>
                 <br>
-              <li><a href="stat-utok.htm"> Imperiální boje*</a>
+              <li><a href="stat-utok.htm"> Imperiální boje *</a>
             </ul>
           </li>
         </ul>
@@ -88,11 +88,11 @@
               <li><%= link_to "Spravovaná území", fields_path %> </a>
               <li><a href="galaxy-budovy.htm"> Budovy* </a>
               <li><%= link_to "Produkce na Arrakis", zobraz_arrakis_path %>
-              <li><a href="galaxy-osidleni.htm"> Osídlení nového léna* </a>
-              <li><a href="galaxy-kolonizace.htm"> Kolonizace nové planety* </a>
+              <li><a href="galaxy-osidleni.htm"> Osídlení nového léna *</a>
+              <li><a href="galaxy-kolonizace.htm"> Kolonizace nové planety *</a>
                 <br>
-              <li><a href="stat-databaze.htm"> Imperialní databáze hráčů*</a>
-              <li><a href="stat-databaze-narody.htm"> Imperialní databáze národů*</a>
+              <li><a href="stat-databaze.htm"> Imperialní databáze hráčů *</a>
+              <li><a href="stat-databaze-narody.htm"> Imperialní databáze národů *</a>
               <li><%= link_to "Imperialní kartografie", systems_path %>
             </ul>
           </li>
