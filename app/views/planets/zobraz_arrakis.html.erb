@@ -8,7 +8,7 @@
 			</td>
 			<th>Bonusy</td>
 			<th>Produkce</td>
-			<th style="width:110px">Na planetě</th>
+			<th style="width:110px">Přítomno</th>
 			<th class="r" style="width:100px">CHOAM [%]</th>
 		</tr>
 		<tr>
@@ -26,8 +26,7 @@
 				
 			</td>
 			<td>
-				<li><%= img_melanz "Melanž" %> 100.00 mg
-        <li><%= img_populace "Populace" %> <%= @arrakis_resource.population %>
+				<li><%= img_populace "Populace" %> <%= @arrakis_resource.population %>
 				<li><%= img_material "Materiál" %> <%= @arrakis_resource.material %>  		
 				
 			</td>
@@ -35,9 +34,19 @@
 				<center>
 				<li><select class="tab" name="Vyberte komoditu" title="Vyberte komoditu k transportu">
 					<option value="material">Materiál</option>
-          <option value="melanz">Melanž</option>
+					<option value="populaci">Populaci</option>
+					<option value="populaci">Jednotka1</option>
+					<option value="populaci">Jednotka2</option>
+					<option value="populaci">Jednotka3</option>
+					<option value="populaci">Jednotka4</option>
+					<option value="populaci">Jednotka5</option>
+					<option value="populaci">Jednotka6</option>
+					<option value="populaci">Jednotka7</option>
+					<option value="populaci">Jednotka8</option>
+					<option value="populaci">Jednotka9</option>
+					<option value="populaci">Jednotka10</option>
 				</select>
-				<select class="tab" name="Vyberte planetu" title="Zvolte cílovou planetu">
+				<select class="tab" name="Vyberte planetu" title="Zvolte odchozí planetu">
 				    <option class="sez-b" value="p1">Giedy Prime</option>
 				    <option value="p2">Lakviel</option>
 				    <option value="p3">P3</option>
@@ -85,12 +94,13 @@
 			<td>
 				<li><%= img_solary %><%= format_mena(@harvester.naklady_stavba_solary, 'S', false) %>  
 				<li><%= img_material %><%= format_mena(@harvester.naklady_stavba_material, 'kg') %> 
-      </td>
-      <td>
 				<%= form_tag postavit_arrakis_path do %>
 					<li><%= number_field_tag :pocet_budov_stavba, nil, :in => -10...10, :step => 1 %></li> 
 					<li><%= submit_tag "Postavit" , :class => "oktab_95" %>
 				<% end %>
+			</td>
+			<td>
+			
 			</td>
 		</tr>
 	</table>

@@ -5,9 +5,8 @@
 	<td class="none"></td>
 	<th class="l" style="width:150px">Vaše léna</th>
 	<th style="width:100px">Kapacita</th>
-  <th style="width:100px">Na planetě</th>
 	<th style="width:100px">Produkce</th>
-	<th class="r" style="width:80px">Bonusy</th>
+	<th class="r" style="width:100px">Bonus planety</th>
 </tr>
 
 <tr>
@@ -22,17 +21,10 @@
 	</td>
 	
 	<td>
-		<li><%= img_populace "Možnost ubytovat lidí" %> 1000000
-		<!--<li><%= img_vyrobky "Maximální kapacita výroby" %> 200-->	
+		<li><%= img_populace "Celková kapacita měst" %> 1000000
+		<li><%= img_vyrobky "Celková kapacita výroby" %> 200	
 		<li><%= img_kasarna "Celková kapacita kasáren" %> 1000
-		<!--<li><%= img_kosmodrom "Celková kapacita kosmodromů" %> 1000 -->
-	</td>
-  
-  <td>
-		<li><%= img_populace "Populace planety" %> 1000000
-    <li><%= img_material "Množství materiálu uloženého na planetě" %> 1000
-		<li><%= img_kasarna "Obsazenost kasaren" %> 1000
-		<!--<li><%= img_kosmodrom "Obsazenost kosmodromů" %> 1000 -->
+		<li><%= img_kosmodrom "Celková kapacita kosmodromů" %> 1000
 	</td>
 	
 	<td>
@@ -48,7 +40,7 @@
 		<li><%= img_material "Bonus materiál" %><font class="<%= trida_barvy(pt.material_bonus) %>"><%= format_mena(pt.material_bonus, "%") %></font>		
 		<li><%= img_populace "Bonus populace" %><font class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%") %></font>
 		<li><%= img_zkusenosti "Bonus zkušenosti" %><font class="<%= trida_barvy(pt.exp_bonus) %>"><%= format_mena(pt.exp_bonus, "%") %></font>
-		<li><%= img_kasarna "Bonus ke kapacitě kasáren" %><font class="cervena"> + 0%</font>
+		<li><%= img_kasarna "Bonus ke kapacitě kasáren a kosmodromů" %><font class="cervena"> + 0%</font>
 	</td>
 </tr>
 
