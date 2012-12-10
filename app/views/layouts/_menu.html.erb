@@ -16,7 +16,7 @@
               <li><a href="#"> Landsraadní fórum *</a>
               <li><a href="#"> Multifórum *</a>
               <li><a href="#"> Systémové fórum *</a>
-              <li><%= link_to "Odhlasit", logout_path %></li>
+              <!-- <li><%= link_to "Odhlasit", logout_path %></li> -->
             </ul>
           </li>
         </ul>
@@ -42,7 +42,7 @@
               	<% else %>
               		<li><%= link_to 'Zasedání Landsraadu', landsraad_show_path %></li>
               	<% end %>
-              	<li><%= link_to 'Zákoník', laws_path %></li>
+              	<li><%= link_to 'Archiv Landsraadu', laws_path %></li>
                 <br>
               <li><a href="#"> Imperiální boje *</a>
               <li><a href="#"> Imperialní databáze *</a>
@@ -58,10 +58,11 @@
           <li><a class="menuvyzkum"  title="Ekonomika a výzkum"></a>
             <ul>
               <li><a href="#"> Ekonomický výzkum *</a>
-              <li><a href="#"> Pozemní výzkum *</a>
-              <li><a href="#"> Vesmírný výzkum *</a>
+              <li><a href="#"> Vojenský výzkum *</a>
+              <li><a href="#"> Objevení nové planety *</a>
+              <!-- <li><a href="#"> Vesmírný výzkum *</a>
               <li><a href="#"> Výroba *</a>
-              <li><a href="#"> Obchod *</a>
+              <li><a href="#"> Obchod *</a> -->
             </ul>
         </ul>
       </td>
@@ -71,11 +72,13 @@
           <li><a class="menuarmada"  title="Armádní velitelství"></a>
             <ul>
               <li><a href="#"> Armádní statistiky *</a>
-              <li><a href="#"> Verbování jednotek *</a>
-              <li><a href="#"> Přesun jednotek *</a>
-              <li><a href="#"> Správa šablon jednotek *</a>
               <li><a href="#"> Vyslat útok *</a>
-                <br>
+              <li><a href="#"> Rozdělení jednotek *</a>
+              <!-- <li><a href="#"> Verbování jednotek *</a>
+              <li><a href="#"> Správa šablon jednotek *</a> -->
+              
+              <br>
+              
               <li><a href="#"> Imperiální boje *</a>
             </ul>
           </li>
@@ -86,11 +89,12 @@
         <ul class="menu">
           <li><a class="menugalaxy"  title="Správa lén*"></a>
             <ul>
-              <li><%= link_to "Spravovaná území", fields_path %> </a>
-              <li><a href="#"> Budovy* </a>
-              <li><%= link_to "Produkce na Arrakis", zobraz_arrakis_path %>
+              <li><%= link_to "Spravovaná léna", fields_path %>
+              <li><%= link_to "Zástavba lén", fields_path %>
+              
+              <a href="#"> Budovy* </a>
+              <li><%= link_to "Místodržící na Arrakis", zobraz_arrakis_path %>
               <li><a href="#"> Osídlení nového léna *</a>
-              <li><a href="#"> Kolonizace nové planety *</a>
                 <br>
               <li><a href="#"> Imperialní databáze hráčů *</a>
               <li><a href="#"> Imperialní databáze národů *</a>
