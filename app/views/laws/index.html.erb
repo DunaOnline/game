@@ -1,46 +1,15 @@
 <h1><%= @title %></h1>
 
-
-<table class="tab0">	   
-
-	<tr>	<td>
-
-			<a href="index.htm" title="Home">¦</a>  
-
-		</td>
-
-		<td class="tdd">
-
-			<ul class="menud">
-
-				<li><a title="Filtrováním pøenastavíte zobrazená data.">Filtrovat archiv »</a> 
-
-					<ul>
-
-						<li><%= link_to 'Vsechny zakony', laws_path(:zakony => 'vsechny') %>
-
-						<li><%= link_to 'Zarazene zakony', laws_path(:zakony => 'zarazene') %>
-
-						<li><%= link_to 'Projednavane zakony', laws_path(:zakony => 'projednavane') %>
-
-						<li><%= link_to 'Schvalene zakony', laws_path(:zakony => 'schvalene') %>
-
-						<li><%= link_to 'Zamitnute zakony', laws_path(:zakony => 'zamitnute') %>
-
-						<li><%= link_to 'Podepsane zakony', laws_path(:zakony => 'podepsane') %>
-
-					</ul>
-
-				</li>
-
-			</ul>		
-
-		</td>
-
-	</tr>
-
-	</table>
-
+<table class="tab0">
+  <tr>
+  	<th><%= link_to 'Vsechny zakony', laws_path(:zakony => 'vsechny') %></th>
+  	<th><%= link_to 'Zarazene zakony', laws_path(:zakony => 'zarazene') %></th>
+  	<th><%= link_to 'Projednavane zakony', laws_path(:zakony => 'projednavane') %></th>
+  	<th><%= link_to 'Schvalene zakony', laws_path(:zakony => 'schvalene') %></th>
+  	<th><%= link_to 'Zamitnute zakony', laws_path(:zakony => 'zamitnute') %></th>
+  	<th><%= link_to 'Podepsane zakony', laws_path(:zakony => 'podepsane') %></th>
+  </tr>
+</table>
 
 <table class="tab1">
   <tr>
