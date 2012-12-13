@@ -62,7 +62,7 @@ class House < ActiveRecord::Base
   end
 
   def kolonizuj_planetu
-    disc = Discoverable.kolonizovatelna.random
+    disc = Discoverable.kolonizovatelna.order("RANDOM()").first
     typ = disc.planet_type_id
     typ += (rand(5) - 2)
     typ = 1 if typ < 1

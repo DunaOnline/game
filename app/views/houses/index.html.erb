@@ -1,22 +1,82 @@
-<% title "Houses" %>
+<% title "Databáze národů" %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Solar</th>
-    <th>Melange</th>
-    <th>Material</th>
-    <th>Exp</th>
-  </tr>
-  <% for house in @houses %>
-    <tr>
-      <td><%= house.name %></td>
-      <td><%= house.solar %></td>
-      <td><%= house.melange %></td>
-      <td><%= house.material %></td>
-      <td><%= house.exp %></td>
-      <td><%= link_to "Show", house %></td>
+<table class="tab0">
+	<tr>
+		<td>
+			<a href="index.htm" title="Home">⌂*</a>
+			» <a href="stat-databaze.htm">Imperiální databáze *</a>
+			» <a href="stat-databaze-narod.htm">Statistika národa *</a>
+		</td>
+
+		<td class="tdd">
+		<ul class="menud">
+			<li><a title="Filtrováním přenastavíte zobrazená data.">Změnit národ »</a>
+				<ul>
+					<% for rod in @houses do %>
+						<li><%= link_to rod.name, rod %></li>
+					<% end %>
+				</ul>
+			</li>
+		</ul>
+	    </td>
+
+        <td class="tdd">
+		<ul class="menud">
+			<li><a title="Filtrováním přenastavíte zobrazená data.">Filtrovat databazi »</a>
+				<ul>
+					<li><%= link_to "Databáze hráčů", users_path %></li>
+					<li><a href="stat-databaze-malorod.htm">Vybrat Malorod *</a>
+					<li><a href="stat-databaze-narod.htm">Vybrat národ *</a>
+                                        <li><%= link_to "Databáze národů", houses_path %></li>
+					<li><a href="stat-databaze-malorody.htm">Databáze Malorodů *</a>
+					<li><a href="stat-databaze-boje.htm">Databáze bojů *</a>
+				</ul>
+			</li>
+		</ul>
+	      </td>
     </tr>
-  <% end %>
 </table>
 
+<table class="tab1">
+	<tr>	<th class="none"></th>
+		<th class="l">Vůdce národa</th>
+		<th>Vrcholní politici</th>
+		<th class="r">Poslanci</th>
+	</tr>
+        <% for house in @houses do %>
+	<tr>	<td class="tdpl" style="background-image: url(<%= asset_path cesta_budovy(house.name, "erb") %>)">
+			<li><h2><%= house.name %></h2>
+			<li><b>Vůdce: </b> <%= house.leader %>
+			<li><b>Vliv: </b> <%= house.influence %>
+			<li><b>Domovská pl.: </b> <%= Planet.domovska_rodu(house).first.name %>
+			<li><b>Počet lén: </b> <%= house.fields.count %>
+			<li><b>Dominantních sektorů: </b> 5 (neni)
+			<li><b>Počet členů: </b><%= house.users.count %>
+			<li><b>Projekt: </b> 50% (neni)
+			<li>	<input type="button" value="Národní útok" class="ok3">
+				<input type="button" value="Diplomatická pošta" class="ok3">
+		</td>
+
+		<td style="text-align: center !important">
+                  <%= link_to house.vudce.nick, house.vudce, :class => "leader" if house.vudce %>
+		</td>
+		<td>
+			<% for user in house.mentate do %>
+				<li><%= link_to user.nick, user, :class => "mentat" %></li>
+			<% end %>
+			<% for user in house.army_mentate do %>
+				<li><%= link_to user.nick, user, :class => "army_mentat" %></li>
+			<% end %>
+			<% for user in house.diplomate do %>
+				<li><%= link_to user.nick, user, :class => "diplomat" %></li>
+			<% end %>
+		</td>
+		<td>
+			<% for user in house.poslanci do %>
+				<li><%= link_to user.nick, user, :class => "poslanec" %></li>
+			<% end %>
+		</td>
+
+	</tr>
+        <% end %>
+</table>

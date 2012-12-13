@@ -2,7 +2,7 @@ class HousesController < ApplicationController
   #authorize_resource # CanCan
   
   def index
-    @houses = House.all
+    @houses = House.playable.order(:name)
   end
 
   def show

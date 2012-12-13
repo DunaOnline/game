@@ -1,0 +1,60 @@
+<% title "Databáze hráčů" %>
+
+<table class="tab0">
+  <tr>	<td
+      <a href="index.htm" title="Home">⌂</a>
+			» <a href="stat-databaze.htm">Imperiální databáze</a>
+			» <a href="stat-databaze.htm">Hráči</a>
+    </td>
+
+    <td class="tdd">
+      <ul class="menud">
+        <li><a title="Filtrováním přenastavíte zobrazená data.">Filtrovat databazi »</a>
+          <ul>
+            <li><%= link_to "Databáze hráčů", users_path %></li>
+            <li><a href="stat-databaze-malorod.htm">Vybrat Malorod *</a>
+            <li><a href="stat-databaze-narod.htm">Vybrat národ *</a>
+            <li><%= link_to "Databáze národů", houses_path %></li>
+            <li><a href="stat-databaze-malorody.htm">Databáze Malorodů *</a>
+            <li><a href="stat-databaze-boje.htm">Databáze bojů *</a>
+          </ul>
+        </li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="text-align:right;">
+      <input class="tab3_input" type="text" name="adresat" size="25" title="Adresát" style="background-image: url(image/cssimage/adresat.png)">
+      <input type="button" value="Hledat profil" title="Hledat profil" class="ok4" >
+    </td>
+  </tr>
+</table>
+
+<table class="tab2">
+  <tr>	<th class="l">Jméno hráče</th>
+    <th>Národ</th>
+    <th>Celková síla</th>
+    <th>Vliv</th>
+    <th style="width:80px">Počet lén</th>
+    <th class="r" style="width:75px">Akce</th>
+  </tr>
+
+  <% for user in @users do %>
+      <tr>	<td><%= link_to user.nick, user %></td>
+        <td><%= link_to user.house.name, user.house %></td>
+        <td>11111***</td>
+        <td><%= user.influence %></td>
+        <td><%= user.fields.count %></td>
+        <td>
+          <a href="#" alt="Pošta"><img src = "image/cssimage/posta.png" alt="Napsat hráči" title="Napsat hráči"></a>
+          <a href="#" alt="Útok"><img src = "image/cssimage/zautocit.png" alt="Zautočit na hráče" title="Zautočit na hráče"></a>
+          <a href="#" alt="Profil"><img src = "image/avatar/id1.png" alt="Profil hráče" title="Profil hráče"></a>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <%= paginate @users %>
+    </tr>
+
+  </table>
+

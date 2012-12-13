@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   
   before_filter :login_required, :except => [:new, :create]
 
+  def index
+    @users = User.where(:house_id => House.playable).order(:nick).page(params[:page])
+  end
+
   def new
     if Aplikace.zakladani_hracu_povoleno?
       @user = User.new

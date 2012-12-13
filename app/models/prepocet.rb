@@ -58,7 +58,7 @@ class Prepocet
 
         vlastnik.update_attributes(
           :solar => vlastnik.solar + solar,
-          :exp => vlastnik.exp + exp,
+          :exp => vlastnik.exp + exp
         )
         field.resource.update_attributes(
           :material => field.resource.material + material,

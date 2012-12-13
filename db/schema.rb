@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(:version => 28) do
   create_table "environments", :force => true do |t|
     t.integer  "planet_id",                             :null => false
     t.integer  "property_id",                           :null => false
-    t.date     "started_at",  :default => '2012-03-21'
+    t.date     "started_at",  :default => '2012-12-13'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -98,8 +98,8 @@ ActiveRecord::Schema.define(:version => 28) do
   create_table "eods", :force => true do |t|
     t.integer  "user_id",                                                                              :null => false
     t.integer  "field_id"
-    t.date     "date",                                              :default => '2012-03-21',          :null => false
-    t.time     "time",                                              :default => '2000-01-01 08:31:25', :null => false
+    t.date     "date",                                              :default => '2012-12-13',          :null => false
+    t.time     "time",                                              :default => '2000-01-01 21:48:25', :null => false
     t.integer  "order",                                                                                :null => false
     t.integer  "solar_income",                                      :default => 0
     t.integer  "exp_income",                                        :default => 0
@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(:version => 28) do
   create_table "influences", :force => true do |t|
     t.integer  "effect_id",                            :null => false
     t.integer  "field_id",                             :null => false
-    t.date     "started_at", :default => '2012-03-21'
+    t.date     "started_at", :default => '2012-12-13'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -206,8 +206,8 @@ ActiveRecord::Schema.define(:version => 28) do
     t.integer  "subhouse_id"
     t.string   "kind"
     t.string   "content"
-    t.date     "date",        :default => '2012-05-11'
-    t.time     "time",        :default => '2000-01-01 10:12:15'
+    t.date     "date",        :default => '2012-12-13'
+    t.time     "time",        :default => '2000-01-01 21:48:25'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -234,7 +234,7 @@ ActiveRecord::Schema.define(:version => 28) do
     t.string   "system_name"
     t.integer  "position"
     t.boolean  "available_to_all", :default => false
-    t.date     "discovered_at",    :default => '2012-03-21'
+    t.date     "discovered_at",    :default => '2012-12-13'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -315,7 +315,7 @@ ActiveRecord::Schema.define(:version => 28) do
   create_table "syselaads", :force => true do |t|
     t.integer  "house_id"
     t.integer  "subhouse_id"
-    t.string   "kind"
+    t.string   "kind",        :null => false
     t.string   "name",        :null => false
     t.string   "description"
     t.datetime "created_at"

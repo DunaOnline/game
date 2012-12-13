@@ -24,10 +24,10 @@
 		<ul class="menud">
 			<li><a title="Filtrováním přenastavíte zobrazená data.">Filtrovat databazi »</a> 
 				<ul>
-					<li><a href="stat-databaze.htm">Databáze hráčů *</a>
+					<li><%= link_to "Databáze hráčů", users_path %></li>
 					<li><a href="stat-databaze-malorod.htm">Vybrat Malorod *</a>
 					<li><a href="stat-databaze-narod.htm">Vybrat národ *</a>
-					<li><a href="stat-databaze-narody.htm">Databáze národů *</a>
+                                        <li><%= link_to "Databáze národů", houses_path %></li>
 					<li><a href="stat-databaze-malorody.htm">Databáze Malorodů *</a>
 					<li><a href="stat-databaze-boje.htm">Databáze bojů *</a>
 				</ul>

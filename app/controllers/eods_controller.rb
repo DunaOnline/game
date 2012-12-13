@@ -1,3 +1,4 @@
+# encoding: utf-8
 class EodsController < ApplicationController
   def index
     @eods = current_user.eods.all
@@ -91,7 +92,7 @@ class EodsController < ApplicationController
       end 
       
     else
-      redirect_to :back, :notice => "Toto je krajni prepocet."
+      redirect_to :back, :notice => "Milosti, statistiky nelze zobrazit, protože daný přepočet ještě neproběhl."
     end    
   end
 end

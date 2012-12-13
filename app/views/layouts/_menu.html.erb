@@ -30,24 +30,24 @@
               <li><a href="#"> Mezinárodní diplomacie *</a>
               <li><%= link_to 'Správa hráče', sprava_path(:id => current_user) %>
               <li><a href="#"> Správa Malorodu* </a>
-              	<% if can? :sprava_rod, House %>
-              <li><%= link_to 'Správa Velkorodu', sprava_rod_path(:id => current_user.house) %>
-              	<% end %>
-              	<% if can? :sprava, Imperium %>
-              <li><%= link_to 'Správa Impéria', sprava_imperia_path %></li>
-              	<% end %>
+                <% if can? :sprava_rod, House %>
+                <li><%= link_to 'Správa Velkorodu', sprava_rod_path(:id => current_user.house) %>
+                <% end %>
+                <% if can? :sprava, Imperium %>
+                <li><%= link_to 'Správa Impéria', sprava_imperia_path %></li>
+              <% end %>
               <li><%= link_to 'Přehled Imperia', imperium_path %></li>
-              	<% if current_user.landsraad? || current_user.admin? %>
-              		<li><%= link_to 'Jedání Landsraadu', landsraad_jednani_path %></li>
-              	<% else %>
-              		<li><%= link_to 'Zasedání Landsraadu', landsraad_show_path %></li>
-              	<% end %>
-              	<li><%= link_to 'Zákoník', laws_path %></li>
-                <br>
+              <% if current_user.landsraad? || current_user.admin? %>
+                <li><%= link_to 'Jedání Landsraadu', landsraad_jednani_path %></li>
+              <% else %>
+                <li><%= link_to 'Zasedání Landsraadu', landsraad_show_path %></li>
+              <% end %>
+              <li><%= link_to 'Zákoník', laws_path %></li>
+              <br>
               <li><a href="#"> Imperiální boje *</a>
-              <li><a href="#"> Imperialní databáze *</a>
+              <li><%= link_to "Imperiální databáze hráčů", users_path %>
               <li><%= link_to "Imperialní kartografie", systems_path %>
-              <li><a href="#"> Národní databáze *</a>
+              <li><%= link_to "Imperiální databáze národů", houses_path %></li>
             </ul>
           </li>
         </ul>
@@ -91,10 +91,7 @@
               <li><%= link_to "Produkce na Arrakis", zobraz_arrakis_path %>
               <li><a href="#"> Osídlení nového léna *</a>
               <li><a href="#"> Kolonizace nové planety *</a>
-                <br>
-              <li><a href="#"> Imperialní databáze hráčů *</a>
-              <li><a href="#"> Imperialní databáze národů *</a>
-              <li><%= link_to "Imperialní kartografie", systems_path %>
+
             </ul>
           </li>
         </ul>
