@@ -3,10 +3,11 @@
 <table class="tab2">
 <tr>
 	<td class="none"></td>
-	<th class="l" style="width:150px">Vaše léna</th>
-	<th style="width:100px">Kapacita</th>
-	<th style="width:100px">Produkce</th>
-	<th class="r" style="width:100px">Bonus planety</th>
+	<th class="l" style="width:140px">Vaše léna</th>
+	<th style="width:90px">Kapacita</th>
+  <th style="width:90px">Na planetě</th>
+	<th style="width:90px">Produkce</th>
+	<th class="r" style="width:80px">Bonusy</th>
 </tr>
 
 <tr>
@@ -22,9 +23,17 @@
 	
 	<td>
 		<li><%= img_populace "Celková kapacita měst" %> 1000000
-		<li><%= img_vyrobky "Celková kapacita výroby" %> 200	
+		<!-- <li><%= img_vyrobky "Celková kapacita výroby" %> 200	-->
 		<li><%= img_kasarna "Celková kapacita kasáren" %> 1000
-		<li><%= img_kosmodrom "Celková kapacita kosmodromů" %> 1000
+		<!-- <li><%= img_kosmodrom "Celková kapacita kosmodromů" %> 1000 -->
+	</td>
+  
+  <td>
+		<li><%= img_populace "Populace na planetě" %> !1000000
+    <li><%= img_material "Materiál uložený na planetě" %> !1000000
+    <li><%= img_melanz "Melanž uložená na planetě" %> !1000000
+		<li><%= img_kasarna "Obsazená kapacita kasáren" %> !1000
+		<!-- <li><%= img_kosmodrom "Celková kapacita kosmodromů" %> !1000 -->
 	</td>
 	
 	<td>
