@@ -10,6 +10,18 @@ class ApplicationController < ActionController::Base
   before_filter :login_required
 
   before_filter :zapis_uzivatele_do_logu
+  
+  def admin_required  
+    unless current_user && current_user.admin?  
+      redirect_to '/'  
+    end  
+  end
+  
+  def admin_or_owner_required(id)  
+    unless current_user.id == id || current_user.admin?  
+      redirect_to '/'  
+    end  
+  end 
 
   def zapis_uzivatele_do_logu
     string = "\n-----------------------------------------------------\n"

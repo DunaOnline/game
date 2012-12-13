@@ -1,4 +1,10 @@
 DuneOnline::Application.routes.draw do
+  resources :posts
+
+  resources :topics
+
+  resources :syselaads
+
   resources :laws
 
   resources :polls

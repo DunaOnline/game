@@ -1,6 +1,5 @@
 #encoding: utf-8
 module ApplicationHelper
-
   def format_date_time(cas = Time.now)
     if cas==nil
       ''
@@ -8,7 +7,7 @@ module ApplicationHelper
       cas.strftime('%d.%m.%Y %H:%M')
     end
   end
-  
+
   def format_time(cas = Time.now)
     if cas==nil
       ''
@@ -33,7 +32,7 @@ module ApplicationHelper
     end
     text
   end
-  
+
   def img_cancel_s
     # TODO maly obrazek cancel, asi nejaky krizek
     "X"
@@ -54,7 +53,7 @@ module ApplicationHelper
   def img_populace(title = "Populace")
     image_tag("css/populace.png",  :alt => title, :title => title)
   end
-  
+
   def img_zkusenosti(title = "Zkušenosti")
     image_tag("css/zkusenosti.png",  :alt => title, :title => title)
   end
@@ -62,7 +61,7 @@ module ApplicationHelper
   def img_logo(title = "Emperor - Duna Online")
     image_tag("css/logo.png",  :alt => title, :title => title)
   end
-  
+
   def img_vyrobky(title = "Výrobky")
     image_tag("css/vyrobky.png",  :alt => title, :title => title)
   end
@@ -78,28 +77,27 @@ module ApplicationHelper
   def img_po(title = "PO")
     image_tag("css/obrana-pozemni.png",  :alt => title, :title => title)
   end
-  
+
   def img_posta(title = "Pošta")
     image_tag("css/posta.png",  :alt => title, :title => title)
   end
-  
+
   def img_utok(title = "Útok")
     image_tag("css/zautocit.png",  :alt => title, :title => title)
   end
-  
+
   def img_budovy(title = "Postaveno")
     image_tag("css/budovy.png",  :alt => title, :title => title)
   end
-  
+
   def img_fremeni(title = "Fremeni")
     image_tag("css/fremeni.png",  :alt => title, :title => title)
   end
-  
+
   def img_arraken(title = "Arraken")
     image_tag("planety/arrakis_arraken.png",  :alt => title, :title => title)
   end
-  
-    
+
   def online_users
     @online_users = []
     sessions = Session.order("created_at ASC").all
@@ -111,17 +109,17 @@ module ApplicationHelper
     end
     @online_users
   end
-  
-  # typy budov: 
+
+  # typy budov:
   #  erb - erb
   #  dul - dul 1
   #  kas - kasarna 1
   #  kos - kosmodrom 1
-  #  lab - laborator 1 
-  #  mes - mesto 1 
+  #  lab - laborator 1
+  #  mes - mesto 1
   #  pob - PO 1
-  #  tov - tovarna 1 
-  #  trh - trh 1 
+  #  tov - tovarna 1
+  #  trh - trh 1
   def cesta_budovy(rod, typ)
     cesta = "budovy/"
     case rod
@@ -145,19 +143,19 @@ module ApplicationHelper
       cesta += "Imperium/"
     end
     cesta += typ + ".png"
-    #cesta += typ
-    #cesta += ".png"
-    
+  #cesta += typ
+  #cesta += ".png"
+
   end
-  
+
   def obrazek_budovy(rod, typ)
     image_tag(cesta_budovy(rod, typ))
   end
-  
+
   def cesta_ikona(ikona)
-    cesta = "css/" + ikona + ".png"    
+    cesta = "css/" + ikona + ".png"
   end
-  
+
   def trida_barvy(cislo)
     if cislo > 0.0
       "zelena"
@@ -165,6 +163,22 @@ module ApplicationHelper
       "cervena"
     else
       "oranzova"
+    end
+  end
+
+  def owner?(id)
+    if current_user.id == id
+      return true
+    else
+      return false
+    end
+  end
+
+  def admin_or_owner?(id)
+    if (admin? || owner?(id))
+      return true
+    else
+      return false
     end
   end
 

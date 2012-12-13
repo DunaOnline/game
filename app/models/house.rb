@@ -8,6 +8,7 @@ class House < ActiveRecord::Base
   has_many :planets
   has_many :votes
   has_many :operations
+  has_many :syselaads 
   
   def poradi_hlasu(typ,pocet = 5)
     hlasy = secti_hlasy(typ, pocet)

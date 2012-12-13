@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 24) do
+ActiveRecord::Schema.define(:version => 28) do
 
   create_table "app_logy", :force => true do |t|
     t.datetime "cas",                      :null => false
@@ -251,6 +251,14 @@ ActiveRecord::Schema.define(:version => 24) do
     t.datetime "updated_at"
   end
 
+  create_table "posts", :force => true do |t|
+    t.integer  "topic_id",   :null => false
+    t.integer  "user_id",    :null => false
+    t.text     "content",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "properties", :force => true do |t|
     t.string   "name",                                                             :null => false
     t.decimal  "population_bonus", :precision => 12, :scale => 4, :default => 0.0
@@ -304,8 +312,28 @@ ActiveRecord::Schema.define(:version => 24) do
   add_index "subhouses", ["house_id"], :name => "index_subhouses_on_house_id"
   add_index "subhouses", ["name"], :name => "index_subhouses_on_name"
 
+  create_table "syselaads", :force => true do |t|
+    t.integer  "house_id"
+    t.integer  "subhouse_id"
+    t.string   "kind"
+    t.string   "name",        :null => false
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "systems", :force => true do |t|
     t.string   "system_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "topics", :force => true do |t|
+    t.integer  "syselaad_id",    :null => false
+    t.integer  "user_id",        :null => false
+    t.string   "name",           :null => false
+    t.integer  "last_poster_id"
+    t.datetime "last_post_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

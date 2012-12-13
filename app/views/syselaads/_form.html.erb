@@ -1,0 +1,24 @@
+<%= form_for @syselaad do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :house_id %><br />
+    <%= f.number_field :house_id %>
+  </p>
+  <p>
+    <%= f.label :subhouse_id %><br />
+    <%= f.number_field :subhouse_id %>
+  </p>
+  <p>
+    <%= f.label :kind %><br />
+    <%= f.text_field :kind %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

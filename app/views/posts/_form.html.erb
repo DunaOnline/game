@@ -1,0 +1,11 @@
+<%= form_for @post do |f| %>
+  <%= f.error_messages %>
+  <% if params[:topic] %>
+  	<input type="hidden" id="topic_syselaad_id" name="post[topic_id]" value="<%= params[:topic] %>" />
+  <% end %> 
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

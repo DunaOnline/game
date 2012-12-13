@@ -1,0 +1,12 @@
+<%= form_for @topic do |f| %>  
+  <%= f.error_messages %>  
+  <% if params[:syselaad] %><input type="hidden" id="topic_syselaad_id" name="topic[syselaad_id]" value="<%= params[:syselaad] %>" /><% end %>  
+  <p>  
+    <%= f.label :name %><br />  
+    <%= f.text_field :name %>  
+  </p>  
+  <p>  
+    <textarea name="post[content]" cols="80" rows="20"><%= @post.content %></textarea>  
+  </p>  
+  <p><%= f.submit "Create" %></p>  
+<% end %>

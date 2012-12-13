@@ -1,0 +1,26 @@
+<% title @topic.name %>
+<table class="tab3">
+	<% for post in @topic.posts %>
+	<tr>
+		<th colspan="2"><%= link_to post.user.username, user_url(post.user) %> [<%= format_date_time post.created_at %>]</th>
+	</tr>
+	<tr>
+		<td><%= post.content %></td>
+		<td class="ava"> 
+			<% if logged_in? %>
+				<% if admin_or_owner?(post.user.id) %>
+					<%= link_to "Edit", edit_post_path(post) %>
+					<br />
+					<%= link_to "Delete", post, :confirm => 'Are you sute?', :method => :delete %>
+				<% end %>
+			<% end %> 
+		</td>
+	</tr>
+	<tr></tr>
+	<% end %>
+</table>
+<p>
+	<% if logged_in? %><%= link_to "Reply", "#{new_post_path}?topic=#{@topic.id}" %> |<% end %>
+	<% if admin? %><%= link_to "Destroy Topic", @topic, :confirm => 'Are you sure?', :method => :delete %> |<% end %>
+	<%= link_to "View All", syselaad_path(@topic.syselaad_id) %>
+</p>
