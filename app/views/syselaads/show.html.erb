@@ -1,9 +1,9 @@
 <% title @syselaad.name  %>
 <table class="tab3">
 	<tr>
-		<th width="60%">Topic Title</th>
-		<th width="10%">Replies</th>
-		<th width="30%">Last Post</th>
+		<th width="50%">Téma vlákna Syselaadu</th>
+		<th width="10%">Odpovìdí</th>
+		<th width="40%">Poslední pøíspìvek</th>
 	</tr>
 	<% for topic in @syselaad.topics %>
 	<tr>
@@ -13,6 +13,7 @@
 	</tr>
 	<% end %>
 </table>
+</br>
 <p>
-	<% if logged_in? %><%= link_to "New Topic", "/topics/new?syselaad=#{@syselaad.id}" %><% end %>
+	<% if logged_in? %><%= link_to "Založit nové vlákno tohoto Syselaadu", "/topics/new?syselaad=#{@syselaad.id}" %><% end %>
 </p>
