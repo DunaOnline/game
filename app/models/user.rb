@@ -111,8 +111,8 @@ class User < ActiveRecord::Base
 
   def napln_suroviny
     # asi rozdelime pak podle rodu
-    self.update_attributes(:solar => 5000.0, :melange => 20.0, :exp => 100)
-    self.fields.first.resource.update_attributes(:population => 200000, :material => 50000.0)
+    self.update_attributes(:solar => 1600.0, :melange => 2.0, :exp => 0)
+    self.fields.first.resource.update_attributes(:population => 10000, :material => 1700.0)
   end
 
   def celkovy_material
