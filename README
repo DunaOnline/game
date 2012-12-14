@@ -1,4 +1,4 @@
-﻿DUNAONLINE
+DUNAONLINE
 
 Webova strategicka hra z prostredi sveta Duny Franka Herberta
 
@@ -9,3 +9,10 @@ Changelog:
 0.3.1
 - přidány přehledy hráčů a národů
 - grafické upravy
+
+0.3.2
+- grafické upravy
+- nastavení materiálu do začátku
+- úpravy v sekci budovy
+- úpravy transportu surovin
+
