@@ -85,10 +85,10 @@
 
       <td>
         <ul class="menu">
-          <li><a class="menugalaxy"  title="Správa lén*"></a>
+          <li><a class="menugalaxy"  title="Správa lén*">
             <ul>
-              <li><%= link_to "Seznam vašich lén", fields_path %> </a>
-              <li><a href="#"> Zastavba lén* </a>
+              <li><%= link_to "Seznam vašich lén", fields_path %>
+              <li><%= link_to "Zastavba lén", current_user.domovske_leno %>
               <li><%= link_to "Místodržící Arrakisu", zobraz_arrakis_path %>
               <li><a href="#"> Osídlení nového léna *</a>
 

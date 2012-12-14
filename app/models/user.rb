@@ -189,6 +189,10 @@ class User < ActiveRecord::Base
     Vypocty.vliv_hrace(self)
   end
 
+  def domovske_leno
+    self.fields.where(:planet_id => Planet.domovska_rodu(self.house)).first
+  end
+
   private
 
   def prepare_password

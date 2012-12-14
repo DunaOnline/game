@@ -6,13 +6,13 @@ State: a little STABLE
 
 Changelog:
 
-0.3.1
-- přidány přehledy hráčů a národů
-- grafické upravy
-
 0.3.2
 - grafické upravy
 - nastavení materiálu do začátku
 - úpravy v sekci budovy
 - úpravy transportu surovin
+- presmerovani "zastavba len" na domovske leno
 
+0.3.1
+- přidány přehledy hráčů a národů
+- grafické upravy
