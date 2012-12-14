@@ -6,3 +6,4 @@ tmp/
 exporty/
 config/database.yml
 .idea
+nbproject

@@ -1,34 +1,19 @@
 <% title "Databáze hráčů" %>
 
-<table class="tab0">
-  <tr>	<td
-      <a href="index.htm" title="Home">⌂</a>
-			» <a href="stat-databaze.htm">Imperiální databáze</a>
-			» <a href="stat-databaze.htm">Hráči</a>
-    </td>
+    <table class="tab0">
 
-    <td class="tdd">
-      <ul class="menud">
-        <li><a title="Filtrováním přenastavíte zobrazená data.">Filtrovat databazi »</a>
-          <ul>
-            <li><%= link_to "Databáze hráčů", users_path %></li>
-            <li><a href="stat-databaze-malorod.htm">Vybrat Malorod *</a>
-            <li><a href="stat-databaze-narod.htm">Vybrat národ *</a>
-            <li><%= link_to "Databáze národů", houses_path %></li>
-            <li><a href="stat-databaze-malorody.htm">Databáze Malorodů *</a>
-            <li><a href="stat-databaze-boje.htm">Databáze bojů *</a>
-          </ul>
-        </li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" style="text-align:right;">
-      <input class="tab3_input" type="text" name="adresat" size="25" title="Adresát" style="background-image: url(image/cssimage/adresat.png)">
-      <input type="button" value="Hledat profil" title="Hledat profil" class="ok4" >
-    </td>
-  </tr>
-</table>
+		<tr>
+			<td>
+				<a href="index.htm" title="Home">⌂*</a> » 
+				<a href="stat-databaze.htm">Imperiální databáze *</a> » 
+				<a href="stat-databaze-profil.htm">Profily *</a>
+			</td>
+
+			<%= render :partial => 'layouts/filter_database' %>
+
+		</tr>
+
+	</table>
 
 <table class="tab2">
   <tr>	<th class="l">Jméno hráče</th>
