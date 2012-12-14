@@ -1,0 +1,11 @@
+<td class="tdd">
+		<ul class="menud">
+			<li><a title="Filtrováním přenastavíte zobrazená data.">Změnit národ »</a> 
+				<ul>
+					<% for rod in @rody do %>
+						<li><%= link_to rod.name, rod %></li>
+					<% end %>
+				</ul>
+			</li>
+		</ul>		
+	    </td>

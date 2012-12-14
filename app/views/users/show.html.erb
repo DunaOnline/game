@@ -1,27 +1,17 @@
 <% title "User" %>
-    <table class="tab0">	   
-	<tr>	<td>
-			<a href="index.htm" title="Home">⌂*</a>  
-			» <a href="stat-databaze.htm">Imperiální databáze *</a>
-			» <a href="stat-databaze-profil.htm">Profily *</a> 
-		</td>
-			
-		<td class="tdd">
-			<ul class="menud">
-				<li><a title="Filtrováním přenastavíte zobrazená data.">Filtrovat databazi »</a> 
-					<ul>
-						<li><a href="stat-databaze.htm">Databáze hráčů *</a>
-						<li><a href="stat-databaze-malorod.htm">Vybrat Malorod *</a>
-						<li><a href="stat-databaze-narod.htm">Vybrat národ *</a>
-						<li><a href="stat-databaze-narody.htm">Databáze národů *</a>
-						<li><a href="stat-databaze-malorody.htm">Databáze Malorodů *</a>
-						<li><a href="stat-databaze-boje.htm">Databáze bojů *</a>
-						<li><a href="stat-databaze-profil.htm">Profily hráčů *</a>
-					</ul>
-				</li>
-			</ul>		
-		</td>
-	</tr>
+    <table class="tab0">
+
+		<tr>
+			<td>
+				<a href="index.htm" title="Home">⌂*</a> » 
+				<a href="stat-databaze.htm">Imperiální databáze *</a> » 
+				<a href="stat-databaze-profil.htm">Profily *</a>
+			</td>
+
+			<%= render :partial => 'layouts/filter_database' %>
+
+		</tr>
+
 	</table>
 	
 	<div class="all">
@@ -42,13 +32,9 @@
 		</tr>
 		<tr>
 			<td style="width:120px;vertical-align: top;">
-				<img src = "image/avatar/id0.png" alt="">
 			</td>
 			
 			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					<li>Profil zmražen: 
-					<li>Profil založen: 
-					<br><br>
 					<li>Narod:
 					<li>Funkce v národě: 
 					<li>Diplomacie s národem: 
@@ -69,22 +55,22 @@
 					<li>gTalk: 
 					<li>Skype: 
 					<br><br>
+					<li>Profil zmražen: 
+					<li>Profil založen: 
+					<br><br>
 					<li>Prezentace: 
 			</td>
 			
 			<td style="width:10px"></td>
 				
 			<td style="text-align:left; vertical-align: top;">
-					<li> Ne
-					<li> 12.1.2012
-					<br><br>
 					<li> <%= link_to @user.house.name, @user.house %>
 					<li> <%= @user.najdi_hodnosti %>
 					<li> Mír
 					<li> Eridani
-					<li> Generál [<a href="sprava-malorod.htm">Nastavit *</a>] """Nastavit vidí jen hráč s právy"""
+					<li> Generál
 					<li> <%= @user.influence %>
-					<li> 12
+					<li> <%= @user.fields.count %>
 					<br><br>
 					<li> 10002
 					<li> 2898
@@ -98,11 +84,10 @@
 					<li> --- 
 					<li> --- 
 					<br><br>
-					<li> Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  
-					Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  
-					Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text. 
-					Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  
-					Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text.  Hráčův prostor pto text. 
+					<li> Ne
+					<li> <%= format_date @user.created_at %>
+					<br><br>
+					<li> Hráčův prostor pto text. 
 			</td>
 				
 			</td>
