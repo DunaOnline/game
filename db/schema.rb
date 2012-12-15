@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 28) do
+ActiveRecord::Schema.define(:version => 29) do
 
   create_table "app_logy", :force => true do |t|
     t.datetime "cas",                      :null => false
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(:version => 28) do
   create_table "environments", :force => true do |t|
     t.integer  "planet_id",                             :null => false
     t.integer  "property_id",                           :null => false
-    t.date     "started_at",  :default => '2012-12-13'
+    t.date     "started_at",  :default => '2012-03-21'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -98,8 +98,8 @@ ActiveRecord::Schema.define(:version => 28) do
   create_table "eods", :force => true do |t|
     t.integer  "user_id",                                                                              :null => false
     t.integer  "field_id"
-    t.date     "date",                                              :default => '2012-12-13',          :null => false
-    t.time     "time",                                              :default => '2000-01-01 21:48:25', :null => false
+    t.date     "date",                                              :default => '2012-03-21',          :null => false
+    t.time     "time",                                              :default => '2000-01-01 08:31:25', :null => false
     t.integer  "order",                                                                                :null => false
     t.integer  "solar_income",                                      :default => 0
     t.integer  "exp_income",                                        :default => 0
@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(:version => 28) do
   create_table "influences", :force => true do |t|
     t.integer  "effect_id",                            :null => false
     t.integer  "field_id",                             :null => false
-    t.date     "started_at", :default => '2012-12-13'
+    t.date     "started_at", :default => '2012-03-21'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -206,8 +206,8 @@ ActiveRecord::Schema.define(:version => 28) do
     t.integer  "subhouse_id"
     t.string   "kind"
     t.string   "content"
-    t.date     "date",        :default => '2012-12-13'
-    t.time     "time",        :default => '2000-01-01 21:48:25'
+    t.date     "date",        :default => '2012-05-11'
+    t.time     "time",        :default => '2000-01-01 10:12:15'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -234,7 +234,7 @@ ActiveRecord::Schema.define(:version => 28) do
     t.string   "system_name"
     t.integer  "position"
     t.boolean  "available_to_all", :default => false
-    t.date     "discovered_at",    :default => '2012-12-13'
+    t.date     "discovered_at",    :default => '2012-03-21'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -315,7 +315,7 @@ ActiveRecord::Schema.define(:version => 28) do
   create_table "syselaads", :force => true do |t|
     t.integer  "house_id"
     t.integer  "subhouse_id"
-    t.string   "kind",        :null => false
+    t.string   "kind"
     t.string   "name",        :null => false
     t.string   "description"
     t.datetime "created_at"
@@ -339,32 +339,39 @@ ActiveRecord::Schema.define(:version => 28) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username",                                                        :null => false
-    t.string   "nick",                                                            :null => false
+    t.string   "username",                         :null => false
+    t.string   "nick",                             :null => false
     t.string   "email"
     t.string   "password_hash"
     t.string   "password_salt"
-    t.integer  "house_id",                                                        :null => false
+    t.integer  "house_id",                         :null => false
     t.integer  "subhouse_id"
-    t.decimal  "solar",         :precision => 12, :scale => 4, :default => 0.0
-    t.decimal  "melange",       :precision => 12, :scale => 4, :default => 0.0
-    t.decimal  "exp",           :precision => 12, :scale => 4, :default => 0.0
-    t.boolean  "leader",                                       :default => false
-    t.boolean  "mentat",                                       :default => false
-    t.boolean  "army_mentat",                                  :default => false
-    t.boolean  "diplomat",                                     :default => false
-    t.boolean  "general",                                      :default => false
-    t.boolean  "vicegeneral",                                  :default => false
-    t.boolean  "landsraad",                                    :default => false
-    t.boolean  "arrakis",                                      :default => false
-    t.boolean  "emperor",                                      :default => false
-    t.boolean  "regent",                                       :default => false
-    t.boolean  "court",                                        :default => false
-    t.boolean  "vezir",                                        :default => false
-    t.boolean  "admin",                                        :default => false
+    t.decimal  "solar",         :default => 0.0
+    t.decimal  "melange",       :default => 0.0
+    t.decimal  "exp",           :default => 0.0
+    t.boolean  "leader",        :default => false
+    t.boolean  "mentat",        :default => false
+    t.boolean  "army_mentat",   :default => false
+    t.boolean  "diplomat",      :default => false
+    t.boolean  "general",       :default => false
+    t.boolean  "vicegeneral",   :default => false
+    t.boolean  "landsraad",     :default => false
+    t.boolean  "arrakis",       :default => false
+    t.boolean  "emperor",       :default => false
+    t.boolean  "regent",        :default => false
+    t.boolean  "court",         :default => false
+    t.boolean  "vezir",         :default => false
+    t.boolean  "admin",         :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "influence"
+    t.string   "web",           :default => " "
+    t.string   "icq",           :default => " "
+    t.string   "gtalk",         :default => " "
+    t.string   "skype",         :default => " "
+    t.string   "facebook",      :default => " "
+    t.text     "presentation",  :default => " "
+    t.boolean  "active",        :default => true
   end
 
   add_index "users", ["house_id"], :name => "index_users_on_house_id"

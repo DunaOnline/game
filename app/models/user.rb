@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation, :house_id, :subhouse_id, :solar, :melange
   attr_accessible :exp, :leader, :mentat, :army_mentat, :diplomat, :general, :vicegeneral, :landsraad, :arrakis
   attr_accessible :emperor, :regent, :court, :vezir, :admin, :nick, :influence
+  attr_accessible :web, :icq, :gtalk, :skype, :facebook, :presentation, :active
 
   attr_accessor :password
   before_save :prepare_password

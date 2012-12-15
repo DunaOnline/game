@@ -19,14 +19,16 @@
 	<table class="tab0">
 		<tr>
 			<th class="m" colspan="3">
-				
-				<h2><%= @user.nick %></h2>
-              <%= best_in_place @user, :nick %>
+				<% if @user == current_user %>
+					<h2><%= best_in_place @user, :nick %></h2>
+				<% else %>
+					<h2><%= @user.nick %></h2>
+              	<% end %>
 				
 			</th>
 			
 			<td style="text-align:right;">
-				<input class="tab3_input" type="text" name="adresat" size="25" title="Adresát" style="background-image: url(image/cssimage/adresat.png)">
+				<input class="tab3_input" type="text" name="adresat" size="25" title="Adresát" style="background-image: url(<%= asset_path 'css/adresat.png' %>)">
 				<input type="button" value="Hledat profil" title="Hledat profil" class="ok4" >
 			</td>		
 		</tr>
@@ -35,7 +37,7 @@
 			</td>
 			
 			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					<li>Narod:
+					<li>Národ:
 					<li>Funkce v národě: 
 					<li>Diplomacie s národem: 
 					<li>Malorod: 
@@ -51,11 +53,10 @@
 					<br><br>	
 					<li>Webové stránky:
 					<li>ICQ: 
-					<li>Jabber: 
 					<li>gTalk: 
 					<li>Skype: 
 					<br><br>
-					<li>Profil zmražen: 
+					<li>Profil aktivní: 
 					<li>Profil založen: 
 					<br><br>
 					<li>Prezentace: 
@@ -64,8 +65,8 @@
 			<td style="width:10px"></td>
 				
 			<td style="text-align:left; vertical-align: top;">
-					<li> <%= link_to @user.house.name, @user.house %>
-					<li> <%= @user.najdi_hodnosti %>
+					<li>&nbsp;<%= link_to @user.house.name, @user.house %>
+					<li>&nbsp;<%= @user.najdi_hodnosti %>
 					<li> Mír
 					<li> Eridani
 					<li> Generál
@@ -76,18 +77,29 @@
 					<li> 2898
 					<li> 3
 					<li> 1
-					<li> <a href="army-utok.htm">Možno *</a>
+					<li> <a href="#">Možno *</a>
 					<br><br>
-					<li> --- 
-					<li> ---
-					<li> --- 
-					<li> --- 
-					<li> --- 
-					<br><br>
-					<li> Ne
-					<li> <%= format_date @user.created_at %>
-					<br><br>
-					<li> Hráčův prostor pto text. 
+					<% if @user == current_user %>
+						<li>&nbsp;<%= best_in_place @user, :web %> 
+						<li>&nbsp;<%= best_in_place @user, :icq %>
+						<li>&nbsp;<%= best_in_place @user, :gtalk %>
+						<li>&nbsp;<%= best_in_place @user, :skype %>
+						<br><br>
+						<li>&nbsp;<%= @user.active %>
+						<li>&nbsp;<%= format_date @user.created_at %>
+						<br><br>
+						<li>&nbsp;<%= best_in_place @user, :presentation %>
+					<% else %>
+						<li>&nbsp;<%= @user.web %> 
+						<li>&nbsp;<%= @user.icq %>
+						<li>&nbsp;<%= @user.gtalk %>
+						<li>&nbsp;<%= @user.skype %>
+						<br><br>
+						<li>&nbsp;<%= @user.active %>
+						<li>&nbsp;<%= format_date @user.created_at %>
+						<br><br>
+						<li>&nbsp;<%= @user.presentation %>
+					<% end %>
 			</td>
 				
 			</td>
