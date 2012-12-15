@@ -3,6 +3,7 @@ class HousesController < ApplicationController
   
   def index
     @houses = House.playable.order(:name)
+    @rody = @houses
   end
 
   def show
