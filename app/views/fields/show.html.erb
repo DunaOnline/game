@@ -35,37 +35,18 @@
 				<li><h3><%= best_in_place @field, :name %></h3></li>
 				<li><%= @field.oznaceni %>
 				<div class="td1">Zástavba planety</div>
-				<%= @planet.obsazenost %>
+				  <%= @planet.obsazenost %>
 				<div class="td1">Zástavba léna</div>
-				<%= @field.zastavba %>
-				<div class="td1">Populace léna</div>
-				<%= @resource.population %>
-				<div class="td1">Material na léne</div>
-				<%= @resource.material %>
-				<div class="td1">Gildovní transport</div>
-				<li><select class="tab" name="Vyberte komoditu k transportu" title="Vyberte komoditu k transportu">
-					<option value="material">Materiál</option>
-					<option value="melanz">Melanž</option>
-          <option value="populaci">Populaci</option>
-					<option value="populaci">Jednotka1</option>
-					<option value="populaci">Jednotka2</option>
-					<option value="populaci">Jednotka3</option>
-					<option value="populaci">Jednotka4</option>
-					<option value="populaci">Jednotka5</option>
-					<option value="populaci">Jednotka6</option>
-				</select>
-				<select class="tab" name="Vyberte planetu" title="Zvolte cílovou planetu">
-					<option class="sez-b" value="p1">Giedy Prime</option>
-					<option value="p2">Lakviel</option>
-					<option value="p3">P3</option>
-					<option value="p4">P4</option>
-					<option value="p5">P5</option>
-				</select>
-				<li><input class="tab" type="text" size=15 title="Zadejte množství">
-				<li><input class="oktab" type="button" value="Odeslat"> 
-				<br />
+				  <%= @field.zastavba %>
+				<div class="td1">Na planetě</div>
+				  <li><%= img_populace "Celková populace"%><%= @resource.population %>
+				  <li><%= img_material "Veškerý materiál na planetě" %><%= @resource.material %>
+          <li><%= img_melanz "Veškerá melanž na planetě" %>
+	
 			</center>
 			</td>
+      
+      
 		<% for budova in @owner.dovolene_budovy('L') do %>
 			<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'L', :obr => 'mes'} %>
 		<% end %>
