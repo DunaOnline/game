@@ -17,6 +17,12 @@
     <h3><%= link_to "Pridej suroviny", pridej_suroviny_path %></h3>
     <h3><%= link_to "Prehled globals", global_index_path %></h3>
     <hr />
+    <h3>Sweep session</h3>
+    <%= form_tag :sweep_session do %>
+      <%= text_field_tag :hodin, nil, :maxlength => 5, :class => "tab" %>
+      <%= submit_tag 'Sweep', :class => "oktab" %>
+    <% end %>
+    <hr />
     <h3>Online hraci</h3>
     <% for user in online_users %>
       <%= link_to user.username, user %>

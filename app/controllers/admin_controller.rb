@@ -78,5 +78,10 @@ class AdminController < ApplicationController
       
     end
   end
+
+  def sweep_session
+    Session.sweep(params[:hodin].to_i.hour)
+    redirect_to :back
+  end
   
 end

@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ApplicationController < ActionController::Base
   include ControllerAuthentication
   helper :all # include all helpers, all the time JUST IN VIEWS! NOT CONTROLLERS
@@ -8,6 +9,7 @@ class ApplicationController < ActionController::Base
   after_filter :show_session, :save_output_html, :update_akce, :clear_session
   before_filter :log_akce
   before_filter :login_required
+  before_filter :admin_required, :only => [:clear_session]
 
   before_filter :zapis_uzivatele_do_logu
   
@@ -42,7 +44,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Access denied."
+    flash[:error] = "Vaše milosti, nechápu jak se to mohlo stát, ale přístup Vám byl zamítnut!"
     redirect_to current_user
   end
 
@@ -66,8 +68,8 @@ class ApplicationController < ActionController::Base
     #puts("\nSESSION:\n#{session.to_yaml}\n")
   end
 
-  def clear_session(time = 1.hour)
-#    Session.sweep(time)
+  def clear_session(time = 4.hour)
+    Session.sweep(time)
   end
   
 end

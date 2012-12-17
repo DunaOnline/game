@@ -12,9 +12,9 @@ class SessionsController < ApplicationController
       if Aplikace.prihlaseni_povoleno? || user.admin?
         session[:user_id] = user.id
         #redirect_to_target_or_default current_user, :notice => "Logged in successfully."
-        redirect_to zobraz_eod_path
+        redirect_to zobraz_eod_path, :notice => " Je čas úřadovat! Milosti vítejte ve hře."
       else
-        redirect_to root_url, :alert => "Prihlasovani docasne zakazano."
+        redirect_to root_url, :alert => "Přihlašování dočasně zakázáno."
       end
     else
 #      flash.now[:alert] = "Invalid login or password."
@@ -24,6 +24,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    reset_session
     redirect_to root_url, :notice => "Opustil jste správu svého dominia, brzy se vraťte milosti."
   end
 end
