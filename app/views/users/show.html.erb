@@ -16,185 +16,136 @@
 	
 	<div class="all">
 	
-	<table class="tab0">
+	<table class="profil">
 		<tr>
-			<th class="m" colspan="3">
-				<% if @user == current_user %>
+			<th style="text-align: left !important;">
+      
+<% if @user == current_user %>
+        
 					<h2><%= best_in_place @user, :nick %></h2>
-				<% else %>
+          
+<% else %>
+        
 					<h2><%= @user.nick %></h2>
-              	<% end %>
+          
+<% end %>
 				
 			</th>
 			
-			<td style="text-align:right;">
+			<td>
+      
 				<input class="tab3_input" type="text" name="adresat" size="25" title="Adresát" style="background-image: url(<%= asset_path 'css/adresat.png' %>)">
-				<input type="button" value="Hledat profil" title="Hledat profil" class="ok4" >
-			</td>		
+				
+        <input type="button" value="Hledat profil" title="Hledat profil" class="ok4" >
+        
+			</td>	
+      	
 		</tr>
     
-    
-      
 		<tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					Poslední aktivita: </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= @user.active %>  </td>
+			<th>Poslední aktivita:</th>
+      <td><%= @user.active %></td>
     </tr> 
     
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					Aktivace účtu: </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= format_date @user.created_at %>  </td>
+			<th>Aktivace účtu: </td>
+      <td><%= format_date @user.created_at %></td>
     </tr>   
     
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					Národ: </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= link_to @user.house.name, @user.house %> ( <%= @user.najdi_hodnosti %> )  </td>
+			<th>Národ: </th>
+      <td><%= link_to @user.house.name, @user.house %> ( <%= @user.najdi_hodnosti %> )  </td>
     </tr> 
     
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					Diplomacie s národem:  </td>
-      <td style="text-align:right; vertical-align: top;>
-              </td>
-    </tr> 
-    
-        <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					Malorod: </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= link_to @user.house.name, @user.house %>   </td>
-    </tr> 
-    
-        <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					Vliv hráče: : </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= @user.influence %>   </td>
-    </tr> 
-    
-        <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					Počet hráčovích lén:  </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= @user.fields.count %>   </td>
+			<th>Diplomacie s národem:  </th>
+      <td></td>
     </tr> 
     
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					Mocnost: </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;   </td>
+			<th>Malorod: </th>
+      <td><%= link_to @user.house.name, @user.house %>   </td>
     </tr> 
     
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					Útok: <br><br></td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<a href="#">Možno *</a>   </td>
+			<th>Vliv hráče:</th>
+      <td><%= @user.influence %>   </td>
+    </tr> 
+    
+    <tr>	
+			<th>Počet hráčových lén:  </th>
+      <td><%= @user.fields.count %>   </td>
+    </tr> 
+    
+    <tr>	
+			<th>Mocnost: </th>
+      <td></td>
+    </tr> 
+    
+    <tr>	
+			<th>Útok: <br><br></th>
+      <td><a href="#">Možno *</a></td>
     </tr> 
 
 <% if @user == current_user %>
     
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					Webové stránky:: </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;&nbsp;<%= best_in_place @user, :web %>    </td>
+			<th>Webové stránky: </th>
+      <td><%= best_in_place @user, :web %>    </td>
     </tr> 
     
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					ICQ: </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;&nbsp;<%= best_in_place @user, :icq %>   </td>
+			<th>ICQ: </th>
+      <td><%= best_in_place @user, :icq %>   </td>
     </tr> 
     
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					gTalk/jabber: </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= best_in_place @user, :gtalk %>   </td>
+			<th>gTalk/jabber: </th>
+      <td><%= best_in_place @user, :gtalk %>   </td>
     </tr>
      
     
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					Skype: </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= best_in_place @user, :skype %>   </td>
-    </tr>
-     
-    
-    <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					gTalk/jabber: <br><br></td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= best_in_place @user, :gtalk %>   </td>
+			<th>Skype: </th>
+      <td><%= best_in_place @user, :skype %>   </td>
     </tr>
     
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					O hráči:</td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= best_in_place @user, :presentation %>   </td>
+			<th>O hráči:</th>
+      <td><%= best_in_place @user, :presentation %>   </td>
     </tr>
 
 <% else %>
 
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					Webové stránky:: </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= @user.web %>    </td>
+			<th>Webové stránky: </th>
+      <td><%= @user.web %>    </td>
     </tr> 
     
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					ICQ: </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;&nbsp;<%= @user.icq %>   </td>
+			<th>ICQ: </th>
+      <td>;<%= @user.icq %>   </td>
     </tr> 
     
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					gTalk/jabber: </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= @user.gtalk %>   </td>
+			<th>gTalk/jabber: </th>
+      <td><%= @user.gtalk %>   </td>
     </tr>
      
     
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					Skype: </td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= @user.skype %>   </td>
+			<th>Skype: </th>
+      <td><%= @user.skype %>   </td>
     </tr>
-     
+
     
     <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					gTalk/jabber: <br><br></td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= @user.gtalk %>   </td>
-    </tr>
-    
-    <tr>	
-			<td style="text-align:right; vertical-align: top; width:150px;font-weight: bold; color: #ffdb30">
-					O vás:</td>
-      <td style="text-align:right; vertical-align: top;>
-           &nbsp;<%= @user.presentation %>   </td>
+			<th>O vás:</th>
+      <td><%= @user.presentation %>   </td>
     </tr>
 
 					<% end %>
-			</td>
-				
-			</td>
-		</tr>
+
 	</table>
 	
 </div>
