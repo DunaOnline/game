@@ -46,6 +46,10 @@ module DuneOnline
     config.assets.version = '1.0'
 
     config.active_record.timestamped_migrations = false
+
+    config.generators do |g|
+      g.fixture_replacement :factory_girl
+    end
     
   end
 end

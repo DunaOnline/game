@@ -38,6 +38,11 @@ group :test do
   gem "mocha"
 end
 
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+  gem 'factory_girl_rails'
+end
+
 gem 'cancan'
 #gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions', :branch => 'rails3'
 gem 'kaminari'#, '0.10.4'
