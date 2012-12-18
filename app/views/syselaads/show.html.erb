@@ -1,4 +1,4 @@
-<% title @syselaad.name  %>
+<% title @syselaad.name %>
 <table class="tab3"> 
 	<tr>
 		<th width="50%">Téma vlákna Syselaadu</th>
@@ -18,5 +18,5 @@
 </table>
 </br>
 <p>
-	<% if logged_in? %><%= link_to "Založit nové vlákno tohoto Syselaadu", "/topics/new?syselaad=#{@syselaad.id}" %><% end %>
+	<% if logged_in? %><%= link_to "Založit nové vlákno tohoto Syselaadu", new_topic_path(:syselaad => @syselaad.id) %><% end %>
 </p>

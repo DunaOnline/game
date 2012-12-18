@@ -20,13 +20,20 @@ class SyselaadsController < ApplicationController
   end
 
   def show
-    @syselaad = Syselaad.find(params[:id])
     rod = current_user.house
-    if @syselaad.house != rod && @syselaad.kind == 'N'
-      @syselaad = Syselaad.narodni.where(:house_id => rod).first
+    case params[:jake]
+    when 'L'
+      @syselaad = Syselaad.landsraadsky.first
+    when 'I'
+      @syselaad = Syselaad.imperialni.first
+    when 'S'
+      @syselaad = Syselaad.systemovy.first
+    when 'E'
+      @syselaad = Syselaad.mezinarodni.first
     else
-      
+      @syselaad = Syselaad.narodni.where(:house_id => rod).first
     end
+    
     @topics = @syselaad.topics.order("created_at DESC").page(params[:page])
   end
 

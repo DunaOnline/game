@@ -10,13 +10,12 @@
               <li><a href="#"> Poslat poštu *</a>
                 <br>
               <li><a href="#"> Malorodní Syselaad *</a>
-              <li><%= link_to "Národní Syselaad", syselaads_path(:jake => 'N') %></li>
-              <li><%= link_to "Mezinárodní Syselaad", syselaads_path(:jake => 'E') %></li>
-              <!-- <li><%= link_to "Imperialní Syselaad", syselaads_path(:jake => 'I') %></li>
-              <li><%= link_to "Landsraadní Syselaad", syselaads_path(:jake => 'L') %></li>
+              <li><%= link_to "Národní Syselaad", syselaad_path(:jake => 'N') %></li>
+              <li><%= link_to "Mezinárodní Syselaad", syselaad_path(:jake => 'E') %></li>
+              <!-- <li><%= link_to "Imperialní Syselaad", syselaad_path(:jake => 'I') %></li>
+              <li><%= link_to "Landsraadní Syselaad", syselaad_path(:jake => 'L') %></li>
               <li><a href="#"> Multifórum *</a>  -->
-              <li><%= link_to "Systémové Syselaad", syselaads_path(:jake => 'S') %></li>
-              <li><%= link_to "Odhlasit", logout_path %></li>
+              <li><%= link_to "Systémový Syselaad", syselaad_path(:jake => 'S') %></li>
             </ul>
           </li>
         </ul>
@@ -43,11 +42,6 @@
                 <li><%= link_to 'Zasedání Landsraadu', landsraad_show_path %></li>
               <% end %>
               <li><%= link_to 'Archiv Landsraadu', laws_path %></li>
-              <br>
-              <li><a href="#"> Imperiální boje *</a>
-              <li><%= link_to "Imperiální databáze hráčů", users_path %>
-              <li><%= link_to "Imperialní kartografie", systems_path %>
-              <li><%= link_to "Imperiální databáze národů", houses_path %></li>
             </ul>
           </li>
         </ul>
@@ -87,10 +81,17 @@
         <ul class="menu">
           <li><a class="menugalaxy"  title="Správa lén*"></a>
             <ul>
+              <li><%= link_to "Arrakis", zobraz_arrakis_path %>
+              <br />
               <li><%= link_to "Seznam vašich lén", fields_path %>
-              <li><%= link_to "Zastavba lén", current_user.domovske_leno %>
-              <li><%= link_to "Místodržící Arrakisu", zobraz_arrakis_path %>
-              <li><a href="#"> Osídlení nového léna *</a>
+              <li><%= link_to "Zástavba lén", current_user.domovske_leno %>
+              <br>
+              <li><%= link_to "Planety k osídlení", planets_path %>
+              <br>
+              <li><a href="#"> Imperiální boje *</a></li>
+              <li><%= link_to "Imperialní kartografie", systems_path %></li>
+              <li><%= link_to "Imperiální databáze hráčů", users_path %></li>
+              <li><%= link_to "Imperiální databáze národů", houses_path %></li>
             </ul>
           </li>
         </ul>
