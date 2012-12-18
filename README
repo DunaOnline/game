@@ -6,6 +6,10 @@ State: a little STABLE
 
 Changelog:
 
+0.3.3
+- zavedeno formatovani v syselaadech
+- pridan prehled surovin na planetach
+
 0.3.2
 - grafické upravy a opravy
 - nastavení materiálu do začátku

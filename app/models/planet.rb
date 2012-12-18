@@ -172,6 +172,21 @@ class Planet < ActiveRecord::Base
     end
   end
   
+  def celkova_populace(user)
+    pop = 0.0
+    for field in self.fields.vlastnik(user).includes(:resource) do
+      pop += field.resource.population
+    end
+    pop
+  end
+  def celkovy_material(user)
+    mat = 0.0
+    for field in self.fields.vlastnik(user).includes(:resource) do
+      mat += field.resource.material
+    end
+    mat
+  end
+  
   scope :domovska, lambda { |user| where(:house_id => user.house.id, :planet_type_id => PlanetType.find_by_name("Domovská"))}
   scope :domovska_rodu, lambda { |house| where(:house_id => house.id, :planet_type_id => PlanetType.find_by_name("Domovská"))}
   scope :domovske, where(:planet_type_id => PlanetType.find_by_name("Domovská"))

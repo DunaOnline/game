@@ -68,12 +68,12 @@
 		<!-- <li><%= img_kosmodrom "Celková kapacita kosmodromů" %> 1000 -->
 	</td>
   
-  <td>
-		<li><%= img_populace "Populace na planetě" %> !1000000
-    <li><%= img_material "Materiál uložený na planetě" %> !1000000
-    <li><%= img_melanz "Melanž uložená na planetě" %> !1000000
-		<li><%= img_kasarna "Obsazená kapacita kasáren" %> !1000
-		<!-- <li><%= img_kosmodrom "Celková kapacita kosmodromů" %> !1000 -->
+  	<td>
+		<li><%= img_populace "Populace na planetě" %> <%= @pole_domovska.resource.population %>
+    	<li><%= img_material "Materiál uložený na planetě" %> <%= @pole_domovska.resource.material %>
+    	<!-- <li><%= img_melanz "Melanž uložená na planetě" %> !!!
+		<li><%= img_kasarna "Obsazená kapacita kasáren" %> !!!
+		<li><%= img_kosmodrom "Celková kapacita kosmodromů" %> !1000 -->
 	</td>
 	
 	<td>

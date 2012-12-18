@@ -49,7 +49,7 @@ class HousesController < ApplicationController
     melange_percent = @house.melange_percent
     if @house.update_attributes(params[:house])
       unless @house.melange_percent == melange_percent
-        Imperium.zapis_operaci("Procentualni podil zisku melanze zmenen z #{melange_percent} na novou hodnotu #{@house.melange_percent}")
+        Imperium.zapis_operaci("Procentualni podil zisku melanze zmenen z #{melange_percent} na novou hodnotu #{@house.melange_percent}. #{current_user.nick}")
       end
       redirect_to @house, :notice  => "Successfully updated house."
     else
