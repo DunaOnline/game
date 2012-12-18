@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: syselaads
+#
+#  id          :integer          not null, primary key
+#  house_id    :integer
+#  subhouse_id :integer
+#  kind        :string(255)      not null
+#  name        :string(255)      not null
+#  description :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class Syselaad < ActiveRecord::Base
   attr_accessible :house_id, :subhouse_id, :kind, :name, :description
 

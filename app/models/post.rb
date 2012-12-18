@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: posts
+#
+#  id         :integer          not null, primary key
+#  topic_id   :integer          not null
+#  user_id    :integer          not null
+#  content    :text             not null
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Post < ActiveRecord::Base
   attr_accessible :topic_id, :user_id, :content
   

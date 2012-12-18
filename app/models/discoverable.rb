@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: discoverables
+#
+#  id             :integer          not null, primary key
+#  name           :string(255)      not null
+#  planet_type_id :integer          not null
+#  system_name    :string(255)      default("")
+#  position       :integer
+#  discovered     :boolean          default(FALSE)
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class Discoverable < ActiveRecord::Base
   attr_accessible :name, :planet_type_id, :system_name, :discovered, :position
 

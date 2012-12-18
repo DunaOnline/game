@@ -1,3 +1,30 @@
+# == Schema Information
+#
+# Table name: buildings
+#
+#  id               :integer          not null, primary key
+#  kind             :string(255)      not null
+#  level            :integer          not null
+#  name             :string(255)      not null
+#  description      :text             default("")
+#  population_bonus :decimal(12, 4)   default(0.0)
+#  pop_limit_bonus  :decimal(12, 4)   default(0.0)
+#  melange_bonus    :decimal(12, 4)   default(0.0)
+#  material_bonus   :decimal(12, 4)   default(0.0)
+#  solar_bonus      :decimal(12, 4)   default(0.0)
+#  exp_bonus        :decimal(12, 4)   default(0.0)
+#  population_cost  :decimal(12, 4)   default(0.0)
+#  melange_cost     :decimal(12, 4)   default(0.0)
+#  material_cost    :decimal(12, 4)   default(0.0)
+#  solar_cost       :decimal(12, 4)   default(0.0)
+#  exp_cost         :decimal(12, 4)   default(0.0)
+#  prerequisity_1   :integer
+#  prerequisity_2   :integer
+#  prerequisity_3   :integer
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 class Building < ActiveRecord::Base
   attr_accessible :name, :level, :kind, :description, :population_bonus, :pop_limit_bonus, :melange_bonus, :material_bonus
   attr_accessible :solar_bonus, :exp_bonus, :population_cost, :melange_cost, :material_cost

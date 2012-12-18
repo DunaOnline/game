@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: app_logy
+#
+#  id         :integer          not null, primary key
+#  cas        :datetime         not null
+#  login      :string(50)
+#  login_id   :integer
+#  controller :string(255)      not null
+#  action     :string(255)      not null
+#  action_id  :integer
+#  session    :text
+#  params     :text
+#  referer    :text
+#  duration   :integer
+#
+
 class AppLog < ActiveRecord::Base
 #  require 'zip/zipfilesystem'
   belongs_to :user, :class_name => "User", :foreign_key => "login_id"

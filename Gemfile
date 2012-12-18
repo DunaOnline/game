@@ -35,7 +35,6 @@ gem 'jquery-rails'
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
-  gem "mocha"
 end
 
 group :test, :development do
@@ -51,6 +50,7 @@ gem 'decent_exposure'
 
 group :development do
   gem 'nifty-generators'
+  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 end
 
 gem 'whenever', :require => false

@@ -1,4 +1,22 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: laws
+#
+#  id         :integer          not null, primary key
+#  label      :string(255)      not null
+#  title      :string(255)      not null
+#  content    :text
+#  state      :string(255)      not null
+#  position   :integer
+#  submitter  :integer          not null
+#  submitted  :datetime
+#  enacted    :datetime
+#  signed     :datetime
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Law < ActiveRecord::Base
   attr_accessible :label, :title, :content, :state, :position, :submitter, :submitted, :enacted, :signed 
   

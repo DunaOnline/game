@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: systems
+#
+#  id          :integer          not null, primary key
+#  system_name :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class System < ActiveRecord::Base
   attr_accessible :system_name
   

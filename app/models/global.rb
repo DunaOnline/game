@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: globals
+#
+#  id         :integer          not null, primary key
+#  setting    :string(255)      not null
+#  value      :boolean
+#  datum      :date
+#  slovo      :string(255)
+#  cislo      :decimal(12, 4)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Global < ActiveRecord::Base
   attr_accessible :setting, :value, :datum, :slovo, :cislo
   

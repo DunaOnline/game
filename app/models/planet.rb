@@ -1,4 +1,20 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: planets
+#
+#  id               :integer          not null, primary key
+#  name             :string(255)      not null
+#  planet_type_id   :integer          not null
+#  house_id         :integer
+#  system_name      :string(255)
+#  position         :integer
+#  available_to_all :boolean          default(FALSE)
+#  discovered_at    :date             default(Sun, 20 May 2012)
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 class Planet < ActiveRecord::Base
   attr_accessible :name, :planet_type_id, :house_id, :available_to_all, :discovered_at, :system_name, :position
 
@@ -160,7 +176,7 @@ class Planet < ActiveRecord::Base
   scope :domovska_rodu, lambda { |house| where(:house_id => house.id, :planet_type_id => PlanetType.find_by_name("Domovská"))}
   scope :domovske, where(:planet_type_id => PlanetType.find_by_name("Domovská"))
   scope :osidlitelna, where(:available_to_all => true)
-  scope :objevene, where("available_to_all = ? AND planet_type_id <> ? AND name <> ?", false, PlanetType.find_by_name("Domovská").id, 'Arrakis')
+  scope :objevene, where("available_to_all = ? AND planet_type_id <> ? AND name <> ?", false, PlanetType.find_by_name("Domovská").try(:id), 'Arrakis')
   #scope :objevena, where(:available_to_all => false, :planet_type_id => PlanetType.find_by_name("Domovská"))
   scope :viditelna, lambda { |house| where(:house_id => house.id, :available_to_all => false)}
 

@@ -1,4 +1,22 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: houses
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)      not null
+#  leader          :string(255)
+#  solar           :decimal(12, 4)   default(0.0)
+#  melange         :decimal(12, 4)   default(0.0)
+#  material        :decimal(12, 4)   default(0.0)
+#  exp             :decimal(12, 4)   default(0.0)
+#  playable        :boolean          default(TRUE)
+#  melange_percent :decimal(12, 4)   default(0.0)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  influence       :decimal(, )
+#
+
 class House < ActiveRecord::Base
   attr_accessible :name, :leader, :solar, :melange, :material, :exp, :playable, :melange_percent
   attr_accessible :influence
