@@ -15,8 +15,10 @@
 	<tr>
   		<%= paginate @topics %>
   	</tr>
+  	<% if logged_in? %>
+		<tr>
+			<td colspan="10"><%= link_to "Založit nové vlákno tohoto Syselaadu", new_topic_path(:syselaad => @syselaad.id) %></td>
+		</tr>
+	<% end %>
 </table>
 </br>
-<p>
-	<% if logged_in? %><%= link_to "Založit nové vlákno tohoto Syselaadu", new_topic_path(:syselaad => @syselaad.id) %><% end %>
-</p>

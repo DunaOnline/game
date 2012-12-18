@@ -1,5 +1,12 @@
 <% title @topic.name %>
 <table class="tab3">
+	<tr>
+		<th colspan="2">
+			<% if logged_in? %><%= link_to "Reply", "#{new_post_path}?topic=#{@topic.id}" %> |<% end %>
+			<% if admin? %><%= link_to "Destroy Topic", @topic, :confirm => 'Are you sure?', :method => :delete %> |<% end %>
+			<%= link_to "View All", syselaad_path(@topic.syselaad_id) %>
+		</th>
+	</tr>
 	<% for post in @posts %>
 	<tr>
 		<th colspan="2"><%= link_to post.user.nick, user_url(post.user) %> [<%= format_date_time post.created_at %>]</th>
@@ -21,8 +28,3 @@
 		<%= paginate @posts %>
 	</tr>
 </table>
-<p>
-	<% if logged_in? %><%= link_to "Reply", "#{new_post_path}?topic=#{@topic.id}" %> |<% end %>
-	<% if admin? %><%= link_to "Destroy Topic", @topic, :confirm => 'Are you sure?', :method => :delete %> |<% end %>
-	<%= link_to "View All", syselaad_path(@topic.syselaad_id) %>
-</p>
