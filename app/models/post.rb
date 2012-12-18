@@ -4,4 +4,10 @@ class Post < ActiveRecord::Base
   belongs_to :topic
   belongs_to :user
   
+  after_save :last_post_update
+  
+  def last_post_update
+    self.topic.update_attributes(:last_poster_id => self.user.id, :last_post_at => Time.now)
+  end
+  
 end

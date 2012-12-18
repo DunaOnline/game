@@ -1,11 +1,18 @@
-<%= form_for @post do |f| %>
-  <%= f.error_messages %>
-  <% if params[:topic] %>
-  	<input type="hidden" id="topic_syselaad_id" name="post[topic_id]" value="<%= params[:topic] %>" />
-  <% end %> 
-  <p>
-    <%= f.label :content %><br />
-    <%= f.text_area :content %>
-  </p>
-  <p><%= f.submit %></p>
-<% end %>
+<table class="tab3">
+	<%= form_for post do |f| %>
+	<%= f.error_messages %>
+	<% if params[:topic] %>
+		<%= hidden_field_tag 'post[topic_id]', params[:topic] %>
+	<% end %>
+	<tr>
+		<th colspan="10"> <%= f.submit "ODESLAT", :title => "ODESLAT", :class => "ok4", :style => "margin-right: 30px;" %> </th>
+	</tr>
+	<tr>
+		<td> 
+			<%= f.label :content %>
+			<br />
+			<%= f.text_area :content %> 
+		</td>
+	</tr>
+	<% end %>
+</table>
