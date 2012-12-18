@@ -15,7 +15,7 @@
 		<td class="right">
 			<% if syselaad.most_recent_post %>
 				<%= distance_of_time_in_words_to_now syselaad.most_recent_post.last_post_at %> ago by 
-				<%= link_to syselaad.most_recent_post.user.username, "/users/#{syselaad.most_recent_post.last_poster_id}" %>
+				<%= link_to syselaad.most_recent_post.user.nick, "/users/#{syselaad.most_recent_post.last_poster_id}" %>
 			<% else %>
 				no posts
 			<% end %>

@@ -38,7 +38,7 @@ class PostsController < ApplicationController
       @topic = Topic.find(@post.topic_id)
       @topic.update_attributes(:last_poster_id => current_user.id, :last_post_at => Time.now)
       flash[:notice] = "Successfully updated post."
-      redirect_to "/topics/#{@post.topic_id}"  
+      redirect_to @topic  
     else
       render :action => 'edit'
     end

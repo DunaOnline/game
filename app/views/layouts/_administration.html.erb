@@ -25,7 +25,7 @@
     <hr />
     <h3>Online hraci</h3>
     <% for user in online_users %>
-      <%= link_to user.username, user %>
+      <%= link_to user.username + "-" + user.nick, user %>
     <% end %>
 
   </div>

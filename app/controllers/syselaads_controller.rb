@@ -27,6 +27,7 @@ class SyselaadsController < ApplicationController
     else
       
     end
+    @topics = @syselaad.topics.order("created_at DESC").page(params[:page])
   end
 
   def new
