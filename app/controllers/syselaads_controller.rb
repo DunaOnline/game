@@ -3,7 +3,7 @@ class SyselaadsController < ApplicationController
   
   def index
     rod = current_user.house
-    case params[:jake]
+    case params[:kind]
     when 'L'
       @syselaads = Syselaad.landsraadsky
     when 'N'
@@ -21,9 +21,11 @@ class SyselaadsController < ApplicationController
 
   def show
     rod = current_user.house
-    case params[:jake]
+    case params[:kind]
     when 'L'
       @syselaad = Syselaad.landsraadsky.first
+    when 'N'
+      @syselaad = Syselaad.narodni.where(:house_id => rod).first
     when 'I'
       @syselaad = Syselaad.imperialni.first
     when 'S'

@@ -4,6 +4,7 @@ DuneOnline::Application.routes.draw do
   resources :topics
 
   resources :syselaads
+  get 'syselaad/:kind' => 'syselaads#show', :as => :syselaad
 
   resources :laws
 
