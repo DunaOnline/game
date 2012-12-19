@@ -247,4 +247,6 @@ class User < ActiveRecord::Base
   scope :dvorane, where(:court => true)
   scope :veziri, where(:vezir => true)
   scope :poslanci, where(:landsraad => true)
+  scope :players, where(:admin => false)
+  scope :by_nick, order(:nick)
 end

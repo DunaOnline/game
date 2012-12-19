@@ -39,7 +39,7 @@ class LandsraadController < ApplicationController
       
       @user = current_user
       @imperium = House.imperium
-      @kandidati = Imperium.kandidati_na_imperatora
+      @kandidati = User.players.by_nick
       
     # end
   end
