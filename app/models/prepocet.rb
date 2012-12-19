@@ -263,7 +263,7 @@ class Prepocet
     pocet_hlasujicich = imperium.votes.where(:typ => 'imperator').count
     if new_imp[0][1] > pocet_hlasujicich * 0.6
       new_imp[0][0].update_attribute(:emperor, true)
-      new_imp[0][0].zapis_operaci('Byl jsi zvolen Imperatorem.')
+      new_imp[0][0].zapis_operaci('Byl jsem zvolen Imperatorem.')
     else
       for u in new_imp do
         u[0].update_attribute(:regent, true)
