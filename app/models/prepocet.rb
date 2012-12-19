@@ -242,8 +242,8 @@ class Prepocet
   end
   
   def self.zvol_imperatora
-    old_imp = User.imperator
-    old_reg = User.regenti
+    old_imp = User.imperator.first
+    old_reg = User.regenti.all
     
     if old_imp
       old_imp.update_attribute(:emperor, false)
@@ -270,7 +270,7 @@ class Prepocet
     end
     
     if new_imp
-      Global.prepni('konec_volby_imperatora', 2, 1.week.from_now)
+      Global.prepni('konec_volby_imperatora', 2, 2.week.from_now)
       Global.prepni('volba_imperatora', 1, false)
     end
   end
