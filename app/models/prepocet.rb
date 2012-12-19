@@ -1,29 +1,31 @@
 # encoding: utf-8
 class Prepocet
   def self.kompletni_prepocet
-    puts a = Time.now
-    puts "PREPOCET"
-    Prepocet.zamkni
-    order = Prepocet.vytvor_eody
-    Prepocet.zmen_vudce(order)
-    Prepocet.zpristupni_planety
-    Prepocet.produkce_suroviny(order)
-    Prepocet.produkce_melanz(order)
-    
-    Prepocet.kontrola_zakonu
-    
-    if Constant.pristi_volby == Date.today
-      Prepocet.zvol_poslance
+    ActiveRecord::Base.transaction do
+      puts a = Time.now
+      puts "PREPOCET"
+      Prepocet.zamkni
+      order = Prepocet.vytvor_eody
+      Prepocet.zmen_vudce(order)
+      Prepocet.zpristupni_planety
+      Prepocet.produkce_suroviny(order)
+      Prepocet.produkce_melanz(order)
+      
+      Prepocet.kontrola_zakonu
+      
+      if Constant.pristi_volby == Date.today
+        Prepocet.zvol_poslance
+      end
+      
+      if Imperium.konec_volby_imperatora == Date.today
+        Prepocet.zvol_imperatora
+      end
+      
+      Prepocet.prepocti_vliv
+      
+      Prepocet.odemkni
+      puts b = Time.now
     end
-    
-    if Imperium.konec_volby_imperatora == Date.today
-      Prepocet.zvol_imperatora
-    end
-    
-    Prepocet.prepocti_vliv
-    
-    Prepocet.odemkni
-    puts b = Time.now
   end
 
   def self.vytvor_eody
@@ -242,8 +244,8 @@ class Prepocet
   end
   
   def self.zvol_imperatora
-    old_imp = User.imperator.first
-    old_reg = User.regenti.all
+    old_imp = User.imperator
+    old_reg = User.regenti
     
     if old_imp
       old_imp.update_attribute(:emperor, false)

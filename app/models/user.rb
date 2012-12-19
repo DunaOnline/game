@@ -206,11 +206,11 @@ class User < ActiveRecord::Base
   end
 
   def self.imperator
-    User.find_by_emperor(true)
+    User.find_by_emperor(true).first
   end
   
   def self.regenti
-    User.find_by_regent(true)
+    User.find_by_regent(true).all
   end
 
   def jmenuj_spravcem
