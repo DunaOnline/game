@@ -228,11 +228,25 @@ class User < ActiveRecord::Base
   end
 
   def vliv
-    Vypocty.vliv_hrace(self)
+    vl = self.politicke_postaveni * (self.fields.count + (self.celkova_populace / 100000.0))
+    return vl.round(4)
   end
 
   def domovske_leno
     self.fields.where(:planet_id => Planet.domovska_rodu(self.house)).first
+  end
+
+  def politicke_postaveni
+    pp = 1
+    pp += 0.05 if self.emperor?
+    pp += 0.02 if self.regent?
+    pp += 0.01 if self.court?
+    pp += 0.01 if self.vezir?
+    pp += 0.05 if self.arrakis?
+    pp += 0.02 if self.leader?
+    pp += 0.01 if self.mentat?
+    pp += 0.01 if self.army_mentat?
+    return pp
   end
 
   private

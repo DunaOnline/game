@@ -20,23 +20,5 @@ class Vypocty
     zakl_cena = Constant.ksv * Constant.zakl_cena_lena * 100.0
     (zakl_cena + zakl_cena * (planeta.fields.count / 100.0)).round(0)
   end
-  
-  def self.vliv_hrace(user)
-    vl = Vypocty.politicke_postaveni(user) * (user.fields.count + (user.celkova_populace / 100000.0))
-    return vl.round(4)
-  end
-  
-  def self.politicke_postaveni(user)
-    pp = 1
-    pp += 0.05 if user.emperor?
-    pp += 0.02 if user.regent?
-    pp += 0.01 if user.court?
-    pp += 0.01 if user.vezir?
-    pp += 0.05 if user.arrakis?
-    pp += 0.02 if user.leader?
-    pp += 0.01 if user.mentat?
-    pp += 0.01 if user.army_mentat?
-    return pp
-  end
-  
+
 end
