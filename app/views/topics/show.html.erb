@@ -3,7 +3,7 @@
 	<tr>
 		<th colspan="2">
 			<% if logged_in? %><%= link_to "ODPOVĚDĚT", :class => "ok4", "#{new_post_path}?topic=#{@topic.id}" %> |<% end %>
-			<% if admin? %><%= link_to "Smazat vlákno", :class => "ok4", @topic, :confirm => 'Are you sure?', :method => :delete %> |<% end %>
+			<% if admin? %><%= link_to "Destroy Topic", :class => "ok4", @topic, :confirm => 'Are you sure?', :method => :delete %> |<% end %>
 			<%= link_to "View All", syselaad_path(@topic.syselaad_id) %>
 		</th>
 	</tr>
