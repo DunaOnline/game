@@ -5,7 +5,11 @@
 		<%= hidden_field_tag 'post[topic_id]', params[:topic] %>
 	<% end %>
 	<tr>
-		<th colspan="10"> <%= f.submit "ODESLAT", :title => "ODESLAT", :class => "ok4", :style => "margin-right: 30px;" %> </th>
+		<th colspan="10"> 
+      <%= f.submit "ODESLAT", :title => "ODESLAT", :class => "ok4" %> 
+      <%= link_to "NÁHLED", :class => "ok4", post %>
+      <%= link_to "View All", :class => "ok4", posts_path %>
+    </th>
 	</tr>
 	<tr>
 		<td> 
