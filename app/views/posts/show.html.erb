@@ -1,19 +1,19 @@
-<% title "Post" %>
+<% title "Příspěvek" %>
 
 <p>
   <strong>Topic:</strong>
   <%= post.topic_id %>
 </p>
 <p>
-  <strong>User:</strong>
+  <strong>Uživatel:</strong>
   <%= post.user_id %>
 </p>
 <p>
-  <strong>Content:</strong>
+  <strong>Obsah:</strong>
   <%= post.content %>
 </p>
 
 <p>
-  <%= link_to "Edit", edit_post_path(post) %> |
-  <%= link_to "Destroy", post, :confirm => 'Are you sure?', :method => :delete %>
+  <%= link_to "Editovat", edit_post_path(post) %> |
+  <%= link_to "Smazat", post, :confirm => 'Are you sure?', :method => :delete %>
 </p>

@@ -56,8 +56,7 @@
 		<tr>	
 			<th class="l">Volba Guvernéra</th>
 			<th>Volba vůdce</th>
-			<th>Volba poslance</th>
-			<th class="r">Volba Imperátora</th>
+			<th class="r">Volba poslance</th>
 		</tr>	<tr>	
 			<td>
 				Nick <input type="text" size="20" Style="width:100px" title="Zadejte důvod" class = "tab" > 
@@ -89,26 +88,13 @@
 						<li><%= user[0].nick %> - <%= user[1] %></li>
 					  <% end %>
 				<% end %>
-			</td>	
-			<td>
-				Nick <input type="text" size="20" style="width:100px" title="Zadejte důvod"> 
-				<h3>Aktuální pořadí</h3>
-				<li>Vévoda [12]
-				<li>Vévoda [10]
-				<li>Vévoda [4]
-				<li>Vévoda [2]
-				<li>Vévoda [2]
 			</td>			
 		</tr>			
 	</table>         
 	
 	<table class="tab1">
 	  <tr>
-	  	<th colspan="2">Prehled poslednich akci</th>
-	  	<th><%= link_to 'Vsechny akce', operations_path(:jake => 'hrac') %></th>
-	  </tr>
-	  <tr>
-    	<th>Obsah akce</th>
+    	<th>Obsah proběhlé akce</th>
 	    <th style="width:80px">Datum</th>
     	<th style="width:80px">Cas</th>
 	  </tr>
@@ -119,5 +105,8 @@
     	  <td><%= format_time(operation.time) %></td>
     	</tr>
   	  <% end %>
+    <tr>
+	  	<td colspan="3"><%= link_to 'Zobrazit všechny proběhlé akce', operations_path(:jake => 'hrac') %></td>
+	  </tr>
   	</table>              
 

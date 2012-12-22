@@ -32,7 +32,7 @@
 				
 			</th>
 			
-			<td>
+			<td style="text-align: right !important;">
       
 				<input class="tab3_input" type="text" name="adresat" size="25" title="Adresát" style="background-image: url(<%= asset_path 'css/adresat.png' %>)">
 				
@@ -81,13 +81,13 @@
 			<th>Mocnost: </th>
       <td></td>
     </tr> 
-    
-    <tr>	
-			<th>Útok: <br><br></th>
-      <td><a href="#">Možno *</a></td>
-    </tr> 
 
 <% if @user == current_user %>
+
+    <tr>	
+			<th>Útok:</th>
+      <td><a href="#">Možno *</a></td>
+    </tr> 
     
     <tr>	
 			<th>Webové stránky: </th>
