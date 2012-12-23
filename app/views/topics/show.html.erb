@@ -1,9 +1,9 @@
 <% title @topic.name %>
-<table class="tab3">
+<table class="tab3" style="height:18px;">
 	<tr>
 		<th colspan="2">
-			<% if logged_in? %><%= link_to "ODPOVĚDĚT", "#{new_post_path}?topic=#{@topic.id}" , :class => "ok4" %> |<% end %>
-			<% if admin? %><%= link_to "Destroy Topic", @topic, :confirm => 'Are you sure?', :method => :delete , :class => "ok4" %> |<% end %>
+			<% if logged_in? %><%= link_to "ODPOVĚDĚT", "#{new_post_path}?topic=#{@topic.id}" , :class => "ok4" %> <% end %>
+			<% if admin? %><%= link_to "Smazat vlákno", @topic, :confirm => 'Are you sure?', :method => :delete , :class => "ok4" %> <% end %>
 			<%= link_to "View All", syselaad_path(@topic.syselaad_id) , :class => "ok4" %>   
 		</th>
 	</tr>
