@@ -1,10 +1,33 @@
+
+<table class="tab0">
+		<tr>
+			<td>
+				<a href="#" title="Home">⌂</a> » 
+				<%= link_to "Imperialní kartografie", systems_path %> » 
+        <a href="#">Kolonizace nové planety</a>
+			</td>
+    </tr>
+</table>
+
 <%= form_tag kolonizuj_path(:house => @house, :cena_mel => @cena_planety_mel, :cena_sol => @cena_planety_sol) do %>
+
+
 <table class="tab1">
 	<tr>
-		<td class="tdpl" rowspan="2" style="width:270px">
+		<td rowspan="2" style="padding: 10px; width:270px; height: 200px; background-image: url(<%= asset_path 'img/kolonizace.png' %>) !important">
+		
+    <div>
+    <li>
+			<h2>Kolonizace nové planety</h2>
 		<li>
-			<h2>Kolonizace planety</h2>
-		<li>
+    
+    <li> Objevení a následná kolonizace planety vhodné pro život je velmi náročná a drahá akce. Vyžaduje si nasazení kvalitních navigátoru 
+    Vesmírné Gildy, kteří prozkoumají neznámé sektory. Musíte být ale napozoru, kolonizace může být neúspěšná. 
+    <li> Pro kolonizaci je nutné mít potřebná práva  v národě.
+    
+    <br>
+		<br>
+    
 			<b>Národ: </b><%= @house.name %>
 		<li>
 			<b>Melanz: </b><%= format_mena(@house.melange, 'mg') %>
@@ -12,14 +35,16 @@
 		<li>
 			<b>Planet: </b><%= @house.pocet_planet %>
 		<li>
-			<b>Členů: </b><%= @house.users.count %>
+			<b>Občanů národa: </b><%= @house.users.count %>
 		<li>
 			<b>Cena nové planety: </b><%= format_mena(@cena_planety_mel, 'mg') %> a <%= format_mena(@cena_planety_sol, 'S', false) %>
 			<br>
 			<br>
 		<li>
-			<%= submit_tag "Kolonizuj" %>
+			<%= submit_tag "Vyslat Gildu pro objevení planety", :class =>"ok" %>
+      </div>
 		</td>
+    
 	</tr>
 </table>
 <% end %> 
