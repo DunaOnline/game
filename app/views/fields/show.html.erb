@@ -34,9 +34,9 @@
 				<li><h3><%= link_to @planet.name, @planet %></h3>
 				<li><h3><%= best_in_place @field, :name %></h3></li>
 				<li><%= @field.oznaceni %>
-				<div class="td1">Zástavba planety</div>
+				<div class="td1">Obsazenost lén</div>
 				  <%= @planet.obsazenost %>
-				<div class="td1">Zástavba léna</div>
+				<div class="td1">Zástavba tohoto léna</div>
 				  <%= @field.zastavba %>
 				<div class="td1">Na planetě</div>
 				  <li><%= img_populace "Celková populace"%><%= @resource.population %>
