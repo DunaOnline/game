@@ -2,8 +2,8 @@
 <table class="tab0">
 		<tr>	
 			<td>
-			<a href="index.htm" title="Home">⌂*</a>  
-			» <a href="sprava.htm">Statistika přepočtů*</a>
+			<a href="#" title="Home">⌂</a>  
+			» <%= link_to "Statistika přepočtů", zobraz_eod_path %>
 			</td>
 
 			<td class="tdd2">
@@ -16,7 +16,7 @@
 	
 	<table class="tab1">
 		<tr>
-			<td class="tdpl" rowspan="2" style="width:120px; min-height: 150px; background-image: url(<%= asset_path 'planety/ekomentat.png' %>) !important"></td>
+			<td class="tdpl" rowspan="2" style="width:120px; min-height: 150px; background-image: url(<%= asset_path 'planety/ekomentat2.png' %>) !important"></td>
 			<th style="width:120px"> Přepočet</th>
 			<th style="width:120px"> Poplatky</th>
 			<th style="width:120px"> Celkový zisk</th>
@@ -109,19 +109,19 @@
 			<td>
 				<li><img src = "" alt="" class = "tdimg">	
 				<li><%= @imperator.house.leader if @imperator %>
-				<li><%= link_to @imperator.nick, @imperator if @imperator %> <%= link_to @imperator.house.name, @imperator.house if @imperator %> 
+				<li><%= link_to @imperator.nick, @imperator if @imperator %> (<%= link_to @imperator.house.name, @imperator.house if @imperator %>)
 			</td>
 	     
 			<td>
 				<li><img src = "" alt="" class = "tdimg">	
 				<li><%= @arrakis.house.leader if @arrakis %>
-				<li><%= link_to @arrakis.nick, @arrakis if @arrakis %> <%= link_to @arrakis.house.name, @arrakis.house if @arrakis %> 
+				<li><%= link_to @arrakis.nick, @arrakis if @arrakis %> (<%= link_to @arrakis.house.name, @arrakis.house if @arrakis %>) 
 			</td>
 	     
 			<td>
 				<li><img src = "" alt="" class = "tdimg">	
 				<li><%= @leader.house.leader if @leader %>
-				<li><%= link_to @leader.nick, @leader if @leader %> <%= link_to @leader.house.name, @leader.house if @leader %>
+				<li><%= link_to @leader.nick, @leader if @leader %> (<%= link_to @leader.house.name, @leader.house if @leader %>)
 			</td>
 	     
 			<td>
