@@ -1,8 +1,17 @@
 <% title "Léno #{@field.name}" %>
-	<table class="tab0">
-	<tr>	
-		<td>
-		</td>
+
+<table class="tab0">
+
+		<tr>
+			<td>
+				<a href="#" title="Home">⌂</a> » 
+				<%= link_to "Imperialní kartografie", systems_path %> » 
+				<%= link_to "Seznam vašich lén a planet", fields_path %> »
+        <a href="#" title="Zástavba">Zástavba</a>
+			</td>
+
+			<%= render :partial => 'layouts/filter_database' %>
+
 		<td class="tdd">
 			<ul class="menud">
 				<li><a title="Filtrováním přenastavíte zobrazená data.">Spravovat jiné léno »</a> 
@@ -17,6 +26,7 @@
 				</li>
 			</ul>		
 		</td>
+    </tr>
 	</table>
 
   	 <table class="tab2">
