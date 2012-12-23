@@ -53,7 +53,9 @@
             <ul>
               <li><a href="#"> Ekonomický výzkum *</a>
               <li><a href="#"> Výzkum armády *</a>
-              <li><a href="#"> Kolonizace nové planety *</a>
+              <% if can? :sprava_rod, House %>
+              <li><%= link_to "Kolonizovat planetu", kolonizuj_path %>
+              <% end %>
               <!-- <li><a href="#"> Vesmírný výzkum *</a>
               <li><a href="#"> Výroba *</a>
               <li><a href="#"> Obchod *</a> -->
