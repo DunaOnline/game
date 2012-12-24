@@ -12,9 +12,13 @@
               <!-- <li><a href="#"> Malorodní Syselaad *</a>  -->
               <li><%= link_to "Národní Syselaad", syselaad_path(:kind => 'N') %></li>
               <li><%= link_to "Mezinárodní Syselaad", syselaad_path(:kind => 'E') %></li>
-              <!-- <li><%= link_to "Imperialní Syselaad", syselaad_path(:kind => 'I') %></li>
+              <!--
+              <li><%= link_to "Imperialní Syselaad", syselaad_path(:kind => 'I') %></li>
+              -->
+              <% if current_user.landsraad? || current_user.admin? %>
               <li><%= link_to "Landsraadní Syselaad", syselaad_path(:kind => 'L') %></li>
-              <li><a href="#"> Multifórum *</a>  -->
+              <% end %>
+              <!-- <li><a href="#"> Multifórum *</a>  -->
               <li><%= link_to "Systémový Syselaad", syselaad_path(:kind => 'S') %></li>
             </ul>
           </li>

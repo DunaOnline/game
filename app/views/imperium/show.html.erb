@@ -1,17 +1,17 @@
 <% title @title %>
 <table class="tab1">
-	<tr>
-		<td class="tdpl" rowspan="2" style="width:300px; background-image: url(image/imgplanety/arrakis.png)">
+  <tr>
+		<td class="tdpl" rowspan="2" style="padding: 10px; width:300px; background-image: url(<%= asset_path 'imghra/arrakis.png' %>) !important">
 		<li>
-			<h2>Imperium</h2>
+			<h2>Imperium a Koření</h2>
 		<li>
 			<b>Imperátor: </b> <%= link_to @imperator.nick, @imperator if @imperator %>
 		<li>
-			<b>Držitel pololéna: </b> <%= link_to @spravce.nick, @spravce if @spravce %>
+			<b>Místodržící Arrakisu:  </b> <%= link_to @spravce.nick, @spravce if @spravce %>
 		<li>
-			<b>Planet: </b> <%= Planet.count %>
+			<b>Známých planet: </b> <%= Planet.count %>
 		<li>
-			<b>Hráčů: </b> <%= User.count %>
+			<b>Občanů Impéria: </b> <%= User.count %>
 		<li>
 			<b>Celkový vliv: </b> <%= @imperium.influence %>
 			<br>

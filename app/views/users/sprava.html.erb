@@ -2,7 +2,7 @@
       <table class="tab1">
       	<%= form_tag :posli_suroviny do %>
 		<tr>	
-			<td class="tdpl" rowspan="2" style="width:100px; background-image: url(<%= asset_path 'planety/ekomentat2.png' %>">
+			<td class="tdpl" rowspan="2" style="width:170px; background-image: url(<%= asset_path 'imghra/hracsklad.png' %>">
 				<li><h2>Sklad hráče</h2>
 				<li><b>Vliv: </b><%= @user.influence %>
 				<li><b>Planet: </b><%= @planets.count %>
@@ -11,8 +11,8 @@
 				<li>	<%= submit_tag 'Poslat zvolené', :name => 'poslat', :class => 'ok' %>
 			</td>
 			<th>Stav skladu</th>
-			<th>Poslat Malorodu</th>
-			<th>Daň Malorodu [%]</th>
+			<!-- <th>Poslat Malorodu</th>
+			<th>Daň Malorodu [%]</th> -->
 			<th>Poslat Národu</th>
 			<th class="r">Projekt [%]</th>
 		</tr>
@@ -23,7 +23,7 @@
 				<li><%= img_melanz %><%= format_mena(@user.melange, 'mg') %>
 				<li><%= img_zkusenosti %><%= format_mena(@user.exp, 'exp', false) %>
 			</td>
-			<td>
+			<!--<td>
 				<li><%= img_solary %><input type="text" size="3" title="Zadejte množství">
 				<li><%= img_material %><input type="text" size="3" title="Zadejte množství">		
 				<li><%= img_melanz %><input type="text" size="3" title="Zadejte množství"> 
@@ -33,7 +33,7 @@
 				<li><%= img_solary %><input type="text" size="3" title="Nastavte daň">
 				<li><%= img_material %><input type="text" size="3" title="Nastavte daň">		
 				<li><%= img_melanz %><input type="text" size="3" title="Nastavte daň"> 
-				<li><%= img_zkusenosti %><input type="text" size="3" title="Nastavte daň"> 
+				<li><%= img_zkusenosti %><input type="text" size="3" title="Nastavte daň"> --> 
 			</td>
 			<td>
 				<li><%= img_solary %><%= text_field_tag 'rod_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
@@ -53,13 +53,15 @@
 	
 	<table class="tab1">
 		<tr>	
-			<th>Volba Guvernéra</th>
+			<td class="tdpl" rowspan="2" style="width:170px; background-image: url(<%= asset_path 'imghra/landsraad.png' %>">
+      <li><h2>Volby</h2>
+      </td>
+      <!-- <th>Volba Guvernéra</th> -->
 			<th>Volba vůdce</th>
 			<th>Volba poslance</th>
-      <th>Volba Imperátora</th>
 		</tr>	
     <tr>	
-			<td>
+			<!-- <td>
 				Nick <input type="text" size="20" Style="width:100px" title="Zadejte důvod" class = "tab" > 
 				<h3>Aktuální pořadí</h3>
 				<li>Vévoda [12]
@@ -67,7 +69,7 @@
 				<li>Vévoda [4]
 				<li>Vévoda [2]
 				<li>Vévoda [2]
-			</td>	
+			</td>	 -->
 			<td>
 				<%= form_tag hlasovat_path(:user_id => @user) do %>
 					<%= select_tag("volit_id]", options_for_select(@user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %><%= submit_tag 'Ξ', :name => 'leader', :class => 'oki'  %>
@@ -87,16 +89,7 @@
 						<li><%= user[0].nick %> - <%= user[1] %></li>
 					  <% end %>
 				<% end %>
-			</td>
-      <td>
-				Nick <input type="text" size="20" Style="width:100px" title="Zadejte důvod" class = "tab" > 
-				<h3>Aktuální pořadí</h3>
-				<li>Vévoda [12]
-				<li>Vévoda [10]
-				<li>Vévoda [4]
-				<li>Vévoda [2]
-				<li>Vévoda [2]
-			</td>			
+			</td>		
 		</tr>			
 	</table>         
 	

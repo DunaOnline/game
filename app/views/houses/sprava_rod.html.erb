@@ -2,10 +2,9 @@
 	<table class="tab1">
 		<%= form_tag :posli_rodove_suroviny do %>
 		<tr>	
-			<td class="tdpl" rowspan="2" style="width:160px">
+			<td class="tdpl" rowspan="2" style="width:160px; background-image: url(<%= asset_path 'imghra/narodnisklad.png' %>">
 				<li><h2>Národní sklad</h2>
 				<li><b>Národ: </b><%= @house.name %>
-				<li><b>Vůdce: </b><%= link_to @vudce.nick, @vudce if @vudce%>
 				<li><b>Vliv: </b> 11820 (27%)
 				<li><b>Planet: </b><%= @house.pocet_planet %>
 				<li><b>Členů: </b><%= @house.users.count %>
@@ -56,74 +55,22 @@
 		<% end %>
 	</table>
 
-	<table class="tab4">
-		<tr>
-			<th class="thf" colspan="4">
-				Přehled vašich národních jednotek
-			</th>	
-		</tr>
-		<tr>
-			<!--<th style="background-image: url(image/8/jedp1.png)"> -->
-			<th class="w_pechota">
-				<a href="army-sablony.htm">Kyborg *</a>
-				<li>	
-					<input title="Útok" style="margin-top: 100px; background-image: url(<%= asset_path cesta_ikona("utok-pozemni") %>)" value="9">
-					<input title="Obrana" style="margin-top: 100px; background-image: url(<%= asset_path cesta_ikona("obrana-pozemni") %>)" value="5">
-				</li>
-			</th>
-			<td>
-				<li>Elitní národní jednotka, která je určena pro pozemní boj.
-				<li>Ve službě je 10 jednotek.
-				<h3>Žold</h3> 
-				<li><%= img_solary %> -1.4
-				<h3>Výbava:</h3>
-				<li>	
-					<input title="Pěchotní zbraň" style="background-image: url(<%= asset_path cesta_ikona("pechotni_zbran") %>)" value="2">
-					<input title="Rychlopalná zbran" style="background-image: url(<%= asset_path cesta_ikona("rychlopalna_zbran") %>)" value="1">
-					<input title="Výzbroj" style="background-image: url(<%= asset_path cesta_ikona("vyzbroj") %>)" value="1">
-					<input title="Kybernetická náhrada" style="background-image: url(<%= asset_path cesta_ikona("kyberneticka_nahrada") %>)" value="1">
-				</li>
-			</td>
-			<!--<th style="background-image: url(image/8/jedv1.png)"> -->
-			<th class="w_pechota">
-				<a href="army-sablony.htm">Obranný satelit *</a>
-				<li>	
-					<input title="Útok" style="margin-top: 100px; background-image: url(<%= asset_path cesta_ikona("utok-vesmir") %>)" value="100">
-					<input title="Obrana" style="margin-top: 100px; background-image: url(<%= asset_path cesta_ikona("obrana-vesmir") %>)" value="100">
-				</li>
-			</th>
-			<td>
-				<li>Národní jednotka, sloužící o obraně orbity planet.
-				<li>Ve službě je 10 jednotek.
-				<h3>Žold</h3>
-				<li><%= img_solary %> -20
-				<h3>Výbava:</h3>
-				<li>	
-					<input title="Trup - fregata" style="background-image: url(<%= asset_path cesta_ikona("trup_fregata") %>)" value="2">
-					<input title="Vesmírná zbraň" style="background-image: url(<%= asset_path cesta_ikona("vesmirna_zbran") %>)" value="2">
-					<input title="Hypervodič" style="background-image: url(<%= asset_path cesta_ikona("hypervodic") %>)" value="1">
-					<input title="Pancéřování" style="background-image: url(<%= asset_path cesta_ikona("pancerovani") %>)" value="1">
-					<input title="Chromatická plastocel" style="background-image: url(<%= asset_path cesta_ikona("chromaticka_plastocel") %>)" value="1">
-				</li>
-			</td>
-		</tr>
-	</table>
-
-	<table class="tab4">
-		<tr>
-			<th class="thf" colspan="4">
-				<%= link_to "Objevit a kolonizovat novou planetu", kolonizuj_path %>
-			</th>	
-		</tr>
-	</table>
-	<br>
 	<table class="tab1">
 		<tr>	
-			<th class="l">Mentat</th>
-			<th>Vojenský mentat</th>
-			<th class="r">Diplomat</th>
+      <td class="tdpl" rowspan="4" style="width:170px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>">
+      <li><h2>Národní byrokracie</h2>
+      </td>
+      <th class="l">Vůdce národa</th>
+			<th>Mentat</th>
+			<th class="r">Vojenský mentat</th>
+			
 		</tr>
 		<tr>
+    
+      <td>
+				<%= link_to @vudce.nick, @vudce if @vudce%>
+			</td>
+      
 			<td>
 				<% if can? :pridel_pravo, User %>
 					<li>
@@ -164,7 +111,17 @@
 				<% end %>
 			</td>
 
-			<td>
+
+		</tr>	
+		<tr>
+			<th class="l">Diplomat</th>
+      <th >Generál</th>
+			<th class="l">Poslanec</th>
+      
+			
+		</tr>
+		<tr>
+    			<td>
 				<% if can? :pridel_pravo, User %>
 					<li>
 						<%= form_tag :pridel_pravo do %>
@@ -183,13 +140,7 @@
 					</li>
 				<% end %>
 			</td>
-		</tr>	
-		<tr>
-			<th class="l">Generál</th>
-			<th>Poslanec</th>
-			<th class="r"></th>
-		</tr>
-		<tr>
+    
 			<td>
 				<% for user in @generalove do %>
 					<li><%= link_to user.nick, user, :class => "general" %></li>
@@ -200,6 +151,24 @@
 					<li><%= link_to user.nick, user, :class => "poslanec" %></li>
 				<% end %>
 			</td>
+
+		</tr>
+	</table>
+  
+  <table class="tab1">
+	<tr>
+		<td rowspan="2" style="padding: 0 10px 10px 10px; width:270px; background-image: url(<%= asset_path 'imghra/kolonizace.png' %>) !important">     
+        
+          <h2>Kolonizace nové planety</h2>
+
+          <li> Objevení a následná kolonizace planety vhodné pro život je velmi náročná a drahá akce. 
+          <li>Vyžaduje si nasazení kvalitních navigátoru  Vesmírné Gildy, kteří prozkoumají neznámé sektory. 
+          <li>Musíte být ale napozoru, kolonizace může být neúspěšná. 
+          <br><br>
+				  <li><%= link_to "Přejít do kolonizace nové planety", kolonizuj_path , :style => "text-align:right" %>
+          <br>
+          
+			</td>	
 		</tr>
 	</table>
 
