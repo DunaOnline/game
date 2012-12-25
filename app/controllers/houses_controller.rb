@@ -64,7 +64,7 @@ class HousesController < ApplicationController
   end
   
   def kolonizuj
-    if params[:commit] == "Kolonizuj"
+    if params[:commit]
       house = House.find(params[:house])
       
       cena_mel = params[:cena_mel].to_f

@@ -7,3 +7,5 @@ exporty/
 config/database.yml
 .idea
 nbproject
+._redcar
+.redcar
