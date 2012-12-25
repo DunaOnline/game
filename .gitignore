@@ -5,6 +5,7 @@ tmp/
 .sass-cache/
 exporty/
 config/database.yml
+config/database.example.yml
 .idea
 nbproject
 ._redcar
