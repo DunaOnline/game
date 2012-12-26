@@ -124,6 +124,18 @@ class HousesController < ApplicationController
       komu.update_attribute(:solar, komu.solar + params[:user_solary].to_i)
       msg << "solary: #{params[:user_solary]} "
     end
+
+ <!--- Přidal TAR pro opravu -->
+
+
+    if params[:user_material].to_f > 0.0 && params[:user_material].to_f <= rod.material
+      rod.update_attribute(:material, rod.material - params[:user_material].to_f)
+      komu.update_attribute(:material, komu.material + params[:user_material].to_f)
+      msg << "material: #{params[:user_material]} "
+    end 
+    
+    
+    
     if params[:user_melanz].to_f > 0.0 && params[:user_melanz].to_f <= rod.melange
       rod.update_attribute(:melange, rod.melange - params[:user_melanz].to_f)
       komu.update_attribute(:melange, komu.melange + params[:user_melanz].to_f)
