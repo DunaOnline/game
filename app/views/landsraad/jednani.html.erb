@@ -35,11 +35,13 @@
 </table>
 
 <% if Imperium.volba_imperatora? %>
-	<table class="tab1">
-		<tr>
-			<th><%= link_to 'Volba Imperatora', volba_imperatora_path %></th>
-		</tr>
-	</table>
+<table class="tab1">
+	<tr>
+		<th>
+                   <%= link_to "Volba Imperatora - Datum voleb: #{format_date @datum_volby}", volba_imperatora_path %>
+                </th>
+        </tr>
+</table>
 <% end %>
 
 <table class="tab1">

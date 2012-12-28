@@ -1,174 +1,174 @@
-<% title "Velkorod #{@house.name}" %>
-	<table class="tab1">
-		<%= form_tag :posli_rodove_suroviny do %>
-		<tr>	
-			<td class="tdpl" rowspan="2" style="width:160px; background-image: url(<%= asset_path 'imghra/narodnisklad.png' %>">
-				<li><h2>Národní sklad</h2>
-				<li><b>Národ: </b><%= @house.name %>
-				<li><b>Vliv: </b> 11820 (27%)
-				<li><b>Planet: </b><%= @house.pocet_planet %>
-				<li><b>Členů: </b><%= @house.users.count %>
-				<br><br>
-				<li><%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok' %>
-			</td>
-
-			<th style="width:120px">Stav skladu</th>
-			<th style="width:120px">Zaslat hráči</th>
-			<th style="width:120px">Zaslat Malorodu</th>
-			<th class="r">Zaslat Velkorodu</th>
-		</tr>
-
-		<tr >
-			<td>
-				<li><%= img_solary %><%= format_mena(@house.solar, 'S', false) %> 
-				<li><%= img_material %><%= format_mena(@house.material, 'kg') %>
-				<li><%= img_melanz %><%= format_mena(@house.melange, 'mg') %>
-				<li><%= img_zkusenosti %><%= format_mena(@house.exp, 'exp', false) %>
-				<li><%= img_populace('Celkova populace') %><%= format_mena(@house.celkova_populace, 'k', false) %>
-			</td>
-			<td>
-				<li><%= img_solary %><%= text_field_tag 'user_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
-				<li><%= img_material %><%= text_field_tag 'user_material', '0.00', :size => "3", :title => "Zadejte množství" %>	
-				<li><%= img_melanz %><%= text_field_tag 'user_melanz', '0.00', :size => "3", :title => "Zadejte množství" %>
-				<li><%= img_zkusenosti %><%= text_field_tag 'user_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %> 
-				<li><%= select_tag :user_id_suroviny, options_for_select(@house.users.order(:nick).all.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :class => "tab" %> 
-			</td>
-			<td>
-				<li><%= img_solary %><input type="text" size="3" title="Zadejte množství">
-				<li><%= img_material %><input type="text" size="3" title="Zadejte množství">		
-				<li><%= img_melanz %><input type="text" size="3" title="Zadejte množství"> 
-				<li><%= img_zkusenosti %><input type="text" size="3" title="Zadejte množství"> 
-				<li>	<select class="vyber" name="Vyberte Malorod">
-						 <option value="p1">Eridani</option>
-						 <option value="p1">Malorod</option>
-						 <option value="p1">Malorod</option>
-					</select>
-			</td>
-			<td>
-				<li><%= img_solary %><%= text_field_tag 'rodu_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
-				<li><%= img_material %><%= text_field_tag 'rodu_material', '0.00', :size => "3", :title => "Zadejte množství" %>	
-				<li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %>
-				<li><%= img_zkusenosti %><%= text_field_tag 'rodu_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %> 
-				<li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}) , :class => "tab" %> 
-			</td>
-		</tr>	
-		<% end %>
-	</table>
-
-	<table class="tab1">
-		<tr>	
-      <td class="tdpl" rowspan="4" style="width:170px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>">
-      <li><h2>Národní byrokracie</h2>
+<% title "Správa velkorodu #{@house.name}" %>
+<table class="tab1">
+  <%= form_tag :posli_rodove_suroviny do %>
+    <tr>
+      <td class="tdpl" rowspan="2" style="width:160px; background-image: url(<%= asset_path 'imghra/narodnisklad.png' %>)">
+        <li><h2>Národní sklad</h2></li>
+        <li><b>Národ: </b><%= @house.name %></li>
+        <li><b>Vliv: </b><%= @house.vliv %></li>
+        <li><b>Planet: </b><%= @house.pocet_planet %></li>
+        <li><b>Občanů: </b><%= @house.users.count %></li>
+        </ br></ br>
+        <li><%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok' %></li>
       </td>
-      <th class="l">Vůdce národa</th>
-			<th>Mentat</th>
-			<th class="r">Vojenský mentat</th>
-			
-		</tr>
-		<tr>
-    
-      <td>
-				<%= link_to @vudce.nick, @vudce if @vudce%>
-			</td>
-      
-			<td>
-				<% if can? :pridel_pravo, User %>
-					<li>
-						<%= form_tag :pridel_pravo do %>
-      						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-      						<%= submit_tag 'Mentat', :class => 'oktab_auto' %>
-    					<% end %>
-					</li>
-				<% end %>
-				<li><h3>Držitelé práv</h3>
-				<% for user in @mentate do %>
-					<li>
-						<%= link_to user.nick, user, :class => "mentat" %>
-						<% if can? :odeber_pravo, User %>
-							<%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Mentat" %>
-						<% end %>
-					</li>
-				<% end %>
-			</td>
 
-			<td>
-				<% if can? :pridel_pravo, User %>
-					<li>
-						<%= form_tag :pridel_pravo do %>
-      						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-      						<%= submit_tag 'ArmyMentat', :class => 'oktab_auto' %>
-    					<% end %>
-					</li>
-				<% end %>
-				<li><h3>Držitelé práv</h3>
-				<% for user in @army_mentate do %>
-					<li>
-						<%= link_to user.nick, user, :class => "army_mentat" %>
-						<% if can? :odeber_pravo, User %>
-							<%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "ArmyMentat" %>
-						<% end %>
-					</li>
-				<% end %>
-			</td>
+      <th style="width:120px">Stav skladu</th>
+      <th style="width:120px">Zaslat hráči</th>
+      <th style="width:120px">Zaslat Malorodu</th>
+      <th class="r">Zaslat Velkorodu</th>
+    </tr>
+
+  <tr >
+    <td>
+      <li><%= img_solary %><%= format_mena(@house.solar, 'S', false) %></li>
+      <li><%= img_material %><%= format_mena(@house.material, 'kg') %></li>
+      <li><%= img_melanz %><%= format_mena(@house.melange, 'mg') %></li>
+      <li><%= img_zkusenosti %><%= format_mena(@house.exp, 'exp', false) %></li>
+      <li><%= img_populace('Celkova populace') %><%= format_mena(@house.celkova_populace, 'k', false) %></li>
+    </td>
+    <td>
+      <li><%= img_solary %><%= text_field_tag 'user_solary', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+      <li><%= img_material %><%= text_field_tag 'user_material', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+      <li><%= img_melanz %><%= text_field_tag 'user_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+      <li><%= img_zkusenosti %><%= text_field_tag 'user_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
+      <li><%= select_tag :user_id_suroviny, options_for_select(@house.users.order(:nick).all.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :class => "tab" %> </li>
+    </td>
+    <td>
+      <li><%= img_solary %><input type="text" size="3" title="Zadejte množství"></li>
+      <li><%= img_material %><input type="text" size="3" title="Zadejte množství"></li>
+      <li><%= img_melanz %><input type="text" size="3" title="Zadejte množství"></li>
+      <li><%= img_zkusenosti %><input type="text" size="3" title="Zadejte množství"></li>
+      <li>	<select class="vyber" name="Vyberte Malorod">
+          <option value="p1">Eridani</option>
+          <option value="p1">Malorod</option>
+          <option value="p1">Malorod</option>
+        </select></li>
+    </td>
+    <td>
+      <li><%= img_solary %><%= text_field_tag 'rodu_solary', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+      <li><%= img_material %><%= text_field_tag 'rodu_material', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+      <li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+      <li><%= img_zkusenosti %><%= text_field_tag 'rodu_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+      <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}) , :class => "tab" %></li>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<table class="tab1">
+  <tr>
+    <td class="tdpl" rowspan="4" style="width:170px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
+  <li><h2>Národní byrokracie</h2>
+    </td>
+  <th class="l">Vůdce národa</th>
+  <th>Mentat</th>
+  <th class="r">Vojenský mentat</th>
+
+</tr>
+<tr>
+
+  <td>
+    <%= link_to @vudce.nick, @vudce if @vudce%>
+  </td>
+
+  <td>
+    <% if can? :pridel_pravo, User %>
+  <li>
+    <%= form_tag :pridel_pravo do %>
+      <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
+      <%= submit_tag 'Mentat', :class => 'oktab_auto' %>
+    <% end %>
+  </li>
+<% end %>
+<li><h3>Držitelé práv</h3>
+  <% for user in @mentate do %>
+    <li>
+      <%= link_to user.nick, user, :class => "mentat" %>
+      <% if can? :odeber_pravo, User %>
+        <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Mentat" %>
+      <% end %>
+    </li>
+  <% end %>
+  </td>
+
+  <td>
+    <% if can? :pridel_pravo, User %>
+    <li>
+      <%= form_tag :pridel_pravo do %>
+        <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
+        <%= submit_tag 'ArmyMentat', :class => 'oktab_auto' %>
+      <% end %>
+    </li>
+  <% end %>
+  <li><h3>Držitelé práv</h3>
+    <% for user in @army_mentate do %>
+      <li>
+        <%= link_to user.nick, user, :class => "army_mentat" %>
+        <% if can? :odeber_pravo, User %>
+          <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "ArmyMentat" %>
+        <% end %>
+      </li>
+    <% end %>
+    </td>
 
 
-		</tr>	
-		<tr>
-			<th class="l">Diplomat</th>
+    </tr>
+    <tr>
+      <th class="l">Diplomat</th>
       <th >Generál</th>
-			<th class="l">Poslanec</th>
-      
-			
-		</tr>
-		<tr>
-    			<td>
-				<% if can? :pridel_pravo, User %>
-					<li>
-						<%= form_tag :pridel_pravo do %>
-      						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-      						<%= submit_tag 'Diplomat', :class => 'oktab_auto' %>
-    					<% end %>
-					</li>
-				<% end %>
-				<li><h3>Držitelé práv</h3>
-				<% for user in @diplomate do %>
-					<li>
-						<%= link_to user.nick, user, :class => "diplomat" %>
-						<% if can? :odeber_pravo, User %>
-							<%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Diplomat" %>
-						<% end %>
-					</li>
-				<% end %>
-			</td>
-    
-			<td>
-				<% for user in @generalove do %>
-					<li><%= link_to user.nick, user, :class => "general" %></li>
-				<% end %>
-			</td>
-			<td>
-				<% for user in @poslanci do %>
-					<li><%= link_to user.nick, user, :class => "poslanec" %></li>
-				<% end %>
-			</td>
+      <th class="l">Poslanec</th>
 
-		</tr>
-	</table>
-  
-  <table class="tab1">
-	<tr>
-		<td rowspan="2" style="padding: 0 10px 10px 10px; width:270px; background-image: url(<%= asset_path 'imghra/kolonizace.png' %>) !important">     
-        
-          <h2>Kolonizace nové planety</h2>
 
-          <li> Objevení a následná kolonizace planety vhodné pro život je velmi náročná a drahá akce. 
-          <li>Vyžaduje si nasazení kvalitních navigátoru  Vesmírné Gildy, kteří prozkoumají neznámé sektory. 
-          <li>Musíte být ale napozoru, kolonizace může být neúspěšná. 
-          <br><br>
-				  <li><%= link_to "Přejít do kolonizace nové planety", kolonizuj_path , :style => "text-align:right" %>
-          <br>
-          
-			</td>	
-		</tr>
-	</table>
+    </tr>
+    <tr>
+      <td>
+        <% if can? :pridel_pravo, User %>
+      <li>
+        <%= form_tag :pridel_pravo do %>
+          <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
+          <%= submit_tag 'Diplomat', :class => 'oktab_auto' %>
+        <% end %>
+      </li>
+    <% end %>
+    <li><h3>Držitelé práv</h3>
+      <% for user in @diplomate do %>
+        <li>
+          <%= link_to user.nick, user, :class => "diplomat" %>
+          <% if can? :odeber_pravo, User %>
+            <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Diplomat" %>
+          <% end %>
+        </li>
+      <% end %>
+      </td>
+
+      <td>
+        <% for user in @generalove do %>
+          <li><%= link_to user.nick, user, :class => "general" %></li>
+        <% end %>
+        </td>
+        <td>
+          <% for user in @poslanci do %>
+            <li><%= link_to user.nick, user, :class => "poslanec" %></li>
+          <% end %>
+          </td>
+
+          </tr>
+          </table>
+
+          <table class="tab1">
+            <tr>
+              <td rowspan="2" style="padding: 0 10px 10px 10px; width:270px; background-image: url(<%= asset_path 'imghra/kolonizace.png' %>) !important">
+
+                <h2>Kolonizace nové planety</h2>
+
+            <li> Objevení a následná kolonizace planety vhodné pro život je velmi náročná a drahá akce.</li>
+            <li>Vyžaduje si nasazení kvalitních navigátoru  Vesmírné Gildy, kteří prozkoumají neznámé sektory.</li>
+            <li>Musíte být ale napozoru, kolonizace může být neúspěšná.</li>
+            </ br></ br>
+            <li><%= link_to "Přejít do kolonizace nové planety", kolonizuj_path , :style => "text-align:right" %></li>
+            </ br>
+
+          </td>
+          </tr>
+          </table>
 

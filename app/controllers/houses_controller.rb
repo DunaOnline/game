@@ -1,3 +1,4 @@
+# encoding: utf-8
 class HousesController < ApplicationController
   #authorize_resource # CanCan
   
@@ -115,42 +116,45 @@ class HousesController < ApplicationController
     
     msg = ''
     
-    if params[:user_solary].to_i > 0.0 || params[:user_melanz].to_f > 0.0 || params[:user_zkusenosti].to_i > 0.0
+    if params[:user_solary].to_i > 0.0 || params[:user_melanz].to_f > 0.0 || params[:user_zkusenosti].to_i > 0.0 || params[:user_material].to_i > 0.0
       komu = User.find(params[:user_id_suroviny])
-      msg << "Poslano hraci #{komu.nick} "
+      msg << "Posláno hráči #{komu.nick} "
     end
     if params[:user_solary].to_i > 0.0 && params[:user_solary].to_i <= rod.solar
       rod.update_attribute(:solar, rod.solar - params[:user_solary].to_i)
       komu.update_attribute(:solar, komu.solar + params[:user_solary].to_i)
-      msg << "solary: #{params[:user_solary]} "
+      msg << "soláry: #{params[:user_solary]} "
     end
-
-
- 
     if params[:user_melanz].to_f > 0.0 && params[:user_melanz].to_f <= rod.melange
       rod.update_attribute(:melange, rod.melange - params[:user_melanz].to_f)
       komu.update_attribute(:melange, komu.melange + params[:user_melanz].to_f)
-      msg << "melanz: #{params[:user_melanz]} "
+      msg << "melanž: #{params[:user_melanz]} "
     end 
     if params[:user_zkusenosti].to_i > 0.0 && params[:user_zkusenosti].to_i <= rod.exp
       rod.update_attribute(:exp, rod.exp - params[:user_zkusenosti].to_i)
       komu.update_attribute(:exp, komu.exp + params[:user_zkusenosti].to_i)
       msg << "expy: #{params[:user_zkusenosti]} "
     end
+    if params[:user_material].to_i > 0.0 && params[:user_material].to_i <= rod.material
+      rod.update_attribute(:material, rod.material - params[:user_material].to_i)
+      leno = komu.domovske_leno
+      leno.resource.update_attribute(:material, leno.resource.material + params[:user_material].to_i)
+      msg << "materiál: #{params[:user_material]} "
+    end
     
     if params[:rodu_solary].to_i > 0.0 || params[:rodu_melanz].to_f > 0.0 || params[:rodu_zkusenosti].to_i > 0.0
       rodu = House.find(params[:rod_id_suroviny])
-      msg << " Poslano rodu #{rodu.name} "
+      msg << " Posláno rodu #{rodu.name} "
     end
     if params[:rodu_solary].to_i > 0.0 && params[:rodu_solary].to_i <= rod.solar
       rod.update_attribute(:solar, rod.solar - params[:rodu_solary].to_i)
       rodu.update_attribute(:solar, rodu.solar + params[:rodu_solary].to_i)
-      msg << "solary: #{params[:rodu_solary]} "
+      msg << "soláry: #{params[:rodu_solary]} "
     end
     if params[:rodu_melanz].to_f > 0.0 && params[:rodu_melanz].to_f <= rod.melange
       rod.update_attribute(:melange, rod.melange - params[:rodu_melanz].to_f)
       rodu.update_attribute(:melange, rodu.melange + params[:rodu_melanz].to_f)
-      msg << "melanz: #{params[:rodu_melanz]} "
+      msg << "melanž: #{params[:rodu_melanz]} "
     end 
     if params[:rodu_zkusenosti].to_i > 0.0 && params[:rodu_zkusenosti].to_i <= rod.exp
       rod.update_attribute(:exp, rod.exp - params[:rodu_zkusenosti].to_i)
@@ -159,8 +163,8 @@ class HousesController < ApplicationController
     end
     
     flash[:notice] = msg
-    rod.zapis_operaci(msg + " hracem #{current_user.nick}.")
-    current_user.zapis_operaci(msg.gsub("Poslano hraci #{komu.nick} ", "Obdrzeno "))
+    rod.zapis_operaci(msg + " hráčem #{current_user.nick}.")
+    current_user.zapis_operaci(msg.gsub("Posláno hráči #{komu.nick} ", "Obdrženo z NS "))
     redirect_to sprava_rod_path(:id => rod)
   end
 end

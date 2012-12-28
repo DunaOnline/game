@@ -16,6 +16,8 @@ class LandsraadController < ApplicationController
     @imperator = User.imperator
     @poslanci = User.poslanci
 
+    @datum_volby = Constant.konec_volby_imperatora
+
     @projednavane = Law.projednavane
     @zakony = Law.order(:submitted, :position)
   end
