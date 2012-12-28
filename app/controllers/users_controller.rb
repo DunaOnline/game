@@ -1,3 +1,4 @@
+# encoding: utf-8
 class UsersController < ApplicationController
 #  authorize_resource # CanCan
   
@@ -159,6 +160,13 @@ class UsersController < ApplicationController
       current_user.update_attribute(:exp, current_user.exp - params[:rod_zkusenosti].to_i)
       msg << "expy: #{params[:rod_zkusenosti]} "
     end
+
+    leno = current_user.domovske_leno.resource
+    if params[:rod_material].to_i > 0.0 && params[:rod_material].to_i <= leno.material
+        rod.update_attribute(:material, rod.material - params[:rod_material].to_i)
+        leno.update_attribute(:material, leno.material + params[:rod_material].to_i)
+        msg << "materiál: #{params[:rod_material]} "
+      end
     
     current_user.zapis_operaci(msg)
     flash[:notice] = msg

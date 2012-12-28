@@ -237,15 +237,42 @@ class User < ActiveRecord::Base
   end
 
   def politicke_postaveni
+    # Imperátor > Mistodržící > Regent > Vůdce > Poslanec > Mentat > Vojenský mentat > Diplomat > Guvernér
     pp = 1
-    pp += 0.05 if self.emperor?
-    pp += 0.02 if self.regent?
-    pp += 0.01 if self.court?
-    pp += 0.01 if self.vezir?
-    pp += 0.05 if self.arrakis?
-    pp += 0.02 if self.leader?
-    pp += 0.01 if self.mentat?
-    pp += 0.01 if self.army_mentat?
+    if self.emperor?
+      pp += 0.05
+    else
+      if self.arrakis?
+        pp += 0.05
+      else
+        if self.regent?
+          pp += 0.02
+        else
+          if self.leader?
+            pp += 0.02
+          else
+            if self.landsraad?
+              pp += 0.02
+            else
+              if self.court? || self.vezir?
+                pp += 0.02
+              else
+                if self.mentat? || self.army_mentat? || self.diplomat?
+                  pp += 0.01
+                else
+                  if self.general? || self.vicegeneral?
+                    pp += 0.01
+                  else
+
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+
     return pp
   end
 
