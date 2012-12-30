@@ -22,7 +22,7 @@
 		<li><%= img_solary %><%= format_mena(budova.naklady_stavba_solary, 'S', false) %>  
 		<li><%= img_material %><%= format_mena(budova.naklady_stavba_material, 'kg') %> 
 		<%= form_tag postavit_budovu_path(:field => field, :budova => budova) do %>
-			<li><%= number_field_tag :pocet_budov_stavba, nil, :in => -10...10, :step => 1 %></li> 
+			<li><%= number_field_tag :pocet_budov_stavba, nil, :in => -21...21, :step => 1 %></li>
 			<li><%= submit_tag "Postavit" , :class => "oktab_95" %>
 		<% end %>
 	</td>

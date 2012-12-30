@@ -12,95 +12,56 @@
 
 </table>
 
-<table class="tab3">
-  <tr>
-    <th>
-      <input type="button" value="PŘESUNOUT SUROVINY" title="PŘESUNOUT SUROVINY" class="ok4" style="margin-right: 30px;">
-    </th>
-  </tr>
-  <tr>
-    <td> 
-  			<center>
-        
-  			<select class="tab" name="Vyberte komoditu" title="Vyberte komoditu k transportu">
-  				<option value="material">Materiál</option>
-          <option value="melanz">Melanž</option>
-  				<option value="populaci">Populaci</option>
-  			</select>
-        
-  			<select class="tab" name="Zdrojová planeta" title="Zvolte zdrojovou planetu">
-  			    <option class="sez-b" value="p1">Giedy Prime</option>
-  			    <option value="p2">Lakviel</option>
-  			    <option value="p3">P3</option>
-  			    <option value="p4">P4</option>
-  			    <option value="p5">P5</option>
-  			</select>
-        
-        <select class="tab" name="Cílová planeta" title="Zvolte cílovou planetu">
-  			    <option class="sez-b" value="p1">Giedy Prime</option>
-  			    <option value="p2">Lakviel</option>
-  			    <option value="p3">P3</option>
-  			    <option value="p4">P4</option>
-  			    <option value="p5">P5</option>
-  			</select>
-        
-  			<input class="tab" type="text" size=15 title="Zadejte množství">
-        
-  			</center>
-  </td>
-<tr>
-</table>
-
 <table class="tab2">
 <tr>
 	<td class="none"></td>
 	<th class="l" style="width:140px">Vaše léna</th>
 	<th style="width:90px">Kapacita</th>
-  <th style="width:90px">Na planetě</th>
+        <th style="width:90px">Na planetě</th>
 	<th style="width:90px">Produkce</th>
 	<th class="r" style="width:80px">Bonusy</th>
 </tr>
 
 <tr>
 	<td class="tdpl" style="background-image: url(<%= asset_path @domovska.background %>)">
-		<li><h2><%= link_to @domovska.name, @domovska %></h2>
-		<li><%= @domovska.system_name %>
-		<li><%= @domovska.oznaceni %>
+		<li><h2><%= link_to @domovska.name, @domovska %></h2></li>
+		<li><%= @domovska.system_name %></li>
+		<li><%= @domovska.oznaceni %></li>
 	</td>
 	
 	<td>
-		<li><%= link_to @pole_domovska.name, @pole_domovska %>
+		<li><%= link_to @pole_domovska.name, @pole_domovska %></li>
 	</td>
 	
 	<td>
-		<li><%= img_populace "Celková kapacita měst" %> 1000000
-		<!-- <li><%= img_vyrobky "Celková kapacita výroby" %> 200	-->
-		<li><%= img_kasarna "Celková kapacita kasáren" %> 1000
-		<!-- <li><%= img_kosmodrom "Celková kapacita kosmodromů" %> 1000 -->
+		<li><%= img_populace "Celková kapacita měst" %> 1000000</li>
+		<!-- <li><%= img_vyrobky "Celková kapacita výroby" %> 200</li>	-->
+		<li><%= img_kasarna "Celková kapacita kasáren" %> 1000</li>
+		<!-- <li><%= img_kosmodrom "Celková kapacita kosmodromů" %> 1000</li> -->
 	</td>
   
   	<td>
-		<li><%= img_populace "Populace na planetě" %> <%= @pole_domovska.resource.population %>
-    	<li><%= img_material "Materiál uložený na planetě" %> <%= @pole_domovska.resource.material %>
-    	<!-- <li><%= img_melanz "Melanž uložená na planetě" %> !!!
-		<li><%= img_kasarna "Obsazená kapacita kasáren" %> !!!
-		<li><%= img_kosmodrom "Celková kapacita kosmodromů" %> !1000 -->
+		<li><%= img_populace "Populace na planetě" %> <%= @pole_domovska.resource.population %></li>
+                <li><%= img_material "Materiál uložený na planetě" %> <%= @pole_domovska.resource.material %></li>
+    	<!-- <li><%= img_melanz "Melanž uložená na planetě" %> !!!</li>
+		<li><%= img_kasarna "Obsazená kapacita kasáren" %> !!!</li>
+		<li><%= img_kosmodrom "Celková kapacita kosmodromů" %> !1000</li> -->
 	</td>
 	
 	<td>
-		<li><%= img_solary "Výnos soláry" %><font class="<%= trida_barvy(@domovska.vynos(current_user, 'solar')) %>"><%= format_mena(@domovska.vynos(current_user, 'solar'), "S") %></font>
-		<li><%= img_material "Výnos materiál" %><font class="<%= trida_barvy(@domovska.vynos(current_user, 'material')) %>"><%= format_mena(@domovska.vynos(current_user, 'material'), "kg") %></font>		
-		<li><%= img_populace "Výnos populace" %><font class="<%= trida_barvy(@domovska.vynos(current_user, 'population')) %>"><%= format_mena(@domovska.vynos(current_user, 'population'), "k") %></font>
-		<li><%= img_zkusenosti "Výnos zkušenosti" %><font class="<%= trida_barvy(@domovska.vynos(current_user, 'exp')) %>"><%= format_mena(@domovska.vynos(current_user, 'exp'), "exp") %></font>
+		<li><%= img_solary "Výnos soláry" %><font class="<%= trida_barvy(@domovska.vynos(current_user, 'solar')) %>"><%= format_mena(@domovska.vynos(current_user, 'solar'), "S") %></font></li>
+		<li><%= img_material "Výnos materiál" %><font class="<%= trida_barvy(@domovska.vynos(current_user, 'material')) %>"><%= format_mena(@domovska.vynos(current_user, 'material'), "kg") %></font></li>
+		<li><%= img_populace "Výnos populace" %><font class="<%= trida_barvy(@domovska.vynos(current_user, 'population')) %>"><%= format_mena(@domovska.vynos(current_user, 'population'), "k") %></font></li>
+		<li><%= img_zkusenosti "Výnos zkušenosti" %><font class="<%= trida_barvy(@domovska.vynos(current_user, 'exp')) %>"><%= format_mena(@domovska.vynos(current_user, 'exp'), "exp") %></font></li>
 	</td>
 		
 	<td>
 		<% pt = @domovska.planet_type %>
-		<li><%= img_solary "Bonus soláry" %><font class="<%= trida_barvy(pt.solar_bonus) %>"><%= format_mena(pt.solar_bonus, "%") %></font>
-		<li><%= img_material "Bonus materiál" %><font class="<%= trida_barvy(pt.material_bonus) %>"><%= format_mena(pt.material_bonus, "%") %></font>		
-		<li><%= img_populace "Bonus populace" %><font class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%") %></font>
-		<li><%= img_zkusenosti "Bonus zkušenosti" %><font class="<%= trida_barvy(pt.exp_bonus) %>"><%= format_mena(pt.exp_bonus, "%") %></font>
-		<li><%= img_kasarna "Bonus ke kapacitě kasáren a kosmodromů" %><font class="cervena"> + 0%</font>
+		<li><%= img_solary "Bonus soláry" %><font class="<%= trida_barvy(pt.solar_bonus) %>"><%= format_mena(pt.solar_bonus, "%") %></font></li>
+		<li><%= img_material "Bonus materiál" %><font class="<%= trida_barvy(pt.material_bonus) %>"><%= format_mena(pt.material_bonus, "%") %></font></li>
+		<li><%= img_populace "Bonus populace" %><font class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%") %></font></li>
+		<li><%= img_zkusenosti "Bonus zkušenosti" %><font class="<%= trida_barvy(pt.exp_bonus) %>"><%= format_mena(pt.exp_bonus, "%") %></font></li>
+		<li><%= img_kasarna "Bonus ke kapacitě kasáren a kosmodromů" %><font class="cervena"> + 0%</font></li>
 	</td>
 </tr>
 

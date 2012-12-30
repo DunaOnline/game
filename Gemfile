@@ -59,3 +59,6 @@ gem 'best_in_place'
 
 gem 'active_record_or'
 gem 'randumb'
+group :development do
+  gem 'meta_request', '0.2.0'
+end

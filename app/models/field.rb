@@ -113,6 +113,17 @@ class Field < ActiveRecord::Base
       ).save
     end
   end
+
+  def move_resource(to, what, amount)
+
+  end
+
+  def check_availabilty(what, amount)
+    case what
+    when 'Population'
+
+    end
+  end
   
   scope :vlastnik, lambda { |user| where(:user_id => user.id)}
   

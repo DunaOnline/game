@@ -1,3 +1,4 @@
+# encoding: utf-8
 class FieldsController < ApplicationController
   authorize_resource # CanCan
   
@@ -21,6 +22,8 @@ class FieldsController < ApplicationController
     end
     @planet = @field.planet
     @resource = @field.resource
+    @co_poslat = [["Materiál","Material"],["Populace","Population"]]
+    @my_fields = current_user.fields
   end
 
   def new
@@ -161,6 +164,11 @@ class FieldsController < ApplicationController
       redirect @arrakis
     end
     
+  end
+
+  def presun_suroviny
+    source = Field.find(params[:source_field])
+    redirect_to source
   end
   
 end

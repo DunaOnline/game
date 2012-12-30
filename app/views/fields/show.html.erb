@@ -27,6 +27,20 @@
     </tr>
 	</table>
 
+<%= form_tag :presun_suroviny do %>
+<table class="tab3">
+  <tr>
+    <th>
+      <%= hidden_field_tag(:source_field, value = @field.id) %>
+      <%= select_tag :presunout_co, options_for_select(@co_poslat.collect { |p| p }, {:include_blank => false}) , :class => "tab" %>
+      <%= select_tag :target_field, options_for_select(@my_fields.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}) , :class => "tab", :title => "Zvolte zdrojovou planetu" %>
+      <%= number_field_tag :amount %>
+      <%= submit_tag 'Přesunout', :name => 'presunout', :class => 'ok4', :style => "margin-right: 30px;", :title => "PŘESUNOUT SUROVINY" %>
+    </th>
+  </tr>
+</table>
+<% end %>
+
   	 <table class="tab2">
 		<tr>	
 			<th class="lr" style="width:120px">Popis léna</th>
