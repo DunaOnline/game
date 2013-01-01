@@ -10,7 +10,7 @@
 #  system_name      :string(255)
 #  position         :integer
 #  available_to_all :boolean          default(FALSE)
-#  discovered_at    :date             default(Sun, 20 May 2012)
+#  discovered_at    :date             default(Thu, 13 Dec 2012)
 #  created_at       :datetime
 #  updated_at       :datetime
 #

@@ -5,8 +5,8 @@
 #  id                 :integer          not null, primary key
 #  user_id            :integer          not null
 #  field_id           :integer
-#  date               :date             default(Sun, 20 May 2012), not null
-#  time               :time             default(2000-01-01 21:55:45 UTC), not null
+#  date               :date             default(Thu, 13 Dec 2012), not null
+#  time               :time             default(2000-01-01 21:48:25 UTC), not null
 #  order              :integer          not null
 #  solar_income       :integer          default(0)
 #  exp_income         :integer          default(0)

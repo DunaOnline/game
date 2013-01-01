@@ -115,13 +115,26 @@ class Field < ActiveRecord::Base
   end
 
   def move_resource(to, what, amount)
+    if self.check_availabilty(what, amount)
+      
 
+    else
+
+    end
   end
 
-  def check_availabilty(what, amount)
+  def check_availability(what, amount)
+#    puts 'jsem ve field.rb'
+#    puts self.to_yaml
+#    puts Resource.all.to_yaml
+#    puts self.resource.to_yaml
     case what
     when 'Population'
-
+      self.resource.population >= amount
+    when 'Material'
+      self.resource.material >= amount
+    else
+      false
     end
   end
   

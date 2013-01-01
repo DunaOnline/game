@@ -8,8 +8,8 @@
 #  subhouse_id :integer
 #  kind        :string(255)
 #  content     :string(255)
-#  date        :date             default(Sun, 20 May 2012)
-#  time        :time             default(2000-01-01 21:55:45 UTC)
+#  date        :date             default(Thu, 13 Dec 2012)
+#  time        :time             default(2000-01-01 21:48:25 UTC)
 #  created_at  :datetime
 #  updated_at  :datetime
 #
