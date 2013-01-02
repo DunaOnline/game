@@ -23,7 +23,7 @@ describe Field do
     user = create(:user)
     field = create(:field, user: user)
     puts field.to_yaml
-    puts field.resource.to_yaml
+    puts Resource.all.to_yaml
 
 #    check = field.check_availability('Population', 50000.0)
 #    expect(check).to eq(true)

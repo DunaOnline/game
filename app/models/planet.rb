@@ -117,7 +117,7 @@ class Planet < ActiveRecord::Base
   end
   
   def osidlitelna?(user)
-    self.house == user.house || self.available_to_all
+    (self.house == user.house || self.available_to_all) && self.max_poli > self.fields.count
   end
   
   def domovska?

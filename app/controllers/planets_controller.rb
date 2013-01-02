@@ -46,7 +46,8 @@ class PlanetsController < ApplicationController
   end
   
   def list_osidlitelnych
-    @planets = Planet.osidlitelna.or.viditelna(current_user.house).order(:name).all
+    #@planets = Planet.osidlitelna.or.viditelna(current_user.house).order(:name).all
+    @planets = Planet.osidlitelna?(current_user).order(:name).all
     render :index
   end
   
