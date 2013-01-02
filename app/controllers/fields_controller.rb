@@ -73,43 +73,46 @@ class FieldsController < ApplicationController
   
   def postavit_budovu
     @field = Field.find(params[:field])
-    @resource = @field.resource
-    @budova = Building.find(params[:budova])
-    
-    cena_sol = @budova.naklady_stavba_solary.to_f
-    cena_mat = @budova.naklady_stavba_material.to_f
-    mat_na_poli = @resource.material
-    pocet_budov = params[:pocet_budov_stavba].to_i
-    
-    if cena_sol * pocet_budov > current_user.solar
-      flash[:error] = "Nedostatek Solaru (chybi #{cena_sol * pocet_budov - current_user.solar} S)."
-      redirect_to @field
-    elsif cena_mat * pocet_budov > mat_na_poli
-      flash[:error] = "Nedostatek materialu (chybi #{cena_mat * pocet_budov - mat_na_poli} kg)."
-      redirect_to @field
-    else
-      if pocet_budov > 0
-        if pocet_budov > @field.volne_misto
-          flash[:error] = "Tolik budov nelze postavit."
-          redirect_to @field
-        else
-          current_user.update_attribute(:solar, current_user.solar - (cena_sol * pocet_budov))
-          @resource.update_attribute(:material, mat_na_poli - (cena_mat * pocet_budov))
-          @field.postav(@budova, pocet_budov)
-          redirect_to @field#, :notice => notice
-        end
+    if @field.user == current_user || current_user.admin?
+      @resource = @field.resource
+      @budova = Building.find(params[:budova])
+
+      cena_sol = @budova.naklady_stavba_solary.to_f
+      cena_mat = @budova.naklady_stavba_material.to_f
+      mat_na_poli = @resource.material
+      pocet_budov = params[:pocet_budov_stavba].to_i
+
+      if cena_sol * pocet_budov > current_user.solar
+        flash[:error] = "Nedostatek Solaru (chybi #{cena_sol * pocet_budov - current_user.solar} S)."
+        redirect_to @field
+      elsif cena_mat * pocet_budov > mat_na_poli
+        flash[:error] = "Nedostatek materialu (chybi #{cena_mat * pocet_budov - mat_na_poli} kg)."
+        redirect_to @field
       else
-        if pocet_budov.abs > @field.postaveno(@budova)
-          flash[:error] = "Tolik budov nelze prodat."
-          redirect_to @field
+        if pocet_budov > 0
+          if pocet_budov > @field.volne_misto
+            flash[:error] = "Tolik budov nelze postavit."
+            redirect_to @field
+          else
+            current_user.update_attribute(:solar, current_user.solar - (cena_sol * pocet_budov))
+            @resource.update_attribute(:material, mat_na_poli - (cena_mat * pocet_budov))
+            @field.postav(@budova, pocet_budov)
+            redirect_to @field#, :notice => notice
+          end
         else
-          current_user.update_attribute(:solar, current_user.solar + ((cena_sol / 2) * pocet_budov.abs))
-          @resource.update_attribute(:material, mat_na_poli + ((cena_mat / 2) * pocet_budov.abs))
-          @field.postav(@budova, pocet_budov)
-          redirect_to @field#, :notice => notice
+          if pocet_budov.abs > @field.postaveno(@budova)
+            flash[:error] = "Tolik budov nelze prodat."
+            redirect_to @field
+          else
+            current_user.update_attribute(:solar, current_user.solar + ((cena_sol / 2) * pocet_budov.abs))
+            @resource.update_attribute(:material, mat_na_poli + ((cena_mat / 2) * pocet_budov.abs))
+            @field.postav(@budova, pocet_budov)
+            redirect_to @field#, :notice => notice
+          end
         end
       end
-      
+    else
+      redirect_to :back, :error => "Na tomto poli nemůžeš stavět."
     end
   end
   

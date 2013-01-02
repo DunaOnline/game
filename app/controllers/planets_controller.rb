@@ -51,30 +51,33 @@ class PlanetsController < ApplicationController
   
   def osidlit_pole
     @planet = Planet.find(params[:id])
-    
-    cena_mel = params[:cena_mel].to_f
-    cena_spoctena = @planet.cena_noveho_lena_mel.to_f
-    cena_mel = cena_spoctena if cena_spoctena > cena_mel 
-    
-    cena_sol = params[:cena_sol].to_f
-    cena_spoctena = @planet.cena_noveho_lena_sol.to_f
-    cena_sol = cena_spoctena if cena_spoctena > cena_sol
-    
-    if cena_mel > current_user.melange
-      flash[:error] = "Nedostatek melanze (chybi #{cena_mel - current_user.melange} mg)."
-      redirect_to @planet
-    elsif cena_sol > current_user.solar
-      flash[:error] = "Nedostatek Solaru (chybi #{cena_sol - current_user.solar} S)."
-      redirect_to @planet
+
+    if @planet.osidlitelna?(current_user)
+      cena_mel = params[:cena_mel].to_f
+      cena_spoctena = @planet.cena_noveho_lena_mel.to_f
+      cena_mel = cena_spoctena if cena_spoctena > cena_mel
+
+      cena_sol = params[:cena_sol].to_f
+      cena_spoctena = @planet.cena_noveho_lena_sol.to_f
+      cena_sol = cena_spoctena if cena_spoctena > cena_sol
+
+      if cena_mel > current_user.melange
+        flash[:error] = "Nedostatek melanze (chybi #{cena_mel - current_user.melange} mg)."
+        redirect_to @planet
+      elsif cena_sol > current_user.solar
+        flash[:error] = "Nedostatek Solaru (chybi #{cena_sol - current_user.solar} S)."
+        redirect_to @planet
+      else
+        field = @planet.vytvor_pole(current_user)
+        field.save
+        current_user.update_attributes(:melange => current_user.melange - cena_mel, :solar => current_user.solar - cena_sol)
+        msg = "Uspesne osidleno (cena: #{cena_mel} mg melanze, #{cena_sol} Solaru)."
+        current_user.zapis_operaci(msg)
+        redirect_to field, :notice => msg
+      end
     else
-      field = @planet.vytvor_pole(current_user)
-      field.save
-      current_user.update_attributes(:melange => current_user.melange - cena_mel, :solar => current_user.solar - cena_sol)
-      msg = "Uspesne osidleno (cena: #{cena_mel} mg melanze, #{cena_sol} Solaru)."
-      current_user.zapis_operaci(msg)
-      redirect_to field, :notice => msg
+      redirect_to :back, :error => "Planetu #{@planet.name} nelze osídlit"
     end
-    
   end
   
   def zobraz_arrakis
