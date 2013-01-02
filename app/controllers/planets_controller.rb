@@ -1,3 +1,4 @@
+# encoding: utf-8
 class PlanetsController < ApplicationController
   authorize_resource # CanCan
   
