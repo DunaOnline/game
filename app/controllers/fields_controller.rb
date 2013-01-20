@@ -171,6 +171,20 @@ class FieldsController < ApplicationController
 
   def presun_suroviny
     source = Field.find(params[:source_field])
+    target = Field.find(params[:target_field])
+    if source.drzitel(current_user) && target.drzitel(current_user)
+      case str = source.move_resource(target, params[:presunout_co], params[:amount])
+        when true
+
+        else
+          flash[:error] = str
+          redirect_to source
+      end
+    else
+      flash[:error] = "Můžeš posílat jen mezi svými lény."
+      redirect_to source
+    end
+    flash[:notice] = "Suroviny přesunuty."
     redirect_to source
   end
   

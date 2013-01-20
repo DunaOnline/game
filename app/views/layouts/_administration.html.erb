@@ -23,6 +23,8 @@
       <%= submit_tag 'Sweep', :class => "oktab" %>
     <% end %>
     <hr />
+    <h3><%= link_to "WIPE", wipe_path, :confirm => 'Opravdu WIPE?' %></h3>
+    <hr />
     <h3>Online hraci</h3>
     <% for user in online_users %>
       <%= link_to user.username, user %>

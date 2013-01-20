@@ -83,5 +83,10 @@ class AdminController < ApplicationController
     Session.sweep(params[:hodin].to_i.hour)
     redirect_to :back
   end
+
+  def wipe
+    Aplikace.wipe
+    redirect_to :back
+  end
   
 end

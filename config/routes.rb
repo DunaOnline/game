@@ -66,6 +66,7 @@ DuneOnline::Application.routes.draw do
   match 'posli_suroviny' => 'users#posli_suroviny', :as => :posli_suroviny
 
 #  resources :admin
+  match 'wipe' => 'admin#wipe', :as => :wipe
   match 'prepni_prihlasovani' => 'admin#prepni_povoleni_prihlasovani'
   match 'prepni_zakladani' => 'admin#prepni_povoleni_zakladani'
   match 'zamkni_hru' => 'admin#zamkni_hru', :as => :zamkni_hru

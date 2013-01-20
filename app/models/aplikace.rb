@@ -53,5 +53,9 @@ class Aplikace
       end
     end
   end
-  
+
+  def self.wipe
+    puts "WIPE"
+  end
+
 end

@@ -27,7 +27,7 @@ class Field < ActiveRecord::Base
   def vytvor_resource
     # nejak mi nefunguje after_create tak jak ma
     unless self.resource
-      Resource.new(:user_id => self.user_id, :field_id => self.id, :population => 100000, :material => 5000.0).save
+      Resource.new(:user_id => self.user_id, :field_id => self.id, :population => 100000, :material => 2000.0).save
     end
   end
   
@@ -116,10 +116,19 @@ class Field < ActiveRecord::Base
 
   def move_resource(to, what, amount)
     if self.check_availabilty(what, amount)
-      
-
+      target = Field.find(to)
+      case what
+        when 'Population'
+          self.resource.update_attribute(:population, self.resource.population - amount.abs)
+          target.resource.update_attribute(:population, target.resource.population + amount.abs)
+        when 'Material'
+          self.resource.update_attribute(:material, self.resource.material - amount.abs)
+          target.resource.update_attribute(:material, target.resource.material + amount.abs)
+        else
+          "Toto nelze poslat"
+      end
     else
-
+      "Nedostatek surovin na odchozím léně"
     end
   end
 
