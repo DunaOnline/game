@@ -1,3 +1,4 @@
+<%# encoding: utf-8 %>
 <% title "Sektor #{@system.id.to_s} - #{@system.system_name}" %>
 
 <table class="tab0">
@@ -22,7 +23,7 @@
 
 <%= render :partial => 'mapa_imperia', :locals => {:systems => @systems} %>
 
-<h2>Sektoru <%= @system.id.to_s + " - " + @system.system_name %>:</h3>
+<h2>Sektoru <%= @system.id.to_s + " - " + @system.system_name %>:</h2>
 
 <table class="tab1">
 	<tr>	

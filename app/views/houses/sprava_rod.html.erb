@@ -1,3 +1,4 @@
+<%# encoding: utf-8 %>
 <% title "Správa velkorodu #{@house.name}" %>
 <table class="tab1">
   <%= form_tag :posli_rodove_suroviny do %>
@@ -8,7 +9,7 @@
         <li><b>Vliv: </b><%= @house.vliv %></li>
         <li><b>Planet: </b><%= @house.pocet_planet %></li>
         <li><b>Občanů: </b><%= @house.users.count %></li>
-        </ br></ br>
+        <br/><br/>
         <li><%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok' %></li>
       </td>
 
@@ -164,9 +165,9 @@
             <li> Objevení a následná kolonizace planety vhodné pro život je velmi náročná a drahá akce.</li>
             <li>Vyžaduje si nasazení kvalitních navigátoru  Vesmírné Gildy, kteří prozkoumají neznámé sektory.</li>
             <li>Musíte být ale napozoru, kolonizace může být neúspěšná.</li>
-            </ br></ br>
+            <br/><br/>
             <li><%= link_to "Přejít do kolonizace nové planety", kolonizuj_path , :style => "text-align:right" %></li>
-            </ br>
+            <br/>
 
           </td>
           </tr>
