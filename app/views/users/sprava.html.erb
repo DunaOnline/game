@@ -20,7 +20,7 @@
 		<tr >
 			<td>
 				<li><%= img_solary %><%= format_mena(@user.solar, 'S', false) %> 
-				<li><%= img_material %><%= format_mena(@user.celkovy_material, 'kg') %>
+				<li><%= img_material %><%= format_mena(@user.celkovy_material, 'kg') %>&nbsp(<%= format_mena(@user.domovske_leno.resource.material, 'kg') %>)
 				<li><%= img_melanz %><%= format_mena(@user.melange, 'mg') %>
 				<li><%= img_zkusenosti %><%= format_mena(@user.exp, 'exp', false) %>
 			</td>

@@ -116,15 +116,14 @@ class Field < ActiveRecord::Base
   end
 
   def move_resource(to, what, amount)
-    if self.check_availabilty(what, amount)
-      target = Field.find(to)
+    if self.check_availability(what, amount)
       case what
         when 'Population'
           self.resource.update_attribute(:population, self.resource.population - amount.abs)
-          target.resource.update_attribute(:population, target.resource.population + amount.abs)
+          to.resource.update_attribute(:population, to.resource.population + amount.abs)
         when 'Material'
           self.resource.update_attribute(:material, self.resource.material - amount.abs)
-          target.resource.update_attribute(:material, target.resource.material + amount.abs)
+          to.resource.update_attribute(:material, to.resource.material + amount.abs)
         else
           "Toto nelze poslat"
       end
@@ -134,10 +133,6 @@ class Field < ActiveRecord::Base
   end
 
   def check_availability(what, amount)
-#    puts 'jsem ve field.rb'
-#    puts self.to_yaml
-#    puts Resource.all.to_yaml
-#    puts self.resource.to_yaml
     case what
     when 'Population'
       self.resource.population >= amount

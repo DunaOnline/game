@@ -143,7 +143,7 @@ class UsersController < ApplicationController
   
   def posli_suroviny
     rod = current_user.house
-    msg = "Poslano rodu #{rod.name} " if params[:rod_solary].to_i > 0.0 || params[:rod_melanz].to_f > 0.0 || params[:rod_zkusenosti].to_i > 0.0
+    msg = "Poslano rodu #{rod.name} " if params[:rod_solary].to_i > 0.0 || params[:rod_melanz].to_f > 0.0 || params[:rod_zkusenosti].to_i > 0.0 || params[:rod_material].to_i > 0.0
     
     if params[:rod_solary].to_i > 0.0 && params[:rod_solary].to_i <= current_user.solar
       rod.update_attribute(:solar, rod.solar + params[:rod_solary].to_i)
