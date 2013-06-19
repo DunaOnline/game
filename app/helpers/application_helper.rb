@@ -102,7 +102,7 @@ module ApplicationHelper
     @online_users = []
     sessions = Session.order("created_at ASC").all
     sessions.each do |session|
-      user = Marshal.load(ActiveSupport::Base64.decode64(session.data))["user_id"]
+      user = Marshal.load(Base64.decode64(session.data))["user_id"]
       if user
         @online_users << User.find(user)
       end

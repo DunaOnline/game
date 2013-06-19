@@ -121,7 +121,11 @@ class House < ActiveRecord::Base
   def pomer_vlivu
     celk_vl = House.imperium.influence
     vl = self.influence
-    vl / celk_vl
+    if celk_vl == 0
+      0.0
+    else
+      vl / celk_vl
+    end
   end
   
   def pocet_poslancu

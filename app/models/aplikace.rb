@@ -56,6 +56,99 @@ class Aplikace
 
   def self.wipe
     puts "WIPE"
+    AppLog.delete_all
+    Eod.delete_all
+    Environment.delete_all
+    Estate.delete_all
+    Resource.delete_all
+    Influence.delete_all
+    Law.delete_all
+    Poll.delete_all
+    Post.delete_all
+    Topic.delete_all
+    Operation.delete_all
+    Vote.delete_all
+
+    for field in Field.all do
+      if field.planet.domovska?
+        field.vytvor_resource
+        field.postav(Building.where(:kind => "L", :level => [1]).first, 2)
+        field.postav(Building.where(:kind => "S", :level => [1]).first, 2)
+        field.postav(Building.where(:kind => "M", :level => [1]).first, 2)
+        field.postav(Building.where(:kind => "E", :level => [1]).first, 2)
+      else
+        field.delete
+      end
+
+    end
+
+    for hou in House.playable do
+      hou.update_attributes(:solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
+    end
+
+    for hou in House.all do
+      hou.update_attribute(:influence, 1.0)
+    end
+
+    for pla in Planet.all do
+      if pla.domovska?
+
+      else
+        pla.delete
+      end
+    end
+    
+    for disc in Discoverable.all do
+      if Planet.find_by_name(disc.name)
+
+      else
+        disc.update_attribute(:discovered, false)
+      end
+    end
+
+    for user in User.all do
+      if user.admin?
+        user.hlasuj(User.find_by_username('Norma_Cenva'),'leader')
+      else
+        user.napln_suroviny
+        user.update_attributes(:leader => false,
+                               :mentat => false,
+                               :army_mentat => false,
+                               :diplomat => false,
+                               :general => false,
+                               :vicegeneral => false,
+                               :landsraad => false,
+                               :arrakis => false,
+                               :emperor => false,
+                               :regent => false,
+                               :court => false,
+                               :vezir => false,
+                               :admin => false)
+        user.hlasuj(user,'leader')
+      end
+    end
+
+    for house in House.playable do
+      i = 0
+      2.times do
+        i += 1
+        planet = house.kolonizuj_planetu
+        if i % 2 == 0
+          planet.update_attribute(:available_to_all, true)
+        end
+        planet.save
+      end
+    end
+    puts 'Vychozi planety objeveny'
+
+    User.find_by_username('Doktor').jmenuj_spravcem
+
+    puts 'Prepocet spusten'
+    Prepocet.prepocti_vliv
+    Prepocet.kompletni_prepocet
+    puts 'Prepocet dokoncen'
+
+    puts 'WIPE KONEC'
   end
 
 end

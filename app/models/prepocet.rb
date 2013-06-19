@@ -20,7 +20,7 @@ class Prepocet
       if Imperium.konec_volby_imperatora == Date.today
         Prepocet.zvol_imperatora
       end
-      
+
       Prepocet.prepocti_vliv
       
       Prepocet.odemkni
