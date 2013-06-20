@@ -141,6 +141,26 @@ class Aplikace
     end
     puts 'Vychozi planety objeveny'
 
+    arrakis = Planet.create(:name => 'Arrakis',
+                            :planet_type_id => PlanetType.find_by_name('Marganský typ').id,
+                            :house_id => House.find_by_name('Impérium').id,
+                            :available_to_all => false,
+                            :discovered_at => Date.today,
+                            :position => 1,
+                            :system_name => "Mu Draconis")
+
+    Planet.arrakis.fields << Field.new(:name => "Leno Arrakis",
+                                       :user_id => nil,
+                                       :pos_x => 1,
+                                       :pos_y => 1
+    )
+    arrakis_field = Field.find_by_planet_id(arrakis)
+    arraken = Building.where(:name => "Arraken").first
+    arrakis_field.postav(arraken, 1)
+    harvester = Building.where(:name => "Továrna na koření").first
+    arrakis_field.postav(harvester, 10)
+    puts "Budovy na Arrakis postaveny"
+
     User.find_by_username('Doktor').jmenuj_spravcem
 
     puts 'Prepocet spusten'
