@@ -36,7 +36,7 @@ class Ability
         #can [:update], User, :id => user.id
         can [:read, :osidlit_pole, :zobraz_arrakis], Planet
         can [:read], House
-        can [:read, :update, :prejmenuj_pole, :postavit_budovu], Field, :user_id => user.id
+        can [:read, :update, :prejmenuj_pole, :postavit_budovu, :presun_suroviny], Field, :user_id => user.id
         can [:read, :update], Resource
         can [:read, :create], Vote
         cannot [:update, :delete], Operation
@@ -82,6 +82,7 @@ class Ability
         if user.vicegeneral?
         end
         if user.arrakis?
+          can [:postavit_arrakis], Field
         end
         if user.landsraad?
           can [:create], Law
