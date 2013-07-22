@@ -45,7 +45,7 @@ class FieldsController < ApplicationController
     @field = Field.find(params[:id])
   end
 
-  respond_to :html, :json
+  respond_to :html, :json 
   def update
     #@field = Field.find(params[:id])
     #if @field.update_attributes(params[:field])
