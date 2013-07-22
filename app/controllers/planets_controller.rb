@@ -62,7 +62,7 @@ class PlanetsController < ApplicationController
       cena_mel = params[:cena_mel].to_f
       cena_mel = (cena_mel * bonus).to_f
       cena_spoctena = @planet.cena_noveho_lena_mel * bonus
-      cena_mel = cena_spoctena if cena_spoctena > cena_mel
+      cena_mel = cena_spoctena if cena_spoctena > cena_mel 
 
       cena_sol = params[:cena_sol].to_f
       cena_sol = cena_sol * bonus
