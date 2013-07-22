@@ -61,7 +61,10 @@ class User < ActiveRecord::Base
 
   has_many :polls
   has_many :laws, :through => :polls
-
+  
+  has_many :researches
+  has_many :technologies, :through => :researches
+  
   validates :username, :presence => true, :uniqueness => true
   validates :password, :presence => true, :on => :create
   validates_confirmation_of :password
@@ -234,6 +237,15 @@ class User < ActiveRecord::Base
 
   def domovske_leno
     self.fields.where(:planet_id => Planet.domovska_rodu(self.house)).first
+  end
+  
+  def vyskumane_tech(id)
+        vyskumane_tech =  self.researches.where('technology_id' => id).first
+        if vyskumane_tech
+          return vyskumane_tech.lvl
+        else
+          return 1
+        end
   end
 
   def politicke_postaveni
