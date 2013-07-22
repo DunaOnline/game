@@ -9,8 +9,11 @@ class PlanetsController < ApplicationController
   def show
     @planet = Planet.find(params[:id])
     @fields = @planet.fields
-    @cena_noveho_lena_melanz = @planet.cena_noveho_lena_mel
-    @cena_noveho_lena_solary = @planet.cena_noveho_lena_sol
+    lvl = current_user.researches.where('technology_id' => 5).first
+    bonus = 1 - (lvl.lvl * 0.02)
+    @cena_noveho_lena_melanz = @planet.cena_noveho_lena_mel * bonus
+    @cena_noveho_lena_solary = @planet.cena_noveho_lena_sol * bonus
+
   end
 
   def new
@@ -53,14 +56,17 @@ class PlanetsController < ApplicationController
   
   def osidlit_pole
     @planet = Planet.find(params[:id])
-
+    lvl = current_user.researches.where('technology_id' => 5).first
+    bonus = 1 - (lvl.lvl * 0.02)
     if @planet.osidlitelna?(current_user)
       cena_mel = params[:cena_mel].to_f
-      cena_spoctena = @planet.cena_noveho_lena_mel.to_f
+      cena_mel = (cena_mel * bonus).to_f
+      cena_spoctena = @planet.cena_noveho_lena_mel * bonus
       cena_mel = cena_spoctena if cena_spoctena > cena_mel
 
       cena_sol = params[:cena_sol].to_f
-      cena_spoctena = @planet.cena_noveho_lena_sol.to_f
+      cena_sol = cena_sol * bonus
+      cena_spoctena = @planet.cena_noveho_lena_sol * bonus
       cena_sol = cena_spoctena if cena_spoctena > cena_sol
 
       if cena_mel > current_user.melange
