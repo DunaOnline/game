@@ -14,6 +14,9 @@ DuneOnline::Application.routes.draw do
 
   resources :eods
   match 'zobraz_eod' => 'eods#zobraz_eod', :as => :zobraz_eod
+  
+  resources :technologies
+  match 'vylepsi_technology' => 'technologies#vylepsi_technology', :as => :vylepsi_technology
 
   resources :systems
 
