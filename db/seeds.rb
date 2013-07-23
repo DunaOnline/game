@@ -109,6 +109,47 @@ Field.create(:user_id => gilbertus.id, :planet_id => titania.id, :name => "Treti
 Field.create(:user_id => simi.id, :planet_id => titania.id, :name => "Ctvrta", :pos_x => 2, :pos_y => 2)
 puts 'Field done'
 
+Technology.create(:name => "Investice do Infrastruktury", :discovered => 1, :description => "-2% cena budov
+1. lvl = povolení stavby Město
+7. lvl = povolení stavby Velkoměsto
+14. lvl = povolení stavby Metropole", :price => 300, :max_lvl => 17, :bonus => 0.02, :bonus_type => "L", :image_url => "image/vyskum/i_inf.png", :image_lvl =>"1*7*14")
+Technology.create(:name => "Investice do ekonomiky", :discovered => 1, :description => "+2% produkce solárů
+1. lvl = povolení stavby Trh
+7. lvl = povolení stavby Banka
+14. lvl = povolení stavby Sídlo CHOAMu", :price => 300, :max_lvl => 17, :bonus => 0.02, :bonus_type => "S", :image_url => "image/vyskum/i_eko.png", :image_lvl =>"1*7*14")
+Technology.create(:name => "Investice do průmyslu", :discovered => 1, :description => "+2% produkce materiálu 
+1. lvl = povolení stavby Důl
+7. lvl = povolení stavby Hlubinný důl
+14. lvl = povolení stavby Orbitální doly", :price => 500, :max_lvl => 17, :bonus => 0.02, :bonus_type => "M", :image_url => "image/vyskum/i_pru.png", :image_lvl =>"1*7*14")
+Technology.create(:name => "Investice do výzkumu", :discovered => 1, :description => "+2% produkce výzkumných bodů
+1. lvl = povolení stavby Laboratoř
+7. lvl = povolení stavby Výzkumné centrum
+14. lvl = povolení stavby Univerzita", :price => 600, :max_lvl => 17, :bonus => 0.02, :bonus_type => "E", :image_url => "image/vyskum/i_vyz.png", :image_lvl =>"1*7*14")
+Technology.create(:name => "Investice do koření", :discovered => 1, :description => "-2% ceny osídlení léna
++2% produkce melanže na Arrakis
+3. lvl = povolení stavby Továrna na koření
+6. lvl = povolení stavby Kasárna", :price => 250, :max_lvl => 17, :bonus => 0.02, :bonus_type => "J", :image_url => "image/vyskum/i_kor.png", :image_lvl =>"1*7*14")
+Technology.create(:name => "Investice do armády", :discovered => 0, :description => "", :price => 400, :max_lvl => 17, :bonus => 0.02, :bonus_type => "A", :image_url => "image/vyskum/i_arm.png", :image_lvl =>"1*7*14")
+Technology.create(:name => "Investice do výroby", :discovered => 0, :description => "+2% kapacita továren
+1. lvl = povolení stavby Manufaktura
+7. lvl = povolení stavby Továrna", :price => 350, :max_lvl => 10, :bonus => 0.02, :bonus_type => "V", :image_url => "image/vyskum/i_eko.png", :image_lvl =>"1*7*14")
+
+Technology.create(:name => "Investice do pěchoty", :discovered => 0, :description => "+2% kapacita kasáren
+1. lvl = povolení stavby Kasárna", :price => 350, :max_lvl => 17, :bonus => 0.02, :bonus_type => "K", :image_url => "image/vyskum/i_eko.png", :image_lvl =>"1*7*14")
+Technology.create(:name => "Investice do flotily", :discovered => 0, :description => "+2% kapacita loděnic
+1. lvl = povolení stavby Loděnice
+7. lvl = povolení stavby Planetární obrana", :price => 350, :max_lvl => 17, :bonus => 0.02, :bonus_type => "P", :image_url => "image/vyskum/i_eko.png", :image_lvl =>"1*7*14")
+Technology.create(:name => "Bojová technika", :discovered => 0, :description => "+2% útok pozemních jednotek", :price => 350, :max_lvl => 15, :bonus => 0.02, :bonus_type => "PF", :image_url => "image/imghra/v011.png", :image_lvl =>"1*7*14")
+Technology.create(:name => "Obraná technologie", :discovered => 0, :description => "+2% HP pozemních jednotek", :price => 450, :max_lvl => 15, :bonus => 0.02, :bonus_type => "PO", :image_url => "image/imghra/v020.png", :image_lvl =>"1*7*14")
+Technology.create(:name => "Bojová technika", :discovered => 0, :description => "+2% útok vesmírnych jednotek", :price => 350, :max_lvl => 15, :bonus => 0.02, :bonus_type => "VF", :image_url => "image/imghra/v030.png", :image_lvl =>"1*7*14")
+Technology.create(:name => "Obraná technologie", :discovered => 0, :description => "+2% HP vesmírnych jednotek", :price => 300, :max_lvl => 15, :bonus => 0.02, :bonus_type => "VO", :image_url => "image/imghra/v040.png", :image_lvl =>"1*7*14")
+
+#Technology.create(:name => "Lasery", :description => "", :price => 300, :max_lvl => 10, :bonus => 0.02, :bonus_type => "VO", :image_url => "image/imghra/v040.png")
+#Technology.create(:name => "Rychlopalné zbraně", :description => "+2% HP vesmírnych jednotek", :price => 300, :max_lvl => 8, :bonus => 0.02, :bonus_type => "VO", :image_url => "image/imghra/v040.png")
+#Technology.create(:name => "Obraná technika flotily", :description => "+2% HP vesmírnych jednotek", :price => 300, :max_lvl => 10, :bonus => 0.02, :bonus_type => "VO", :image_url => "image/imghra/v040.png")
+
+puts 'Technology done'
+
 norma.napln_suroviny
 doktor.napln_suroviny
 gilbertus.napln_suroviny
