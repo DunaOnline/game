@@ -56,8 +56,12 @@ class PlanetsController < ApplicationController
   
   def osidlit_pole
     @planet = Planet.find(params[:id])
-    lvl = current_user.researches.where('technology_id' => 5).first
-    bonus = 1 - (lvl.lvl * 0.02)
+    lvl = current_user.vyskumane_tech(5)
+    if lvl
+      bonus = 1 - (lvl.lvl * 0.02)
+    else
+    bonus = 1
+    end
     if @planet.osidlitelna?(current_user)
       cena_mel = params[:cena_mel].to_f
       cena_mel = (cena_mel * bonus).to_f
