@@ -50,7 +50,7 @@ class Technology < ActiveRecord::Base
     end
     return levely
   end
-
+public
 def cesta_technologie(typ)
     cesta = "technologie/"
     case self.id
@@ -81,6 +81,5 @@ def cesta_technologie(typ)
   
   end
 
-  public :cesta_technologie
 
 
