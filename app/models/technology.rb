@@ -81,5 +81,5 @@ def cesta_technologie(typ)
   
   end
 
-
+end
 
