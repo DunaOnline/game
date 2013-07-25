@@ -43,14 +43,6 @@ class Technology < ActiveRecord::Base
     end
   end
 
-  def vynalezene?(user)
-    research = self.researches.where(:user_id => user).exists?
-      return true
-    else
-      return false
-    end
-  end
-
   public
   def levely
     if self.image_lvl
