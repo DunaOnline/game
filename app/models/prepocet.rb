@@ -87,10 +87,10 @@ class Prepocet
   
   def self.produkce_melanz(order)
     puts "PRODUKUJI MELANZ"
-    tech = vlastnik.vyskumane_tech(5)
     arrakis = Planet.arrakis
     leno = Field.find_by_planet_id(arrakis)
     vlastnik = User.spravce_arrakis
+    tech = vlastnik.vyskumane_tech(5)
     if vlastnik
       melange = leno.vynos('melange') * ((tech * 0.02) + 1)
     else
