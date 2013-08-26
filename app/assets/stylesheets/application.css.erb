@@ -497,7 +497,7 @@ border-top-right-radius: 4px;
 	}
 	
 div.l {
-	color:#fffff;
+	color:#ffffff;
 	font-size:12px;
 	width: 150px;
 	padding: 10px 10px 10px 15px;
@@ -696,7 +696,7 @@ border-radius: 3px;
 		.ok5:hover {color:#ffdb30; border:#ffdb30 1px solid;}
 		
 .okuni {	
-	padding: auto 5px auto 5px !important;
+	/*padding: auto 5px auto 5px !important;*/
 	width: auto !important;
 	background-color: transparent;
 	background-image: url(<%= asset_path 'css/td1.png' %>) !important;   
@@ -789,7 +789,7 @@ input.oktab_95 {
 /* ++++++++++++++++++++ Form?tov?n? textu ++++++++++++++++++++ */	
 h1 {
 	font-size: 1.5em;
-	font-stretch: wider;
+	font-stretch: expanded;
 	font-weight: bold;
 	color: #ff8c00;
 	padding: 5px 0 5px 0;
@@ -800,7 +800,7 @@ h1 {
 		
 h2 {
 	font-size: 1.3em;
-	font-stretch: wider;
+	font-stretch: expanded;
 	font-weight: bold;
 	color: #ffdb30;
 	padding: 5px 0 5px 0;
@@ -833,8 +833,8 @@ a.emperor { text-decoration:none; margin:0px; color:#da70d6;	}
 a.regent { text-decoration:none; margin:0px; color:#da70d6;	}		
 	a.regent:hover{text-decoration:underline;}	
 	
-a.duce { text-decoration:none;  margin:0px; color:#1e90ff;	}		
-	duce:hover{text-decoration:underline;}	
+/*a.duce { text-decoration:none;  margin:0px; color:#1e90ff;	}		*/
+	/*duce:hover{text-decoration:underline;}	*/
 	
 a.poslanec { text-decoration:none; margin:0px; color:#40e0d0;	}		
 	a.poslanec:hover{text-decoration:underline;}	
@@ -969,7 +969,7 @@ div.all{
 		padding: 0 15px 15px 15px;
 		background-image: url(<%= asset_path 'css/tseda.png' %>); 
 		text-align: justify;
-		font-size: 1.0 em;
+		font-size: 1.0em;
 		border: 1px solid #696969;
 		vertical-align: top;
 		margin-top: 20px;
@@ -993,10 +993,10 @@ td.tdpl{
 	background-position: center;
 	background-color: #000;
 	background-repeat: no-repeat;
-	text-shadow: 0.1em 0.1em #000 !Important;
+	text-shadow: 0.1em 0.1em #000;
 	border: 1px solid #696969;
 	vertical-align: top;
-	padding: 5px 10px 5px 15px !Important;
+	padding: 5px 10px 5px 15px;
 -webkit-border-top-left-radius: 4px;
 -webkit-border-bottom-left-radius: 4px;
 -moz-border-radius-topleft: 4px;
@@ -1017,10 +1017,10 @@ td.tdpr{
 	background-position: center;
 	background-color: #000;
 	background-repeat: no-repeat;
-	text-shadow: 0.1em 0.1em #000 !Important;
+	text-shadow: 0.1em 0.1em #000;
 	border: 1px solid #696969;
 	vertical-align: top;
-	padding: 5px 10px 5px 15px !Important;
+	padding: 5px 10px 5px 15px;
 -webkit-border-top-right-radius: 4px;
 -webkit-border-bottom-right-radius: 4px;
 -moz-border-radius-topright: 4px;
@@ -1041,10 +1041,10 @@ td.tdpl2{
 	background-position: center;
 	background-color: #000;
 	background-repeat: no-repeat;
-	text-shadow: 0.1em 0.1em #000 !Important;
+	text-shadow: 0.1em 0.1em #000;
 	border: 1px solid #696969;
 	vertical-align: top;
-	padding: 5px 10px 5px 15px !Important;
+	padding: 5px 10px 5px 15px;
 		-webkit-border-radius: 4px;
 		-moz-border-radius: 4px;
 		border-radius: 4px;
@@ -1062,7 +1062,7 @@ td.tdpl2{
 }
 
 .r{
-				DOPLNIT! border radius!
+				/*DOPLNIT! border radius!*/
 }
 
 .m{
@@ -1102,7 +1102,7 @@ border-top-right-radius: 4px;
 td.ava{
 		border: none !important;
 		width: 50px;	
-		padding: none !important;
+		padding: 0 !important;
 		margin-bottom:20px;
 }
 	td.ava img{
@@ -1130,7 +1130,7 @@ td.none{
 		padding: 3px 0 3px 0 !important;
 		margin: 10px -6px 5px -6px !important;
 		text-align: center !important;
-		font-size: 12 px !important;
+		font-size: 12px !important;
 		background-image: url(<%= asset_path 'css/td1.png' %>)!important;
 		background-repeat: repeat !important;
 		background-color: transparent !important;
@@ -1155,7 +1155,7 @@ table.tab0 {
 	table.tab0 a {
 		color: #fff;
 		text-decoration: none;
-		font-weight: border;
+		font-weight: bold;
 		font-size: 1em;			
 	}
 	table.tab0 a:hover {
@@ -1187,7 +1187,7 @@ table.tab1 {
 		padding: 5px;
 		background-image: url(<%= asset_path 'css/tseda.png' %>);   
 		text-align: justify;
-		font-size: 1.0 em;
+		font-size: 1.0em;
 		border: 1px solid #696969;
 		vertical-align: top;
 	}
@@ -1204,13 +1204,19 @@ table.tab1 {
 		-moz-border-radius: 2px;
 		border-radius: 2px;
 	}
+        table.tab1 img:hover {
+            background: #aaaaaa;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 2px;
+        }
 	table.tab1 input {
 		margin: 2px 3px 2px 0;
 		width: 60px;
 		padding: 3px 5px 2px 5px;
 		background-color: transparent;
 		background-image: url(<%= asset_path 'css/tcerna.png' %>);   
-		font-size: 1.0 em;
+		font-size: 1.0em;
 		color: #a2a2a2;	
 		text-decoration: none;
 		vertical-align: middle;
@@ -1255,7 +1261,7 @@ table.tab2 {
 		padding: 5px;
 		background-image: url(<%= asset_path 'css/tseda.png' %>);   
 		text-align: justify;
-		font-size: 1.0 em;
+		font-size: 1.0em;
 		border: 1px solid #696969;
 		vertical-align: top;
 	}
@@ -1381,18 +1387,18 @@ table.tab3 {
 			padding: 5px;
 			background-image: url(<%= asset_path 'css/tseda.png' %>);   
 			text-align: justify;
-			font-size: 1.0 em;
+			font-size: 1.0em;
 			border: 1px solid #696969;
 			vertical-align: top;
 		}
 		
 		table.tab3 textarea{
-			padding: none;
-			margin: none;
+			padding: 0;
+			margin: 0;
 			background: transparent;
 			color: #fff;
 			text-align: justify;
-			font-size: 1.0 em;
+			font-size: 1.0em;
 			border: none;
 			vertical-align: top;
 			width: 676px;
@@ -1424,7 +1430,7 @@ table.tab4 {
 		width: 260px;
 		background-image: url(<%= asset_path 'css/tseda.png' %>);   
 		text-align: justify;
-		font-size: 1.0 em;
+		font-size: 1.0em;
 		border: 1px solid #696969;
 		vertical-align: top;
 	}
@@ -1499,7 +1505,7 @@ table.tab4 {
 				width:700px; 
 				height: auto;		
 				margin: 10px 0 10px 0;
-				background-image: url(<%= asset_path 'css/landsraad.png' %>;
+				background-image: url(<%= asset_path 'css/landsraad.png' %>);
 				background-position: top;
 				}
 				
@@ -1572,7 +1578,7 @@ table.vyzkum {
 			padding:9px 5px 5px 3px;
 			width: 200px;
 			white-space: nowrap;
-			font-size: 1 em;
+			font-size: 1em;
 			text-shadow: 0.1em 0.1em #000 !important;
 			text-align: right;
 			vertical-align: baseline;
@@ -1641,7 +1647,7 @@ td.v{
 	vertical-align: top !important;
 	text-align: right !important;
 	padding: 5px 0 0 5px !important;
-	text-shadow: 0.1em 0.1em #000 !Important;
+	text-shadow: 0.1em 0.1em #000;
 	font-size: 13px !important;
 	white-space: nowrap;
         padding:6px 5px 5px 3px !important;
@@ -1760,7 +1766,7 @@ table.profil {
 	table.profil a {
 		color: #fff;
 		text-decoration: none;
-		font-weight: border;
+		font-weight: bold;
 		font-size: 1em;			
 	}
 	table.profil a:hover {
@@ -1990,4 +1996,101 @@ td.tdo {
 
 .best_in_place {
   background-color: #444444;
+}
+
+
+.fright {
+    float: right;
+}
+
+.reply {
+    float: right;
+    border-right: 1px solid #ffffff;
+    padding-right: 5px;
+}
+.postaBody {
+    display: none;
+}
+#message_subject {
+    background-image: url(../images/css/email.png)
+}
+.opica {
+    display: none;
+}
+.error {
+    border: solid 1px #ff0000;
+    padding: 1px;
+}
+#pagination {
+    text-align: center;
+}
+#pagination span {
+    padding-left: 5px;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+#pagination .selected {
+    text-decoration: underline;
+
+}
+.myOffers {
+    width:700px;
+
+    margin: 10px 0 10px 0;
+    float: left;
+    border: 0;
+}
+
+table.myOffers th{
+    color:#ffdb30;
+    font-weight: bold;
+    font-size: 12px;
+    padding:6px 5px 5px 3px;
+    height: 20px !important;
+    width: 100px !important;
+    white-space: nowrap;
+    text-align: center !important;
+    background-image: url(<%= asset_path 'css/td1.png' %>);
+    border: 1px solid #696969 !important;
+    border-bottom: 1px solid #ffdb30 !important;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+table.myOffers td{
+    padding:3px;
+    height: 20px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+table.myOffers img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+table.myOffers img:hover {
+    background: #aaaaaa;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+#offerForm {
+    display: none;
+}
+
+    /* ++++++++++++++++++++ Form?tov?n? technologii ++++++++++++++++++++ */
+
+.tech_description {
+    display:none;
+}
+.descr {
+    cursor: pointer;
 }
