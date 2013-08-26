@@ -114,12 +114,12 @@ class MarketsController < ApplicationController
 	      if @market.what_goods(current_user) && @market.save
 
 		      @market.seller(current_user.id)
-		      flash[:notice] = 'Market was successfully created.'
+		      flash[:notice] = 'Ponuka bola uspesne vytvorena'
 	        format.html { redirect_to action: "index" }
 	        format.json { render json: @markets, status: :created, location: @market }
 	      else
 
-		      flash[:error] = 'Market was NOT successfully created.'
+		      flash[:error] = 'Ponuka nebola vytvorena prosim skuste znova'
 	        format.html { redirect_to action: "index" }
 	        format.json { render json: @market.errors, status: :unprocessable_entity }
 	      end
