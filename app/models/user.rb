@@ -247,6 +247,37 @@ class User < ActiveRecord::Base
           return 0
         end
   end
+  
+  def goodsToBuyer(typ,amount)
+	  goods = self.goodsHome(typ)
+	  case typ
+		  when "M"
+			  self.domovske_leno.resource.update_attribute(:material,goods + amount)
+		  when "P"
+			  self.domovske_leno.resource.update_attribute(:population,goods + amount)
+		  when "J"
+			  self.update_attribute(:melange,goods + amount)
+		  when "E"
+			  self.update_attribute(:exp,goods + amount)
+		  else
+			  return
+	  end
+  end
+
+  def goodsHome(typ)
+	  case typ
+		  when "M"
+			  self.domovske_leno.resource.material
+		  when "P"
+			  self.domovske_leno.resource.population
+		  when "J"
+			  self.melange
+		  when "E"
+			  self.exp
+		  else
+			  return
+	  end
+  end
 
   def politicke_postaveni
     # Imperátor > Mistodržící > Regent > Vůdce > Poslanec > Mentat > Vojenský mentat > Diplomat > Guvernér
