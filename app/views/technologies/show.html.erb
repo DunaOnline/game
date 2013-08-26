@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @technology.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @technology.description %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @cena_tech %>
+</p>
+
+<%= form_tag vylepsi_technology_path(:technology => params[:id], :user_id => current_user) do %>
+			
+			<%= submit_tag "Vylepsi" %>
+		<% end %>
+
+
+<%= link_to 'Edit', edit_technology_path(@technology) %> |
+<%= link_to 'Back', technologies_path %>

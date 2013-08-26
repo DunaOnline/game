@@ -1,0 +1,20 @@
+  <tr xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" class="opica" data-druh="<%= message.druh if message.druh %>">
+  <td><%= link_to message.created_at, '#', :class => "message" %></td>
+  <% odosielatelId = message.conversations.first.recipient%>
+  <% odosielatel = User.find(odosielatelId) %>
+  <td><%=link_to message.zistiMenoOdosielatela(odosielatelId), odosielatel %></td>
+  <td><%= odosielatel.house.name %></td>
+  <td><%= message.subject %>
+
+  <span class="fright">
+  <%= link_to image_tag('../assets/css/DO_cross.png'), message, :confirm => "are you sure?", :method => :delete, :class => 'delete_post', :remote => true  %></span></td>
+
+</tr>
+<tr class="postaBody">
+  <td colspan="4">
+    <%= message.body %>
+    <p>
+    <%= link_to 'Odpovedat', new_message_path, :class => "reply"%>
+    </p>
+  </td>
+</tr>

@@ -11,9 +11,19 @@
 //= require_tree .
 
 
-//funkcia na hide/show description pre technologiu 
-$(function () {
-    $(".descr").click(function () {
-        $(this).parent().next().toggle();
-    });
-});
+
+
+
+//funkcia na hide/show form pre postu
+//
+//$(document).ready (function() {
+//    $(".novaPostaBtn").click(function () {
+//        $("#novaPosta").toggle();
+//        //$("#novaPosta").find('textarea,input[type="text"],input[type="file"]').focus;
+//    });
+//});
+
+
+
+
+

@@ -1,0 +1,50 @@
+<table class="tab0">
+  <tr>
+    <td class="drob">
+      <a href="index.htm" title="Home">⌂</a>
+      » <a href="kom-soukroma.htm">Přijaté zprávy</a>
+
+    </td>
+
+    <td class="tdd">
+      <ul class="menud">
+        <li><a title="Filtrováním přenastavíte zobrazená data.">Filtrovat druh »</a>
+          <ul>
+            <li class="filterPosta"><a href="#">Soukromá zpráva</a>
+
+            <li class="filterPosta"><a href="#">Malorodní</a>
+            <li class="filterPosta"><a href="#">Generálům</a>
+            <li class="filterPosta"><a href="#">Národní</a>
+            <li class="filterPosta"><a href="#">Diplomatická</a>
+            <li class="filterPosta"><a href="#">Imperiální</a>
+          </ul>
+        </li>
+      </ul>
+    </td>
+  </tr>
+</table>
+<div id="pagination"></div>
+<table class="tab1" id="opica">
+  <tr>
+    <th class="l">Čas</th>
+    <th>Odesilatel</th>
+    <th>Národ</th>
+    <th class="r" style="width:240px">Předmět</th>
+  </tr>
+
+
+
+
+
+
+  <%= render :partial => "message", :collection => @messages %>
+  <tr id="novaposta">
+
+
+</table>
+
+<br />
+
+
+
+

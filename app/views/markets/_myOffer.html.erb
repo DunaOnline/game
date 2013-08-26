@@ -1,0 +1,34 @@
+
+
+
+<tr>	<td><%= myOffer.showArea %></td>
+
+
+  <td><%= myOffer.price %></td>
+  <td><%= myOffer.amount %></td>
+
+
+
+
+  <td>
+    <%= link_to 'Strata 30% zbozi', myOffer, :confirm => "are you sure?", :method => :delete, :remote => true, :class => 'delete_market' %>
+  </td>
+  <% if ((Time.now - myOffer.updated_at) / 3600).round > 1 %>
+      <td>
+        <% if myOffer.price != 1 %>
+        <%= link_to 'Zlevnit o 10%', zlevnit_path(:market => myOffer.id), :confirm => "are you sure?", :class => 'delete_market' %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to 'Zdrazet o 10%', zdrazet_path(:market => myOffer.id), :confirm => "are you sure?", :class => 'delete_market' %>
+      </td>
+  <% else %>
+      <td>Mozete zlacnit kazdu hodinu</td>
+      <td>Mozete zdrazet kazdu hodinu</td>
+
+
+    <% end %>
+    </tr>
+
+
+
