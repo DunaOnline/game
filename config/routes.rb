@@ -1,4 +1,12 @@
 DuneOnline::Application.routes.draw do
+  resources :markets
+  match 'buy' => 'markets#buy', :as => :buy
+  match 'myOffers' => 'markets#myOffers', :as => :myOffers
+  match 'zlevnit' => 'markets#zlevnit', :as => :zlevnit
+  match 'zdrazet' => 'markets#zdrazet', :as => :zdrazet
+
+  resources :messages
+  
   resources :posts
 
   resources :topics
