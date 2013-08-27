@@ -1,9 +1,9 @@
 class Message < ActiveRecord::Base
-  attr_accessible :body, :subject, :read, :recipients, :druh
+  attr_accessible :body, :subject, :read, :recipients,:user_id, :druh
 	has_many :conversations
 	belongs_to :user
 
-	validates_presence_of :recipients, :subject, :body
+	validates_presence_of :subject, :body
 
 end
 
@@ -13,12 +13,8 @@ def zistiIdPrijemcu(komu)
 			if user
 				user.id
 			else
-				0
+				return false
 			end
-end
-def zistiMenoOdosielatela(id)
-	  user = User.where('id' => id).first
-		user.nick
 end
 
 def vymaz(user,odoslana)
@@ -37,6 +33,7 @@ end
 
 public
 def posliPostu(odosielatel, komu, posta)
+	posta.update_attribute(:user_id, odosielatel.id)
 	narod = odosielatel.house_id
 	malorod = odosielatel.subhouse_id
 	case posta.druh
@@ -57,24 +54,26 @@ def posliPostu(odosielatel, komu, posta)
 		Message.vytvor_postu(odosielatel,recipient.nick,posta)
 	end
 
+	if komu
+		prijemci = komu.split(",")
+		index = 0
+		while index < prijemci.length
+			prijemca = prijemci[index].strip
 
-	prijemci = komu.split(",")
-	index = 0
-	while index < prijemci.length
-		prijemca = prijemci[index].strip
+			prijemca = prijemca[1..prijemca.length] if index >0
+			user = nil
+			user = User.find(self.zistiIdPrijemcu(prijemca)) if prijemca != "" and prijemca != nil
 
-		prijemca = prijemca[1..prijemca.length] if index >0
-		user = nil
-		user = User.find(self.zistiIdPrijemcu(prijemca)) if prijemca != "" and prijemca != nil
-
-		if user && user != odosielatel.id
-		Message.vytvor_postu(odosielatel,prijemca,posta)
+			if user && user != odosielatel.id
+			Message.vytvor_postu(odosielatel,prijemca,posta)
+			end
+			index += 1
 		end
-		index += 1
 	end
 end
 
 def vytvor_postu(odosielatel, komu, posta)
+	#asi zbytocna podmienka musim sa na to pozriet uz hore to nprejde pokial nieje prijemca
 	if self.zistiIdPrijemcu(komu)
 	Conversation.new(
 			:message_id => posta.id,

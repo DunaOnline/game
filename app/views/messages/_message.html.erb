@@ -1,9 +1,7 @@
   <tr xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" class="opica" data-druh="<%= message.druh if message.druh %>">
   <td><%= link_to message.created_at, '#', :class => "message" %></td>
-  <% odosielatelId = message.conversations.first.recipient%>
-  <% odosielatel = User.find(odosielatelId) %>
-  <td><%=link_to message.zistiMenoOdosielatela(odosielatelId), odosielatel %></td>
-  <td><%= odosielatel.house.name %></td>
+  <td><%=link_to message.user.nick, message.user %></td>
+  <td><%= message.user.house.name %></td>
   <td><%= message.subject %>
 
   <span class="fright">
@@ -14,7 +12,7 @@
   <td colspan="4">
     <%= message.body %>
     <p>
-    <%= link_to 'Odpovedat', reply_path(:id => message.id), :class => "reply"%>
+    <%= link_to 'Odpovedat', new_message_path(:id => message.id), :class => "reply"%>
     </p>
   </td>
 </tr>

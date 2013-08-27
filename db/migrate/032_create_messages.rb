@@ -4,7 +4,7 @@ class CreateMessages < ActiveRecord::Migration
       t.string :body
       t.string :subject
       t.string :recipients
-      t.string :conversations
+      t.integer :user_id
       t.string :druh
       t.boolean :read
 
