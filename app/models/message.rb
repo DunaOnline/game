@@ -37,6 +37,26 @@ end
 
 public
 def posliPostu(odosielatel, komu, posta)
+	narod = odosielatel.house_id
+	malorod = odosielatel.subhouse_id
+	case posta.druh
+		when "M"
+			recipients = User.where(:subhouse_id => malorod, :house_id => narod)
+		when "G"
+			recipients = User.where(:general => true, :house_id => narod)
+		when "N"
+			recipients = User.where(:house_id => narod)
+		when "D"
+			recipients = User.where(:house_id => narod, :diplomat => true)
+		when "I"
+			recipients = User.all
+		else
+			recipients = []
+	end
+	recipients.each do |recipient|
+		Message.vytvor_postu(odosielatel,recipient.nick,posta)
+	end
+
 
 	prijemci = komu.split(",")
 	index = 0
