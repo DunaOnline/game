@@ -14,7 +14,7 @@
   <td colspan="4">
     <%= message.body %>
     <p>
-    <%= link_to 'Odpovedat', new_message_path, :class => "reply"%>
+    <%= link_to 'Odpovedat', reply_path(:id => message.id), :class => "reply"%>
     </p>
   </td>
 </tr>

@@ -44,19 +44,17 @@
 
 </script>
 <div id="novaPosta">
-  <h1>Nova Posta</h1>
+
     <%= form_for(@message) do |f|%>
-
-
 
 
 <table class="tab3">
   <tr>
     <th>
       <%= f.submit :title => "ODESLAT", :value => "ODESLAT", :class => "ok4" %>
-      <%= f.text_field :subject, :title => "Předmět", :placeholder => "Předmět" %>
+      <%= f.text_field :subject, :title => "Předmět", :placeholder => "Předmět", :value => @old_msg ? @old_msg.subject : '' %>
 
-      <%= f.text_field :recipients, :placeholder => "Adresat", :title => "Adresát" %>
+      <%= f.text_field :recipients, :placeholder => "Adresat", :title => "Adresát", :value => @old_msg ? @old_msg.recipients : '' %>
 
       <%= f.select :druh, options_for_select([['Hromadní pošta', nil], ['Malorodní', 'M'], ['Generálům', 'G'], ['Národní', 'N'],['Diplomatická', 'D'],['Imperiální', 'I']])%>
 
@@ -73,7 +71,7 @@
 
 
 
-    <%= f.text_area :body %>
+    <%= f.text_area :body, :value => @old_msg ? @old_msg.body : '' %>
 
 
     </td>
