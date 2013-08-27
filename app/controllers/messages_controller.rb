@@ -10,38 +10,13 @@ class MessagesController < ApplicationController
 			  @messages = Message.order('messages.created_at DESC').includes(:conversations).where('conversations.recipient' => current_user, 'conversations.deleted_by' => [nil,"S"])
 		  when 'Odoslana'
 			  @messages = Message.order('messages.created_at DESC').includes(:conversations).where('conversations.sender' => current_user, 'conversations.deleted_by' => [nil,"R"])
-			#when 'Malorodni'
-			#  @messages = Message.includes(:conversations).where('conversations.sender' => current_user,  'messages.druh' => 'M', 'conversations.deleted_by' => nil)
-			#when 'Generalum'
-			#  @messages = Message.includes(:conversations).where('conversations.sender' => current_user, 'messages.druh' => 'G', 'conversations.deleted_by' => nil)
-			#when 'Narodni'
-			#  @messages = Message.includes(:conversations).where('conversations.sender' => current_user, 'messages.druh' => 'N', 'conversations.deleted_by' => nil)
-			#when 'Diplomaticka'
-			#  @messages = Message.includes(:conversations).where('conversations.sender' => current_user, 'messages.druh' => 'D', 'conversations.deleted_by' => nil)
-			#when 'Imperialni'
-			#  @messages = Message.includes(:conversations).where('conversations.sender' => current_user, 'messages.druh' => 'I', 'conversations.deleted_by' => nil)
 			else
 				@messages = Message.includes(:conversations).where('conversations.recipient' => current_user, 'conversations.deleted_by' => [nil,"S"] )
 	  end
 
   end
 
-  #def odoslane
-	 # @posta = Message.includes(:conversations).where('conversations.sender' => current_user)
-  #
-  #
-  #
-	 # respond_to do |format|
-  #
-		#  format.html # odoslane.html.erb
-		#  format.json { render json: @posta }
-  #
-	 # end
-  #end
 
-  #def filtered_posta(druh)
-	 # @posta = Message.includes(:conversations).where('conversations.sender' => current_user)
-  #end
 
 
 
@@ -70,6 +45,18 @@ class MessagesController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @message }
     end
+  end
+  def reply
+	  @old_msg = Message.find(params[:id])
+	  @recipient_array = User.all.map &:nick
+	  @message = Message.new
+
+
+
+	  respond_to do |format|
+		  format.html # new.html.erb
+		  format.json { render json: @message }
+	  end
   end
 
 

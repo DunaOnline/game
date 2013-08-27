@@ -18,6 +18,9 @@
 #      $form.find('textarea,input[type="text"],input[type="file"]').val("")
 
 $(document).ready ->
+  $("#message_druh").click ->
+    if $(this).val() != "" then $("#message_recipients").attr("disabled", "disabled") $("#message_recipients").val("")  else $("#message_recipients").removeAttr("disabled")
+
   $(".message").click ->
     $(this).parent().parent().next().toggle(200)
     $("tr.postaBody").not($(this).parent().parent().next()).hide();
@@ -30,6 +33,8 @@ $(document).ready ->
   $(".filterPosta").each ->
     $(this).click ->
       messages.fadeOut ->
+      $(".druhPosty").empty()
+      $(".druhPosty").append(this.innerText)
       druh = this.innerText.substr(0,1)
       if druh == "S" then pagination(messages) else pagination($('tr[data-druh='+druh+']'))
 
@@ -45,6 +50,7 @@ messagesToShow = (page,messages) ->
   messages_to_show = messages[pageBeg...pageEnd]
   messages_to_show.each ->
     $(this).fadeIn 'slow'
+
 pagination = (messages) ->
   messages = messages
   count = messages.length
