@@ -68,7 +68,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-	      Message.posliPostu(current_user,@message.recipients,@message)
+	      @message.posli_postu(current_user,@message.recipients)
         format.html { redirect_to messages_url(:type => "Dorucena"), :notice => "Posta odoslana"}
         format.json { render json: @message }
 	      #format.js
@@ -85,8 +85,8 @@ class MessagesController < ApplicationController
   # DELETE /messages/1.json
   def destroy
     postum = Message.find(params[:id])
-    postum = postum.conversations.first
-		odoslana = postum.sender == current_user.nick
+    conversation = postum.conversations.first
+		odoslana = conversation.sender == current_user.id
     postum.vymaz(current_user.id,odoslana)
 
     respond_to do |format|
