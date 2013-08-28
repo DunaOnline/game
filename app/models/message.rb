@@ -81,7 +81,7 @@ class Message < ActiveRecord::Base
 				user = User.find(self.zisti_id_prijemcu(recipient)) if recipient != "" and recipient != nil
 
 				if user && user != odosielatel.id
-					self.vytvor_postu(odosielatel,prijemca)
+					self.vytvor_postu(odosielatel,recipient)
 				end
 				index += 1
 			end
