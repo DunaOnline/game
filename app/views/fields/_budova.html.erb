@@ -19,8 +19,8 @@
 
 	</td>
 	<td>
-		<li><%= img_solary %><%= format_mena(budova.naklady_stavba_solary, 'S', false) %>  
-		<li><%= img_material %><%= format_mena(budova.naklady_stavba_material, 'kg') %> 
+		<li><%= img_solary %><%= number_with_precision(@bonus * budova.naklady_stavba_solary, precision: 2) %>  
+		<li><%= img_material %><%= number_with_precision(@bonus * budova.naklady_stavba_material, precision: 2) %> 
 		<%= form_tag postavit_budovu_path(:field => field, :budova => budova) do %>
 			<li><%= number_field_tag :pocet_budov_stavba, nil, :in => -21...21, :step => 1 %></li>
 			<li><%= submit_tag "Postavit" , :class => "oktab_95" %>

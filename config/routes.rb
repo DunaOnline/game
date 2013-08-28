@@ -1,4 +1,12 @@
 DuneOnline::Application.routes.draw do
+  resources :markets
+  match 'buy' => 'markets#buy', :as => :buy
+  match 'myOffers' => 'markets#myOffers', :as => :myOffers
+  match 'zlevnit' => 'markets#zlevnit', :as => :zlevnit
+  match 'zdrazet' => 'markets#zdrazet', :as => :zdrazet
+
+  resources :messages
+  
   resources :posts
 
   resources :topics
@@ -14,6 +22,9 @@ DuneOnline::Application.routes.draw do
 
   resources :eods
   match 'zobraz_eod' => 'eods#zobraz_eod', :as => :zobraz_eod
+  
+  resources :technologies
+  match 'vylepsi_technology' => 'technologies#vylepsi_technology', :as => :vylepsi_technology
 
   resources :systems
 

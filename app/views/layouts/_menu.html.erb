@@ -6,9 +6,9 @@
         <ul class="menu">
           <li><a class="menukomunikace" title="Komunikace"></a>
             <ul>
-              <li><a href="#"> Doručená pošta *</a>
-              <li><a href="#"> Odeslaná pošta *</a>
-              <li><a href="#"> Poslat poštu *</a>
+              <li><%= link_to "Doručená pošta", messages_path(:type => 'Dorucena')%>
+              <li><%= link_to "Odeslaná pošta", messages_path(:type => 'Odoslana') %>
+              <li><%= link_to "Poslat poštu", new_message_path %>
                 <br>
               <!-- <li><a href="#"> Malorodní Syselaad *</a>  -->
               <li><%= link_to "Národní Syselaad", syselaad_path(:kind => 'N') %></li>
@@ -56,14 +56,24 @@
         <ul class="menu">
           <li><a class="menuvyzkum"  title="Ekonomika a výzkum"></a>
             <ul>
-              <li><a href="#"> Ekonomický výzkum *</a>
-              <li><a href="#"> Výzkum armády *</a>
+
+
+
+              <li><%= link_to ' Ekonomický výzkum', technologies_path %>
+              <li><%= link_to ' Ekonomický výzkum', technologies_path %>
+
+
+
+
+
+
               <% if can? :sprava_rod, House %>
               <li><%= link_to "Kolonizovat planetu", kolonizuj_path %>
               <% end %>
               <!-- <li><a href="#"> Vesmírný výzkum *</a>
               <li><a href="#"> Výroba *</a>
               <li><a href="#"> Obchod *</a> -->
+              <li><%= link_to ' Trh', markets_path %>
             </ul>
         </ul>
       </td>

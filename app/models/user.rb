@@ -61,7 +61,10 @@ class User < ActiveRecord::Base
 
   has_many :polls
   has_many :laws, :through => :polls
-
+  
+  has_many :researches
+  has_many :technologies, :through => :researches
+  
   validates :username, :presence => true, :uniqueness => true
   validates :password, :presence => true, :on => :create
   validates_confirmation_of :password
@@ -234,6 +237,46 @@ class User < ActiveRecord::Base
 
   def domovske_leno
     self.fields.where(:planet_id => Planet.domovska_rodu(self.house)).first
+  end
+  
+ def vyskumane_tech(id)
+        vyskumane_tech =  self.researches.where('technology_id' => id).first
+        if vyskumane_tech
+          return vyskumane_tech.lvl
+        else
+          return 0
+        end
+  end
+  
+  def goodsToBuyer(typ,amount)
+	  goods = self.goodsHome(typ)
+	  case typ
+		  when "M"
+			  self.domovske_leno.resource.update_attribute(:material,goods + amount)
+		  when "P"
+			  self.domovske_leno.resource.update_attribute(:population,goods + amount)
+		  when "J"
+			  self.update_attribute(:melange,goods + amount)
+		  when "E"
+			  self.update_attribute(:exp,goods + amount)
+		  else
+			  return
+	  end
+  end
+
+  def goodsHome(typ)
+	  case typ
+		  when "M"
+			  self.domovske_leno.resource.material
+		  when "P"
+			  self.domovske_leno.resource.population
+		  when "J"
+			  self.melange
+		  when "E"
+			  self.exp
+		  else
+			  return
+	  end
   end
 
   def politicke_postaveni

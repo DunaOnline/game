@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Area:</b>
+  <%= @market.area %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @market.user_id %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @market.price %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @market.amount %>
+</p>
+
+
+<%= link_to 'Edit', edit_market_path(@market) %> |
+<%= link_to 'Back', markets_path %>

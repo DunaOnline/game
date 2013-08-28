@@ -1,0 +1,34 @@
+
+
+
+    <tr>
+
+
+
+  	<td><%= market.showArea %></td>
+
+
+
+    <td><%= market.price %></td>
+    <td><%= market.amount %></td>
+
+
+
+
+    <td>
+
+
+      <%= form_tag buy_path(:market => market.id) do %>
+
+          <%= number_field_tag(:q, nil,:min => 1, :title => "Zadejte množství" ) %>
+          <%= submit_tag 'Koupit', :class => "ok" %></td>
+
+      <% end %>
+
+
+    </td>
+
+  </tr>
+
+
+

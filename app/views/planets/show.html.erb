@@ -38,7 +38,7 @@
 			
 			<% else %>
  				<% if @planet.osidlitelna?(current_user) %>
-					<li><%= link_to "Osidlit pole (#{format_mena(@cena_noveho_lena_melanz, 'mg')} a #{format_mena(@cena_noveho_lena_solary, 'S', false)})", :action => "osidlit_pole", :id => @planet, :cena_mel => @cena_noveho_lena_melanz, :cena_sol => @cena_noveho_lena_solray %>
+					<li><%= link_to "Osidlit pole (#{number_with_precision(@cena_noveho_lena_melanz, precision: 2)} mg a #{number_with_precision(@cena_noveho_lena_solary, precision: 2)} S)", :action => "osidlit_pole", :id => @planet, :cena_mel => @cena_noveho_lena_melanz, :cena_sol => @cena_noveho_lena_solray %>
 				<% else %>
 					<li>Vesmírná Gilda planetu ještě nezahrnula do pravidelných cest.</li>
 				<% end %>

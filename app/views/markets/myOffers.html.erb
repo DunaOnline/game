@@ -1,0 +1,15 @@
+<table class="myOffers">
+  <tr>
+    <th>Tovar</th>
+
+    <th>Cena za kus [Sol]</th>
+    <th>Množství</th>
+    <th>Stahnout</th>
+    <th>Zlevnit</th>
+    <th>Zdrazet</th>
+  </tr>
+
+<%= render :partial => "myOffer", :collection => @markets %>
+
+    </table>
+<%= link_to 'Spat', markets_path %>

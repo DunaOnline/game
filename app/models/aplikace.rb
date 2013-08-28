@@ -151,11 +151,13 @@ class Aplikace
                             :system_name => "Mu Draconis")
 
     Planet.arrakis.fields << Field.new(:name => "Leno Arrakis",
+                                       :planet_id => arrakis.id,
                                        :user_id => nil,
                                        :pos_x => 1,
                                        :pos_y => 1
     )
     arrakis_field = Field.find_by_planet_id(arrakis)
+    arrakis_field.vytvor_resource
     arraken = Building.where(:name => "Arraken").first
     arrakis_field.postav(arraken, 1)
     harvester = Building.where(:name => "Továrna na koření").first

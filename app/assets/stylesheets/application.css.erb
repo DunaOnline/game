@@ -82,6 +82,19 @@ input.i_key {background-image: url(<%= asset_path 'css/key.png' %>) !important;}
 	}
 		div.l select:hover{border: solid 1px #ffdb30 !important;}
 
+/* ++++++++++++++++++++ Form?tov?n? technologii ++++++++++++++++++++ */
+
+.tech_description {
+	display:none;
+	}
+.descr {
+	cursor: pointer;
+	}
+
+
+
+
+
 /* ++++++++++++++++++++ Lista ++++++++++++++++++++ */	
   
 div.lista{
@@ -484,7 +497,7 @@ border-top-right-radius: 4px;
 	}
 	
 div.l {
-	color:#fffff;
+	color:#ffffff;
 	font-size:12px;
 	width: 150px;
 	padding: 10px 10px 10px 15px;
@@ -683,7 +696,7 @@ border-radius: 3px;
 		.ok5:hover {color:#ffdb30; border:#ffdb30 1px solid;}
 		
 .okuni {	
-	padding: auto 5px auto 5px !important;
+	/*padding: auto 5px auto 5px !important;*/
 	width: auto !important;
 	background-color: transparent;
 	background-image: url(<%= asset_path 'css/td1.png' %>) !important;   
@@ -776,7 +789,7 @@ input.oktab_95 {
 /* ++++++++++++++++++++ Form?tov?n? textu ++++++++++++++++++++ */	
 h1 {
 	font-size: 1.5em;
-	font-stretch: wider;
+	font-stretch: expanded;
 	font-weight: bold;
 	color: #ff8c00;
 	padding: 5px 0 5px 0;
@@ -787,7 +800,7 @@ h1 {
 		
 h2 {
 	font-size: 1.3em;
-	font-stretch: wider;
+	font-stretch: expanded;
 	font-weight: bold;
 	color: #ffdb30;
 	padding: 5px 0 5px 0;
@@ -820,8 +833,8 @@ a.emperor { text-decoration:none; margin:0px; color:#da70d6;	}
 a.regent { text-decoration:none; margin:0px; color:#da70d6;	}		
 	a.regent:hover{text-decoration:underline;}	
 	
-a.duce { text-decoration:none;  margin:0px; color:#1e90ff;	}		
-	duce:hover{text-decoration:underline;}	
+/*a.duce { text-decoration:none;  margin:0px; color:#1e90ff;	}		*/
+	/*duce:hover{text-decoration:underline;}	*/
 	
 a.poslanec { text-decoration:none; margin:0px; color:#40e0d0;	}		
 	a.poslanec:hover{text-decoration:underline;}	
@@ -956,7 +969,7 @@ div.all{
 		padding: 0 15px 15px 15px;
 		background-image: url(<%= asset_path 'css/tseda.png' %>); 
 		text-align: justify;
-		font-size: 1.0 em;
+		font-size: 1.0em;
 		border: 1px solid #696969;
 		vertical-align: top;
 		margin-top: 20px;
@@ -980,10 +993,10 @@ td.tdpl{
 	background-position: center;
 	background-color: #000;
 	background-repeat: no-repeat;
-	text-shadow: 0.1em 0.1em #000 !Important;
+	text-shadow: 0.1em 0.1em #000;
 	border: 1px solid #696969;
 	vertical-align: top;
-	padding: 5px 10px 5px 15px !Important;
+	padding: 5px 10px 5px 15px;
 -webkit-border-top-left-radius: 4px;
 -webkit-border-bottom-left-radius: 4px;
 -moz-border-radius-topleft: 4px;
@@ -1004,10 +1017,10 @@ td.tdpr{
 	background-position: center;
 	background-color: #000;
 	background-repeat: no-repeat;
-	text-shadow: 0.1em 0.1em #000 !Important;
+	text-shadow: 0.1em 0.1em #000;
 	border: 1px solid #696969;
 	vertical-align: top;
-	padding: 5px 10px 5px 15px !Important;
+	padding: 5px 10px 5px 15px;
 -webkit-border-top-right-radius: 4px;
 -webkit-border-bottom-right-radius: 4px;
 -moz-border-radius-topright: 4px;
@@ -1028,10 +1041,10 @@ td.tdpl2{
 	background-position: center;
 	background-color: #000;
 	background-repeat: no-repeat;
-	text-shadow: 0.1em 0.1em #000 !Important;
+	text-shadow: 0.1em 0.1em #000;
 	border: 1px solid #696969;
 	vertical-align: top;
-	padding: 5px 10px 5px 15px !Important;
+	padding: 5px 10px 5px 15px;
 		-webkit-border-radius: 4px;
 		-moz-border-radius: 4px;
 		border-radius: 4px;
@@ -1049,7 +1062,7 @@ td.tdpl2{
 }
 
 .r{
-				DOPLNIT! border radius!
+				/*DOPLNIT! border radius!*/
 }
 
 .m{
@@ -1089,7 +1102,7 @@ border-top-right-radius: 4px;
 td.ava{
 		border: none !important;
 		width: 50px;	
-		padding: none !important;
+		padding: 0 !important;
 		margin-bottom:20px;
 }
 	td.ava img{
@@ -1117,7 +1130,7 @@ td.none{
 		padding: 3px 0 3px 0 !important;
 		margin: 10px -6px 5px -6px !important;
 		text-align: center !important;
-		font-size: 12 px !important;
+		font-size: 12px !important;
 		background-image: url(<%= asset_path 'css/td1.png' %>)!important;
 		background-repeat: repeat !important;
 		background-color: transparent !important;
@@ -1142,7 +1155,7 @@ table.tab0 {
 	table.tab0 a {
 		color: #fff;
 		text-decoration: none;
-		font-weight: border;
+		font-weight: bold;
 		font-size: 1em;			
 	}
 	table.tab0 a:hover {
@@ -1174,7 +1187,7 @@ table.tab1 {
 		padding: 5px;
 		background-image: url(<%= asset_path 'css/tseda.png' %>);   
 		text-align: justify;
-		font-size: 1.0 em;
+		font-size: 1.0em;
 		border: 1px solid #696969;
 		vertical-align: top;
 	}
@@ -1191,13 +1204,19 @@ table.tab1 {
 		-moz-border-radius: 2px;
 		border-radius: 2px;
 	}
+        table.tab1 img:hover {
+            background: #aaaaaa;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 2px;
+        }
 	table.tab1 input {
 		margin: 2px 3px 2px 0;
 		width: 60px;
 		padding: 3px 5px 2px 5px;
 		background-color: transparent;
 		background-image: url(<%= asset_path 'css/tcerna.png' %>);   
-		font-size: 1.0 em;
+		font-size: 1.0em;
 		color: #a2a2a2;	
 		text-decoration: none;
 		vertical-align: middle;
@@ -1242,7 +1261,7 @@ table.tab2 {
 		padding: 5px;
 		background-image: url(<%= asset_path 'css/tseda.png' %>);   
 		text-align: justify;
-		font-size: 1.0 em;
+		font-size: 1.0em;
 		border: 1px solid #696969;
 		vertical-align: top;
 	}
@@ -1368,18 +1387,18 @@ table.tab3 {
 			padding: 5px;
 			background-image: url(<%= asset_path 'css/tseda.png' %>);   
 			text-align: justify;
-			font-size: 1.0 em;
+			font-size: 1.0em;
 			border: 1px solid #696969;
 			vertical-align: top;
 		}
 		
 		table.tab3 textarea{
-			padding: none;
-			margin: none;
+			padding: 0;
+			margin: 0;
 			background: transparent;
 			color: #fff;
 			text-align: justify;
-			font-size: 1.0 em;
+			font-size: 1.0em;
 			border: none;
 			vertical-align: top;
 			width: 676px;
@@ -1411,7 +1430,7 @@ table.tab4 {
 		width: 260px;
 		background-image: url(<%= asset_path 'css/tseda.png' %>);   
 		text-align: justify;
-		font-size: 1.0 em;
+		font-size: 1.0em;
 		border: 1px solid #696969;
 		vertical-align: top;
 	}
@@ -1486,7 +1505,7 @@ table.tab4 {
 				width:700px; 
 				height: auto;		
 				margin: 10px 0 10px 0;
-				background-image: url(<%= asset_path 'css/landsraad.png' %>;
+				background-image: url(<%= asset_path 'css/landsraad.png' %>);
 				background-position: top;
 				}
 				
@@ -1559,7 +1578,7 @@ table.vyzkum {
 			padding:9px 5px 5px 3px;
 			width: 200px;
 			white-space: nowrap;
-			font-size: 1 em;
+			font-size: 1em;
 			text-shadow: 0.1em 0.1em #000 !important;
 			text-align: right;
 			vertical-align: baseline;
@@ -1610,6 +1629,7 @@ table.vyzkum {
 			td.v2:hover{border: solid 1px #ffdb30 !important;} 
 					
         	td.v2 input{
+        		pointer: cursor;
 			color: #fff; 
 			text-shadow: 0.2em 0.2em #000 !important;
 			padding: 20px 3px 1px 5px;
@@ -1627,7 +1647,7 @@ td.v{
 	vertical-align: top !important;
 	text-align: right !important;
 	padding: 5px 0 0 5px !important;
-	text-shadow: 0.1em 0.1em #000 !Important;
+	text-shadow: 0.1em 0.1em #000;
 	font-size: 13px !important;
 	white-space: nowrap;
         padding:6px 5px 5px 3px !important;
@@ -1746,7 +1766,7 @@ table.profil {
 	table.profil a {
 		color: #fff;
 		text-decoration: none;
-		font-weight: border;
+		font-weight: bold;
 		font-size: 1em;			
 	}
 	table.profil a:hover {
@@ -1977,3 +1997,270 @@ td.tdo {
 .best_in_place {
   background-color: #444444;
 }
+
+
+.fright {
+    float: right;
+}
+
+.reply {
+    float: right;
+    border-right: 1px solid #ffffff;
+    padding-right: 5px;
+}
+.postaBody {
+    display: none;
+}
+#message_subject {
+    background-image: url(../images/css/email.png)
+}
+.opica {
+    display: none;
+}
+.error {
+    border: solid 1px #ff0000;
+    padding: 1px;
+}
+#pagination {
+    text-align: center;
+}
+#pagination span {
+    padding-left: 5px;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+#pagination .selected {
+    text-decoration: underline;
+
+}
+.myOffers {
+    width:700px;
+
+    margin: 10px 0 10px 0;
+    float: left;
+    border: 0;
+}
+
+table.myOffers th{
+    color:#ffdb30;
+    font-weight: bold;
+    font-size: 12px;
+    padding:6px 5px 5px 3px;
+    height: 20px !important;
+    width: 100px !important;
+    white-space: nowrap;
+    text-align: center !important;
+    background-image: url(<%= asset_path 'css/td1.png' %>);
+    border: 1px solid #696969 !important;
+    border-bottom: 1px solid #ffdb30 !important;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+table.myOffers td{
+    padding:3px;
+    height: 20px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+table.myOffers img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+table.myOffers img:hover {
+    background: #aaaaaa;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+#offerForm {
+    display: none;
+}
+
+    /* ++++++++++++++++++++ Form?tov?n? technologii ++++++++++++++++++++ */
+
+.tech_description {
+    display:none;
+}
+.descr {
+    cursor: pointer;
+}
+
+/*! jQuery UI - v1.10.3 - 2013-07-28
+* http://jqueryui.com
+* Includes: jquery.ui.core.css, jquery.ui.autocomplete.css, jquery.ui.menu.css, jquery.ui.tooltip.css
+* To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Trebuchet%20MS%2CTahoma%2CVerdana%2CArial%2Csans-serif&fwDefault=bold&fsDefault=1.1em&cornerRadius=4px&bgColorHeader=f6a828&bgTextureHeader=gloss_wave&bgImgOpacityHeader=35&borderColorHeader=e78f08&fcHeader=ffffff&iconColorHeader=ffffff&bgColorContent=eeeeee&bgTextureContent=highlight_soft&bgImgOpacityContent=100&borderColorContent=dddddd&fcContent=333333&iconColorContent=222222&bgColorDefault=f6f6f6&bgTextureDefault=glass&bgImgOpacityDefault=100&borderColorDefault=cccccc&fcDefault=1c94c4&iconColorDefault=ef8c08&bgColorHover=fdf5ce&bgTextureHover=glass&bgImgOpacityHover=100&borderColorHover=fbcb09&fcHover=c77405&iconColorHover=ef8c08&bgColorActive=ffffff&bgTextureActive=glass&bgImgOpacityActive=65&borderColorActive=fbd850&fcActive=eb8f00&iconColorActive=ef8c08&bgColorHighlight=ffe45c&bgTextureHighlight=highlight_soft&bgImgOpacityHighlight=75&borderColorHighlight=fed22f&fcHighlight=363636&iconColorHighlight=228ef1&bgColorError=b81900&bgTextureError=diagonals_thick&bgImgOpacityError=18&borderColorError=cd0a0a&fcError=ffffff&iconColorError=ffd27a&bgColorOverlay=666666&bgTextureOverlay=diagonals_thick&bgImgOpacityOverlay=20&opacityOverlay=50&bgColorShadow=000000&bgTextureShadow=flat&bgImgOpacityShadow=10&opacityShadow=20&thicknessShadow=5px&offsetTopShadow=-5px&offsetLeftShadow=-5px&cornerRadiusShadow=5px
+* Copyright 2013 jQuery Foundation and other contributors Licensed MIT */
+
+        /* Layout helpers
+        ----------------------------------*/
+    .ui-helper-hidden {
+        display: none;
+    }
+    .ui-helper-hidden-accessible {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    .ui-helper-reset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        line-height: 1.3;
+        text-decoration: none;
+        font-size: 100%;
+        list-style: none;
+    }
+    .ui-helper-clearfix:before,
+    .ui-helper-clearfix:after {
+        content: "";
+        display: table;
+        border-collapse: collapse;
+    }
+    .ui-helper-clearfix:after {
+        clear: both;
+    }
+    .ui-helper-clearfix {
+        min-height: 0; /* support: IE7 */
+    }
+    .ui-helper-zfix {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        opacity: 0;
+        filter:Alpha(Opacity=0);
+    }
+
+    .ui-front {
+        z-index: 100;
+    }
+
+        /* Overlays */
+    .ui-widget-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .ui-autocomplete {
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor: default;
+    }
+    .ui-menu {
+        list-style: none;
+        padding: 2px;
+        margin: 0;
+        display: block;
+        outline: none;
+    }
+    .ui-menu .ui-menu {
+        margin-top: -3px;
+        position: absolute;
+    }
+    .ui-menu .ui-menu-item {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        /* support: IE10, see #8844 */
+        list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
+    }
+
+    .ui-menu .ui-menu-item a {
+        text-decoration: none;
+        display: block;
+        padding: 2px .4em;
+        line-height: 1.5;
+        min-height: 0; /* support: IE7 */
+        font-weight: normal;
+    }
+    .ui-menu .ui-menu-item a.ui-state-focus,
+    .ui-menu .ui-menu-item a.ui-state-active {
+        font-weight: normal;
+        margin: -1px;
+    }
+
+
+
+
+        /* Component containers
+        ----------------------------------*/
+    .ui-widget {
+        font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
+        font-size: 1.1em;
+    }
+    .ui-widget .ui-widget {
+        font-size: 1em;
+    }
+
+    .ui-widget-content {
+        border: 1px solid #dddddd;
+        background: #eeeeee;
+        color: #333333;
+    }
+    .ui-widget-content a {
+        color: #333333;
+    }
+            /* Misc visuals
+        ----------------------------------*/
+
+        /* Corner radius */
+    .ui-corner-all,
+    .ui-corner-top,
+    .ui-corner-left,
+    .ui-corner-tl {
+        border-top-left-radius: 4px;
+    }
+    .ui-corner-all,
+    .ui-corner-top,
+    .ui-corner-right,
+    .ui-corner-tr {
+        border-top-right-radius: 4px;
+    }
+    .ui-corner-all,
+    .ui-corner-bottom,
+    .ui-corner-left,
+    .ui-corner-bl {
+        border-bottom-left-radius: 4px;
+    }
+    .ui-corner-all,
+    .ui-corner-bottom,
+    .ui-corner-right,
+    .ui-corner-br {
+        border-bottom-right-radius: 4px;
+    }
+
+        /* Overlays */
+    /*.ui-widget-overlay {*/
+        /*background: #666666 url(images/ui-bg_diagonals-thick_20_666666_40x40.png) 50% 50% repeat;*/
+        /*opacity: .5;*/
+        /*filter: Alpha(Opacity=50);*/
+    /*}*/
+    /*.ui-widget-shadow {*/
+        /*margin: -5px 0 0 -5px;*/
+        /*padding: 5px;*/
+        /*background: #000000 url(images/ui-bg_flat_10_000000_40x100.png) 50% 50% repeat-x;*/
+        /*opacity: .2;*/
+        /*filter: Alpha(Opacity=20);*/
+        /*border-radius: 5px;*/
+    /*}*/
+
