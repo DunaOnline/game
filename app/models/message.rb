@@ -80,10 +80,12 @@ class Message < ActiveRecord::Base
 				user = nil
 				user = User.find(self.zisti_id_prijemcu(recipient)) if recipient != "" and recipient != nil
 
-				if user && user != odosielatel.id
+				#if user && user.id != odosielatel.id
 					self.vytvor_postu(odosielatel,recipient)
-				end
-				index += 1
+				#else
+					#return false
+				#end
+
 			end
 		end
 	end
