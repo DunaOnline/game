@@ -63,3 +63,7 @@ gem 'randumb'
 group :development do
   gem 'meta_request', '0.2.0'
 end
+
+gem 'execjs'
+
+gem 'therubyracer'
