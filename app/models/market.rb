@@ -61,7 +61,7 @@ class Market < ActiveRecord::Base
 	  self.update_attribute(:user_id,user)
   end
 
-  def showArea
+  def show_area
 	  case self.area
 	  when "M"
 		  "Material"
@@ -120,15 +120,11 @@ class Market < ActiveRecord::Base
 	scope :rozl, group(:area)
   scope :myOffers, ->(user) { where("user_id = ?", user) }
 
-  #scope :open_calls, where(:call_status => "open).where("unit_id IS NOT NULL").order("id ASC")
   scope :material, where('area = ?', "M")
   scope :moje, ->(user) { where('user_id != ?', user) }
   scope :melanz, where('area = ?', "J")
   scope :expy, where('area = ?', "E")
   scope :populacia, where('area = ?', "P")
-	#spravit to tak ze @markets = []
-	#@markets << ['J', Market.melanz.minimum(:price)]
-	#@markets << ['E', Market.expy.minimum(:price)]
-	#
+
 end
 

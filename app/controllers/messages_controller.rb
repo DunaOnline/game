@@ -80,6 +80,19 @@ class MessagesController < ApplicationController
     end
   end
 
+  def update
+	  @message = Message.find(params[:id])
+	  read = params[:message]
+	  if read[:read] == "true"
+		  respond_to do |format|
+			  if @message.update_attributes(params[:message])
+			    format.json { render :layout => false }
+			  end
+		  end
+	  end
+	  render nothing: true
+  end
+
 
   # DELETE /messages/1
   # DELETE /messages/1.json

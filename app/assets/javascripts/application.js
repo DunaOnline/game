@@ -14,14 +14,9 @@
 
 
 
-//funkcia na hide/show form pre postu
-//
-//$(document).ready (function() {
-//    $(".novaPostaBtn").click(function () {
-//        $("#novaPosta").toggle();
-//        //$("#novaPosta").find('textarea,input[type="text"],input[type="file"]').focus;
-//    });
-//});
+
+
+
 
 
 

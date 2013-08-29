@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  attr_accessible :body, :subject, :read, :recipients,:user_id, :druh
+  attr_accessible :body, :subject, :recipients, :user_id, :druh, :read
 	has_many :conversations
 	belongs_to :user
 
@@ -21,12 +21,20 @@ class Message < ActiveRecord::Base
 		if odoslana
 		recipients = Conversation.where('sender' => user, 'message_id' => self.id)
 			recipients.each do |r|
-				r.update_attributes(:deleted_by => "S")
+				if r.deleted_by == "R"
+					r.update_attributes(:deleted_by => "RS")
+				else
+					r.update_attributes(:deleted_by => "S")
+				end
 			end
 		else
 			recipients = Conversation.where('recipient' => user, 'message_id' => self.id)
 			recipients.each do |r|
-				r.update_attributes(:deleted_by => "R")
+				if r.deleted_by == "S"
+					r.update_attributes(:deleted_by => "SR")
+				else
+					r.update_attributes(:deleted_by => "R")
+				end
 			end
 		end
 	end
