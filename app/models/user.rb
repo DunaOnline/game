@@ -186,7 +186,22 @@ class User < ActiveRecord::Base
 
   def dovolene_budovy(kind)
     # TODO dovolene budovy podle tech levelu
-    Building.where(:kind => kind, :level => [1]).all
+	  technology = Technology.where(:bonus_type => kind).first
+	  if technology
+	  lvl = self.vyskumane_tech(technology.id)
+
+	    case lvl
+			  when 0..6
+				  Building.where(:kind => kind, :level => [1]).all(:group => "name")
+			  when 7..13
+				  Building.where(:kind => kind, :level => [1,2]).all(:group => "name")
+			  when 14..17
+				  Building.where(:kind => kind).all(:group => "name")
+	    end
+		else
+			Building.where(:kind => kind, :level => [1]).all(:group => "name")
+		end
+
   end
 
   def stat_se(cim)  # cim = presne nazev attributu
@@ -239,17 +254,18 @@ class User < ActiveRecord::Base
     self.fields.where(:planet_id => Planet.domovska_rodu(self.house)).first
   end
   
- def vyskumane_tech(id)
-        vyskumane_tech =  self.researches.where('technology_id' => id).first
+ def vyskumane_tech(bonus_type)
+	  technologie = Technology.where(:bonus_type => bonus_type).first
+        vyskumane_tech =  self.researches.where('technology_id' => technologie.id).first if technologie
         if vyskumane_tech
-          return vyskumane_tech.lvl
+          vyskumane_tech.lvl * technologie.bonus
         else
-          return 0
+          0
         end
   end
   
-  def goodsToBuyer(typ,amount)
-	  goods = self.goodsHome(typ)
+  def goods_to_buyer(typ,amount)
+	  goods = self.goods_at_warehouse(typ)
 	  case typ
 		  when "M"
 			  self.domovske_leno.resource.update_attribute(:material,goods + amount)
@@ -264,7 +280,7 @@ class User < ActiveRecord::Base
 	  end
   end
 
-  def goodsHome(typ)
+  def goods_at_warehouse(typ)
 	  case typ
 		  when "M"
 			  self.domovske_leno.resource.material

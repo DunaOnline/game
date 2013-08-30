@@ -19,6 +19,12 @@
       
 
     </td>
+    <% if current_user.admin? || current_user.leader? || current_user.mentat? %>
+        <td class="tdd">
+          <%= link_to 'Narodni vyskum >>', narodni_vyskum_path %>
+
+        </td>
+    <% end %>
 
   </tr>
 
@@ -57,11 +63,11 @@
 
 
       !!!!! -->
-       <div id="tech">
+
       <% unless @technologies.blank? %>
           <%= render :partial => "technology", :collection => @technologies, :as => :technology %>
       <% end %>
-       </div>
+
 
 
       

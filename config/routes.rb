@@ -26,7 +26,7 @@ DuneOnline::Application.routes.draw do
   
   resources :technologies
   match 'vylepsi_technology' => 'technologies#vylepsi_technology', :as => :vylepsi_technology
-
+	match 'narodni_vyskum' => 'technologies#narodni_vyskum', :as => :narodni_vyskum
   resources :systems
 
   resources :votes

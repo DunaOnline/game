@@ -21,6 +21,7 @@ class House < ActiveRecord::Base
   attr_accessible :name, :leader, :solar, :melange, :material, :exp, :playable, :melange_percent
   attr_accessible :influence
 
+  has_many :researches
   has_many :users
   has_many :fields, :through => :users
   has_many :planets
@@ -63,6 +64,16 @@ class House < ActiveRecord::Base
   end
   def poslanci
     self.users.where(:landsraad => true).order(:nick).all
+  end
+
+  def vyskumane_narodni_tech(bonus_type)
+	  technologie = Technology.where(:bonus_type => bonus_type).first
+	  vyskumane_tech =  self.researches.where(:technology_id => technologie.id).first if technologie
+	  if vyskumane_tech
+		  vyskumane_tech.lvl * technologie.house_bonus
+	  else
+		  0
+	  end
   end
 
   def celkova_populace

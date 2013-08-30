@@ -4,6 +4,8 @@ class CreateResearches < ActiveRecord::Migration
       t.integer :lvl
       t.integer :technology_id
       t.integer :user_id
+      t.integer :subhouse_id
+      t.integer :house_id
       
 
       t.timestamps

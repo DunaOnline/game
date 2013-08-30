@@ -20,5 +20,10 @@
 #
 #
 #
-$(document).on 'click', '#descr', ->
-  $(this).parent().next().toggle()
+
+$(document).ready ->
+
+  $(".descr").click ->
+    $(this).parent().next().toggle(500)
+
+

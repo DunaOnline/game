@@ -50,15 +50,19 @@ class Prepocet
   def self.produkce_suroviny(order)
     for field in Field.includes(:user, :buildings, :resource).all do
       vlastnik = field.user
+      narod = vlastnik.house if vlastnik
       if field.planet == Planet.arrakis
         
       else
-        solar_exp = vlastnik.vyskumane_tech(2)
-        solar = field.vynos('solar') * ((solar_exp * 0.02) + 1)
-        exp_exp = vlastnik.vyskumane_tech(4)
-        exp = field.vynos('exp') * ((exp_exp * 0.02) + 1)
-        material_exp = vlastnik.vyskumane_tech(3)
-        material = field.vynos('material') * ((material_exp * 0.02) + 1)
+        solar_exp = vlastnik.vyskumane_tech("S")
+        solar_house_exp = narod.vyskumane_narodni_tech("S")
+        solar = field.vynos('solar') * (solar_exp + solar_house_exp)
+        exp_exp = vlastnik.vyskumane_tech("E")
+        exp_house_exp = narod.vyskumane_narodni_tech("E")
+        exp = field.vynos('exp') * (exp_exp + exp_house_exp )
+        material_exp = vlastnik.vyskumane_tech("M")
+        material_house_exp = narod.vyskumane_narodni_tech("M")
+        material = field.vynos('material') * (material_exp + material_house_exp)
         population = field.vynos('population')
 
         vlastnik.update_attributes(
@@ -90,9 +94,10 @@ class Prepocet
     arrakis = Planet.arrakis
     leno = Field.find_by_planet_id(arrakis)
     vlastnik = User.spravce_arrakis
-    tech = vlastnik.vyskumane_tech(5)
+    user_tech = vlastnik.vyskumane_tech("J") if vlastnik
+    house_tech = vlastnik.house.vyskumane_narodni_tech("J") if vlastnik
     if vlastnik
-      melange = leno.vynos('melange') * ((tech * 0.02) + 1)
+      melange = leno.vynos('melange') * (user_tech + house_tech )
     else
       melange = 0.0
     end

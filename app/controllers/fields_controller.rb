@@ -11,8 +11,20 @@ class FieldsController < ApplicationController
   def show
     @field = Field.find(params[:id])
     @owner = @field.user
-    lvl = current_user.researches.where('technology_id' => 1).first
-    @bonus = (1 - (lvl.lvl * 0.02)).to_f
+    user_lvl = @owner.vyskumane_tech("L")
+    house_lvl = @owner.house.vyskumane_narodni_tech("L")
+    if user_lvl && house_lvl
+      @bonus = (1 - (user_lvl + house_lvl)).to_f
+    else
+	    if user_lvl
+		    @bonus = 1 - user_lvl.to_f
+		  elsif house_lvl
+		    @bonus = 1 - house_lvl.to_f
+		  else
+			  @bonus = 1
+	    end
+
+	  end
     if current_user.admin?
       
     else

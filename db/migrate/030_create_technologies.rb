@@ -6,6 +6,8 @@ class CreateTechnologies < ActiveRecord::Migration
       t.integer :price
       t.integer :max_lvl
       t.decimal :bonus
+      t.decimal :subhouse_bonus
+      t.decimal :house_bonus
       t.string :bonus_type
       t.string :image_url
       t.string :image_lvl
