@@ -41,16 +41,30 @@ class PollsController < ApplicationController
   # POST /polls.json
   def create
     @poll = Poll.new(params[:poll])
+    @poll.choice = params[:commit]
+    @poll.user_id = current_user.id
+    @poll.law_id = params[:law_id]
 
-    respond_to do |format|
-      if @poll.save
-        format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
-        format.json { render json: @poll, status: :created, location: @poll }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @poll.errors, status: :unprocessable_entity }
-      end
-    end
+
+
+    if @poll.save
+	    flash[:notice] = "Hlas bol prideleny"
+	    redirect_to landsraad_jednani_path
+	    #format.html { redirect_to 'landsraad_jednani', notice: 'Law was successfully created.' }
+	    #format.json { render json: @law, status: :created, location: @law }
+    else
+	    flash[:error] = "Hlas nebol prideleny"
+	    redirect_to landsraad_jednani_path
+	  end
+    #respond_to do |format|
+    #  if @poll.save
+    #    format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
+    #    format.json { render json: @poll, status: :created, location: @poll }
+    #  else
+    #    format.html { render action: "new" }
+    #    format.json { render json: @poll.errors, status: :unprocessable_entity }
+    #  end
+    #end
   end
 
   # PUT /polls/1

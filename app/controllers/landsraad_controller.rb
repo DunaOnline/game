@@ -6,7 +6,8 @@ class LandsraadController < ApplicationController
     @imperator = User.imperator
     @poslanci = User.poslanci
 
-    @projednavane = Law.zarazene.limit(3).order(:submitted, :position)
+    @projednavane = Law.projednavane.order(:submitted, :position)
+    @zarazeny = Law.zarazene.order(:submitted, :position)
     @zakony = Law.order(:submitted, :position)
   end
 
@@ -19,11 +20,13 @@ class LandsraadController < ApplicationController
 
     @datum_volby = Constant.konec_volby_imperatora
 
-    @projednavane = Law.zarazene.limit(3).order(:submitted, :position)
-    @zakony = Law.order(:submitted, :position)
+    @projednavane = Law.projednavane.order(:submitted, :position)
+    @zarazeny = Law.zarazene.order(:submitted, :position)
+    #@zakony = Law.order(:submitted, :position)
 
     @law = Law.new
     @zakon = params[:zakon]
+	  @hlas = Poll.new
 
 
 
@@ -33,18 +36,26 @@ class LandsraadController < ApplicationController
   def vytvor_zakon
 	  @law = Law.new(params[:law])
 
+	  actual = Law.projednavane.count
+
 	  @law.label = Law.create_label
 	  @law.position = Law.create_position
 	  @law.submitted = Time.now
-	  @law.state = Law::STATE[0]
+	  if actual >= 3
+	    @law.state = Law::STATE[0]
+	  else
+		  @law.state = Law::STATE[1]
+		end
 	  @law.submitter = current_user.id
 
 
 	  if @law.save
+		  flash[:notice] = "Zakon bol zaradeny na pojednavanie"
 		  redirect_to :action => 'jednani'
 	     #format.html { redirect_to 'landsraad_jednani', notice: 'Law was successfully created.' }
 	     #format.json { render json: @law, status: :created, location: @law }
 	  else
+		  flash[:error] = "Titul aj telo zakona musi byt vyplnene"
 		  redirect_to :action => 'jednani'
 	     #format.html { redirect_to 'landsraad_jednani', notice: 'Law was NOT successfully created.'  }
 	     #format.json { render json: @law.errors, status: :unprocessable_entity }

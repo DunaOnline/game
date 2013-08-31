@@ -50,14 +50,24 @@
 		<th colspan="10">Hlasovat o zákonu</th>
 	</tr>
 	<tr>
-		<% for law in @projednavane do %> 
+		<% for law in @projednavane do %>
 			<td style="width:25%"><h3><%= law.label + ' - ' + law.title %></h3>
 				<li>
 					<%= law.content %>
 				<li>
-				<input type="button" value="Ano" class="ok4">
-				<input type="button" value="Ne" class="ok4">
-				<input type="button" value="Zdržet se" class="ok4">
+                  <% temp = law.zahlasovane(current_user) %>
+                    <% if temp %>
+
+                    <span class="tvoj_hlas">Hlasoval jsi za <%= temp %></span>
+                <% else%>
+                      <%= form_for(@hlas) do |f| %>
+                          <%= hidden_field_tag :law_id, law.id %>
+                          <%= submit_tag 'Ano',  :class => "ok4" %>
+                          <%= submit_tag 'Ne',  :class => "ok4" %>
+                          <%= submit_tag 'Zdržet se', :class => "ok4" %>
+                      <% end %>
+                <% end %>
+
 			</td>
 		<% end %> 
 	</tr>
@@ -96,20 +106,16 @@
 		<th>Autor</th>
 		<th class="r" style="width:80px">Ano/Ne/Zdr.</th>
 	</tr>
-	<tr>
-		<td>010</td>
-		<td>Zařazen</td>
-		<td>Celkové znění zákona, které předložil poslanec.</td>
-		<td class="ctr">---</td>
-		<td class="ctr"><a class="deputy" href="profil.htm">Nick_autora *</a></td>
-		<td class="ctr">---</td>
-	</tr>
-	<tr>
-		<td>009</td>
-		<td>Zařazen</td>
-		<td>Celkové znění zákona, které předložil poslanec.</td>
-		<td class="ctr">---</td>
-		<td class="ctr"><a class="deputy" href="profil.htm">Nick_autora *</a></td>
-		<td class="ctr">---</td>
-	</tr>
+  <% for law in @zarazeny do %>
+      <tr>
+        <td><%= law.label %></td>
+        <td><%= law.state %></td>
+        <td><%= law.content %></td>
+        <td class="ctr">---</td>
+        <td class="ctr"><%= link_to User.find(law.submitter).nick  %></td>
+        <td class="ctr"><%=  law.pomer_hlasu %></td>
+      </tr>
+
+  <% end %>
+
 </table>
