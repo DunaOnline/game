@@ -6,7 +6,7 @@ class CreateMessages < ActiveRecord::Migration
       t.string :recipients
       t.integer :user_id
       t.string :druh
-      t.boolean :read
+      t.boolean :opened
 
       t.timestamps
     end

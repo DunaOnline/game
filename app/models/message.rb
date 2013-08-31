@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  attr_accessible :body, :subject, :recipients, :user_id, :druh, :read
+  attr_accessible :body, :subject, :recipients, :user_id, :druh, :opened
 	has_many :conversations
 	belongs_to :user
 
@@ -16,6 +16,19 @@ class Message < ActiveRecord::Base
 					return false
 				end
 	end
+
+  def odoslana(user)
+	  sprava = Conversation.where('receiver' => user, 'message_id' => self.id).first
+	  sprava.update_attributes(:opened => true)
+  end
+  def odosielatel(user)
+	  sprava = Conversation.where('receiver' => user, 'message_id' => self.id).first
+	  if sprava
+		  sprava.opened
+	  else
+		  false
+	  end
+  end
 
 	def vymaz(user,odoslana)
 		if odoslana
@@ -62,28 +75,11 @@ class Message < ActiveRecord::Base
 		self.vytvor_postu(odosielatel,recipient.nick)
 		end
 
-		#if komu
-		#	prijemci = komu.split(",")
-		#	index = 0
-		#	while index < prijemci.length
-		#		prijemca = prijemci[index].strip
-		#
-		#		prijemca = prijemca[1..prijemca.length] if index >0
-		#		user = nil
-		#		user = User.find(self.zisti_id_prijemcu(prijemca)) if prijemca != "" and prijemca != nil
-		#
-		#		if user && user != odosielatel.id
-		#			self.vytvor_postu(odosielatel,prijemca)
-		#		end
-		#		index += 1
-		#	end
-		#end
+
 		if komu
 			komu.split(",").each do |recipient|
 
-
 				recipient = recipient.strip
-
 
 				user = nil
 				user = User.find(self.zisti_id_prijemcu(recipient)) if recipient != "" and recipient != nil
@@ -99,12 +95,12 @@ class Message < ActiveRecord::Base
 	end
 
 	def vytvor_postu(odosielatel, komu)
-		#asi zbytocna podmienka musim sa na to pozriet uz hore to nprejde pokial nieje prijemca
+
 		if self.zisti_id_prijemcu(komu)
 		Conversation.new(
 				:message_id => self.id,
 				:sender => odosielatel.id,
-				:recipient => (self.zisti_id_prijemcu(komu))
+				:receiver => (self.zisti_id_prijemcu(komu))
 		).save
 		end
 	end

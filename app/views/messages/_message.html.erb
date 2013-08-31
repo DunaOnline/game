@@ -1,15 +1,17 @@
   <tr xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" class="opica" data-druh="<%= message.druh if message.druh %>">
-  <td><%= link_to message.created_at, '#', :class => "message" %>
-      <% unless message.read %>
+  <td><%= link_to message.created_at.localtime, '#', :class => "message" %>
+
+      <% unless message.odosielatel(current_user) %>
       <div class="precitanaimg"></div>
       <% end %>
+
   </td>
   <td><%= link_to message.user.nick, message.user %></td>
   <td><%= link_to message.user.house.name, message.user.house %></td>
   <td><%= message.subject %>
 
   <span class="fright">
-  <%= best_in_place message, :read, :type => :checkbox, :classes => 'precitana' %>
+  <%= best_in_place message, :opened, :type => :checkbox, :classes => 'precitana' %>
   <%= link_to image_tag('../assets/css/DO_cross.png'), message, :confirm => "are you sure?", :method => :delete, :class => 'delete_post', :remote => true  %></span></td>
 
 </tr>

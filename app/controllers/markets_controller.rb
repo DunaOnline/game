@@ -152,7 +152,7 @@ class MarketsController < ApplicationController
   def destroy
     @market = Market.find(params[:id])
     if @market.destroy
-	    current_user.goodsToBuyer(@market.area,@market.amount * 0.7)
+	    current_user.goods_to_buyer(@market.area,@market.amount * 0.7)
     end
 
     respond_to do |format|

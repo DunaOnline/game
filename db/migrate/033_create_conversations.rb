@@ -3,8 +3,9 @@ class CreateConversations < ActiveRecord::Migration
     create_table :conversations do |t|
 	    t.integer :sender
 	    t.integer :message_id
-	    t.integer :recipient
+	    t.integer :receiver
 	    t.string :deleted_by
+	    t.boolean :opened
 
       t.timestamps
     end

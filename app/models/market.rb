@@ -18,7 +18,7 @@ class Market < ActiveRecord::Base
 	    if solary > 0 && quantity > 0 && amount > 0
 			  if amount > 0 && quantity >= amount && solary >= amount * market.price
 				  user.update_attribute(:solar, solary - amount * market.price)
-				  user.goodsToBuyer(market.area,amount)
+				  user.goods_to_buyer(market.area,amount)
 				  seller.update_attribute(:solar, seller.solar + amount * market.price)
 				  market.update_attribute(:amount, quantity - amount)
 				  MarketHistory.new(

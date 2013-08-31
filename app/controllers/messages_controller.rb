@@ -5,15 +5,19 @@ class MessagesController < ApplicationController
 
   def index
 	  @recipient_array = User.all.map &:nick
-	  case params[:type]
-		  when 'Dorucena'
-			  @messages = Message.order('messages.created_at DESC').includes(:conversations).where('conversations.recipient' => current_user, 'conversations.deleted_by' => [nil,"S"])
-		  when 'Odoslana'
-			  @messages = Message.order('messages.created_at DESC').includes(:conversations).where('conversations.sender' => current_user, 'conversations.deleted_by' => [nil,"R"])
-			else
-				@messages = Message.includes(:conversations).where('conversations.recipient' => current_user, 'conversations.deleted_by' => [nil,"S"] )
-	  end
 
+			  @messages = Message.order('messages.created_at DESC').includes(:conversations).where('conversations.receiver' => current_user, 'conversations.deleted_by' => [nil,"S"])
+
+
+
+
+
+
+end
+
+  def odeslana_posta
+	  @recipient_array = User.all.map &:nick
+	  @messages = Message.order('messages.created_at DESC').includes(:conversations).where('conversations.sender' => current_user, 'conversations.deleted_by' => [nil,"R"])
   end
 
 
@@ -82,10 +86,10 @@ class MessagesController < ApplicationController
 
   def update
 	  @message = Message.find(params[:id])
-	  read = params[:message]
-	  if read[:read] == "true"
+	  opened = params[:message]
+	  if opened[:opened] == "true"
 		  respond_to do |format|
-			  if @message.update_attributes(params[:message])
+			  if @message.odoslana(current_user)
 			    format.json { render :layout => false }
 			  end
 		  end

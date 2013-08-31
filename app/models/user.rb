@@ -64,6 +64,9 @@ class User < ActiveRecord::Base
   
   has_many :researches
   has_many :technologies, :through => :researches
+
+  has_many :conversations, :foreign_key => 'receiver'
+  has_many :messages
   
   validates :username, :presence => true, :uniqueness => true
   validates :password, :presence => true, :on => :create
@@ -293,6 +296,10 @@ class User < ActiveRecord::Base
 		  else
 			  return
 	  end
+  end
+
+  def neprocteno_sprav
+	  self.conversations.where(:opened => nil).count
   end
 
   def politicke_postaveni
