@@ -6,11 +6,12 @@ class LandsraadController < ApplicationController
     @imperator = User.imperator
     @poslanci = User.poslanci
 
-    @projednavane = Law.projednavane
+    @projednavane = Law.zarazene.limit(3).order(:submitted, :position)
     @zakony = Law.order(:submitted, :position)
   end
 
   def jednani
+
     @title = 'Jedání Landsraadu'
     @spravce = User.spravce_arrakis
     @imperator = User.imperator
@@ -18,31 +19,60 @@ class LandsraadController < ApplicationController
 
     @datum_volby = Constant.konec_volby_imperatora
 
-    @projednavane = Law.projednavane
+    @projednavane = Law.zarazene.limit(3).order(:submitted, :position)
     @zakony = Law.order(:submitted, :position)
+
+    @law = Law.new
+    @zakon = params[:zakon]
+
+
+
+
+  end
+
+  def vytvor_zakon
+	  @law = Law.new(params[:law])
+
+	  @law.label = Law.create_label
+	  @law.position = Law.create_position
+	  @law.submitted = Time.now
+	  @law.state = Law::STATE[0]
+	  @law.submitter = current_user.id
+
+
+	  if @law.save
+		  redirect_to :action => 'jednani'
+	     #format.html { redirect_to 'landsraad_jednani', notice: 'Law was successfully created.' }
+	     #format.json { render json: @law, status: :created, location: @law }
+	  else
+		  redirect_to :action => 'jednani'
+	     #format.html { redirect_to 'landsraad_jednani', notice: 'Law was NOT successfully created.'  }
+	     #format.json { render json: @law.errors, status: :unprocessable_entity }
+
+	  end
   end
 
   def volba_imperatora
     # if params[:volit_id]
-    # ja = User.find(params[:user_id])
-    # if ja == current_user && ja.ladsraad? && Imperium.volba_imperatora?
-    # koho = User.find(params[:volit_id])
-    # ja.vol_imperatora(koho)
-    #
-    # redirect_to :back, :notice => "Uspesne odhlasovano."
+      # ja = User.find(params[:user_id])
+      # if ja == current_user && ja.ladsraad? && Imperium.volba_imperatora?
+        # koho = User.find(params[:volit_id])
+        # ja.vol_imperatora(koho)
+# 
+        # redirect_to :back, :notice => "Uspesne odhlasovano."
+      # else
+        # redirect_to :back, :notice => "Nelze hlasovat."
+      # end
     # else
-    # redirect_to :back, :notice => "Nelze hlasovat."
-    # end
-    # else
-    @title = 'Volba Imperatora'
-    @spravce = User.spravce_arrakis
-
-    @poslanci = User.poslanci
-
-    @user = current_user
-    @imperium = House.imperium
-    @kandidati = User.players.by_nick
-
+      @title = 'Volba Imperatora'
+      @spravce = User.spravce_arrakis
+      
+      @poslanci = User.poslanci
+      
+      @user = current_user
+      @imperium = House.imperium
+      @kandidati = User.players.by_nick
+      
     # end
   end
 end
