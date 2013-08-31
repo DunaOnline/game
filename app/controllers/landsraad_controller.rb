@@ -9,6 +9,7 @@ class LandsraadController < ApplicationController
     @projednavane = Law.projednavane.order(:submitted, :position)
     @zarazeny = Law.zarazene.order(:submitted, :position)
     @zakony = Law.order(:submitted, :position)
+    @hlas = Poll.new
   end
 
   def jednani
