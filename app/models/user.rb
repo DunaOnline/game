@@ -61,13 +61,13 @@ class User < ActiveRecord::Base
 
   has_many :polls
   has_many :laws, :through => :polls
-  
+
   has_many :researches
   has_many :technologies, :through => :researches
 
   has_many :conversations, :foreign_key => 'receiver'
   has_many :messages
-  
+
   validates :username, :presence => true, :uniqueness => true
   validates :password, :presence => true, :on => :create
   validates_confirmation_of :password
@@ -189,31 +189,31 @@ class User < ActiveRecord::Base
 
   def dovolene_budovy(kind)
     # TODO dovolene budovy podle tech levelu
-	  technology = Technology.where(:bonus_type => kind).first
-	  if technology
-	  lvl = self.vyskumane_tech(technology.id)
+    technology = Technology.where(:bonus_type => kind).first
+    if technology
+      lvl = self.vyskumane_tech(technology.id)
 
-	    case lvl
-			  when 0..6
-				  Building.where(:kind => kind, :level => [1]).all(:group => "name")
-			  when 7..13
-				  Building.where(:kind => kind, :level => [1,2]).all(:group => "name")
-			  when 14..17
-				  Building.where(:kind => kind).all(:group => "name")
-	    end
-		else
-			Building.where(:kind => kind, :level => [1]).all(:group => "name")
-		end
+      case lvl
+        when 0..6
+          Building.where(:kind => kind, :level => [1]).all(:group => "name")
+        when 7..13
+          Building.where(:kind => kind, :level => [1, 2]).all(:group => "name")
+        when 14..17
+          Building.where(:kind => kind).all(:group => "name")
+      end
+    else
+      Building.where(:kind => kind, :level => [1]).all(:group => "name")
+    end
 
   end
 
-  def stat_se(cim)  # cim = presne nazev attributu
-    #self.zapis_operaci("Od ted jsem #{cim}.")
+  def stat_se(cim) # cim = presne nazev attributu
+                   #self.zapis_operaci("Od ted jsem #{cim}.")
     self.update_attribute(cim, true)
   end
 
-  def prestat_byt(cim)  # cim = presne nazev attributu
-    #self.zapis_operaci("Uz dale nejsem #{cim}.")
+  def prestat_byt(cim) # cim = presne nazev attributu
+                       #self.zapis_operaci("Uz dale nejsem #{cim}.")
     self.update_attribute(cim, false)
   end
 
@@ -229,7 +229,7 @@ class User < ActiveRecord::Base
   def self.imperator
     User.find_by_emperor(true)
   end
-  
+
   def self.regenti
     User.find_all_by_regent(true)
   end
@@ -256,50 +256,50 @@ class User < ActiveRecord::Base
   def domovske_leno
     self.fields.where(:planet_id => Planet.domovska_rodu(self.house)).first
   end
-  
- def vyskumane_tech(bonus_type)
-	  technologie = Technology.where(:bonus_type => bonus_type).first
-        vyskumane_tech =  self.researches.where('technology_id' => technologie.id).first if technologie
-        if vyskumane_tech
-          vyskumane_tech.lvl * technologie.bonus
-        else
-          0
-        end
+
+  def vyskumane_tech(bonus_type)
+    technologie = Technology.where(:bonus_type => bonus_type).first
+    vyskumane_tech = self.researches.where('technology_id' => technologie.id).first if technologie
+    if vyskumane_tech
+      vyskumane_tech.lvl * technologie.bonus
+    else
+      0
+    end
   end
-  
-  def goods_to_buyer(typ,amount)
-	  goods = self.goods_at_warehouse(typ)
-	  case typ
-		  when "M"
-			  self.domovske_leno.resource.update_attribute(:material,goods + amount)
-		  when "P"
-			  self.domovske_leno.resource.update_attribute(:population,goods + amount)
-		  when "J"
-			  self.update_attribute(:melange,goods + amount)
-		  when "E"
-			  self.update_attribute(:exp,goods + amount)
-		  else
-			  return
-	  end
+
+  def goods_to_buyer(typ, amount)
+    goods = self.goods_at_warehouse(typ)
+    case typ
+      when "M"
+        self.domovske_leno.resource.update_attribute(:material, goods + amount)
+      when "P"
+        self.domovske_leno.resource.update_attribute(:population, goods + amount)
+      when "J"
+        self.update_attribute(:melange, goods + amount)
+      when "E"
+        self.update_attribute(:exp, goods + amount)
+      else
+        return
+    end
   end
 
   def goods_at_warehouse(typ)
-	  case typ
-		  when "M"
-			  self.domovske_leno.resource.material
-		  when "P"
-			  self.domovske_leno.resource.population
-		  when "J"
-			  self.melange
-		  when "E"
-			  self.exp
-		  else
-			  return
-	  end
+    case typ
+      when "M"
+        self.domovske_leno.resource.material
+      when "P"
+        self.domovske_leno.resource.population
+      when "J"
+        self.melange
+      when "E"
+        self.exp
+      else
+        return
+    end
   end
 
   def neprocteno_sprav
-	  self.conversations.where(:opened => nil).count
+    self.conversations.where(:opened => nil).count
   end
 
   def politicke_postaveni

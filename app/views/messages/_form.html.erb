@@ -1,41 +1,43 @@
 <script>
-    $(document).ready(function() {
-        var availableTags = <%= @recipient_array.to_json.html_safe%> ;
-        function split( val ) {
-            return val.split( /,\s*/ );
-        }
-        function extractLast( term ) {
-            return split( term ).pop();
+    $(document).ready(function () {
+        var availableTags = <%= @recipient_array.to_json.html_safe%>;
+
+        function split(val) {
+            return val.split(/,\s*/);
         }
 
-        $( "#message_recipients" )
+        function extractLast(term) {
+            return split(term).pop();
+        }
+
+        $("#message_recipients")
             // don't navigate away from the field on tab when selecting an item
-                .bind( "keydown", function( event ) {
-                    if ( event.keyCode === $.ui.keyCode.TAB &&
-                            $( this ).data( "ui-autocomplete" ).menu.active ) {
+                .bind("keydown", function (event) {
+                    if (event.keyCode === $.ui.keyCode.TAB &&
+                            $(this).data("ui-autocomplete").menu.active) {
                         event.preventDefault();
                     }
                 })
                 .autocomplete({
                     minLength: 0,
-                    source: function( request, response ) {
+                    source: function (request, response) {
                         // delegate back to autocomplete, but extract the last term
-                        response( $.ui.autocomplete.filter(
-                                availableTags, extractLast( request.term ) ) );
+                        response($.ui.autocomplete.filter(
+                                availableTags, extractLast(request.term)));
                     },
-                    focus: function() {
+                    focus: function () {
                         // prevent value inserted on focus
                         return false;
                     },
-                    select: function( event, ui ) {
-                        var terms = split( this.value );
+                    select: function (event, ui) {
+                        var terms = split(this.value);
                         // remove the current input
                         terms.pop();
                         // add the selected item
-                        terms.push( ui.item.value );
+                        terms.push(ui.item.value);
                         // add placeholder to get the comma-and-space at the end
-                        terms.push( "" );
-                        this.value = terms.join( ", " );
+                        terms.push("");
+                        this.value = terms.join(", ");
                         return false;
                     }
                 });
@@ -45,38 +47,37 @@
 </script>
 <div id="novaPosta">
 
-    <%= form_for(@message) do |f|%>
+  <%= form_for(@message) do |f| %>
 
 
-<table class="tab3">
-  <tr>
-    <th>
-      <%= f.submit :title => "ODESLAT", :value => "ODESLAT", :class => "ok4" %>
-      <%= f.text_field :subject, :title => "Předmět", :placeholder => "Předmět", :value => @old_msg ? @old_msg.subject : '' %>
+      <table class="tab3">
+        <tr>
+          <th>
+            <%= f.submit :title => "ODESLAT", :value => "ODESLAT", :class => "ok4" %>
+            <%= f.text_field :subject, :title => "Předmět", :placeholder => "Předmět", :value => @old_msg ? @old_msg.subject : '' %>
 
-      <%= f.text_field :recipients, :placeholder => "Adresat", :title => "Adresát", :value => @old_msg ? @old_msg.user.nick : '' %>
+            <%= f.text_field :recipients, :placeholder => "Adresat", :title => "Adresát", :value => @old_msg ? @old_msg.user.nick : '' %>
 
-      <%= f.select :druh, options_for_select([['Hromadní pošta', nil], ['Malorodní', 'M'], ['Generálům', 'G'], ['Národní', 'N'],['Diplomatická', 'D'],['Imperiální', 'I']])%>
+            <%= f.select :druh, options_for_select([['Hromadní pošta', nil], ['Malorodní', 'M'], ['Generálům', 'G'], ['Národní', 'N'], ['Diplomatická', 'D'], ['Imperiální', 'I']]) %>
 
-      <input type="button" value="B" title="Tučné" class="ok4">
-      <input type="button" value="I" title="Zkosené" class="ok4">
-      <input type="button" value="U" title="Podtržené" class="ok4">
-      <input type="button" value="F" title="Barva" class="ok4">
-      <input type="button" value="Url" title="Odkaz" class="ok4">
+            <input type="button" value="B" title="Tučné" class="ok4">
+            <input type="button" value="I" title="Zkosené" class="ok4">
+            <input type="button" value="U" title="Podtržené" class="ok4">
+            <input type="button" value="F" title="Barva" class="ok4">
+            <input type="button" value="Url" title="Odkaz" class="ok4">
 
-    </th>
-  </tr>
-  <tr>
-    <td>
-
-
-
-    <%= f.text_area :body, :value => @old_msg ? @old_msg.body : '' %>
+          </th>
+        </tr>
+        <tr>
+          <td>
 
 
-    </td>
-  </tr>
-</table>
+            <%= f.text_area :body, :value => @old_msg ? @old_msg.body : '' %>
+
+
+          </td>
+        </tr>
+      </table>
 
   <% end %>
 

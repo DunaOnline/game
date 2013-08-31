@@ -1,57 +1,51 @@
+<tr>
 
-        <tr>
+  <th class="descr"><%= technology.name %></th>
 
-        <th class="descr"><%= technology.name %></th>
-        
-        
-        
-        <%= form_tag vylepsi_technology_path(:technology => technology.id, :user_id => current_user), :class => 'vylepsiTech' do %>
 
-          <td class="v2" title="Vylepsi"><%= submit_tag number_with_precision technology.cena_technology(current_user), :precision => 0 %></td>
-           <%end%> 
-            
-             
-            <% vylep = technology.vylepseno(current_user)%>
-            <% technology.max_lvl.times do |lvl| %>
-            
-                      
 
-            <% if vylep > lvl %>
-              <% if technology.levely.include?(lvl)%>
-                <td class="v1" style=background-image:(<%= technology.cesta_technologie("v")%>) >
+  <%= form_tag vylepsi_technology_path(:technology => technology.id, :user_id => current_user), :class => 'vylepsiTech' do %>
+
+      <td class="v2" title="Vylepsi"><%= submit_tag number_with_precision technology.cena_technology(current_user), :precision => 0 %></td>
+  <% end %>
+
+
+  <% vylep = technology.vylepseno(current_user) %>
+  <% technology.max_lvl.times do |lvl| %>
+
+
+      <% if vylep > lvl %>
+          <% if technology.levely.include?(lvl) %>
+              <td class="v1" style=background-image:(<%= technology.cesta_technologie("v")%>)>
                 <%= lvl+1 %>
-                </td>
-                
-            
-              <% else %>
-                <td class="v1">
+              </td>
+
+
+          <% else %>
+              <td class="v1">
                 <%= lvl+1 %>
-                </td>
+              </td>
 
-              <%end%>
+          <% end %>
 
 
-            <% else %>
-            <% if technology.levely.include?(lvl)%>
-            <td style=background-image:(<%= technology.cesta_technologie("n")%>)>
-            <%= lvl+1 %></td>
-            <%else%>
-            <td>
+      <% else %>
+          <% if technology.levely.include?(lvl) %>
+              <td style=background-image:(<%= technology.cesta_technologie("n")%>)>
+                <%= lvl+1 %></td>
+          <% else %>
+              <td>
                 <%= lvl+1 %>
-                </td>
+              </td>
 
-            <%end%>
-            <%end%>
-              
-             
+          <% end %>
+      <% end %>
 
-            
-         
-        
-      
-        <%end%></tr>
-        <tr class="tech_description"><td colspan="19"><p><%= technology.description %></p></td>
 
-          </tr>
+  <% end %></tr>
+<tr class="tech_description">
+  <td colspan="19"><p><%= technology.description %></p></td>
+
+</tr>
    
             

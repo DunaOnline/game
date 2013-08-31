@@ -29,7 +29,7 @@ class SystemsController < ApplicationController
   def update
     @system = System.find(params[:id])
     if @system.update_attributes(params[:system])
-      redirect_to @system, :notice  => "Successfully updated system."
+      redirect_to @system, :notice => "Successfully updated system."
     else
       render :action => 'edit'
     end

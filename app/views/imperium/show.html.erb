@@ -2,32 +2,32 @@
 <% title @title %>
 <table class="tab1">
   <tr>
-		<td class="tdpl" rowspan="2" style="padding: 10px; width:300px; background-image: url(<%= asset_path 'imghra/arrakis.png' %>) !important">
-		<li>
-			<h2>Imperium a Koření</h2>
-		<li>
-			<b>Imperátor: </b> <%= link_to @imperator.nick, @imperator if @imperator %>
-		<li>
-			<b>Místodržící Arrakisu:  </b> <%= link_to @spravce.nick, @spravce if @spravce %>
-		<li>
-			<b>Známých planet: </b> <%= Planet.count %>
-		<li>
-			<b>Občanů Impéria: </b> <%= User.count %>
-		<li>
-			<b>Celkový vliv: </b> <%= @imperium.influence %>
-			<br>
-			<br>
-		</td>
-		<th>Přepočet</th>
-		<th class="r">Podíl [%]</th>
-	</tr>
-	<tr>
-		<%= render :partial => 'melange_flow' %>
+    <td class="tdpl" rowspan="2" style="padding: 10px; width:300px; background-image: url(<%= asset_path 'imghra/arrakis.png' %>) !important">
+      <li>
+        <h2>Imperium a Koření</h2>
+      <li>
+        <b>Imperátor: </b> <%= link_to @imperator.nick, @imperator if @imperator %>
+      <li>
+        <b>Místodržící Arrakisu: </b> <%= link_to @spravce.nick, @spravce if @spravce %>
+      <li>
+        <b>Známých planet: </b> <%= Planet.count %>
+      <li>
+        <b>Občanů Impéria: </b> <%= User.count %>
+      <li>
+        <b>Celkový vliv: </b> <%= @imperium.influence %>
+        <br>
+        <br>
+    </td>
+    <th>Přepočet</th>
+    <th class="r">Podíl [%]</th>
+  </tr>
+  <tr>
+    <%= render :partial => 'melange_flow' %>
 
-		<%= render :partial => 'rody_podil' %>
-	</tr>
+    <%= render :partial => 'rody_podil' %>
+  </tr>
 </table>
 <table class="tab1">
-	<%= render :partial => 'dvur' %>
+  <%= render :partial => 'dvur' %>
 </table>
 <%= render :partial => 'imperium_operace' %>

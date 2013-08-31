@@ -1,6 +1,6 @@
 class PlanetTypesController < ApplicationController
   authorize_resource # CanCan
-  
+
   def index
     @planet_types = PlanetType.all
   end
@@ -29,7 +29,7 @@ class PlanetTypesController < ApplicationController
   def update
     @planet_type = PlanetType.find(params[:id])
     if @planet_type.update_attributes(params[:planet_type])
-      redirect_to @planet_type, :notice  => "Successfully updated planet type."
+      redirect_to @planet_type, :notice => "Successfully updated planet type."
     else
       render :action => 'edit'
     end

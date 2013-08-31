@@ -1,30 +1,30 @@
 <%# encoding: utf-8 %>
-	<table class="tab1">
+<table class="tab1">
 
-	  <tr>
+  <tr>
 
-    	<th>Obsah proběhlých akcí v Impériu</th>
+    <th>Obsah proběhlých akcí v Impériu</th>
 
-	    <th style="width:80px">Datum</th>
+    <th style="width:80px">Datum</th>
 
-    	<th style="width:80px">Cas</th>
+    <th style="width:80px">Cas</th>
 
-	  </tr>
+  </tr>
 
-	  <% for operation in @operations %>
+  <% for operation in @operations %>
 
-    	<tr>
+      <tr>
 
-    	  <td><%= operation.content %></td>
+        <td><%= operation.content %></td>
 
-	      <td><%= format_date(operation.date) %></td>
+        <td><%= format_date(operation.date) %></td>
 
-    	  <td><%= format_time(operation.time) %></td>
+        <td><%= format_time(operation.time) %></td>
 
-    	</tr>
+      </tr>
 
-  	  <% end %>
-      
-      <td colspan="3"><%= link_to 'Zobrazit vsechny akce Impéria', operations_path(:jake => 'imperium') %></td>
+  <% end %>
 
-  	</table> 
+  <td colspan="3"><%= link_to 'Zobrazit vsechny akce Impéria', operations_path(:jake => 'imperium') %></td>
+
+</table>

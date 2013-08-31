@@ -4,24 +4,16 @@ class MessagesController < ApplicationController
 
 
   def index
-	  @recipient_array = User.all.map &:nick
+    @recipient_array = User.all.map &:nick
 
-			  @messages = Message.order('messages.created_at DESC').includes(:conversations).where('conversations.receiver' => current_user, 'conversations.deleted_by' => [nil,"S"])
+    @messages = Message.order('messages.created_at DESC').includes(:conversations).where('conversations.receiver' => current_user, 'conversations.deleted_by' => [nil, "S"])
 
-
-
-
-
-
-end
-
-  def odeslana_posta
-	  @recipient_array = User.all.map &:nick
-	  @messages = Message.order('messages.created_at DESC').includes(:conversations).where('conversations.sender' => current_user, 'conversations.deleted_by' => [nil,"R"])
   end
 
-
-
+  def odeslana_posta
+    @recipient_array = User.all.map &:nick
+    @messages = Message.order('messages.created_at DESC').includes(:conversations).where('conversations.sender' => current_user, 'conversations.deleted_by' => [nil, "R"])
+  end
 
 
   # GET /messages/1
@@ -40,9 +32,8 @@ end
   # GET /messages/new.json
   def new
 
-	  @recipient_array = User.all.map &:nick
-	  @message = Message.new
-
+    @recipient_array = User.all.map &:nick
+    @message = Message.new
 
 
     respond_to do |format|
@@ -50,17 +41,17 @@ end
       format.json { render json: @message }
     end
   end
+
   def reply
-	  @old_msg = Message.find(params[:id])
-	  @recipient_array = User.all.map &:nick
-	  @message = Message.new
+    @old_msg = Message.find(params[:id])
+    @recipient_array = User.all.map &:nick
+    @message = Message.new
 
 
-
-	  respond_to do |format|
-		  format.html # new.html.erb
-		  format.json { render json: @message }
-	  end
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @message }
+    end
   end
 
 
@@ -72,12 +63,12 @@ end
 
     respond_to do |format|
       if @message.save
-	      @message.posli_postu(current_user,@message.recipients)
-        format.html { redirect_to messages_url(:type => "Dorucena"), :notice => "Posta odoslana"}
+        @message.posli_postu(current_user, @message.recipients)
+        format.html { redirect_to messages_url(:type => "Dorucena"), :notice => "Posta odoslana" }
         format.json { render json: @message }
-	      #format.js
+        #format.js
       else
-        format.html { redirect_to new_message_url, :alert => "Prosim vyplnte chybajuce udaje"  }
+        format.html { redirect_to new_message_url, :alert => "Prosim vyplnte chybajuce udaje" }
         format.json { render json: @message.errors, status: :unprocessable_entity }
         #format.js
       end
@@ -85,16 +76,16 @@ end
   end
 
   def update
-	  @message = Message.find(params[:id])
-	  opened = params[:message]
-	  if opened[:opened] == "true"
-		  respond_to do |format|
-			  if @message.odoslana(current_user)
-			    format.json { render :layout => false }
-			  end
-		  end
-	  end
-	  render nothing: true
+    @message = Message.find(params[:id])
+    opened = params[:message]
+    if opened[:opened] == "true"
+      respond_to do |format|
+        if @message.odoslana(current_user)
+          format.json { render :layout => false }
+        end
+      end
+    end
+    render nothing: true
   end
 
 
@@ -103,12 +94,12 @@ end
   def destroy
     postum = Message.find(params[:id])
     conversation = postum.conversations.first
-		odoslana = conversation.sender == current_user.id
-    postum.vymaz(current_user.id,odoslana)
+    odoslana = conversation.sender == current_user.id
+    postum.vymaz(current_user.id, odoslana)
 
     respond_to do |format|
-      format.html { redirect_to messages_url(:type => "Dorucena"), :notice =>"Posta bola vymazana"}
-      format.js   { render :layout => false }
+      format.html { redirect_to messages_url(:type => "Dorucena"), :notice => "Posta bola vymazana" }
+      format.js { render :layout => false }
       format.json { head :no_content }
     end
   end

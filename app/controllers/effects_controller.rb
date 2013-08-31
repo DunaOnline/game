@@ -1,6 +1,6 @@
 class EffectsController < ApplicationController
   authorize_resource # CanCan
-  
+
   def index
     @effects = Effect.all
   end
@@ -29,7 +29,7 @@ class EffectsController < ApplicationController
   def update
     @effect = Effect.find(params[:id])
     if @effect.update_attributes(params[:effect])
-      redirect_to @effect, :notice  => "Successfully updated effect."
+      redirect_to @effect, :notice => "Successfully updated effect."
     else
       render :action => 'edit'
     end

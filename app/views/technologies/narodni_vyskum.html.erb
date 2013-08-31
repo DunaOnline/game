@@ -1,24 +1,19 @@
-
-
-
-
-
 <!-- !!!!!!!!! POČÁTEK - OBLAST ZMĚNY  V KÓDU PRO TUTO STRÁNKU !!!!! -->
 
 
 
 <table class="tab0">
 
-  <tr>  <td>
+  <tr>
+    <td>
 
-    <a href="index.html" title="Home">⌂</a> »
-
-
-    <%= link_to "Ekonomický výzkum", technologies_path %>
+      <a href="index.html" title="Home">⌂</a> »
 
 
+      <%= link_to "Ekonomický výzkum", technologies_path %>
 
-  </td>
+
+    </td>
     <% if current_user.admin? || current_user.leader? || current_user.mentat? %>
         <td class="tdd">
           <a href="#" class="narodnitech">Narodni vyskum &gt;&gt;</a>
@@ -35,15 +30,6 @@
 
 
 <table class="vyzkum">
-
-
-
-
-
-
-
-
-
 
 
   <!-- !!!!! pozor!
@@ -67,13 +53,6 @@
   <% unless @technologies.blank? %>
       <%= render :partial => "narodni_technologie", :collection => @technologies, :as => :technology %>
   <% end %>
-
-
-
-
-
-
-
 
 
 </table>

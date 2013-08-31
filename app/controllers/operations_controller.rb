@@ -1,20 +1,20 @@
 class OperationsController < ApplicationController
   authorize_resource # CanCan
-  
+
   def index
     case params[:jake]
-    when 'hrac'
-      @hrac = current_user
-      @operations = @hrac.operations.seradit.page(params[:page])
-      @title = "Operace hrace #{@hrac.nick}"
-    when 'narod'
-      @narod = current_user.house
-      @operations = @narod.operations.seradit.page(params[:page])
-      @title = "Operace rodu #{@narod.name}"
-    when 'imperium'
-      #@narod = current_user.house
-      @operations = Operation.imperialni.seradit.page(params[:page])
-      @title = "Operace Imperia"
+      when 'hrac'
+        @hrac = current_user
+        @operations = @hrac.operations.seradit.page(params[:page])
+        @title = "Operace hrace #{@hrac.nick}"
+      when 'narod'
+        @narod = current_user.house
+        @operations = @narod.operations.seradit.page(params[:page])
+        @title = "Operace rodu #{@narod.name}"
+      when 'imperium'
+        #@narod = current_user.house
+        @operations = Operation.imperialni.seradit.page(params[:page])
+        @title = "Operace Imperia"
     end
   end
 
@@ -42,7 +42,7 @@ class OperationsController < ApplicationController
   def update
     @operation = Operation.find(params[:id])
     if @operation.update_attributes(params[:operation])
-      redirect_to @operation, :notice  => "Successfully updated operation."
+      redirect_to @operation, :notice => "Successfully updated operation."
     else
       render :action => 'edit'
     end

@@ -25,8 +25,8 @@ class Syselaad < ActiveRecord::Base
   # L = landsraadsky
   # S = systemovy
   # E = mezinarodni
-  
-  
+
+
   def most_recent_post
     topic = Topic.first(:order => 'last_post_at DESC', :conditions => ['syselaad_id = ?', self.id])
     return topic

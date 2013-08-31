@@ -1,51 +1,52 @@
 <%# encoding: utf-8 %>
 <table class="tab0">
-		<tr>
-			<td>
-				<a href="#" title="Home">⌂</a> » 
-				<%= link_to "Imperialní kartografie", systems_path %> » 
-        <a href="#">Kolonizace nové planety</a>
-			</td>
-    </tr>
+  <tr>
+    <td>
+      <a href="#" title="Home">⌂</a> »
+      <%= link_to "Imperialní kartografie", systems_path %> »
+      <a href="#">Kolonizace nové planety</a>
+    </td>
+  </tr>
 </table>
 
 <%= form_tag kolonizuj_path(:house => @house, :cena_mel => @cena_planety_mel, :cena_sol => @cena_planety_sol) do %>
 
 
-<table class="tab1">
-	<tr>
-		<td rowspan="2" style="padding: 10px; width:270px; height: 200px; background-image: url(<%= asset_path 'imghra/kolonizace.png' %>) !important">
-		
-    <div>
-    <li>
-			<h2>Kolonizace nové planety</h2>
-		<li>
-    
-    <li> Objevení a následná kolonizace planety vhodné pro život je velmi náročná a drahá akce. 
-    <li>Vyžaduje si nasazení kvalitních navigátoru  Vesmírné Gildy, kteří prozkoumají neznámé sektory. 
-    <li>Musíte být ale napozoru, kolonizace může být neúspěšná. 
-    <li> Pro kolonizaci je nutné mít potřebná práva  v národě.
-    
-    <br>
-		<br>
-    
-			<b>Národ: </b><%= @house.name %>
-		<li>
-			<b>Melanz: </b><%= format_mena(@house.melange, 'mg') %>
-			<b>Solary: </b><%= format_mena(@house.solar, 'S') %>
-		<li>
-			<b>Planet: </b><%= @house.pocet_planet %>
-		<li>
-			<b>Občanů národa: </b><%= @house.users.count %>
-		<li>
-			<b>Cena nové planety: </b><%= format_mena(@cena_planety_mel, 'mg') %> a <%= format_mena(@cena_planety_sol, 'S', false) %>
-			<br>
-			<br>
-		<li>
-			<%= submit_tag "Vyslat Gildu pro objevení planety", :class =>"ok" %>
-      </div>
-		</td>
-    
-	</tr>
-</table>
+    <table class="tab1">
+      <tr>
+        <td rowspan="2" style="padding: 10px; width:270px; height: 200px; background-image: url(<%= asset_path 'imghra/kolonizace.png' %>) !important">
+
+          <div>
+            <li>
+              <h2>Kolonizace nové planety</h2>
+            <li>
+
+            <li> Objevení a následná kolonizace planety vhodné pro život je velmi náročná a drahá akce.
+            <li>Vyžaduje si nasazení kvalitních navigátoru Vesmírné Gildy, kteří prozkoumají neznámé sektory.
+            <li>Musíte být ale napozoru, kolonizace může být neúspěšná.
+            <li> Pro kolonizaci je nutné mít potřebná práva v národě.
+
+              <br>
+              <br>
+
+              <b>Národ: </b><%= @house.name %>
+            <li>
+              <b>Melanz: </b><%= format_mena(@house.melange, 'mg') %>
+              <b>Solary: </b><%= format_mena(@house.solar, 'S') %>
+            <li>
+              <b>Planet: </b><%= @house.pocet_planet %>
+            <li>
+              <b>Občanů národa: </b><%= @house.users.count %>
+            <li>
+              <b>Cena nové planety: </b><%= format_mena(@cena_planety_mel, 'mg') %>
+              a <%= format_mena(@cena_planety_sol, 'S', false) %>
+              <br>
+              <br>
+            <li>
+              <%= submit_tag "Vyslat Gildu pro objevení planety", :class => "ok" %>
+          </div>
+        </td>
+
+      </tr>
+    </table>
 <% end %> 

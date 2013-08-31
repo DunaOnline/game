@@ -6,7 +6,7 @@ class CreateResearches < ActiveRecord::Migration
       t.integer :user_id
       t.integer :subhouse_id
       t.integer :house_id
-      
+
 
       t.timestamps
     end

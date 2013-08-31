@@ -3,94 +3,94 @@
 
 <table class="tab0">
 
-		<tr>
-			<td>
-				<a href="#" title="Home">⌂</a> » 
-				<%= link_to "Imperialní kartografie", systems_path %> » 
-				<%= link_to "Seznam vašich lén a planet", fields_path %> »
-        <a href="#" title="Zástavba">Zástavba</a>
-			</td>
-
-		<td class="tdd">
-			<ul class="menud">
-				<li><a title="Filtrováním přenastavíte zobrazená data.">Spravovat jiné léno »</a> 
-					<ul>
-						<% for planet in @owner.osidlene_planety do %>
-							<li><%= link_to planet.name, planet, :class => "oranzova" %>
-								<% for field in planet.vlastni_pole(@owner) do %>
-									<li><%= link_to field.name, field %></li>
-								<% end %>
-						<% end %>
-					</ul>
-				</li>
-			</ul>		
-		</td>
-    </tr>
-	</table>
-
-<%= form_tag :presun_suroviny do %>
-<table class="tab3">
   <tr>
-    <th>
-      <%= hidden_field_tag(:source_field, value = @field.id) %>
-      <%= select_tag :presunout_co, options_for_select(@co_poslat.collect { |p| p }, {:include_blank => false}) , :class => "tab" %>
-      <%= select_tag :target_field, options_for_select(@my_fields.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}) , :class => "tab", :title => "Zvolte zdrojovou planetu" %>
-      <%= number_field_tag :amount %>
-      <%= submit_tag 'Přesunout', :name => 'presunout', :class => 'ok4', :style => "margin-right: 30px;", :title => "PŘESUNOUT SUROVINY" %>
-    </th>
+    <td>
+      <a href="#" title="Home">⌂</a> »
+      <%= link_to "Imperialní kartografie", systems_path %> »
+      <%= link_to "Seznam vašich lén a planet", fields_path %> »
+      <a href="#" title="Zástavba">Zástavba</a>
+    </td>
+
+    <td class="tdd">
+      <ul class="menud">
+        <li><a title="Filtrováním přenastavíte zobrazená data.">Spravovat jiné léno »</a>
+          <ul>
+            <% for planet in @owner.osidlene_planety do %>
+                <li><%= link_to planet.name, planet, :class => "oranzova" %>
+                  <% for field in planet.vlastni_pole(@owner) do %>
+                    <li><%= link_to field.name, field %></li>
+                <% end %>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
+    </td>
   </tr>
 </table>
+
+<%= form_tag :presun_suroviny do %>
+    <table class="tab3">
+      <tr>
+        <th>
+          <%= hidden_field_tag(:source_field, value = @field.id) %>
+          <%= select_tag :presunout_co, options_for_select(@co_poslat.collect { |p| p }, {:include_blank => false}), :class => "tab" %>
+          <%= select_tag :target_field, options_for_select(@my_fields.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab", :title => "Zvolte zdrojovou planetu" %>
+          <%= number_field_tag :amount %>
+          <%= submit_tag 'Přesunout', :name => 'presunout', :class => 'ok4', :style => "margin-right: 30px;", :title => "PŘESUNOUT SUROVINY" %>
+        </th>
+      </tr>
+    </table>
 <% end %>
 
-  	 <table class="tab2">
-		<tr>	
-			<th class="lr" style="width:120px">Popis léna</th>
-			<th class="none"  style="width:140px"></th> 
-			<th class="l" >Popis stavby</th>
-			<th style="width:100px">Náklady na stavbu</th>
-			<th class="r" style="width:70px">Náklady vylepšení</th>
-		</tr>
-		<tr>	
-			<td rowspan="21">
-			<center>
-				<li><img class="tdimg2" src = "<%= asset_path @planet.background %>">
-				<li><h3><%= link_to @planet.name, @planet %></h3>
-				<li><h3><%= best_in_place @field, :name %></h3></li>
-				<li><%= @field.oznaceni %>
-				<div class="td1">Obsazenost lén</div>
-				  <%= @planet.obsazenost %>
-				<div class="td1">Zástavba tohoto léna</div>
-				  <%= @field.zastavba %>
-				<div class="td1">Na planetě</div>
-				  <li><%= img_populace "Celková populace"%><%= @resource.population %>
-				  <li><%= img_material "Veškerý materiál na planetě" %><%= @resource.material %>
-          		  <li><%= img_melanz "Veškerá melanž na planetě" %>
-	
-			</center>
-			</td>
-      
-      
-		<% for budova in @owner.dovolene_budovy('L') do %>
-			<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'L', :obr => 'mes'} %>
-		<% end %>
-		</tr>
-		<% for budova in @owner.dovolene_budovy('S') do %>
-			<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'S', :obr => 'trh'} %>
-		<% end %>
-		
-		<% for budova in @owner.dovolene_budovy('M') do %>
-			<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'M', :obr => 'dul'} %>
-		<% end %>
-		
-		<% for budova in @owner.dovolene_budovy('E') do %>
-			<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'E', :obr => 'lab'} %>
-		<% end %>
-		
-		<% for budova in @owner.dovolene_budovy('V') do %>
-			<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'V', :obr => 'tov'} %>
-		<% end %>
-		
-		<% for budova in @owner.dovolene_budovy('O') do %>
-			<%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'O', :obr => 'pob'} %>
-		<% end %>
-	  </table>
+<table class="tab2">
+  <tr>
+    <th class="lr" style="width:120px">Popis léna</th>
+    <th class="none" style="width:140px"></th>
+    <th class="l">Popis stavby</th>
+    <th style="width:100px">Náklady na stavbu</th>
+    <th class="r" style="width:70px">Náklady vylepšení</th>
+  </tr>
+  <tr>
+    <td rowspan="21">
+      <center>
+        <li><img class="tdimg2" src="<%= asset_path @planet.background %>">
+        <li><h3><%= link_to @planet.name, @planet %></h3>
+        <li><h3><%= best_in_place @field, :name %></h3></li>
+        <li><%= @field.oznaceni %>
+          <div class="td1">Obsazenost lén</div>
+          <%= @planet.obsazenost %>
+          <div class="td1">Zástavba tohoto léna</div>
+          <%= @field.zastavba %>
+          <div class="td1">Na planetě</div>
+        <li><%= img_populace "Celková populace" %><%= @resource.population %>
+        <li><%= img_material "Veškerý materiál na planetě" %><%= @resource.material %>
+        <li><%= img_melanz "Veškerá melanž na planetě" %>
+
+      </center>
+    </td>
+
+
+    <% for budova in @owner.dovolene_budovy('L') do %>
+        <%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'L', :obr => 'mes'} %>
+    <% end %>
+  </tr>
+  <% for budova in @owner.dovolene_budovy('S') do %>
+      <%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'S', :obr => 'trh'} %>
+  <% end %>
+
+  <% for budova in @owner.dovolene_budovy('M') do %>
+      <%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'M', :obr => 'dul'} %>
+  <% end %>
+
+  <% for budova in @owner.dovolene_budovy('E') do %>
+      <%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'E', :obr => 'lab'} %>
+  <% end %>
+
+  <% for budova in @owner.dovolene_budovy('V') do %>
+      <%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'V', :obr => 'tov'} %>
+  <% end %>
+
+  <% for budova in @owner.dovolene_budovy('O') do %>
+      <%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'O', :obr => 'pob'} %>
+  <% end %>
+</table>

@@ -22,7 +22,6 @@
 #
 
 $(document).ready ->
-
   $(".descr").click ->
     $(this).parent().next().toggle(500)
 

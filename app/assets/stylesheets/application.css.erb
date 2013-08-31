@@ -1,2052 +1,1933 @@
 body {
-	color:#fff;
-	background-color:#000; 
-	background-image: url(<%= asset_path 'css/bg.jpg' %>);   
-	font-family: Calibri, Arial, Verdana;
-	font-size: 13px;
-	text-align: justify;
-	text-shadow: 0.05em 0.05em #000 !important;
-	}
+    color: #fff;
+    background-color: #000;
+    background-image: url(<%= asset_path 'css/bg.jpg' %>);
+    font-family: Calibri, Arial, Verdana;
+    font-size: 13px;
+    text-align: justify;
+    text-shadow: 0.05em 0.05em #000 !important;
+}
 
-/* ++++++++++++++++++++ Index + Login ++++++++++++++++++++ */
+    /* ++++++++++++++++++++ Index + Login ++++++++++++++++++++ */
 
 #header_i {
-	position: relative;
-	left: -1px;
-	top: -120px;
-	background-image: url(<%= asset_path 'css/head_login.png' %>);   
-	background-repeat: no-repeat;
-	background-position: right;
-	z-index: 1;
-	width: 1100px;
-	height: 180px;
-	border: 0;
--webkit-border-radius: 4px;
--moz-border-radius: 4px;
-border-radius: 4px;
+    position: relative;
+    left: -1px;
+    top: -120px;
+    background-image: url(<%= asset_path 'css/head_login.png' %>);
+    background-repeat: no-repeat;
+    background-position: right;
+    z-index: 1;
+    width: 1100px;
+    height: 180px;
+    border: 0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
 }
 
 #nava_i {
-	position: absolute;
-	top: 119px;
-	left: -1px;
-	z-index: 3;
-	width: 1102px;
-	height:50px;
-	background-image: url(<%= asset_path 'css/head1102i.png' %>);   
-	background-position: top;
-	background-repeat: no-repeat;
-	border-bottom: solid 0px #3399ff;
+    position: absolute;
+    top: 119px;
+    left: -1px;
+    z-index: 3;
+    width: 1102px;
+    height: 50px;
+    background-image: url(<%= asset_path 'css/head1102i.png' %>);
+    background-position: top;
+    background-repeat: no-repeat;
+    border-bottom: solid 0px #3399ff;
 }
 
 div.inf_i {
-	position: absolute; top: 31px; left: 254px;
-	width: 818px;
-	height: 128px;
-	background-image: url(<%= asset_path 'css/logo.png' %>); 
-	z-index: 3;
-	font-size: 1em;
-	padding: 7px 0px 7px 0px;
-	vertical-align: middle;
-	border: solid 1px #a9a9a9;
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
+    position: absolute;
+    top: 31px;
+    left: 254px;
+    width: 818px;
+    height: 128px;
+    background-image: url(<%= asset_path 'css/logo.png' %>);
+    z-index: 3;
+    font-size: 1em;
+    padding: 7px 0px 7px 0px;
+    vertical-align: middle;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 img.screen {
-	width: 155px !important;
-	height: auto !important;
-	margin: 2px !important;
+    width: 155px !important;
+    height: auto !important;
+    margin: 2px !important;
 }
 
-input.i_email {background-image: url(<%= asset_path 'css/email2.png' %>) !important;}
-input.i_login {background-image: url(<%= asset_path 'css/adresat.png' %>) !important;}
-input.i_nick {background-image: url(<%= asset_path 'css/adresat.png' %>) !important;}
-input.i_key {background-image: url(<%= asset_path 'css/key.png' %>) !important;}
-	
-	div.l select{
-		margin: 7px 2px 5px 2px;
-		padding: 2px 5px 2px 25px;
-		width:100px;
-		font-size: 11px !important;
-		color: #ffdb30;
-		vertical-align: middle;
-		background-color: #292929;
-		background-position: left;
-		background-repeat: no-repeat;
-		border: solid 1px #696969;
-			-webkit-border-radius: 2px;
-			-moz-border-radius: 2px;
-			border-radius: 2px;
-	}
-		div.l select:hover{border: solid 1px #ffdb30 !important;}
+input.i_email {
+    background-image: url(<%= asset_path 'css/email2.png' %>) !important;
+}
 
-/* ++++++++++++++++++++ Form?tov?n? technologii ++++++++++++++++++++ */
+input.i_login {
+    background-image: url(<%= asset_path 'css/adresat.png' %>) !important;
+}
+
+input.i_nick {
+    background-image: url(<%= asset_path 'css/adresat.png' %>) !important;
+}
+
+input.i_key {
+    background-image: url(<%= asset_path 'css/key.png' %>) !important;
+}
+
+div.l select {
+    margin: 7px 2px 5px 2px;
+    padding: 2px 5px 2px 25px;
+    width: 100px;
+    font-size: 11px !important;
+    color: #ffdb30;
+    vertical-align: middle;
+    background-color: #292929;
+    background-position: left;
+    background-repeat: no-repeat;
+    border: solid 1px #696969;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+div.l select:hover {
+    border: solid 1px #ffdb30 !important;
+}
+
+    /* ++++++++++++++++++++ Form?tov?n? technologii ++++++++++++++++++++ */
 
 .tech_description {
-	display:none;
-	}
-.descr {
-	cursor: pointer;
-	}
-
-
-
-
-
-/* ++++++++++++++++++++ Lista ++++++++++++++++++++ */	
-  
-div.lista{
-	position: absolute;
-	top:0;
-	left:0;
-	width: 100%;
-	height: auto;
-	padding: 2px 0 3px 0;
-	font-size: 9px !important;
-	text-shadow: 0.1em 0.1em #000 !important;
-	text-align: right;
-	vertical-align: middle;
-	background-image: url(<%= asset_path 'css/td1.png' %>);
-	border: 0;
-	border-bottom: solid 1px #696969;
-	border-top: solid 1px #696969;
-	z-index: 3 !important;
+    display: none;
 }
-	div.lista a{
-		border: 0 !important;   
-		}	
-    
-	div.lista li{
-		list-style: none;
-	}	
-	
-	div.lista input{
-		float: right;
-		padding: 2px 4px 2px 4px !important;
-		margin: 0 1px 0 1px;
-		width: auto !important;
-		background-color: transparent;
-		background-image: url(<%= asset_path 'css/td1.png' %>);
-		color: #a2a2a2;	
-		font-size: 9px !important;
-		text-decoration: none !important;
-		font-weight: bold !important;
-		vertical-align: middle;
-		text-align: center;
-		border: 1px solid #696969;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	}
-		div.lista input:hover {
-			color:#ffdb30; 
-			border:#ffdb30 1px solid; 
-			text-decoration: none !important;
-		}
-    		
 
-/* ++++++++++++++++++++ Hlavn? t?lo webu ++++++++++++++++++++ */
+.descr {
+    cursor: pointer;
+}
+
+    /* ++++++++++++++++++++ Lista ++++++++++++++++++++ */
+
+div.lista {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding: 2px 0 3px 0;
+    font-size: 9px !important;
+    text-shadow: 0.1em 0.1em #000 !important;
+    text-align: right;
+    vertical-align: middle;
+    background-image: url(<%= asset_path 'css/td1.png' %>);
+    border: 0;
+    border-bottom: solid 1px #696969;
+    border-top: solid 1px #696969;
+    z-index: 3 !important;
+}
+
+div.lista a {
+    border: 0 !important;
+}
+
+div.lista li {
+    list-style: none;
+}
+
+div.lista input {
+    float: right;
+    padding: 2px 4px 2px 4px !important;
+    margin: 0 1px 0 1px;
+    width: auto !important;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/td1.png' %>);
+    color: #a2a2a2;
+    font-size: 9px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #696969;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+div.lista input:hover {
+    color: #ffdb30;
+    border: #ffdb30 1px solid;
+    text-decoration: none !important;
+}
+
+    /* ++++++++++++++++++++ Hlavn? t?lo webu ++++++++++++++++++++ */
 
 #body_wrapper {
-  width: 1100px;
-  margin-left: auto;
-  margin-right: auto; 
+    width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #body_container {
-	position: relative;
-	top: -280px;
-	margin: 0px auto; 
-	z-index: 1;
-	background-image: url(<%= asset_path 'css/tseda.png' %>);   
-	border: solid 1px #a2a2a2;
--webkit-border-radius: 4px;
--moz-border-radius: 4px;
-border-radius: 4px;
+    position: relative;
+    top: -280px;
+    margin: 0px auto;
+    z-index: 1;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    border: solid 1px #a2a2a2;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
 }
 
 #body_container_b {
-	width: 1100px;
-	z-index: 1;
-	min-width:500px;
+    width: 1100px;
+    z-index: 1;
+    min-width: 500px;
 }
 
 .planet {
-	position: relative;
-	left: -50px;
-	top: -40px;
-	background-image: url(<%= asset_path 'css/arrakis.png' %>);   
-	background-repeat: no-repeat;
-	background-position: right;
-	z-index: 0 !important;
-	width: 1200px;
-	height: 400px;
-	border: 0;
-}
-
-.header {
-	position: relative;
-	left: -1px;
-	top: -120px;
-	background-image: url(<%= asset_path 'css/head0.png' %>);   
-	background-repeat: no-repeat;
-	background-position: right;
-	z-index: 1;
-	width: 1100px;
-	height: 180px;
-	border: 0;
--webkit-border-radius: 4px;
--moz-border-radius: 4px;
-border-radius: 4px;
-}
-
-.stred  {
-	z-index: 2;
-	min-height: 430px;
-	margin-top:0px;
-}
-
-#page_content {
-	width: 1104px;
-	font-size: 1em;
-	margin: -120px 0 0 -23px;
-	padding: 0 20px 15px 20px;
-	min-height: 500px;
-	z-index: 2;
-}
-
-td.left {width: 13%; vertical-align: top;}
-	
-
-td.stred {
-	width: 74%;
-	vertical-align: top;
-}
-
-td.prava {
-	width: 13%;
-	vertical-align: top;
-}
-
-.footer {
-	width: 1100px;
-	height: 30px;
-	font-size: 0.9em;
-	font-weight: bold;
-	text-align: center;
-	vertical-align: bottom;
-}
-
-/* ++++++++++++++++++++ Menu + hlavi?ka ++++++++++++++++++++ */
-
-div.suroviny {
-	position: absolute; top: 128px; left:260px;
-	width: 635px;
-	height: 20px;
-	border: 0px;
-	z-index: 4;
-	font-size: 1.2em;
-	vertical-align: middle;
-}
-		div.suroviny img  {
-			width: 24px;
-			height: 24px;
-			margin-right: 3px;
-			margin-left: 10px;
-			vertical-align: middle;
-			border: solid 1px #a9a9a9;
-		-webkit-border-radius: 2px;
-		-moz-border-radius: 2px;
-		border-radius: 2px;
-		}
-
-div.inf {
-	position: absolute; top: 21px; left:0px;
-	width: 253px;
-	height: 90px;
-	background-image: url(<%= asset_path 'css/tseda.png' %>);    
-	z-index: 3;
-	font-size: 1em;
-	padding: 7px 0px 7px 0px;
-	vertical-align: middle;
-	border: solid 1px #a9a9a9;
-		-webkit-border-radius: 2px;
-		-moz-border-radius: 2px;
-		border-radius: 2px;
-}
-		div.inf img  {
-			float: left;
-			width: 70px;
-			height: 80px;
-			margin-right: 7px;
-			margin-left:-1px;
-			vertical-align: middle;
-			border: solid 1px #a9a9a9;
-		-webkit-border-radius: 2px;
-		-moz-border-radius: 2px;
-		border-radius: 2px;
-		}
-		div.inf a  {
-		text-decoration: none;
-		color: #fff;
-		}
-		div.inf a:hover  {
-		color: #ffdb30;
-		}
-		.a1  {
-		text-decoration: none;
-		color: #ffdb30 !important;
-		}
-		.a1:hover  {
-		text-decoration: underline;
-		}
-		
-a.menukomunikace {
-	position: absolute; top: 5px; left:15px;
-	z-index: 2;
-	background-image: url(<%= asset_path 'css/komunikace.png' %>);   
-	width: 42px;
-	height: 42px;
-	background-repeat: no-repeat;
-	border:0;
-}
-		a.menukomunikace:hover  {
-			z-index: 4;
-			background-image: url(<%= asset_path 'css/komunikace2.png' %>);   
-		}
-
-a.menupolitika {
-	position: absolute; top: 5px; left:61px;
-	z-index: 2;
-	background-image: url(<%= asset_path 'css/diplomacie.png' %>);   
-	width: 42px;
-	height: 42px;
-	background-repeat: no-repeat;
-	border:0;
-}
-		a.menupolitika:hover  {	
-			z-index: 4;		
-			background-image: url(<%= asset_path 'css/diplomacie2.png' %>);   
-		}
-
-a.menuvyzkum  {
-	position: absolute; top: 5px; left:107px;
-	z-index: 2;
-	background-image: url(<%= asset_path 'css/vyzkum.png' %>);   
-	width: 42px;
-	height: 42px;
-	background-repeat: no-repeat;
-	border:0;
-}
-		a.menuvyzkum:hover  {
-			z-index: 4;
-			background-image: url(<%= asset_path 'css/vyzkum2.png' %>);   
-		}
-
-a.menuarmada {
-	position: absolute; top: 5px; left:153px;
-	z-index: 2;
-	background-image: url(<%= asset_path 'css/armada.png' %>);   
-	width: 42px;
-	height: 42px;
-	background-repeat: no-repeat;
-	border:0;
-}
-		a.menuarmada:hover {
-			z-index: 4;
-			background-image: url(<%= asset_path 'css/armada2.png' %>);   
-		}
-
-a.menugalaxy {
-	position: absolute; top: 5px; left:199px;
-	z-index: 2;
-	background-image: url(<%= asset_path 'css/galaxy.png' %>);   
-	width: 42px;
-	height: 42px;
-	background-repeat: no-repeat;
-	border:0;
-}
-		a.menugalaxy:hover {
-			z-index: 4;
-			background-image: url(<%= asset_path 'css/galaxy2.png' %>);   
-		}
-
-#nava {
-	position: absolute;
-	top: 119px;
-	left: -1px;
-	z-index: 3;
-	width: 1102px;
-	height:50px;
-	background-image: url(<%= asset_path 'css/head1102.png' %>);   
-	background-position: top;
-	background-repeat: no-repeat;
-	border-bottom: solid 0px #3399ff;
-}
-#nava2 {
-	top: 4px;
-	left: 2px;
-	z-index: 3;
-	height: 35px;
-}
-	#nava2 td:hover{
-		z-index: 3;
-		color: #ffffff !important; 
-		border: 0;
-		background-repeat: repeat-x;
-	}
-	#nava2 a:hover{
-		z-index: 2;
-		color: #fff; 
-	}
-	
-.menu {
-	padding: 2px 5px 0 5px;  
-	margin: 0;
-	list-style-type: none; 
-	display:block;
-}
-		.menu ul {
-			position: absolute; 
-			visibility: hidden; 
-			font-size: 0.9em !important;
-			padding: 10px 5px 5px 5px; 
-			margin: 31px 0 0 0;
-			list-style-type: none;
-			background-image: url(<%= asset_path 'css/tcerna2.png' %>);    
-			border: solid 1px #a2a2a2;
-			border-top:0;
-			-webkit-border-bottom-right-radius: 4px;
-			-webkit-border-bottom-left-radius: 4px;
-			-moz-border-radius-bottomright: 4px;
-			-moz-border-radius-bottomleft: 4px;
-			border-bottom-right-radius: 4px;
-			border-bottom-left-radius: 4px;
-			}
-		.menu li {
-			float: left; 
-			padding: 2px 0px 2px 0px;  
-			white-space: nowrap;
-			}
-		.menu a {
-			padding: 3px 3px 5px 3px; 
-			text-align: left;  
-			color: #3399ff; 
-			display: block; 
-			text-decoration: none; 
-			font-weight: bold;
-			}
-		.menu a:hover{
-			color: #ffdb30 !important;
-			}	
-		.menu li a {
-			font-size: 1.1em;
-			color: #3399ff;
-			text-decoration: none;
-			text-shadow: silver;
-			font-weight: bold;
-			}
-		.menu ul a:link {
-			color: #fff;
-			border-bottom: none; 
-			margin: 2px 5px 2px 5px ; 
-			}
-		.menu ul a:visited {
-			color: #fff; 
-			border-bottom: none; 
-			}
-		.menu ul a:hover {
-			color: #ffdb30;
-			}
-		.menu li:hover ul, ul.menu li.hover ul { visibility: visible;}
-		.menu li li {float: none; border: none; padding: 0; margin: 0;}
-
-/* ++++++++++++++++++++ Form?tov?n? obr?zku ++++++++++++++++++++ */
-
-
-.img_l{
-	padding: 10px !important;
-}
-
-img.l {
-	float: left;
-	padding: 20px;
-	border:0;
-	}
-img.r {
-	float: right;
-	padding: 10px 0 10px 20px;
-	border:0;
-	}
-	
-div.lh {
-	color:#ffdb30;
-	font-weight: bolder;
-	font-size:12px;
-	width: 150px;
-	padding: 7px 10px 7px 15px;
-	margin: 0px 20px 0px -1px;
-	border: 1px solid #a2a2a2;
-	border-bottom: 1px solid #ffdb30;
-	background-image: url(<%= asset_path 'css/td1.png' %>);   
--webkit-border-top-right-radius: 4px;
--moz-border-radius-topright: 4px;
-border-top-right-radius: 4px;
-	}
-	
-div.l {
-	color:#ffffff;
-	font-size:12px;
-	width: 150px;
-	padding: 10px 10px 10px 15px;
-	margin: 0px 20px 15px -1px;
-	border: 1px solid #a2a2a2;
-	border-top: 0px;
-	background-image: url(<%= asset_path 'css/tseda.png' %>);   
--webkit-border-bottom-right-radius: 4px;
--moz-border-radius-bottomright: 4px;
-border-bottom-right-radius: 4px;
-	}
-	
-	div.l li{list-style: none;}
-	
-	div.l input {margin: 7px 2px 5px 2px;
-		padding: 3px 5px 3px 25px;
-		width:100px;
-		font-size: 11px !important;
-		color: #ffdb30;
-		vertical-align: middle;
-		background: transparent;
-		background-position: left;
-		background-repeat: no-repeat;
-		border: solid 1px #696969;
-			-webkit-border-radius: 2px;
-			-moz-border-radius: 2px;
-			border-radius: 2px;
-}
-	div.l input:hover{border: solid 1px #ffdb30 !important;}
-
-		
-div.la {
-	color:#fff;
-	width: 150px;
-	font-size:12px;
-	padding: 10px 10px 10px 15px;
-	margin: 0px 20px 15px -1px;
-	border: 1px solid #a2a2a2;
-	background-image: url(<%= asset_path 'css/tseda.png' %>);   
--webkit-border-top-right-radius: 4px;
--webkit-border-bottom-right-radius: 4px;
--moz-border-radius-topright: 4px;
--moz-border-radius-bottomright: 4px;
-border-top-right-radius: 4px;
-border-bottom-right-radius: 4px;
-	}
-
-div.rh {
-	color:#ffdb30;
-	font-weight: bolder;
-	font-size:12px;
-	width: 155px;
-	padding: 7px 10px 7px 10px;
-	margin: 0px -1px 0px 20px;
-	border: 1px solid #a2a2a2;
-	border-bottom: 1px solid #ffdb30;
-	background-image: url(<%= asset_path 'css/td1.png' %>);   
--webkit-border-top-left-radius: 4px;
--moz-border-radius-topleft: 4px;
-border-top-left-radius: 4px;
-	}
-	
-div.r {
-	color:#fff;
-	width: 155px;
-	font-size:12px;
-	padding: 10px 10px 10px 10px;
-	margin: 0px -1px 20px 20px;
-	border: 1px solid #a2a2a2;
-	border-top:0;
-	background-image: url(<%= asset_path 'css/tseda.png' %>);   
--webkit-border-bottom-left-radius: 4px;
--moz-border-radius-bottomleft: 4px;
-border-bottom-left-radius: 4px;
-	}
-	
-	div.r li{list-style: none;}
-	
-div.ra {
-	color:#fff;
-	width: 155px;
-	font-size:12px;
-	padding: 10px;
-	margin: 0px -1px 20px 20px;
-	border: 1px solid #a2a2a2;
-	background-image: url(<%= asset_path 'css/tseda.png' %>);   
--webkit-border-top-left-radius: 4px;
--webkit-border-bottom-left-radius: 4px;
--moz-border-radius-topleft: 4px;
--moz-border-radius-bottomleft: 4px;
-border-top-left-radius: 4px;
-border-bottom-left-radius: 4px;
-	}
-	
-/* ++++++++++++++++++++ Tlac?tka a formula?e ++++++++++++++++++++ */	
-
-.ok {
-	margin: 2px 0 2px 0;
-	padding: 2px 5px 2px 5px !important;
-	background-color: transparent;
-	background-image: url(<%= asset_path 'css/td1.png' %>) !important;  
-	background-repeat: repeat !important;	
-	width: auto !important;
-	font-size: 12px !important;
-	color: #a2a2a2;	
-	text-decoration: none;
-	font-weight: bold !important;
-	vertical-align: middle;
-	text-align: center;
-	border: 1px solid #a2a2a2;
--webkit-border-radius: 3px;
--moz-border-radius: 3px;
-border-radius: 3px;
-}
-		.ok:hover {color:#ffdb30; border:#ffdb30 1px solid;}
-		
-.ok2 {
-	margin: 2px 0 2px 0;
-	padding: 2px 3px 2px 3px !important;
-	width: 100px !important;
-	background-color: transparent;
-	background-image: url(<%= asset_path 'css/td1.png' %>) !important; 
-	background-repeat: repeat !important;	
-	font-size: 10px !important;
-	color: #a2a2a2;	
-	text-decoration: none;
-	font-weight: bold !important;
-	vertical-align: middle;
-	text-align: center;
-	border: 1px solid #a2a2a2;
--webkit-border-radius: 3px;
--moz-border-radius: 3px;
-border-radius: 3px;
-}
-		.ok2:hover {color:#ffdb30; border:#ffdb30 1px solid;}
-
-.ok3 {
-	margin: 6px 0 2px 0 !important;
-	padding: 2px 3px 2px 3px !important;
-	width: auto !important;
-	background-color: transparent;
-	background-image: url(<%= asset_path 'css/tcerna2.png' %>) !important; 
-	background-repeat: repeat !important;
-	font-size: 9px !important;
-	color: #a2a2a2;	
-	text-decoration: none;
-	font-weight: bold !important;
-	vertical-align: middle;
-	text-align: center;
-	border: 1px solid #a2a2a2;
--webkit-border-radius: 3px;
--moz-border-radius: 3px;
-border-radius: 3px;
-}
-		.ok3:hover {color:#ffdb30; border:#ffdb30 1px solid;}
-
-.ok4 {
-	margin: 7px 2px 5px 2px !important;
-	padding: 3px 5px 3px 5px !important;
-	width: auto !important;
-	background-color: transparent;
-	background-image: url(<%= asset_path 'css/td1.png' %>) !important;   
-	background-repeat: repeat !important;
-	font-size: 11px !important;
-	color: #a2a2a2;	
-	text-decoration: none;
-	font-weight: bold !important;
-	vertical-align: middle;
-	text-align: center;
-	border: 1px solid #a2a2a2;
--webkit-border-radius: 3px;
--moz-border-radius: 3px;
-border-radius: 3px;
-}
-		.ok4:hover {color:#ffdb30; border:#ffdb30 1px solid;}
-		
-.ok5 {	
-	margin: 2px 2px 5px 2px !important;
-	padding: 3px 5px 3px 5px !important;
-	width: auto !important;
-	background-color: transparent;
-	background-image: url(<%= asset_path 'css/td1.png' %>) !important;   
-	background-repeat: repeat !important;
-	background-position: top !important;
-	font-size: 11px !important;
-	color: #a2a2a2;	
-	text-decoration: none;
-	font-weight: bold !important;
-	vertical-align: middle;
-	text-align: center;
-	border: 1px solid #a2a2a2;
--webkit-border-radius: 3px;
--moz-border-radius: 3px;
-border-radius: 3px;
-}
-		.ok5:hover {color:#ffdb30; border:#ffdb30 1px solid;}
-		
-.okuni {	
-	/*padding: auto 5px auto 5px !important;*/
-	width: auto !important;
-	background-color: transparent;
-	background-image: url(<%= asset_path 'css/td1.png' %>) !important;   
-	background-position: top !important;
-	background-repeat: repeat !important;
-	font-size: 12px !important;
-	color: #a2a2a2;	
-	text-decoration: none;
-	font-weight: bold !important;
-	vertical-align: middle;
-	text-align: center;
-	border: 1px solid #a2a2a2;
--webkit-border-radius: 3px;
--moz-border-radius: 3px;
-border-radius: 3px;
-}
-		.okuni:hover {color:#ffdb30; border:#ffdb30 1px solid;}
-
-	
-
-select.tab {
-		margin: 2px !important;
-		padding: 2px 5px 2px 5px !important;
-		width: 120px !important;
-		font-size: 11px !important;
-	}
-		
-input.tab {
-		margin: 2px !important;
-		padding: 3px 5px 3px 5px !important;
-		width: 108px !important;
-		font-size: 11px !important;
-		appearance: none;
-	}
-	
-input.oktab {
-		margin: 2px !important; 
-		padding: 3px 5px 3px 5px !important;
-		width: 120px !important;
-		font-size: 11px !important;
-		font-weight: bold !important;
-		background-color: transparent;
-		background-image: url(<%= asset_path 'css/td1.png' %>) !important;   
-		background-repeat: repeat !important;
-		background-position: top !important;
-	}
-	input.oktab:hover {color:#ffdb30; border:#ffdb30 1px solid;}
-
-input.oki {
-		margin: -2px 0 0 3px !important; 
-		padding: 3px 5px 3px 5px !important;
-    width: 20px !important;
-		font-size: 11px !important;
-		font-weight: bold !important;
-    color: #ffdb30;
-		background-color: transparent;
-		background-image: url(<%= asset_path 'css/td1.png' %>) !important;   
-		background-repeat: repeat !important;
-		background-position: center center !important;
-	}
-	input.oki:hover {color: #ffdb30; border:#ffdb30 1px solid;}
-	
-input.oktab_auto {
-		margin: 2px !important; 
-		padding: 3px 5px 3px 5px !important;
-		width: auto !important;
-		font-size: 11px !important;
-		font-weight: bold !important;
-		background-color: transparent;
-		background-image: url(<%= asset_path 'css/td1.png' %>) !important;   
-		background-repeat: repeat !important;
-		background-position: top !important;
-	}
-	input.oktab_auto:hover {color:#ffdb30; border:#ffdb30 1px solid;}
-	
-input.oktab_95 {
-		margin: 2px !important; 
-		padding: 3px 5px 3px 5px !important;
-		width: 95px !important;
-		font-size: 11px !important;
-		font-weight: bold !important;
-		background-color: transparent;
-		background-image: url(<%= asset_path 'css/td1.png' %>) !important;   
-		background-repeat: repeat !important;
-		background-position: top !important;
-	}
-	input.oktab_95:hover {color:#ffdb30; border:#ffdb30 1px solid;}
-
-
-/* ++++++++++++++++++++ Form?tov?n? textu ++++++++++++++++++++ */	
-h1 {
-	font-size: 1.5em;
-	font-stretch: expanded;
-	font-weight: bold;
-	color: #ff8c00;
-	padding: 5px 0 5px 0;
-	margin: 15px 0 0 0;
-	text-decoration: none;
-	border-bottom: 1px solid #ffdb30;
-	}
-		
-h2 {
-	font-size: 1.3em;
-	font-stretch: expanded;
-	font-weight: bold;
-	color: #ffdb30;
-	padding: 5px 0 5px 0;
-	margin: 10px 0 0 0;
-	text-decoration: none;
-	}	
-	
-h3 {
-	font-size: 12px;
-	font-weight: bold;
-	color: #ffdb30;
-	padding: 5px 0 5px 0;
-	margin:0px;
-	text-decoration: none;
-	}	
-	
-h5 {
-	font-size: 0.7em !important;
-	font-weight: normal !important;
-	text-decoration: none !important;
-	}	
-	
-p { padding-bottom:5px; margin:0px; font-weight: normal;	}	
-a { text-decoration:none; padding-bottom:5px; margin:0px; color:#ffdb30;	}		
-	a:hover{text-decoration:underline;}
-
-a.emperor { text-decoration:none; margin:0px; color:#da70d6;	}		
-	a.emperor:hover{text-decoration:underline;}	
-
-a.regent { text-decoration:none; margin:0px; color:#da70d6;	}		
-	a.regent:hover{text-decoration:underline;}	
-	
-/*a.duce { text-decoration:none;  margin:0px; color:#1e90ff;	}		*/
-	/*duce:hover{text-decoration:underline;}	*/
-	
-a.poslanec { text-decoration:none; margin:0px; color:#40e0d0;	}		
-	a.poslanec:hover{text-decoration:underline;}	
-	
-a.diplomat { text-decoration:none; margin:0px; color:#fffafa;	}		
-	a.diplomat:hover{text-decoration:underline;}	
-	
-a.army_mentat { text-decoration:none; margin:0px; color: 	#6b8e23;	}		
-	a.army_mentat:hover{text-decoration:underline;}	
-	
-a.mentat { text-decoration:none; margin:0px; color:#9acd32;	}		
-	a.mentat:hover{text-decoration:underline;}	
-	
-a.general { text-decoration:none; margin:0px; color:	#ff4500;	}		
-	a.general:hover{text-decoration:underline;}	
-
-.zelena{
-	color: #7cfc00;
-}
-
-.cervena{
-	color: #ff0000;
-}
-
-.oranzova{
-	color: #ffd700 !important;
-}
-
-
-
-/* ++++++++++++++++++++ V?suvn? menu statistik ++++++++++++++++++++ */
-
-td.tdd {
-	margin: 0 !important;
-	width: 120px !important;
-	padding: 2px 5px 2px 5px !important; 
-	background-image: url(<%= asset_path 'css/tcerna2.png' %>);    
-	border: solid 1px #a2a2a2;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
-
-.menud {
-	color: #000000; 
-	padding: 0;  
-	margin: 0;
-	list-style-type: none; 
-	display:block;
-	font-size: 13px;
-}
-		.menud ul {
-			position: absolute; 
-			visibility: hidden; 
-			width:120px;
-			font-size: 0.9em !important;
-			padding: 10px 5px 5px 5px; 
-			margin: 2px 0 0 -6px;
-			list-style-type: none;
-			background-color: transparent;
-			background-image: url(<%= asset_path 'css/tcerna2.png' %>);    
-			border: solid 1px #a2a2a2;
-			border-top:0;
-			-webkit-border-bottom-right-radius: 4px;
-			-webkit-border-bottom-left-radius: 4px;
-			-moz-border-radius-bottomright: 4px;
-			-moz-border-radius-bottomleft: 4px;
-			border-bottom-right-radius: 4px;
-			border-bottom-left-radius: 4px;
-			}
-		.menud li {
-			float: left; 
-			padding: 2px 0px 2px 0px;  
-			white-space: nowrap;
-			}
-		.menud a {
-			padding: 3px 3px 5px 3px; 
-			text-align: left;  
-			color: #3399ff; 
-			display: block; 
-			text-decoration: none; 
-			}
-		.menud li a {
-			font-size: 1.1em;
-			color: #ffdb30;
-			text-decoration: none;
-			text-shadow: silver;
-			font-weight: bolder;
-			}
-		.menud ul a:link {
-			color: #fff;
-			border-bottom: none; 
-			margin: 0 ; 
-			}
-		.menud ul a:visited {
-			color: #fff; 
-			border-bottom: none; 
-			}
-		.menud ul a:hover {
-			color: #ffdb30;
-			}
-		.menud li:hover ul, ul.menu li.hover ul { visibility: visible; }
-		.menud li li {float: none; border: none; padding: 0; margin: 0;}
-		
-td.tdd2{
-	width: 20%;
-	padding: 0px 5px 3px 5px !important;
-	border-top:0;
-	color: #a9a9a9;
-	font-size: 1.0em !important;
-	text-align: center !important;
-	font-weight: bold !important;
-	background-image: url(<%= asset_path 'css/tcerna2.png' %>);    
-	border: solid 1px #a2a2a2;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
-	td.tdd2 a{text-decoration:none; color:#a9a9a9; font-size: 1.2em !important;}
-	td.tdd2 a:hover{text-decoration:none; color: #ffdb30;}
-	td.tdd2 select{background-color:transparent; color:#ffdb30; border:0; width:auto;}
-	td.tdd2 option{
-		font-size: 12px;
-		color: #fff;
-		background-color: #000;
-		text-align: left;
-	}
-
-/* ++++++++++++++++++++ Tabulky - univerzaln? ++++++++++++++++++++ */
-
-div.all{
-		padding: 0 15px 15px 15px;
-		background-image: url(<%= asset_path 'css/tseda.png' %>); 
-		text-align: justify;
-		font-size: 1.0em;
-		border: 1px solid #696969;
-		vertical-align: top;
-		margin-top: 20px;
-		-webkit-border-radius: 4px;
-		-moz-border-radius: 4px;
-		border-radius: 4px;
-}
-
-		div.all li{
-			list-style: none;
-		}
-		
-.tdpimg{
-	width: 150px;
-	height: auto;
-	border: 1px solid #696969;
-}
-
-td.tdpl{
-	max-width: 30%;
-	background-position: center;
-	background-color: #000;
-	background-repeat: no-repeat;
-	text-shadow: 0.1em 0.1em #000;
-	border: 1px solid #696969;
-	vertical-align: top;
-	padding: 5px 10px 5px 15px;
--webkit-border-top-left-radius: 4px;
--webkit-border-bottom-left-radius: 4px;
--moz-border-radius-topleft: 4px;
--moz-border-radius-bottomleft: 4px;
-border-top-left-radius: 4px;
-border-bottom-left-radius: 4px;
-}
-		td.tdpl li{
-			list-style: none;
-		}
-		td.tdpl h2{
-			margin: 0 0 1px 0 !important;
-			text-shadow: 0.1em 0.1em #000;
-		}
-		
-td.tdpr{
-	max-width: 30%;
-	background-position: center;
-	background-color: #000;
-	background-repeat: no-repeat;
-	text-shadow: 0.1em 0.1em #000;
-	border: 1px solid #696969;
-	vertical-align: top;
-	padding: 5px 10px 5px 15px;
--webkit-border-top-right-radius: 4px;
--webkit-border-bottom-right-radius: 4px;
--moz-border-radius-topright: 4px;
--moz-border-radius-bottomright: 4px;
-border-top-right-radius: 4px;
-border-bottom-right-radius: 4px;
-}
-		td.tdpr li{
-			list-style: none;
-		}
-		td.tdpr h2{
-			margin: 0 0 1px 0 !important;
-			text-shadow: 0.1em 0.1em #000;
-		}
-		
-td.tdpl2{
-	max-width: 30%;
-	background-position: center;
-	background-color: #000;
-	background-repeat: no-repeat;
-	text-shadow: 0.1em 0.1em #000;
-	border: 1px solid #696969;
-	vertical-align: top;
-	padding: 5px 10px 5px 15px;
-		-webkit-border-radius: 4px;
-		-moz-border-radius: 4px;
-		border-radius: 4px;
-}
-		td.tdpl2 li{
-			list-style: none;
-		}
-		td.tdpl2 h2{
-			margin: 0 0 1px 0 !important;
-			text-shadow: 0.1em 0.1em #000;
-		}
-		
-.ctr{
-	text-align: center !important;
-}
-
-.r{
-				/*DOPLNIT! border radius!*/
-}
-
-.m{
-		-webkit-border-radius: 4px;
-		-moz-border-radius: 4px;
-		border-radius: 4px;
-}
-
-.lr{
--webkit-border-top-left-radius: 4px;
--webkit-border-top-right-radius: 4px;
--moz-border-radius-topleft: 4px;
--moz-border-radius-topright: 4px;
-border-top-left-radius: 4px;
-border-top-right-radius: 4px;
-}
-
-.thr{
-		border: 1px solid #696969 !important;
-		border-right: 1px solid #ffdb30 !important;
-}
-
-.thf{
-		color:#ffdb30 !important;
-		font-weight: bold !important;
-		padding: 6px 3px 5px 3px !important;
-		margin: 5px -6px 0px -6px !important;
-		text-align: center !important;
-		font-size: 1.1em !important;
-		background-image: url(<%= asset_path 'css/td1.png' %>);    
-		background-repeat: repeat !important;
-		background-color: transparent !important;
-		border: 1px solid #696969 !important;
-		border-bottom: 1px solid #ffdb30 !important;
-}
-
-td.ava{
-		border: none !important;
-		width: 50px;	
-		padding: 0 !important;
-		margin-bottom:20px;
-}
-	td.ava img{
-		width:50px;
-		height: auto;
-		margin: 0;
-		border: 0;
-	}
-
-.none{
-	background: none !important;
-	bakground-image: none !important;
-	border: none !important;
-}
-
-td.none{
-	background: none !important;
-	bakground-image: none !important;
-	border: none !important;
-}
-
-.td1{
-		color:#ffdb30 !important;
-		font-weight: bold !important;
-		padding: 3px 0 3px 0 !important;
-		margin: 10px -6px 5px -6px !important;
-		text-align: center !important;
-		font-size: 12px !important;
-		background-image: url(<%= asset_path 'css/td1.png' %>)!important;
-		background-repeat: repeat !important;
-		background-color: transparent !important;
-		border: 1px solid #696969 !important;
-}
-	
-/* ++++++++++++++++++++ Tabulky - TAB0 = Drobe?kov? navigace ++++++++++++++++++++ */	
-
-table.tab0 {
-	width: 100%;
-	border: 0;
-}
-
-	table.tab0 td {
-		color: #fff; 
-		text-align: left;
-		padding: 0 0 10px 0;  
-		margin: 0;
-		font-size: 13px;
-		vertical-align: middle;
-	}
-	table.tab0 a {
-		color: #fff;
-		text-decoration: none;
-		font-weight: bold;
-		font-size: 1em;			
-	}
-	table.tab0 a:hover {
-		color: #ffdb30;
-		text-decoration: none;
-	}
-		
-/* ++++++++++++++++++++ Tabulky - TAB1 ++++++++++++++++++++ */	
-
-table.tab1 {
-	width: 100%;
-	border: 0;
-	font-size: 12px;
-	margin-top: 15px;
-}
-	table.tab1 th{
-		color:#ffdb30;
-		font-weight: bold;
-		white-space: nowrap;
-		padding: 6px 5px 5px 5px;
-		margin: 5px -6px 2px -6px;
-		text-align: center;
-		font-size: 1.1em;
-		background-image: url(<%= asset_path 'css/td1.png' %>);   
-		border: 1px solid #696969;
-		border-bottom: 1px solid #ffdb30;
-	}
-	table.tab1 td{
-		padding: 5px;
-		background-image: url(<%= asset_path 'css/tseda.png' %>);   
-		text-align: justify;
-		font-size: 1.0em;
-		border: 1px solid #696969;
-		vertical-align: top;
-	}
-	table.tab1 li{
-		list-style: none;
-	}
-	table.tab1 img{
-		width: 12px;
-		height: 12px;
-		margin: 2px 3px 2px 0;
-		vertical-align: middle;
-		border: solid 1px #a9a9a9;
-		-webkit-border-radius: 2px;
-		-moz-border-radius: 2px;
-		border-radius: 2px;
-	}
-        table.tab1 img:hover {
-            background: #aaaaaa;
-            -webkit-border-radius: 2px;
-            -moz-border-radius: 2px;
-            border-radius: 2px;
-        }
-	table.tab1 input {
-		margin: 2px 3px 2px 0;
-		width: 60px;
-		padding: 3px 5px 2px 5px;
-		background-color: transparent;
-		background-image: url(<%= asset_path 'css/tcerna.png' %>);   
-		font-size: 1.0em;
-		color: #a2a2a2;	
-		text-decoration: none;
-		vertical-align: middle;
-		text-align: center;
-		border: 1px solid #a2a2a2;
-		-webkit-border-radius: 3px;
-		-moz-border-radius: 3px;
-		border-radius: 3px;
-	}
-	table.tab1 select{
-		font-size: 12px;
-		color: #fff;
-		padding: 2px;
-		background-color: #1d1d1d;
-		text-align: left;
-		border: 1px solid #a2a2a2;
-		-webkit-border-radius: 3px;
-		-moz-border-radius: 3px;
-		border-radius: 3px;
-	}
-
-/* ++++++++++++++++++++ Tabulky - TAB2 ++++++++++++++++++++ */	
-
-table.tab2 {
-	width: 100% !important;
-	border: 0;
-	font-size: 12px;
-	margin-top: 15px;
-}
-	table.tab2 th{
-		color:#ffdb30;
-		font-weight: bold;
-		padding: 6px 3px 5px 3px;
-		margin: 5px -6px 2px -6px;
-		text-align: center;
-		font-size: 1.1em;
-		background-image: url(<%= asset_path 'css/td1.png' %>);   
-		border: 1px solid #696969;
-		border-bottom: 1px solid #ffdb30;
-	}
-	table.tab2 td{
-		padding: 5px;
-		background-image: url(<%= asset_path 'css/tseda.png' %>);   
-		text-align: justify;
-		font-size: 1.0em;
-		border: 1px solid #696969;
-		vertical-align: top;
-	}
-	table.tab2 li{
-		list-style: none;
-	}
-	table.tab2 img{
-		width: 15px;
-		height: 15px;
-		margin: 2px 3px 2px 0;
-		vertical-align: middle;
-		border: solid 1px #a9a9a9;
-		-webkit-border-radius: 2px;
-		-moz-border-radius: 2px;
-		border-radius: 2px;
-	}
-	table.tab2 input {
-		width: 100px;
-		margin: 2px;
-		padding: 3px 5px 3px 5px ;
-		font-size: 11px ;
-		background-color: transparent;
-		background-image: url(<%= asset_path 'css/tcerna.png' %>);   
-		color: #a2a2a2;	
-		text-decoration: none;
-		vertical-align: middle;
-		text-align: center;
-		border: 1px solid #a2a2a2;
-		-webkit-border-radius: 3px;
-		-moz-border-radius: 3px;
-		border-radius: 3px;
-	}
-	table.tab2 select{
-		margin: 2px;
-		padding: 2px 5px 2px 5px ;
-		width: 50px;
-		font-size: 11px;
-		appearance: none;
-		color: #fff;
-		background-color: #1d1d1d;
-		text-align: left;
-		border: 1px solid #a2a2a2;
-		-webkit-border-radius: 3px;
-		-moz-border-radius: 3px;
-		border-radius: 3px;
-	}
-	
-/* ++++++++++++++++++++ Tabulky - TAB3 ++++++++++++++++++++ */	
-
-table.tab3 {
-	width: 100%;
-	border: 0;
-	font-size: 12px;
-	margin-top: 15px;
-}
-		table.tab3 th{
-		padding: 1px 5px 1px 5px;
-		text-shadow: 0.1em 0.1em #000 !important;
-		text-align: left;
-		vertical-align: baseline;
-		background-image: url(<%= asset_path 'css/td1.png' %>);   
-		border: solid 1px #696969;
-		border-bottom: solid 1px #ffdb30;
-			-webkit-border-radius: 2px;
-			-moz-border-radius: 2px;
-			border-radius: 2px;
-		}
-		table.tab3 li{
-		list-style: none;
-		}	
-		table.tab3 input{
-			margin: 7px 2px 5px 2px;
-			padding: 3px 5px 3px 25px;
-			width:100px;
-			font-size: 11px !important;
-			color: #ffdb30;
-			vertical-align: middle;
-			background: transparent;
-			background-position: left;
-			background-repeat: no-repeat;
-			border: solid 1px #696969;
-				-webkit-border-radius: 2px;
-				-moz-border-radius: 2px;
-				border-radius: 2px;
-		}
-			table.tab3 input:hover{border: solid 1px #ffdb30 !important;}
-		
-		.tab3_input{
-			margin: 7px 2px 5px 2px;
-			padding: 3px 5px 3px 25px;
-			width:100px;
-			font-size: 11px !important;
-			color: #ffdb30;
-			vertical-align: middle;
-			background: transparent;
-			background-position: left;
-			background-repeat: no-repeat;
-			border: solid 1px #696969;
-				-webkit-border-radius: 2px;
-				-moz-border-radius: 2px;
-				border-radius: 2px;
-		}
-			.tab3_input:hover{border: solid 1px #ffdb30 !important;}
-		
-		table.tab3 select{
-			margin: 7px 2px 5px 2px;
-			padding: 2px 5px 2px 25px;
-			width:140px;
-			font-size: 11px !important;
-			color: #ffdb30;
-			vertical-align: middle;
-			background-color: #292929;
-			background-position: left;
-			background-repeat: no-repeat;
-			border: solid 1px #696969;
-				-webkit-border-radius: 2px;
-				-moz-border-radius: 2px;
-				border-radius: 2px;
-		}
-			table.tab3 select:hover{border: solid 1px #ffdb30 !important;}
-			
-		table.tab3 td{
-			padding: 5px;
-			background-image: url(<%= asset_path 'css/tseda.png' %>);   
-			text-align: justify;
-			font-size: 1.0em;
-			border: 1px solid #696969;
-			vertical-align: top;
-		}
-		
-		table.tab3 textarea{
-			padding: 0;
-			margin: 0;
-			background: transparent;
-			color: #fff;
-			text-align: justify;
-			font-size: 1.0em;
-			border: none;
-			vertical-align: top;
-			width: 676px;
-			max-width:676;
-			height: 300px;
-		}
-
-		
-/* ++++++++++++++++++++ Tabulky - TAB4 ++++++++++++++++++++ */	
-
-table.tab4 {
-	width: 100%;
-	border: 0;
-	font-size: 12px;
-	margin-top: 15px;
-}	
-	table.tab4 th{
-		width: 120px;
-		min-height: 120px;
-		background-color: #000;
-		background-repeat: no-repeat;
-		text-shadow: 0.1em 0.1em #000;
-		vertical-align: top;
-		border: 1px solid #696969;
-		padding: 5px 10px 5px 10px;
-	}
-	table.tab4 td{
-		padding: 5px;
-		width: 260px;
-		background-image: url(<%= asset_path 'css/tseda.png' %>);   
-		text-align: justify;
-		font-size: 1.0em;
-		border: 1px solid #696969;
-		vertical-align: top;
-	}
-		
-	table.tab4 li{
-		list-style: none;
-	}
-	table.tab4 a{
-		font-size: 1.2em !important;
-		margin: 0 0 3px 0 !important;
-		text-shadow: 0.1em 0.1em #000;
-	}
-	table.tab4 img{
-		width: 16px;
-		height: 16px;
-		margin: 2px 3px 2px 0;
-		vertical-align: middle;
-		border: solid 1px #a9a9a9;
-		-webkit-border-radius: 2px;
-		-moz-border-radius: 2px;
-		border-radius: 2px;
-	}
-	table.tab4 input{
-		width: 35px; 
-		margin: 2px 2px 2px 2px;
-		padding: 3px 5px 3px 3px;
-		font-size: 11px;
-		color: #fff;
-		text-shadow: 0.1em 0.1em #000;
-		text-align: right;
-		vertical-align: middle;
-		background-color: #292929;
-		background-position: left;
-		background-repeat: no-repeat;
-		border: solid 1px #a9a9a9;
-		-webkit-border-radius: 2px;
-		-moz-border-radius: 2px;
-		border-radius: 2px;
-	}
-	
-	table.tab4 select{
-		margin: -1px 0 -1px 3px;
-		padding: 1px 3px 1px 3px;
-		float: left;
-		width:100px;
-		font-size: 11px !important;
-		color: #ffdb30;
-		vertical-align: middle;
-		background-color: #292929;
-		background-position: left;
-		background-repeat: no-repeat;
-		border: solid 1px #696969;
-		-webkit-border-radius: 2px;
-		-moz-border-radius: 2px;
-		border-radius: 2px;
-	}
-		table.tab3 select:hover{border: solid 1px #ffdb30 !important;}
-            
-        .input3{
-		margin: -1px 0 -1px 3px;
-		padding: 2px 3px 2px 3px !important;
-		font-size: 11px !important;
-		color: #ffdb30 !important;
-		border: solid 1px #696969 !important;
-	}
-					
-	th.w_pechota{width: 120px !important;}
-	
-/* ++++++++++++++++++++ Tabulky - Landsraad ++++++++++++++++++++ */	
-				
-			table.land {
-				width:700px; 
-				height: auto;		
-				margin: 10px 0 10px 0;
-				background-image: url(<%= asset_path 'css/landsraad.png' %>);
-				background-position: top;
-				}
-				
-					table.land td{
-					width: 20px !important;		
-					height: 20px !important;
-					border: solid 1px #a9a9a9;
-						-webkit-border-radius: 2px;
-						-moz-border-radius: 2px;
-						border-radius: 2px;
-					}
-							table.land td:hover{border: solid 1px #ffdb30;} 
-              
-          table.land tr{	
-					height: 40px !important;
-					}
-							table.land td:hover{border: solid 1px #ffdb30;} 
-	
-/* ++++++++++++++++++++ Tabulky - Mapa ++++++++++++++++++++ */	
-	
-table.map {
-	width:700px; 
-	/* +++++++ height: 54px +++++++ */	
-	height: 324px;		
-	margin: 10px 0 10px 0;
-	background-image: url(<%= asset_path 'css/galax.png' %>);   
-	background-position: top;
-	border: solid 3px #000;
-			-webkit-border-radius: 3px;
-			-moz-border-radius: 3px;
-			border-radius: 3px;
-	}
-	
-		table.map td{
-		padding:1px;
-		font-size: 0.7em;
-		text-align: right;
-		vertical-align: baseline;
-		width: 20px;		
-		height: 20px;
-		border: solid 1px #a9a9a9;
-			-webkit-border-radius: 2px;
-			-moz-border-radius: 2px;
-			border-radius: 2px;
-		}
-				table.map td:hover{border: solid 1px #ffdb30;}
-				
-		table.map input{
-           padding:1px;
-           color: #ffffff;
-                                         font-size: 11px;
-                                         text-align: right;
-           width: 100%;
-           height: 100%;
-           border: none;
-           background: none;
-           }
-        		table.map input:hover{color: #ffdb30;}
-
-/* ++++++++++++++++++++ Tabulky - V?zkum ++++++++++++++++++++ */	
-				
-table.vyzkum {
-	width:700px; 
-	/* +++++++ height: 54px +++++++ */	
-	margin: 10px 0 10px 0;
-	border: 0;
-}
-		
-		table.vyzkum th{
-			padding:9px 5px 5px 3px;
-			width: 200px;
-			white-space: nowrap;
-			font-size: 1em;
-			text-shadow: 0.1em 0.1em #000 !important;
-			text-align: right;
-			vertical-align: baseline;
-			border: solid 1px #a9a9a9;
-			-webkit-border-radius: 2px;
-			-moz-border-radius: 2px;
-			border-radius: 2px;
-		}
-			table.vyzkum th:hover{border: solid 1px #ffdb30; color:#ffdb30;}
-		
-		table.vyzkum td{
-			padding: 1px 2px 1px 1px;
-			font-size: 9px;
-			text-shadow: 0.2em 0.2em #000 !important;
-			text-align: right;
-			vertical-align: bottom;
-			width: 20px !important;			
-			height: 25px !important;
-			background-image: url(<%= asset_path 'css/td3.png' %>);   
-			border: solid 1px #a9a9a9;
-			-webkit-border-radius: 2px;
-			-moz-border-radius: 2px;
-			border-radius: 2px;
-		}
-		
-			table.vyzkum td:hover{border: solid 1px #a9a9a9;}
-
-		td.v1{
-			padding: 3px;
-			font-size: 0.8em;
-			text-align: right;
-			vertical-align: baseline;
-			width: 20px !important;		
-			height: 25px !important;
-			background-image: url(<%= asset_path 'css/td1.png' %>)!important;
-			border: solid 1px #a9a9a9;
-		-webkit-border-radius: 2px;
-		-moz-border-radius: 2px;
-		border-radius: 2px;
-		}
-					
-        	td.v2{
-			padding: 0 !important;
-			background-image: url(<%= asset_path 'css/td3v.png' %>) !important;
-			background-position: center !important;;
-			border: solid 1px #a9a9a9 !important;
-		}
-			td.v2:hover{border: solid 1px #ffdb30 !important;} 
-					
-        	td.v2 input{
-        		pointer: cursor;
-			color: #fff; 
-			text-shadow: 0.2em 0.2em #000 !important;
-			padding: 20px 3px 1px 5px;
-			font-size: 9px;
-			border: none;
-			background-color: transparent;
-					}
-        	td.v2 input:hover{color:#ffdb30 !important;}
-
-/* ++++++++++++++++++++ Tabulky - V?roba ++++++++++++++++++++ */	
-
-
-td.v{
-	font-weight: bold !important;
-	vertical-align: top !important;
-	text-align: right !important;
-	padding: 5px 0 0 5px !important;
-	text-shadow: 0.1em 0.1em #000;
-	font-size: 13px !important;
-	white-space: nowrap;
-        padding:6px 5px 5px 3px !important;
-}
-		
-table.vyroba {
-	width:700px; 
-	/* +++++++ height: 54px +++++++ */	
-	margin: 10px 0 10px 0;
-	border: 0;
-	}
-		
-		table.vyroba th{
-			color:#ffdb30;
-			font-weight: bold;
-			font-size: 12px;
-			padding:6px 5px 5px 3px;
-			height: 20px !important;
-			width: 100px !important;
-			white-space: nowrap;
-			text-align: center !important;
-			background-image: url(<%= asset_path 'css/td1.png' %>); 
-			border: 1px solid #696969 !important;
-			border-bottom: 1px solid #ffdb30 !important;
-				-webkit-border-radius: 2px;
-				-moz-border-radius: 2px;
-				border-radius: 2px;
-		}
-		
-		table.vyroba td{
-		padding:3px;
-		height: 27px;
-		font-size: 12px;
-		text-align: center;
-		white-space: nowrap;
-		background-image: url(<%= asset_path 'css/td3.png' %>);   
-		border: solid 1px #a9a9a9;
-			-webkit-border-radius: 2px;
-			-moz-border-radius: 2px;
-			border-radius: 2px;
-		}
-		
-		table.vyroba img{
-		padding:0;
-		margin: 3px;
-		width: 20px;
-		height: auto;
-		vertical-align: middle;
-		border: solid 1px #a9a9a9;
-			-webkit-border-radius: 2px;
-			-moz-border-radius: 2px;
-			border-radius: 2px;
-		}
-		
-		table.vyroba input{
-		padding:3px;
-		margin:0px;
-		height: 22px;
-		font-size: 12px;
-		color: #ffdb30;
-		vertical-align: middle;
-		background: transparent;
-		border: solid 1px #a9a9a9;
-			-webkit-border-radius: 2px;
-			-moz-border-radius: 2px;
-			border-radius: 2px;
-		}
-			table.vyroba input:hover{border: solid 1px #ffdb30 !important;}
-					
-		table.vyroba select{
-			margin:0px;
-			padding:3px;
-			width:150px;
-			font-size: 11px !important;
-			color: #ffdb30;
-			vertical-align: middle;
-			background-color: #565656;
-			border: solid 1px #a9a9a9;
-		-webkit-border-radius: 2px;
-		-moz-border-radius: 2px;
-		border-radius: 2px;
-		}
-			table.vyroba select:hover{border: solid 1px #ffdb30 !important;}
-									
-
-/* ++++++++++++++++++++ Tabulky - profily ++++++++++++++++++++ */	
-
-table.profil {
-	width: 100%;
-	border: 0;
-}
-
-	table.profil td {
-		color: #fff; 
-		text-align: left;
-    vertical-align: middle;
-		padding: 3px 10px 3px 20px; 
-		margin: 0;
-		font-size: 13px;
-		vertical-align: middle;
-	}
-  
-  table.profil th {
-		color: #ffdb30; 
-		text-align: right;
-    vertical-align: middle;
-    width: 35%;
-    font-weight: bold;
-    vertical-align: middle;
-		padding: 3px 10px 3px 20px;  
-		margin: 0;
-		font-size: 13px;
-		
-	}
-  
-	table.profil a {
-		color: #fff;
-		text-decoration: none;
-		font-weight: bold;
-		font-size: 1em;			
-	}
-	table.profil a:hover {
-		color: #ffdb30;
-		text-decoration: none;
-	}			
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-td.td{
-	width: 20%;
-	padding: 5px;
-	background-image: url(<%= asset_path 'css/tseda.png' %>);   
-	border: 1px solid #696969;
-	border-top:0;
-	text-align: left;
-	vertical-align: top;
-	-webkit-border-bottom-right-radius: 4px;
--webkit-border-bottom-left-radius: 4px;
--moz-border-radius-bottomright: 4px;
--moz-border-radius-bottomleft: 4px;
-border-bottom-right-radius: 4px;
-border-bottom-left-radius: 4px;
-}
-		td.td li{
-			list-style: none;
-		}
-		td.td img{
-		width: 28px;
-		height: 28px;
-		margin-right:5px;
-		margin-bottom: 3px;
-		vertical-align: middle;
-		border: solid 1px #a9a9a9;
-			-webkit-border-radius: 2px;
-			-moz-border-radius: 2px;
-			border-radius: 2px;
-		}
-		.tdimg{
-		width: 100px !important;
-		height: 100px !important;
-		margin: 10px;
-		margin-top: 0;
-		vertical-align: middle;
-		border: solid 1px #a9a9a9;
-			-webkit-border-radius: 2px;
-			-moz-border-radius: 2px;
-			border-radius: 2px;
-		}	
-		.tdimg2{
-		width: 100px !important;
-		height: 100px !important;
-		margin: 10px;
-		margin-top: 0;
-		vertical-align: middle;
-		border: 0 !important;
-		}
-		td.td input {
-			margin: 2px 0 2px 0;
-			padding: 2px 3px 2px 3px;
-			background-color: transparent;
-			background-image: url(<%= asset_path 'css/tcerna.png' %>);   
-			font-size: 12px;
-			color: #a2a2a2;	
-			text-decoration: none;
-			vertical-align: middle;
-			text-align: center;
-			border: 1px solid #a2a2a2;
-		-webkit-border-radius: 3px;
-		-moz-border-radius: 3px;
-		border-radius: 3px;
-		}
-		.input2 {width:112px;}
-		
-		td.td select {
-			margin: 2px 0 2px 0;
-			width:120px;
-			padding: 2px 5px 2px 0px;
-			background-color: #1d1d1d;
-			font-size: 12px;
-			color: #a2a2a2;	
-			text-decoration: none;
-			vertical-align: middle;
-			text-align: center;
-			border: 1px solid #a2a2a2;
-		-webkit-border-radius: 3px;
-		-moz-border-radius: 3px;
-		border-radius: 3px;
-		}
-		td.td option{
-			font-size: 12px;
-			color: #fff;
-			background-color: #000;
-			text-align: left;
-		}
-		option.h3{
-			font-size: 12px;
-			color: #fff;
-			background-color: #000;
-			background-image: url(<%= asset_path 'css/toranzova2.png' %>);   
-			text-align: left;
-		}
-		option.h3dp{
-			font-size: 12px;
-			color: #fff;
-			background-color: #800000 !important;
-			text-align: left;
-		}
-		
-td.tdh1{
-	width: auto;
-	padding: 5px 10px 5px 10px;
-	color: #ffdb30;
-	font-size: 1.4em;
-	font-weight: bold;
-	text-align: right;
-}
-
-
-		
-td.tdo {
-	width: 120px;
-	height: 100px;
-	background-position: top;
-	background-repeat: no-repeat;
-	background-color: #000;
-	border-top:0;
-	text-align: left;
-	border: solid 1px #ffdb30;
-		-webkit-border-radius: 2px;
-		-moz-border-radius: 2px;
-		border-radius: 2px;
-}
-
-/* Syselaad post */
-.post {width:100%; display:table;}  
-.post span {padding:5px; border:3px solid #eee; margin:0;}  
-.post span.left {width:150px; background:#eee; border:3px solid #eee; display:table-cell;}  
-.post span.rightright { border:3px solid #eee; display:table-cell;}  
-
-/*
- * This is a manifest file that'll automatically include all the stylesheets available in this directory
- * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
- * the top of the compiled file, but it's generally better to create a new file per style scope.
- *= require_self
- *= require_tree . 
-*/
-
-.clear {
-  clear: both;
-  height: 0;
-  overflow: hidden;
-}
-
-#container {
-  width: 75%;
-  margin: 0 auto;
-  background-color: #FFF;
-  padding: 20px 40px;
-  border: solid 1px black;
-  margin-top: 20px;
-}
-
-#flash_notice, #flash_error, #flash_alert {
-  padding: 5px 8px;
-  margin: 10px 0;
-  color: #000;
-}
-
-#flash_notice {
-  background-color: #CFC;
-  border: solid 1px #6C6;
-}
-
-#flash_error, #flash_alert {
-  background-color: #FCC;
-  border: solid 1px #C66;
-}
-
-.fieldWithErrors {
-  display: inline;
-}
-
-.error_messages {
-  width: 400px;
-  border: 2px solid #CF0000;
-  padding: 0px;
-  padding-bottom: 12px;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-  font-size: 12px;
-}
-
-.error_messages h2 {
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 10px;
-  font-size: 12px;
-  margin: 0;
-  background-color: #c00;
-  color: #fff;
-}
-
-.error_messages p {
-  margin: 8px 10px;
-}
-
-.error_messages ul {
-  margin: 0;
-}
-
-.best_in_place {
-  background-color: #444444;
-}
-
-
-.fright {
-    float: right;
-}
-
-.reply {
-    float: right;
-    border-right: 1px solid #ffffff;
-    padding-right: 5px;
-}
-.postaBody {
-    display: none;
-}
-#message_subject {
-    background-image: url(../images/css/email.png)
-}
-.opica {
-    display: none;
-}
-.error {
-    border: solid 1px #ff0000;
-    padding: 1px;
-}
-#pagination {
-    text-align: center;
-}
-#pagination span {
-    padding-left: 5px;
-    font-weight: bold;
-    cursor: pointer;
-
-}
-#pagination .selected {
-    text-decoration: underline;
-
-}
-.myOffers {
-    width:700px;
-
-    margin: 10px 0 10px 0;
-    float: left;
+    position: relative;
+    left: -50px;
+    top: -40px;
+    background-image: url(<%= asset_path 'css/arrakis.png' %>);
+    background-repeat: no-repeat;
+    background-position: right;
+    z-index: 0 !important;
+    width: 1200px;
+    height: 400px;
     border: 0;
 }
 
-table.myOffers th{
-    color:#ffdb30;
+.header {
+    position: relative;
+    left: -1px;
+    top: -120px;
+    background-image: url(<%= asset_path 'css/head0.png' %>);
+    background-repeat: no-repeat;
+    background-position: right;
+    z-index: 1;
+    width: 1100px;
+    height: 180px;
+    border: 0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.stred {
+    z-index: 2;
+    min-height: 430px;
+    margin-top: 0px;
+}
+
+#page_content {
+    width: 1104px;
+    font-size: 1em;
+    margin: -120px 0 0 -23px;
+    padding: 0 20px 15px 20px;
+    min-height: 500px;
+    z-index: 2;
+}
+
+td.left {
+    width: 13%;
+    vertical-align: top;
+}
+
+td.stred {
+    width: 74%;
+    vertical-align: top;
+}
+
+td.prava {
+    width: 13%;
+    vertical-align: top;
+}
+
+.footer {
+    width: 1100px;
+    height: 30px;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+    /* ++++++++++++++++++++ Menu + hlavi?ka ++++++++++++++++++++ */
+
+div.suroviny {
+    position: absolute;
+    top: 128px;
+    left: 260px;
+    width: 635px;
+    height: 20px;
+    border: 0px;
+    z-index: 4;
+    font-size: 1.2em;
+    vertical-align: middle;
+}
+
+div.suroviny img {
+    width: 24px;
+    height: 24px;
+    margin-right: 3px;
+    margin-left: 10px;
+    vertical-align: middle;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+div.inf {
+    position: absolute;
+    top: 21px;
+    left: 0px;
+    width: 253px;
+    height: 90px;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    z-index: 3;
+    font-size: 1em;
+    padding: 7px 0px 7px 0px;
+    vertical-align: middle;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+div.inf img {
+    float: left;
+    width: 70px;
+    height: 80px;
+    margin-right: 7px;
+    margin-left: -1px;
+    vertical-align: middle;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+div.inf a {
+    text-decoration: none;
+    color: #fff;
+}
+
+div.inf a:hover {
+    color: #ffdb30;
+}
+
+.a1 {
+    text-decoration: none;
+    color: #ffdb30 !important;
+}
+
+.a1:hover {
+    text-decoration: underline;
+}
+
+a.menukomunikace {
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    z-index: 2;
+    background-image: url(<%= asset_path 'css/komunikace.png' %>);
+    width: 42px;
+    height: 42px;
+    background-repeat: no-repeat;
+    border: 0;
+}
+
+a.menukomunikace:hover {
+    z-index: 4;
+    background-image: url(<%= asset_path 'css/komunikace2.png' %>);
+}
+
+a.menupolitika {
+    position: absolute;
+    top: 5px;
+    left: 61px;
+    z-index: 2;
+    background-image: url(<%= asset_path 'css/diplomacie.png' %>);
+    width: 42px;
+    height: 42px;
+    background-repeat: no-repeat;
+    border: 0;
+}
+
+a.menupolitika:hover {
+    z-index: 4;
+    background-image: url(<%= asset_path 'css/diplomacie2.png' %>);
+}
+
+a.menuvyzkum {
+    position: absolute;
+    top: 5px;
+    left: 107px;
+    z-index: 2;
+    background-image: url(<%= asset_path 'css/vyzkum.png' %>);
+    width: 42px;
+    height: 42px;
+    background-repeat: no-repeat;
+    border: 0;
+}
+
+a.menuvyzkum:hover {
+    z-index: 4;
+    background-image: url(<%= asset_path 'css/vyzkum2.png' %>);
+}
+
+a.menuarmada {
+    position: absolute;
+    top: 5px;
+    left: 153px;
+    z-index: 2;
+    background-image: url(<%= asset_path 'css/armada.png' %>);
+    width: 42px;
+    height: 42px;
+    background-repeat: no-repeat;
+    border: 0;
+}
+
+a.menuarmada:hover {
+    z-index: 4;
+    background-image: url(<%= asset_path 'css/armada2.png' %>);
+}
+
+a.menugalaxy {
+    position: absolute;
+    top: 5px;
+    left: 199px;
+    z-index: 2;
+    background-image: url(<%= asset_path 'css/galaxy.png' %>);
+    width: 42px;
+    height: 42px;
+    background-repeat: no-repeat;
+    border: 0;
+}
+
+a.menugalaxy:hover {
+    z-index: 4;
+    background-image: url(<%= asset_path 'css/galaxy2.png' %>);
+}
+
+#nava {
+    position: absolute;
+    top: 119px;
+    left: -1px;
+    z-index: 3;
+    width: 1102px;
+    height: 50px;
+    background-image: url(<%= asset_path 'css/head1102.png' %>);
+    background-position: top;
+    background-repeat: no-repeat;
+    border-bottom: solid 0px #3399ff;
+}
+
+#nava2 {
+    top: 4px;
+    left: 2px;
+    z-index: 3;
+    height: 35px;
+}
+
+#nava2 td:hover {
+    z-index: 3;
+    color: #ffffff !important;
+    border: 0;
+    background-repeat: repeat-x;
+}
+
+#nava2 a:hover {
+    z-index: 2;
+    color: #fff;
+}
+
+.menu {
+    padding: 2px 5px 0 5px;
+    margin: 0;
+    list-style-type: none;
+    display: block;
+}
+
+.menu ul {
+    position: absolute;
+    visibility: hidden;
+    font-size: 0.9em !important;
+    padding: 10px 5px 5px 5px;
+    margin: 31px 0 0 0;
+    list-style-type: none;
+    background-image: url(<%= asset_path 'css/tcerna2.png' %>);
+    border: solid 1px #a2a2a2;
+    border-top: 0;
+    -webkit-border-bottom-right-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomright: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.menu li {
+    float: left;
+    padding: 2px 0px 2px 0px;
+    white-space: nowrap;
+}
+
+.menu a {
+    padding: 3px 3px 5px 3px;
+    text-align: left;
+    color: #3399ff;
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #ffdb30 !important;
+}
+
+.menu li a {
+    font-size: 1.1em;
+    color: #3399ff;
+    text-decoration: none;
+    text-shadow: silver;
+    font-weight: bold;
+}
+
+.menu ul a:link {
+    color: #fff;
+    border-bottom: none;
+    margin: 2px 5px 2px 5px;
+}
+
+.menu ul a:visited {
+    color: #fff;
+    border-bottom: none;
+}
+
+.menu ul a:hover {
+    color: #ffdb30;
+}
+
+.menu li:hover ul, ul.menu li.hover ul {
+    visibility: visible;
+}
+
+.menu li li {
+    float: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+    /* ++++++++++++++++++++ Form?tov?n? obr?zku ++++++++++++++++++++ */
+
+.img_l {
+    padding: 10px !important;
+}
+
+img.l {
+    float: left;
+    padding: 20px;
+    border: 0;
+}
+
+img.r {
+    float: right;
+    padding: 10px 0 10px 20px;
+    border: 0;
+}
+
+div.lh {
+    color: #ffdb30;
+    font-weight: bolder;
+    font-size: 12px;
+    width: 150px;
+    padding: 7px 10px 7px 15px;
+    margin: 0px 20px 0px -1px;
+    border: 1px solid #a2a2a2;
+    border-bottom: 1px solid #ffdb30;
+    background-image: url(<%= asset_path 'css/td1.png' %>);
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    border-top-right-radius: 4px;
+}
+
+div.l {
+    color: #ffffff;
+    font-size: 12px;
+    width: 150px;
+    padding: 10px 10px 10px 15px;
+    margin: 0px 20px 15px -1px;
+    border: 1px solid #a2a2a2;
+    border-top: 0px;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-bottomright: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+div.l li {
+    list-style: none;
+}
+
+div.l input {
+    margin: 7px 2px 5px 2px;
+    padding: 3px 5px 3px 25px;
+    width: 100px;
+    font-size: 11px !important;
+    color: #ffdb30;
+    vertical-align: middle;
+    background: transparent;
+    background-position: left;
+    background-repeat: no-repeat;
+    border: solid 1px #696969;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+div.l input:hover {
+    border: solid 1px #ffdb30 !important;
+}
+
+div.la {
+    color: #fff;
+    width: 150px;
+    font-size: 12px;
+    padding: 10px 10px 10px 15px;
+    margin: 0px 20px 15px -1px;
+    border: 1px solid #a2a2a2;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    -webkit-border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+div.rh {
+    color: #ffdb30;
+    font-weight: bolder;
+    font-size: 12px;
+    width: 155px;
+    padding: 7px 10px 7px 10px;
+    margin: 0px -1px 0px 20px;
+    border: 1px solid #a2a2a2;
+    border-bottom: 1px solid #ffdb30;
+    background-image: url(<%= asset_path 'css/td1.png' %>);
+    -webkit-border-top-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    border-top-left-radius: 4px;
+}
+
+div.r {
+    color: #fff;
+    width: 155px;
+    font-size: 12px;
+    padding: 10px 10px 10px 10px;
+    margin: 0px -1px 20px 20px;
+    border: 1px solid #a2a2a2;
+    border-top: 0;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+div.r li {
+    list-style: none;
+}
+
+div.ra {
+    color: #fff;
+    width: 155px;
+    font-size: 12px;
+    padding: 10px;
+    margin: 0px -1px 20px 20px;
+    border: 1px solid #a2a2a2;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+    /* ++++++++++++++++++++ Tlac?tka a formula?e ++++++++++++++++++++ */
+
+.ok {
+    margin: 2px 0 2px 0;
+    padding: 2px 5px 2px 5px !important;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/td1.png' %>) !important;
+    background-repeat: repeat !important;
+    width: auto !important;
+    font-size: 12px !important;
+    color: #a2a2a2;
+    text-decoration: none;
+    font-weight: bold !important;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #a2a2a2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.ok:hover {
+    color: #ffdb30;
+    border: #ffdb30 1px solid;
+}
+
+.ok2 {
+    margin: 2px 0 2px 0;
+    padding: 2px 3px 2px 3px !important;
+    width: 100px !important;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/td1.png' %>) !important;
+    background-repeat: repeat !important;
+    font-size: 10px !important;
+    color: #a2a2a2;
+    text-decoration: none;
+    font-weight: bold !important;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #a2a2a2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.ok2:hover {
+    color: #ffdb30;
+    border: #ffdb30 1px solid;
+}
+
+.ok3 {
+    margin: 6px 0 2px 0 !important;
+    padding: 2px 3px 2px 3px !important;
+    width: auto !important;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/tcerna2.png' %>) !important;
+    background-repeat: repeat !important;
+    font-size: 9px !important;
+    color: #a2a2a2;
+    text-decoration: none;
+    font-weight: bold !important;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #a2a2a2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.ok3:hover {
+    color: #ffdb30;
+    border: #ffdb30 1px solid;
+}
+
+.ok4 {
+    margin: 7px 2px 5px 2px !important;
+    padding: 3px 5px 3px 5px !important;
+    width: auto !important;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/td1.png' %>) !important;
+    background-repeat: repeat !important;
+    font-size: 11px !important;
+    color: #a2a2a2;
+    text-decoration: none;
+    font-weight: bold !important;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #a2a2a2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.ok4:hover {
+    color: #ffdb30;
+    border: #ffdb30 1px solid;
+}
+
+.ok5 {
+    margin: 2px 2px 5px 2px !important;
+    padding: 3px 5px 3px 5px !important;
+    width: auto !important;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/td1.png' %>) !important;
+    background-repeat: repeat !important;
+    background-position: top !important;
+    font-size: 11px !important;
+    color: #a2a2a2;
+    text-decoration: none;
+    font-weight: bold !important;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #a2a2a2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.ok5:hover {
+    color: #ffdb30;
+    border: #ffdb30 1px solid;
+}
+
+.okuni {
+    /*padding: auto 5px auto 5px !important;*/
+    width: auto !important;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/td1.png' %>) !important;
+    background-position: top !important;
+    background-repeat: repeat !important;
+    font-size: 12px !important;
+    color: #a2a2a2;
+    text-decoration: none;
+    font-weight: bold !important;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #a2a2a2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.okuni:hover {
+    color: #ffdb30;
+    border: #ffdb30 1px solid;
+}
+
+select.tab {
+    margin: 2px !important;
+    padding: 2px 5px 2px 5px !important;
+    width: 120px !important;
+    font-size: 11px !important;
+}
+
+input.tab {
+    margin: 2px !important;
+    padding: 3px 5px 3px 5px !important;
+    width: 108px !important;
+    font-size: 11px !important;
+    appearance: none;
+}
+
+input.oktab {
+    margin: 2px !important;
+    padding: 3px 5px 3px 5px !important;
+    width: 120px !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/td1.png' %>) !important;
+    background-repeat: repeat !important;
+    background-position: top !important;
+}
+
+input.oktab:hover {
+    color: #ffdb30;
+    border: #ffdb30 1px solid;
+}
+
+input.oki {
+    margin: -2px 0 0 3px !important;
+    padding: 3px 5px 3px 5px !important;
+    width: 20px !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    color: #ffdb30;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/td1.png' %>) !important;
+    background-repeat: repeat !important;
+    background-position: center center !important;
+}
+
+input.oki:hover {
+    color: #ffdb30;
+    border: #ffdb30 1px solid;
+}
+
+input.oktab_auto {
+    margin: 2px !important;
+    padding: 3px 5px 3px 5px !important;
+    width: auto !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/td1.png' %>) !important;
+    background-repeat: repeat !important;
+    background-position: top !important;
+}
+
+input.oktab_auto:hover {
+    color: #ffdb30;
+    border: #ffdb30 1px solid;
+}
+
+input.oktab_95 {
+    margin: 2px !important;
+    padding: 3px 5px 3px 5px !important;
+    width: 95px !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/td1.png' %>) !important;
+    background-repeat: repeat !important;
+    background-position: top !important;
+}
+
+input.oktab_95:hover {
+    color: #ffdb30;
+    border: #ffdb30 1px solid;
+}
+
+    /* ++++++++++++++++++++ Form?tov?n? textu ++++++++++++++++++++ */
+h1 {
+    font-size: 1.5em;
+    font-stretch: expanded;
+    font-weight: bold;
+    color: #ff8c00;
+    padding: 5px 0 5px 0;
+    margin: 15px 0 0 0;
+    text-decoration: none;
+    border-bottom: 1px solid #ffdb30;
+}
+
+h2 {
+    font-size: 1.3em;
+    font-stretch: expanded;
+    font-weight: bold;
+    color: #ffdb30;
+    padding: 5px 0 5px 0;
+    margin: 10px 0 0 0;
+    text-decoration: none;
+}
+
+h3 {
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffdb30;
+    padding: 5px 0 5px 0;
+    margin: 0px;
+    text-decoration: none;
+}
+
+h5 {
+    font-size: 0.7em !important;
+    font-weight: normal !important;
+    text-decoration: none !important;
+}
+
+p {
+    padding-bottom: 5px;
+    margin: 0px;
+    font-weight: normal;
+}
+
+a {
+    text-decoration: none;
+    padding-bottom: 5px;
+    margin: 0px;
+    color: #ffdb30;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a.emperor {
+    text-decoration: none;
+    margin: 0px;
+    color: #da70d6;
+}
+
+a.emperor:hover {
+    text-decoration: underline;
+}
+
+a.regent {
+    text-decoration: none;
+    margin: 0px;
+    color: #da70d6;
+}
+
+a.regent:hover {
+    text-decoration: underline;
+}
+
+    /*a.duce { text-decoration:none;  margin:0px; color:#1e90ff;	}		*/
+    /*duce:hover{text-decoration:underline;}	*/
+
+a.poslanec {
+    text-decoration: none;
+    margin: 0px;
+    color: #40e0d0;
+}
+
+a.poslanec:hover {
+    text-decoration: underline;
+}
+
+a.diplomat {
+    text-decoration: none;
+    margin: 0px;
+    color: #fffafa;
+}
+
+a.diplomat:hover {
+    text-decoration: underline;
+}
+
+a.army_mentat {
+    text-decoration: none;
+    margin: 0px;
+    color: #6b8e23;
+}
+
+a.army_mentat:hover {
+    text-decoration: underline;
+}
+
+a.mentat {
+    text-decoration: none;
+    margin: 0px;
+    color: #9acd32;
+}
+
+a.mentat:hover {
+    text-decoration: underline;
+}
+
+a.general {
+    text-decoration: none;
+    margin: 0px;
+    color: #ff4500;
+}
+
+a.general:hover {
+    text-decoration: underline;
+}
+
+.zelena {
+    color: #7cfc00;
+}
+
+.cervena {
+    color: #ff0000;
+}
+
+.oranzova {
+    color: #ffd700 !important;
+}
+
+    /* ++++++++++++++++++++ V?suvn? menu statistik ++++++++++++++++++++ */
+
+td.tdd {
+    margin: 0 !important;
+    width: 120px !important;
+    padding: 2px 5px 2px 5px !important;
+    background-image: url(<%= asset_path 'css/tcerna2.png' %>);
+    border: solid 1px #a2a2a2;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.menud {
+    color: #000000;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: block;
+    font-size: 13px;
+}
+
+.menud ul {
+    position: absolute;
+    visibility: hidden;
+    width: 120px;
+    font-size: 0.9em !important;
+    padding: 10px 5px 5px 5px;
+    margin: 2px 0 0 -6px;
+    list-style-type: none;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/tcerna2.png' %>);
+    border: solid 1px #a2a2a2;
+    border-top: 0;
+    -webkit-border-bottom-right-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomright: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.menud li {
+    float: left;
+    padding: 2px 0px 2px 0px;
+    white-space: nowrap;
+}
+
+.menud a {
+    padding: 3px 3px 5px 3px;
+    text-align: left;
+    color: #3399ff;
+    display: block;
+    text-decoration: none;
+}
+
+.menud li a {
+    font-size: 1.1em;
+    color: #ffdb30;
+    text-decoration: none;
+    text-shadow: silver;
+    font-weight: bolder;
+}
+
+.menud ul a:link {
+    color: #fff;
+    border-bottom: none;
+    margin: 0;
+}
+
+.menud ul a:visited {
+    color: #fff;
+    border-bottom: none;
+}
+
+.menud ul a:hover {
+    color: #ffdb30;
+}
+
+.menud li:hover ul, ul.menu li.hover ul {
+    visibility: visible;
+}
+
+.menud li li {
+    float: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+td.tdd2 {
+    width: 20%;
+    padding: 0px 5px 3px 5px !important;
+    border-top: 0;
+    color: #a9a9a9;
+    font-size: 1.0em !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    background-image: url(<%= asset_path 'css/tcerna2.png' %>);
+    border: solid 1px #a2a2a2;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+td.tdd2 a {
+    text-decoration: none;
+    color: #a9a9a9;
+    font-size: 1.2em !important;
+}
+
+td.tdd2 a:hover {
+    text-decoration: none;
+    color: #ffdb30;
+}
+
+td.tdd2 select {
+    background-color: transparent;
+    color: #ffdb30;
+    border: 0;
+    width: auto;
+}
+
+td.tdd2 option {
+    font-size: 12px;
+    color: #fff;
+    background-color: #000;
+    text-align: left;
+}
+
+    /* ++++++++++++++++++++ Tabulky - univerzaln? ++++++++++++++++++++ */
+
+div.all {
+    padding: 0 15px 15px 15px;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    text-align: justify;
+    font-size: 1.0em;
+    border: 1px solid #696969;
+    vertical-align: top;
+    margin-top: 20px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+div.all li {
+    list-style: none;
+}
+
+.tdpimg {
+    width: 150px;
+    height: auto;
+    border: 1px solid #696969;
+}
+
+td.tdpl {
+    max-width: 30%;
+    background-position: center;
+    background-color: #000;
+    background-repeat: no-repeat;
+    text-shadow: 0.1em 0.1em #000;
+    border: 1px solid #696969;
+    vertical-align: top;
+    padding: 5px 10px 5px 15px;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+td.tdpl li {
+    list-style: none;
+}
+
+td.tdpl h2 {
+    margin: 0 0 1px 0 !important;
+    text-shadow: 0.1em 0.1em #000;
+}
+
+td.tdpr {
+    max-width: 30%;
+    background-position: center;
+    background-color: #000;
+    background-repeat: no-repeat;
+    text-shadow: 0.1em 0.1em #000;
+    border: 1px solid #696969;
+    vertical-align: top;
+    padding: 5px 10px 5px 15px;
+    -webkit-border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+td.tdpr li {
+    list-style: none;
+}
+
+td.tdpr h2 {
+    margin: 0 0 1px 0 !important;
+    text-shadow: 0.1em 0.1em #000;
+}
+
+td.tdpl2 {
+    max-width: 30%;
+    background-position: center;
+    background-color: #000;
+    background-repeat: no-repeat;
+    text-shadow: 0.1em 0.1em #000;
+    border: 1px solid #696969;
+    vertical-align: top;
+    padding: 5px 10px 5px 15px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+td.tdpl2 li {
+    list-style: none;
+}
+
+td.tdpl2 h2 {
+    margin: 0 0 1px 0 !important;
+    text-shadow: 0.1em 0.1em #000;
+}
+
+.ctr {
+    text-align: center !important;
+}
+
+.r {
+    /*DOPLNIT! border radius!*/
+}
+
+.m {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.lr {
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.thr {
+    border: 1px solid #696969 !important;
+    border-right: 1px solid #ffdb30 !important;
+}
+
+.thf {
+    color: #ffdb30 !important;
+    font-weight: bold !important;
+    padding: 6px 3px 5px 3px !important;
+    margin: 5px -6px 0px -6px !important;
+    text-align: center !important;
+    font-size: 1.1em !important;
+    background-image: url(<%= asset_path 'css/td1.png' %>);
+    background-repeat: repeat !important;
+    background-color: transparent !important;
+    border: 1px solid #696969 !important;
+    border-bottom: 1px solid #ffdb30 !important;
+}
+
+td.ava {
+    border: none !important;
+    width: 50px;
+    padding: 0 !important;
+    margin-bottom: 20px;
+}
+
+td.ava img {
+    width: 50px;
+    height: auto;
+    margin: 0;
+    border: 0;
+}
+
+.none {
+    background: none !important;
+    bakground-image: none !important;
+    border: none !important;
+}
+
+td.none {
+    background: none !important;
+    bakground-image: none !important;
+    border: none !important;
+}
+
+.td1 {
+    color: #ffdb30 !important;
+    font-weight: bold !important;
+    padding: 3px 0 3px 0 !important;
+    margin: 10px -6px 5px -6px !important;
+    text-align: center !important;
+    font-size: 12px !important;
+    background-image: url(<%= asset_path 'css/td1.png' %>) !important;
+    background-repeat: repeat !important;
+    background-color: transparent !important;
+    border: 1px solid #696969 !important;
+}
+
+    /* ++++++++++++++++++++ Tabulky - TAB0 = Drobe?kov? navigace ++++++++++++++++++++ */
+
+table.tab0 {
+    width: 100%;
+    border: 0;
+}
+
+table.tab0 td {
+    color: #fff;
+    text-align: left;
+    padding: 0 0 10px 0;
+    margin: 0;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+table.tab0 a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+table.tab0 a:hover {
+    color: #ffdb30;
+    text-decoration: none;
+}
+
+    /* ++++++++++++++++++++ Tabulky - TAB1 ++++++++++++++++++++ */
+
+table.tab1 {
+    width: 100%;
+    border: 0;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+table.tab1 th {
+    color: #ffdb30;
+    font-weight: bold;
+    white-space: nowrap;
+    padding: 6px 5px 5px 5px;
+    margin: 5px -6px 2px -6px;
+    text-align: center;
+    font-size: 1.1em;
+    background-image: url(<%= asset_path 'css/td1.png' %>);
+    border: 1px solid #696969;
+    border-bottom: 1px solid #ffdb30;
+}
+
+table.tab1 td {
+    padding: 5px;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    text-align: justify;
+    font-size: 1.0em;
+    border: 1px solid #696969;
+    vertical-align: top;
+}
+
+table.tab1 li {
+    list-style: none;
+}
+
+table.tab1 img {
+    width: 12px;
+    height: 12px;
+    margin: 2px 3px 2px 0;
+    vertical-align: middle;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.tab1 img:hover {
+    background: #aaaaaa;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.tab1 input {
+    margin: 2px 3px 2px 0;
+    width: 60px;
+    padding: 3px 5px 2px 5px;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/tcerna.png' %>);
+    font-size: 1.0em;
+    color: #a2a2a2;
+    text-decoration: none;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #a2a2a2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+table.tab1 select {
+    font-size: 12px;
+    color: #fff;
+    padding: 2px;
+    background-color: #1d1d1d;
+    text-align: left;
+    border: 1px solid #a2a2a2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+    /* ++++++++++++++++++++ Tabulky - TAB2 ++++++++++++++++++++ */
+
+table.tab2 {
+    width: 100% !important;
+    border: 0;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+table.tab2 th {
+    color: #ffdb30;
+    font-weight: bold;
+    padding: 6px 3px 5px 3px;
+    margin: 5px -6px 2px -6px;
+    text-align: center;
+    font-size: 1.1em;
+    background-image: url(<%= asset_path 'css/td1.png' %>);
+    border: 1px solid #696969;
+    border-bottom: 1px solid #ffdb30;
+}
+
+table.tab2 td {
+    padding: 5px;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    text-align: justify;
+    font-size: 1.0em;
+    border: 1px solid #696969;
+    vertical-align: top;
+}
+
+table.tab2 li {
+    list-style: none;
+}
+
+table.tab2 img {
+    width: 15px;
+    height: 15px;
+    margin: 2px 3px 2px 0;
+    vertical-align: middle;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.tab2 input {
+    width: 100px;
+    margin: 2px;
+    padding: 3px 5px 3px 5px;
+    font-size: 11px;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/tcerna.png' %>);
+    color: #a2a2a2;
+    text-decoration: none;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #a2a2a2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+table.tab2 select {
+    margin: 2px;
+    padding: 2px 5px 2px 5px;
+    width: 50px;
+    font-size: 11px;
+    appearance: none;
+    color: #fff;
+    background-color: #1d1d1d;
+    text-align: left;
+    border: 1px solid #a2a2a2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+    /* ++++++++++++++++++++ Tabulky - TAB3 ++++++++++++++++++++ */
+
+table.tab3 {
+    width: 100%;
+    border: 0;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+table.tab3 th {
+    padding: 1px 5px 1px 5px;
+    text-shadow: 0.1em 0.1em #000 !important;
+    text-align: left;
+    vertical-align: baseline;
+    background-image: url(<%= asset_path 'css/td1.png' %>);
+    border: solid 1px #696969;
+    border-bottom: solid 1px #ffdb30;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.tab3 li {
+    list-style: none;
+}
+
+table.tab3 input {
+    margin: 7px 2px 5px 2px;
+    padding: 3px 5px 3px 25px;
+    width: 100px;
+    font-size: 11px !important;
+    color: #ffdb30;
+    vertical-align: middle;
+    background: transparent;
+    background-position: left;
+    background-repeat: no-repeat;
+    border: solid 1px #696969;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.tab3 input:hover {
+    border: solid 1px #ffdb30 !important;
+}
+
+.tab3_input {
+    margin: 7px 2px 5px 2px;
+    padding: 3px 5px 3px 25px;
+    width: 100px;
+    font-size: 11px !important;
+    color: #ffdb30;
+    vertical-align: middle;
+    background: transparent;
+    background-position: left;
+    background-repeat: no-repeat;
+    border: solid 1px #696969;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.tab3_input:hover {
+    border: solid 1px #ffdb30 !important;
+}
+
+table.tab3 select {
+    margin: 7px 2px 5px 2px;
+    padding: 2px 5px 2px 25px;
+    width: 140px;
+    font-size: 11px !important;
+    color: #ffdb30;
+    vertical-align: middle;
+    background-color: #292929;
+    background-position: left;
+    background-repeat: no-repeat;
+    border: solid 1px #696969;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.tab3 select:hover {
+    border: solid 1px #ffdb30 !important;
+}
+
+table.tab3 td {
+    padding: 5px;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    text-align: justify;
+    font-size: 1.0em;
+    border: 1px solid #696969;
+    vertical-align: top;
+}
+
+table.tab3 textarea {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: #fff;
+    text-align: justify;
+    font-size: 1.0em;
+    border: none;
+    vertical-align: top;
+    width: 676px;
+    max-width: 676;
+    height: 300px;
+}
+
+    /* ++++++++++++++++++++ Tabulky - TAB4 ++++++++++++++++++++ */
+
+table.tab4 {
+    width: 100%;
+    border: 0;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+table.tab4 th {
+    width: 120px;
+    min-height: 120px;
+    background-color: #000;
+    background-repeat: no-repeat;
+    text-shadow: 0.1em 0.1em #000;
+    vertical-align: top;
+    border: 1px solid #696969;
+    padding: 5px 10px 5px 10px;
+}
+
+table.tab4 td {
+    padding: 5px;
+    width: 260px;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    text-align: justify;
+    font-size: 1.0em;
+    border: 1px solid #696969;
+    vertical-align: top;
+}
+
+table.tab4 li {
+    list-style: none;
+}
+
+table.tab4 a {
+    font-size: 1.2em !important;
+    margin: 0 0 3px 0 !important;
+    text-shadow: 0.1em 0.1em #000;
+}
+
+table.tab4 img {
+    width: 16px;
+    height: 16px;
+    margin: 2px 3px 2px 0;
+    vertical-align: middle;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.tab4 input {
+    width: 35px;
+    margin: 2px 2px 2px 2px;
+    padding: 3px 5px 3px 3px;
+    font-size: 11px;
+    color: #fff;
+    text-shadow: 0.1em 0.1em #000;
+    text-align: right;
+    vertical-align: middle;
+    background-color: #292929;
+    background-position: left;
+    background-repeat: no-repeat;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.tab4 select {
+    margin: -1px 0 -1px 3px;
+    padding: 1px 3px 1px 3px;
+    float: left;
+    width: 100px;
+    font-size: 11px !important;
+    color: #ffdb30;
+    vertical-align: middle;
+    background-color: #292929;
+    background-position: left;
+    background-repeat: no-repeat;
+    border: solid 1px #696969;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.tab3 select:hover {
+    border: solid 1px #ffdb30 !important;
+}
+
+.input3 {
+    margin: -1px 0 -1px 3px;
+    padding: 2px 3px 2px 3px !important;
+    font-size: 11px !important;
+    color: #ffdb30 !important;
+    border: solid 1px #696969 !important;
+}
+
+th.w_pechota {
+    width: 120px !important;
+}
+
+    /* ++++++++++++++++++++ Tabulky - Landsraad ++++++++++++++++++++ */
+
+table.land {
+    width: 700px;
+    height: auto;
+    margin: 10px 0 10px 0;
+    background-image: url(<%= asset_path 'css/landsraad.png' %>);
+    background-position: top;
+}
+
+table.land td {
+    width: 20px !important;
+    height: 20px !important;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.land td:hover {
+    border: solid 1px #ffdb30;
+}
+
+table.land tr {
+    height: 40px !important;
+}
+
+table.land td:hover {
+    border: solid 1px #ffdb30;
+}
+
+    /* ++++++++++++++++++++ Tabulky - Mapa ++++++++++++++++++++ */
+
+table.map {
+    width: 700px;
+    /* +++++++ height: 54px +++++++ */
+    height: 324px;
+    margin: 10px 0 10px 0;
+    background-image: url(<%= asset_path 'css/galax.png' %>);
+    background-position: top;
+    border: solid 3px #000;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+table.map td {
+    padding: 1px;
+    font-size: 0.7em;
+    text-align: right;
+    vertical-align: baseline;
+    width: 20px;
+    height: 20px;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.map td:hover {
+    border: solid 1px #ffdb30;
+}
+
+table.map input {
+    padding: 1px;
+    color: #ffffff;
+    font-size: 11px;
+    text-align: right;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: none;
+}
+
+table.map input:hover {
+    color: #ffdb30;
+}
+
+    /* ++++++++++++++++++++ Tabulky - V?zkum ++++++++++++++++++++ */
+
+table.vyzkum {
+    width: 700px;
+    /* +++++++ height: 54px +++++++ */
+    margin: 10px 0 10px 0;
+    border: 0;
+}
+
+table.vyzkum th {
+    padding: 9px 5px 5px 3px;
+    width: 200px;
+    white-space: nowrap;
+    font-size: 1em;
+    text-shadow: 0.1em 0.1em #000 !important;
+    text-align: right;
+    vertical-align: baseline;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.vyzkum th:hover {
+    border: solid 1px #ffdb30;
+    color: #ffdb30;
+}
+
+table.vyzkum td {
+    padding: 1px 2px 1px 1px;
+    font-size: 9px;
+    text-shadow: 0.2em 0.2em #000 !important;
+    text-align: right;
+    vertical-align: bottom;
+    width: 20px !important;
+    height: 25px !important;
+    background-image: url(<%= asset_path 'css/td3.png' %>);
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.vyzkum td:hover {
+    border: solid 1px #a9a9a9;
+}
+
+td.v1 {
+    padding: 3px;
+    font-size: 0.8em;
+    text-align: right;
+    vertical-align: baseline;
+    width: 20px !important;
+    height: 25px !important;
+    background-image: url(<%= asset_path 'css/td1.png' %>) !important;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+td.v2 {
+    padding: 0 !important;
+    background-image: url(<%= asset_path 'css/td3v.png' %>) !important;
+    background-position: center !important;;
+    border: solid 1px #a9a9a9 !important;
+}
+
+td.v2:hover {
+    border: solid 1px #ffdb30 !important;
+}
+
+td.v2 input {
+    pointer: cursor;
+    color: #fff;
+    text-shadow: 0.2em 0.2em #000 !important;
+    padding: 20px 3px 1px 5px;
+    font-size: 9px;
+    border: none;
+    background-color: transparent;
+}
+
+td.v2 input:hover {
+    color: #ffdb30 !important;
+}
+
+    /* ++++++++++++++++++++ Tabulky - V?roba ++++++++++++++++++++ */
+
+td.v {
+    font-weight: bold !important;
+    vertical-align: top !important;
+    text-align: right !important;
+    padding: 5px 0 0 5px !important;
+    text-shadow: 0.1em 0.1em #000;
+    font-size: 13px !important;
+    white-space: nowrap;
+    padding: 6px 5px 5px 3px !important;
+}
+
+table.vyroba {
+    width: 700px;
+    /* +++++++ height: 54px +++++++ */
+    margin: 10px 0 10px 0;
+    border: 0;
+}
+
+table.vyroba th {
+    color: #ffdb30;
     font-weight: bold;
     font-size: 12px;
-    padding:6px 5px 5px 3px;
+    padding: 6px 5px 5px 3px;
     height: 20px !important;
     width: 100px !important;
     white-space: nowrap;
@@ -2058,8 +1939,413 @@ table.myOffers th{
     -moz-border-radius: 2px;
     border-radius: 2px;
 }
-table.myOffers td{
-    padding:3px;
+
+table.vyroba td {
+    padding: 3px;
+    height: 27px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    background-image: url(<%= asset_path 'css/td3.png' %>);
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.vyroba img {
+    padding: 0;
+    margin: 3px;
+    width: 20px;
+    height: auto;
+    vertical-align: middle;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.vyroba input {
+    padding: 3px;
+    margin: 0px;
+    height: 22px;
+    font-size: 12px;
+    color: #ffdb30;
+    vertical-align: middle;
+    background: transparent;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.vyroba input:hover {
+    border: solid 1px #ffdb30 !important;
+}
+
+table.vyroba select {
+    margin: 0px;
+    padding: 3px;
+    width: 150px;
+    font-size: 11px !important;
+    color: #ffdb30;
+    vertical-align: middle;
+    background-color: #565656;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.vyroba select:hover {
+    border: solid 1px #ffdb30 !important;
+}
+
+    /* ++++++++++++++++++++ Tabulky - profily ++++++++++++++++++++ */
+
+table.profil {
+    width: 100%;
+    border: 0;
+}
+
+table.profil td {
+    color: #fff;
+    text-align: left;
+    vertical-align: middle;
+    padding: 3px 10px 3px 20px;
+    margin: 0;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+table.profil th {
+    color: #ffdb30;
+    text-align: right;
+    vertical-align: middle;
+    width: 35%;
+    font-weight: bold;
+    vertical-align: middle;
+    padding: 3px 10px 3px 20px;
+    margin: 0;
+    font-size: 13px;
+
+}
+
+table.profil a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+table.profil a:hover {
+    color: #ffdb30;
+    text-decoration: none;
+}
+
+td.td {
+    width: 20%;
+    padding: 5px;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    border: 1px solid #696969;
+    border-top: 0;
+    text-align: left;
+    vertical-align: top;
+    -webkit-border-bottom-right-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomright: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+td.td li {
+    list-style: none;
+}
+
+td.td img {
+    width: 28px;
+    height: 28px;
+    margin-right: 5px;
+    margin-bottom: 3px;
+    vertical-align: middle;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.tdimg {
+    width: 100px !important;
+    height: 100px !important;
+    margin: 10px;
+    margin-top: 0;
+    vertical-align: middle;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.tdimg2 {
+    width: 100px !important;
+    height: 100px !important;
+    margin: 10px;
+    margin-top: 0;
+    vertical-align: middle;
+    border: 0 !important;
+}
+
+td.td input {
+    margin: 2px 0 2px 0;
+    padding: 2px 3px 2px 3px;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/tcerna.png' %>);
+    font-size: 12px;
+    color: #a2a2a2;
+    text-decoration: none;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #a2a2a2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.input2 {
+    width: 112px;
+}
+
+td.td select {
+    margin: 2px 0 2px 0;
+    width: 120px;
+    padding: 2px 5px 2px 0px;
+    background-color: #1d1d1d;
+    font-size: 12px;
+    color: #a2a2a2;
+    text-decoration: none;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #a2a2a2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+td.td option {
+    font-size: 12px;
+    color: #fff;
+    background-color: #000;
+    text-align: left;
+}
+
+option.h3 {
+    font-size: 12px;
+    color: #fff;
+    background-color: #000;
+    background-image: url(<%= asset_path 'css/toranzova2.png' %>);
+    text-align: left;
+}
+
+option.h3dp {
+    font-size: 12px;
+    color: #fff;
+    background-color: #800000 !important;
+    text-align: left;
+}
+
+td.tdh1 {
+    width: auto;
+    padding: 5px 10px 5px 10px;
+    color: #ffdb30;
+    font-size: 1.4em;
+    font-weight: bold;
+    text-align: right;
+}
+
+td.tdo {
+    width: 120px;
+    height: 100px;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-color: #000;
+    border-top: 0;
+    text-align: left;
+    border: solid 1px #ffdb30;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+    /* Syselaad post */
+.post {
+    width: 100%;
+    display: table;
+}
+
+.post span {
+    padding: 5px;
+    border: 3px solid #eee;
+    margin: 0;
+}
+
+.post span.left {
+    width: 150px;
+    background: #eee;
+    border: 3px solid #eee;
+    display: table-cell;
+}
+
+.post span.rightright {
+    border: 3px solid #eee;
+    display: table-cell;
+}
+
+    /*
+     * This is a manifest file that'll automatically include all the stylesheets available in this directory
+     * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+     * the top of the compiled file, but it's generally better to create a new file per style scope.
+     *= require_self
+     *= require_tree .
+    */
+
+.clear {
+    clear: both;
+    height: 0;
+    overflow: hidden;
+}
+
+#container {
+    width: 75%;
+    margin: 0 auto;
+    background-color: #FFF;
+    padding: 20px 40px;
+    border: solid 1px black;
+    margin-top: 20px;
+}
+
+#flash_notice, #flash_error, #flash_alert {
+    padding: 5px 8px;
+    margin: 10px 0;
+    color: #000;
+}
+
+#flash_notice {
+    background-color: #CFC;
+    border: solid 1px #6C6;
+}
+
+#flash_error, #flash_alert {
+    background-color: #FCC;
+    border: solid 1px #C66;
+}
+
+.fieldWithErrors {
+    display: inline;
+}
+
+.error_messages {
+    width: 400px;
+    border: 2px solid #CF0000;
+    padding: 0px;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+    font-size: 12px;
+}
+
+.error_messages h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 10px;
+    font-size: 12px;
+    margin: 0;
+    background-color: #c00;
+    color: #fff;
+}
+
+.error_messages p {
+    margin: 8px 10px;
+}
+
+.error_messages ul {
+    margin: 0;
+}
+
+.best_in_place {
+    background-color: #444444;
+}
+
+.fright {
+    float: right;
+}
+
+.reply {
+    float: right;
+    border-right: 1px solid #ffffff;
+    padding-right: 5px;
+}
+
+.postaBody {
+    display: none;
+}
+
+#message_subject {
+    background-image: url(../images/css/email.png)
+}
+
+.opica {
+    display: none;
+}
+
+.error {
+    border: solid 1px #ff0000;
+    padding: 1px;
+}
+
+#pagination {
+    text-align: center;
+}
+
+#pagination span {
+    padding-left: 5px;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+#pagination .selected {
+    text-decoration: underline;
+
+}
+
+.myOffers {
+    width: 700px;
+
+    margin: 10px 0 10px 0;
+    float: left;
+    border: 0;
+}
+
+table.myOffers th {
+    color: #ffdb30;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 5px 5px 3px;
+    height: 20px !important;
+    width: 100px !important;
+    white-space: nowrap;
+    text-align: center !important;
+    background-image: url(<%= asset_path 'css/td1.png' %>);
+    border: 1px solid #696969 !important;
+    border-bottom: 1px solid #ffdb30 !important;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+table.myOffers td {
+    padding: 3px;
     height: 20px;
     font-size: 12px;
     text-align: center;
@@ -2070,11 +2356,13 @@ table.myOffers td{
     -moz-border-radius: 2px;
     border-radius: 2px;
 }
+
 table.myOffers img {
     width: 20px;
     height: 20px;
     vertical-align: middle;
 }
+
 table.myOffers img:hover {
     background: #aaaaaa;
     -webkit-border-radius: 2px;
@@ -2089,179 +2377,194 @@ table.myOffers img:hover {
     /* ++++++++++++++++++++ Form?tov?n? technologii ++++++++++++++++++++ */
 
 .tech_description {
-    display:none;
+    display: none;
 }
+
 .descr {
     cursor: pointer;
 }
 
-/*! jQuery UI - v1.10.3 - 2013-07-28
-* http://jqueryui.com
-* Includes: jquery.ui.core.css, jquery.ui.autocomplete.css, jquery.ui.menu.css, jquery.ui.tooltip.css
-* To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Trebuchet%20MS%2CTahoma%2CVerdana%2CArial%2Csans-serif&fwDefault=bold&fsDefault=1.1em&cornerRadius=4px&bgColorHeader=f6a828&bgTextureHeader=gloss_wave&bgImgOpacityHeader=35&borderColorHeader=e78f08&fcHeader=ffffff&iconColorHeader=ffffff&bgColorContent=eeeeee&bgTextureContent=highlight_soft&bgImgOpacityContent=100&borderColorContent=dddddd&fcContent=333333&iconColorContent=222222&bgColorDefault=f6f6f6&bgTextureDefault=glass&bgImgOpacityDefault=100&borderColorDefault=cccccc&fcDefault=1c94c4&iconColorDefault=ef8c08&bgColorHover=fdf5ce&bgTextureHover=glass&bgImgOpacityHover=100&borderColorHover=fbcb09&fcHover=c77405&iconColorHover=ef8c08&bgColorActive=ffffff&bgTextureActive=glass&bgImgOpacityActive=65&borderColorActive=fbd850&fcActive=eb8f00&iconColorActive=ef8c08&bgColorHighlight=ffe45c&bgTextureHighlight=highlight_soft&bgImgOpacityHighlight=75&borderColorHighlight=fed22f&fcHighlight=363636&iconColorHighlight=228ef1&bgColorError=b81900&bgTextureError=diagonals_thick&bgImgOpacityError=18&borderColorError=cd0a0a&fcError=ffffff&iconColorError=ffd27a&bgColorOverlay=666666&bgTextureOverlay=diagonals_thick&bgImgOpacityOverlay=20&opacityOverlay=50&bgColorShadow=000000&bgTextureShadow=flat&bgImgOpacityShadow=10&opacityShadow=20&thicknessShadow=5px&offsetTopShadow=-5px&offsetLeftShadow=-5px&cornerRadiusShadow=5px
-* Copyright 2013 jQuery Foundation and other contributors Licensed MIT */
+    /*! jQuery UI - v1.10.3 - 2013-07-28
+    * http://jqueryui.com
+    * Includes: jquery.ui.core.css, jquery.ui.autocomplete.css, jquery.ui.menu.css, jquery.ui.tooltip.css
+    * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Trebuchet%20MS%2CTahoma%2CVerdana%2CArial%2Csans-serif&fwDefault=bold&fsDefault=1.1em&cornerRadius=4px&bgColorHeader=f6a828&bgTextureHeader=gloss_wave&bgImgOpacityHeader=35&borderColorHeader=e78f08&fcHeader=ffffff&iconColorHeader=ffffff&bgColorContent=eeeeee&bgTextureContent=highlight_soft&bgImgOpacityContent=100&borderColorContent=dddddd&fcContent=333333&iconColorContent=222222&bgColorDefault=f6f6f6&bgTextureDefault=glass&bgImgOpacityDefault=100&borderColorDefault=cccccc&fcDefault=1c94c4&iconColorDefault=ef8c08&bgColorHover=fdf5ce&bgTextureHover=glass&bgImgOpacityHover=100&borderColorHover=fbcb09&fcHover=c77405&iconColorHover=ef8c08&bgColorActive=ffffff&bgTextureActive=glass&bgImgOpacityActive=65&borderColorActive=fbd850&fcActive=eb8f00&iconColorActive=ef8c08&bgColorHighlight=ffe45c&bgTextureHighlight=highlight_soft&bgImgOpacityHighlight=75&borderColorHighlight=fed22f&fcHighlight=363636&iconColorHighlight=228ef1&bgColorError=b81900&bgTextureError=diagonals_thick&bgImgOpacityError=18&borderColorError=cd0a0a&fcError=ffffff&iconColorError=ffd27a&bgColorOverlay=666666&bgTextureOverlay=diagonals_thick&bgImgOpacityOverlay=20&opacityOverlay=50&bgColorShadow=000000&bgTextureShadow=flat&bgImgOpacityShadow=10&opacityShadow=20&thicknessShadow=5px&offsetTopShadow=-5px&offsetLeftShadow=-5px&cornerRadiusShadow=5px
+    * Copyright 2013 jQuery Foundation and other contributors Licensed MIT */
 
-        /* Layout helpers
-        ----------------------------------*/
-    .ui-helper-hidden {
-        display: none;
-    }
-    .ui-helper-hidden-accessible {
-        border: 0;
-        clip: rect(0 0 0 0);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-    }
-    .ui-helper-reset {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        outline: 0;
-        line-height: 1.3;
-        text-decoration: none;
-        font-size: 100%;
-        list-style: none;
-    }
-    .ui-helper-clearfix:before,
-    .ui-helper-clearfix:after {
-        content: "";
-        display: table;
-        border-collapse: collapse;
-    }
-    .ui-helper-clearfix:after {
-        clear: both;
-    }
-    .ui-helper-clearfix {
-        min-height: 0; /* support: IE7 */
-    }
-    .ui-helper-zfix {
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        position: absolute;
-        opacity: 0;
-        filter:Alpha(Opacity=0);
-    }
+    /* Layout helpers
+    ----------------------------------*/
+.ui-helper-hidden {
+    display: none;
+}
 
-    .ui-front {
-        z-index: 100;
-    }
+.ui-helper-hidden-accessible {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
 
-        /* Overlays */
-    .ui-widget-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-    .ui-autocomplete {
-        position: absolute;
-        top: 0;
-        left: 0;
-        cursor: default;
-    }
-    .ui-menu {
-        list-style: none;
-        padding: 2px;
-        margin: 0;
-        display: block;
-        outline: none;
-    }
-    .ui-menu .ui-menu {
-        margin-top: -3px;
-        position: absolute;
-    }
-    .ui-menu .ui-menu-item {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        /* support: IE10, see #8844 */
-        list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
-    }
+.ui-helper-reset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    line-height: 1.3;
+    text-decoration: none;
+    font-size: 100%;
+    list-style: none;
+}
 
-    .ui-menu .ui-menu-item a {
-        text-decoration: none;
-        display: block;
-        padding: 2px .4em;
-        line-height: 1.5;
-        min-height: 0; /* support: IE7 */
-        font-weight: normal;
-    }
-    .ui-menu .ui-menu-item a.ui-state-focus,
-    .ui-menu .ui-menu-item a.ui-state-active {
-        font-weight: normal;
-        margin: -1px;
-    }
+.ui-helper-clearfix:before,
+.ui-helper-clearfix:after {
+    content: "";
+    display: table;
+    border-collapse: collapse;
+}
 
+.ui-helper-clearfix:after {
+    clear: both;
+}
 
+.ui-helper-clearfix {
+    min-height: 0; /* support: IE7 */
+}
 
+.ui-helper-zfix {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    opacity: 0;
+    filter: Alpha(Opacity=0);
+}
 
-        /* Component containers
-        ----------------------------------*/
-    .ui-widget {
-        font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
-        font-size: 1.1em;
-    }
-    .ui-widget .ui-widget {
-        font-size: 1em;
-    }
+.ui-front {
+    z-index: 100;
+}
 
-    .ui-widget-content {
-        border: 1px solid #dddddd;
-        background: #eeeeee;
-        color: #333333;
-    }
-    .ui-widget-content a {
-        color: #333333;
-    }
-            /* Misc visuals
-        ----------------------------------*/
+    /* Overlays */
+.ui-widget-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
-        /* Corner radius */
-    .ui-corner-all,
-    .ui-corner-top,
-    .ui-corner-left,
-    .ui-corner-tl {
-        border-top-left-radius: 4px;
-    }
-    .ui-corner-all,
-    .ui-corner-top,
-    .ui-corner-right,
-    .ui-corner-tr {
-        border-top-right-radius: 4px;
-    }
-    .ui-corner-all,
-    .ui-corner-bottom,
-    .ui-corner-left,
-    .ui-corner-bl {
-        border-bottom-left-radius: 4px;
-    }
-    .ui-corner-all,
-    .ui-corner-bottom,
-    .ui-corner-right,
-    .ui-corner-br {
-        border-bottom-right-radius: 4px;
-    }
+.ui-autocomplete {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: default;
+}
 
-        /* Overlays */
+.ui-menu {
+    list-style: none;
+    padding: 2px;
+    margin: 0;
+    display: block;
+    outline: none;
+}
+
+.ui-menu .ui-menu {
+    margin-top: -3px;
+    position: absolute;
+}
+
+.ui-menu .ui-menu-item {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /* support: IE10, see #8844 */
+    list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
+}
+
+.ui-menu .ui-menu-item a {
+    text-decoration: none;
+    display: block;
+    padding: 2px .4em;
+    line-height: 1.5;
+    min-height: 0; /* support: IE7 */
+    font-weight: normal;
+}
+
+.ui-menu .ui-menu-item a.ui-state-focus,
+.ui-menu .ui-menu-item a.ui-state-active {
+    font-weight: normal;
+    margin: -1px;
+}
+
+    /* Component containers
+    ----------------------------------*/
+.ui-widget {
+    font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 1.1em;
+}
+
+.ui-widget .ui-widget {
+    font-size: 1em;
+}
+
+.ui-widget-content {
+    border: 1px solid #dddddd;
+    background: #eeeeee;
+    color: #333333;
+}
+
+.ui-widget-content a {
+    color: #333333;
+}
+
+    /* Misc visuals
+----------------------------------*/
+
+    /* Corner radius */
+.ui-corner-all,
+.ui-corner-top,
+.ui-corner-left,
+.ui-corner-tl {
+    border-top-left-radius: 4px;
+}
+
+.ui-corner-all,
+.ui-corner-top,
+.ui-corner-right,
+.ui-corner-tr {
+    border-top-right-radius: 4px;
+}
+
+.ui-corner-all,
+.ui-corner-bottom,
+.ui-corner-left,
+.ui-corner-bl {
+    border-bottom-left-radius: 4px;
+}
+
+.ui-corner-all,
+.ui-corner-bottom,
+.ui-corner-right,
+.ui-corner-br {
+    border-bottom-right-radius: 4px;
+}
+
+    /* Overlays */
     /*.ui-widget-overlay {*/
-        /*background: #666666 url(images/ui-bg_diagonals-thick_20_666666_40x40.png) 50% 50% repeat;*/
-        /*opacity: .5;*/
-        /*filter: Alpha(Opacity=50);*/
+    /*background: #666666 url(images/ui-bg_diagonals-thick_20_666666_40x40.png) 50% 50% repeat;*/
+    /*opacity: .5;*/
+    /*filter: Alpha(Opacity=50);*/
     /*}*/
     /*.ui-widget-shadow {*/
-        /*margin: -5px 0 0 -5px;*/
-        /*padding: 5px;*/
-        /*background: #000000 url(images/ui-bg_flat_10_000000_40x100.png) 50% 50% repeat-x;*/
-        /*opacity: .2;*/
-        /*filter: Alpha(Opacity=20);*/
-        /*border-radius: 5px;*/
+    /*margin: -5px 0 0 -5px;*/
+    /*padding: 5px;*/
+    /*background: #000000 url(images/ui-bg_flat_10_000000_40x100.png) 50% 50% repeat-x;*/
+    /*opacity: .2;*/
+    /*filter: Alpha(Opacity=20);*/
+    /*border-radius: 5px;*/
     /*}*/
 
     /* ++++++++++++++++++++ Market ++++++++++++++++++++ */
@@ -2270,24 +2573,29 @@ table.myOffers img:hover {
     height: 200px;
     background-image: url("imghra/market.jpg");
     border: 1px solid #cccccc
-    }
+}
+
     /* ++++++++++++++++++++ Posta ++++++++++++++++++++ */
 .center {
     text-align: center !important;
 }
+
 .precitana {
     display: none;
 }
+
 .precitanaimg {
     width: 25px;
     height: 19px;
     float: right;
     background-image: url("css/post0.png");
 }
+
     /* ++++++++++++++++++++ Technologie ++++++++++++++++++++ */
 #descr {
     cursor: pointer;
 }
+
 input[type="submit"] {
     cursor: pointer;
 }

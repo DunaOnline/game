@@ -1,22 +1,17 @@
-
-     
-
-  
-
 <!-- !!!!!!!!! POČÁTEK - OBLAST ZMĚNY  V KÓDU PRO TUTO STRÁNKU !!!!! -->
 
-            
 
-    <table class="tab0">
 
-  <tr>  <td>
+<table class="tab0">
+
+  <tr>
+    <td>
 
       <a href="index.html" title="Home">⌂</a> »
 
 
-        <%= link_to "Ekonomický výzkum", technologies_path %>
+      <%= link_to "Ekonomický výzkum", technologies_path %>
 
-      
 
     </td>
     <% if current_user.admin? || current_user.leader? || current_user.mentat? %>
@@ -28,78 +23,45 @@
 
   </tr>
 
-  </table>
-
-  
-
-  
-
-  <table class="vyzkum">
-
-  
-
-  
-
-    
-
-    
-
-    
-
-      <!-- !!!!! pozor! 
-
-      
-
-      nevyzkoumane bunky maji jen td, vyzkoumane maji tr class="v1" 
-
-      
-
-      u bunek, ktere zobrazuji i budovu je to slozitejsi, jsou rozliseny 0 a 1
-
-      napr: nevyzkoumane mesto :  /mes_0.png
-
-        vyzkoumane mesto:   /mes_1.png
+</table>
 
 
 
-      !!!!! -->
-
-      <% unless @technologies.blank? %>
-          <%= render :partial => "technology", :collection => @technologies, :as => :technology %>
-      <% end %>
 
 
-
-      
-    
-        
-        
-         
-         
-        
-        
-        
-
-      
-        
-      
+<table class="vyzkum">
 
 
-    
+  <!-- !!!!! pozor!
 
-     
 
-  
 
-  
+  nevyzkoumane bunky maji jen td, vyzkoumane maji tr class="v1"
 
-  </table>
 
-  
 
-  
+  u bunek, ktere zobrazuji i budovu je to slozitejsi, jsou rozliseny 0 a 1
 
-  
+  napr: nevyzkoumane mesto :  /mes_0.png
+
+    vyzkoumane mesto:   /mes_1.png
+
+
+
+  !!!!! -->
+
+  <% unless @technologies.blank? %>
+      <%= render :partial => "technology", :collection => @technologies, :as => :technology %>
+  <% end %>
+
+
+</table>
+
+
+
+
+
+
 
 <!-- !!!!!!!!! KONEC - OBLAST ZMĚNY  V KÓDU PRO TUTO STRÁNKU !!!!! -->
 

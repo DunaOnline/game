@@ -1,7 +1,7 @@
 # encoding: utf-8
 class PlanetsController < ApplicationController
   authorize_resource # CanCan
-  
+
   def index
     @planets = Planet.osidlitelna.or.viditelna(current_user.house).order(:name).all
   end
@@ -36,7 +36,7 @@ class PlanetsController < ApplicationController
   def update
     @planet = Planet.find(params[:id])
     if @planet.update_attributes(params[:planet])
-      redirect_to @planet, :notice  => "Successfully updated planet."
+      redirect_to @planet, :notice => "Successfully updated planet."
     else
       render :action => 'edit'
     end
@@ -47,23 +47,23 @@ class PlanetsController < ApplicationController
     @planet.destroy
     redirect_to planets_url, :notice => "Successfully destroyed planet."
   end
-  
+
   def list_osidlitelnych
     #@planets = Planet.osidlitelna.or.viditelna(current_user.house).order(:name).all
     @planets = Planet.osidlitelna?(current_user).order(:name).all
     render :index
   end
-  
+
   def osidlit_pole
     @planet = Planet.find(params[:id])
     lvl = current_user.vyskumane_tech(5)
     bonus = 1 - (lvl * 0.02)
-    
+
     if @planet.osidlitelna?(current_user)
       cena_mel = params[:cena_mel].to_f
       cena_mel = (cena_mel * bonus).to_f
       cena_spoctena = @planet.cena_noveho_lena_mel * bonus
-      cena_mel = cena_spoctena if cena_spoctena > cena_mel 
+      cena_mel = cena_spoctena if cena_spoctena > cena_mel
 
       cena_sol = params[:cena_sol].to_f
       cena_sol = cena_sol * bonus
@@ -88,7 +88,7 @@ class PlanetsController < ApplicationController
       redirect_to :back, :error => "Planetu #{@planet.name} nelze osídlit"
     end
   end
-  
+
   def zobraz_arrakis
     @arrakis = Planet.arrakis
     @arrakis_field = Field.find_by_planet_id(@arrakis)

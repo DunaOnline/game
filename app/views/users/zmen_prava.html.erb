@@ -1,47 +1,47 @@
 <%= form_tag :zmen_prava do %>
-  <%= form_for @user_prava do |f| %>
-    <%= hidden_field_tag :user_id_zmena, @user_prava.id %>
-    <table>
-      <tr>
-        <td class="tdh1" colspan="11"><%= @user_prava.username %> - <%= @user_prava.nick %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :leader %></td>
-        <td><%= f.label :mentat %></td>
-        <td><%= f.label :army_mentat %></td>
-        <td><%= f.label :diplomat %></td>
-        <td><%= f.label :general %></td>
-        <td><%= f.label :vicegeneral %></td>
-        <td><%= f.label :landsraad %></td>
-        <td><%= f.label :arrakis %></td>
-        <td><%= f.label :emperor %></td>
-        <td><%= f.label :regent %></td>
-        <td><%= f.label :court %></td>
-        <td><%= f.label :vezir %></td>
-        <td><%= f.label :admin %></td>
-      </tr>
-      <tr>
-        <td><%= f.check_box :leader %></td>
-        <td><%= f.check_box :mentat %></td>
-        <td><%= f.check_box :army_mentat %></td>
-        <td><%= f.check_box :diplomat %></td>
-        <td><%= f.check_box :general %></td>
-        <td><%= f.check_box :vicegeneral %></td>
-        <td><%= f.check_box :landsraad %></td>
-        <td><%= f.check_box :arrakis %></td>
-        <td><%= f.check_box :emperor %></td>
-        <td><%= f.check_box :regent %></td>
-        <td><%= f.check_box :court %></td>
-        <td><%= f.check_box :vezir %></td>
-        <td><%= f.check_box :admin %></td>
-      </tr>
-      <tr>
-        <td colspan="3">Nove heslo:</td>
-        <td colspan="3"><%= text_field_tag :new_password %></td>
-      </tr>
-      <tr>
-        <td colspan="11"><%= submit_tag "Zmen prava"%></td>
-      </tr>
-    </table>
-  <% end %>
+    <%= form_for @user_prava do |f| %>
+        <%= hidden_field_tag :user_id_zmena, @user_prava.id %>
+        <table>
+          <tr>
+            <td class="tdh1" colspan="11"><%= @user_prava.username %> - <%= @user_prava.nick %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :leader %></td>
+            <td><%= f.label :mentat %></td>
+            <td><%= f.label :army_mentat %></td>
+            <td><%= f.label :diplomat %></td>
+            <td><%= f.label :general %></td>
+            <td><%= f.label :vicegeneral %></td>
+            <td><%= f.label :landsraad %></td>
+            <td><%= f.label :arrakis %></td>
+            <td><%= f.label :emperor %></td>
+            <td><%= f.label :regent %></td>
+            <td><%= f.label :court %></td>
+            <td><%= f.label :vezir %></td>
+            <td><%= f.label :admin %></td>
+          </tr>
+          <tr>
+            <td><%= f.check_box :leader %></td>
+            <td><%= f.check_box :mentat %></td>
+            <td><%= f.check_box :army_mentat %></td>
+            <td><%= f.check_box :diplomat %></td>
+            <td><%= f.check_box :general %></td>
+            <td><%= f.check_box :vicegeneral %></td>
+            <td><%= f.check_box :landsraad %></td>
+            <td><%= f.check_box :arrakis %></td>
+            <td><%= f.check_box :emperor %></td>
+            <td><%= f.check_box :regent %></td>
+            <td><%= f.check_box :court %></td>
+            <td><%= f.check_box :vezir %></td>
+            <td><%= f.check_box :admin %></td>
+          </tr>
+          <tr>
+            <td colspan="3">Nove heslo:</td>
+            <td colspan="3"><%= text_field_tag :new_password %></td>
+          </tr>
+          <tr>
+            <td colspan="11"><%= submit_tag "Zmen prava" %></td>
+          </tr>
+        </table>
+    <% end %>
 <% end %>

@@ -16,7 +16,7 @@
 
 FactoryGirl.define do
   factory :syselaad do
-    sequence(:name) {|n| "syselaad#{n}"}
+    sequence(:name) { |n| "syselaad#{n}" }
     kind "S"
   end
 end

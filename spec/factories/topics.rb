@@ -16,7 +16,7 @@
 
 FactoryGirl.define do
   factory :topic do
-    sequence(:name) {|n| "topic#{n}"}
+    sequence(:name) { |n| "topic#{n}" }
     syselaad
     user
   end

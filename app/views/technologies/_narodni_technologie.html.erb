@@ -1,4 +1,3 @@
-
 <tr>
 
   <th class="descr"><%= technology.name %></th>
@@ -8,17 +7,16 @@
   <%= form_tag vylepsi_technology_path(:technology => technology.id, :user_id => current_user, :narodni => true), :class => 'vylepsiTech' do %>
 
       <td class="v2" title="Vylepsi"><%= submit_tag number_with_precision technology.cena_narodni_technology(current_user.house), :precision => 0 %></td>
-  <%end%>
+  <% end %>
 
 
-  <% vylep = technology.vylepseno_narodni(current_user.house_id)%>
+  <% vylep = technology.vylepseno_narodni(current_user.house_id) %>
   <% technology.max_lvl_narodni.times do |lvl| %>
 
 
-
       <% if vylep > lvl %>
-          <% if technology.levely.include?(lvl)%>
-              <td class="v1" style=background-image:(<%= technology.cesta_technologie("v")%>) >
+          <% if technology.levely.include?(lvl) %>
+              <td class="v1" style=background-image:(<%= technology.cesta_technologie("v")%>)>
                 <%= lvl+1 %>
               </td>
 
@@ -28,29 +26,25 @@
                 <%= lvl+1 %>
               </td>
 
-          <%end%>
+          <% end %>
 
 
       <% else %>
-          <% if technology.levely.include?(lvl)%>
+          <% if technology.levely.include?(lvl) %>
               <td style=background-image:(<%= technology.cesta_technologie("n")%>)>
                 <%= lvl+1 %></td>
-          <%else%>
+          <% else %>
               <td>
                 <%= lvl+1 %>
               </td>
 
-          <%end%>
-      <%end%>
+          <% end %>
+      <% end %>
 
 
-
-
-
-
-
-  <%end%></tr>
-<tr class="tech_description"><td colspan="19"><p><%= technology.description.split(".")[0].tr("1", " ").tr("3", " ").tr("2", "1") %></p></td>
+  <% end %></tr>
+<tr class="tech_description">
+  <td colspan="19"><p><%= technology.description.split(".")[0].tr("1", " ").tr("3", " ").tr("2", "1") %></p></td>
 
 </tr>
 

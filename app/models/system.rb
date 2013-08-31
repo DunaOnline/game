@@ -10,13 +10,13 @@
 
 class System < ActiveRecord::Base
   attr_accessible :system_name
-  
+
   has_many :planets, :primary_key => 'system_name', :foreign_key => 'system_name'
-  
+
   def pocet_objevenych_planet
     self.planets.count
   end
-  
+
   def zastoupene_rody
     # TODO silene!!!! predelat!!!!
     #max_poli = 0
@@ -30,13 +30,13 @@ class System < ActiveRecord::Base
     #return dom_rod
     a = []
     b = []
-    
+
     for planet in self.planets do
       a << planet.zastoupene_rody
     end
-    
+
     puts 'zastoupene rody : ' << a.to_s
-    
+
     for zastupce in a do
       unless zastupce == []
         if b.assoc(zastupce[0]) == nil
@@ -46,11 +46,11 @@ class System < ActiveRecord::Base
         end
       end
     end
-    
-    b.sort! { |a,b| a[1] <=> b[1] }
+
+    b.sort! { |a, b| a[1] <=> b[1] }
     return b
   end
-  
+
   def dominantni_rod
     a = self.zastoupene_rody
     if a[0]

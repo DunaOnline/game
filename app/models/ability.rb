@@ -48,7 +48,7 @@ class Ability
         can [:show], Landsraad
         can [:read], Law
         can [:read], Poll
-      
+
         if user.emperor?
           can [:sprava, :posli_imperialni_suroviny], Imperium
           can [:create], Law
@@ -61,7 +61,7 @@ class Ability
         if user.leader?
           can [:kolonizuj, :sprava_rod], House do |house|
             user.try(:house) == house
-          end 
+          end
           #:id => user.house_id
           can [:pridel_pravo, :odeber_pravo], User do |hrac|
             hrac.house == user.house
@@ -96,7 +96,7 @@ class Ability
         end
       end
     else
-      
+
     end
   end
 end

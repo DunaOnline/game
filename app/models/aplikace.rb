@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Aplikace
   include ApplicationHelper
-  
+
   VEK = '1'
 
   def self.prihlaseni_povoleno?
@@ -26,14 +26,14 @@ class Aplikace
 #  def self.cesta_pro_pdf(filename)
 #    Rails.root.join('pdfs', "#{filename}.pdf")
 #  end
-  
+
   def self.zamkni_hru
     if Aplikace.prihlaseni_povoleno?
       Global.prepni('login', 1, false)
     end
     Aplikace.odhlas_hrace
   end
-  
+
   def self.odemkni_hru
     unless Aplikace.prihlaseni_povoleno?
       Global.prepni('login', 1, true)
@@ -98,7 +98,7 @@ class Aplikace
         pla.delete
       end
     end
-    
+
     for disc in Discoverable.all do
       if Planet.find_by_name(disc.name)
 
@@ -109,7 +109,7 @@ class Aplikace
 
     for user in User.all do
       if user.admin?
-        user.hlasuj(User.find_by_username('Norma_Cenva'),'leader')
+        user.hlasuj(User.find_by_username('Norma_Cenva'), 'leader')
       else
         user.napln_suroviny
         user.update_attributes(:leader => false,
@@ -125,7 +125,7 @@ class Aplikace
                                :court => false,
                                :vezir => false,
                                :admin => false)
-        user.hlasuj(user,'leader')
+        user.hlasuj(user, 'leader')
       end
     end
 

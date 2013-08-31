@@ -1,106 +1,108 @@
 <%# encoding: utf-8 %>
 <% title @title %>
 <table class="land">
-	<tr>
-		<td class="none" colspan="4"></td>
-		<td background="image/	8	/imperator.png" rowspan="2" colspan ="2"></td>
-		<td class="none" colspan="4"></td>
-		<td class="none" rowspan="9" style="width:4px !important;"></td>
-		<td class="tdpr" rowspan="9" style="width:70px !important;">
-		<li>
-			<h2><%= @title %></h2>
-		<li>
-			<b>Imperátor: </b><%= link_to @imperator.nick, @imperator if @imperator %>
-		<li>
-			<b>Držitel pololéna: </b><%= link_to @spravce.nick, @spravce if @spravce %>
-		<li>
-			<b>Poslanci: </b>
-			<% for poslanec in @poslanci do %>
-			<%= link_to poslanec.nick, poslanec %>
-			<% end %>
-			<br>
-			<br>
+  <tr>
+    <td class="none" colspan="4"></td>
+    <td background="image/	8	/imperator.png" rowspan="2" colspan="2"></td>
+    <td class="none" colspan="4"></td>
+    <td class="none" rowspan="9" style="width:4px !important;"></td>
+    <td class="tdpr" rowspan="9" style="width:70px !important;">
+      <li>
+        <h2><%= @title %></h2>
+      <li>
+        <b>Imperátor: </b><%= link_to @imperator.nick, @imperator if @imperator %>
+      <li>
+        <b>Držitel pololéna: </b><%= link_to @spravce.nick, @spravce if @spravce %>
+      <li>
+        <b>Poslanci: </b>
+        <% for poslanec in @poslanci do %>
+            <%= link_to poslanec.nick, poslanec %>
+        <% end %>
+        <br>
+        <br>
 
-		</td>
-	</tr>
-	<tr>
-		<% 8.times do %> <td background="<%= asset_path(cesta_budovy('Atreides', 'dom')) %>"></td>
-		<% end %>
-	</tr>
-	<% 3.times do %>
-	<tr>
-		<% 10.times do %> <td background="<%= asset_path(cesta_budovy('Atreides', 'dom')) %>"></td>
-		<% end %>
-	</tr>
-	<% end %>
+    </td>
+  </tr>
+  <tr>
+    <% 8.times do %>
+        <td background="<%= asset_path(cesta_budovy('Atreides', 'dom')) %>"></td>
+    <% end %>
+  </tr>
+  <% 3.times do %>
+      <tr>
+        <% 10.times do %>
+            <td background="<%= asset_path(cesta_budovy('Atreides', 'dom')) %>"></td>
+        <% end %>
+      </tr>
+  <% end %>
 </table>
 
 <% if Imperium.volba_imperatora? %>
-<table class="tab1">
-	<tr>
-		<th>
-                   <%= link_to "Volba Imperatora - Datum voleb: #{format_date @datum_volby}", volba_imperatora_path %>
-                </th>
-        </tr>
-</table>
+    <table class="tab1">
+      <tr>
+        <th>
+          <%= link_to "Volba Imperatora - Datum voleb: #{format_date @datum_volby}", volba_imperatora_path %>
+        </th>
+      </tr>
+    </table>
 <% end %>
 
 <table class="tab1">
-	<tr>
-		<th colspan="10">Hlasovat o zákonu</th>
-	</tr>
-	<tr>
-		<% for law in @projednavane do %> 
-			<td style="width:25%"><h3><%= law.label + ' - ' + law.title %></h3>
-				<li>
-					<%= law.content %>
-				<li>
-				<input type="button" value="Ano" class="ok4">
-				<input type="button" value="Ne" class="ok4">
-				<input type="button" value="Zdržet se" class="ok4">
-			</td>
-		<% end %> 
-	</tr>
+  <tr>
+    <th colspan="10">Hlasovat o zákonu</th>
+  </tr>
+  <tr>
+    <% for law in @projednavane do %>
+        <td style="width:25%"><h3><%= law.label + ' - ' + law.title %></h3>
+          <li>
+            <%= law.content %>
+          <li>
+            <input type="button" value="Ano" class="ok4">
+            <input type="button" value="Ne" class="ok4">
+            <input type="button" value="Zdržet se" class="ok4">
+        </td>
+    <% end %>
+  </tr>
 </table>
 
 <table class="tab3">
-	<tr>
-		<th colspan="10">
-    
+  <tr>
+    <th colspan="10">
+
       <input type="button" value="PŘEDLOŽIT NOVÝ ZÁKON" title="PŘEDLOŽIT" class="ok4" style="margin-right: 30px;">
 
     </th>
-	</tr>
-	<tr>
-		<td>
-			<textarea></textarea>
-		</td>
-	</tr>
+  </tr>
+  <tr>
+    <td>
+      <textarea></textarea>
+    </td>
+  </tr>
 </table>
 
 <table class="tab1">
-	<tr>
-		<th class="l" style="width:30px">Číslo</th>
-		<th style="width:50px">Stav</th>
-		<th>Znění neprojednaných zákonů</th>
-		<th>Uzavření</th>
-		<th>Autor</th>
-		<th class="r" style="width:80px">Ano/Ne/Zdr.</th>
-	</tr>
-	<tr>
-		<td>010</td>
-		<td>Zařazen</td>
-		<td>Celkové znění zákona, které předložil poslanec.</td>
-		<td class="ctr">---</td>
-		<td class="ctr"><a class="deputy" href="profil.htm">Nick_autora *</a></td>
-		<td class="ctr">---</td>
-	</tr>
-	<tr>
-		<td>009</td>
-		<td>Zařazen</td>
-		<td>Celkové znění zákona, které předložil poslanec.</td>
-		<td class="ctr">---</td>
-		<td class="ctr"><a class="deputy" href="profil.htm">Nick_autora *</a></td>
-		<td class="ctr">---</td>
-	</tr>
+  <tr>
+    <th class="l" style="width:30px">Číslo</th>
+    <th style="width:50px">Stav</th>
+    <th>Znění neprojednaných zákonů</th>
+    <th>Uzavření</th>
+    <th>Autor</th>
+    <th class="r" style="width:80px">Ano/Ne/Zdr.</th>
+  </tr>
+  <tr>
+    <td>010</td>
+    <td>Zařazen</td>
+    <td>Celkové znění zákona, které předložil poslanec.</td>
+    <td class="ctr">---</td>
+    <td class="ctr"><a class="deputy" href="profil.htm">Nick_autora *</a></td>
+    <td class="ctr">---</td>
+  </tr>
+  <tr>
+    <td>009</td>
+    <td>Zařazen</td>
+    <td>Celkové znění zákona, které předložil poslanec.</td>
+    <td class="ctr">---</td>
+    <td class="ctr"><a class="deputy" href="profil.htm">Nick_autora *</a></td>
+    <td class="ctr">---</td>
+  </tr>
 </table>

@@ -1,13 +1,9 @@
-
-
-
-<tr>	<td><%= myOffer.show_area %></td>
+<tr>
+  <td><%= myOffer.show_area %></td>
 
 
   <td><%= myOffer.price %></td>
   <td><%= myOffer.amount %></td>
-
-
 
 
   <td>
@@ -16,7 +12,7 @@
   <% if ((Time.now - myOffer.updated_at) / 3600).round > 1 %>
       <td>
         <% if myOffer.price != 1 %>
-        <%= link_to 'Zlevnit o 10%', zlevnit_path(:market => myOffer.id), :confirm => "are you sure?", :class => 'delete_market' %>
+            <%= link_to 'Zlevnit o 10%', zlevnit_path(:market => myOffer.id), :confirm => "are you sure?", :class => 'delete_market' %>
         <% end %>
       </td>
       <td>
@@ -27,8 +23,8 @@
       <td>Mozete zdrazet kazdu hodinu</td>
 
 
-    <% end %>
-    </tr>
+  <% end %>
+</tr>
 
 
 

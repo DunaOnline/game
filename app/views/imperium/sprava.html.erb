@@ -2,41 +2,41 @@
 <% title @title %>
 
 <table class="tab1">
-	<tr>
-			<td class="tdpl" rowspan="2" style="padding: 10px; width:270px; background-image: url(<%= asset_path 'imghra/arrakis.png' %>) !important">
-		<li>
-			<h2>Imperium a Koření</h2>
-		<li>
-			<b>Imperátor: </b> <%= link_to @imperator.nick, @imperator if @imperator %>
-		<li>
-			<b>Místodržící Arrakisu: </b> <%= link_to @spravce.nick, @spravce if @spravce %>
-		<li>
-			<b>Známých planet: </b> <%= Planet.count %>
-		<li>
-			<b>Občanů Impéria: </b> <%= User.count %>
-		<li>
-			<b>Celkový vliv: </b> <%= @imperium.influence %>
-			<br>
-			<br>
-		<li>
-			<input type="button" value="Potvrdit" class="ok">
-		</td>
-		<th>Přepočet</th>
-		<th>Přesun ze skladu</th>
-		<th class="r">Podíl [%]</th>
-	</tr>
-	<tr>
-		<%= render :partial => 'melange_flow' %>
+  <tr>
+    <td class="tdpl" rowspan="2" style="padding: 10px; width:270px; background-image: url(<%= asset_path 'imghra/arrakis.png' %>) !important">
+      <li>
+        <h2>Imperium a Koření</h2>
+      <li>
+        <b>Imperátor: </b> <%= link_to @imperator.nick, @imperator if @imperator %>
+      <li>
+        <b>Místodržící Arrakisu: </b> <%= link_to @spravce.nick, @spravce if @spravce %>
+      <li>
+        <b>Známých planet: </b> <%= Planet.count %>
+      <li>
+        <b>Občanů Impéria: </b> <%= User.count %>
+      <li>
+        <b>Celkový vliv: </b> <%= @imperium.influence %>
+        <br>
+        <br>
+      <li>
+        <input type="button" value="Potvrdit" class="ok">
+    </td>
+    <th>Přepočet</th>
+    <th>Přesun ze skladu</th>
+    <th class="r">Podíl [%]</th>
+  </tr>
+  <tr>
+    <%= render :partial => 'melange_flow' %>
 
-		<td>
-			<%= form_tag :posli_imperialni_suroviny do %>
-			<h3>Poslat Velkorodu</h3>
-			
-			<li><%= img_solary %><%= text_field_tag 'rodu_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
-			<li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %> 
-			<li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}) , :class => "tab" %> 
-			<br />
-			<!-- <h3>Prodej na trhu</h3>
+    <td>
+      <%= form_tag :posli_imperialni_suroviny do %>
+          <h3>Poslat Velkorodu</h3>
+
+          <li><%= img_solary %><%= text_field_tag 'rodu_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %>
+            <br/>
+            <!-- <h3>Prodej na trhu</h3>
 			<li><%= img_melanz "Množství melanže na trhu." %> 1000</li> 
 			<li>
 				<%= img_solary "Prodejní cena melanže" %>
@@ -44,19 +44,19 @@
 			</li>
 			<br />
 			<li><%= submit_tag 'Potvrdit', :name => 'potvrdit', :class => 'ok' %>
-			<% end %>  -->
-		</td>
-		
-		<td>
-			<% for house in @houses do %>
-				<li>
-					<%= obrazek_budovy(house.name, 'erb') %>
-					<%= best_in_place house, :melange_percent %>
-				</li>
-			<% end %>
-		</td>
+      <% end %>  -->
+    </td>
 
-	</tr>
+    <td>
+      <% for house in @houses do %>
+          <li>
+            <%= obrazek_budovy(house.name, 'erb') %>
+            <%= best_in_place house, :melange_percent %>
+          </li>
+      <% end %>
+    </td>
+
+  </tr>
 </table>
 
 
@@ -64,62 +64,62 @@
 
 
 
-	<table class="tab1">
-		<tr>	
-			<td class="tdpl" rowspan="2" style="width: 270px !important; background-image: url(<%= asset_path 'imghra/dvur_v.png' %>) !important; Background-position: top !important;">
-				<li><h2>Imperiální dvůr</h2>
-				<li><b>Členové dvora: </b>         
-					<% for user in @courtship do %>
-					<li>
-						<%= link_to user.nick, user, :class => "court" %>
-						<% if can? :odeber_pravo, User %>
-							<%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Court" %>
-						<% end %>
-					</li>
-				<% end %>	
-				<li><b>Veziri: </b>         
-					<% for user in @veziri do %>
-					<li>
-						<%= link_to user.nick, user, :class => "vezir" %>
-						<% if can? :odeber_pravo, User %>
-							<%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Court" %>
-						<% end %>
-					</li>
-				<% end %>
-			</td>
+<table class="tab1">
+  <tr>
+    <td class="tdpl" rowspan="2" style="width: 270px !important; background-image: url(<%= asset_path 'imghra/dvur_v.png' %>) !important; Background-position: top !important;">
+      <li><h2>Imperiální dvůr</h2>
+      <li><b>Členové dvora: </b>
+        <% for user in @courtship do %>
+          <li>
+            <%= link_to user.nick, user, :class => "court" %>
+            <% if can? :odeber_pravo, User %>
+                <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Court" %>
+            <% end %>
+          </li>
+      <% end %>
+      <li><b>Veziri: </b>
+        <% for user in @veziri do %>
+          <li>
+            <%= link_to user.nick, user, :class => "vezir" %>
+            <% if can? :odeber_pravo, User %>
+                <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Court" %>
+            <% end %>
+          </li>
+      <% end %>
+    </td>
 
-			<th style="width: 150px">Imperátor</th>
+    <th style="width: 150px">Imperátor</th>
 
-			<th class="r">Přidělení práv</th>
-		</tr>
+    <th class="r">Přidělení práv</th>
+  </tr>
 
-		<tr>
-			<td style="min-height: 170px;">
-				<li><img src = "image/avatar/id3.png" alt="" class = "tdimg">
-					<% if @imperator %>
-				<li><%= link_to @imperator.nick, @imperator, :class => :emperor %> <%= @imperator.house.name %>
-					<% end %>
-			</td>
-      
-      <td> 
-          
-          				<% if can? :pridel_pravo, User %>
-					<li>
-						<%= form_tag :pridel_pravo do %>
-      						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-      						<%= submit_tag 'Dvoran', :class => 'oktab_auto' %>
-    					<% end %>
-					</li>
-					<li>
-						<%= form_tag :pridel_pravo do %>
-      						<%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-      						<%= submit_tag 'Vezir', :class => 'oktab_auto' %>
-    					<% end %>
-					</li>
-				<% end %>
-			</td>   
-		</tr>
+  <tr>
+    <td style="min-height: 170px;">
+      <li><img src="image/avatar/id3.png" alt="" class="tdimg">
+        <% if @imperator %>
+          <li><%= link_to @imperator.nick, @imperator, :class => :emperor %> <%= @imperator.house.name %>
+      <% end %>
+    </td>
 
-	</table>
+    <td>
+
+      <% if can? :pridel_pravo, User %>
+          <li>
+            <%= form_tag :pridel_pravo do %>
+                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
+                <%= submit_tag 'Dvoran', :class => 'oktab_auto' %>
+            <% end %>
+          </li>
+          <li>
+            <%= form_tag :pridel_pravo do %>
+                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
+                <%= submit_tag 'Vezir', :class => 'oktab_auto' %>
+            <% end %>
+          </li>
+      <% end %>
+    </td>
+  </tr>
+
+</table>
 
 <%= render :partial => 'imperium_operace' %>

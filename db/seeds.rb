@@ -57,10 +57,10 @@ puts 'Planet done'
 titania = Planet.find_by_name('Titánia')
 arrakis = Planet.arrakis
 arrakis.fields << Field.new(:name => "Leno Arrakis",
-      :user_id => nil,
-      :pos_x => 1,
-      :pos_y => 1
-    )
+                            :user_id => nil,
+                            :pos_x => 1,
+                            :pos_y => 1
+)
 puts "Leno Arrakis done"
 
 Global.create(:setting => 'login', :value => true)
@@ -112,37 +112,37 @@ puts 'Field done'
 Technology.create(:name => "Investice do Infrastruktury", :discovered => 1, :description => "-2% cena budov
 1. lvl = povolení stavby Město
 7. lvl = povolení stavby Velkoměsto
-14. lvl = povolení stavby Metropole", :price => 300, :max_lvl => 17, :bonus => 0.02, :bonus_type => "L", :image_url => "image/vyskum/i_inf.png", :image_lvl =>"1*7*14")
+14. lvl = povolení stavby Metropole", :price => 300, :max_lvl => 17, :bonus => 0.02, :bonus_type => "L", :image_url => "image/vyskum/i_inf.png", :image_lvl => "1*7*14")
 Technology.create(:name => "Investice do ekonomiky", :discovered => 1, :description => "+2% produkce solárů
 1. lvl = povolení stavby Trh
 7. lvl = povolení stavby Banka
-14. lvl = povolení stavby Sídlo CHOAMu", :price => 300, :max_lvl => 17, :bonus => 0.02, :bonus_type => "S", :image_url => "image/vyskum/i_eko.png", :image_lvl =>"1*7*14")
+14. lvl = povolení stavby Sídlo CHOAMu", :price => 300, :max_lvl => 17, :bonus => 0.02, :bonus_type => "S", :image_url => "image/vyskum/i_eko.png", :image_lvl => "1*7*14")
 Technology.create(:name => "Investice do průmyslu", :discovered => 1, :description => "+2% produkce materiálu 
 1. lvl = povolení stavby Důl
 7. lvl = povolení stavby Hlubinný důl
-14. lvl = povolení stavby Orbitální doly", :price => 500, :max_lvl => 17, :bonus => 0.02, :bonus_type => "M", :image_url => "image/vyskum/i_pru.png", :image_lvl =>"1*7*14")
+14. lvl = povolení stavby Orbitální doly", :price => 500, :max_lvl => 17, :bonus => 0.02, :bonus_type => "M", :image_url => "image/vyskum/i_pru.png", :image_lvl => "1*7*14")
 Technology.create(:name => "Investice do výzkumu", :discovered => 1, :description => "+2% produkce výzkumných bodů
 1. lvl = povolení stavby Laboratoř
 7. lvl = povolení stavby Výzkumné centrum
-14. lvl = povolení stavby Univerzita", :price => 600, :max_lvl => 17, :bonus => 0.02, :bonus_type => "E", :image_url => "image/vyskum/i_vyz.png", :image_lvl =>"1*7*14")
+14. lvl = povolení stavby Univerzita", :price => 600, :max_lvl => 17, :bonus => 0.02, :bonus_type => "E", :image_url => "image/vyskum/i_vyz.png", :image_lvl => "1*7*14")
 Technology.create(:name => "Investice do koření", :discovered => 1, :description => "-2% ceny osídlení léna
 +2% produkce melanže na Arrakis
 3. lvl = povolení stavby Továrna na koření
-6. lvl = povolení stavby Kasárna", :price => 250, :max_lvl => 17, :bonus => 0.02, :bonus_type => "J", :image_url => "image/vyskum/i_kor.png", :image_lvl =>"1*7*14")
-Technology.create(:name => "Investice do armády", :discovered => 1, :description => "", :price => 400, :max_lvl => 17, :bonus => 0.02, :bonus_type => "A", :image_url => "image/vyskum/i_arm.png", :image_lvl =>"1*7*14")
+6. lvl = povolení stavby Kasárna", :price => 250, :max_lvl => 17, :bonus => 0.02, :bonus_type => "J", :image_url => "image/vyskum/i_kor.png", :image_lvl => "1*7*14")
+Technology.create(:name => "Investice do armády", :discovered => 1, :description => "", :price => 400, :max_lvl => 17, :bonus => 0.02, :bonus_type => "A", :image_url => "image/vyskum/i_arm.png", :image_lvl => "1*7*14")
 Technology.create(:name => "Investice do výroby", :discovered => 1, :description => "+2% kapacita továren
 1. lvl = povolení stavby Manufaktura
-7. lvl = povolení stavby Továrna", :price => 350, :max_lvl => 10, :bonus => 0.02, :bonus_type => "V", :image_url => "image/vyskum/i_eko.png", :image_lvl =>"1*7*14")
+7. lvl = povolení stavby Továrna", :price => 350, :max_lvl => 10, :bonus => 0.02, :bonus_type => "V", :image_url => "image/vyskum/i_eko.png", :image_lvl => "1*7*14")
 
 Technology.create(:name => "Investice do pěchoty", :discovered => 1, :description => "+2% kapacita kasáren
-1. lvl = povolení stavby Kasárna", :price => 350, :max_lvl => 17, :bonus => 0.02, :bonus_type => "K", :image_url => "image/vyskum/i_eko.png", :image_lvl =>"1*7*14")
+1. lvl = povolení stavby Kasárna", :price => 350, :max_lvl => 17, :bonus => 0.02, :bonus_type => "K", :image_url => "image/vyskum/i_eko.png", :image_lvl => "1*7*14")
 Technology.create(:name => "Investice do flotily", :discovered => 1, :description => "+2% kapacita loděnic
 1. lvl = povolení stavby Loděnice
-7. lvl = povolení stavby Planetární obrana", :price => 350, :max_lvl => 17, :bonus => 0.02, :bonus_type => "P", :image_url => "image/vyskum/i_eko.png", :image_lvl =>"1*7*14")
-Technology.create(:name => "Bojová technika", :discovered => 1, :description => "+2% útok pozemních jednotek", :price => 350, :max_lvl => 15, :bonus => 0.02, :bonus_type => "PF", :image_url => "image/imghra/v011.png", :image_lvl =>"1*7*14")
-Technology.create(:name => "Obraná technologie", :discovered => 1, :description => "+2% HP pozemních jednotek", :price => 450, :max_lvl => 15, :bonus => 0.02, :bonus_type => "PO", :image_url => "image/imghra/v020.png", :image_lvl =>"1*7*14")
-Technology.create(:name => "Bojová technika", :discovered => 1, :description => "+2% útok vesmírnych jednotek", :price => 350, :max_lvl => 15, :bonus => 0.02, :bonus_type => "VF", :image_url => "image/imghra/v030.png", :image_lvl =>"1*7*14")
-Technology.create(:name => "Obraná technologie", :discovered => 1, :description => "+2% HP vesmírnych jednotek", :price => 300, :max_lvl => 15, :bonus => 0.02, :bonus_type => "VO", :image_url => "image/imghra/v040.png", :image_lvl =>"1*7*14")
+7. lvl = povolení stavby Planetární obrana", :price => 350, :max_lvl => 17, :bonus => 0.02, :bonus_type => "P", :image_url => "image/vyskum/i_eko.png", :image_lvl => "1*7*14")
+Technology.create(:name => "Bojová technika", :discovered => 1, :description => "+2% útok pozemních jednotek", :price => 350, :max_lvl => 15, :bonus => 0.02, :bonus_type => "PF", :image_url => "image/imghra/v011.png", :image_lvl => "1*7*14")
+Technology.create(:name => "Obraná technologie", :discovered => 1, :description => "+2% HP pozemních jednotek", :price => 450, :max_lvl => 15, :bonus => 0.02, :bonus_type => "PO", :image_url => "image/imghra/v020.png", :image_lvl => "1*7*14")
+Technology.create(:name => "Bojová technika", :discovered => 1, :description => "+2% útok vesmírnych jednotek", :price => 350, :max_lvl => 15, :bonus => 0.02, :bonus_type => "VF", :image_url => "image/imghra/v030.png", :image_lvl => "1*7*14")
+Technology.create(:name => "Obraná technologie", :discovered => 1, :description => "+2% HP vesmírnych jednotek", :price => 300, :max_lvl => 15, :bonus => 0.02, :bonus_type => "VO", :image_url => "image/imghra/v040.png", :image_lvl => "1*7*14")
 
 #Technology.create(:name => "Lasery", :description => "", :price => 300, :max_lvl => 10, :bonus => 0.02, :bonus_type => "VO", :image_url => "image/imghra/v040.png")
 #Technology.create(:name => "Rychlopalné zbraně", :description => "+2% HP vesmírnych jednotek", :price => 300, :max_lvl => 8, :bonus => 0.02, :bonus_type => "VO", :image_url => "image/imghra/v040.png")
@@ -156,10 +156,10 @@ gilbertus.napln_suroviny
 simi.napln_suroviny
 puts 'Suroviny done'
 
-norma.hlasuj(norma,'leader')
-doktor.hlasuj(norma,'leader')
-gilbertus.hlasuj(norma,'leader')
-simi.hlasuj(norma,'leader')
+norma.hlasuj(norma, 'leader')
+doktor.hlasuj(norma, 'leader')
+gilbertus.hlasuj(norma, 'leader')
+simi.hlasuj(norma, 'leader')
 puts 'hlasy done'
 
 Building.create(:kind => "L", :level => 1, :name => "Město", :description => "Města slouží k ubytování vaší populace.", :population_bonus => 20.0, :pop_limit_bonus => 20.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 35.0, :solar_cost => 30.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
@@ -449,7 +449,7 @@ Syselaad.create(
 
 for syselaad in Syselaad.all do
   syselaad.topics << Topic.create(:syselaad_id => syselaad.id, :user_id => 1, :name => 'Úvod',
-                                  :last_poster_id => 1, :last_post_at => Time.now, )
+                                  :last_poster_id => 1, :last_post_at => Time.now,)
 end
 for topic in Topic.all do
   topic.posts << Post.create(:topic_id => topic.id, :user_id => 1, :content => 'Vítejte!')

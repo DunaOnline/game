@@ -1,13 +1,13 @@
 DuneOnline::Application.routes.draw do
-	resources :markets
-	match 'buy' => 'markets#buy', :as => :buy
-	match 'myOffers' => 'markets#myOffers', :as => :myOffers
-	match 'zlevnit' => 'markets#zlevnit', :as => :zlevnit
-	match 'zdrazet' => 'markets#zdrazet', :as => :zdrazet
+  resources :markets
+  match 'buy' => 'markets#buy', :as => :buy
+  match 'my_offers' => 'markets#my_offers', :as => :my_offers
+  match 'zlevnit' => 'markets#zlevnit', :as => :zlevnit
+  match 'zdrazet' => 'markets#zdrazet', :as => :zdrazet
 
-	resources :messages
-	match 'reply' => 'messages#reply', :as => :reply
-	match 'odeslana_posta' => 'messages#odeslana_posta'
+  resources :messages
+  match 'reply' => 'messages#reply', :as => :reply
+  match 'odeslana_posta' => 'messages#odeslana_posta'
 
   resources :posts
 
@@ -24,10 +24,10 @@ DuneOnline::Application.routes.draw do
 
   resources :eods
   match 'zobraz_eod' => 'eods#zobraz_eod', :as => :zobraz_eod
-  
+
   resources :technologies
   match 'vylepsi_technology' => 'technologies#vylepsi_technology', :as => :vylepsi_technology
-	match 'narodni_vyskum' => 'technologies#narodni_vyskum', :as => :narodni_vyskum
+  match 'narodni_vyskum' => 'technologies#narodni_vyskum', :as => :narodni_vyskum
   resources :systems
 
   resources :votes
@@ -59,7 +59,7 @@ DuneOnline::Application.routes.draw do
   match 'posli_rodove_suroviny' => 'houses#posli_rodove_suroviny', :as => :posli_rodove_suroviny
 
   resources :discoverables
-  
+
 #  match 'user/edit' => 'users#edit', :as => :edit_current_user
 
   match 'signup' => 'users#new', :as => :signup
@@ -89,7 +89,7 @@ DuneOnline::Application.routes.draw do
   match 'global_index' => 'admin#global_index', :as => :global_index
   match 'update_global/:id' => 'admin#update_global', :as => :global
   match 'sweep_session' => 'admin#sweep_session', :as => :sweep_session
-  
+
   match 'show' => 'imperium#show', :as => :imperium
   match 'sprava_imperia' => 'imperium#sprava', :as => :sprava_imperia
   match 'posli_imperialni_suroviny' => 'imperium#posli_imperialni_suroviny', :as => :posli_imperialni_suroviny
@@ -97,8 +97,8 @@ DuneOnline::Application.routes.draw do
   match 'landsraad_show' => 'landsraad#show', :as => :landsraad_show
   match 'landsraad_jednani' => 'landsraad#jednani', :as => :landsraad_jednani
   match 'volba_imperatora' => 'landsraad#volba_imperatora', :as => :volba_imperatora
-  
-  
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

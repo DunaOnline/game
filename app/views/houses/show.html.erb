@@ -2,91 +2,91 @@
 <% title "Velkorod #{@house.name}" %>
 
 <table class="tab0">
-	<tr>
-		<td>
-				<a href="#" title="Home">⌂</a> » 
-				<%= link_to "Imperiální databáze národů", houses_path %> »
-        <a href="#">Velkorod</a> 
-		</td>
+  <tr>
+    <td>
+      <a href="#" title="Home">⌂</a> »
+      <%= link_to "Imperiální databáze národů", houses_path %> »
+      <a href="#">Velkorod</a>
+    </td>
 
-		<%= render :partial => 'layouts/change_house' %>
+    <%= render :partial => 'layouts/change_house' %>
 
 
-        <%= render :partial => 'layouts/filter_database' %>
-    </tr>
+    <%= render :partial => 'layouts/filter_database' %>
+  </tr>
 </table>
 
-	<table class="tab1">
-	<tr>
-		<td class="tdpl" rowspan="2" style="background-image: url(<%= asset_path cesta_budovy(@house.name, "erb") %>)">
-			<li><h2><%= @house.name %></h2>
-			<li><b>Vliv: </b><%= @house.influence %>
-			<li><b>Planet: </b><%= @house.planets.count %>
-			<li><b>Členů: </b><%= @house.users.count %>
-			<li><b>Projekt: </b> 0%
-			<br><br>
-			<li>	<input type="button" value="Národní útok" class="ok3">
-				<input type="button" value="Diplomatická pošta" class="ok3">
-		</td>
-		<th><%= @house.leader %></th>
-		<th>Vrcholní politici</th>
-		<th class="r">Poslanci</th>
-	</tr>
+<table class="tab1">
+  <tr>
+    <td class="tdpl" rowspan="2" style="background-image: url(<%= asset_path cesta_budovy(@house.name, "erb") %>)">
+      <li><h2><%= @house.name %></h2>
+      <li><b>Vliv: </b><%= @house.influence %>
+      <li><b>Planet: </b><%= @house.planets.count %>
+      <li><b>Členů: </b><%= @house.users.count %>
+      <li><b>Projekt: </b> 0%
+        <br><br>
+      <li><input type="button" value="Národní útok" class="ok3">
+        <input type="button" value="Diplomatická pošta" class="ok3">
+    </td>
+    <th><%= @house.leader %></th>
+    <th>Vrcholní politici</th>
+    <th class="r">Poslanci</th>
+  </tr>
 
-	<tr>
-		<td>
-			<%= link_to @vudce.nick, @vudce, :class => "leader" if @vudce %>
-		</td>
-		<td>
-			<% for user in @mentate do %>
-				<li><%= link_to user.nick, user, :class => "mentat" %></li>
-			<% end %>
-			<% for user in @army_mentate do %>
-				<li><%= link_to user.nick, user, :class => "army_mentat" %></li>
-			<% end %>
-			<% for user in @diplomate do %>
-				<li><%= link_to user.nick, user, :class => "diplomat" %></li>
-			<% end %>
-		</td>
-		<td>
-			<% for user in @poslanci do %>
-				<li><%= link_to user.nick, user, :class => "poslanec" %></li>
-			<% end %>
-		</td>
-	</tr>
+  <tr>
+    <td>
+      <%= link_to @vudce.nick, @vudce, :class => "leader" if @vudce %>
+    </td>
+    <td>
+      <% for user in @mentate do %>
+          <li><%= link_to user.nick, user, :class => "mentat" %></li>
+      <% end %>
+      <% for user in @army_mentate do %>
+          <li><%= link_to user.nick, user, :class => "army_mentat" %></li>
+      <% end %>
+      <% for user in @diplomate do %>
+          <li><%= link_to user.nick, user, :class => "diplomat" %></li>
+      <% end %>
+    </td>
+    <td>
+      <% for user in @poslanci do %>
+          <li><%= link_to user.nick, user, :class => "poslanec" %></li>
+      <% end %>
+    </td>
+  </tr>
 </table>
 
-  <table class="tab2">
-	<tr>
-		<th class="l">Jméno hráče</th>
-		<th>Malorod</th>
-		<th style="width:35px">Daň</th>
-		<th>Pozemní síla</th>
-        <th>Vesmírná síla</th>
-		<th style="width:80px">Vliv</th>
-		<th style="width:80px">Počet lén</th>
-		<th class="r" width="48px">Akce</th>
-	</tr>
-	<% for user in @hraci do %>
-		<%= render :partial => 'line_hrac', :locals => {:user => user} %>
-	<% end %>
-  </table>
-  
-	<table class="tab1">
-	  <tr>
-	  	<th colspan="2">Prehled poslednich akci rodu</th>
-	  	<th><%= link_to 'Vsechny akce', operations_path(:jake => 'narod') %></th>
-	  </tr>
-	  <tr>
-    	<th>Obsah akce</th>
-	    <th style="width:80px">Datum</th>
-    	<th style="width:80px">Cas</th>
-	  </tr>
-	  <% for operation in @operations %>
-    	<tr>
-    	  <td><%= operation.content %></td>
-	      <td><%= format_date(operation.date) %></td>
-    	  <td><%= format_time(operation.time) %></td>
-    	</tr>
-  	  <% end %>
-  	</table> 
+<table class="tab2">
+  <tr>
+    <th class="l">Jméno hráče</th>
+    <th>Malorod</th>
+    <th style="width:35px">Daň</th>
+    <th>Pozemní síla</th>
+    <th>Vesmírná síla</th>
+    <th style="width:80px">Vliv</th>
+    <th style="width:80px">Počet lén</th>
+    <th class="r" width="48px">Akce</th>
+  </tr>
+  <% for user in @hraci do %>
+      <%= render :partial => 'line_hrac', :locals => {:user => user} %>
+  <% end %>
+</table>
+
+<table class="tab1">
+  <tr>
+    <th colspan="2">Prehled poslednich akci rodu</th>
+    <th><%= link_to 'Vsechny akce', operations_path(:jake => 'narod') %></th>
+  </tr>
+  <tr>
+    <th>Obsah akce</th>
+    <th style="width:80px">Datum</th>
+    <th style="width:80px">Cas</th>
+  </tr>
+  <% for operation in @operations %>
+      <tr>
+        <td><%= operation.content %></td>
+        <td><%= format_date(operation.date) %></td>
+        <td><%= format_time(operation.time) %></td>
+      </tr>
+  <% end %>
+</table>

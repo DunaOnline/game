@@ -39,63 +39,63 @@ module ApplicationHelper
   end
 
   def img_solary(title = "Soláry")
-    image_tag("css/solary.png",  :alt => title, :title => title)
+    image_tag("css/solary.png", :alt => title, :title => title)
   end
 
   def img_material(title = "Materiál")
-    image_tag("css/material.png",  :alt => title, :title => title)
+    image_tag("css/material.png", :alt => title, :title => title)
   end
 
   def img_melanz(title = "Melanž")
-    image_tag("css/melanz.png",  :alt => title, :title => title)
+    image_tag("css/melanz.png", :alt => title, :title => title)
   end
 
   def img_populace(title = "Populace")
-    image_tag("css/populace.png",  :alt => title, :title => title)
+    image_tag("css/populace.png", :alt => title, :title => title)
   end
 
   def img_zkusenosti(title = "Zkušenosti")
-    image_tag("css/zkusenosti.png",  :alt => title, :title => title)
+    image_tag("css/zkusenosti.png", :alt => title, :title => title)
   end
 
   def img_logo(title = "Emperor - Duna Online")
-    image_tag("css/logo.png",  :alt => title, :title => title)
+    image_tag("css/logo.png", :alt => title, :title => title)
   end
 
   def img_vyrobky(title = "Výrobky")
-    image_tag("css/vyrobky.png",  :alt => title, :title => title)
+    image_tag("css/vyrobky.png", :alt => title, :title => title)
   end
 
   def img_kasarna(title = "Celková kapacita kasáren")
-    image_tag("css/vybavenost.png",  :alt => title, :title => title)
+    image_tag("css/vybavenost.png", :alt => title, :title => title)
   end
 
   def img_kosmodrom(title = "Celková kapacita kosmodromů")
-    image_tag("css/vybavenostv.png",  :alt => title, :title => title)
+    image_tag("css/vybavenostv.png", :alt => title, :title => title)
   end
 
   def img_po(title = "PO")
-    image_tag("css/obrana-pozemni.png",  :alt => title, :title => title)
+    image_tag("css/obrana-pozemni.png", :alt => title, :title => title)
   end
 
   def img_posta(title = "Pošta")
-    image_tag("css/posta.png",  :alt => title, :title => title)
+    image_tag("css/posta.png", :alt => title, :title => title)
   end
 
   def img_utok(title = "Útok")
-    image_tag("css/zautocit.png",  :alt => title, :title => title)
+    image_tag("css/zautocit.png", :alt => title, :title => title)
   end
 
   def img_budovy(title = "Postaveno")
-    image_tag("css/budovy.png",  :alt => title, :title => title)
+    image_tag("css/budovy.png", :alt => title, :title => title)
   end
 
   def img_fremeni(title = "Fremeni")
-    image_tag("css/fremeni.png",  :alt => title, :title => title)
+    image_tag("css/fremeni.png", :alt => title, :title => title)
   end
 
   def img_arraken(title = "Arraken")
-    image_tag("planety/arrakis_arraken.png",  :alt => title, :title => title)
+    image_tag("planety/arrakis_arraken.png", :alt => title, :title => title)
   end
 
   def online_users
@@ -123,28 +123,28 @@ module ApplicationHelper
   def cesta_budovy(rod, typ)
     cesta = "budovy/"
     case rod
-    when "Atreides"
-      cesta += "Atreides/"
-    when "Corrino"
-      cesta += "Corrino/"
-    when "Ekaz"
-      cesta += "Ekaz/"
-    when "Harkonnen"
-      cesta += "Harkonnen/"
-    when "Moritani"
-      cesta += "Moritani/"
-    when "Riches"
-      cesta += "Riches/"
-    when "Vernio"
-      cesta += "Vernio/"
-    when "Titáni"
-      cesta += "Titani/"
-    when "Impérium"
-      cesta += "Imperium/"
+      when "Atreides"
+        cesta += "Atreides/"
+      when "Corrino"
+        cesta += "Corrino/"
+      when "Ekaz"
+        cesta += "Ekaz/"
+      when "Harkonnen"
+        cesta += "Harkonnen/"
+      when "Moritani"
+        cesta += "Moritani/"
+      when "Riches"
+        cesta += "Riches/"
+      when "Vernio"
+        cesta += "Vernio/"
+      when "Titáni"
+        cesta += "Titani/"
+      when "Impérium"
+        cesta += "Imperium/"
     end
     cesta += typ + ".png"
-  #cesta += typ
-  #cesta += ".png"
+    #cesta += typ
+    #cesta += ".png"
 
   end
 

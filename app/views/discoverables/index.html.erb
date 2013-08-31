@@ -12,16 +12,16 @@
     <td class="td1"></td>
   </tr>
   <% for discoverable in @discoverables %>
-    <tr>
-      <td class="tdp"><%= link_to discoverable.name, discoverable %></td>
-      <td class="tdp"><%= discoverable.planet_type.name %></td>
-      <td class="tdp"><%= discoverable.system %></td>
-      <td class="tdp"><%= discoverable.discovered %></td>
-      <td class="tdp">
-        <%= link_to "Edit", edit_discoverable_path(discoverable) %>
-        <%= link_to "Destroy", discoverable, :confirm => 'Are you sure?', :method => :delete %>
-      </td>
-    </tr>
+      <tr>
+        <td class="tdp"><%= link_to discoverable.name, discoverable %></td>
+        <td class="tdp"><%= discoverable.planet_type.name %></td>
+        <td class="tdp"><%= discoverable.system %></td>
+        <td class="tdp"><%= discoverable.discovered %></td>
+        <td class="tdp">
+          <%= link_to "Edit", edit_discoverable_path(discoverable) %>
+          <%= link_to "Destroy", discoverable, :confirm => 'Are you sure?', :method => :delete %>
+        </td>
+      </tr>
   <% end %>
 </table>
 

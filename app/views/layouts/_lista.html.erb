@@ -1,13 +1,13 @@
 <%# encoding: UTF-8 %>
-  <div class="lista">
-  	<% if current_user -%>
-		<%= button_to "Odhlasit", :logout, :style => "margin-right: 5px;" %>
-      	<input type="button" value="Nastavení" title="Nastavení prostředí hry, hesla a vašich osobních údajů" onClick="window.location.href = '';">
-      	<input type="button" value="Help" title="Help" onClick="window.location.href = '';">
-  	<% end -%>
-  	  
-    <%= button_to "Facebook", 'http://www.facebook.com/DunaOnline', :title => "Dunaonline.cz na Facebooku", :style => "margin-right: 10px;" %>
-    <%= button_to "Google+", 'https://plus.google.com/u/0/b/113790847689421917030/113790847689421917030/posts', :title => "Dunaonline.cz na Google+" %>
-    <%= button_to "DunaCon", 'http://www.klasikon.tleilax.cz/', :title => "Klasikon a DunaCon na Festivvalu Fantazie v Chotěboři" %>
-  </div>
+<div class="lista">
+  <% if current_user -%>
+      <%= button_to "Odhlasit", :logout, :style => "margin-right: 5px;" %>
+      <input type="button" value="Nastavení" title="Nastavení prostředí hry, hesla a vašich osobních údajů" onClick="window.location.href = '';">
+      <input type="button" value="Help" title="Help" onClick="window.location.href = '';">
+  <% end -%>
+
+  <%= button_to "Facebook", 'http://www.facebook.com/DunaOnline', :title => "Dunaonline.cz na Facebooku", :style => "margin-right: 10px;" %>
+  <%= button_to "Google+", 'https://plus.google.com/u/0/b/113790847689421917030/113790847689421917030/posts', :title => "Dunaonline.cz na Google+" %>
+  <%= button_to "DunaCon", 'http://www.klasikon.tleilax.cz/', :title => "Klasikon a DunaCon na Festivvalu Fantazie v Chotěboři" %>
+</div>
 

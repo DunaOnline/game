@@ -14,7 +14,7 @@
 
 FactoryGirl.define do
   factory :post do
-    sequence(:content) {|n| "posts content#{n}"}
+    sequence(:content) { |n| "posts content#{n}" }
     topic
     user
   end

@@ -2,7 +2,6 @@
   <td><%= link_to odeslana.created_at.localtime, '#', :class => "message" %>
 
 
-
   </td>
   <td><%= link_to odeslana.user.nick, odeslana.user %></td>
   <td><%= link_to odeslana.user.house.name, odeslana.user.house %></td>
@@ -11,14 +10,15 @@
     <span class="fright">
 
 
-      <%= link_to image_tag('../assets/css/DO_cross.png'), odeslana, :confirm => "are you sure?", :method => :delete, :class => 'delete_post', :remote => true  %></span></td>
+      <%= link_to image_tag('../assets/css/DO_cross.png'), odeslana, :confirm => "are you sure?", :method => :delete, :class => 'delete_post', :remote => true %></span>
+  </td>
 
 </tr>
 <tr class="postaBody">
   <td colspan="4">
     <%= odeslana.body %>
     <p>
-      <%= link_to 'Odpovedat', reply_path(:id => odeslana.id), :class => "reply"%>
+      <%= link_to 'Odpovedat', reply_path(:id => odeslana.id), :class => "reply" %>
     </p>
   </td>
 </tr>

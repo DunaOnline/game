@@ -1,6 +1,6 @@
 class SubhousesController < ApplicationController
   authorize_resource # CanCan
-  
+
   def index
     @subhouses = Subhouse.all
   end
@@ -29,7 +29,7 @@ class SubhousesController < ApplicationController
   def update
     @subhouse = Subhouse.find(params[:id])
     if @subhouse.update_attributes(params[:subhouse])
-      redirect_to @subhouse, :notice  => "Successfully updated subhouse."
+      redirect_to @subhouse, :notice => "Successfully updated subhouse."
     else
       render :action => 'edit'
     end

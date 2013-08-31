@@ -9,10 +9,10 @@ namespace :pick do
   task :prize => :environment do
     puts "Prize: #{pick(Planet).name}"
   end
-  
+
   desc "Pick a random prize and winner"
   task :all => [:prize, :winner]
-  
+
   def pick(model_class)
     model_class.find(:first, :order => 'RANDOM()')
   end

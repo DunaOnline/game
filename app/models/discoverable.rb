@@ -17,17 +17,17 @@ class Discoverable < ActiveRecord::Base
 
   #belongs_to :planet_type
   before_create :vytvor_system
-  
+
   def vytvor_system
     unless System.find_by_system_name(self.system_name)
       System.new(:system_name => self.system_name).save
     end
   end
-  
+
   def zkolonizuj
     self.update_attribute(:discovered, true)
   end
-  
+
   scope :kolonizovatelna, where(:discovered => false)
-  
+
 end

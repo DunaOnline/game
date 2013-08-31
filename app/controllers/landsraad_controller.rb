@@ -24,25 +24,25 @@ class LandsraadController < ApplicationController
 
   def volba_imperatora
     # if params[:volit_id]
-      # ja = User.find(params[:user_id])
-      # if ja == current_user && ja.ladsraad? && Imperium.volba_imperatora?
-        # koho = User.find(params[:volit_id])
-        # ja.vol_imperatora(koho)
-# 
-        # redirect_to :back, :notice => "Uspesne odhlasovano."
-      # else
-        # redirect_to :back, :notice => "Nelze hlasovat."
-      # end
+    # ja = User.find(params[:user_id])
+    # if ja == current_user && ja.ladsraad? && Imperium.volba_imperatora?
+    # koho = User.find(params[:volit_id])
+    # ja.vol_imperatora(koho)
+    #
+    # redirect_to :back, :notice => "Uspesne odhlasovano."
     # else
-      @title = 'Volba Imperatora'
-      @spravce = User.spravce_arrakis
-      
-      @poslanci = User.poslanci
-      
-      @user = current_user
-      @imperium = House.imperium
-      @kandidati = User.players.by_nick
-      
+    # redirect_to :back, :notice => "Nelze hlasovat."
+    # end
+    # else
+    @title = 'Volba Imperatora'
+    @spravce = User.spravce_arrakis
+
+    @poslanci = User.poslanci
+
+    @user = current_user
+    @imperium = House.imperium
+    @kandidati = User.players.by_nick
+
     # end
   end
 end

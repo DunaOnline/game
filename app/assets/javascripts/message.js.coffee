@@ -1,6 +1,4 @@
-
 $(document).ready ->
-
   $("#message_druh").click ->
     if $(this).val() != ""
       $("#message_recipients").attr("disabled", "disabled")
@@ -16,7 +14,6 @@ $(document).ready ->
     $("tr.postaBody").not($(this).parent().parent().next()).hide();
 
 
-
   messages = $(".opica")
   pagination(messages)
 
@@ -25,13 +22,13 @@ $(document).ready ->
       messages.fadeOut ->
       $(".druhPosty").empty()
       $(".druhPosty").append(this.innerText)
-      druh = this.innerText.substr(0,1)
-      if druh == "S" then pagination(messages) else pagination($('tr[data-druh='+druh+']'))
+      druh = this.innerText.substr(0, 1)
+      if druh == "S" then pagination(messages) else pagination($('tr[data-druh=' + druh + ']'))
 
 
-messagesToShow = (page,messages) ->
-  pageEnd = page*10
-  if page == 1 then pageBeg = 1 else pageBeg = page*10-10
+messagesToShow = (page, messages) ->
+  pageEnd = page * 10
+  if page == 1 then pageBeg = 1 else pageBeg = page * 10 - 10
   messages_to_show = messages[pageBeg...pageEnd]
   messages_to_show.each ->
     $(this).fadeIn 'slow'
@@ -46,15 +43,15 @@ pagination = (messages) ->
   $('.pageNumber').each ->
     $(this).remove()
   page = for number in [1..Math.ceil(pages)] when Math.ceil(pages) > 1
-   # if number == 2 then $("#pagination").append("<span class='pageNumber'>"+1+"</span>")
+    # if number == 2 then $("#pagination").append("<span class='pageNumber'>"+1+"</span>")
 
-    $("#pagination").append("<span class='pageNumber'>"+number+"</span>")
+    $("#pagination").append("<span class='pageNumber'>" + number + "</span>")
   $(".pageNumber").first().addClass("selected")
   $(".pageNumber").each ->
     $(this).click ->
       $("tr.postaBody").hide()
       messages.fadeOut ->
-      messagesToShow(parseInt(this.innerText),messages)
+      messagesToShow(parseInt(this.innerText), messages)
       if $(".selected") then $(".selected").removeClass('selected')
       $(this).addClass("selected")
 

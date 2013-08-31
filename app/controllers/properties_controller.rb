@@ -1,6 +1,6 @@
 class PropertiesController < ApplicationController
   authorize_resource # CanCan
-  
+
   def index
     @properties = Property.all
   end
@@ -29,7 +29,7 @@ class PropertiesController < ApplicationController
   def update
     @property = Property.find(params[:id])
     if @property.update_attributes(params[:property])
-      redirect_to @property, :notice  => "Successfully updated property."
+      redirect_to @property, :notice => "Successfully updated property."
     else
       render :action => 'edit'
     end

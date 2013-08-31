@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include ControllerAuthentication
   helper :all # include all helpers, all the time JUST IN VIEWS! NOT CONTROLLERS
   include ApplicationHelper # to use it in controllers
-  
+
   protect_from_forgery
 
   after_filter :show_session, :save_output_html, :update_akce, :clear_session
@@ -12,18 +12,18 @@ class ApplicationController < ActionController::Base
   before_filter :admin_required, :only => [:clear_session]
 
   before_filter :zapis_uzivatele_do_logu
-  
-  def admin_required  
-    unless current_user && current_user.admin?  
-      redirect_to '/'  
-    end  
+
+  def admin_required
+    unless current_user && current_user.admin?
+      redirect_to '/'
+    end
   end
-  
-  def admin_or_owner_required(id)  
-    unless current_user.id == id || current_user.admin?  
-      redirect_to '/'  
-    end  
-  end 
+
+  def admin_or_owner_required(id)
+    unless current_user.id == id || current_user.admin?
+      redirect_to '/'
+    end
+  end
 
   def zapis_uzivatele_do_logu
     string = "\n-----------------------------------------------------\n"
@@ -71,5 +71,5 @@ class ApplicationController < ActionController::Base
   def clear_session(time = 4.hour)
     Session.sweep(time)
   end
-  
+
 end

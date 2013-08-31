@@ -1,113 +1,112 @@
 class Message < ActiveRecord::Base
   attr_accessible :body, :subject, :recipients, :user_id, :druh, :opened
-	has_many :conversations
-	belongs_to :user
+  has_many :conversations
+  belongs_to :user
 
-	validates_presence_of :subject, :body
-
-
+  validates_presence_of :subject, :body
 
 
-	def zisti_id_prijemcu(komu)
-				user = User.where('nick' => komu).first
-				if user
-					user.id
-				else
-					return false
-				end
-	end
+  def zisti_id_prijemcu(komu)
+    user = User.where('nick' => komu).first
+    if user
+      user.id
+    else
+      return false
+    end
+  end
 
   def odoslana(user)
-	  sprava = Conversation.where('receiver' => user, 'message_id' => self.id).first
-	  sprava.update_attributes(:opened => true)
+    sprava = Conversation.where('receiver' => user, 'message_id' => self.id).first
+    sprava.update_attributes(:opened => true)
   end
+
   def odosielatel(user)
-	  sprava = Conversation.where('receiver' => user, 'message_id' => self.id).first
-	  if sprava
-		  sprava.opened
-	  else
-		  false
-	  end
+    sprava = Conversation.where('receiver' => user, 'message_id' => self.id).first
+    if sprava
+      sprava.opened
+    else
+      false
+    end
   end
 
-	def vymaz(user,odoslana)
-		if odoslana
-		recipients = Conversation.where('sender' => user, 'message_id' => self.id)
-			recipients.each do |r|
-				if r.deleted_by == "R"
-					r.update_attributes(:deleted_by => "RS")
-				else
-					r.update_attributes(:deleted_by => "S")
-				end
-			end
-		else
-			recipients = Conversation.where('recipient' => user, 'message_id' => self.id)
-			recipients.each do |r|
-				if r.deleted_by == "S"
-					r.update_attributes(:deleted_by => "SR")
-				else
-					r.update_attributes(:deleted_by => "R")
-				end
-			end
-		end
-	end
+  def vymaz(user, odoslana)
+    if odoslana
+      recipients = Conversation.where('sender' => user, 'message_id' => self.id)
+      recipients.each do |r|
+        if r.deleted_by == "R"
+          r.update_attributes(:deleted_by => "RS")
+        else
+          r.update_attributes(:deleted_by => "S")
+        end
+      end
+    else
+      recipients = Conversation.where('recipient' => user, 'message_id' => self.id)
+      recipients.each do |r|
+        if r.deleted_by == "S"
+          r.update_attributes(:deleted_by => "SR")
+        else
+          r.update_attributes(:deleted_by => "R")
+        end
+      end
+    end
+  end
 
 
-	def posli_postu(odosielatel, komu)
-		self.update_attribute(:user_id, odosielatel.id)
-		narod = odosielatel.house_id
-		malorod = odosielatel.subhouse_id
-		case self.druh
-			when "M"
-				recipients = User.where(:subhouse_id => malorod, :house_id => narod)
-			when "G"
-				recipients = User.where(:general => true, :house_id => narod)
-			when "N"
-				recipients = User.where(:house_id => narod)
-			when "D"
-				recipients = User.where(:house_id => narod, :diplomat => true)
-			when "I"
-				recipients = User.all
-			else
-				recipients = []
-		end
-		recipients.each do |recipient|
-		self.vytvor_postu(odosielatel,recipient.nick)
-		end
+  def posli_postu(odosielatel, komu)
+    self.update_attribute(:user_id, odosielatel.id)
+    narod = odosielatel.house_id
+    malorod = odosielatel.subhouse_id
+    case self.druh
+      when "M"
+        recipients = User.where(:subhouse_id => malorod, :house_id => narod)
+      when "G"
+        recipients = User.where(:general => true, :house_id => narod)
+      when "N"
+        recipients = User.where(:house_id => narod)
+      when "D"
+        recipients = User.where(:house_id => narod, :diplomat => true)
+      when "I"
+        recipients = User.all
+      else
+        recipients = []
+    end
+    recipients.each do |recipient|
+      self.vytvor_postu(odosielatel, recipient.nick)
+    end
 
 
-		if komu
-			komu.split(",").each do |recipient|
+    if komu
+      komu.split(",").each do |recipient|
 
-				recipient = recipient.strip
+        recipient = recipient.strip
 
-				user = nil
-				user = User.find(self.zisti_id_prijemcu(recipient)) if recipient != "" and recipient != nil
+        user = nil
+        user = User.find(self.zisti_id_prijemcu(recipient)) if recipient != "" and recipient != nil
 
-				#if user && user.id != odosielatel.id
-					self.vytvor_postu(odosielatel,recipient)
-				#else
-					#return false
-				#end
+        #if user && user.id != odosielatel.id
+        self.vytvor_postu(odosielatel, recipient)
+        #else
+        #return false
+        #end
 
-			end
-		end
-	end
+      end
+    end
+  end
 
-	def vytvor_postu(odosielatel, komu)
+  def vytvor_postu(odosielatel, komu)
 
-		if self.zisti_id_prijemcu(komu)
-		Conversation.new(
-				:message_id => self.id,
-				:sender => odosielatel.id,
-				:receiver => (self.zisti_id_prijemcu(komu))
-		).save
-		end
-	end
+    if self.zisti_id_prijemcu(komu)
+      Conversation.new(
+          :message_id => self.id,
+          :sender => odosielatel.id,
+          :receiver => (self.zisti_id_prijemcu(komu))
+      ).save
+    end
+  end
 
-	def procist(posta)
-		posta.update_attribute(:read, true)
-	end
+  def procist(posta)
+    posta.update_attribute(:read, true)
+  end
 end
 
 

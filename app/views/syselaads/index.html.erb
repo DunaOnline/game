@@ -1,30 +1,35 @@
 <% title "Syselaady" %>
 <table class="tab3">
-	<tr>
-		<th width="60%">Syselaad</th>
-		<th width="40%">Posledni prispevek</th>
-	</tr>
-	<% for syselaad in @syselaads %>
-	<tr>
-		<td>
-			<h4><%= link_to h(syselaad.name), syselaad_path(syselaad.id) %></h4>
-			<small><%= syselaad.topics.count %> topics</small>
-			<br />
-			<%= h syselaad.description %>
-		</td>
-		<td class="right">
-			<% if syselaad.most_recent_post %>
-				<%= distance_of_time_in_words_to_now syselaad.most_recent_post.last_post_at %> ago by 
-				<%= link_to syselaad.most_recent_post.user.nick, "/users/#{syselaad.most_recent_post.last_poster_id}" %>
-			<% else %>
-				no posts
-			<% end %>
-		</td>
-		<% if admin? %><td><%= link_to "Edit", edit_syselaad_path(syselaad) %></td><% end %>
-		<% if admin? %><td><%= link_to "Destroy", syselaad, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
-	</tr>
-	<% end %>
+  <tr>
+    <th width="60%">Syselaad</th>
+    <th width="40%">Posledni prispevek</th>
+  </tr>
+  <% for syselaad in @syselaads %>
+      <tr>
+        <td>
+          <h4><%= link_to h(syselaad.name), syselaad_path(syselaad.id) %></h4>
+          <small><%= syselaad.topics.count %> topics</small>
+          <br/>
+          <%= h syselaad.description %>
+        </td>
+        <td class="right">
+          <% if syselaad.most_recent_post %>
+              <%= distance_of_time_in_words_to_now syselaad.most_recent_post.last_post_at %> ago by
+              <%= link_to syselaad.most_recent_post.user.nick, "/users/#{syselaad.most_recent_post.last_poster_id}" %>
+          <% else %>
+              no posts
+          <% end %>
+        </td>
+        <% if admin? %>
+            <td><%= link_to "Edit", edit_syselaad_path(syselaad) %></td>
+        <% end %>
+        <% if admin? %>
+            <td><%= link_to "Destroy", syselaad, :confirm => 'Are you sure?', :method => :delete %></td>
+        <% end %>
+      </tr>
+  <% end %>
 </table>
 <p>
-	<% if admin? %><%= link_to "New Syselaad", new_syselaad_path %><% end %>
+  <% if admin? %><%= link_to "New Syselaad", new_syselaad_path %>
+  <% end %>
 </p>

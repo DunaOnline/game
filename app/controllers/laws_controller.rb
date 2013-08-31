@@ -1,7 +1,7 @@
 # encoding: utf-8
 class LawsController < ApplicationController
   authorize_resource # CanCan
-  
+
   # GET /laws
   # GET /laws.json
   def index
@@ -20,13 +20,13 @@ class LawsController < ApplicationController
     else
       @laws = Law.podepsane.seradit
     end
-    
+
     if params[:zakony]
       @title = params[:zakony].capitalize + ' zakony'
     else
       @title = 'Podepsane zakony'
     end
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @laws }
@@ -65,10 +65,10 @@ class LawsController < ApplicationController
   def create
     puts "\\\\\\\\\\\\\\\\\\ delam create"
     @law = Law.new(params[:law])
-    
+
     @law.label = Law.create_label
     @law.position = Law.create_position
-    
+
     @law.state = Law::STATE[0]
     @law.submitter = current_user.id
 
@@ -110,8 +110,8 @@ class LawsController < ApplicationController
       format.json { head :ok }
     end
   end
-  
+
   def hlasuj
-    
+
   end
 end

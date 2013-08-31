@@ -1,16 +1,16 @@
 # encoding: utf-8
 class HousesController < ApplicationController
   #authorize_resource # CanCan
-  
+
   def index
     @houses = House.playable.order(:name)
     @rody = @houses
   end
 
   def show
-    if params[:id] == 1 or params[:id] == 2 or params[:id] == 3   # nezobrazime Titany, Imperium a Renegaty
+    if params[:id] == 1 or params[:id] == 2 or params[:id] == 3 # nezobrazime Titany, Imperium a Renegaty
       if current_user.admin?
-        @house = House.find(params[:id])      # pouze adminum
+        @house = House.find(params[:id]) # pouze adminum
       else
         @house = current_user.house
       end
@@ -52,7 +52,7 @@ class HousesController < ApplicationController
       unless @house.melange_percent == melange_percent
         Imperium.zapis_operaci("Procentualni podil zisku melanze zmenen z #{melange_percent} na novou hodnotu #{@house.melange_percent}. #{current_user.nick}")
       end
-      redirect_to @house, :notice  => "Successfully updated house."
+      redirect_to @house, :notice => "Successfully updated house."
     else
       render :action => 'edit'
     end
@@ -63,19 +63,19 @@ class HousesController < ApplicationController
     @house.destroy
     redirect_to houses_url, :notice => "Successfully destroyed house."
   end
-  
+
   def kolonizuj
     if params[:commit]
       house = House.find(params[:house])
-      
+
       cena_mel = params[:cena_mel].to_f
       cena_spoctena = Vypocty.cena_nove_planety_melanz.to_f
-      cena_mel = cena_spoctena if cena_spoctena > cena_mel 
-    
+      cena_mel = cena_spoctena if cena_spoctena > cena_mel
+
       cena_sol = params[:cena_sol].to_f
       cena_spoctena = Vypocty.cena_nove_planety_solary.to_f
       cena_sol = cena_spoctena if cena_spoctena > cena_sol
-      
+
       if cena_mel > house.melange
         flash[:error] = "Nedostatek melanze."
         redirect_to kolonizuj_path
@@ -88,14 +88,14 @@ class HousesController < ApplicationController
         house.update_attributes(:melange => house.melange - cena_mel, :solar => house.solar - cena_sol)
         redirect_to planeta
       end
-      
+
     else
       @house = current_user.house
       @cena_planety_mel = Vypocty.cena_nove_planety_melanz
       @cena_planety_sol = Vypocty.cena_nove_planety_solary
     end
   end
-  
+
   def sprava_rod
     if current_user.admin?
       @house = House.find(params[:id])
@@ -110,16 +110,16 @@ class HousesController < ApplicationController
     @generalove = @house.generalove
     @hraci = @house.users.order(:nick)
   end
-  
+
   def posli_rodove_suroviny
     rod = current_user.house
-    
+
     msg = ''
-    
+
     if params[:user_solary].to_i > 0.0 || params[:user_melanz].to_f > 0.0 || params[:user_zkusenosti].to_i > 0.0 || params[:user_material].to_i > 0.0
       komu = User.find(params[:user_id_suroviny])
       msg << "Posláno hráči #{komu.nick} "
-      
+
       if params[:user_solary].to_i > 0.0 && params[:user_solary].to_i <= rod.solar
         rod.update_attribute(:solar, rod.solar - params[:user_solary].to_i)
         komu.update_attribute(:solar, komu.solar + params[:user_solary].to_i)
@@ -145,7 +145,7 @@ class HousesController < ApplicationController
       rod.zapis_operaci(msg + " hráčem #{current_user.nick}.")
       current_user.zapis_operaci(msg.gsub("Posláno hráči #{komu.nick} ", "Obdrženo z NS "))
     end
-    
+
     if params[:rodu_solary].to_i > 0.0 || params[:rodu_melanz].to_f > 0.0 || params[:rodu_zkusenosti].to_i > 0.0 || params[:rodu_material].to_i > 0.0
       rodu = House.find(params[:rod_id_suroviny])
       msg << "Posláno rodu #{rodu.name} "
@@ -174,7 +174,7 @@ class HousesController < ApplicationController
       rod.zapis_operaci(msg + " hráčem #{current_user.nick}.")
       rodu.zapis_operaci(msg.gsub("Posláno rodu #{rodu.name} ", "Obdrženo od rodu #{rodu.name} "))
     end
-    
+
     flash[:notice] = msg
     redirect_to sprava_rod_path(:id => rod)
   end

@@ -22,24 +22,24 @@ class Field < ActiveRecord::Base
   has_one :resource
   has_many :estates
   has_many :buildings, :through => :estates
-    
+
   after_save :vytvor_resource
-  
+
   def vytvor_resource
     # nejak mi nefunguje after_create tak jak ma
     unless self.resource
       Resource.new(:user_id => self.user_id, :field_id => self.id, :population => 100000, :material => 2000.0).save
     end
   end
-  
+
   def souradnice
     self.pos_x.to_i.to_s + "." + self.pos_y.to_i.to_s
   end
-  
+
   def oznaceni
     self.planet.id.to_s + "." + self.id.to_s + "." + self.souradnice
   end
-  
+
   def drzitel(user)
     if user.admin?
       true
@@ -47,26 +47,26 @@ class Field < ActiveRecord::Base
       self.user == user
     end
   end
-  
+
   def vynos(ceho)
     vynos = 0.0
     case ceho
-    when 'solar'
-      kind = 'S'
-    when 'material'
-      kind = 'M'
-    when 'exp'
-      kind = 'E'
-    when 'population'
-      kind = 'L'
-    when 'melange'
-      kind = 'J'
+      when 'solar'
+        kind = 'S'
+      when 'material'
+        kind = 'M'
+      when 'exp'
+        kind = 'E'
+      when 'population'
+        kind = 'L'
+      when 'melange'
+        kind = 'J'
     end
     pop = self.resource.population
     for building in self.buildings.where('kind LIKE ?', '%'+kind+'%') do
       pocet = self.estates.where(:building_id => building).first.number
       attr = 'vynos_' + ceho
-      if pop > building.nutna_pop 
+      if pop > building.nutna_pop
         vynos += building.send(attr) * pocet
       else
         vynos += building.send(attr) * pocet * Constant.vynos_bez_pop
@@ -74,7 +74,7 @@ class Field < ActiveRecord::Base
     end
     vynos
   end
-  
+
   def postaveno(building)
     estate = self.estates.where(:building_id => building).first
     if estate
@@ -83,7 +83,7 @@ class Field < ActiveRecord::Base
       0
     end
   end
-  
+
   def zastavba
     max = self.max_budov
     aktualne = self.aktualne_zastaveno
@@ -97,20 +97,20 @@ class Field < ActiveRecord::Base
   def aktualne_zastaveno
     self.estates.sum(:number)
   end
-  
+
   def volne_misto
     self.max_budov - self.aktualne_zastaveno
   end
-  
+
   def postav(budova, pocet)
     estate = self.estates.where(:building_id => budova).first
     if estate
       estate.update_attribute(:number, estate.number + pocet)
     else
       Estate.new(
-        :field_id => self.id,
-        :building_id => budova.id,
-        :number => pocet
+          :field_id => self.id,
+          :building_id => budova.id,
+          :number => pocet
       ).save
     end
   end
@@ -134,16 +134,16 @@ class Field < ActiveRecord::Base
 
   def check_availability(what, amount)
     case what
-    when 'Population'
-      self.resource.population >= amount
-    when 'Material'
-      self.resource.material >= amount
-    else
-      false
+      when 'Population'
+        self.resource.population >= amount
+      when 'Material'
+        self.resource.material >= amount
+      else
+        false
     end
   end
-  
-  scope :vlastnik, lambda { |user| where(:user_id => user.id)}
-  
-  
+
+  scope :vlastnik, lambda { |user| where(:user_id => user.id) }
+
+
 end
