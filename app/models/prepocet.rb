@@ -248,7 +248,7 @@ class Prepocet
 
   def self.zarad_zakony
     until Law.projednavane.count == 3 || Law.zarazene.count == 0
-      Law.zarazene.order(:position).first.update_attributes(:state => Law::STATE[1], :submitted => Date.today)
+      Law.zarazene.order(:position).first.update_attributes(:state => Law::STATE[1], :enacted => Date.today)
     end
   end
 

@@ -46,6 +46,9 @@
               <% else %>
                   <li><%= link_to 'Zasedání Landsraadu', landsraad_show_path %></li>
               <% end %>
+              <% if current_user.emperor? || current_user.admin? %>
+                  <li><%= link_to 'Zákony na podepsání', imperator_zakony_path %></li>
+              <% end %>
               <li><%= link_to 'Archiv Landsraadu', laws_path %></li>
             </ul>
           </li>
@@ -59,7 +62,7 @@
 
 
               <li><%= link_to ' Ekonomický výzkum', technologies_path %>
-              <li><%= link_to ' Ekonomický výzkum', technologies_path %>
+
 
 
 

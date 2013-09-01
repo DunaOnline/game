@@ -43,11 +43,14 @@ class PollsController < ApplicationController
     @poll = Poll.new(params[:poll])
     @poll.choice = params[:commit]
     @poll.user_id = current_user.id
-    @poll.law_id = params[:law_id]
+    zakon = Law.find(params[:law_id])
+    @poll.law_id = zakon.id
+
 
 
 
     if @poll.save
+	    Poll.zapis_hlasu(current_user.id,"Poslanec #{current_user.nick} hlasoval pro zakon #{zakon.label} - #{zakon.title} za #{@poll.choice} .")
 	    flash[:notice] = "Hlas bol prideleny"
 	    redirect_to landsraad_jednani_path
 	    #format.html { redirect_to 'landsraad_jednani', notice: 'Law was successfully created.' }

@@ -9,7 +9,7 @@ class LandsraadController < ApplicationController
     @projednavane = Law.projednavane.order(:submitted, :position)
     @zarazeny = Law.zarazene.order(:submitted, :position)
     @zakony = Law.order(:submitted, :position)
-    @hlas = Poll.new
+
   end
 
   def jednani
@@ -26,7 +26,7 @@ class LandsraadController < ApplicationController
     #@zakony = Law.order(:submitted, :position)
 
     @law = Law.new
-    @zakon = params[:zakon]
+
 	  @hlas = Poll.new
 
 
@@ -34,35 +34,22 @@ class LandsraadController < ApplicationController
 
   end
 
-  def vytvor_zakon
-	  @law = Law.new(params[:law])
+  def imperator_zakony
+	   @schvalene = Law.schvalene.order(:enacted, :position).where(:signed => nil)
+	   @projednavane = Law.projednavane.order(:submitted, :position)
+	   @videne = Law.order(:position).where(:signed => [true,false])
 
-	  actual = Law.projednavane.count
-
-	  @law.label = Law.create_label
-	  @law.position = Law.create_position
-	  @law.submitted = Time.now
-	  if actual >= 3
-	    @law.state = Law::STATE[0]
-	  else
-		  @law.state = Law::STATE[1]
-		end
-	  @law.submitter = current_user.id
-
-
-	  if @law.save
-		  flash[:notice] = "Zakon bol zaradeny na pojednavanie"
-		  redirect_to :action => 'jednani'
-	     #format.html { redirect_to 'landsraad_jednani', notice: 'Law was successfully created.' }
-	     #format.json { render json: @law, status: :created, location: @law }
-	  else
-		  flash[:error] = "Titul aj telo zakona musi byt vyplnene"
-		  redirect_to :action => 'jednani'
-	     #format.html { redirect_to 'landsraad_jednani', notice: 'Law was NOT successfully created.'  }
-	     #format.json { render json: @law.errors, status: :unprocessable_entity }
-
-	  end
   end
+
+  def podepisat_zakon
+	  volba = params[:commit]
+	  zakon = Law.find(params[:law_id])
+
+	  if zakon.imp_podepis(volba)
+	     redirect_to imperator_zakony_path
+		end
+  end
+
 
   def volba_imperatora
     # if params[:volit_id]

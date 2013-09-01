@@ -24,6 +24,10 @@ class Poll < ActiveRecord::Base
     'Ne',
     'Zdržet se'
   ]
+
+  def self.zapis_hlasu(user,content)
+	  Operation.new(:kind => "L", :user_id => user, :content => content, :date => Date.today, :time => Time.now).save
+  end
   
   scope :pro, where(:choice => Poll::CHOICE[0])
   scope :proti, where(:choice => Poll::CHOICE[1])

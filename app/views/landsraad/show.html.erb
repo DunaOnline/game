@@ -37,47 +37,7 @@
 	<% end %>
 </table>
 
-<table class="tab1">
-	<tr>
-		<th colspan="10"><%= link_to 'Projednavane zakony', landsraad_jednani_path %></th>
-	</tr>
-	<tr>
-		<% for law in @projednavane do %>
-          <td style="width:25%"><h3><%= law.label + ' - ' + law.title %></h3>
-            <li>
-              <%= law.content %>
-            <li>
-              <% temp = law.zahlasovane(current_user) %>
-              <% if temp %>
 
-                  <span class="tvoj_hlas">Hlasoval jsi za <%= temp %></span>
-              <% else%>
-                  <%= form_for(@hlas) do |f| %>
-                      <%= hidden_field_tag :law_id, law.id %>
-                      <%= submit_tag 'Ano',  :class => "ok4" %>
-                      <%= submit_tag 'Ne',  :class => "ok4" %>
-                      <%= submit_tag 'Zdržet se', :class => "ok4" %>
-                  <% end %>
-              <% end %>
-
-              </td>
-		<% end %>
-
-      <td style="width:25%">
-        <%= form_tag landsraad_jednani_path do %>
-            <h3>Předložit nový zákon</h3>
-
-            <%= text_area_tag(:zakon, nil, :title => "Titulok Zakona", :class => "novyzakon") %>
-            <%= submit_tag 'Předložit', :class => "ok4" %></td>
-
-        <% end %>
-
-
-      </td>
-
-
-    </tr>
-</table>
 
 <table class="tab1">
 	<tr>

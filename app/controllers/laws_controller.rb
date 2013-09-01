@@ -62,25 +62,31 @@ class LawsController < ApplicationController
 
   # POST /laws
   # POST /laws.json
-  #def create
-  #  puts "\\\\\\\\\\\\\\\\\\ delam create"
-  #  @law = Law.new(params[:law])
-  #
-  #  @law.label = Law.create_label
-  #  @law.position = Law.create_position
-  #  @law.submitted = Time.now
-  #
-  #  @law.state = Law::STATE[0]
-  #  @law.submitter = current_user.id
-  #
-  #  respond_to do |format|
-	 #   if @law.save
-		#    redirect_to landsraad_jednani_path
-  #    else
-	 #     redirect_to landsraad_jednani_path
-	 #   end
-  #  end
-  #end
+  def create
+	  @law = Law.new(params[:law])
+
+	  actual = Law.projednavane.count
+
+	  @law.label = Law.create_label
+	  @law.position = Law.create_position
+	  @law.submitted = Time.now
+	  @law.state = Law::STATE[0]
+	  @law.submitter = current_user.id
+
+
+	  if @law.save
+		  flash[:notice] = "Zakon bol zaradeny na pojednavanie"
+		  redirect_to landsraad_jednani_path
+		  #format.html { redirect_to 'landsraad_jednani', notice: 'Law was successfully created.' }
+		  #format.json { render json: @law, status: :created, location: @law }
+	  else
+		  flash[:error] = "Titul aj telo zakona musi byt vyplnene"
+		  redirect_to landsraad_jednani_path
+		  #format.html { redirect_to 'landsraad_jednani', notice: 'Law was NOT successfully created.'  }
+		  #format.json { render json: @law.errors, status: :unprocessable_entity }
+
+	  end
+  end
 
   # PUT /laws/1
   # PUT /laws/1.json

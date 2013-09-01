@@ -35,7 +35,7 @@
 	<% end %>
 </table>
 
-<% if Imperium.volba_imperatora? %>
+<% if Imperium.volba_imperatora? && current_user.landsraad?%>
 <table class="tab1">
 	<tr>
 		<th>
@@ -55,26 +55,28 @@
 				<li>
 					<%= law.content %>
 				<li>
-                  <% temp = law.zahlasovane(current_user) %>
-                    <% if temp %>
+                <% if current_user.landsraad? %>
+                   <% temp = law.zahlasovane(current_user) %>
+                   <% if temp %>
 
                     <span class="tvoj_hlas">Hlasoval jsi za <%= temp %></span>
-                <% else%>
+                   <% else%>
                       <%= form_for(@hlas) do |f| %>
-                          <%= hidden_field_tag :law_id, law.id %>
-                          <%= submit_tag 'Ano',  :class => "ok4" %>
-                          <%= submit_tag 'Ne',  :class => "ok4" %>
-                          <%= submit_tag 'Zdržet se', :class => "ok4" %>
+                         <%= hidden_field_tag :law_id, law.id %>
+                         <%= submit_tag 'Ano',  :class => "ok4" %>
+                         <%= submit_tag 'Ne',  :class => "ok4" %>
+                         <%= submit_tag 'Zdržet se', :class => "ok4" %>
                       <% end %>
+                   <% end %>
                 <% end %>
 
 			</td>
 		<% end %> 
 	</tr>
 </table>
-
+<% if current_user.landsraad? %>
 <table class="tab3">
-  <%= form_for(@law, url: vytvor_zakon_path) do |f| %>
+  <%= form_for(@law) do |f| %>
 
 	<tr>
 		<th colspan="10">
@@ -82,8 +84,8 @@
 
 
       <span class="lfloat zakon_title">
-        <%= f.label :title %>
-        <%= f.text_field :title , :value => @zakon%>
+
+        <%= f.text_field :title , :placeholder => "Nazev zakonu"%>
 
       </span>
 
@@ -96,6 +98,9 @@
 	</tr>
           <% end %>
 </table>
+<% else %>
+
+<% end %>
 
 <table class="tab1">
 	<tr>
@@ -112,7 +117,7 @@
         <td><%= law.state %></td>
         <td><%= law.content %></td>
         <td class="ctr">---</td>
-        <td class="ctr"><%= link_to User.find(law.submitter).nick  %></td>
+        <td class="ctr"><%= link_to law.user.nick, law.user  %></td>
         <td class="ctr"><%=  law.pomer_hlasu %></td>
       </tr>
 

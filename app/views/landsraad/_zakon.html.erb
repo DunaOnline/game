@@ -3,6 +3,6 @@
   <td><%= zakon.state %></td>
   <td><%= zakon.content %></td>
   <td class="ctr"><%= zakon.signed.localtime if zakon.signed %></td>
-  <td class="ctr"><%= link_to User.find(zakon.submitter).nick  %></td>
+  <td class="ctr"><%= link_to zakon.user.nick, zakon.user  %></td>
   <td class="ctr"><%=  zakon.pomer_hlasu %></td>
 </tr>

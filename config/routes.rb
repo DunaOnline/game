@@ -1,4 +1,10 @@
 DuneOnline::Application.routes.draw do
+  resources :productions
+
+
+  resources :products
+
+
 	resources :markets
 	match 'buy' => 'markets#buy', :as => :buy
 	match 'myOffers' => 'markets#myOffers', :as => :myOffers
@@ -97,7 +103,8 @@ DuneOnline::Application.routes.draw do
   match 'landsraad_show' => 'landsraad#show', :as => :landsraad_show
   match 'landsraad_jednani' => 'landsraad#jednani', :as => :landsraad_jednani
   match 'volba_imperatora' => 'landsraad#volba_imperatora', :as => :volba_imperatora
-	match 'vytvor_zakon' => 'landsraad#vytvor_zakon', :as => :vytvor_zakon
+	match 'imperator_zakony' => 'landsraad#imperator_zakony', :as => :imperator_zakony
+	match 'podepisat_zakon' => 'landsraad#podepisat_zakon', :as => :podepisat_zakon
 
   
   
