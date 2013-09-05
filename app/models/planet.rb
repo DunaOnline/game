@@ -189,6 +189,29 @@ class Planet < ActiveRecord::Base
     mat
   end
 
+  def celkovy_parts(user)
+	  parts = 0.0
+	  for field in self.fields.vlastnik(user).includes(:resource) do
+		  parts += field.resource.parts
+	  end
+	  parts
+  end
+
+  def kapacita_parts(user)
+	  tovarna = Building.where(:kind => "V").first
+	  parts = 0.0
+
+	  pocet_tovaren = 0
+	  for field in self.fields.vlastnik(user) do
+		  leno_s_tovarnou = field.estates.where(:building_id => tovarna.id).first
+		  pocet_tovaren += leno_s_tovarnou.number if leno_s_tovarnou
+	  end
+
+
+	  (pocet_tovaren * Constant.kapacita_tovaren).to_i
+
+  end
+
   scope :domovska, lambda { |user| where(:house_id => user.house.id, :planet_type_id => PlanetType.find_by_name("Domovská")) }
   scope :domovska_rodu, lambda { |house| where(:house_id => house.id, :planet_type_id => PlanetType.find_by_name("Domovská")) }
   scope :domovske, where(:planet_type_id => PlanetType.find_by_name("Domovská"))

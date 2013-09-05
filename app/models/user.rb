@@ -59,6 +59,8 @@ class User < ActiveRecord::Base
 
   has_many :eods
 
+  has_many :productions
+
   has_many :polls
   has_many :laws, :through => :polls
 
@@ -160,7 +162,7 @@ class User < ActiveRecord::Base
   def napln_suroviny
     # asi rozdelime pak podle rodu
     self.update_attributes(:solar => 1600.0, :melange => 2.0, :exp => 0)
-    self.fields.first.resource.update_attributes(:population => 10000, :material => 1700.0)
+    self.fields.first.resource.update_attributes(:population => 10000, :material => 1700.0, :parts => 0)
   end
 
   def celkovy_material
@@ -190,16 +192,18 @@ class User < ActiveRecord::Base
   def dovolene_budovy(kind)
     # TODO dovolene budovy podle tech levelu
     technology = Technology.where(:bonus_type => kind).first
+
     if technology
+
       lvl = self.vyskumane_tech(technology.id)
 
       case lvl
         when 0..6
-          Building.where(:kind => kind, :level => [1]).all(:group => "name")
+          Building.where(:kind => kind, :level => [1]).all
         when 7..13
-          Building.where(:kind => kind, :level => [1, 2]).all(:group => "name")
+          Building.where(:kind => kind, :level => [1, 2]).all
         when 14..17
-          Building.where(:kind => kind).all(:group => "name")
+          Building.where(:kind => kind).all
       end
     else
       Building.where(:kind => kind, :level => [1]).all(:group => "name")
@@ -296,6 +300,26 @@ class User < ActiveRecord::Base
       else
         return
     end
+  end
+
+  def resourcy_s_tovarny
+	  tovarna = Building.where(:kind => "V").first
+	  self.fields.includes(:estates).where("estates.building_id = ?", tovarna.id)
+	end
+
+  def factories_options
+	  fields = self.resourcy_s_tovarny
+	  resourcy = []
+
+	  fields.each do |field|
+		  if field.resource.parts
+		  resourcy << [field.name + ' - ' + field.resource.parts.to_s + ' ks',  field.id.to_s]
+		  else
+			resourcy << [field.name + ' - ' + field.resource.parts.to_s + '0 ks',  field.id.to_s]
+			end
+		  #@artists = genre.artists.map{|a| [a.name, a.id]}.insert(0, "Select an Artist")
+	  end
+	  resourcy
   end
 
   def neprocteno_sprav

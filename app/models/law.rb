@@ -85,13 +85,13 @@ class Law < ActiveRecord::Base
 	  end
   end
 
-  def imp_podepis(volba)
+  def imp_podepis(volba,user)
 	  if volba == "Ano"
-	    self.update_attribute(:signed,true)
-	    Landsraad.zapis_hlasu_imp(current_user.id,"Byl podepsan zakon #{self.label} - #{self.title} .")
+	    self.update_attributes(:signed => true, :state => Law::STATE[4])
+	    Landsraad.zapis_hlasu_imp(user.id,"Byl podepsan zakon #{self.label} - #{self.title} .")
 	  elsif volba == "Ne"
-		  self.update_attribute(:signed,false)
-		  Landsraad.zapis_hlasu_imp(current_user.id,"Byl zamitnout zakon #{self.label} - #{self.title} .")
+		  self.update_attributes(:signed => false, :state => Law::STATE[5])
+		  Landsraad.zapis_hlasu_imp(user.id,"Byl zamitnout zakon #{self.label} - #{self.title} .")
 		end
   end
   

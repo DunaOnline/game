@@ -18,11 +18,23 @@
 
   </td>
   <td>
-    <li><%= img_solary %><%= number_with_precision(@bonus * budova.naklady_stavba_solary, precision: 2) %>
-    <li><%= img_material %><%= number_with_precision(@bonus * budova.naklady_stavba_material, precision: 2) %>
+    <li>
+      <%= img_solary %><%= number_with_precision(@bonus * budova.naklady_stavba_solary, precision: 2) %>
+    </li>
+    <li>
+      <%= img_material %><%= number_with_precision(@bonus * budova.naklady_stavba_material, precision: 2) %>
+      <% if budova.naklady_stavba_melange > 0%>
+      <%= img_melanz %>
+      <%= number_with_precision(@bonus * budova.naklady_stavba_melange, precision: 2) %>
+      <% end %>
+    </li>
       <%= form_tag postavit_budovu_path(:field => field, :budova => budova) do %>
-        <li><%= number_field_tag :pocet_budov_stavba, nil, :in => -21...21, :step => 1 %></li>
-        <li><%= submit_tag "Postavit", :class => "oktab_95" %>
+        <li>
+          <%= number_field_tag :pocet_budov_stavba, nil, :in => -21...21, :step => 1 %>
+        </li>
+        <li>
+          <%= submit_tag "Postavit", :class => "oktab_95" %>
+        </li>
     <% end %>
   </td>
   <td>

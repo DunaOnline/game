@@ -52,7 +52,7 @@
   </tr>
   <tr>
     <td rowspan="21">
-      <center>
+
         <li><img class="tdimg2" src="<%= asset_path @planet.background %>">
         <li><h3><%= link_to @planet.name, @planet %></h3>
         <li><h3><%= best_in_place @field, :name %></h3></li>
@@ -61,12 +61,12 @@
           <%= @planet.obsazenost %>
           <div class="td1">Zástavba tohoto léna</div>
           <%= @field.zastavba %>
-          <div class="td1">Na planetě</div>
-        <li><%= img_populace "Celková populace" %><%= @resource.population %>
-        <li><%= img_material "Veškerý materiál na planetě" %><%= @resource.material %>
-        <li><%= img_melanz "Veškerá melanž na planetě" %>
+          <div class="td1">Na lénu</div>
+        <li><%= img_populace "Celková populace na lénu" %><%= @resource.population %>
+        <li><%= img_material "Veškerý materiál na lénu" %><%= @resource.material %>
+        <li><%= img_vyrobky "Veškerý vyrobky na lénu" %><%= @resource.parts %>
 
-      </center>
+
     </td>
 
 

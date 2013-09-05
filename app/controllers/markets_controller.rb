@@ -3,10 +3,10 @@ class MarketsController < ApplicationController
   # GET /markets.json
   def index
     @markets = []
-    @markets << Market.material.moje(current_user.id).createdDesc.priceDesc.last unless Market.material.moje(current_user.id).createdDesc.priceDesc.last.nil?
-    @markets << Market.melanz.moje(current_user.id).createdDesc.priceDesc.last unless Market.melanz.moje(current_user.id).createdDesc.priceDesc.last.nil?
-    @markets << Market.populacia.moje(current_user.id).createdDesc.priceDesc.last unless Market.populacia.moje(current_user.id).createdDesc.priceDesc.last.nil?
-    @markets << Market.expy.createdDesc.priceDesc.moje(current_user.id).last unless Market.expy.moje(current_user.id).createdDesc.priceDesc.last.nil?
+    @markets << Market.material.moje(current_user.id).created_desc.price_desc.last unless Market.material.moje(current_user.id).created_desc.price_desc.last.nil?
+    @markets << Market.melanz.moje(current_user.id).created_desc.price_desc.last unless Market.melanz.moje(current_user.id).created_desc.price_desc.last.nil?
+    @markets << Market.populacia.moje(current_user.id).created_desc.price_desc.last unless Market.populacia.moje(current_user.id).created_desc.price_desc.last.nil?
+    @markets << Market.expy.created_desc.price_desc.moje(current_user.id).last unless Market.expy.moje(current_user.id).created_desc.price_desc.last.nil?
 
     #opica = []
     #opica << [Market.material.minimum(:price)]

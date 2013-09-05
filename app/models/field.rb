@@ -28,7 +28,7 @@ class Field < ActiveRecord::Base
   def vytvor_resource
     # nejak mi nefunguje after_create tak jak ma
     unless self.resource
-      Resource.new(:user_id => self.user_id, :field_id => self.id, :population => 100000, :material => 2000.0).save
+      Resource.new(:user_id => self.user_id, :field_id => self.id, :population => 100000, :material => 2000.0, :parts => 0).save
     end
   end
 
@@ -61,6 +61,8 @@ class Field < ActiveRecord::Base
         kind = 'L'
       when 'melange'
         kind = 'J'
+	    when 'parts'
+		    kind = 'V'
     end
     pop = self.resource.population
     for building in self.buildings.where('kind LIKE ?', '%'+kind+'%') do
@@ -115,6 +117,48 @@ class Field < ActiveRecord::Base
     end
   end
 
+  def vyuzitie_tovaren
+	  vyrobky = Production.where(:resource_id => self.resource.id)
+	  pocet_vyrobkov = 0
+	  vyrobky.each do |vyrobok|
+		  pocet_vyrobkov += vyrobok.amount
+	  end
+
+	  pocet_vyrobkov.to_s + "/" + self.kapacita_tovaren.to_s
+
+  end
+
+  def kapacita_tovaren
+	  tovarna = Building.where(:kind => "V").first
+	  kapacita = self.estates.where(:building_id => tovarna.id).first
+	  kapacita = (kapacita.number * Constant.kapacita_tovaren).to_i
+  end
+
+  def presunout_vyrobky(co,target,amount,user)
+	  vyrobok = Product.find(co)
+	  source_production = Production.where(:resource_id => self.resource.id, :product_id => vyrobok.id).first
+	  target_production = Production.where(:resource_id => target.resource.id, :product_id => vyrobok.id).first
+
+	  unless target_production
+		  target_production = Production.new(
+				  :resource_id => target.resource.id,
+				  :user_id => user.id,
+				  :product_id => vyrobok.id,
+				  :amount => 0
+		  )
+	  end
+
+	  case str = source_production.check_availability(amount,target,target_production)
+		  when true
+			  source_production.update_attribute(:amount, source_production.amount - amount)
+			  target_production.update_attribute(:amount, target_production.amount + amount)
+
+		  else
+			  message = str
+
+	  end
+  end
+
   def move_resource(to, what, amount)
     if self.check_availability(what, amount)
       case what
@@ -124,6 +168,9 @@ class Field < ActiveRecord::Base
         when 'Material'
           self.resource.update_attribute(:material, self.resource.material - amount.abs)
           to.resource.update_attribute(:material, to.resource.material + amount.abs)
+	      when 'Parts'
+		      self.resource.update_attribute(:parts, self.resource.parts - amount.abs)
+		      to.resource.update_attribute(:parts, to.resource.parts + amount.abs)
         else
           "Toto nelze poslat"
       end
@@ -138,6 +185,8 @@ class Field < ActiveRecord::Base
         self.resource.population >= amount
       when 'Material'
         self.resource.material >= amount
+	    when 'Parts'
+		    self.resource.parts >= amount
       else
         false
     end

@@ -1,22 +1,22 @@
 <tr>
-  <td><%= myOffer.show_area %></td>
+  <td><%= my_offer.show_area %></td>
 
 
-  <td><%= myOffer.price %></td>
-  <td><%= myOffer.amount %></td>
+  <td><%= my_offer.price %></td>
+  <td><%= my_offer.amount %></td>
 
 
   <td>
-    <%= link_to 'Strata 30% zbozi', myOffer, :confirm => "are you sure?", :method => :delete, :remote => true, :class => 'delete_market' %>
+    <%= link_to 'Strata 30% zbozi', my_offer, :confirm => "are you sure?", :method => :delete, :remote => true, :class => 'delete_market' %>
   </td>
-  <% if ((Time.now - myOffer.updated_at) / 3600).round > 1 %>
+  <% if ((Time.now - my_offer.updated_at) / 3600).round > 1 %>
       <td>
-        <% if myOffer.price != 1 %>
-            <%= link_to 'Zlevnit o 10%', zlevnit_path(:market => myOffer.id), :confirm => "are you sure?", :class => 'delete_market' %>
+        <% if my_offer.price != 1 %>
+            <%= link_to 'Zlevnit o 10%', zlevnit_path(:market => my_offer.id), :confirm => "are you sure?", :class => 'delete_market' %>
         <% end %>
       </td>
       <td>
-        <%= link_to 'Zdrazet o 10%', zdrazet_path(:market => myOffer.id), :confirm => "are you sure?", :class => 'delete_market' %>
+        <%= link_to 'Zdrazet o 10%', zdrazet_path(:market => my_offer.id), :confirm => "are you sure?", :class => 'delete_market' %>
       </td>
   <% else %>
       <td>Mozete zlacnit kazdu hodinu</td>

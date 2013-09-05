@@ -57,13 +57,17 @@ class Prepocet
         solar_exp = vlastnik.vyskumane_tech("S")
         solar_house_exp = narod.vyskumane_narodni_tech("S")
         solar = field.vynos('solar') * (solar_exp + solar_house_exp)
+
         exp_exp = vlastnik.vyskumane_tech("E")
         exp_house_exp = narod.vyskumane_narodni_tech("E")
         exp = field.vynos('exp') * (exp_exp + exp_house_exp)
+
         material_exp = vlastnik.vyskumane_tech("M")
         material_house_exp = narod.vyskumane_narodni_tech("M")
         material = field.vynos('material') * (material_exp + material_house_exp)
         population = field.vynos('population')
+
+        parts = field.vynos('parts')
 
         vlastnik.update_attributes(
             :solar => vlastnik.solar + solar,
@@ -71,7 +75,8 @@ class Prepocet
         )
         field.resource.update_attributes(
             :material => field.resource.material + material,
-            :population => field.resource.population + population
+            :population => field.resource.population + population,
+            :parts => field.resource.parts + parts
         )
         Eod.new(
             :user_id => vlastnik.id,

@@ -61,7 +61,7 @@
             <ul>
 
 
-              <li><%= link_to ' Ekonomický výzkum', technologies_path %>
+              <li><%= link_to ' Ekonomický výzkum', technologies_path %></li>
 
 
 
@@ -70,12 +70,13 @@
 
 
                 <% if can? :sprava_rod, House %>
-                  <li><%= link_to "Kolonizovat planetu", kolonizuj_path %>
+                  <li><%= link_to "Kolonizovat planetu", kolonizuj_path %></li>
               <% end %>
               <!-- <li><a href="#"> Vesmírný výzkum *</a>
               <li><a href="#"> Výroba *</a>
               <li><a href="#"> Obchod *</a> -->
-              <li><%= link_to ' Trh', markets_path %>
+              <li><%= link_to ' Trh', markets_path %></li>
+              <li><%= link_to ' Vyroba', productions_path %></li>
             </ul>
         </ul>
       </td>

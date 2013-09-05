@@ -45,7 +45,7 @@ class LandsraadController < ApplicationController
 	  volba = params[:commit]
 	  zakon = Law.find(params[:law_id])
 
-	  if zakon.imp_podepis(volba)
+	  if zakon.imp_podepis(volba,current_user)
 	     redirect_to imperator_zakony_path
 		end
   end

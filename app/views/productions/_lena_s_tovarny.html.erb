@@ -1,0 +1,32 @@
+<div id="zoznam_len_s_tovarni">
+  <div class="left_column" style="background-image: url(<%= asset_path cesta_budovy(current_user.house.name, "tov") %>)">
+    <%= link_to lena_s_tovarny.name, production_url(lena_s_tovarny.id), :class => "zobraz_tovaren" %>
+  </div>
+  <div class="right_column">
+    <ul>
+      <% @products.each do |product| %>
+          <li>
+            <%= product.title%>
+          </li>
+          <li>
+            <%= product.vlastnim(current_user,lena_s_tovarny.resource.id) %>
+          </li>
+      <% end %>
+
+    </ul>
+    <ul>
+      <li>
+         <%= img_vyrobky "Výrobky na lenu" %> <%= lena_s_tovarny.resource.parts %>
+
+      </li>
+      <li>
+        Celková kapacita vaší výroby tomto lénu je <%= lena_s_tovarny.vyuzitie_tovaren %> Z.
+      </li>
+    </ul>
+
+  </div>
+  <div style="clear: both;"></div>
+
+
+
+</div>

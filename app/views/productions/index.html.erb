@@ -1,0 +1,32 @@
+<%# encoding: utf-8 %>
+<table class="tab0">
+  <tr>	<td>
+    <a href="index.htm" title="Home">⌂</a>
+    » <a>Výzkum a ekonomika</a>
+    » <a href="stat-databaze.htm">Výroba</a>
+  </td>
+  </tr>
+</table>
+
+
+<h2>Presun vyrobku medzi lenami</h2>
+<%= form_tag :presun_vyrobku do %>
+    <table class="tab3">
+      <tr>
+        <th>
+          <%= select_tag :presunout_co, options_from_collection_for_select(@products, "id", "title"),:include_blank => false, :class => "tab", :title => "Zvolte Vyrobok na presun" %>
+          <%= select_tag :source_production, options_from_collection_for_select(current_user.resourcy_s_tovarny, "id", "name"), :class => "tab", :title => "Zvolte zdrojove leno" %>
+          <%= select_tag :target_production, options_from_collection_for_select(current_user.resourcy_s_tovarny, "id", "name"), :class => "tab", :title => "Zvolte cilove leno" %>
+          <%= number_field_tag :amount %>
+          <%= submit_tag 'Přesunout', :name => 'presunout', :class => 'ok4', :style => "margin-right: 30px;", :title => "PŘESUNOUT VYROBKY" %>
+        </th>
+      </tr>
+    </table>
+<% end %>
+
+<h2>Lena na kterych je postavena tovaren</h2>
+
+<%= render :partial => "lena_s_tovarny", :collection => @fields_factories %>
+
+
+

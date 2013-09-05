@@ -35,8 +35,10 @@
     </td>
 
     <td>
+
       <li><%= img_populace "Celková kapacita měst" %> 1000000</li>
-      <!-- <li><%= img_vyrobky "Celková kapacita výroby" %> 200</li>	-->
+       <li><%= img_vyrobky "Celková kapacita výroby" %><%= @pole_domovska.vyuzitie_tovaren %></li>
+
       <li><%= img_kasarna "Celková kapacita kasáren" %> 1000</li>
       <!-- <li><%= img_kosmodrom "Celková kapacita kosmodromů" %> 1000</li> -->
     </td>
@@ -44,6 +46,7 @@
     <td>
       <li><%= img_populace "Populace na planetě" %> <%= @pole_domovska.resource.population %></li>
       <li><%= img_material "Materiál uložený na planetě" %> <%= @pole_domovska.resource.material %></li>
+      <li><%= img_vyrobky "Vyrobky uložený na planetě" %><%= @pole_domovska.resource.parts.to_i %></li>
       <!-- <li><%= img_melanz "Melanž uložená na planetě" %> !!!</li>
 		<li><%= img_kasarna "Obsazená kapacita kasáren" %> !!!</li>
 		<li><%= img_kosmodrom "Celková kapacita kosmodromů" %> !1000</li> -->

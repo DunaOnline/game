@@ -1,13 +1,13 @@
 DuneOnline::Application.routes.draw do
   resources :productions
-
+  match 'presun_vyrobku' => 'productions#presun_vyrobku', :as => :presun_vyrobku
 
   resources :products
 
 
 	resources :markets
 	match 'buy' => 'markets#buy', :as => :buy
-	match 'myOffers' => 'markets#myOffers', :as => :myOffers
+	match 'my_offers' => 'markets#my_offers', :as => :my_offers
 	match 'zlevnit' => 'markets#zlevnit', :as => :zlevnit
 	match 'zdrazet' => 'markets#zdrazet', :as => :zdrazet
 

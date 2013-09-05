@@ -11,15 +11,7 @@
 #      $form = $(this)
 #      $form.find('textarea,input[type="text"],input[type="file"]').val("")
 #      alert "koniec"
-#
-#
-#
-#
-#
-#
-#
-#
-#
+
 
 $(document).ready ->
   $(".descr").click ->

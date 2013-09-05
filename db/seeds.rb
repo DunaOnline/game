@@ -74,6 +74,7 @@ Global.create(:setting => 'k_material_produkce', :cislo => 1.0)
 Global.create(:setting => 'k_melanz_produkce', :cislo => 1.0)
 Global.create(:setting => 'k_exp_produkce', :cislo => 1.0)
 Global.create(:setting => 'k_population_produkce', :cislo => 1.0)
+Global.create(:setting => 'k_parts_produkce', :cislo => 1.0)
 Global.create(:setting => 'k_solar_vydej', :cislo => 1.0)
 Global.create(:setting => 'k_material_vydej', :cislo => 1.0)
 Global.create(:setting => 'k_melanz_vydej', :cislo => 1.0)
@@ -84,6 +85,8 @@ Global.create(:setting => 'k_material_vynos', :cislo => 10.0)
 Global.create(:setting => 'k_melanz_vynos', :cislo => 1.0)
 Global.create(:setting => 'k_exp_vynos', :cislo => 1.0)
 Global.create(:setting => 'k_population_vynos', :cislo => 1000.0)
+Global.create(:setting => 'k_parts_vynos', :cislo => 1.0)
+Global.create(:setting => 'kapacita_tovaren', :cislo => 100.0)
 Global.create(:setting => 'bezvladi_arrakis', :datum => Date.today)
 Global.create(:setting => 'budov_na_leno', :cislo => 20.0)
 Global.create(:setting => 'gilda_melanz_procenta', :cislo => 15.0)
@@ -149,6 +152,13 @@ Technology.create(:name => "Obraná technologie", :discovered => 1, :description
 #Technology.create(:name => "Obraná technika flotily", :description => "+2% HP vesmírnych jednotek", :price => 300, :max_lvl => 10, :bonus => 0.02, :bonus_type => "VO", :image_url => "image/imghra/v040.png")
 
 puts 'Technology done'
+
+Product.create(:example_value1 => 22, :example_value1 => 10, :parts => 30, :title => "Spalovac kamene", :description => "Imba iks utocna jednotka", :material => 25.5,
+:melanz => 0.5, :price => 1000, :druh => "D")
+Product.create(:example_value1 => 12, :example_value1 => 30, :parts => 50, :title => "Transporter", :description => "Gilda nim vozi opice na planetu", :material => 25.5,
+               :melanz => 1.75, :price => 1200, :druh => "D")
+
+puts 'Products done'
 
 norma.napln_suroviny
 doktor.napln_suroviny

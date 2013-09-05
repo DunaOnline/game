@@ -27,6 +27,11 @@ class Constant
     Global.vrat('k_population_produkce', 4)
   end
 
+  #KPAP = Global.vrat('k_parts_produkce', 4)
+  def self.kpap
+	  Global.vrat('k_parts_produkce', 4)
+  end
+
   #KSV = Global.vrat('k_solar_vydej', 4)
   def self.ksv
     Global.vrat('k_solar_vydej', 4)
@@ -77,10 +82,20 @@ class Constant
     Global.vrat('k_population_vynos', 4)
   end
 
+  #KVYNOSPAR = Global.vrat('k_parts_vynos', 4)
+  def self.kvynospar
+	  Global.vrat('k_parts_vynos', 4)
+  end
+
   # aplikace
   ADMIN_EMAIL = "admin@duneonline.cz"
 
   # vypocty
+  #KAPACITA_TOVAREN = Global.vrat('kapacita_tovaren', 4)
+  def self.kapacita_tovaren
+	  Global.vrat('kapacita_tovaren', 4)
+  end
+
   #ZAKL_CENA_NOVE_PLANETY = Global.vrat('zakl_cena_planety', 4)
   def self.zakl_cena_planety
     Global.vrat('zakl_cena_planety', 4)
