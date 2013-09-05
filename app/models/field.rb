@@ -117,8 +117,10 @@ class Field < ActiveRecord::Base
     end
   end
 
+
+
   def vyuzitie_tovaren
-	  vyrobky = Production.where(:resource_id => self.resource.id)
+	  vyrobky = self.resource.productions
 	  pocet_vyrobkov = 0
 	  vyrobky.each do |vyrobok|
 		  pocet_vyrobkov += vyrobok.amount
@@ -134,10 +136,10 @@ class Field < ActiveRecord::Base
 	  kapacita = (kapacita.number * Constant.kapacita_tovaren).to_i
   end
 
-  def presunout_vyrobky(co,target,amount,user)
+  def move_products(co,target,amount,user)
 	  vyrobok = Product.find(co)
-	  source_production = Production.where(:resource_id => self.resource.id, :product_id => vyrobok.id).first
-	  target_production = Production.where(:resource_id => target.resource.id, :product_id => vyrobok.id).first
+	  source_production = self.resource.productions.where(:product_id => vyrobok.id).first
+	  target_production = target.resource.productions.where(:product_id => vyrobok.id).first
 
 	  unless target_production
 		  target_production = Production.new(
