@@ -126,7 +126,8 @@ class Field < ActiveRecord::Base
 		  pocet_vyrobkov += vyrobok.amount
 	  end
 
-	  pocet_vyrobkov.to_s + "/" + self.kapacita_tovaren.to_s
+	  pocet_vyrobkov
+	  #.to_s + "/" + self.kapacita_tovaren.to_s
 
   end
 

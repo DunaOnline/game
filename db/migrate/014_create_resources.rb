@@ -5,6 +5,7 @@ class CreateResources < ActiveRecord::Migration
       t.integer :field_id
       t.decimal :population, :precision => 12, :scale => 4, :default => 0.0
       t.decimal :material, :precision => 12, :scale => 4, :default => 0.0
+	  t.decimal :parts, :precision => 12, :scale => 4, :default => 0.0
 
       t.timestamps
     end

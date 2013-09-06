@@ -272,34 +272,41 @@ class User < ActiveRecord::Base
   end
 
   def goods_to_buyer(typ, amount)
-    goods = self.goods_at_warehouse(typ)
+
     case typ
       when "M"
-        self.domovske_leno.resource.update_attribute(:material, goods + amount)
+        self.domovske_leno.resource.update_attribute(:material, self.domovske_leno.resource.material + amount)
       when "P"
-        self.domovske_leno.resource.update_attribute(:population, goods + amount)
+        self.domovske_leno.resource.update_attribute(:population, self.domovske_leno.resource.population + amount)
+	    when "V"
+		    self.domovske_leno.resource.update_attribute(:parts, self.domovske_leno.resource.parts + amount)
       when "J"
-        self.update_attribute(:melange, goods + amount)
+        self.update_attribute(:melange, self.melange + amount)
       when "E"
-        self.update_attribute(:exp, goods + amount)
+        self.update_attribute(:exp, self.exp + amount)
       else
-        return
-    end
+	      production = self.domovske_leno.resource.productions.where(:product_id => typ).first
+	      production.update_attribute(:amount,production.amount + amount)
+	    end
   end
 
-  def goods_at_warehouse(typ)
-    case typ
-      when "M"
-        self.domovske_leno.resource.material
-      when "P"
-        self.domovske_leno.resource.population
-      when "J"
-        self.melange
-      when "E"
-        self.exp
-      else
-        return
-    end
+  def miesto_v_tovarni?(amount)
+	  self.domovske_leno.vyuzitie_tovaren + amount.to_i <= self.domovske_leno.kapacita_tovaren
+  end
+
+  def for_sale
+	  na_prodej = []
+	  vyrobky = self.productions.where(["resource_id = ? and amount > ?", self.domovske_leno.resource.id, 0])
+	  vyrobky.each do |vyrobok|
+		  nazov = Product.find(vyrobok.product_id).title
+		  na_prodej << [nazov,vyrobok.product_id]
+
+	  end
+	  na_prodej << ['Materiál', 'M']
+	  na_prodej << ['Melanž', 'J']
+	  na_prodej << ['Expy', 'E']
+	  na_prodej << ['Populace', 'P']
+	  na_prodej << ['Vyrobky','V']
   end
 
   def resourcy_s_tovarny

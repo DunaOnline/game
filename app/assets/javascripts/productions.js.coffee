@@ -6,6 +6,6 @@ $(document).ready ->
   $(".select_tovaren").attr("href", $("#lena").val())
   $("#lena").change ->
     $(".zobraz_tovaren").attr("href", $(this).val())
-  $(".select_tovaren").click ->
+  $(".titel").click ->
     $(this).parent().next().toggle(500)
 

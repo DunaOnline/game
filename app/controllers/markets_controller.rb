@@ -2,26 +2,17 @@ class MarketsController < ApplicationController
   # GET /markets
   # GET /markets.json
   def index
-    @markets = []
-    @markets << Market.material.moje(current_user.id).created_desc.price_desc.last unless Market.material.moje(current_user.id).created_desc.price_desc.last.nil?
-    @markets << Market.melanz.moje(current_user.id).created_desc.price_desc.last unless Market.melanz.moje(current_user.id).created_desc.price_desc.last.nil?
-    @markets << Market.populacia.moje(current_user.id).created_desc.price_desc.last unless Market.populacia.moje(current_user.id).created_desc.price_desc.last.nil?
-    @markets << Market.expy.created_desc.price_desc.moje(current_user.id).last unless Market.expy.moje(current_user.id).created_desc.price_desc.last.nil?
+    #@markets = []
+    #@markets << Market.material.cizi(current_user.id).created_desc.price_desc.last unless Market.material.cizi(current_user.id).created_desc.price_desc.last.nil?
+    #@markets << Market.melanz.cizi(current_user.id).created_desc.price_desc.last unless Market.melanz.cizi(current_user.id).created_desc.price_desc.last.nil?
+    #@markets << Market.populacia.cizi(current_user.id).created_desc.price_desc.last unless Market.populacia.cizi(current_user.id).created_desc.price_desc.last.nil?
+    #@markets << Market.expy.cizi(current_user.id).created_desc.price_desc.last unless Market.expy.cizi(current_user.id).created_desc.price_desc.last.nil?
+    #@markets << Market.vyrobky.cizi(current_user.id).created_desc.price_desc.last unless Market.vyrobky.cizi(current_user.id).created_desc.price_desc.last.nil?
+    #Market.zobraz_trh(current_user).each do |market|
+    #@markets << market
+    #end
+	  @markets = Market.zobraz_trh(current_user)
 
-    #opica = []
-    #opica << [Market.material.minimum(:price)]
-    #opica << ["J", Market.melanz.minimum(:price)]
-    #opica << ["E", Market.expy.minimum(:price)]
-    #opica << ["P", Market.populacia.minimum(:price)]
-    #@markets = []
-    #@markets << Market.where(:area => opica[0][0], :price => opica[0][1] ).first
-    #@markets << Market.where(:area => opica[1][0], :price => opica[1][1] ).first
-    #@markets << Market.where(:area => opica[2][0], :price => opica[2][1] ).first
-    #@markets << Market.where(:area => opica[3][0], :price => opica[3][1] ).first
-    #@markets = ufo.trh.rozl
-    #@markets = []
-    #@markets << ['J', Market.melanz.minimum(:price)]
-    #@markets << ['E', Market.expy.minimum(:price)]
 
     @user = current_user
     @market = Market.new
@@ -68,7 +59,7 @@ class MarketsController < ApplicationController
 
 
     respond_to do |format|
-      if @market.what_goods(current_user) && @market.save
+      if @market.sell_goods(current_user) && @market.save
 
         @market.seller(current_user.id)
         flash[:notice] = 'Ponuka bola uspesne vytvorena'
@@ -149,16 +140,32 @@ class MarketsController < ApplicationController
   end
 
   def buy
-    opica = (params[:q])
+    amount = (params[:q])
     @market = Market.find(params[:market])
+		if @market.area.to_i > 0
+			if current_user.miesto_v_tovarni?(amount)
+				if @market.buy_goods(amount, current_user)
+					flash[:notice] = 'Zbozi bylo nakoupeno'
+					redirect_to :action => 'index'
+				else
+		      flash[:error] = 'Chyba skuste nakoupit este jednou'
+		      redirect_to :action => 'index'
+				end
+			else
+				flash[:error] = 'Nedostatok miesta'
+				redirect_to :action => 'index'
+			end
+		else
 
-    if @market.buy_goods(opica, current_user)
-      flash[:notice] = 'Zbozi bylo nakoupeno'
-      redirect_to :action => 'index'
-    else
-      flash[:error] = 'Chyba skuste nakoupit este jednou'
-      redirect_to :action => 'index'
-    end
+				if @market.buy_goods(amount, current_user)
+					flash[:notice] = 'Zbozi bylo nakoupeno'
+					redirect_to :action => 'index'
+				else
+					flash[:error] = 'Chyba skuste nakoupit este jednou'
+					redirect_to :action => 'index'
+				end
+
+		end
 
   end
 end

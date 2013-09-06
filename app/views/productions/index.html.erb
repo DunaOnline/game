@@ -8,9 +8,9 @@
   </tr>
 </table>
 
-
-<h2>Presun vyrobku medzi lenami</h2>
-<%= form_tag :presun_vyrobku do %>
+<div class="tovarna_obrazok">
+<span class="heading">Presun vyrobku medzi lenami</span>
+<%= form_tag :presun_vyrobku, :class => "bottom_div" do %>
     <table class="tab3">
       <tr>
         <th>
@@ -23,6 +23,7 @@
       </tr>
     </table>
 <% end %>
+</div>
 
 <h2>Lena na kterych je postavena tovaren</h2>
 

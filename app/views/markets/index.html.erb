@@ -8,10 +8,11 @@
   </tr>
 </table>
 <div id="market">
+  <span class="heading">Na trhu mozete predavat zbozi</span>
   <table class="tab0">
     <tr>
-      <td>
-        Na trhu mozete predavat zbozi
+      <td >
+
       </td>
       <td class="tdd">
         <%= link_to 'Moje ponuky >>', my_offers_path %>
@@ -57,7 +58,7 @@
         <tr>
           <td>
 
-            <%= f.select :area, options_for_select([['Materiál', 'M'], ['Melanž', 'J'], ['Expy', 'E'], ['Populace', 'P']]), :name => "Vyberte komoditu k prodeji", :title => "Vyberte komoditu k prodeji", :class => "vyber" %>
+            <%= f.select :area, options_for_select(@user.for_sale), :name => "Vyberte komoditu k prodeji", :title => "Vyberte komoditu k prodeji", :class => "vyber" %>
 
           </td>
           <td><%= f.number_field :price, :required => true, :min => 1, :size => 3, :title => "Zadejte cenu" %></td>
