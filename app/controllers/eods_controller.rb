@@ -82,6 +82,7 @@ class EodsController < ApplicationController
       @material_income = 0.0
       @population_income = 0.0
       @melange_income = 0.0
+      @parts_income = 0.0
 
       for eod in @eods_fields do
         @solar_income += eod.solar_income
@@ -89,6 +90,7 @@ class EodsController < ApplicationController
         @material_income += eod.material_income
         @population_income += eod.population_income
         @melange_income += eod.melange_income
+	      #@parts_income += eod.parts_income
       end
 
     else

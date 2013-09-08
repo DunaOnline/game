@@ -89,11 +89,10 @@ class FieldsController < ApplicationController
   def postavit_budovu
     @field = Field.find(params[:field])
     if @field.user == current_user || current_user.admin?
-	    @resource = @field.resource
 	    @budova = Building.find(params[:budova])
 	    pocet_budov = params[:pocet_budov_stavba].to_i
 
-	    message, postaveno = @budova.postav_availability_check(@field,pocet_budov)
+	    message, postaveno = @field.postav_availability_check(@budova,pocet_budov)
 	    respond_to do |format|
 		    if postaveno
 			    format.html { redirect_to @field, notice: message }

@@ -81,61 +81,7 @@ class Building < ActiveRecord::Base
     self.population_cost * Constant.kpv
   end
 
-  def postav_availability_check(field,pocet_budov)
 
-	  tech = field.user.vyskumane_tech("L")
-
-	  bonus = (2 - tech).to_f
-
-	  cena_sol = self.naklady_stavba_solary * bonus
-	  cena_mat = self.naklady_stavba_material * bonus
-	  cena_mel = self.naklady_stavba_melange * bonus
-	  mat_na_poli = field.resource.material
-	  melange_user = field.user.melange
-	  postaveno = false
-	  message = ""
-
-	  solary = cena_sol * pocet_budov < field.user.solar
-	  material = cena_mat * pocet_budov < mat_na_poli
-	  melange = cena_mel * pocet_budov < melange_user
-	  miesto = pocet_budov < field.volne_misto
-	  if miesto
-		  if pocet_budov > 0
-			  if solary && material && melange
-				  field.user.update_attribute(:solar, field.user.solar - (cena_sol * pocet_budov))
-				  field.user.update_attribute(:melange, field.user.melange - (cena_mel * pocet_budov))
-				  field.resource.update_attribute(:material, mat_na_poli - (cena_mat * pocet_budov))
-				  field.postav(self, pocet_budov)
-				  postaveno = true
-				  message += "Bylo postaveno #{pocet_budov} budov"
-			  else
-
-				  message += "Chybi vam "
-				  message += "#{cena_sol * pocet_budov} sol, " if solary
-				  message += "#{cena_mat * pocet_budov} kg," if material
-				  message += "#{cena_mel * pocet_budov} mg" if melange
-				  message += "."
-				end
-			else
-				if pocet_budov.abs > field.postaveno(self)
-					message += "Tolik budov nelze prodat."
-
-				else
-				  field.user.update_attribute(:solar, field.user.solar + ((cena_sol / 2) * pocet_budov.abs))
-				  field.user.update_attribute(:melange, field.user.melange + ((cena_mel / 2) * pocet_budov.abs))
-				  field.resource.update_attribute(:material, mat_na_poli + ((cena_mat / 2) * pocet_budov.abs))
-				  field.postav(self, pocet_budov)
-
-				  message += "Bylo prodano #{pocet_budov.abs} budov dostali jste #{(cena_sol / 2) * pocet_budov.abs} solaru a #{(cena_mat / 2) * pocet_budov.abs} kg materialu "
-					message += "a #{(cena_mel / 2) * pocet_budov.abs} mg melanze." if cena_mel > 0
-					postaveno = true
-			  end
-			end
-	  else
-		  message += "Nemate tolik mista na stavbu"
-	  end
-	  return message, postaveno
-	end
 
 
 
