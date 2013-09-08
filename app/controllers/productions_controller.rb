@@ -20,12 +20,20 @@ class ProductionsController < ApplicationController
   def show
 	  @kapacita = Constant.kapacita_tovaren
     @products = Product.zakladni
-    @fields_factories = Field.find(params[:id])
-    @production = Production.new
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @production }
-    end
+    @fields_factories = Field.find_by_id(params[:id])
+	  if @fields_factories
+		  if @fields_factories.user == current_user
+	    @production = Production.new
+	    respond_to do |format|
+	      format.html # show.html.erb
+	      format.json { render json: @production }
+	    end
+		  else
+			  redirect_to :back
+			end
+	  else
+		  redirect_to :back
+		end
   end
 
   # GET /productions/new

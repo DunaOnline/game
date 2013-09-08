@@ -9,35 +9,28 @@ class FieldsController < ApplicationController
   end
 
   def show
-    @field = Field.find(params[:id])
-    @owner = @field.user
-    user_lvl = @owner.vyskumane_tech("L")
-    house_lvl = @owner.house.vyskumane_narodni_tech("L")
-    if user_lvl && house_lvl
-      @bonus = (2 - (user_lvl * house_lvl)).to_f
+    @field = Field.find_by_id(params[:id])
+    if @field
+	    @owner = @field.user
+	    user_lvl = @owner.vyskumane_tech("L")
+	    house_lvl = @owner.house.vyskumane_narodni_tech("L")
+	    if user_lvl && house_lvl
+	      @bonus = (2 - (user_lvl * house_lvl)).to_f
+	    end
+
+	    if current_user.admin? || @owner == current_user
+
+	    else
+	     redirect_to field_url(current_user.domovske_leno)
+	    end
+
+	    @planet = @field.planet
+	    @resource = @field.resource
+	    @co_poslat = [["Materiál", "Material"], ["Populace", "Population"], ["Vyrobky", "Parts"]]
+	    @my_fields = current_user.fields
     else
-      if user_lvl
-        @bonus = 2 - user_lvl.to_f
-      elsif house_lvl
-        @bonus = 2 - house_lvl.to_f
-      else
-        @bonus = 1
-      end
-
+	    redirect_to field_url(current_user.domovske_leno)
     end
-    if current_user.admin?
-
-    else
-      if @owner == current_user
-
-      else
-        redirect_to current_user
-      end
-    end
-    @planet = @field.planet
-    @resource = @field.resource
-    @co_poslat = [["Materiál", "Material"], ["Populace", "Population"], ["Vyrobky", "Parts"]]
-    @my_fields = current_user.fields
   end
 
   def new

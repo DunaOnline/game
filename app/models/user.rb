@@ -195,7 +195,7 @@ class User < ActiveRecord::Base
 
     if technology
 
-      lvl = self.vyskumane_tech(technology.id)
+      lvl = technology.vylepseno(self)
 
       case lvl
         when 0..6

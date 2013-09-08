@@ -4,8 +4,8 @@
         <td colspan="2" class="tdh1"><h3>komu suroviny poslat:</h3></td>
       </tr>
       <tr>
-        <td class="tdh1"><%= radio_button_tag "komu", "hraci" %>Hraci</td>
-        <td class="tdh1"><%= radio_button_tag "komu", "rodu" %>Rodu</td>
+        <td class="tdh1"><%= radio_button_tag "komu", "hraci", :required => true %>Hraci</td>
+        <td class="tdh1"><%= radio_button_tag "komu", "rodu", :required => true %>Rodu</td>
       </tr>
     </table>
 
@@ -22,11 +22,15 @@
         <td>Solary</td>
         <td>Melange</td>
         <td>Expy</td>
+        <td>Material</td>
+        <td>Parts</td>
       </tr>
       <tr>
         <td><%= text_field_tag "solary_user" %></td>
         <td><%= text_field_tag "melange_user" %></td>
         <td><%= text_field_tag "expy_user" %></td>
+        <td><%= text_field_tag "material" %></td>
+        <td><%= text_field_tag "parts_user" %></td>
       </tr>
     </table>
 
