@@ -10,7 +10,7 @@ class PlanetsController < ApplicationController
     @planet = Planet.find(params[:id])
     @fields = @planet.fields
     tech_bonus = current_user.vyskumane_tech("J")
-    bonus = 1 - tech_bonus
+    bonus = 2 - tech_bonus
     @cena_noveho_lena_melanz = @planet.cena_noveho_lena_mel * bonus
     @cena_noveho_lena_solary = @planet.cena_noveho_lena_sol * bonus
 

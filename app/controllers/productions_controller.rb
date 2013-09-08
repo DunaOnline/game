@@ -54,7 +54,7 @@ class ProductionsController < ApplicationController
     vyrobky.each do |title|
 	    par << [[params[title]],[title]] unless params[title] == ""
     end
-    message, vyrobeno = @production.vyroba_vyrobkov(par,current_user,field)
+    message, vyrobeno = @production.vyroba_vyrobkov(par,field)
 
     respond_to do |format|
       if vyrobeno

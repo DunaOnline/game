@@ -11,6 +11,8 @@ class Prepocet
       Prepocet.produkce_suroviny(order)
       Prepocet.produkce_melanz(order)
 
+      #Prepocet.udalost
+
       Prepocet.kontrola_zakonu
 
       if Constant.pristi_volby == Date.today
@@ -290,5 +292,34 @@ class Prepocet
       Global.prepni('volba_imperatora', 1, false)
     end
   end
+
+	#def self.udalost
+	#
+	#	udalost = 0
+	#	pocet_udalosti = Constant.pocet_udalosti.to_i
+	#	pocet_udalosti.times do
+	#		if udalost == rand(1)
+	#			Prepocet.vyber_udalost
+	#		end
+	#		udalost += 1
+	#	end
+	#end
+	#
+	#def self.vyber_udalost
+	#	 udalost = Property.find(rand(Property.count).round + 1)
+	#	 columns = []
+	#	 udalost.attributes.each_pair do |bonus, value|
+	#		 columns << [bonus ,value]
+	#	 end
+	#	 bonusy  = columns[2..7]
+	#	 malusy = columns[9..Property.column_names.length - 3]
+	#	 opica = []
+	#	 bonusy.each do |bonus|
+	#		 opica << bonus
+	#	 end
+	#	 malusy.each do |malus|
+	#		 opica << malus
+	#	 end
+	#end
 
 end

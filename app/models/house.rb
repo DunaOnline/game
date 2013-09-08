@@ -77,7 +77,7 @@ class House < ActiveRecord::Base
     if vyskumane_tech
       vyskumane_tech.lvl * technologie.house_bonus
     else
-      0
+      1
     end
   end
 

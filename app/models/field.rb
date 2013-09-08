@@ -119,6 +119,7 @@ class Field < ActiveRecord::Base
 
 
 
+
   def vyuzitie_tovaren
 	  vyrobky = self.resource.productions
 	  pocet_vyrobkov = 0

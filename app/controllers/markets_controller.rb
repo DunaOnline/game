@@ -152,11 +152,10 @@ class MarketsController < ApplicationController
 		      redirect_to :action => 'index'
 				end
 			else
-				flash[:error] = 'Nedostatok miesta'
+				flash[:error] = 'Nedostatok miesta v tovarne'
 				redirect_to :action => 'index'
 			end
 		else
-
 				if @market.buy_goods(amount, current_user)
 					flash[:notice] = 'Zbozi bylo nakoupeno'
 					redirect_to :action => 'index'

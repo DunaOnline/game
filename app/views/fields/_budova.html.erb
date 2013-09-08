@@ -30,7 +30,7 @@
     </li>
       <%= form_tag postavit_budovu_path(:field => field, :budova => budova) do %>
         <li>
-          <%= number_field_tag :pocet_budov_stavba, nil, :in => -21...21, :step => 1 %>
+          <%= number_field_tag :pocet_budov_stavba, nil, :in => -21...21, :step => 1, :required => true %>
         </li>
         <li>
           <%= submit_tag "Postavit", :class => "oktab_95" %>

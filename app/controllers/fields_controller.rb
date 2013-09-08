@@ -14,12 +14,12 @@ class FieldsController < ApplicationController
     user_lvl = @owner.vyskumane_tech("L")
     house_lvl = @owner.house.vyskumane_narodni_tech("L")
     if user_lvl && house_lvl
-      @bonus = (1 - (user_lvl + house_lvl)).to_f
+      @bonus = (2 - (user_lvl * house_lvl)).to_f
     else
       if user_lvl
-        @bonus = 1 - user_lvl.to_f
+        @bonus = 2 - user_lvl.to_f
       elsif house_lvl
-        @bonus = 1 - house_lvl.to_f
+        @bonus = 2 - house_lvl.to_f
       else
         @bonus = 1
       end
@@ -89,113 +89,20 @@ class FieldsController < ApplicationController
   def postavit_budovu
     @field = Field.find(params[:field])
     if @field.user == current_user || current_user.admin?
-      @resource = @field.resource
-      @budova = Building.find(params[:budova])
-      tech = current_user.vyskumane_tech("L")
+	    @resource = @field.resource
+	    @budova = Building.find(params[:budova])
+	    pocet_budov = params[:pocet_budov_stavba].to_i
 
-      bonus = (1 - tech).to_f
-
-      cena_sol = (@budova.naklady_stavba_solary * bonus).to_int
-      cena_mat = @budova.naklady_stavba_material * bonus
-      cena_mel = @budova.naklady_stavba_melange * bonus
-      mat_na_poli = @resource.material
-      melange_user = current_user.melange
-      pocet_budov = params[:pocet_budov_stavba].to_i
-
-
-
-      if cena_sol * pocet_budov > current_user.solar
-	      if cena_mat * pocet_budov > mat_na_poli
-		      if cena_mel * pocet_budov > melange_user
-			      flash[:error] = "Nedostatek Surovin (chybi #{cena_sol * pocet_budov - current_user.solar} S  ,  #{cena_mat * pocet_budov - mat_na_poli} kg  a #{cena_mel * pocet_budov - melange_user} mg)."
-			      redirect_to @field
-		      else
-			      flash[:error] = "Nedostatek Surovin (chybi #{cena_sol * pocet_budov - current_user.solar} S  a  #{cena_mat * pocet_budov - mat_na_poli} kg)."
-			      redirect_to @field
-			    end
-	      else
-		      if cena_mel * pocet_budov > melange_user
-			      flash[:error] = "Nedostatek Surovin (chybi #{cena_sol * pocet_budov - current_user.solar} S  a #{cena_mel * pocet_budov - melange_user} mg)."
-			      redirect_to @field
-		      else
-			      flash[:error] = "Nedostatek Solaru (chybi #{cena_sol * pocet_budov - current_user.solar} S)."
-			      redirect_to @field
-		      end
-
-	      end
-      elsif cena_mat * pocet_budov > mat_na_poli
-	      if cena_mel * pocet_budov > melange_user
-		      flash[:error] = "Nedostatek Surovin (chybi #{cena_mat * pocet_budov - mat_na_poli} kg  a #{cena_mel * pocet_budov - melange_user} mg)."
-		      redirect_to @field
-				else
-	      flash[:error] = "Nedostatek materialu (chybi #{cena_mat * pocet_budov - mat_na_poli} kg)."
-	      redirect_to @field
-				end
-      elsif cena_mel * pocet_budov > melange_user
-	      if  cena_mat * pocet_budov > mat_na_poli
-		      flash[:error] = "Nedostatek Surovin (chybi #{cena_mat * pocet_budov - mat_na_poli} kg  a #{cena_mel * pocet_budov - melange_user} mg)."
-		      redirect_to @field
-	      else
-		      flash[:error] = "Nedostatek melange (chybi #{cena_mel * pocet_budov - melange_user} mg)."
-		      redirect_to @field
-	      end
-      else
-	      if pocet_budov > 0
-		      if pocet_budov > @field.volne_misto
-			      flash[:error] = "Tolik budov nelze postavit."
-			      redirect_to @field
-		      else
-			      current_user.update_attribute(:solar, current_user.solar - (cena_sol * pocet_budov))
-			      @resource.update_attribute(:material, mat_na_poli - (cena_mat * pocet_budov))
-			      @field.postav(@budova, pocet_budov)
-			      redirect_to @field #, :notice => notice
-		      end
-	      else
-		      if pocet_budov.abs > @field.postaveno(@budova)
-			      flash[:error] = "Tolik budov nelze prodat."
-			      redirect_to @field
-		      else
-			      current_user.update_attribute(:solar, current_user.solar + ((cena_sol / 2) * pocet_budov.abs))
-			      @resource.update_attribute(:material, mat_na_poli + ((cena_mat / 2) * pocet_budov.abs))
-			      @field.postav(@budova, pocet_budov)
-			      redirect_to @field #, :notice => notice
-		      end
-	      end
-      end
-      #if cena_sol * pocet_budov > current_user.solar
-      #  if cena_mat * pocet_budov > mat_na_poli && cena_mel > melange_user
-      #    flash[:error] = "Nedostatek Surovin (chybi #{cena_sol * pocet_budov - current_user.solar} S  a  #{cena_mat * pocet_budov - mat_na_poli} kg)."
-      #    redirect_to @field
-      #  else
-      #    flash[:error] = "Nedostatek Solaru (chybi #{cena_sol * pocet_budov - current_user.solar} S)."
-      #    redirect_to @field
-      #  end
-      #elsif cena_mat * pocet_budov > mat_na_poli
-      #  flash[:error] = "Nedostatek materialu (chybi #{cena_mat * pocet_budov - mat_na_poli} kg)."
-      #  redirect_to @field
-      #else
-      #  if pocet_budov > 0
-      #    if pocet_budov > @field.volne_misto
-      #      flash[:error] = "Tolik budov nelze postavit."
-      #      redirect_to @field
-      #    else
-      #      current_user.update_attribute(:solar, current_user.solar - (cena_sol * pocet_budov))
-      #      @resource.update_attribute(:material, mat_na_poli - (cena_mat * pocet_budov))
-      #      @field.postav(@budova, pocet_budov)
-      #      redirect_to @field #, :notice => notice
-      #    end
-      #  else
-      #    if pocet_budov.abs > @field.postaveno(@budova)
-      #      flash[:error] = "Tolik budov nelze prodat."
-      #      redirect_to @field
-      #    else
-      #      current_user.update_attribute(:solar, current_user.solar + ((cena_sol / 2) * pocet_budov.abs))
-      #      @resource.update_attribute(:material, mat_na_poli + ((cena_mat / 2) * pocet_budov.abs))
-      #      @field.postav(@budova, pocet_budov)
-      #      redirect_to @field #, :notice => notice
-      #    end
-      #  end
-      #end
+	    message, postaveno = @budova.postav_availability_check(@field,pocet_budov)
+	    respond_to do |format|
+		    if postaveno
+			    format.html { redirect_to @field, notice: message }
+			    format.json { render json: @budova, status: :created, location: @budova }
+		    else
+			    format.html { redirect_to @field, alert: message }
+			    format.json { render json: @budova, status: :created, location: @budova }
+		    end
+	    end
     else
       redirect_to :back, :error => "Na tomto poli nemůžeš stavět."
     end

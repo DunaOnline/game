@@ -267,7 +267,7 @@ class User < ActiveRecord::Base
     if vyskumane_tech
       vyskumane_tech.lvl * technologie.bonus
     else
-      0
+      1
     end
   end
 
@@ -296,10 +296,10 @@ class User < ActiveRecord::Base
 
   def for_sale
 	  na_prodej = []
-	  vyrobky = self.productions.where(["resource_id = ? and amount > ?", self.domovske_leno.resource.id, 0])
+	  vyrobky = self.domovske_leno.resource.productions.where(["amount > ?", 0])
 	  vyrobky.each do |vyrobok|
 		  nazov = Product.find(vyrobok.product_id).title
-		  na_prodej << [nazov,vyrobok.product_id]
+		  na_prodej << [nazov + " " + vyrobok.amount.to_s + "ks" ,vyrobok.product_id]
 
 	  end
 	  na_prodej << ['Materiál', 'M']

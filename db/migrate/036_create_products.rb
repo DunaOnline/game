@@ -11,6 +11,7 @@ class CreateProducts < ActiveRecord::Migration
 	    t.decimal :melanz
 	    t.integer :price
 	    t.string :druh
+	    t.string :img
 
 
       t.timestamps

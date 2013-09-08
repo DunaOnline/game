@@ -10,7 +10,7 @@ class Production < ActiveRecord::Base
 
 
 
-	def vyroba_vyrobkov(vyrobky,user,field)
+	def vyroba_vyrobkov(vyrobky,field)
 		field = Field.find(field)
 		zdroje_lena = field.resource
 		total_material = 0
@@ -31,8 +31,8 @@ class Production < ActiveRecord::Base
 
 		end
 		material = zdroje_lena.material > total_material
-		melanz = user.melange > total_melanz
-		price = user.solar > total_price
+		melanz = field.user.melange > total_melanz
+		price = field.user.solar > total_price
 		parts = zdroje_lena.parts > total_parts
 
 		oznamenie = ""
@@ -43,13 +43,12 @@ class Production < ActiveRecord::Base
 				pocet = pocet[0].to_i
 				coho = Product.where(:title => vyrobok[1]).first
 
-				produkcia = Production.where(:user_id => user.id, :resource_id => zdroje_lena.id, :product_id => coho.id).first
+				produkcia = Production.where(:resource_id => zdroje_lena.id, :product_id => coho.id).first
 				if produkcia
 					 produkcia.update_attribute(:amount , produkcia.amount + pocet)
 				else
 				Production.new(
 						:resource_id => zdroje_lena.id,
-						:user_id => user.id,
 						:product_id => coho.id,
 						:amount => pocet
 				).save
@@ -57,14 +56,14 @@ class Production < ActiveRecord::Base
 			end
 
 			zdroje_lena.update_attributes(:material => zdroje_lena.material - total_material, :parts => zdroje_lena.parts - total_parts)
-			user.update_attributes(:solar => user.solar - total_price, :melange => user.melange - total_melanz)
+			field.user.update_attributes(:solar => field.user.solar - total_price, :melange => field.user.melange - total_melanz)
 			vyrobeno = true
 		else
 		oznamenie += "Chybi vam "
 		oznamenie += (total_material - zdroje_lena.material).to_s + " kg materialu" unless material
-		oznamenie += (total_melanz - user.melange).to_s + " mg melanze" unless melanz
+		oznamenie += (total_melanz - field.user.melange).to_s + " mg melanze" unless melanz
 		oznamenie += (total_parts - zdroje_lena.parts).to_s + " vyrobkov " unless parts
-		oznamenie += (total_price - user.solar).to_s + " solaru " unless price
+		oznamenie += (total_price - field.user.solar).to_s + " solaru " unless price
 		oznamenie += "."
 		end
 		return oznamenie, vyrobeno

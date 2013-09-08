@@ -2,9 +2,9 @@ class Product < ActiveRecord::Base
   attr_accessible :id, :example_value1, :example_value2, :parts, :title, :description, :material, :melanz, :price, :druh
 
 
-  def vlastnim(user,leno)
+  def vlastnim(leno)
 
-	  produkty = user.productions.where(:product_id => self.id, :resource_id => leno).first
+	  produkty = leno.resource.productions.where(:product_id => self.id).first
 	  if produkty
 	  mnozstvo = produkty.amount
 	  else

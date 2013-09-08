@@ -144,4 +144,12 @@ class Constant
   def self.konec_volby_imperatora
     Global.vrat('konec_volby_imperatora', 2)
   end
+
+	def self.pravdepodobnost
+		Global.vrat('pravdepodobnost_eventu', 4)
+	end
+
+	def self.pocet_udalosti
+		Global.vrat('mozny_pocet_eventu_prepocet', 4)
+	end
 end
