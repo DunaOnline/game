@@ -141,15 +141,15 @@ class Field < ActiveRecord::Base
 				  self.user.update_attribute(:solar, self.user.solar - (cena_sol * pocet_budov))
 				  self.user.update_attribute(:melange, self.user.melange - (cena_mel * pocet_budov))
 				  self.resource.update_attribute(:material, mat_na_poli - (cena_mat * pocet_budov))
-				  self.postav(self, pocet_budov)
+				  self.postav(budova, pocet_budov)
 				  postaveno = true
 				  message += "Bylo postaveno #{pocet_budov} budov" if pocet_budov > 1
 				  message += "Byla postavena #{pocet_budov} budova" if pocet_budov == 1
 			  else
 				  message += "Chybi vam "
-				  message += "#{cena_sol * pocet_budov} sol, " if solary
-				  message += "#{cena_mat * pocet_budov} kg," if material
-				  message += "#{cena_mel * pocet_budov} mg" if melange
+				  message += "#{cena_sol * pocet_budov - self.user.solar} sol, " unless solary
+				  message += "#{cena_mat * pocet_budov - mat_na_poli} kg," unless material
+				  message += "#{cena_mel * pocet_budov - melange_user} mg" unless melange
 				  message += "."
 			  end
 		  else
@@ -159,7 +159,7 @@ class Field < ActiveRecord::Base
 				  self.user.update_attribute(:solar, self.user.solar + ((cena_sol / 2) * pocet_budov.abs))
 				  self.user.update_attribute(:melange, self.user.melange + ((cena_mel / 2) * pocet_budov.abs))
 				  self.resource.update_attribute(:material, mat_na_poli + ((cena_mat / 2) * pocet_budov.abs))
-				  self.postav(self, pocet_budov)
+				  self.postav(budova, pocet_budov)
 
 				  message += "Bylo prodano #{pocet_budov.abs} budov dostali jste #{(cena_sol / 2) * pocet_budov.abs} solaru a #{(cena_mat / 2) * pocet_budov.abs} kg materialu " if pocet_budov.abs > 1
 				  message += "Byla prodana #{pocet_budov.abs} budova dostali jste #{(cena_sol / 2) * pocet_budov.abs} solaru a #{(cena_mat / 2) * pocet_budov.abs} kg materialu " if pocet_budov.abs == 1
