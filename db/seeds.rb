@@ -132,7 +132,7 @@ Technology.create(:name => "Investice do koření", :discovered => 1, :descripti
 +2% produkce melanže na Arrakis
 3. lvl = povolení stavby Továrna na koření
 6. lvl = povolení stavby Kasárna", :price => 250, :max_lvl => 17, :bonus => 0.02, :bonus_type => "J", :image_url => "image/vyskum/i_kor.png", :image_lvl => "1*7*14")
-Technology.create(:name => "Investice do armády", :discovered => 1, :description => "", :price => 400, :max_lvl => 17, :bonus => 0.02, :bonus_type => "A", :image_url => "image/vyskum/i_arm.png", :image_lvl => "1*7*14")
+Technology.create(:name => "Investice do armády", :discovered => 1, :description => "Investice do armády", :price => 400, :max_lvl => 17, :bonus => 0.02, :bonus_type => "A", :image_url => "image/vyskum/i_arm.png", :image_lvl => "1*7*14")
 Technology.create(:name => "Investice do výroby", :discovered => 1, :description => "+2% kapacita továren
 1. lvl = povolení stavby Manufaktura
 7. lvl = povolení stavby Továrna", :price => 350, :max_lvl => 10, :bonus => 0.02, :bonus_type => "V", :image_url => "image/vyskum/i_eko.png", :image_lvl => "1*7*14")
@@ -187,8 +187,8 @@ Building.create(:kind => "E", :level => 3, :name => "Chrám vědy", :description
 
 Building.create(:kind => "J", :level => 1, :name => "Továrna na koření", :description => "Produkuje koreni.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 100.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 20.0, :melange_cost => 3.0, :material_cost => 50.0, :solar_cost => 100.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 
-Building.create(:kind => "O", :level => 1, :name => "PO", :description => "Planetarni obrana.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 1.0, :material_cost => 70.0, :solar_cost => 100.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
-Building.create(:kind => "V", :level => 1, :name => "Továrna", :description => "Produkuje vyrobky.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 2.0, :material_cost => 75.0, :solar_cost => 50.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
+Building.create(:kind => "O", :level => 1, :name => "PO", :description => "Planetarni obrana.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 70.0, :solar_cost => 100.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
+Building.create(:kind => "V", :level => 1, :name => "Továrna", :description => "Produkuje vyrobky.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 75.0, :solar_cost => 50.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 
 Building.create(:kind => "JL", :level => 1, :name => "Arraken", :description => "Sídelní město, astroport.", :population_bonus => 10.0, :pop_limit_bonus => 0.0, :melange_bonus => 300.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 0.0, :melange_cost => 0.0, :material_cost => 0.0, :solar_cost => 0.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 puts 'budovy done'

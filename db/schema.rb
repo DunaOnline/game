@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(:version => 37) do
   create_table "environments", :force => true do |t|
     t.integer  "planet_id",                             :null => false
     t.integer  "property_id",                           :null => false
-    t.date     "started_at",  :default => '2013-08-31'
+    t.date     "started_at",  :default => '2013-09-08'
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
@@ -108,8 +108,8 @@ ActiveRecord::Schema.define(:version => 37) do
   create_table "eods", :force => true do |t|
     t.integer  "user_id",                                                                              :null => false
     t.integer  "field_id"
-    t.date     "date",                                              :default => '2013-08-31',          :null => false
-    t.time     "time",                                              :default => '2000-01-01 21:17:56', :null => false
+    t.date     "date",                                              :default => '2013-09-08',          :null => false
+    t.time     "time",                                              :default => '2000-01-01 18:48:49', :null => false
     t.integer  "order",                                                                                :null => false
     t.integer  "solar_income",                                      :default => 0
     t.integer  "exp_income",                                        :default => 0
@@ -187,7 +187,7 @@ ActiveRecord::Schema.define(:version => 37) do
   create_table "influences", :force => true do |t|
     t.integer  "effect_id",                            :null => false
     t.integer  "field_id",                             :null => false
-    t.date     "started_at", :default => '2013-08-31'
+    t.date     "started_at", :default => '2013-09-08'
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
   end
@@ -244,8 +244,8 @@ ActiveRecord::Schema.define(:version => 37) do
     t.integer  "subhouse_id"
     t.string   "kind"
     t.string   "content"
-    t.date     "date",        :default => '2013-08-31'
-    t.time     "time",        :default => '2000-01-01 21:17:56'
+    t.date     "date",        :default => '2013-09-08'
+    t.time     "time",        :default => '2000-01-01 18:48:49'
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
   end
@@ -272,7 +272,7 @@ ActiveRecord::Schema.define(:version => 37) do
     t.string   "system_name"
     t.integer  "position"
     t.boolean  "available_to_all", :default => false
-    t.date     "discovered_at",    :default => '2013-08-31'
+    t.date     "discovered_at",    :default => '2013-09-08'
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
   end
@@ -299,7 +299,6 @@ ActiveRecord::Schema.define(:version => 37) do
 
   create_table "productions", :force => true do |t|
     t.integer  "resource_id"
-    t.integer  "user_id"
     t.integer  "product_id"
     t.integer  "amount"
     t.integer  "house_id"
@@ -319,6 +318,7 @@ ActiveRecord::Schema.define(:version => 37) do
     t.decimal  "melanz"
     t.integer  "price"
     t.string   "druh"
+    t.string   "img"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -356,12 +356,11 @@ ActiveRecord::Schema.define(:version => 37) do
   create_table "resources", :force => true do |t|
     t.integer  "user_id"
     t.integer  "field_id"
-    t.decimal  "population",    :precision => 12, :scale => 4, :default => 0.0
-    t.decimal  "material",      :precision => 12, :scale => 4, :default => 0.0
-    t.integer  "parts"
-    t.integer  "production_id"
-    t.datetime "created_at",                                                    :null => false
-    t.datetime "updated_at",                                                    :null => false
+    t.decimal  "population", :precision => 12, :scale => 4, :default => 0.0
+    t.decimal  "material",   :precision => 12, :scale => 4, :default => 0.0
+    t.decimal  "parts",      :precision => 12, :scale => 4, :default => 0.0
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
   end
 
   create_table "sessions", :force => true do |t|

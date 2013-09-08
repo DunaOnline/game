@@ -46,6 +46,7 @@ class Building < ActiveRecord::Base
   end
 
   def naklady_stavba_melange
+    # TODO proč .kpv???
 	  self.sum_bonus * self.melange_cost * Constant.kpv
   end
 
@@ -80,9 +81,5 @@ class Building < ActiveRecord::Base
   def nutna_pop
     self.population_cost * Constant.kpv
   end
-
-
-
-
 
 end
