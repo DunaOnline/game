@@ -153,7 +153,7 @@ class Field < ActiveRecord::Base
 				  message += "."
 			  end
 		  else
-			  if pocet_budov.abs > self.postaveno(self)
+			  if pocet_budov.abs > self.postaveno(budova)
 				  message += "Tolik budov nelze prodat."
 			  else
 				  self.user.update_attribute(:solar, self.user.solar + ((cena_sol / 2) * pocet_budov.abs))
