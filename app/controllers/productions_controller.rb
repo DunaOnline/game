@@ -82,7 +82,7 @@ class ProductionsController < ApplicationController
 	  mnozstvo = (params[:amount]).to_i
 
 	  if source.drzitel(current_user) && target.drzitel(current_user)
-		 case str = source.presunout_vyrobky(vyrobok,target,mnozstvo,current_user)
+		 case str = source.move_products(vyrobok,target,mnozstvo)
 			  when true
 				  flash[:notice] = "Vyrobky byli presunuty"
 				  redirect_to productions_path

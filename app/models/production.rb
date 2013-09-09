@@ -69,8 +69,6 @@ class Production < ActiveRecord::Base
 		return oznamenie, vyrobeno
 	end
 
-
-
   def check_availability(amount,target_field,target_production)
 	  message = ""
 	 if self.amount < amount

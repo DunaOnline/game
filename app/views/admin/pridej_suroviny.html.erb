@@ -4,12 +4,12 @@
         <td colspan="2" class="tdh1"><h3>komu suroviny poslat:</h3></td>
       </tr>
       <tr>
-        <td class="tdh1"><%= radio_button_tag "komu", "hraci", :required => true %>Hraci</td>
-        <td class="tdh1"><%= radio_button_tag "komu", "rodu", :required => true %>Rodu</td>
+        <td class="tdh1"><%= radio_button_tag "komu", "hraci" %>Hraci</td>
+        <td class="tdh1"><%= radio_button_tag "komu", "rodu" %>Rodu</td>
       </tr>
     </table>
 
-    <table>
+    <table class="suroviny_hraci">
       <tr>
         <th>Zvol hrace a suroviny:</th>
       </tr>
@@ -34,7 +34,7 @@
       </tr>
     </table>
 
-    <table>
+    <table  class="suroviny_narodu">
       <tr>
         <th>Zvol narod a suroviny:</th>
       </tr>
@@ -56,5 +56,5 @@
         <td><%= text_field_tag "expy_narod" %></td>
       </tr>
     </table>
-    <%= submit_tag "Proved" %>
+    <%= submit_tag "Proved", :class => "pridej_suroviny" %>
 <% end %>

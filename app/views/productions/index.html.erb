@@ -14,10 +14,10 @@
     <table class="tab3">
       <tr>
         <th>
-          <%= select_tag :presunout_co, options_from_collection_for_select(@products, "id", "title"),:include_blank => false, :required => true, :class => "tab", :title => "Zvolte Vyrobok na presun" %>
-          <%= select_tag :source_production, options_from_collection_for_select(current_user.resourcy_s_tovarny, "id", "name"), :required => true, :class => "tab", :title => "Zvolte zdrojove leno" %>
-          <%= select_tag :target_production, options_from_collection_for_select(current_user.resourcy_s_tovarny, "id", "name"), :required => true, :class => "tab", :title => "Zvolte cilove leno" %>
-          <%= number_field_tag :amount %>
+          <%= select_tag :presunout_co, options_from_collection_for_select(@products, "id", "title"),:include_blank => false, :class => "tab", :title => "Zvolte Vyrobok na presun" %>
+          <%= select_tag :source_production, options_from_collection_for_select(current_user.resourcy_s_tovarny, "id", "name"), :class => "tab", :title => "Zvolte zdrojove leno" %>
+          <%= select_tag :target_production, options_from_collection_for_select(current_user.resourcy_s_tovarny, "id", "name"), :class => "tab", :title => "Zvolte cilove leno" %>
+          <%= number_field_tag :amount,nil, :required => true %>
           <%= submit_tag 'Přesunout', :name => 'presunout', :class => 'ok4', :style => "margin-right: 30px;", :title => "PŘESUNOUT VYROBKY" %>
         </th>
       </tr>

@@ -12,7 +12,7 @@ class FieldsController < ApplicationController
     @field = Field.find_by_id(params[:id])
     if @field
 	    @owner = @field.user
-	    user_lvl = @owner.vyskumane_tech("L")
+	    user_lvl = @owner.tech_bonus("L")
 	    house_lvl = @owner.house.vyskumane_narodni_tech("L")
 	    if user_lvl && house_lvl
 	      @bonus = (2 - (user_lvl * house_lvl)).to_f

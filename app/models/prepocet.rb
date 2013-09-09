@@ -56,7 +56,7 @@ class Prepocet
       if field.planet == Planet.arrakis
 
       else
-        solar_exp = vlastnik.vyskumane_tech("S")
+        solar_exp = vlastnik.tech_bonus("S")
         solar_house_exp = narod.vyskumane_narodni_tech("S")
         solar = field.vynos('solar') * (solar_exp + solar_house_exp)
 
@@ -101,7 +101,7 @@ class Prepocet
     arrakis = Planet.arrakis
     leno = Field.find_by_planet_id(arrakis)
     vlastnik = User.spravce_arrakis
-    user_tech = vlastnik.vyskumane_tech("J") if vlastnik
+    user_tech = vlastnik.tech_bonus("J") if vlastnik
     house_tech = vlastnik.house.vyskumane_narodni_tech("J") if vlastnik
     if vlastnik
       melange = leno.vynos('melange') * (user_tech + house_tech)

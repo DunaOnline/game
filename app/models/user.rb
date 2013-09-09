@@ -261,7 +261,7 @@ class User < ActiveRecord::Base
     self.fields.where(:planet_id => Planet.domovska_rodu(self.house)).first
   end
 
-  def vyskumane_tech(bonus_type)
+  def tech_bonus(bonus_type)
     technologie = Technology.where(:bonus_type => bonus_type).first
     vyskumane_tech = self.researches.where('technology_id' => technologie.id).first if technologie
     if vyskumane_tech

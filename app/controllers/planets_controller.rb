@@ -9,7 +9,7 @@ class PlanetsController < ApplicationController
   def show
     @planet = Planet.find(params[:id])
     @fields = @planet.fields
-    tech_bonus = current_user.vyskumane_tech("J")
+    tech_bonus = current_user.tech_bonus("J")
     bonus = 2 - tech_bonus
     @cena_noveho_lena_melanz = @planet.cena_noveho_lena_mel * bonus
     @cena_noveho_lena_solary = @planet.cena_noveho_lena_sol * bonus
@@ -56,7 +56,7 @@ class PlanetsController < ApplicationController
 
   def osidlit_pole
     @planet = Planet.find(params[:id])
-    lvl = current_user.vyskumane_tech(5)
+    lvl = current_user.tech_bonus(5)
     bonus = 1 - (lvl * 0.02)
 
     if @planet.osidlitelna?(current_user)

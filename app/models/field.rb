@@ -119,7 +119,7 @@ class Field < ActiveRecord::Base
 
   def postav_availability_check(budova,pocet_budov)
 
-	  tech = self.user.vyskumane_tech("L")
+	  tech = self.user.tech_bonus("L")
 
 	  bonus = (2 - tech).to_f
 
@@ -191,30 +191,33 @@ class Field < ActiveRecord::Base
 	  kapacita = (kapacita.number * Constant.kapacita_tovaren).to_i
   end
 
-  def move_products(co,target,amount,user)
+  def move_products(co,target,amount)
 	  vyrobok = Product.find(co)
 	  source_production = self.resource.productions.where(:product_id => vyrobok.id).first
 	  target_production = target.resource.productions.where(:product_id => vyrobok.id).first
+	  if source_production
+		  unless target_production
+			  target_production = Production.new(
+					  :resource_id => target.resource.id,
+					  :product_id => vyrobok.id,
+					  :amount => 0
+			  )
+		  end
 
-	  unless target_production
-		  target_production = Production.new(
-				  :resource_id => target.resource.id,
-				  :user_id => user.id,
-				  :product_id => vyrobok.id,
-				  :amount => 0
-		  )
-	  end
+		  case str = source_production.check_availability(amount,target,target_production)
+			  when true
+				  source_production.update_attribute(:amount, source_production.amount - amount)
+				  target_production.update_attribute(:amount, target_production.amount + amount)
 
-	  case str = source_production.check_availability(amount,target,target_production)
-		  when true
-			  source_production.update_attribute(:amount, source_production.amount - amount)
-			  target_production.update_attribute(:amount, target_production.amount + amount)
+			  else
+				  message = str
 
-		  else
-			  message = str
-
-	  end
+		  end
+	  else
+		  "Jeste jste nepostavili vyrobky tohoto typu"
+		end
   end
+
 
   def move_resource(to, what, amount)
     if self.check_availability(what, amount)
