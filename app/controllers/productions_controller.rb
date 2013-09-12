@@ -55,24 +55,41 @@ class ProductionsController < ApplicationController
   # POST /productions
   # POST /productions.json
   def create
-    @production = Production.new(params[:production])
+
     vyrobky = Product.all.map { |x| x.title }
-    field = params[:leno]
+    field = Field.find(params[:leno])
     par = []
     vyrobky.each do |title|
 	    par << [[params[title]],[title]] unless params[title] == ""
     end
-    message, vyrobeno = @production.vyroba_vyrobkov(par,field)
+    if par.any?
+	    if params[:commit]
+		    message, vyrobeno = field.vyroba_vyrobkov(par)
 
-    respond_to do |format|
-      if vyrobeno
-        format.html { redirect_to production_url(field), notice: 'Vyrobky byli vyrobeny' }
-        format.json { render json: @production, status: :created, location: @production }
-      else
-	      format.html { redirect_to production_url(field), alert: message }
-	      format.json { render json: @production, status: :created, location: @production }
-      end
-    end
+		    respond_to do |format|
+		      if vyrobeno
+		        format.html { redirect_to production_url(field), notice: 'Vyrobky byli vyrobeny' }
+		        format.json { render json: @production, status: :created, location: @production }
+		      else
+			      format.html { redirect_to production_url(field), alert: message }
+			      format.json { render json: @production, status: :created, location: @production }
+		      end
+		    end
+	    elsif params[:zrusit]
+		    message, prodat = field.predaj_produktov(par)
+		    respond_to do |format|
+			    if prodat
+				    format.html { redirect_to production_url(field), notice: message }
+				    format.json { render json: @production, status: :created, location: @production }
+			    else
+				    format.html { redirect_to production_url(field), alert: message }
+				    format.json { render json: @production, status: :created, location: @production }
+			    end
+		    end
+	    end
+    else
+	    redirect_to production_url(field), alert: "Zadejte prosim pocet vyrobku"
+	  end
   end
 
   def presun_vyrobku

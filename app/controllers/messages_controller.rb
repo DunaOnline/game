@@ -62,13 +62,13 @@ class MessagesController < ApplicationController
     @recipient_array = User.all.map &:nick
 
     respond_to do |format|
-      if @message.save
-        @message.posli_postu(current_user, @message.recipients)
+      if @message.save && @message.posli_postu(current_user, @message.recipients)
+
         format.html { redirect_to messages_url(:type => "Dorucena"), :notice => "Posta odoslana" }
         format.json { render json: @message }
         #format.js
       else
-        format.html { redirect_to new_message_url, :alert => "Prosim vyplnte chybajuce udaje" }
+        format.html { redirect_to new_message_url, :alert => "Chybne udaje" }
         format.json { render json: @message.errors, status: :unprocessable_entity }
         #format.js
       end
@@ -80,7 +80,7 @@ class MessagesController < ApplicationController
     opened = params[:message]
     if opened[:opened] == "true"
       respond_to do |format|
-        if @message.odoslana(current_user)
+        if @message.procti_spravu(current_user)
           format.json { render :layout => false }
         end
       end

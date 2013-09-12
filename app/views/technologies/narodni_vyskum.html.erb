@@ -14,12 +14,12 @@
 
 
     </td>
-    <% if current_user.admin? || current_user.leader? || current_user.mentat? %>
+
         <td class="tdd">
-          <a href="#" class="narodnitech">Narodni vyskum &gt;&gt;</a>
+          <%= link_to 'Vyskum >>', technologies_path %>
 
         </td>
-    <% end %>
+
 
   </tr>
 

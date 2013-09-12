@@ -15,13 +15,13 @@ class Message < ActiveRecord::Base
     end
   end
 
-  def odoslana(user)
-    sprava = Conversation.where('receiver' => user, 'message_id' => self.id).first
-    sprava.update_attributes(:opened => true)
+  def procti_spravu(user)
+    sprava = self.conversations.where('receiver' => user).first
+    sprava.update_attributes(:opened => true) if sprava
   end
 
-  def odosielatel(user)
-    sprava = Conversation.where('receiver' => user, 'message_id' => self.id).first
+  def proctena(user)
+    sprava = self.conversations.where('receiver' => user).first
     if sprava
       sprava.opened
     else
@@ -40,7 +40,7 @@ class Message < ActiveRecord::Base
         end
       end
     else
-      recipients = Conversation.where('recipient' => user, 'message_id' => self.id)
+      recipients = Conversation.where('receiver' => user, 'message_id' => self.id)
       recipients.each do |r|
         if r.deleted_by == "S"
           r.update_attributes(:deleted_by => "SR")
@@ -81,13 +81,13 @@ class Message < ActiveRecord::Base
         recipient = recipient.strip
 
         user = nil
-        user = User.find(self.zisti_id_prijemcu(recipient)) if recipient != "" and recipient != nil
+        user = User.find(self.zisti_id_prijemcu(recipient)) if recipient != "" && recipient != nil && self.zisti_id_prijemcu(recipient)
 
-        #if user && user.id != odosielatel.id
-        self.vytvor_postu(odosielatel, recipient)
-        #else
-        #return false
-        #end
+        if user && user.id != odosielatel.id
+        self.vytvor_postu(odosielatel, user)
+        else
+        return false
+        end
 
       end
     end
@@ -95,18 +95,16 @@ class Message < ActiveRecord::Base
 
   def vytvor_postu(odosielatel, komu)
 
-    if self.zisti_id_prijemcu(komu)
+
       Conversation.new(
           :message_id => self.id,
           :sender => odosielatel.id,
           :receiver => (self.zisti_id_prijemcu(komu))
       ).save
-    end
+
   end
 
-  def procist(posta)
-    posta.update_attribute(:read, true)
-  end
+
 end
 
 

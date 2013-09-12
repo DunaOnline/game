@@ -218,6 +218,110 @@ class Field < ActiveRecord::Base
 		end
   end
 
+  def vyroba_vyrobkov(vyrobky)
+	  field = self
+	  zdroje_lena = field.resource
+	  total_material = 0
+	  total_melanz = 0
+	  total_price = 0
+	  total_parts = 0
+	  vyrobeno = false
+
+	  vyrobky.each do |vyrobok|
+		  pocet = vyrobok[0]
+		  pocet = pocet[0].to_i
+		  coho = Product.where(:title => vyrobok[1]).first
+
+		  total_material += coho.material * pocet
+		  total_melanz += coho.melanz * pocet
+		  total_price += coho.price * pocet
+		  total_parts += coho.parts * pocet
+
+	  end
+	  material = zdroje_lena.material >= total_material
+	  melanz = field.user.melange >= total_melanz
+	  price = field.user.solar >= total_price
+	  parts = zdroje_lena.parts >= total_parts
+
+	  oznamenie = ""
+
+	  if material && melanz && price && parts
+		  vyrobky.each do |vyrobok|
+			  pocet = vyrobok[0]
+			  pocet = pocet[0].to_i
+			  coho = Product.where(:title => vyrobok[1]).first
+
+			  produkcia = Production.where(:resource_id => zdroje_lena.id, :product_id => coho.id).first
+			  if produkcia
+				  produkcia.update_attribute(:amount , produkcia.amount + pocet)
+			  else
+				  Production.new(
+						  :resource_id => zdroje_lena.id,
+						  :product_id => coho.id,
+						  :amount => pocet
+				  ).save
+			  end
+		  end
+
+		  zdroje_lena.update_attributes(:material => zdroje_lena.material - total_material, :parts => zdroje_lena.parts - total_parts)
+		  field.user.update_attributes(:solar => field.user.solar - total_price, :melange => field.user.melange - total_melanz)
+		  vyrobeno = true
+	  else
+		  oznamenie += "Chybi vam "
+		  oznamenie += (total_material - zdroje_lena.material).to_s + " kg materialu " unless material
+		  oznamenie += (total_melanz - field.user.melange).to_s + " mg melanze " unless melanz
+		  oznamenie += (total_parts - zdroje_lena.parts).to_s + " vyrobkov " unless parts
+		  oznamenie += (total_price - field.user.solar).to_s + " solaru " unless price
+		  oznamenie += "."
+	  end
+	  return oznamenie, vyrobeno
+  end
+
+  def predaj_produktov(vyrobky)
+	  field = self
+
+	  total_material = 0
+	  total_melanz = 0
+	  total_price = 0
+	  total_parts = 0
+	  number = 0
+	  oznamenie = ""
+
+	  nemozno_prodat = false
+
+	  vyrobky.each do |vyrobok|
+		  pocet = vyrobok[0]
+		  pocet = pocet[0].to_i.abs
+		  coho = Product.where(:title => vyrobok[1]).first
+		  if coho
+			  if 0 < coho.vlastnim(field) && coho.vlastnim(field) >= pocet
+				  total_material += (coho.material * pocet) / 2
+				  total_melanz += (coho.melanz * pocet) / 2
+				  total_price += (coho.price * pocet) / 2
+				  total_parts += (coho.parts * pocet) / 2
+				  number += pocet
+
+				  produkcia = Production.where(:resource_id => field.resource.id, :product_id => coho.id).first
+				  produkcia.update_attribute(:amount , produkcia.amount - pocet)
+				  field.resource.update_attributes(:material => field.resource.material + total_material, :parts => field.resource.parts + total_parts)
+				  field.user.update_attributes(:solar => field.user.solar + total_price, :melange => field.user.melange + total_melanz)
+			  else
+				  nemozno_prodat = true
+			  end
+		  end
+
+
+	  end
+	  if nemozno_prodat
+		  oznamenie += "Tolik vyrobku nemozno prodat"
+	  else
+		  oznamenie += "Bylo prodano #{number} vyrobku, prodejem sme ziskali #{total_material} kg materialu, #{total_melanz} mg melanze, #{total_price} solaru a #{total_parts} dilu"
+	  end
+
+	  return oznamenie, nemozno_prodat
+
+	end
+
 
   def move_resource(to, what, amount)
     if self.check_availability(what, amount)

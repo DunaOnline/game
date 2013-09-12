@@ -4,7 +4,7 @@
     <td class="tdpl" style="background-image: url(<%= asset_path cesta_budovy(current_user.house.name, "tov") %>)">
 
       <li><%= submit_tag 'Vyrobit zadané množství', :class => "ok" %></li>
-      <li><input type="button" value="Zrušit zadané množství" class="ok"></li>
+      <li><%= submit_tag 'Zrušit zadané množství',:name => "zrusit", :class => "ok" %></li>
       <%= hidden_field_tag 'leno' , value = factory.id %>
     </td>
 

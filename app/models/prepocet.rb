@@ -60,11 +60,11 @@ class Prepocet
         solar_house_exp = narod.vyskumane_narodni_tech("S")
         solar = field.vynos('solar') * (solar_exp + solar_house_exp)
 
-        exp_exp = vlastnik.vyskumane_tech("E")
+        exp_exp = vlastnik.tech_bonus("E")
         exp_house_exp = narod.vyskumane_narodni_tech("E")
         exp = field.vynos('exp') * (exp_exp + exp_house_exp)
 
-        material_exp = vlastnik.vyskumane_tech("M")
+        material_exp = vlastnik.tech_bonus("M")
         material_house_exp = narod.vyskumane_narodni_tech("M")
         material = field.vynos('material') * (material_exp + material_house_exp)
         population = field.vynos('population')
@@ -247,7 +247,7 @@ class Prepocet
   def self.ukonci_hlasovani
     puts "Ukoncuji hlasovani"
     for law in Law.projednavane do
-      if law.enacted.to_date == 3.days.ago.to_date
+      if law.submitted.to_date == 3.days.ago.to_date
         law.vyhodnot_zakon
       end
     end
