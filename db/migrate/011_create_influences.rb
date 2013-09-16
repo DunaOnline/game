@@ -3,6 +3,7 @@ class CreateInfluences < ActiveRecord::Migration
     create_table :influences do |t|
       t.integer :effect_id, :null => false
       t.integer :field_id, :null => false
+      t.integer :duration, :null => false
       t.date :started_at, :default => Date.today
 
       t.timestamps
@@ -10,6 +11,7 @@ class CreateInfluences < ActiveRecord::Migration
 
     add_index :influences, :effect_id
     add_index :influences, :field_id
+    add_index :influences, :duration
     add_index :influences, :started_at
   end
 end

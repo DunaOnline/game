@@ -50,7 +50,7 @@
     <td>
       <% for house in @houses do %>
           <li>
-            <%= obrazek_budovy(house.name, 'erb') %>
+            <span title="<%= house.name %>"><%= obrazek_budovy(house.name, 'erb') %></span>
             <%= best_in_place house, :melange_percent %>
           </li>
       <% end %>

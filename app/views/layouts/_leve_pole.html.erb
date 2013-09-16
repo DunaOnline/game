@@ -1,5 +1,15 @@
-<div class="la">
-  <p>text
-</div>
+   <% field, planet = current_user.zobraz_udalost %>
+  <% if field != ""%>
+      <div class="la field_event">
+        <%= field %>
+      </div>
+     <%end%>
+   <% if planet != ""%>
+   <div class="la field_event">
+     <%= planet %>
+   </div>
+   <%end%>
+
+
 
 <%= render 'layouts/narodni_nastenka' %>

@@ -93,4 +93,8 @@
   <% for budova in @owner.dovolene_budovy('O') do %>
       <%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'O', :obr => 'pob'} %>
   <% end %>
+
+  <% for budova in @owner.dovolene_budovy('J') do %>
+      <%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'J', :obr => 'tov'} %>
+  <% end %>
 </table>

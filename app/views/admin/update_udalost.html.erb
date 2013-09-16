@@ -1,0 +1,18 @@
+<%= form_for @event do |f| %>
+    <%= f.error_messages %>
+    <p>
+      <%= f.label :property_id %><br/>
+      <%= f.text_field :property_id %>
+    </p>
+    <p>
+      <%= f.label :planet_id %><br/>
+      <%= f.text_field :planet_id %>
+    </p>
+    <p>
+      <%= f.label :duration %><br/>
+      <%= f.text_field :duration %>
+    </p>
+
+    <p><%= f.submit "Save" %></p>
+    <%= link_to 'back', :back %>
+<% end %>

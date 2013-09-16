@@ -98,6 +98,32 @@ class UsersController < ApplicationController
 
   end
 
+  def opustit
+	  user = User.find(params[:id])
+	  if user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first
+		  redirect_to :back, :notice => "Nemozte opustit renegatov"
+	  else
+	  narod = user.house
+	  user.opustit_narod
+
+
+	  redirect_to :back, :notice => "Opustili ste narod #{narod.name}"
+		end
+  end
+
+  def ziadost
+	  user = User.find(params[:id])
+
+		  if user.podat_ziadost(params[:narod])
+			  redirect_to :back, :notice => "Ziadost byla podana"
+		  else
+			  redirect_to :back, :alert => "Nemozte ziadat o prijatie ked nieste renegat"
+			end
+
+
+
+  end
+
   def pridel_pravo
     komu = User.find(params[:user_id])
     case params[:commit]
@@ -144,7 +170,7 @@ class UsersController < ApplicationController
 
   def posli_suroviny
     rod = current_user.house
-    msg = "Poslano rodu #{rod.name} " if params[:rod_solary].to_i > 0.0 || params[:rod_melanz].to_f > 0.0 || params[:rod_zkusenosti].to_i > 0.0 || params[:rod_material].to_i > 0.0
+    msg = "Poslano rodu #{rod.name} " if params[:rod_solary].to_i > 0.0 || params[:rod_melanz].to_f > 0.0 || params[:rod_zkusenosti].to_i > 0.0 || params[:rod_material].to_i > 0.0 || params[:rod_vyrobky].to_i > 0.0
 
     if params[:rod_solary].to_i > 0.0 && params[:rod_solary].to_i <= current_user.solar
       rod.update_attribute(:solar, rod.solar + params[:rod_solary].to_i)
@@ -167,6 +193,12 @@ class UsersController < ApplicationController
       rod.update_attribute(:material, rod.material - params[:rod_material].to_i)
       leno.update_attribute(:material, leno.material + params[:rod_material].to_i)
       msg << "materiál: #{params[:rod_material]} "
+    end
+
+    if params[:rod_vyrobky].to_i > 0.0 && params[:rod_vyrobky].to_i <= leno.parts
+	    rod.update_attribute(:parts, rod.parts + params[:rod_vyrobky].to_i)
+	    leno.update_attribute(:parts, leno.parts - params[:rod_vyrobky].to_i)
+	    msg << "vyrobky: #{params[:rod_vyrobky]} "
     end
 
     current_user.zapis_operaci(msg)

@@ -66,6 +66,7 @@ class Ability
           can [:pridel_pravo, :odeber_pravo], User do |hrac|
             hrac.house == user.house
           end
+          can [:u_ziadost], User
           can [:create], Law
           can [:jednani], Landsraad
         end

@@ -59,14 +59,14 @@ describe Message do
 		user  = create(:user, :house => house, :nick => "minohimself")
 
 		user2  = create(:user, :house => house, :nick => "doktor")
-		komu = "minohimself, doktor"
-		message = create(:message, :user_id => 5)
+		komu = "#{user.nick}, #{user2.nick}"
+		message = create(:message, :user_id => 2)
 
-		message.posli_postu(user,komu)
+		message.posli_postu(komu)
 
 		expect(Conversation.where(:id => 1).exists?).to eq(true)
 		expect(Conversation.where(:id => 2).exists?).to eq(true)
-		expect(Conversation.where(:id => 3).exists?).to eq(false)
+		expect(Conversation.where(:id => 3)).to eq(komu)
 		expect(Conversation.where(:message_id => message.id, :receiver => user.id).exists?).to eq(true)
 		expect(Conversation.where(:message_id => message.id, :receiver => user2.id).exists?).to eq(true)
 		expect(Conversation.find(1).message_id).to eq(message.id)

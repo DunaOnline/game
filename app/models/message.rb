@@ -1,5 +1,6 @@
 class Message < ActiveRecord::Base
-  attr_accessible :body, :subject, :recipients, :user_id, :druh, :opened
+  attr_accessible :body, :subject, :recipients, :user_id, :druh
+
   has_many :conversations
   belongs_to :user
 
@@ -52,13 +53,14 @@ class Message < ActiveRecord::Base
   end
 
 
-  def posli_postu(odosielatel, komu)
-    self.update_attribute(:user_id, odosielatel.id)
-    narod = odosielatel.house_id
-    malorod = odosielatel.subhouse_id
+  def posli_postu(komu)
+    #self.update_attribute(:user_id, odosielatel.id)
+    narod = self.user.house_id
+    malorod = self.user.subhouse_id
+
     case self.druh
       when "M"
-        recipients = User.where(:subhouse_id => malorod, :house_id => narod)
+	      recipients = User.where(:subhouse_id => malorod, :house_id => narod)
       when "G"
         recipients = User.where(:general => true, :house_id => narod)
       when "N"
@@ -71,37 +73,27 @@ class Message < ActiveRecord::Base
         recipients = []
     end
     recipients.each do |recipient|
-      self.vytvor_postu(odosielatel, recipient.nick)
+      self.vytvor_postu(self.user, recipient.id)
     end
-
-
     if komu
       komu.split(",").each do |recipient|
-
         recipient = recipient.strip
-
-        user = nil
-        user = User.find(self.zisti_id_prijemcu(recipient)) if recipient != "" && recipient != nil && self.zisti_id_prijemcu(recipient)
-
-        if user && user.id != odosielatel.id
-        self.vytvor_postu(odosielatel, user)
-        else
-        return false
-        end
-
+        #user = nil
+        user = self.zisti_id_prijemcu(recipient) if recipient != "" && recipient != nil && self.zisti_id_prijemcu(recipient)
+        if user
+          self.vytvor_postu(self.user, user)
+	      end
       end
     end
+
   end
 
   def vytvor_postu(odosielatel, komu)
-
-
       Conversation.new(
           :message_id => self.id,
           :sender => odosielatel.id,
-          :receiver => (self.zisti_id_prijemcu(komu))
+          :receiver => komu
       ).save
-
   end
 
 

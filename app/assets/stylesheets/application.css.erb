@@ -496,6 +496,7 @@ a.menugalaxy:hover {
     text-decoration: none;
     text-shadow: silver;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .menu ul a:link {
@@ -2631,14 +2632,20 @@ input[type="submit"] {
 
 }
 #zoznam_len_s_tovarni ul{
-    list-style-type: none;
-    padding: 3px;
+    height: 23px;
+    margin: 0px;
+    padding-top: 5px;
+
+
 }
 #zoznam_len_s_tovarni ul li{
 
-    display:inline;
+    display: block;
+    float: left;
+    height: 23px;
+
     padding-left: 10px;
-    padding: 3px;
+
 
 }
 
@@ -2653,6 +2660,7 @@ input[type="submit"] {
     width: 519px;
     height: 100px;
     float: left;
+    position: relative;
     background-color: transparent;
     background-image: url("css/tseda.png");
 
@@ -2681,4 +2689,8 @@ input[type="submit"] {
 }
 html {
     background-color: #000000;
+}
+
+.best_in_place {
+    cursor: pointer;
 }

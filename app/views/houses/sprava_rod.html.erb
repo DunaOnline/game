@@ -21,17 +21,19 @@
 
       <tr>
         <td>
-          <li><%= img_solary %><%= format_mena(@house.solar, 'S', false) %></li>
+          <li><%= img_solary %><%= format_mena(@house.solar, 'S', true) %></li>
           <li><%= img_material %><%= format_mena(@house.material, 'kg') %></li>
           <li><%= img_melanz %><%= format_mena(@house.melange, 'mg') %></li>
           <li><%= img_zkusenosti %><%= format_mena(@house.exp, 'exp', false) %></li>
           <li><%= img_populace('Celkova populace') %><%= format_mena(@house.celkova_populace, 'k', false) %></li>
+          <li><%= img_vyrobky('Celkovo dilu') %><%= format_mena(@house.parts, 'ks', true) %></li>
         </td>
         <td>
           <li><%= img_solary %><%= text_field_tag 'user_solary', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_material %><%= text_field_tag 'user_material', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_melanz %><%= text_field_tag 'user_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'user_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
+          <li><%= img_vyrobky %><%= text_field_tag 'user_parts', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
           <li><%= select_tag :user_id_suroviny, options_for_select(@house.users.order(:nick).all.collect { |p| [p.nick, p.id] }, {:include_blank => false}), :class => "tab" %> </li>
         </td>
         <td>
@@ -54,6 +56,7 @@
           <li><%= img_material %><%= text_field_tag 'rodu_material', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'rodu_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+          <li><%= img_vyrobky %><%= text_field_tag 'rodu_parts', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %></li>
         </td>
       </tr>
@@ -113,7 +116,8 @@
                 <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "ArmyMentat" %>
             <% end %>
           </li>
-      <% end %>
+        <% end %>
+
     </td>
 
 
@@ -125,6 +129,8 @@
 
 
   </tr>
+
+
   <tr>
     <td>
       <% if can? :pridel_pravo, User %>
@@ -159,7 +165,18 @@
 
   </tr>
 </table>
+<table class="tab1">
+  <tr>
+    <th>Meno Ziadatela  </th>
 
+  </tr>
+  <% @ziadosti.each do |ziadost| %>
+    <tr>
+      <td><%= ziadost.nick %></td>
+      <td><%= button_to("Prijmout", prijmi_hrace_url(:id => ziadost.id),:confirm => "Are you sure?") %></td>
+    </tr>
+  <% end %>
+</table>
 <table class="tab1">
   <tr>
     <td rowspan="2" style="padding: 0 10px 10px 10px; width:270px; background-image: url(<%= asset_path 'imghra/kolonizace.png' %>) !important">

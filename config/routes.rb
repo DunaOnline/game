@@ -63,6 +63,7 @@ DuneOnline::Application.routes.draw do
   match 'kolonizuj' => 'houses#kolonizuj', :as => :kolonizuj
   match 'sprava_rod' => 'houses#sprava_rod', :as => :sprava_rod
   match 'posli_rodove_suroviny' => 'houses#posli_rodove_suroviny', :as => :posli_rodove_suroviny
+  match 'prijmi_hrace/:id' => 'houses#prijmi_hrace', :as => :prijmi_hrace
 
   resources :discoverables
   
@@ -80,6 +81,8 @@ DuneOnline::Application.routes.draw do
   match 'zmen_prava' => 'users#zmen_prava', :as => :zmen_prava
   match 'hlasovat' => 'users#hlasovat', :as => :hlasovat
   match 'sprava' => 'users#sprava', :as => :sprava
+	match 'opustit' => 'users#opustit', :as => :opustit
+	match 'ziadost' => 'users#ziadost', :as => :ziadost
   match 'pridel_pravo' => 'users#pridel_pravo', :as => :pridel_pravo
   match 'odeber_pravo' => 'users#odeber_pravo', :as => :odeber_pravo
   match 'posli_suroviny' => 'users#posli_suroviny', :as => :posli_suroviny
@@ -95,6 +98,9 @@ DuneOnline::Application.routes.draw do
   match 'global_index' => 'admin#global_index', :as => :global_index
   match 'update_global/:id' => 'admin#update_global', :as => :global
   match 'sweep_session' => 'admin#sweep_session', :as => :sweep_session
+	match 'udalosti' => 'admin#udalosti', :as => :udalosti
+	match 'update_udalost/:id' => 'admin#update_udalost', :as => :environment
+	match 'leno_update_udalost/:id' => 'admin#leno_update_udalost', :as => :influence
   
   match 'show' => 'imperium#show', :as => :imperium
   match 'sprava_imperia' => 'imperium#sprava', :as => :sprava_imperia

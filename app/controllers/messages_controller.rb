@@ -59,19 +59,21 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(params[:message])
+    @message.user_id = current_user.id
     @recipient_array = User.all.map &:nick
 
     respond_to do |format|
-      if @message.save && @message.posli_postu(current_user, @message.recipients)
 
-        format.html { redirect_to messages_url(:type => "Dorucena"), :notice => "Posta odoslana" }
-        format.json { render json: @message }
-        #format.js
-      else
-        format.html { redirect_to new_message_url, :alert => "Chybne udaje" }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-        #format.js
-      end
+		      if @message.save
+			      @message.posli_postu(@message.recipients)
+		        format.html { redirect_to messages_url(:type => "Dorucena"), :notice => "Posta odoslana"}
+		        format.json { render json: @message }
+		      else
+			      format.html {redirect_to new_message_url, :alert => "Chybne udaje"}
+			      format.json { render json: @message.errors, status: :unprocessable_entity }
+			    end
+
+
     end
   end
 

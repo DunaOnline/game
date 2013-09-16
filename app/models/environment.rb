@@ -11,4 +11,7 @@
 #
 
 class Environment < ActiveRecord::Base
+
+belongs_to :planet
+belongs_to :property
 end

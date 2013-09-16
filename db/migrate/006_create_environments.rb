@@ -3,6 +3,7 @@ class CreateEnvironments < ActiveRecord::Migration
     create_table :environments do |t|
       t.integer :planet_id, :null => false
       t.integer :property_id, :null => false
+      t.integer :duration, :null => false
       t.date :started_at, :default => Date.today
 
       t.timestamps

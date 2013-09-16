@@ -6,17 +6,17 @@ class Prepocet
       puts "PREPOCET"
       Prepocet.zamkni
       order = Prepocet.vytvor_eody
-      Prepocet.zmen_vudce(order)
+      #Prepocet.zmen_vudce(order)
       Prepocet.zpristupni_planety
       Prepocet.produkce_suroviny(order)
       Prepocet.produkce_melanz(order)
 
-      #Prepocet.udalost
+      Prepocet.udalosti
 
       Prepocet.kontrola_zakonu
 
       if Constant.pristi_volby == Date.today
-        Prepocet.zvol_poslance
+       # Prepocet.zvol_poslance
       end
 
       if Imperium.konec_volby_imperatora == Date.today
@@ -57,19 +57,28 @@ class Prepocet
 
       else
         solar_exp = vlastnik.tech_bonus("S")
+        enviro_solar = field.planet.udalost_bonus("S")
+        effect_solar = field.leno_udalost_bonus("S")
         solar_house_exp = narod.vyskumane_narodni_tech("S")
-        solar = field.vynos('solar') * (solar_exp + solar_house_exp)
+        solar = field.vynos('solar') * (solar_exp + solar_house_exp) * enviro_solar * effect_solar
 
+        enviro_exp = field.planet.udalost_bonus("E")
+        effect_exp = field.leno_udalost_bonus("E")
         exp_exp = vlastnik.tech_bonus("E")
         exp_house_exp = narod.vyskumane_narodni_tech("E")
-        exp = field.vynos('exp') * (exp_exp + exp_house_exp)
+        exp = (field.vynos('exp') * (exp_exp + exp_house_exp) * enviro_exp * effect_exp).round
 
+        enviro_material = field.planet.udalost_bonus("M")
+        effect_material = field.leno_udalost_bonus("M")
         material_exp = vlastnik.tech_bonus("M")
         material_house_exp = narod.vyskumane_narodni_tech("M")
-        material = field.vynos('material') * (material_exp + material_house_exp)
-        population = field.vynos('population')
+        material = field.vynos('material') * (material_exp + material_house_exp) * enviro_material * effect_material
 
-        parts = field.vynos('parts')
+        enviro_pop = field.planet.udalost_bonus("P")
+        effect_pop = field.leno_udalost_bonus("P")
+        population = field.vynos('population') * enviro_pop * effect_pop
+
+        parts = field.vynos('parts')   #enviro_parts
 
         vlastnik.update_attributes(
             :solar => vlastnik.solar + solar,
@@ -101,6 +110,7 @@ class Prepocet
     arrakis = Planet.arrakis
     leno = Field.find_by_planet_id(arrakis)
     vlastnik = User.spravce_arrakis
+    #enviro_material = field.planet.udalost_bonus("M")
     user_tech = vlastnik.tech_bonus("J") if vlastnik
     house_tech = vlastnik.house.vyskumane_narodni_tech("J") if vlastnik
     if vlastnik
@@ -123,6 +133,7 @@ class Prepocet
     for house in House.playable.all do
       rodu = melange * (house.melange_percent / 100.0)
       odevzdano += rodu
+      house.zapis_operaci("Obdrzeno #{rodu} mg melanze.")
       house.zapis_operaci("Obdrzeno #{rodu} mg melanze.")
       house.update_attribute(:melange, house.melange + rodu)
 
@@ -293,33 +304,16 @@ class Prepocet
     end
   end
 
-	#def self.udalost
-	#
-	#	udalost = 0
-	#	pocet_udalosti = Constant.pocet_udalosti.to_i
-	#	pocet_udalosti.times do
-	#		if udalost == rand(1)
-	#			Prepocet.vyber_udalost
-	#		end
-	#		udalost += 1
-	#	end
-	#end
-	#
-	#def self.vyber_udalost
-	#	 udalost = Property.find(rand(Property.count).round + 1)
-	#	 columns = []
-	#	 udalost.attributes.each_pair do |bonus, value|
-	#		 columns << [bonus ,value]
-	#	 end
-	#	 bonusy  = columns[2..7]
-	#	 malusy = columns[9..Property.column_names.length - 3]
-	#	 opica = []
-	#	 bonusy.each do |bonus|
-	#		 opica << bonus
-	#	 end
-	#	 malusy.each do |malus|
-	#		 opica << malus
-	#	 end
-	#end
+	def self.udalosti
+
+
+		Planet.nahodna_udalost
+		puts 'Enviroments done'
+
+		Field.udalosti_lena
+		puts 'Effects done'
+	end
+
+
 
 end

@@ -42,7 +42,7 @@
 class User < ActiveRecord::Base
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation, :house_id, :subhouse_id, :solar, :melange
-  attr_accessible :exp, :leader, :mentat, :army_mentat, :diplomat, :general, :vicegeneral, :landsraad, :arrakis
+  attr_accessible :exp, :leader, :mentat, :army_mentat, :diplomat, :general, :vicegeneral, :landsraad, :arrakis ,:ziadost_house
   attr_accessible :emperor, :regent, :court, :vezir, :admin, :nick, :influence
   attr_accessible :web, :icq, :gtalk, :skype, :facebook, :presentation, :active
 
@@ -179,6 +179,14 @@ class User < ActiveRecord::Base
       pop += field.resource.population
     end
     pop
+  end
+
+  def celkovy_parts
+	  parts = 0
+	  for field in self.fields.includes(:resource) do
+		  parts += field.resource.parts
+	  end
+	  parts
   end
 
   def osidlene_planety
@@ -329,6 +337,54 @@ class User < ActiveRecord::Base
 	  resourcy
   end
 
+  def zobraz_udalost
+	  msg_leno = ""
+	  msg_pla = ""
+	  self.fields.each do |field|
+		  if field.influence
+			  msg_leno += "//**Udalost na lenu #{field.name} : #{field.influence.effect.name}**//"
+		  end
+	  end
+	  self.fields.each do |field|
+		  if field.planet.environment
+			  msg_pla += "//**Udalost na planete #{field.planet.name} : #{field.planet.environment.property.name}**//"
+			end
+	  end
+	  return msg_leno, msg_pla
+  end
+
+
+  def opustit_narod
+	  narod = self.house
+	  field = self.domovske_leno
+	  field.update_attribute(:planet_id,Planet.domovska_rodu(House.renegat).first.id)
+	  self.update_attribute(:house_id, House.renegat.id)
+			  self.zapis_operaci("Opustili jste narod #{narod.name}")
+  end
+
+  def podat_ziadost(house_id)
+	  if self.house == House.renegat
+
+
+		  self.update_attributes(:house_id => House.renegat.id, :ziadost_house => house_id)
+		  self.zapis_operaci("Podali sme zadosti o prijeti do naroda #{house.name}")
+		  return true
+	  else
+		  return false
+		end
+  end
+
+  def prijat_do_naroda(house)
+	  if self.house == House.renegat
+		  field = self.domovske_leno
+		  field.update_attribute(:planet_id,Planet.domovska_rodu(house).first.id)
+		  self.update_attributes(:house_id => house.id, :ziadost_house => nil)
+		  self.zapis_operaci("Byl jste prijat do naroda #{house.name}, Opustili sme renegaty")
+	  return true
+	  end
+	  return false
+  end
+
   def neprocteno_sprav
     self.conversations.where(:opened => nil).count
   end
@@ -382,6 +438,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  scope :ziadost, lambda {|house| where("ziadost_house = ?", house)}
   scope :dvorane, where(:court => true)
   scope :veziri, where(:vezir => true)
   scope :poslanci, where(:landsraad => true)

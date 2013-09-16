@@ -101,6 +101,7 @@ class MarketsController < ApplicationController
     @market = Market.find(params[:id])
     if @market.destroy
       current_user.goods_to_buyer(@market.area, @market.amount * 0.7)
+      @market.zapis_obchodu(current_user,"Zbozi bylo stahnuto z trhu bylo straceno #{@market.amount * 0.3} ks #{@market.show_area}")
     end
 
     respond_to do |format|

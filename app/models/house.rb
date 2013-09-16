@@ -114,6 +114,82 @@ class House < ActiveRecord::Base
     planet
   end
 
+
+
+  def posli_rodove_suroviny(h_suroviny,u_suroviny,h_recipient,u_recipient)
+	    h_flag = false
+	    u_flag = false
+	    msg = ""
+	    h_suroviny.each do |sur|
+		    if sur > 0
+			    h_flag = true
+		    end
+	    end
+	    if h_flag
+		    h_solar = h_suroviny[0]
+		    h_melange = h_suroviny[1]
+		    h_exp = h_suroviny[2]
+		    h_material = h_suroviny[3]
+		    h_parts = h_suroviny[4]
+		    sprava, flag = self.check_availability(h_solar,h_material,h_melange,h_exp,h_parts)
+		    if flag == true
+			    house = House.find(h_recipient)
+			    house.update_attributes(:solar => house.solar + h_solar, :material => house.material + h_material, :melange => house.melange + h_melange, :exp => house.exp + h_exp, :parts => house.parts + h_parts)
+			    self.update_attributes(:solar => self.solar - h_solar, :material => self.material - h_material, :melange => self.melange - h_melange, :exp => self.exp - h_exp, :parts => self.parts - h_parts)
+			    msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_material} kg, #{h_melange} mg, #{h_exp} exp, #{h_parts} dilu od naroda #{self.name}"
+			    self.zapis_operaci(sprava)
+		    else
+			    msg += sprava
+		    end
+		  end
+	    u_suroviny.each do |n_sur|
+		    if n_sur > 0
+			    u_flag = true
+		    end
+	    end
+	    if u_flag
+		    u_solar = u_suroviny[0]
+		    u_melange = u_suroviny[1]
+		    u_exp = u_suroviny[2]
+		    u_material = u_suroviny[3]
+		    u_parts = u_suroviny[4]
+		    sprava, flag = self.check_availability(u_solar,u_material,u_melange,u_exp,u_parts)
+		    if flag == true
+			    user = User.find(u_recipient)
+			    user.domovske_leno.resource.update_attributes(:material => user.domovske_leno.resource.material + u_material, :parts => user.domovske_leno.resource.parts + u_parts)
+			    user.update_attributes(:solar => user.solar + u_solar, :melange => user.melange + u_melange, :exp => user.exp + u_exp)
+			    self.update_attributes(:solar => self.solar - u_solar, :material => self.material - u_material, :melange => self.melange - u_melange, :exp => self.exp - u_exp, :parts => self.parts - u_parts)
+			    msg +="Posláno hraci #{user.nick} #{u_solar} solaru, #{u_material} kg, #{u_melange} mg, #{u_exp} exp, #{u_parts} dilu od naroda #{self.name}"
+			    self.zapis_operaci(sprava)
+		    else
+			    msg += sprava
+		    end
+	    end
+	    return msg, flag
+  end
+  def check_availability(sol,mat,mel,exp,par)
+	  msg = ""
+	  flag = false
+	  bsol = self.solar >= sol
+	  bmat = self.material >= mat
+	  bmel = self.melange >= mel
+	  bexp = self.exp >= exp
+	  bpar = self.parts >= par
+	  if bsol && bmat && bmel && bexp && bpar
+		  flag = true
+	  else
+		  flag = false
+		  msg += "Chybi vam"
+	    msg += "#{sol - self.solar} solaru" unless bsol
+		  msg += "#{mat - self.material} materialu" unless bmat
+		  msg += "#{mel - self.melange} materialu" unless bmel
+		  msg += "#{exp - self.exp} exp" unless bexp
+		  msg += "#{par - self.parts} dilu" unless bpar
+		end
+	 return msg, flag
+  end
+
+
   def eod_zapis_vudce(order, vudce)
     for user in self.users.includes(:eods) do
       for eod in user.eods.where(:date => Date.today, :leader => nil, :order => order).all do
@@ -124,6 +200,10 @@ class House < ActiveRecord::Base
 
   def self.imperium
     @imperium ||= House.find_by_name('Impérium')
+  end
+
+  def self.renegat
+	  House.find_by_name('Renegáti')
   end
 
   def zapis_operaci(content, kind = "N")

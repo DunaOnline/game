@@ -22,6 +22,8 @@ class Planet < ActiveRecord::Base
   belongs_to :planet_type
   belongs_to :system, :primary_key => 'system_name', :foreign_key => 'system_name'
   has_many :fields
+  has_one :environment
+  has_one :property, :through => :environment
 
   def vytvor_pole(user)
     Field.new(
@@ -199,18 +201,82 @@ class Planet < ActiveRecord::Base
 
   def kapacita_parts(user)
 	  tovarna = Building.where(:kind => "V").first
-	  parts = 0.0
 
 	  pocet_tovaren = 0
 	  for field in self.fields.vlastnik(user) do
 		  leno_s_tovarnou = field.estates.where(:building_id => tovarna.id).first
 		  pocet_tovaren += leno_s_tovarnou.number if leno_s_tovarnou
 	  end
-
-
 	  (pocet_tovaren * Constant.kapacita_tovaren).to_i
-
   end
+
+  def self.nahodna_udalost
+	  enviro = Environment.all
+	  enviro.each do |envi|
+		  if envi.duration == 0
+			  envi.destroy
+		  else
+			  envi.update_attribute(:duration,envi.duration - 1)
+		  end
+	  end
+
+	  self.all.each do |planet|
+		  planet.udalost
+	  end
+  end
+
+  def udalost
+	  udalost = 0
+
+	  pocet_udalosti = Constant.pocet_udalosti.to_i
+	  pocet_udalosti.times do
+		  if udalost == rand(Constant.pravdepodobnost)
+			  if Property.count > 0
+				  roll_property = rand(Property.nahodne.count) + 1
+				  property = Property.nahodne.find(roll_property)
+				  flag = false
+				  while flag != true  do
+					  if self.environment
+						  opica = false
+					  else
+						  Environment.new(
+								  :planet_id => self.id,
+								  :property_id => property.id,
+								  :duration => property.duration
+						  ).save
+						  flag = true
+					  end
+				  end
+				  self.house.zapis_operaci("Mimoriadna udalost na planete #{self.name} : #{property.name}")
+				  udalost += 1
+				end
+		  end
+	  end
+  end
+
+  def udalost_bonus(typ)
+	  enviro_bonus = 1
+	  if self.environment
+		  case typ
+				when "P"
+					 enviro_bonus = self.environment.property.population_bonus * self.environment.property.population_cost if self.environment
+			  when "PL"
+					  enviro_bonus = self.environment.property.pop_limit_bonus  if self.environment
+			  when "J"
+					  enviro_bonus = self.environment.property.melange_bonus * self.environment.property.melange_cost if self.environment
+			  when "M"
+					  enviro_bonus = self.environment.property.material_bonus * self.environment.property.material_cost if self.environment
+			  when "S"
+					  enviro_bonus = self.environment.property.solar_bonus * self.environment.property.solar_cost if self.environment
+			  when "E"
+					  enviro_bonus = self.environment.property.exp_bonus * self.environment.property.exp_cost if self.environment
+			  else
+				  enviro_bonus = 1
+		  end
+		end
+	  enviro_bonus
+	end
+
 
   scope :domovska, lambda { |user| where(:house_id => user.house.id, :planet_type_id => PlanetType.find_by_name("Domovská")) }
   scope :domovska_rodu, lambda { |house| where(:house_id => house.id, :planet_type_id => PlanetType.find_by_name("Domovská")) }

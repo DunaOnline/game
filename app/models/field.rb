@@ -23,6 +23,9 @@ class Field < ActiveRecord::Base
   has_many :estates
   has_many :buildings, :through => :estates
 
+  has_one :influence
+  has_one :effect, :through => :influence
+
   after_save :vytvor_resource
 
   def vytvor_resource
@@ -131,9 +134,9 @@ class Field < ActiveRecord::Base
 	  postaveno = false
 	  message = ""
 
-	  solary = cena_sol * pocet_budov < self.user.solar
-	  material = cena_mat * pocet_budov < mat_na_poli
-	  melange = cena_mel * pocet_budov < melange_user
+	  solary = cena_sol * pocet_budov <= self.user.solar
+	  material = cena_mat * pocet_budov <= mat_na_poli
+	  melange = cena_mel * pocet_budov <= melange_user
 	  miesto = pocet_budov <= self.volne_misto
 	  if miesto
 		  if pocet_budov > 0
@@ -142,6 +145,8 @@ class Field < ActiveRecord::Base
 				  self.user.update_attribute(:melange, self.user.melange - (cena_mel * pocet_budov))
 				  self.resource.update_attribute(:material, mat_na_poli - (cena_mat * pocet_budov))
 				  self.postav(budova, pocet_budov)
+				  self.zapis_udalosti(self.user,"Bylo postaveno #{pocet_budov} #{budova.name} na lenu #{self.name} za #{cena_sol * pocet_budov} solaru,
+					#{cena_mel * pocet_budov} mg a #{cena_mat * pocet_budov} kg")
 				  postaveno = true
 				  message += "Bylo postaveno #{pocet_budov} budov" if pocet_budov > 1
 				  message += "Byla postavena #{pocet_budov} budova" if pocet_budov == 1
@@ -160,6 +165,8 @@ class Field < ActiveRecord::Base
 				  self.user.update_attribute(:melange, self.user.melange + ((cena_mel / 2) * pocet_budov.abs))
 				  self.resource.update_attribute(:material, mat_na_poli + ((cena_mat / 2) * pocet_budov.abs))
 				  self.postav(budova, pocet_budov)
+				  self.zapis_udalosti(self.user,"Bylo prodano #{pocet_budov.abs} #{budova.name} na lenu #{self.name}. Ziskali sme #{(cena_sol / 2) * pocet_budov.abs} solaru,
+					#{(cena_mel / 2) * pocet_budov.abs} mg a #{(cena_mat / 2) * pocet_budov.abs} kg")
 
 				  message += "Bylo prodano #{pocet_budov.abs} budov dostali jste #{(cena_sol / 2) * pocet_budov.abs} solaru a #{(cena_mat / 2) * pocet_budov.abs} kg materialu " if pocet_budov.abs > 1
 				  message += "Byla prodana #{pocet_budov.abs} budova dostali jste #{(cena_sol / 2) * pocet_budov.abs} solaru a #{(cena_mat / 2) * pocet_budov.abs} kg materialu " if pocet_budov.abs == 1
@@ -208,7 +215,7 @@ class Field < ActiveRecord::Base
 			  when true
 				  source_production.update_attribute(:amount, source_production.amount - amount)
 				  target_production.update_attribute(:amount, target_production.amount + amount)
-
+				  self.zapis_udalosti(self.user,"Bylo presunuto #{amount} ks #{vyrobok.title} z #{self.name} na #{target.name} leno")
 			  else
 				  message = str
 
@@ -261,6 +268,8 @@ class Field < ActiveRecord::Base
 						  :amount => pocet
 				  ).save
 			  end
+			  self.zapis_udalosti(self.user,"Bylo nakoupeno #{pocet} ks #{coho.title} za #{coho.material * pocet} kg, #{coho.melanz * pocet} mg,
+				#{coho.price * pocet} solaru a #{coho.parts * pocet} vyrobku")
 		  end
 
 		  zdroje_lena.update_attributes(:material => zdroje_lena.material - total_material, :parts => zdroje_lena.parts - total_parts)
@@ -305,6 +314,8 @@ class Field < ActiveRecord::Base
 				  produkcia.update_attribute(:amount , produkcia.amount - pocet)
 				  field.resource.update_attributes(:material => field.resource.material + total_material, :parts => field.resource.parts + total_parts)
 				  field.user.update_attributes(:solar => field.user.solar + total_price, :melange => field.user.melange + total_melanz)
+				  self.zapis_udalosti(self.user,"Bylo prodano #{pocet} ks #{coho.title} za #{(coho.material * pocet) / 2} kg, #{(coho.melanz * pocet) / 2} mg,
+					#{(coho.price * pocet) / 2} solaru a #{(coho.parts * pocet) / 2} vyrobku")
 			  else
 				  nemozno_prodat = true
 			  end
@@ -329,18 +340,84 @@ class Field < ActiveRecord::Base
         when 'Population'
           self.resource.update_attribute(:population, self.resource.population - amount.abs)
           to.resource.update_attribute(:population, to.resource.population + amount.abs)
+		      self.zapis_udalosti(self.user,"Bylo presunuto #{amount} populacie z #{self.name} na #{to.name} leno")
         when 'Material'
           self.resource.update_attribute(:material, self.resource.material - amount.abs)
           to.resource.update_attribute(:material, to.resource.material + amount.abs)
+          self.zapis_udalosti(self.user,"Bylo presunuto #{amount} materialu z #{self.name} na #{to.name} leno")
 	      when 'Parts'
 		      self.resource.update_attribute(:parts, self.resource.parts - amount.abs)
 		      to.resource.update_attribute(:parts, to.resource.parts + amount.abs)
+		      self.zapis_udalosti(self.user,"Bylo presunuto #{amount} vyrobku z #{self.name} na #{to.name} leno")
         else
           "Toto nelze poslat"
       end
     else
       "Nedostatek surovin na odchozím léně"
     end
+  end
+
+  def self.udalosti_lena
+	  influence = Influence.all
+	  influence.each do |infl|
+		  if infl.duration == 0
+			  infl.destroy
+		  else
+			  infl.update_attribute(:duration,infl.duration - 1)
+		  end
+	  end
+
+	  self.all.each do |field|
+		  field.udalost
+	  end
+  end
+
+  def udalost
+	  udalost = 0
+
+	  pocet_udalosti = Constant.pocet_udalosti.to_i
+	  pocet_udalosti.times do
+		  if udalost == rand(Constant.pravdepodobnost)
+			  if Effect.count > 0
+				  roll_effect = rand(Property.count) + 1
+				  effect = Effect.find(roll_effect)
+				  Influence.new(
+						  :field_id => self.id,
+						  :effect_id => effect.id,
+						  :duration => effect.duration
+				  ).save unless self.influence
+				  if self.name == "Leno Arrakis"
+				    #self.user.zapis_operaci("Mimoriadna udalost #{effect.name}")
+				  else
+					  self.user.zapis_operaci("Mimoriadna udalost na lenu #{self.name} : #{effect.name}")
+					end
+				  udalost += 1
+			  end
+		  end
+	  end
+  end
+
+  def leno_udalost_bonus(typ)
+	  enviro_bonus = 1
+	  if self.influence
+		  case typ
+			  when "P"
+				  enviro_bonus = self.influence.effect.population_bonus * self.influence.effect.population_cost if self.influence
+			  when "PL"
+				  enviro_bonus = self.influence.effect.pop_limit_bonus  if self.influence
+			  when "J"
+				  enviro_bonus = self.influence.effect.melange_bonus * self.influence.effect.melange_cost if self.influence
+			  when "M"
+				  enviro_bonus = self.influence.effect.material_bonus * self.influence.effect.material_cost if self.influence
+			  when "S"
+				  enviro_bonus = self.influence.effect.solar_bonus * self.influence.effect.solar_cost if self.influence
+			  when "E"
+				  enviro_bonus = self.influence.effect.exp_bonus * self.influence.effect.exp_cost if self.influence
+			  else
+				  enviro_bonus = 1
+		  end
+	  end
+	  enviro_bonus
   end
 
   def check_availability(what, amount)
@@ -354,6 +431,10 @@ class Field < ActiveRecord::Base
       else
         false
     end
+  end
+
+  def zapis_udalosti(user,content)
+	  Operation.new(:kind => "U", :user_id => user, :content => content, :date => Date.today, :time => Time.now).save
   end
 
   scope :vlastnik, lambda { |user| where(:user_id => user.id) }

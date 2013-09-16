@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(:version => 37) do
 
   create_table "effects", :force => true do |t|
     t.string   "name",                                                             :null => false
+    t.string   "typ",                                                              :null => false
+    t.string   "image"
     t.decimal  "population_bonus", :precision => 12, :scale => 4, :default => 0.0
     t.decimal  "pop_limit_bonus",  :precision => 12, :scale => 4, :default => 0.0
     t.decimal  "melange_bonus",    :precision => 12, :scale => 4, :default => 0.0
@@ -96,7 +98,8 @@ ActiveRecord::Schema.define(:version => 37) do
   create_table "environments", :force => true do |t|
     t.integer  "planet_id",                             :null => false
     t.integer  "property_id",                           :null => false
-    t.date     "started_at",  :default => '2013-09-08'
+    t.integer  "duration",                              :null => false
+    t.date     "started_at",  :default => '2013-09-15'
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
@@ -108,8 +111,8 @@ ActiveRecord::Schema.define(:version => 37) do
   create_table "eods", :force => true do |t|
     t.integer  "user_id",                                                                              :null => false
     t.integer  "field_id"
-    t.date     "date",                                              :default => '2013-09-08',          :null => false
-    t.time     "time",                                              :default => '2000-01-01 18:48:49', :null => false
+    t.date     "date",                                              :default => '2013-09-15',          :null => false
+    t.time     "time",                                              :default => '2000-01-01 15:06:16', :null => false
     t.integer  "order",                                                                                :null => false
     t.integer  "solar_income",                                      :default => 0
     t.integer  "exp_income",                                        :default => 0
@@ -174,6 +177,7 @@ ActiveRecord::Schema.define(:version => 37) do
     t.decimal  "solar",           :precision => 12, :scale => 4, :default => 0.0
     t.decimal  "melange",         :precision => 12, :scale => 4, :default => 0.0
     t.decimal  "material",        :precision => 12, :scale => 4, :default => 0.0
+    t.decimal  "parts",           :precision => 12, :scale => 4, :default => 0.0
     t.decimal  "exp",             :precision => 12, :scale => 4, :default => 0.0
     t.boolean  "playable",                                       :default => true
     t.decimal  "melange_percent", :precision => 12, :scale => 4, :default => 0.0
@@ -187,11 +191,13 @@ ActiveRecord::Schema.define(:version => 37) do
   create_table "influences", :force => true do |t|
     t.integer  "effect_id",                            :null => false
     t.integer  "field_id",                             :null => false
-    t.date     "started_at", :default => '2013-09-08'
+    t.integer  "duration",                             :null => false
+    t.date     "started_at", :default => '2013-09-15'
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
   end
 
+  add_index "influences", ["duration"], :name => "index_influences_on_duration"
   add_index "influences", ["effect_id"], :name => "index_influences_on_effect_id"
   add_index "influences", ["field_id"], :name => "index_influences_on_field_id"
   add_index "influences", ["started_at"], :name => "index_influences_on_started_at"
@@ -244,8 +250,8 @@ ActiveRecord::Schema.define(:version => 37) do
     t.integer  "subhouse_id"
     t.string   "kind"
     t.string   "content"
-    t.date     "date",        :default => '2013-09-08'
-    t.time     "time",        :default => '2000-01-01 18:48:49'
+    t.date     "date",        :default => '2013-09-15'
+    t.time     "time",        :default => '2000-01-01 15:06:16'
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
   end
@@ -272,7 +278,7 @@ ActiveRecord::Schema.define(:version => 37) do
     t.string   "system_name"
     t.integer  "position"
     t.boolean  "available_to_all", :default => false
-    t.date     "discovered_at",    :default => '2013-09-08'
+    t.date     "discovered_at",    :default => '2013-09-15'
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
   end
@@ -325,6 +331,8 @@ ActiveRecord::Schema.define(:version => 37) do
 
   create_table "properties", :force => true do |t|
     t.string   "name",                                                             :null => false
+    t.string   "typ",                                                              :null => false
+    t.string   "image"
     t.decimal  "population_bonus", :precision => 12, :scale => 4, :default => 0.0
     t.decimal  "pop_limit_bonus",  :precision => 12, :scale => 4, :default => 0.0
     t.decimal  "melange_bonus",    :precision => 12, :scale => 4, :default => 0.0
@@ -437,6 +445,7 @@ ActiveRecord::Schema.define(:version => 37) do
     t.string   "password_salt"
     t.integer  "house_id",                                                        :null => false
     t.integer  "subhouse_id"
+    t.integer  "ziadost_house"
     t.decimal  "solar",         :precision => 12, :scale => 4, :default => 0.0
     t.decimal  "melange",       :precision => 12, :scale => 4, :default => 0.0
     t.decimal  "exp",           :precision => 12, :scale => 4, :default => 0.0

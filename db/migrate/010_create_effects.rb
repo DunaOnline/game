@@ -2,6 +2,8 @@ class CreateEffects < ActiveRecord::Migration
   def self.up
     create_table :effects do |t|
       t.string :name, :null => false
+      t.string :typ, :null => false
+      t.string :image
       t.decimal :population_bonus, :precision => 12, :scale => 4, :default => 0.0
       t.decimal :pop_limit_bonus, :precision => 12, :scale => 4, :default => 0.0
       t.decimal :melange_bonus, :precision => 12, :scale => 4, :default => 0.0

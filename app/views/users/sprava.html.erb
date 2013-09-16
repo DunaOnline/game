@@ -19,11 +19,12 @@
       </tr>
       <tr>
         <td>
-          <li><%= img_solary %><%= format_mena(@user.solar, 'S', false) %>
+          <li><%= img_solary %><%= format_mena(@user.solar, 'S', true) %>
           <li><%= img_material %><%= format_mena(@user.celkovy_material, 'kg') %>
             &nbsp(<%= format_mena(@user.domovske_leno.resource.material, 'kg') %>)
           <li><%= img_melanz %><%= format_mena(@user.melange, 'mg') %>
           <li><%= img_zkusenosti %><%= format_mena(@user.exp, 'exp', false) %>
+          <li><%= img_vyrobky %><%= format_mena(@user.celkovy_parts, 'ks') %>
         </td>
         <!--<td>
 				<li><%= img_solary %><input type="text" size="3" title="Zadejte množství">
@@ -42,6 +43,7 @@
           <li><%= img_material %><%= text_field_tag 'rod_material', '0.00', :size => "3", :title => "Zadejte množství" %>
           <li><%= img_melanz %><%= text_field_tag 'rod_melanz', '0.00', :size => "3", :title => "Zadejte množství" %>
           <li><%= img_zkusenosti %><%= text_field_tag 'rod_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= img_vyrobky %><%= text_field_tag 'rod_vyrobky', '0.00', :size => "3", :title => "Zadejte množství" %>
         </td>
         <td>
           <li><%= img_solary %>
@@ -78,7 +80,7 @@
     </td>	 -->
     <td>
       <%= form_tag hlasovat_path(:user_id => @user) do %>
-          <%= select_tag("volit_id]", options_for_select(@user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %><%= submit_tag 'Ξ', :name => 'leader', :class => 'oki' %>
+          <%= select_tag("volit_id", options_for_select(@user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %><%= submit_tag 'Ξ', :name => 'leader', :class => 'oki' %>
           <p>Váš hlas: <%= @user.koho_jsem_volil('leader') %></p>
 
           <h3>Aktuální pořadí</h3>
@@ -89,7 +91,7 @@
     </td>
     <td>
       <%= form_tag hlasovat_path(:user_id => @user) do %>
-          <%= select_tag("volit_id]", options_for_select(@user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %><%= submit_tag 'Ξ', :name => 'poslanec', :class => 'oki' %>
+          <%= select_tag("volit_id", options_for_select(@user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %><%= submit_tag 'Ξ', :name => 'poslanec', :class => 'oki' %>
           <p>Váš hlas: <%= @user.koho_jsem_volil('poslanec') %></p>
 
           <h3>Aktuální pořadí</h3>
@@ -100,6 +102,28 @@
     </td>
   </tr>
 </table>
+<table class="tab1">
+  <tr>
+    <td>
+      <% if @user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first %>
+      <span>
+         <%= form_tag ziadost_path(:id => @user) do %>
+            <%= select_tag :narod, options_for_select(House.playable.collect {|p| [ p.name, p.id ] }, {:include_blank => false}), :class => "tab" %>
+
+       <%= submit_tag 'Prihlasit sa do Naroda',  data:{ :confirm => "Ste si isty? Podat ziadost si mozete iba raz za prepocet" } %>
+         <% end %>
+      </span>
+      <% else %>
+      <span>
+        <%= link_to 'Opustit narod', opustit_path(:id => @user), :confirm => "Jste si jisti opustit narod #{current_user.house.name} ?" %>
+      </span>
+      <% end %>
+      </td>
+
+  </tr>
+
+</table>
+
 
 <table class="tab1">
   <tr>

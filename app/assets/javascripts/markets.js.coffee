@@ -14,14 +14,9 @@ $(document).ready ->
       when "J" then $("#market_amount").attr("step", "any")
       when "E" then $("#market_amount").removeAttr("step")
       when "P" then $("#market_amount").removeAttr("step")
-  #      switch area
-  #      when "M" then $("#market_amount").attr("step","any")
-  #      when "J"
-  #      when "E"
-  #      when "P"
-  #
-  #      else
-  #        $("#market_amount").removeAttr("step")
+      else
+        $("#market_amount").removeAttr("step")
+
   $(".vyroba #q").each ->
     $(this).next().attr('disabled', 'disabled')
     $(this).click ->
