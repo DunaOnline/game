@@ -98,28 +98,69 @@ class UsersController < ApplicationController
 
   end
 
+  def udalosti
+	  case params[:typ]
+		  when "L"
+			  @udalost = Influence.find(params[:id]).effect
+			  @leno =  Influence.find(params[:id])
+		  when "P"
+			  @udalost = Environment.find(params[:id]).property
+			  @planet =  Environment.find(params[:id])
+		  else
+
+	  end
+
+
+  end
+
+  def zrus_udalost
+	  @udalost = Environment.find(params[:id])
+  end
+
   def opustit
-	  user = User.find(params[:id])
-	  if user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first
-		  redirect_to :back, :notice => "Nemozte opustit renegatov"
-	  else
-	  narod = user.house
-	  user.opustit_narod
+
+    if params[:id]
+		  user = User.find(params[:id])
+		  if user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first
+			  redirect_to :back, :notice => "Nemozte opustit renegatov"
+		  else
+		  narod = user.house
+		  user.opustit_narod
 
 
-	  redirect_to :back, :notice => "Opustili ste narod #{narod.name}"
-		end
+		  redirect_to :back, :notice => "Opustili ste narod #{narod.name}"
+		  end
+    else
+	    redirect_to :back
+	  end
   end
 
   def ziadost
-	  user = User.find(params[:id])
+	  if params[:id]
+		  user = User.find(params[:id])
 
-		  if user.podat_ziadost(params[:narod])
-			  redirect_to :back, :notice => "Ziadost byla podana"
-		  else
-			  redirect_to :back, :alert => "Nemozte ziadat o prijatie ked nieste renegat"
-			end
+			  if msg = user.podat_ziadost(params[:narod])
+				  redirect_to :back, :notice => msg
+			  else
+				  redirect_to :back, :alert => msg
+			  end
+	  else
+		  redirect_to :back
+		end
+  end
 
+  def oprava_katastrofy
+	  if params[:typ] == "L"
+		  effect = Influence.find(params[:id])
+		  effect.odstran_katastrofu(current_user)
+		  redirect_to sprava_path(:id => current_user)
+	  elsif params[:typ] == "P"
+		  enviro = Environment.find(params[:id])
+		  enviro.odstran_katastrofu(current_user)
+		  redirect_to sprava_path(:id => current_user)
+	  else
+		  redirect_to sprava_path(:id => current_user)
+		end
 
 
   end
@@ -167,6 +208,7 @@ class UsersController < ApplicationController
     komu.zapis_operaci("#{current_user.nick} me odvolal z pozice #{params[:pravo]}.")
     redirect_to :back
   end
+
 
   def posli_suroviny
     rod = current_user.house

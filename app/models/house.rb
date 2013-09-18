@@ -206,6 +206,8 @@ class House < ActiveRecord::Base
 	  House.find_by_name('Renegáti')
   end
 
+
+
   def zapis_operaci(content, kind = "N")
     self.operations << Operation.new(:kind => kind, :content => content, :date => Date.today, :time => Time.now)
   end

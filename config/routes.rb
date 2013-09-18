@@ -86,6 +86,8 @@ DuneOnline::Application.routes.draw do
   match 'pridel_pravo' => 'users#pridel_pravo', :as => :pridel_pravo
   match 'odeber_pravo' => 'users#odeber_pravo', :as => :odeber_pravo
   match 'posli_suroviny' => 'users#posli_suroviny', :as => :posli_suroviny
+	match 'udalosti' => 'users#udalosti', :as => :udalosti
+	match 'oprava_katastrofy' => 'users#oprava_katastrofy', :as => :oprava_katastrofy
 
 #  resources :admin
   match 'wipe' => 'admin#wipe', :as => :wipe
@@ -98,7 +100,7 @@ DuneOnline::Application.routes.draw do
   match 'global_index' => 'admin#global_index', :as => :global_index
   match 'update_global/:id' => 'admin#update_global', :as => :global
   match 'sweep_session' => 'admin#sweep_session', :as => :sweep_session
-	match 'udalosti' => 'admin#udalosti', :as => :udalosti
+	match 'udalosti' => 'admin#udalosti', :as => :udalosti_admin
 	match 'update_udalost/:id' => 'admin#update_udalost', :as => :environment
 	match 'leno_update_udalost/:id' => 'admin#leno_update_udalost', :as => :influence
   

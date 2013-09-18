@@ -152,4 +152,17 @@ class Constant
 	def self.pocet_udalosti
 		Global.vrat('mozny_pocet_eventu_prepocet', 4)
 	end
+
+  def self.presun_leno
+	  Global.vrat('presun_leno', 4)
+  end
+
+  def self.presun_planeta
+	  Global.vrat('presun_planeta', 4)
+  end
+
+  def self.presun_vyrobku
+	  Global.vrat('presun_vyrobku', 4)
+  end
+
 end

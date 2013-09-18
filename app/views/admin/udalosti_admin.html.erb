@@ -1,0 +1,49 @@
+<h3>Udalosti na planete</h3>
+<table class="tab1">
+  <tr>
+    <td class="tdh1">Planeta</td>
+    <td class="tdh1">Udalost</td>
+    <td class="tdh1">Cas</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <% for event in @events do %>
+
+      <tr>
+
+        <td class="tdh1"><%= event.planet.name %></td>
+        <td class="tdh1"><%= event.planet.house.name %></td>
+        <td class="tdd"><%= event.property.name %></td>
+        <td class="tdd"><%= format_date(event.started_at) %></td>
+        <td class="tdd"><%= event.duration %></td>
+        <td class="tdd"><%= link_to "edit", environment_path(:id => event) %></td>
+      </tr>
+  <% end %>
+
+</table>
+<h3>Udalosti na lenu</h3>
+<table class="tab1">
+  <tr>
+    <td class="tdh1">Planeta</td>
+    <td class="tdh1">Udalost</td>
+    <td class="tdh1">Cas</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <% for infl in @influence do %>
+
+      <tr>
+
+        <td class="tdh1"><%= infl.field.name %></td>
+        <td class="tdh1"><%= infl.field.house.name if infl.field.house%></td>
+        <td class="tdd"><%= infl.effect.name %></td>
+        <td class="tdd"><%= format_date(infl.started_at) %></td>
+        <td class="tdd"><%= infl.duration %></td>
+        <td class="tdd"><%= link_to "edit", influence_path(:id => infl) %></td>
+      </tr>
+  <% end %>
+
+</table>
+

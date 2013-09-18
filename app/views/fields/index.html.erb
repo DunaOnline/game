@@ -37,7 +37,7 @@
     <td>
 
       <li><%= img_populace "Celková kapacita měst" %> 1000000</li>
-       <li><%= img_vyrobky "Celková kapacita výroby" %><%= @pole_domovska.vyuzitie_tovaren %></li>
+       <li><%= img_vyrobky "Celková kapacita výroby" %><%= @pole_domovska.kapacita_tovaren %></li>
 
       <li><%= img_kasarna "Celková kapacita kasáren" %> 1000</li>
       <!-- <li><%= img_kosmodrom "Celková kapacita kosmodromů" %> 1000</li> -->
@@ -54,31 +54,31 @@
 
     <td>
       <li><%= img_solary "Výnos soláry" %>
-        <font class="<%= trida_barvy(@domovska.vynos(current_user, 'solar')) %>"><%= format_mena(@domovska.vynos(current_user, 'solar'), "S") %></font>
+        <span class="<%= trida_barvy(@domovska.vynos(current_user, 'solar')) %>"><%= format_mena(@domovska.vynos(current_user, 'solar'), "S") %></span>
       </li>
       <li><%= img_material "Výnos materiál" %>
-        <font class="<%= trida_barvy(@domovska.vynos(current_user, 'material')) %>"><%= format_mena(@domovska.vynos(current_user, 'material'), "kg") %></font>
+        <span class="<%= trida_barvy(@domovska.vynos(current_user, 'material')) %>"><%= format_mena(@domovska.vynos(current_user, 'material'), "kg") %></span>
       </li>
       <li><%= img_populace "Výnos populace" %>
-        <font class="<%= trida_barvy(@domovska.vynos(current_user, 'population')) %>"><%= format_mena(@domovska.vynos(current_user, 'population'), "k") %></font>
+        <span class="<%= trida_barvy(@domovska.vynos(current_user, 'population')) %>"><%= format_mena(@domovska.vynos(current_user, 'population'), "k") %></span>
       </li>
       <li><%= img_zkusenosti "Výnos zkušenosti" %>
-        <font class="<%= trida_barvy(@domovska.vynos(current_user, 'exp')) %>"><%= format_mena(@domovska.vynos(current_user, 'exp'), "exp") %></font>
+        <span class="<%= trida_barvy(@domovska.vynos(current_user, 'exp')) %>"><%= format_mena(@domovska.vynos(current_user, 'exp'), "exp") %></span>
       </li>
     </td>
 
     <td>
       <% pt = @domovska.planet_type %>
       <li><%= img_solary "Bonus soláry" %>
-        <font class="<%= trida_barvy(pt.solar_bonus) %>"><%= format_mena(pt.solar_bonus, "%") %></font></li>
+        <span class="<%= trida_barvy(pt.solar_bonus) %>"><%= format_mena(pt.solar_bonus, "%") %></span></li>
       <li><%= img_material "Bonus materiál" %>
-        <font class="<%= trida_barvy(pt.material_bonus) %>"><%= format_mena(pt.material_bonus, "%") %></font></li>
+        <span class="<%= trida_barvy(pt.material_bonus) %>"><%= format_mena(pt.material_bonus, "%") %></span></li>
       <li><%= img_populace "Bonus populace" %>
-        <font class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%") %></font></li>
+        <span class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%") %></span></li>
       <li><%= img_zkusenosti "Bonus zkušenosti" %>
-        <font class="<%= trida_barvy(pt.exp_bonus) %>"><%= format_mena(pt.exp_bonus, "%") %></font></li>
+        <span class="<%= trida_barvy(pt.exp_bonus) %>"><%= format_mena(pt.exp_bonus, "%") %></span></li>
       <li><%= img_kasarna "Bonus ke kapacitě kasáren a kosmodromů" %>
-        <font class="cervena"> + 0%</font></li>
+        <span class="cervena"> + 0%</span></li>
     </td>
   </tr>
 

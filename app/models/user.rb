@@ -337,22 +337,29 @@ class User < ActiveRecord::Base
 	  resourcy
   end
 
+
+
   def zobraz_udalost
-	  msg_leno = ""
-	  msg_pla = ""
+	  msg_leno = []
+	  msg_pla = []
 	  self.fields.each do |field|
-		  if field.influence
-			  msg_leno += "//**Udalost na lenu #{field.name} : #{field.influence.effect.name}**//"
-		  end
-	  end
+		  field.influence.each do |influence|
+			  if influence && influence.effect.typ != "M"
+			    msg_leno << ["//**Udalost na lenu #{field.name} : #{influence.effect.name}**//",influence]
+				end
+			end
+
+		end
+
 	  self.fields.each do |field|
-		  if field.planet.environment
-			  msg_pla += "//**Udalost na planete #{field.planet.name} : #{field.planet.environment.property.name}**//"
+		  field.planet.environment.each do |environment|
+		  if environment
+			  msg_pla << ["//**Udalost na planete #{field.planet.name} : #{environment.property.name}**//",environment]
 			end
 	  end
 	  return msg_leno, msg_pla
   end
-
+ end
 
   def opustit_narod
 	  narod = self.house
@@ -360,24 +367,40 @@ class User < ActiveRecord::Base
 	  field.update_attribute(:planet_id,Planet.domovska_rodu(House.renegat).first.id)
 	  self.update_attribute(:house_id, House.renegat.id)
 			  self.zapis_operaci("Opustili jste narod #{narod.name}")
+	  Influence.new(
+			  :field_id => field.id,
+	      :effect_id => Effect.find_by_typ("M").id,
+	      :duration => 100,
+	      :started_at => Date.today
+	  )
   end
 
   def podat_ziadost(house_id)
-	  if self.house == House.renegat
+	  house = House.find(house_id)
+	  infl = self.domovske_leno.influence.where(:effect_id => Effect.find_by_typ("M").id).first
+	  if infl
 
+		  if  infl.started_at + 7 >= Date.today
 
-		  self.update_attributes(:house_id => House.renegat.id, :ziadost_house => house_id)
-		  self.zapis_operaci("Podali sme zadosti o prijeti do naroda #{house.name}")
-		  return true
+			  self.update_attributes(:house_id => House.renegat.id, :ziadost_house => house_id)
+			  self.zapis_operaci("Podali sme zadosti o prijeti do naroda #{house.name}")
+			  return "Podali sme zadosti o prijeti do naroda #{house.name}"
+		  else
+			  return "Musite pockat este #{Date.today - infl.started_at }"
+		  end
 	  else
-		  return false
+		  return "Nieste renegat"
 		end
+
   end
 
   def prijat_do_naroda(house)
 	  if self.house == House.renegat
 		  field = self.domovske_leno
 		  field.update_attribute(:planet_id,Planet.domovska_rodu(house).first.id)
+		  if o = Influence.where(:field_id => field, :effect_id => Effect.find_by_typ("M"))
+			  o.destroy
+		  end
 		  self.update_attributes(:house_id => house.id, :ziadost_house => nil)
 		  self.zapis_operaci("Byl jste prijat do naroda #{house.name}, Opustili sme renegaty")
 	  return true
@@ -427,6 +450,20 @@ class User < ActiveRecord::Base
     end
 
     return pp
+  end
+
+  def preprava_cost(amount,typ)
+	  if typ == "leno"
+		  House.imperium.update_attribute(:solar,House.imperium.solar + (amount * Constant.presun_leno))
+		  self.update_attribute(:solar,self.solar - (amount * Constant.presun_leno))
+		  return true
+	  elsif  typ == "planeta"
+		  House.imperium.update_attribute(:solar,House.imperium.solar + (amount * Constant.presun_leno))
+		  self.update_attribute(:solar,self.solar - (amount * Constant.presun_leno))
+		  return true
+	  else
+		  return false
+		end
   end
 
   private

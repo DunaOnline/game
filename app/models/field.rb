@@ -23,8 +23,8 @@ class Field < ActiveRecord::Base
   has_many :estates
   has_many :buildings, :through => :estates
 
-  has_one :influence
-  has_one :effect, :through => :influence
+  has_many :influence
+  has_many :effect, :through => :influence
 
   after_save :vytvor_resource
 
@@ -152,9 +152,9 @@ class Field < ActiveRecord::Base
 				  message += "Byla postavena #{pocet_budov} budova" if pocet_budov == 1
 			  else
 				  message += "Chybi vam "
-				  message += "#{cena_sol * pocet_budov - self.user.solar} sol, " unless solary
-				  message += "#{cena_mat * pocet_budov - mat_na_poli} kg," unless material
-				  message += "#{cena_mel * pocet_budov - melange_user} mg" unless melange
+				  message += "#{(cena_sol * pocet_budov - self.user.solar).to_f} sol, " unless solary
+				  message += "#{(cena_mat * pocet_budov - mat_na_poli).to_f} kg," unless material
+				  message += "#{(cena_mel * pocet_budov - melange_user).to_f} mg" unless melange
 				  message += "."
 			  end
 		  else
@@ -196,6 +196,7 @@ class Field < ActiveRecord::Base
 	  tovarna = Building.where(:kind => "V").first
 	  kapacita = self.estates.where(:building_id => tovarna.id).first
 	  kapacita = (kapacita.number * Constant.kapacita_tovaren).to_i
+
   end
 
   def move_products(co,target,amount)
@@ -211,11 +212,11 @@ class Field < ActiveRecord::Base
 			  )
 		  end
 
-		  case str = source_production.check_availability(amount,target,target_production)
+		  case str = source_production.check_availability(amount,target,target_production) && self.user.solar >= Constant.presun_vyrobku * amount
 			  when true
 				  source_production.update_attribute(:amount, source_production.amount - amount)
 				  target_production.update_attribute(:amount, target_production.amount + amount)
-				  self.zapis_udalosti(self.user,"Bylo presunuto #{amount} ks #{vyrobok.title} z #{self.name} na #{target.name} leno")
+				  self.zapis_udalosti(self.user,"Bylo presunuto #{amount} ks #{vyrobok.title} z #{self.name} na #{target.name} leno, Za presun zaplaceno #{Constant.presun_vyrobku * amount} solaru")
 			  else
 				  message = str
 
@@ -335,20 +336,51 @@ class Field < ActiveRecord::Base
 
 
   def move_resource(to, what, amount)
-    if self.check_availability(what, amount)
+
+    flag = self.check_availability(what, amount) if self.planet == to.planet
+
+    flag = self.check_availability(what, amount,"planeta")if self.planet != to.planet
+	  if flag
+
       case what
         when 'Population'
           self.resource.update_attribute(:population, self.resource.population - amount.abs)
           to.resource.update_attribute(:population, to.resource.population + amount.abs)
-		      self.zapis_udalosti(self.user,"Bylo presunuto #{amount} populacie z #{self.name} na #{to.name} leno")
+          if self.planet == to.planet
+
+	          self.user.preprava_cost(amount,"leno")
+	          self.zapis_udalosti(self.user,"Bylo presunuto #{amount} populacie z #{self.name} na #{to.name} leno, za presun mezi leny jsme zaplatili #{amount * Constant.presun_planeta} solaru")
+          else
+
+	          self.user.preprava_cost(amount,"planeta")
+		        self.zapis_udalosti(self.user,"Bylo presunuto #{amount} populacie z #{self.name} na #{to.name} leno, za presun mezi planetami jsme zaplatili #{amount * Constant.presun_planeta} solaru")
+          end
         when 'Material'
           self.resource.update_attribute(:material, self.resource.material - amount.abs)
           to.resource.update_attribute(:material, to.resource.material + amount.abs)
-          self.zapis_udalosti(self.user,"Bylo presunuto #{amount} materialu z #{self.name} na #{to.name} leno")
+          if self.planet == to.planet
+
+	          self.user.preprava_cost(amount,"leno")
+	          self.zapis_udalosti(self.user,"Bylo presunuto #{amount} materialu z #{self.name} na #{to.name} leno, za presun mezi leny jsme zaplatili #{amount * Constant.presun_planeta} solaru")
+          else
+
+	          self.user.preprava_cost(amount,"planeta")
+	          self.zapis_udalosti(self.user,"Bylo presunuto #{amount} materialu z #{self.name} na #{to.name} leno, za presun mezi planetami jsme zaplatili #{amount * Constant.presun_planeta} solaru")
+          end
+
 	      when 'Parts'
 		      self.resource.update_attribute(:parts, self.resource.parts - amount.abs)
 		      to.resource.update_attribute(:parts, to.resource.parts + amount.abs)
-		      self.zapis_udalosti(self.user,"Bylo presunuto #{amount} vyrobku z #{self.name} na #{to.name} leno")
+		      if self.planet == to.planet
+
+			      self.user.preprava_cost(amount,"leno")
+			      self.zapis_udalosti(self.user,"Bylo presunuto #{amount} vyrobku z #{self.name} na #{to.name} leno, za presun mezi leny jsme zaplatili #{amount * Constant.presun_planeta} solaru")
+		      else
+
+			      self.user.preprava_cost(amount,"planeta")
+			      self.zapis_udalosti(self.user,"Bylo presunuto #{amount} vyrobku z #{self.name} na #{to.name} leno, za presun mezi planetami jsme zaplatili #{amount * Constant.presun_planeta} solaru")
+		      end
+
         else
           "Toto nelze poslat"
       end
@@ -385,7 +417,7 @@ class Field < ActiveRecord::Base
 						  :field_id => self.id,
 						  :effect_id => effect.id,
 						  :duration => effect.duration
-				  ).save unless self.influence
+				  ).save
 				  if self.name == "Leno Arrakis"
 				    #self.user.zapis_operaci("Mimoriadna udalost #{effect.name}")
 				  else
@@ -402,39 +434,58 @@ class Field < ActiveRecord::Base
 	  if self.influence
 		  case typ
 			  when "P"
-				  enviro_bonus = self.influence.effect.population_bonus * self.influence.effect.population_cost if self.influence
+				self.influence.each do |influence|
+				  enviro_bonus = influence.effect.population_bonus * influence.effect.population_cost if influence
+				end
 			  when "PL"
-				  enviro_bonus = self.influence.effect.pop_limit_bonus  if self.influence
-			  when "J"
-				  enviro_bonus = self.influence.effect.melange_bonus * self.influence.effect.melange_cost if self.influence
-			  when "M"
-				  enviro_bonus = self.influence.effect.material_bonus * self.influence.effect.material_cost if self.influence
-			  when "S"
-				  enviro_bonus = self.influence.effect.solar_bonus * self.influence.effect.solar_cost if self.influence
-			  when "E"
-				  enviro_bonus = self.influence.effect.exp_bonus * self.influence.effect.exp_cost if self.influence
+				self.influence.each do |influence|
+				  enviro_bonus = influence.effect.pop_limit_bonus  if influence
+				end
+				when "J"
+				self.influence.each do |influence|
+				  enviro_bonus = influence.effect.melange_bonus * influence.effect.melange_cost if influence
+				end
+				when "M"
+				self.influence.each do |influence|
+				  enviro_bonus = influence.effect.material_bonus * influence.effect.material_cost if influence
+				end
+				when "S"
+				self.influence.each do |influence|
+				  enviro_bonus = influence.effect.solar_bonus * influence.effect.solar_cost if influence
+				end
+				when "E"
+				self.influence.each do |influence|
+					enviro_bonus = influence.effect.exp_bonus * influence.effect.exp_cost if influence
+				end
 			  else
 				  enviro_bonus = 1
 		  end
 	  end
+	  enviro_bonus = enviro_bonus -1 if enviro_bonus > 2
 	  enviro_bonus
   end
 
-  def check_availability(what, amount)
-    case what
-      when 'Population'
-        self.resource.population >= amount
-      when 'Material'
-        self.resource.material >= amount
-	    when 'Parts'
-		    self.resource.parts >= amount
-      else
-        false
-    end
+  def check_availability(what, amount, typ="leno")
+		  poplatok = Constant.presun_leno if typ == "leno"
+		  poplatok = Constant.presun_planeta if typ == "planeta"
+	  if poplatok <= self.user.solar
+	    case what
+	      when 'Population'
+	        self.resource.population >= amount
+	      when 'Material'
+	        self.resource.material >= amount
+		    when 'Parts'
+			    self.resource.parts >= amount
+	      else
+	        false
+	    end
+	  else
+		  false
+		end
   end
 
   def zapis_udalosti(user,content)
-	  Operation.new(:kind => "U", :user_id => user, :content => content, :date => Date.today, :time => Time.now).save
+	  Operation.new(:kind => "U", :user_id => user.id, :content => content, :date => Date.today, :time => Time.now).save
   end
 
   scope :vlastnik, lambda { |user| where(:user_id => user.id) }

@@ -64,7 +64,7 @@ class AdminController < ApplicationController
     end
   end
 
-  def udalosti
+  def udalosti_admin
 	  @events = Environment.order(:started_at).all
 	  @influence = Influence.order(:started_at).all
 

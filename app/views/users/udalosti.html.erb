@@ -1,0 +1,9 @@
+<div class="tovarna_obrazok">
+  <span class="heading"><%= @udalost.name %></span>
+  <%= @udalost.description%>
+  <%= @udalost.duration %>
+
+  <%= button_to @udalost.price, oprava_katastrofy_path(:id => @leno.id,:typ => "L") if @leno%>
+  <%= button_to @udalost.price, oprava_katastrofy_path(:id => @planet.id,:typ => "P") if @planet%>
+
+</div>

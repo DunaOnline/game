@@ -108,13 +108,18 @@
       <% if @user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first %>
       <span>
          <%= form_tag ziadost_path(:id => @user) do %>
+            <% if current_user.ziadost_house%>
+        Aktualna ziadost v narode <%= House.find(current_user.ziadost_house).name %>
+        <% end %>
+
             <%= select_tag :narod, options_for_select(House.playable.collect {|p| [ p.name, p.id ] }, {:include_blank => false}), :class => "tab" %>
 
-       <%= submit_tag 'Prihlasit sa do Naroda',  data:{ :confirm => "Ste si isty? Podat ziadost si mozete iba raz za prepocet" } %>
+       <%= submit_tag 'Prihlasit sa do Naroda',  data:{ :confirm => "Ste si isty?"} %>
          <% end %>
       </span>
       <% else %>
       <span>
+
         <%= link_to 'Opustit narod', opustit_path(:id => @user), :confirm => "Jste si jisti opustit narod #{current_user.house.name} ?" %>
       </span>
       <% end %>

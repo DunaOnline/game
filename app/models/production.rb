@@ -10,6 +10,7 @@ class Production < ActiveRecord::Base
 
   def check_availability(amount,target_field,target_production)
 	  message = ""
+
 	 if self.amount < amount
 		 message += "Nemate tolik vyrobku na presun"
 	 elsif target_production.amount + amount >= target_field.kapacita_tovaren

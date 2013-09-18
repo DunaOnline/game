@@ -95,6 +95,9 @@ Global.create(:setting => 'volba_imperatora', :value => true)
 Global.create(:setting => 'konec_volby_imperatora', :datum => 10.days.from_now)
 Global.create(:setting => 'pravdepodobnost_eventu', :cislo => 20.0)
 Global.create(:setting => 'mozny_pocet_eventu_prepocet', :cislo => 2.0)
+Global.create(:setting => 'presun_leno', :cislo => 0.02)
+Global.create(:setting => 'presun_planeta', :cislo => 0.02)
+Global.create(:setting => 'presun_vyrobku', :cislo => 0.02)
 puts 'Global done'
 
 User.create(:username => 'Norma_Cenva', :nick => 'Norma Cenva', :email => 'normacenva@spojka.vg', :house_id => titani.id, :password => 'doktoros', :password_confirmation => 'doktoros', :admin => true)

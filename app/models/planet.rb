@@ -22,8 +22,8 @@ class Planet < ActiveRecord::Base
   belongs_to :planet_type
   belongs_to :system, :primary_key => 'system_name', :foreign_key => 'system_name'
   has_many :fields
-  has_one :environment
-  has_one :property, :through => :environment
+  has_many :environment
+  has_many :property, :through => :environment
 
   def vytvor_pole(user)
     Field.new(
@@ -234,21 +234,17 @@ class Planet < ActiveRecord::Base
 			  if Property.count > 0
 				  roll_property = rand(Property.nahodne.count) + 1
 				  property = Property.nahodne.find(roll_property)
-				  flag = false
-				  while flag != true  do
-					  if self.environment
-						  opica = false
-					  else
+
 						  Environment.new(
 								  :planet_id => self.id,
 								  :property_id => property.id,
 								  :duration => property.duration
 						  ).save
-						  flag = true
-					  end
-				  end
+
+
+
 				  self.house.zapis_operaci("Mimoriadna udalost na planete #{self.name} : #{property.name}")
-				  udalost += 1
+
 				end
 		  end
 	  end
@@ -258,22 +254,37 @@ class Planet < ActiveRecord::Base
 	  enviro_bonus = 1
 	  if self.environment
 		  case typ
-				when "P"
-					 enviro_bonus = self.environment.property.population_bonus * self.environment.property.population_cost if self.environment
+			  when "P"
+				  self.environment.each do |enviro|
+					  enviro_bonus += enviro.property.population_bonus * enviro.property.population_cost if enviro
+
+				  end
 			  when "PL"
-					  enviro_bonus = self.environment.property.pop_limit_bonus  if self.environment
+				  self.environment.each do |enviro|
+					  enviro_bonus += enviro.property.pop_limit_bonus  if enviro
+					end
 			  when "J"
-					  enviro_bonus = self.environment.property.melange_bonus * self.environment.property.melange_cost if self.environment
+				  self.environment.each do |enviro|
+					  enviro_bonus += enviro.property.melange_bonus * enviro.property.melange_cost if enviro
+					end
 			  when "M"
-					  enviro_bonus = self.environment.property.material_bonus * self.environment.property.material_cost if self.environment
+				  self.environment.each do |enviro|
+					  enviro_bonus += enviro.property.material_bonus * enviro.property.material_cost if enviro
+					end
 			  when "S"
-					  enviro_bonus = self.environment.property.solar_bonus * self.environment.property.solar_cost if self.environment
+				  self.environment.each do |enviro|
+					  enviro_bonus += enviro.property.solar_bonus * enviro.property.solar_cost if enviro
+					end
 			  when "E"
-					  enviro_bonus = self.environment.property.exp_bonus * self.environment.property.exp_cost if self.environment
+				  self.environment.each do |enviro|
+					  enviro_bonus += enviro.property.exp_bonus * enviro.property.exp_cost if enviro
+					end
 			  else
 				  enviro_bonus = 1
 		  end
-		end
+	  end
+
+	  enviro_bonus = enviro_bonus -1 if enviro_bonus > 2
 	  enviro_bonus
 	end
 

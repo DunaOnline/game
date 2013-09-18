@@ -6,7 +6,7 @@ class Prepocet
       puts "PREPOCET"
       Prepocet.zamkni
       order = Prepocet.vytvor_eody
-      #Prepocet.zmen_vudce(order)
+      Prepocet.zmen_vudce(order)
       Prepocet.zpristupni_planety
       Prepocet.produkce_suroviny(order)
       Prepocet.produkce_melanz(order)
@@ -16,7 +16,7 @@ class Prepocet
       Prepocet.kontrola_zakonu
 
       if Constant.pristi_volby == Date.today
-       # Prepocet.zvol_poslance
+        Prepocet.zvol_poslance
       end
 
       if Imperium.konec_volby_imperatora == Date.today
@@ -130,7 +130,7 @@ class Prepocet
     Imperium.zapis_operaci("Vesmirne Gilde bylo odeslano #{gilde} mg melanze.")
     melange -= gilde
     odevzdano = 0.0
-    for house in House.playable.all do
+    House.playable.all.each do |house|
       rodu = melange * (house.melange_percent / 100.0)
       odevzdano += rodu
       house.zapis_operaci("Obdrzeno #{rodu} mg melanze.")
@@ -169,8 +169,8 @@ class Prepocet
   end
 
   def self.zmen_vudce(order)
-    houses = House.where('name NOT IN (?)', 'Renegáti, Impérium').includes(:users, :votes)
-    for house in houses do
+    houses = House.playable.includes(:users, :votes)
+    houses.each do |house|
       puts "Delam #{house.name}"
       old_vudce = house.users.where(:leader => true).first
       new_vudce = house.kdo_je_vitez('leader')
@@ -306,7 +306,7 @@ class Prepocet
 
 	def self.udalosti
 
-
+		puts 'udalosti'
 		Planet.nahodna_udalost
 		puts 'Enviroments done'
 

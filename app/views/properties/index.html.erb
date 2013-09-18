@@ -3,6 +3,10 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Description</th>
+    <th>typ</th>
+    <th>image</th>
+    <th>price</th>
     <th>Population Bonus</th>
     <th>Pop Limit Bonus</th>
     <th>Melange Bonus</th>
@@ -19,6 +23,10 @@
   <% for property in @properties %>
       <tr>
         <td><%= property.name %></td>
+        <td><%= property.description %></td>
+        <td><%= property.typ %></td>
+        <td><%= property.image %></td>
+        <td><%= property.price %></td>
         <td><%= property.population_bonus %></td>
         <td><%= property.pop_limit_bonus %></td>
         <td><%= property.melange_bonus %></td>
