@@ -69,10 +69,19 @@ class Aplikace
     #Topic.delete_all
     Operation.delete_all
     Vote.delete_all
+    Message.delete_all
+    Conversation.delete_all
+    Market.delete_all
+    MarketHistory.delete_all
+    Research.delete_all
+    Production.delete_all
+
+
 
     for field in Field.all do
       if field.planet.domovska?
         field.vytvor_resource
+
         field.postav(Building.where(:kind => "L", :level => [1]).first, 2)
         field.postav(Building.where(:kind => "S", :level => [1]).first, 2)
         field.postav(Building.where(:kind => "M", :level => [1]).first, 2)
@@ -150,7 +159,7 @@ class Aplikace
                             :position => 1,
                             :system_name => "Mu Draconis")
 
-    Planet.arrakis.fields << Field.new(:name => "Leno Arrakis",
+    Planet.arrakis.fields << Field.create(:name => "Leno Arrakis",
                                        :planet_id => arrakis.id,
                                        :user_id => nil,
                                        :pos_x => 1,

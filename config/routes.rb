@@ -82,7 +82,9 @@ DuneOnline::Application.routes.draw do
   match 'hlasovat' => 'users#hlasovat', :as => :hlasovat
   match 'sprava' => 'users#sprava', :as => :sprava
 	match 'opustit' => 'users#opustit', :as => :opustit
+	match 'opustit_mr' => 'users#opustit_mr', :as => :opustit_mr
 	match 'ziadost' => 'users#ziadost', :as => :ziadost
+	match 'ziadost_malorod' => 'users#ziadost_malorod', :as => :ziadost_malorod
   match 'pridel_pravo' => 'users#pridel_pravo', :as => :pridel_pravo
   match 'odeber_pravo' => 'users#odeber_pravo', :as => :odeber_pravo
   match 'posli_suroviny' => 'users#posli_suroviny', :as => :posli_suroviny
@@ -100,7 +102,7 @@ DuneOnline::Application.routes.draw do
   match 'global_index' => 'admin#global_index', :as => :global_index
   match 'update_global/:id' => 'admin#update_global', :as => :global
   match 'sweep_session' => 'admin#sweep_session', :as => :sweep_session
-	match 'udalosti' => 'admin#udalosti', :as => :udalosti_admin
+	match 'udalosti_admin' => 'admin#udalosti_admin', :as => :udalosti_admin
 	match 'update_udalost/:id' => 'admin#update_udalost', :as => :environment
 	match 'leno_update_udalost/:id' => 'admin#leno_update_udalost', :as => :influence
   

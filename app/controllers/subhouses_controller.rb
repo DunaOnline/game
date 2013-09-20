@@ -14,11 +14,16 @@ class SubhousesController < ApplicationController
   end
 
   def create
-    @subhouse = Subhouse.new(params[:subhouse])
-    if @subhouse.save
-      redirect_to @subhouse, :notice => "Successfully created subhouse."
+    @subhouse = Subhouse.new
+    @subhouse.name = (params[:Malorod])
+    @subhouse.house_id = current_user.house.id
+
+    if @subhouse.obsazenost_mr
+	    @subhouse.save
+	    @subhouse.prirad_mr(current_user)
+      redirect_to :back, :notice => "Malorod uspesne zalozeny"
     else
-      render :action => 'new'
+      redirect_to :back, :alert => "Nemozte zalozit malorod"
     end
   end
 

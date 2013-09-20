@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :house_id, :null => false
       t.integer :subhouse_id, :null => true
       t.integer :ziadost_house, :null => true
+      t.integer :ziadost_subhouse, :null => true
       t.decimal :solar, :precision => 12, :scale => 4, :default => 0.0
       t.decimal :melange, :precision => 12, :scale => 4, :default => 0.0
       t.decimal :exp, :precision => 12, :scale => 4, :default => 0.0

@@ -193,10 +193,11 @@ class Field < ActiveRecord::Base
   end
 
   def kapacita_tovaren
+	  number = 0
 	  tovarna = Building.where(:kind => "V").first
 	  kapacita = self.estates.where(:building_id => tovarna.id).first
-	  kapacita = (kapacita.number * Constant.kapacita_tovaren).to_i
-
+	  number = (kapacita.number * Constant.kapacita_tovaren).to_i if kapacita
+	  number
   end
 
   def move_products(co,target,amount)
@@ -398,7 +399,6 @@ class Field < ActiveRecord::Base
 			  infl.update_attribute(:duration,infl.duration - 1)
 		  end
 	  end
-
 	  self.all.each do |field|
 		  field.udalost
 	  end

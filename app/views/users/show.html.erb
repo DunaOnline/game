@@ -65,7 +65,7 @@
 
     <tr>
       <th>Malorod:</th>
-      <td><%= link_to @user.house.name, @user.house %>   </td>
+      <td><%= link_to @user.subhouse.name, @user.subhouse if @user.subhouse%>   </td>
     </tr>
 
     <tr>

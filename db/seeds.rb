@@ -98,6 +98,7 @@ Global.create(:setting => 'mozny_pocet_eventu_prepocet', :cislo => 2.0)
 Global.create(:setting => 'presun_leno', :cislo => 0.02)
 Global.create(:setting => 'presun_planeta', :cislo => 0.02)
 Global.create(:setting => 'presun_vyrobku', :cislo => 0.02)
+Global.create(:setting => 'max_hracu_malorod', :cislo => 10)
 puts 'Global done'
 
 User.create(:username => 'Norma_Cenva', :nick => 'Norma Cenva', :email => 'normacenva@spojka.vg', :house_id => titani.id, :password => 'doktoros', :password_confirmation => 'doktoros', :admin => true)
@@ -117,30 +118,30 @@ Field.create(:user_id => gilbertus.id, :planet_id => titania.id, :name => "Treti
 Field.create(:user_id => simi.id, :planet_id => titania.id, :name => "Ctvrta", :pos_x => 2, :pos_y => 2)
 puts 'Field done'
 
-Property.create(:name => "Asteroid", :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.2, :material_bonus => 1.0, :solar_bonus => 1.0,
+Property.create(:name => "Asteroid",:typ => "R",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.2, :material_bonus => 1.0, :solar_bonus => 1.0,
 								:exp_bonus => 1.2, :duration => 2, :population_cost => 1.0, :melange_cost => 1.0, :material_cost => 1.0, :solar_cost => 1.0, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "R")
-Property.create(:name => "Potopa", :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
+Property.create(:name => "Potopa",:typ => "R",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
                 :exp_bonus => 1.0, :duration => 2, :population_cost => 1.0, :melange_cost => 1.0, :material_cost => 1.0, :solar_cost => 1.0, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "R")
-Property.create(:name => "Cervy", :population_bonus => 1.2, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
+Property.create(:name => "Cervy",:typ => "R",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.2, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
                 :exp_bonus => 1.2, :duration => 2, :population_cost => 1.0, :melange_cost => 1.0, :material_cost => 1.0, :solar_cost => 1.0, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "R")
-Property.create(:name => "Ufonci", :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
+Property.create(:name => "Ufonci",:typ => "R",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
                 :exp_bonus => 1.0, :duration => 2, :population_cost => 0.8, :melange_cost => 0.8, :material_cost => 0.8, :solar_cost => 0.8, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "R")
-Property.create(:name => "Renegat", :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
-                :exp_bonus => 1.0, :duration => 2, :population_cost => 0.8, :melange_cost => 0.8, :material_cost => 0.8, :solar_cost => 0.8, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "M")
+Property.create(:name => "Renegat",:typ => "R",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
+                :exp_bonus => 1.0, :duration => 2,:description => "BlaBla",:image => "/img",:price => 300, :population_cost => 0.8, :melange_cost => 0.8, :material_cost => 0.8, :solar_cost => 0.8, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "M")
 puts 'Property done'
 
 Effect.create(:name => "opica", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
-              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R")
+              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R", :description => "BlaBla",:image => "/img",:price => 300)
 Effect.create(:name => "Ufo", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
-              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R")
+              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R", :description => "BlaBla",:image => "/img",:price => 300)
 Effect.create(:name => "Bombardovanie", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
-              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R")
+              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R", :description => "BlaBla",:image => "/img",:price => 300)
 Effect.create(:name => "Mor", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
-              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R")
+              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R", :description => "BlaBla",:image => "/img",:price => 300)
 Effect.create(:name => "Hladomor", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
-              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R")
+              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R", :description => "BlaBla",:image => "/img",:price => 300)
 Effect.create(:name => "Hladomor", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
-              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "M")
+              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "M", :description => "BlaBla",:image => "/img",:price => 300)
 puts 'Effects done'
 
 Technology.create(:name => "Investice do Infrastruktury", :discovered => 1, :description => "-2% cena budov

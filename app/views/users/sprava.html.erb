@@ -102,6 +102,54 @@
     </td>
   </tr>
 </table>
+
+<% if current_user.subhouse %>
+    <table class="tab1">
+      <tr>
+        <td>
+          <%= link_to 'Opustit malorod', opustit_mr_path %>
+        </td>
+
+      </tr>
+
+    </table>
+<% else %>
+    <table class="tab1">
+      <% @subhouses.each do |s| %>
+          <tr>
+            <td>
+              <span><%= s.name %> </span>
+            </td>
+            <td>
+              <span><%= s.pocet_userov %> / <%= Constant.max_u_mr.to_i %></span>
+            </td>
+            <td>
+              <span><%= link_to 'Podat Ziadost', ziadost_malorod_url(:id => s.id)  %></span>
+            </td>
+
+
+          </tr>
+      <% end %>
+
+    </table>
+
+    <table class="tab1">
+      <tr>
+        <td>
+          <span>Zalozit malorod : </span>
+        </td>
+        <td>
+          <%= form_tag @subhouse do %>
+              <%= text_field_tag 'Malorod','', :class => "tab" %>
+              <%= submit_tag 'Zaloz' %>
+          <% end %>
+        </td>
+
+      </tr>
+
+    </table>
+<% end %>
+
 <table class="tab1">
   <tr>
     <td>
@@ -114,16 +162,16 @@
 
             <%= select_tag :narod, options_for_select(House.playable.collect {|p| [ p.name, p.id ] }, {:include_blank => false}), :class => "tab" %>
 
-       <%= submit_tag 'Prihlasit sa do Naroda',  data:{ :confirm => "Ste si isty?"} %>
+            <%= submit_tag 'Prihlasit sa do Naroda',  data:{ :confirm => "Ste si isty?"} %>
          <% end %>
       </span>
       <% else %>
       <span>
 
-        <%= link_to 'Opustit narod', opustit_path(:id => @user), :confirm => "Jste si jisti opustit narod #{current_user.house.name} ?" %>
+        <%= link_to 'Opustit narod', opustit_path, :confirm => "Jste si jisti opustit narod #{current_user.house.name} ?" %>
       </span>
       <% end %>
-      </td>
+    </td>
 
   </tr>
 

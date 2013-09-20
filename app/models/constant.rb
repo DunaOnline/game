@@ -165,4 +165,8 @@ class Constant
 	  Global.vrat('presun_vyrobku', 4)
   end
 
+	def self.max_u_mr
+		Global.vrat('max_hracu_malorod', 4)
+	end
+
 end

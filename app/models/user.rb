@@ -42,7 +42,7 @@
 class User < ActiveRecord::Base
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation, :house_id, :subhouse_id, :solar, :melange
-  attr_accessible :exp, :leader, :mentat, :army_mentat, :diplomat, :general, :vicegeneral, :landsraad, :arrakis ,:ziadost_house
+  attr_accessible :exp, :leader, :mentat, :army_mentat, :diplomat, :general, :vicegeneral, :landsraad, :arrakis ,:ziadost_house, :ziadost_subhouse
   attr_accessible :emperor, :regent, :court, :vezir, :admin, :nick, :influence
   attr_accessible :web, :icq, :gtalk, :skype, :facebook, :presentation, :active
 
@@ -52,6 +52,7 @@ class User < ActiveRecord::Base
   # after_save :napln_suroviny
 
   belongs_to :house
+  belongs_to :subhouse
   has_many :fields
   has_many :votes, :foreign_key => 'elective'
 
@@ -375,6 +376,13 @@ class User < ActiveRecord::Base
 	  )
   end
 
+  def opustit_mr
+	  subhouse = self.subhouse
+
+	  self.update_attribute(:subhouse_id, nil)
+	  subhouse.delete if subhouse.users.count == 0
+  end
+
   def podat_ziadost(house_id)
 	  house = House.find(house_id)
 	  infl = self.domovske_leno.influence.where(:effect_id => Effect.find_by_typ("M").id).first
@@ -458,8 +466,8 @@ class User < ActiveRecord::Base
 		  self.update_attribute(:solar,self.solar - (amount * Constant.presun_leno))
 		  return true
 	  elsif  typ == "planeta"
-		  House.imperium.update_attribute(:solar,House.imperium.solar + (amount * Constant.presun_leno))
-		  self.update_attribute(:solar,self.solar - (amount * Constant.presun_leno))
+		  House.imperium.update_attribute(:solar,House.imperium.solar + (amount * Constant.presun_planeta))
+		  self.update_attribute(:solar,self.solar - (amount * Constant.presun_planeta))
 		  return true
 	  else
 		  return false

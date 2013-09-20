@@ -95,7 +95,8 @@ class UsersController < ApplicationController
     end
     @planets = @user.najdi_planety
     @operations = @user.operations.uzivatelske.seradit.limit(5)
-
+    @subhouse = Subhouse.new
+	  @subhouses = Subhouse.all
   end
 
   def udalosti
@@ -107,10 +108,7 @@ class UsersController < ApplicationController
 			  @udalost = Environment.find(params[:id]).property
 			  @planet =  Environment.find(params[:id])
 		  else
-
 	  end
-
-
   end
 
   def zrus_udalost
@@ -118,27 +116,27 @@ class UsersController < ApplicationController
   end
 
   def opustit
-
-    if params[:id]
-		  user = User.find(params[:id])
-		  if user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first
+		  if current_user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first
 			  redirect_to :back, :notice => "Nemozte opustit renegatov"
 		  else
-		  narod = user.house
-		  user.opustit_narod
-
-
+		  narod = current_user.house
+		  current_user.opustit_narod
 		  redirect_to :back, :notice => "Opustili ste narod #{narod.name}"
 		  end
-    else
-	    redirect_to :back
+  end
+
+  def opustit_mr
+	  mr = current_user.subhouse
+	  if current_user.opustit_mr
+		  redirect_to :back, :notice => "Opustili jste malorod #{mr.name}"
+	  else
+		  redirect_to :back, :alert => "Nemozte opustit malorod #{mr.name}"
 	  end
   end
 
   def ziadost
 	  if params[:id]
 		  user = User.find(params[:id])
-
 			  if msg = user.podat_ziadost(params[:narod])
 				  redirect_to :back, :notice => msg
 			  else
@@ -148,6 +146,11 @@ class UsersController < ApplicationController
 		  redirect_to :back
 		end
   end
+
+  def ziadost_malorod
+	  subhouse = Subhouse.find(params[:id])
+  end
+
 
   def oprava_katastrofy
 	  if params[:typ] == "L"
@@ -161,9 +164,8 @@ class UsersController < ApplicationController
 	  else
 		  redirect_to sprava_path(:id => current_user)
 		end
-
-
   end
+
 
   def pridel_pravo
     komu = User.find(params[:user_id])
