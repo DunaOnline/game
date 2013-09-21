@@ -58,7 +58,7 @@ DuneOnline::Application.routes.draw do
   match 'zobraz_arrakis' => 'planets#zobraz_arrakis', :as => :zobraz_arrakis
 
   resources :subhouses
-  match 'sprava_mr/:id' => 'subhouses#sprava_mr', :as => :sprava_mr
+  match 'sprava_mr/(:id)' => 'subhouses#sprava_mr', :as => :sprava_mr
   match 'posli_mr_sur' => 'subhouses#posli_mr_sur', :as => :posli_mr_sur
   match 'vyhod_mr/:id' => 'subhouses#vyhod_mr', :as => :vyhod_mr
   match 'prijmi_hrace_mr' => 'subhouses#prijmi_hrace_mr', :as => :prijmi_hrace_mr
@@ -97,6 +97,8 @@ DuneOnline::Application.routes.draw do
   match 'posli_suroviny' => 'users#posli_suroviny', :as => :posli_suroviny
 	match 'udalosti' => 'users#udalosti', :as => :udalosti
 	match 'oprava_katastrofy' => 'users#oprava_katastrofy', :as => :oprava_katastrofy
+  match 'zmena_hesla_f' => 'users#zmena_hesla_f', :as => :zmena_hesla_f
+  match 'zmena_hesla' => 'users#zmena_hesla', :as => :zmena_hesla
 
 #  resources :admin
   match 'wipe' => 'admin#wipe', :as => :wipe

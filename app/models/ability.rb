@@ -34,6 +34,7 @@ class Ability
         cannot [:update, :delete], Global
         cannot [:read, :update, :create, :delete], Product
         can [:read, :update], User
+        can [:zmena_hesla, :zmena_hesla_f], User
         can [:read, :create], Subhouse
         #can [:update], User, :id => user.id
         can [:read, :osidlit_pole, :zobraz_arrakis], Planet

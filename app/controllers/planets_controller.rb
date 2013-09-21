@@ -8,12 +8,15 @@ class PlanetsController < ApplicationController
 
   def show
     @planet = Planet.find(params[:id])
-    @fields = @planet.fields
-    tech_bonus = current_user.tech_bonus("J")
-    bonus = 2 - tech_bonus
-    @cena_noveho_lena_melanz = @planet.cena_noveho_lena_mel * bonus
-    @cena_noveho_lena_solary = @planet.cena_noveho_lena_sol * bonus
-
+    if @planet == Planet.arrakis
+      return redirect_to zobraz_arrakis_path
+    else
+      @fields = @planet.fields
+      tech_bonus = current_user.tech_bonus("J")
+      bonus = 2 - tech_bonus
+      @cena_noveho_lena_melanz = @planet.cena_noveho_lena_mel * bonus
+      @cena_noveho_lena_solary = @planet.cena_noveho_lena_sol * bonus
+    end
   end
 
   def new

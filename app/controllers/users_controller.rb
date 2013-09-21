@@ -232,4 +232,43 @@ class UsersController < ApplicationController
 
 
   end
+
+  def zmena_hesla_f
+    @title="Změna hesla uživatele"
+    @user = current_user
+    @user.password=""
+    @user.password_confirmation=""
+  end
+
+  def zmena_hesla
+    flash[:notice] = nil
+    @user = current_user
+    old_pass = params[:password][:old]
+    new_pass = params[:user][:password]
+    new_mail = params[:user][:email]
+    if User.authenticate(@user.username, old_pass) # jestli si opravuje vlastni heslo
+      unless new_mail == @user.email
+        flash[:notice] = 'Email změněn.'
+        @user.update_attribute('email', new_mail)
+      end
+
+      unless new_pass.blank?
+        if new_pass == params['user']['password_confirmation']
+          if new_pass.length.between?(4, 40)
+            @user.change_password(new_pass)
+            flash[:notice] = 'Heslo změněno.'
+          else
+            flash[:error] = 'Heslo nemá 5-40 znaků.'
+          end
+        else
+          flash[:error] = 'Hesla nejsou stejná.'
+        end
+      else
+        flash[:error] = 'Heslo nemá 5-40 znaků.'
+      end
+    else
+      flash[:error] = 'Neúspěšné ověření původního hesla.'
+    end
+    render :action => 'zmena_hesla_f'
+  end
 end

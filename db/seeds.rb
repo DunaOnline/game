@@ -63,8 +63,8 @@ arrakis.fields << Field.new(:name => "Leno Arrakis",
 )
 puts "Leno Arrakis done"
 
-Global.create(:setting => 'login', :value => true)
-Global.create(:setting => 'signup', :value => true)
+Global.create(:setting => 'login', :value => false)
+Global.create(:setting => 'signup', :value => false)
 Global.create(:setting => 'pristi_volby', :datum => 1.week.from_now)
 Global.create(:setting => 'zakl_cena_planety', :cislo => 200.00)
 Global.create(:setting => 'zakl_cena_lena', :cislo => 15.00)
@@ -93,7 +93,7 @@ Global.create(:setting => 'gilda_melanz_procenta', :cislo => 15.0)
 Global.create(:setting => 'gilda_melanz_pevna_castka', :cislo => 100.0)
 Global.create(:setting => 'volba_imperatora', :value => true)
 Global.create(:setting => 'konec_volby_imperatora', :datum => 10.days.from_now)
-Global.create(:setting => 'pravdepodobnost_eventu', :cislo => 20.0)
+Global.create(:setting => 'pravdepodobnost_eventu', :cislo => 2.0)
 Global.create(:setting => 'mozny_pocet_eventu_prepocet', :cislo => 2.0)
 Global.create(:setting => 'presun_leno', :cislo => 0.02)
 Global.create(:setting => 'presun_planeta', :cislo => 0.02)
@@ -107,7 +107,7 @@ User.create(:username => 'Norma_Cenva', :nick => 'Norma Cenva', :email => 'norma
 User.create(:username => 'Doktor', :nick => 'Doktor', :email => 'admin@dunaonline.cz', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
 User.create(:username => 'Gilbertus_Albans', :nick => 'Gilbertus Albans', :email => 'administr@dunaonline.cz', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
 User.create(:username => 'Simi', :nick => 'Simi', :email => 'administrator@dunaonline.cz', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
-User.create(:username => 'minohimself', :nick => 'minohimself', :email => 'administrator@dunaonline.cz', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
+User.create(:username => 'minohimself', :nick => 'minohimself', :email => 'adminhimself@dunaonline.cz', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
 puts 'User done'
 
 norma = User.find_by_username('Norma_Cenva')
@@ -125,28 +125,10 @@ puts 'Field done'
 
 Property.create(:name => "Asteroid",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.2, :material_bonus => 1.0, :solar_bonus => 1.0,
 								:exp_bonus => 1.2, :duration => 2, :population_cost => 1.0, :melange_cost => 1.0, :material_cost => 1.0, :solar_cost => 1.0, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "R")
-Property.create(:name => "Potopa",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
-                :exp_bonus => 1.0, :duration => 2, :population_cost => 1.0, :melange_cost => 1.0, :material_cost => 1.0, :solar_cost => 1.0, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "R")
-Property.create(:name => "Cervy",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.2, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
-                :exp_bonus => 1.2, :duration => 2, :population_cost => 1.0, :melange_cost => 1.0, :material_cost => 1.0, :solar_cost => 1.0, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "R")
-Property.create(:name => "Ufonci",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
-                :exp_bonus => 1.0, :duration => 2, :population_cost => 0.8, :melange_cost => 0.8, :material_cost => 0.8, :solar_cost => 0.8, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "R")
-Property.create(:name => "Renegat",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
-                :exp_bonus => 1.0, :duration => 2,:description => "BlaBla",:image => "/img",:price => 300, :population_cost => 0.8, :melange_cost => 0.8, :material_cost => 0.8, :solar_cost => 0.8, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "M")
 puts 'Property done'
 
 Effect.create(:name => "opica", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
               :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R", :description => "BlaBla",:image => "/img",:price => 300)
-Effect.create(:name => "Ufo", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
-              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R", :description => "BlaBla",:image => "/img",:price => 300)
-Effect.create(:name => "Bombardovanie", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
-              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R", :description => "BlaBla",:image => "/img",:price => 300)
-Effect.create(:name => "Mor", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
-              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R", :description => "BlaBla",:image => "/img",:price => 300)
-Effect.create(:name => "Hladomor", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
-              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R", :description => "BlaBla",:image => "/img",:price => 300)
-Effect.create(:name => "Hladomor", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
-              :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "M", :description => "BlaBla",:image => "/img",:price => 300)
 puts 'Effects done'
 
 Technology.create(:name => "Investice do Infrastruktury", :discovered => 1, :description => "-2% cena budov
@@ -190,9 +172,9 @@ Technology.create(:name => "Obraná technologie", :discovered => 1, :description
 
 puts 'Technology done'
 
-Product.create(:example_value1 => 22, :example_value1 => 10, :parts => 30, :title => "Spalovac kamene", :description => "Imba iks utocna jednotka", :material => 25.5,
-:melanz => 0.5, :price => 1000, :druh => "D")
-Product.create(:example_value1 => 12, :example_value1 => 30, :parts => 50, :title => "Transporter", :description => "Gilda nim vozi opice na planetu", :material => 25.5,
+Product.create(:parts => 30, :title => "Spalovac kamene", :description => "Imba iks utocna jednotka", :material => 25.5,
+               :melanz => 0.5, :price => 1000, :druh => "D")
+Product.create(:parts => 50, :title => "Transporter", :description => "Gilda nim vozi opice na planetu", :material => 25.5,
                :melanz => 1.75, :price => 1200, :druh => "D")
 
 puts 'Products done'
@@ -224,11 +206,10 @@ Building.create(:kind => "E", :level => 1, :name => "Laboratoř", :description =
 Building.create(:kind => "E", :level => 2, :name => "Univerzita", :description => "Univerzity jsou určeny k produkci zkušeností (expů), ty jsou dále využity pro výzkum technologii.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 14.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 42.0, :solar_cost => 31.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 Building.create(:kind => "E", :level => 3, :name => "Chrám vědy", :description => "Chramy vedy jsou určeny k produkci zkušeností (expů), ty jsou dále využity pro výzkum technologii.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 18.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 44.0, :solar_cost => 32.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 
-Building.create(:kind => "J", :level => 1, :name => "Továrna na koření", :description => "Produkuje koreni.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 100.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 20.0, :melange_cost => 3.0, :material_cost => 50.0, :solar_cost => 100.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
-
 Building.create(:kind => "O", :level => 1, :name => "PO", :description => "Planetarni obrana.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 70.0, :solar_cost => 100.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 Building.create(:kind => "V", :level => 1, :name => "Továrna", :description => "Produkuje vyrobky.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 75.0, :solar_cost => 50.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 
+Building.create(:kind => "J", :level => 1, :name => "Továrna na koření", :description => "Produkuje koreni.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 100.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 20.0, :melange_cost => 3.0, :material_cost => 50.0, :solar_cost => 100.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 Building.create(:kind => "JL", :level => 1, :name => "Arraken", :description => "Sídelní město, astroport.", :population_bonus => 10.0, :pop_limit_bonus => 0.0, :melange_bonus => 300.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 0.0, :melange_cost => 0.0, :material_cost => 0.0, :solar_cost => 0.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 puts 'budovy done'
 

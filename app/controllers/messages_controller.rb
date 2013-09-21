@@ -97,8 +97,8 @@ class MessagesController < ApplicationController
     postum = Message.find(params[:id])
     conversation = postum.conversations.first
     odoslana = conversation.sender == current_user.id
-    prijata =  conversation.receiver == current_user.id
-    postum.vymaz(current_user.id, odoslana,prijata)
+    prijata = conversation.receiver == current_user.id
+    postum.vymaz(current_user.id, odoslana, prijata)
 
     respond_to do |format|
       format.html { redirect_to messages_url(:type => "Dorucena"), :notice => "Posta bola vymazana" }

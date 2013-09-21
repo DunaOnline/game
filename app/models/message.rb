@@ -30,7 +30,7 @@ class Message < ActiveRecord::Base
     end
   end
 
-  def vymaz(user, odoslana,prijata)
+  def vymaz(user, odoslana, prijata)
     if odoslana
 	    recipients = Conversation.where('receiver' => user, 'message_id' => self.id)
 	    recipients.each do |r|

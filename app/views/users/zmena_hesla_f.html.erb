@@ -1,0 +1,28 @@
+<%= form_tag :action => 'zmena_hesla', :id => @user do %>
+    <table>
+      <tr>
+        <th class="span-1">Uživatel: <%= "#{@user.username}" %></th>
+        <th class="span-3"></th>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td><%= text_field('user', 'email') %></td>
+      </tr>
+      <tr>
+        <td>Současné heslo:</td>
+        <td><%= password_field('password', 'old') %>*</td>
+      </tr>
+      <tr>
+        <td>Nové heslo:</td>
+        <td><%= password_field('user', 'password', :limit => 40) %></td>
+      </tr>
+      <tr>
+        <td>Potvrzení hesla:</td>
+        <td><%= password_field('user', 'password_confirmation', :limit => 40) %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= submit_tag 'Změnit' %></td>
+      </tr>
+    </table>
+<% end %>

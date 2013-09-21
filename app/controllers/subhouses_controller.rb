@@ -2,7 +2,7 @@ class SubhousesController < ApplicationController
   authorize_resource # CanCan
 
   def index
-    @subhouses = Subhouse.all
+    @subhouses = Subhouse.where(:house_id => current_user.house).all
   end
 
   def show
@@ -42,8 +42,12 @@ class SubhousesController < ApplicationController
   end
 
   def sprava_mr
-	  @subhouse = Subhouse.find(params[:id])
-	  @ziadosti = User.malorod(@subhouse.id)
+    if params[:id]
+      @subhouse = Subhouse.find(params[:id])
+      @ziadosti = User.malorod(@subhouse.id)
+    else
+      redirect_to current_user.house
+    end
   end
 
   def vyhod_mr

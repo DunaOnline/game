@@ -21,6 +21,8 @@
               <% end %>
               <!-- <li><a href="#"> Multifórum *</a>  -->
               <li><%= link_to "Systémový Syselaad", syselaad_path(:kind => 'S') %></li>
+              <br/>
+              <li><%= link_to 'Změna hesla', zmena_hesla_f_path %></li>
             </ul>
           </li>
         </ul>
@@ -33,7 +35,7 @@
               <li><%= link_to "Statistika přepočtů", zobraz_eod_path %>
               <li><a href="#"> Mezinárodní diplomacie *</a>
               <li><%= link_to 'Správa hráče a volby', sprava_path(:id => current_user) %>
-                <% if can? :sprava_mr, Subhouse %>
+              <% if can? :sprava_mr, Subhouse %>
                   <li><%= link_to 'Správa Malorod', sprava_mr_path(:id => current_user.subhouse) %>
               <% end %>
                 <% if can? :sprava_rod, House %>
