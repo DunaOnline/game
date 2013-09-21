@@ -107,28 +107,31 @@ User.create(:username => 'Norma_Cenva', :nick => 'Norma Cenva', :email => 'norma
 User.create(:username => 'Doktor', :nick => 'Doktor', :email => 'admin@dunaonline.cz', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
 User.create(:username => 'Gilbertus_Albans', :nick => 'Gilbertus Albans', :email => 'administr@dunaonline.cz', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
 User.create(:username => 'Simi', :nick => 'Simi', :email => 'administrator@dunaonline.cz', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
+User.create(:username => 'minohimself', :nick => 'minohimself', :email => 'administrator@dunaonline.cz', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
 puts 'User done'
 
 norma = User.find_by_username('Norma_Cenva')
 doktor = User.find_by_username('Doktor')
 gilbertus = User.find_by_username('Gilbertus_Albans')
 simi = User.find_by_username('Simi')
+mino = User.find_by_username('minohimself')
 
 Field.create(:user_id => norma.id, :planet_id => titania.id, :name => "Prvni", :pos_x => 1, :pos_y => 1)
 Field.create(:user_id => doktor.id, :planet_id => titania.id, :name => "Druha", :pos_x => 1, :pos_y => 2)
 Field.create(:user_id => gilbertus.id, :planet_id => titania.id, :name => "Treti", :pos_x => 2, :pos_y => 1)
 Field.create(:user_id => simi.id, :planet_id => titania.id, :name => "Ctvrta", :pos_x => 2, :pos_y => 2)
+Field.create(:user_id => mino.id, :planet_id => titania.id, :name => "Pata", :pos_x => 3, :pos_y => 1)
 puts 'Field done'
 
-Property.create(:name => "Asteroid",:typ => "R",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.2, :material_bonus => 1.0, :solar_bonus => 1.0,
+Property.create(:name => "Asteroid",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.2, :material_bonus => 1.0, :solar_bonus => 1.0,
 								:exp_bonus => 1.2, :duration => 2, :population_cost => 1.0, :melange_cost => 1.0, :material_cost => 1.0, :solar_cost => 1.0, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "R")
-Property.create(:name => "Potopa",:typ => "R",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
+Property.create(:name => "Potopa",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
                 :exp_bonus => 1.0, :duration => 2, :population_cost => 1.0, :melange_cost => 1.0, :material_cost => 1.0, :solar_cost => 1.0, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "R")
-Property.create(:name => "Cervy",:typ => "R",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.2, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
+Property.create(:name => "Cervy",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.2, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
                 :exp_bonus => 1.2, :duration => 2, :population_cost => 1.0, :melange_cost => 1.0, :material_cost => 1.0, :solar_cost => 1.0, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "R")
-Property.create(:name => "Ufonci",:typ => "R",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
+Property.create(:name => "Ufonci",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
                 :exp_bonus => 1.0, :duration => 2, :population_cost => 0.8, :melange_cost => 0.8, :material_cost => 0.8, :solar_cost => 0.8, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "R")
-Property.create(:name => "Renegat",:typ => "R",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
+Property.create(:name => "Renegat",:description => "BlaBla",:image => "/img",:price => 300, :population_bonus => 1.0, :population_limit_bonus => 1.0, :melange_bonus => 1.0, :material_bonus => 1.0, :solar_bonus => 1.0,
                 :exp_bonus => 1.0, :duration => 2,:description => "BlaBla",:image => "/img",:price => 300, :population_cost => 0.8, :melange_cost => 0.8, :material_cost => 0.8, :solar_cost => 0.8, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "M")
 puts 'Property done'
 
@@ -198,12 +201,14 @@ norma.napln_suroviny
 doktor.napln_suroviny
 gilbertus.napln_suroviny
 simi.napln_suroviny
+mino.napln_suroviny
 puts 'Suroviny done'
 
 norma.hlasuj(norma, 'leader')
 doktor.hlasuj(norma, 'leader')
 gilbertus.hlasuj(norma, 'leader')
 simi.hlasuj(norma, 'leader')
+mino.hlasuj(norma, 'leader')
 puts 'hlasy done'
 
 Building.create(:kind => "L", :level => 1, :name => "Město", :description => "Města slouží k ubytování vaší populace.", :population_bonus => 20.0, :pop_limit_bonus => 20.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 35.0, :solar_cost => 30.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
