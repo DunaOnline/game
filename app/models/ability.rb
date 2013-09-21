@@ -32,10 +32,13 @@ class Ability
         can :manage, :all
       else
         cannot [:update, :delete], Global
+        cannot [:update, :delete], Global
         can [:read, :update], User
-        can [:read, :update, :create], Subhouse
+        can [:read, :update, :create, :sprava_mr], Subhouse
         #can [:update], User, :id => user.id
         can [:read, :osidlit_pole, :zobraz_arrakis], Planet
+        cannot [:read, :update, :create, :delete, :udalosti_admin], Environment
+        cannot [:read, :update, :create, :delete], Influence
         can [:read], House
         can [:read, :update, :prejmenuj_pole, :postavit_budovu, :presun_suroviny], Field, :user_id => user.id
         can [:read, :update], Resource

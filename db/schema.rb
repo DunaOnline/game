@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(:version => 37) do
     t.integer  "user_id",                                                                              :null => false
     t.integer  "field_id"
     t.date     "date",                                              :default => '2013-09-20',          :null => false
-    t.time     "time",                                              :default => '2000-01-01 21:37:01', :null => false
+    t.time     "time",                                              :default => '2000-01-01 18:54:26', :null => false
     t.integer  "order",                                                                                :null => false
     t.integer  "solar_income",                                      :default => 0
     t.integer  "exp_income",                                        :default => 0
@@ -253,7 +253,7 @@ ActiveRecord::Schema.define(:version => 37) do
     t.string   "kind"
     t.string   "content"
     t.date     "date",        :default => '2013-09-20'
-    t.time     "time",        :default => '2000-01-01 21:37:01'
+    t.time     "time",        :default => '2000-01-01 18:54:26'
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
   end
@@ -388,12 +388,13 @@ ActiveRecord::Schema.define(:version => 37) do
   create_table "subhouses", :force => true do |t|
     t.string   "name"
     t.integer  "house_id"
-    t.integer  "solar"
-    t.decimal  "melange"
-    t.decimal  "material"
-    t.integer  "exp"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.decimal  "solar",      :precision => 12, :scale => 4, :default => 0.0
+    t.decimal  "melange",    :precision => 12, :scale => 4, :default => 0.0
+    t.decimal  "material",   :precision => 12, :scale => 4, :default => 0.0
+    t.decimal  "parts",      :precision => 12, :scale => 4, :default => 0.0
+    t.integer  "exp",                                       :default => 0
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
   end
 
   add_index "subhouses", ["house_id"], :name => "index_subhouses_on_house_id"

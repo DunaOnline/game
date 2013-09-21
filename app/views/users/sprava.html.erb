@@ -15,6 +15,7 @@
         <!-- <th>Poslat Malorodu</th>
         <th>Daň Malorodu [%]</th> -->
         <th>Poslat Národu</th>
+        <th>Poslat Malorodu</th>
         <th class="r">Projekt [%]</th>
       </tr>
       <tr>
@@ -36,14 +37,23 @@
 				<li><%= img_solary %><input type="text" size="3" title="Nastavte daň">
 				<li><%= img_material %><input type="text" size="3" title="Nastavte daň">		
 				<li><%= img_melanz %><input type="text" size="3" title="Nastavte daň"> 
-				<li><%= img_zkusenosti %><input type="text" size="3" title="Nastavte daň"> -->
-        </td>
+				<li><%= img_zkusenosti %><input type="text" size="3" title="Nastavte daň">
+        </td>  -->
         <td>
           <li><%= img_solary %><%= text_field_tag 'rod_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
           <li><%= img_material %><%= text_field_tag 'rod_material', '0.00', :size => "3", :title => "Zadejte množství" %>
           <li><%= img_melanz %><%= text_field_tag 'rod_melanz', '0.00', :size => "3", :title => "Zadejte množství" %>
           <li><%= img_zkusenosti %><%= text_field_tag 'rod_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %>
           <li><%= img_vyrobky %><%= text_field_tag 'rod_vyrobky', '0.00', :size => "3", :title => "Zadejte množství" %>
+        </td>
+
+        <td>
+          <li><%= img_solary %><%= text_field_tag 'mr_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= img_material %><%= text_field_tag 'mr_material', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= img_melanz %><%= text_field_tag 'mr_melanz', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= img_zkusenosti %><%= text_field_tag 'mr_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= img_vyrobky %><%= text_field_tag 'mr_vyrobky', '0.00', :size => "3", :title => "Zadejte množství" %>
+
         </td>
         <td>
           <li><%= img_solary %>

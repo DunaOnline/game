@@ -125,17 +125,23 @@ class HousesController < ApplicationController
 
   def posli_rodove_suroviny
     rod = current_user.house
-    user_suroviny = []
-    narod_suroviny = []
+    user = []
+    mr = []
+    narod = []
     rodu = params[:rod_id_suroviny]
     useru = params[:user_id_suroviny]
-    user_suroviny << params[:user_solary].to_f << params[:user_melanz].to_f << params[:user_zkusenosti].to_i << params[:user_material].to_i << params[:user_parts].to_f
-    narod_suroviny << params[:rodu_solary].to_f << params[:rodu_melanz].to_f << params[:rodu_zkusenosti].to_i << params[:rodu_material].to_f << params[:rodu_parts].to_f
-    msg, flag = rod.posli_rodove_suroviny(narod_suroviny,user_suroviny,rodu,useru)
+    mrdu = params[:mr_id_suroviny]
+    user << params[:user_solary].to_f << params[:user_melanz].to_f << params[:user_zkusenosti].to_i << params[:user_material].to_f << params[:user_parts].to_f
+    narod << params[:rodu_solary].to_f << params[:rodu_melanz].to_f << params[:rodu_zkusenosti].to_i << params[:rodu_material].to_f << params[:rodu_parts].to_f
+    mr << params[:mr_solary].to_f << params[:mr_melanz].to_f << params[:mr_zkusenosti].to_i << params[:mr_material].to_f << params[:mr_parts].to_f
+    msg, flag = rod.posli_rodove_suroviny(narod,user,mr,rodu,useru,mrdu)
     if flag
 	    redirect_to sprava_rod_path(:id => rod), :notice => msg
     else
+
+	    msg += "Nezadali ste mnozstvo na presun" if msg == ""
 	    redirect_to sprava_rod_path(:id => rod), :alert => msg
     end
   end
+
 end

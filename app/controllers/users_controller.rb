@@ -149,8 +149,12 @@ class UsersController < ApplicationController
 
   def ziadost_malorod
 	  subhouse = Subhouse.find(params[:id])
+	  if current_user.update_attribute(:ziadost_subhouse,subhouse.id)
+		  redirect_to :back, :notice => "Ziadost do malorodu #{subhouse.name} bola podana"
+	  else
+		  redirect_to :back, :alert => "Nemuzte poslat zadost"
+	  end
   end
-
 
   def oprava_katastrofy
 	  if params[:typ] == "L"
@@ -182,7 +186,6 @@ class UsersController < ApplicationController
       when "Vezir"
         komu.stat_se("vezir")
         Imperium.zapis_operaci("#{current_user.nick} jmenoval hrace #{komu.nick} na pozici #{params[:commit]}.")
-
     end
     current_user.house.zapis_operaci("#{current_user.nick} jmenoval hrace #{komu.nick} na pozici #{params[:commit]}.")
     komu.zapis_operaci("#{current_user.nick} me jmenoval na pozici #{params[:commit]}.")
@@ -213,41 +216,18 @@ class UsersController < ApplicationController
 
 
   def posli_suroviny
-    rod = current_user.house
-    msg = "Poslano rodu #{rod.name} " if params[:rod_solary].to_i > 0.0 || params[:rod_melanz].to_f > 0.0 || params[:rod_zkusenosti].to_i > 0.0 || params[:rod_material].to_i > 0.0 || params[:rod_vyrobky].to_i > 0.0
-
-    if params[:rod_solary].to_i > 0.0 && params[:rod_solary].to_i <= current_user.solar
-      rod.update_attribute(:solar, rod.solar + params[:rod_solary].to_i)
-      current_user.update_attribute(:solar, current_user.solar - params[:rod_solary].to_i)
-      msg << "solary: #{params[:rod_solary]} "
-    end
-    if params[:rod_melanz].to_f > 0.0 && params[:rod_melanz].to_f <= current_user.melange
-      rod.update_attribute(:melange, rod.melange + params[:rod_melanz].to_f)
-      current_user.update_attribute(:melange, current_user.melange - params[:rod_melanz].to_f)
-      msg << "melanz: #{params[:rod_melanz]} "
-    end
-    if params[:rod_zkusenosti].to_i > 0.0 && params[:rod_zkusenosti].to_i <= current_user.exp
-      rod.update_attribute(:exp, rod.exp + params[:rod_zkusenosti].to_i)
-      current_user.update_attribute(:exp, current_user.exp - params[:rod_zkusenosti].to_i)
-      msg << "expy: #{params[:rod_zkusenosti]} "
+    rod = []
+    mr = []
+    rod << params[:rod_solary].to_f << params[:rod_melanz].to_f << params[:rod_zkusenosti].to_i << params[:rod_material].to_f << params[:rod_vyrobky].to_f
+    mr << params[:mr_solary].to_f << params[:mr_melanz].to_f << params[:mr_zkusenosti].to_i << params[:mr_material].to_f << params[:mr_vyrobky].to_f
+    msg, flag = current_user.posli_suroviny(rod,mr)
+    if flag
+	    redirect_to :back, :notice => msg
+    else
+	    msg += "Nezadali ste mnozstvo na presun" if msg == ""
+	    redirect_to :back, :alert => msg
     end
 
-    leno = current_user.domovske_leno.resource
-    if params[:rod_material].to_i > 0.0 && params[:rod_material].to_i <= leno.material
-      rod.update_attribute(:material, rod.material - params[:rod_material].to_i)
-      leno.update_attribute(:material, leno.material + params[:rod_material].to_i)
-      msg << "materiál: #{params[:rod_material]} "
-    end
 
-    if params[:rod_vyrobky].to_i > 0.0 && params[:rod_vyrobky].to_i <= leno.parts
-	    rod.update_attribute(:parts, rod.parts + params[:rod_vyrobky].to_i)
-	    leno.update_attribute(:parts, leno.parts - params[:rod_vyrobky].to_i)
-	    msg << "vyrobky: #{params[:rod_vyrobky]} "
-    end
-
-    current_user.zapis_operaci(msg)
-    flash[:notice] = msg
-    rod.zapis_operaci(msg.gsub("Poslano rodu #{rod.name} ", "Obdrzeno od hrace #{current_user.nick} "))
-    redirect_to sprava_path(:id => current_user)
   end
 end

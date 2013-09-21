@@ -349,7 +349,6 @@ class User < ActiveRecord::Base
 			    msg_leno << ["//**Udalost na lenu #{field.name} : #{influence.effect.name}**//",influence]
 				end
 			end
-
 		end
 
 	  self.fields.each do |field|
@@ -380,7 +379,14 @@ class User < ActiveRecord::Base
 	  subhouse = self.subhouse
 
 	  self.update_attribute(:subhouse_id, nil)
-	  subhouse.delete if subhouse.users.count == 0
+	  if subhouse.users.count == 0
+		   subhouse.house.update_attributes(:solar => subhouse.house.solar + subhouse.solar, :material => subhouse.house.material + subhouse.material,
+		   :melange => subhouse.house.melange + subhouse.melange, :exp => subhouse.house.exp + subhouse.exp, :parts => subhouse.house.parts + subhouse.parts)
+		   self.house.zapis_operaci("Byl rozpusten malorod #{subhouse.name} do narodnych skladu pribudlo #{subhouse.solar} solaru, #{subhouse.material} materialu, #{subhouse.melange} mg,
+ #{subhouse.exp} expu a #{subhouse.parts} dilu")
+		   subhouse.delete
+	  end
+
   end
 
   def podat_ziadost(house_id)
@@ -473,6 +479,97 @@ class User < ActiveRecord::Base
 		  return false
 		end
   end
+
+  def move_to_house(suroviny)
+	  msg = ""
+	  presun = false
+	  suroviny.each do |sur|
+		  if sur > 0
+			  presun = true
+		  end
+	  end
+	  if presun
+		  h_solar = suroviny[0]
+		  h_melange = suroviny[1]
+		  h_exp = suroviny[2]
+		  h_material = suroviny[3]
+		  h_parts = suroviny[4]
+		  sprava, flag = self.check_availability(h_solar,h_material,h_melange,h_exp,h_parts)
+		  if flag == true
+			  house = self.house
+			  house.update_attributes(:solar => house.solar + h_solar, :material => house.material + h_material, :melange => house.melange + h_melange, :exp => house.exp + h_exp, :parts => house.parts + h_parts)
+			  self.update_attributes(:solar => self.solar - h_solar, :melange => self.melange - h_melange, :exp => self.exp - h_exp)
+			  self.domovske_leno.resource.update_attributes(:material => self.domovske_leno.resource.material - h_material, :parts => self.domovske_leno.resource.parts - h_parts)
+			  msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_material} kg, #{h_melange} mg, #{h_exp} exp, #{h_parts} dilu od hraca #{self.nick}"
+			  self.zapis_operaci(msg)
+		  else
+			  msg += sprava
+		  end
+	  end
+	  return msg, flag
+  end
+
+  def move_to_mr(suroviny)
+	  msg = ""
+	  presun = false
+	  suroviny.each do |n_sur|
+		  if n_sur > 0
+			  presun = true
+		  end
+	  end
+	  if presun
+		  mr_solar = suroviny[0]
+		  mr_melange = suroviny[1]
+		  mr_exp = suroviny[2]
+		  mr_material = suroviny[3]
+		  mr_parts = suroviny[4]
+		  sprava, flag = self.check_availability(mr_solar,mr_material,mr_melange,mr_exp,mr_parts)
+		  if flag == true
+			  mr = self.subhouse
+			  mr.update_attributes(:solar => mr.solar + mr_solar, :melange => mr.melange + mr_melange, :exp => mr.exp + mr_exp,:material => mr.material + mr_material, :parts => mr.parts + mr_parts)
+			  self.update_attributes(:solar => self.solar - mr_solar, :melange => self.melange - mr_melange, :exp => self.exp - mr_exp)
+			  self.domovske_leno.resource.update_attributes(:material => self.domovske_leno.resource.material - mr_material, :parts => self.domovske_leno.resource.parts - mr_parts)
+			  msg ="Posláno malorodu #{mr.name} #{mr_solar} solaru, #{mr_material} kg, #{mr_melange} mg, #{mr_exp} exp, #{mr_parts} dilu od hraca #{self.nick}"
+			  self.zapis_operaci(msg)
+		  else
+			  msg += sprava
+		  end
+	  end
+	  return msg, flag
+  end
+
+  def posli_suroviny(h,mr)
+	  msg = ""
+	  sprava, flag = self.move_to_house(h)
+	  sprava1, flag1 = self.move_to_mr(mr)
+	  msg += sprava if sprava
+	  msg += sprava1 if sprava1
+
+	  return msg, flag || flag1
+  end
+
+  def check_availability(sol,mat,mel,exp,par)
+	  msg = ""
+	  flag = false
+	  bsol = self.solar >= sol
+	  bmat = self.domovske_leno.resource.material >= mat
+	  bmel = self.melange >= mel
+	  bexp = self.exp >= exp
+	  bpar = self.domovske_leno.resource.parts >= par
+	  if bsol && bmat && bmel && bexp && bpar
+		  flag = true
+	  else
+		  flag = false
+		  msg += "Chybi vam "
+		  msg += "#{sol - self.solar} solaru" unless bsol
+		  msg += "#{mat - self.domovske_leno.resource.material} materialu" unless bmat
+		  msg += "#{mel - self.melange} materialu" unless bmel
+		  msg += "#{exp - self.exp} exp" unless bexp
+		  msg += "#{par - self.domovske_leno.resource.parts} dilu" unless bpar
+	  end
+	  return msg, flag
+  end
+
 
   private
 

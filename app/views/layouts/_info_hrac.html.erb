@@ -6,5 +6,5 @@
       <a><%= hodnost %></a>
   <% end %>
   <br>Národ: <%= link_to current_user.house.name, current_user.house %>
-  <br>Malorod: <a>Eridani</a>
+  <br>Malorod: <%= link_to current_user.subhouse.name, current_user.subhouse if current_user.subhouse %>
 </div>

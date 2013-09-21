@@ -169,4 +169,8 @@ class Constant
 		Global.vrat('max_hracu_malorod', 4)
 	end
 
+  def self.rozdiel_u_reg
+	  Global.vrat('rozdiel_poctu_u_registracia', 4)
+  end
+
 end

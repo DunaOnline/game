@@ -3,10 +3,11 @@ class CreateSubhouses < ActiveRecord::Migration
     create_table :subhouses do |t|
       t.string :name
       t.integer :house_id
-      t.integer :solar
-      t.decimal :melange
-      t.decimal :material
-      t.integer :exp
+      t.decimal :solar, :precision => 12, :scale => 4, :default => 0.0
+      t.decimal :melange, :precision => 12, :scale => 4, :default => 0.0
+      t.decimal :material, :precision => 12, :scale => 4, :default => 0.0
+      t.decimal :parts, :precision => 12, :scale => 4, :default => 0.0
+      t.integer :exp, :default => 0
       t.timestamps
     end
 
