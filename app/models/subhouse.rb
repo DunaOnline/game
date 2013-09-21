@@ -162,6 +162,18 @@ class Subhouse < ActiveRecord::Base
 	  return msg, flag
   end
 
-  scope :by_house, lambda{ |house| where(house_id: house) unless house.nil? }
+  def poradi_hlasu(typ, pocet = 5)
+	  hlasy = secti_hlasy(typ, pocet)
+	  poradi = []
+	  hlasy.each do |key, val|
+		  poradi << [User.find(key), val]
+	  end
+	  return poradi
+  end
 
+  def secti_hlasy(typ, pocet)
+	  self.house.votes.where(:typ => typ).group(:elective).limit(pocet).order('count_id desc, created_at').count('id')
+  end
+
+  scope :by_house, lambda{ |house| where(house_id: house) unless house.nil? }
 end

@@ -21,6 +21,7 @@ class SubhousesController < ApplicationController
     if @subhouse.obsazenost_mr
 	    @subhouse.save
 	    @subhouse.prirad_mr(current_user)
+	    current_user.update_attribute(:general,true)
       redirect_to :back, :notice => "Malorod uspesne zalozeny"
     else
       redirect_to :back, :alert => "Nemozte zalozit malorod"
@@ -42,9 +43,8 @@ class SubhousesController < ApplicationController
 
   def sprava_mr
 	  @subhouse = Subhouse.find(params[:id])
-
+	  @ziadosti = User.malorod(@subhouse.id)
   end
-
 
   def vyhod_mr
 	  user = User.find(params[:id])
@@ -54,6 +54,15 @@ class SubhousesController < ApplicationController
 		  user.zapis_operaci("Byl jste vyhosten z malorodu #{mr.name}")
 	  else
 		  redirect_to :back, :alert => "Nemuzte vyhostit hrace #{user.nick}"
+	  end
+  end
+
+  def prijmi_hrace_mr
+	  user = User.find(params[:id])
+	  if user.prijat_do_mr(current_user.subhouse)
+		  redirect_to :back, :notice => "Hrac #{user.nick} bol prijaty do malorodu"
+	  else
+		  redirect_to :back, :alert => "Nepodarilo sa prijat hraca"
 	  end
   end
 
@@ -75,6 +84,15 @@ class SubhousesController < ApplicationController
 		  msg += "Nezadali ste mnozstvo na presun" if msg == ""
 		  redirect_to sprava_mr_path(:id => malorod), :alert => msg
 	  end
+  end
+
+  def menuj_vice
+		user = User.find(params[:vicegeneral])
+			if user.menuj_vice
+				redirect_to :back, :notice => "#{user.nick} bol zvoleny za Vicegenerala"
+			else
+				redirect_to :back, :alert => "#{user.nick} uz je Vicegeneral"
+			end
   end
 
   def destroy

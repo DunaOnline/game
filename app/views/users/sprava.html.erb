@@ -77,6 +77,7 @@
     <!-- <th>Volba Guvernéra</th> -->
     <th>Volba vůdce</th>
     <th>Volba poslance</th>
+    <th>Volba generala</th>
   </tr>
   <tr>
     <!-- <td>
@@ -106,6 +107,17 @@
 
           <h3>Aktuální pořadí</h3>
           <% for user in @user.house.poradi_hlasu('poslanec') %>
+              <li><%= user[0].nick %> - <%= user[1] %></li>
+          <% end %>
+      <% end %>
+    </td>
+    <td>
+      <%= form_tag hlasovat_path(:user_id => @user) do %>
+          <%= select_tag("volit_id", options_for_select(@user.subhouse.users.order(:nick).collect { |p| [p.nick, p.id] })) %><%= submit_tag 'Ξ', :name => 'general', :class => 'oki' %>
+          <p>Váš hlas: <%= @user.koho_jsem_volil('general') %></p>
+
+          <h3>Aktuální pořadí</h3>
+          <% for user in @user.subhouse.poradi_hlasu('general') %>
               <li><%= user[0].nick %> - <%= user[1] %></li>
           <% end %>
       <% end %>

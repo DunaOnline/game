@@ -81,6 +81,8 @@ class UsersController < ApplicationController
       ja.hlasuj(koho, 'poslanec')
     elsif params[:imperator]
       ja.vol_imperatora(koho)
+    elsif params[:general]
+	    ja.hlasuj(koho, 'general')
     else
 
     end

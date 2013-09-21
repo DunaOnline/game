@@ -257,6 +257,20 @@ class User < ActiveRecord::Base
     Global.prepni('bezvladi_arrakis', 2, 3.days.since)
   end
 
+  def menuj_vice
+	  stary = self.subhouse.users.vicegeneral.first
+	  if stary == self
+		  false
+	  else
+		  if stary
+			  stary.update_attribute(:vicegeneral,false)
+		  end
+		  self.update_attribute(:vicegeneral,true)
+	  end
+
+
+  end
+
   def zapis_operaci(content, kind = "U")
     self.operations << Operation.new(:kind => kind, :content => content, :date => Date.today, :time => Time.now)
   end
@@ -422,6 +436,16 @@ class User < ActiveRecord::Base
 	  return false
   end
 
+  def prijat_do_mr(mr)
+	  if self.subhouse == nil
+		  self.update_attributes(:subhouse_id => mr.id, :ziadost_subhouse => nil)
+		  self.zapis_operaci("Byl jste prijat do malorodu #{mr.name}")
+		  return true
+	  else
+		  return false
+	  end
+  end
+
   def neprocteno_sprav
     self.conversations.where(:opened => nil).count
   end
@@ -581,9 +605,12 @@ class User < ActiveRecord::Base
   end
 
   scope :ziadost, lambda {|house| where("ziadost_house = ?", house)}
+  scope :malorod, lambda {|mr| where("ziadost_subhouse = ?", mr)}
   scope :dvorane, where(:court => true)
   scope :veziri, where(:vezir => true)
   scope :poslanci, where(:landsraad => true)
+  scope :general, where(:general => true)
+  scope :vicegeneral, where(:vicegeneral => true)
   scope :players, where(:admin => false)
   scope :by_nick, order(:nick)
 end

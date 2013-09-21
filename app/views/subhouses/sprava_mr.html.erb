@@ -89,5 +89,34 @@
   </tr>
   <% end %>
 </table>
+<% if @ziadosti.count > 0 %>
+    <table class="tab1">
+      <tr>
+        <th> Meno Ziadatela </th>
 
+      </tr>
+      <% @ziadosti.each do |ziadost| %>
+          <tr>
+            <td><%= link_to ziadost.nick, user_path(ziadost) %></td>
+            <td><%= button_to("Prijmout", prijmi_hrace_mr_url(:id => ziadost.id),:confirm => "Naozaj chcete prijat hrace ?") %></td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>
+
+<table class="tab1">
+  <tr>
+    <td> Menovat Vicegenerala :</td>
+    <td>
+      <%= form_tag :menuj_vice do %>
+      <%= select_tag :vicegeneral, options_for_select(@subhouse.users.collect { |p| [p.nick, p.id] }, {:include_blank => false}), :class => "tab" %>
+          <%= submit_tag 'Menuj'%>
+      <% end %>
+    </td>
+    <td>Aktualny Vicegeneral : <%= @subhouse.users.vicegeneral.first.nick if @subhouse.users.vicegeneral.first %></td>
+  </tr>
+
+
+
+</table>
 

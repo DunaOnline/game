@@ -1,6 +1,6 @@
 <%= form_for(@product) do |f| %>
   <% if @product.errors.any? %>
-    <div id="error_explanation">
+        <div id="error_explanation" xmlns="http://www.w3.org/1999/html">
       <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
       <ul>
@@ -12,6 +12,27 @@
   <% end %>
 
   <div class="actions">
+
+    <%= label_tag :house_id %>
+    <%= f.text_field :house_id %> </br>
+    <%= label_tag :title %>
+    <%= f.text_field :title %>  </br>
+    <%= label_tag :description %>
+    <%= f.text_field :description %></br>
+    <%= label_tag :material %>
+    <%= f.text_field :material %></br>
+    <%= label_tag :melanz %>
+    <%= f.text_field :melanz %> </br>
+    <%= label_tag :parts %>
+    <%= f.text_field :parts %> </br>
+    <%= label_tag :price %>
+    <%= f.text_field :price %>  </br>
+    <%= label_tag :druh %>
+    <%= f.text_field :druh %>   </br>
+    <%= label_tag :img %>
+    <%= f.text_field :img %>   </br>
+    <%= label_tag :house_id %>
+    <%= f.text_field :house_id %> </br>
     <%= f.submit %>
   </div>
 <% end %>

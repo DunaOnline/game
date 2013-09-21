@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  attr_accessible :id, :example_value1, :example_value2, :parts, :title, :description, :material, :melanz, :price, :druh
+  attr_accessible :id, :parts, :title, :description, :material, :melanz, :price, :druh
 
 
   def vlastnim(leno)

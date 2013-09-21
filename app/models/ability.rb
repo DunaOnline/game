@@ -32,13 +32,11 @@ class Ability
         can :manage, :all
       else
         cannot [:update, :delete], Global
-        cannot [:update, :delete], Global
+        cannot [:read, :update, :create, :delete], Product
         can [:read, :update], User
-        can [:read, :update, :create, :sprava_mr], Subhouse
+        can [:read, :create], Subhouse
         #can [:update], User, :id => user.id
         can [:read, :osidlit_pole, :zobraz_arrakis], Planet
-        cannot [:read, :update, :create, :delete, :udalosti_admin], Environment
-        cannot [:read, :update, :create, :delete], Influence
         can [:read], House
         can [:read, :update, :prejmenuj_pole, :postavit_budovu, :presun_suroviny], Field, :user_id => user.id
         can [:read, :update], Resource
@@ -99,6 +97,12 @@ class Ability
         if user.vezir?
           can [:sprava, :posli_imperialni_suroviny], Imperium
         end
+	      if user.general?
+		      can [:read, :update, :sprava_mr], Subhouse
+	      end
+	      if user.vicegeneral?
+		      can [:read, :update, :sprava_mr], Subhouse
+	      end
       end
     else
 

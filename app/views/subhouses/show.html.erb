@@ -5,45 +5,37 @@
       <a href="index.htm" title="Home">⌂</a>
       » <%= link_to 'Malorod', subhouse_path(current_user.subhouse), :title => "Malorod" %>
     </td>
+    <% if can? :update, @subhouse %>
     <td class="tdd">
-      <%= link_to 'Sprava malorodu >>', sprava_mr_path(:id => current_user.subhouse) %>
+          <%= link_to 'Sprava malorodu >>', sprava_mr_path(:id => current_user.subhouse) %>
     </td>
+    <% end %>
   </tr>
 </table>
 
+<h2>Zoznam hracu v malorode</h2>
+  <table class="tab1">
+    <tr>
+      <th>Nick</th>
+      <th>Pocet Len</th>
+      <th>Detaily</th>
+    </tr>
+    <% @subhouse.users.each do |user| %>
+        <tr>
+          <td>
+            <%= user.nick %>
+          </td>
+          <td>
+            <%= user.fields.count %>
+          </td>
+          <td>
+            <%= link_to 'Detail', user_path(user) %>
+          </td>
+        </tr>
+    <% end %>
+  </table>
 
-
-
-
-
-<div class="inline_list">
-  <ul>
-    <li>
-      Nick
-    </li>
-    <li>
-      Pocet Len
-    </li>
-    <li>
-      Detaily
-    </li>
-  </ul>
-  <ul>
-  <% @subhouse.users.each do |user| %>
-        <li>
-          <%= user.nick %>
-        </li>
-        <li>
-          <%= user.fields.count %>
-        </li>
-        <li>
-          <%= link_to 'Detail', user_path(user) %>
-        </li>
-
-  <% end %>
-  </ul>
-</div>
-</br>
+<h2>Detaily MR</h2>
 
 <table class="tab1">
   <tr>

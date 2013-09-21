@@ -160,18 +160,20 @@
 
   </tr>
 </table>
-<table class="tab1">
-  <tr>
-    <th>Meno Ziadatela  </th>
+<% if @ziadosti.count > 0 %>
+    <table class="tab1">
+      <tr>
+        <th>Meno Ziadatela  </th>
 
-  </tr>
-  <% @ziadosti.each do |ziadost| %>
-    <tr>
-      <td><%= ziadost.nick %></td>
-      <td><%= button_to("Prijmout", prijmi_hrace_url(:id => ziadost.id),:confirm => "Are you sure?") %></td>
-    </tr>
-  <% end %>
-</table>
+      </tr>
+      <% @ziadosti.each do |ziadost| %>
+        <tr>
+          <td><%= link_to ziadost.nick, user_path(ziadost) %></td>
+          <td><%= button_to("Prijmout", prijmi_hrace_url(:id => ziadost.id),:confirm => "Are you sure?") %></td>
+        </tr>
+      <% end %>
+    </table>
+<% end %>
 <table class="tab1">
   <tr>
     <td rowspan="2" style="padding: 0 10px 10px 10px; width:270px; background-image: url(<%= asset_path 'imghra/kolonizace.png' %>) !important">

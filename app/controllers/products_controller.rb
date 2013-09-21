@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+	authorize_resource # CanCan
   # GET /products
   # GET /products.json
   def index

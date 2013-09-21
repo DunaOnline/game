@@ -115,7 +115,7 @@ class HousesController < ApplicationController
   def prijmi_hrace
 	  user = User.find(params[:id])
 	  if user.prijat_do_naroda(current_user.house)
-		  user.zapis_operaci("Byl prijat novy hrac #{user.nick}","N")
+		  current_user.house.zapis_operaci("Byl prijat novy hrac #{user.nick}","N")
 		  redirect_to :back, :notice => "Hrac #{user.nick} bol prijaty do naroda"
 	  else
 		  redirect_to :back, :alert => "Nepodarilo sa prijat hraca"

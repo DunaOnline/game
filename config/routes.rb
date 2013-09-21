@@ -61,6 +61,8 @@ DuneOnline::Application.routes.draw do
   match 'sprava_mr/:id' => 'subhouses#sprava_mr', :as => :sprava_mr
   match 'posli_mr_sur' => 'subhouses#posli_mr_sur', :as => :posli_mr_sur
   match 'vyhod_mr/:id' => 'subhouses#vyhod_mr', :as => :vyhod_mr
+  match 'prijmi_hrace_mr' => 'subhouses#prijmi_hrace_mr', :as => :prijmi_hrace_mr
+  match 'menuj_vice' => 'subhouses#menuj_vice', :as => :menuj_vice
 
 
   resources :houses
@@ -68,6 +70,7 @@ DuneOnline::Application.routes.draw do
   match 'sprava_rod' => 'houses#sprava_rod', :as => :sprava_rod
   match 'posli_rodove_suroviny' => 'houses#posli_rodove_suroviny', :as => :posli_rodove_suroviny
   match 'posli_mr_sur' => 'houses#posli_mr_sur', :as => :posli_mr_sur
+  match 'prijmi_hrace' => 'houses#prijmi_hrace', :as => :prijmi_hrace
 
   resources :discoverables
   
