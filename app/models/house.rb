@@ -28,6 +28,7 @@ class House < ActiveRecord::Base
   has_many :votes
   has_many :operations
   has_many :syselaads
+  has_many :subhouses
 
   def poradi_hlasu(typ, pocet = 5)
     hlasy = secti_hlasy(typ, pocet)
@@ -114,58 +115,104 @@ class House < ActiveRecord::Base
     planet
   end
 
-
-
-  def posli_rodove_suroviny(h_suroviny,u_suroviny,h_recipient,u_recipient)
-	    h_flag = false
-	    u_flag = false
-	    msg = ""
-	    h_suroviny.each do |sur|
-		    if sur > 0
-			    h_flag = true
-		    end
-	    end
-	    if h_flag
-		    h_solar = h_suroviny[0]
-		    h_melange = h_suroviny[1]
-		    h_exp = h_suroviny[2]
-		    h_material = h_suroviny[3]
-		    h_parts = h_suroviny[4]
-		    sprava, flag = self.check_availability(h_solar,h_material,h_melange,h_exp,h_parts)
-		    if flag == true
-			    house = House.find(h_recipient)
-			    house.update_attributes(:solar => house.solar + h_solar, :material => house.material + h_material, :melange => house.melange + h_melange, :exp => house.exp + h_exp, :parts => house.parts + h_parts)
-			    self.update_attributes(:solar => self.solar - h_solar, :material => self.material - h_material, :melange => self.melange - h_melange, :exp => self.exp - h_exp, :parts => self.parts - h_parts)
-			    msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_material} kg, #{h_melange} mg, #{h_exp} exp, #{h_parts} dilu od naroda #{self.name}"
-			    self.zapis_operaci(sprava)
-		    else
-			    msg += sprava
-		    end
+  def move_to_house(suroviny,house)
+	  msg = ""
+	  presun = false
+	  suroviny.each do |sur|
+		  if sur > 0
+			  presun = true
 		  end
-	    u_suroviny.each do |n_sur|
-		    if n_sur > 0
-			    u_flag = true
-		    end
-	    end
-	    if u_flag
-		    u_solar = u_suroviny[0]
-		    u_melange = u_suroviny[1]
-		    u_exp = u_suroviny[2]
-		    u_material = u_suroviny[3]
-		    u_parts = u_suroviny[4]
-		    sprava, flag = self.check_availability(u_solar,u_material,u_melange,u_exp,u_parts)
-		    if flag == true
-			    user = User.find(u_recipient)
-			    user.domovske_leno.resource.update_attributes(:material => user.domovske_leno.resource.material + u_material, :parts => user.domovske_leno.resource.parts + u_parts)
-			    user.update_attributes(:solar => user.solar + u_solar, :melange => user.melange + u_melange, :exp => user.exp + u_exp)
-			    self.update_attributes(:solar => self.solar - u_solar, :material => self.material - u_material, :melange => self.melange - u_melange, :exp => self.exp - u_exp, :parts => self.parts - u_parts)
-			    msg +="Posláno hraci #{user.nick} #{u_solar} solaru, #{u_material} kg, #{u_melange} mg, #{u_exp} exp, #{u_parts} dilu od naroda #{self.name}"
-			    self.zapis_operaci(sprava)
-		    else
-			    msg += sprava
-		    end
-	    end
-	    return msg, flag
+	  end
+	  if presun
+		  h_solar = suroviny[0]
+		  h_melange = suroviny[1]
+		  h_exp = suroviny[2]
+		  h_material = suroviny[3]
+		  h_parts = suroviny[4]
+		  sprava, flag = self.check_availability(h_solar,h_material,h_melange,h_exp,h_parts)
+		  if flag == true
+			  house = House.find(house)
+			  house.update_attributes(:solar => house.solar + h_solar, :material => house.material + h_material, :melange => house.melange + h_melange, :exp => house.exp + h_exp, :parts => house.parts + h_parts)
+			  self.update_attributes(:solar => self.solar - h_solar, :material => self.material - h_material, :melange => self.melange - h_melange, :exp => self.exp - h_exp, :parts => self.parts - h_parts)
+			  msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_material} kg, #{h_melange} mg, #{h_exp} exp, #{h_parts} dilu od naroda #{self.name}"
+			  self.zapis_operaci(msg)
+		  else
+			  msg += sprava
+		  end
+	  end
+	  return msg, flag
+  end
+
+  def move_to_mr(suroviny,mr)
+	  msg = ""
+	  presun = false
+	  suroviny.each do |n_sur|
+		  if n_sur > 0
+			  presun = true
+		  end
+	  end
+	  if presun
+		  mr_solar = suroviny[0]
+		  mr_melange = suroviny[1]
+		  mr_exp = suroviny[2]
+		  mr_material = suroviny[3]
+		  mr_parts = suroviny[4]
+		  sprava, flag = self.check_availability(mr_solar,mr_material,mr_melange,mr_exp,mr_parts)
+		  if flag == true
+			  mr = Subhouse.find(mr)
+			  mr.update_attributes(:solar => mr.solar + mr_solar, :melange => mr.melange + mr_melange, :exp => mr.exp + mr_exp,:material => mr.material + mr_material, :parts => mr.parts + mr_parts)
+			  self.update_attributes(:solar => self.solar - mr_solar, :material => self.material - mr_material, :melange => self.melange - mr_melange, :exp => self.exp - mr_exp, :parts => self.parts - mr_parts)
+			  msg ="Posláno malorodu #{mr.name} #{mr_solar} solaru, #{mr_material} kg, #{mr_melange} mg, #{mr_exp} exp, #{mr_parts} dilu od naroda #{self.name}"
+			  self.zapis_operaci(msg)
+		  else
+			  msg += sprava
+		  end
+	  end
+	  return msg, flag
+  end
+
+  def move_to_user(suroviny,user)
+	  msg = ""
+	  presun = false
+	  suroviny.each do |n_sur|
+		  if n_sur > 0
+			  presun = true
+		  end
+	  end
+	  if presun
+		  u_solar = suroviny[0]
+		  u_melange = suroviny[1]
+		  u_exp = suroviny[2]
+		  u_material = suroviny[3]
+		  u_parts = suroviny[4]
+		  sprava, flag = self.check_availability(u_solar,u_material,u_melange,u_exp,u_parts)
+		  if flag == true
+			  user = User.find(user)
+			  user.domovske_leno.resource.update_attributes(:material => user.domovske_leno.resource.material + u_material, :parts => user.domovske_leno.resource.parts + u_parts)
+			  user.update_attributes(:solar => user.solar + u_solar, :melange => user.melange + u_melange, :exp => user.exp + u_exp)
+			  self.update_attributes(:solar => self.solar - u_solar, :material => self.material - u_material, :melange => self.melange - u_melange, :exp => self.exp - u_exp, :parts => self.parts - u_parts)
+			  msg +="Posláno hraci #{user.nick} #{u_solar} solaru, #{u_material} kg, #{u_melange} mg, #{u_exp} exp, #{u_parts} dilu od naroda #{self.name}"
+			  self.zapis_operaci(msg)
+		  else
+			  msg += sprava
+		  end
+	  end
+	  return msg, flag
+  end
+
+
+
+  def posli_rodove_suroviny(h,u,mr,narod,user,malorod)
+
+	    msg = ""
+	    sprava, flag = self.move_to_house(h,narod)
+	    sprava1, flag1 = self.move_to_user(u,user)
+	    sprava2, flag2 = self.move_to_mr(mr,malorod)
+	    msg += sprava if sprava
+	    msg += sprava1 if sprava1
+	    msg += sprava2 if sprava2
+
+	    return msg, flag || flag1 || flag2
   end
   def check_availability(sol,mat,mel,exp,par)
 	  msg = ""
@@ -179,7 +226,7 @@ class House < ActiveRecord::Base
 		  flag = true
 	  else
 		  flag = false
-		  msg += "Chybi vam"
+		  msg += "Chybi vam "
 	    msg += "#{sol - self.solar} solaru" unless bsol
 		  msg += "#{mat - self.material} materialu" unless bmat
 		  msg += "#{mel - self.melange} materialu" unless bmel

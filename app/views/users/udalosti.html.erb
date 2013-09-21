@@ -1,11 +1,11 @@
 <div class="tovarna_obrazok">
   <span class="heading"><%= @udalost.name %></span>
   <%= @udalost.description%>
-  <%= @leno.duration if @leno%>
-  <%= @planet.duration if @planet%>
+  <%= @leno.duration + 1 if @leno%>
+  <%= @planet.duration + 1 if @planet%>
 
-  <%= button_to @udalost.price * @leno.duration, oprava_katastrofy_path(:id => @leno.id,:typ => "L") if @leno%>
-  <%= button_to @udalost.price * @planet.duration, oprava_katastrofy_path(:id => @planet.id,:typ => "P") if @planet%>
-  <%= link_to :back, sprava_path(:id => current_user) %>
+  <%= button_to @udalost.price * (@leno.duration + 1), oprava_katastrofy_path(:id => @leno.id,:typ => "L") if @leno%>
+  <%= button_to @udalost.price * (@planet.duration + 1), oprava_katastrofy_path(:id => @planet.id,:typ => "P") if @planet && current_user.leader?%>
+  <%= link_to :back, sprava_path(:id => current_user), :class => "back_right_down" %>
 
 </div>

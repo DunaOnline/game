@@ -58,12 +58,16 @@ DuneOnline::Application.routes.draw do
   match 'zobraz_arrakis' => 'planets#zobraz_arrakis', :as => :zobraz_arrakis
 
   resources :subhouses
+  match 'sprava_mr/:id' => 'subhouses#sprava_mr', :as => :sprava_mr
+  match 'posli_mr_sur' => 'subhouses#posli_mr_sur', :as => :posli_mr_sur
+  match 'vyhod_mr/:id' => 'subhouses#vyhod_mr', :as => :vyhod_mr
+
 
   resources :houses
   match 'kolonizuj' => 'houses#kolonizuj', :as => :kolonizuj
   match 'sprava_rod' => 'houses#sprava_rod', :as => :sprava_rod
   match 'posli_rodove_suroviny' => 'houses#posli_rodove_suroviny', :as => :posli_rodove_suroviny
-  match 'prijmi_hrace/:id' => 'houses#prijmi_hrace', :as => :prijmi_hrace
+  match 'posli_mr_sur' => 'houses#posli_mr_sur', :as => :posli_mr_sur
 
   resources :discoverables
   

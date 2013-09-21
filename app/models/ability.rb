@@ -33,7 +33,7 @@ class Ability
       else
         cannot [:update, :delete], Global
         can [:read, :update], User
-        can [:read, :update, :create], Subhouse
+        can [:read, :update, :create, :sprava_mr], Subhouse
         #can [:update], User, :id => user.id
         can [:read, :osidlit_pole, :zobraz_arrakis], Planet
         can [:read], House

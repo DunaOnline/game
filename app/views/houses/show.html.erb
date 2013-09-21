@@ -6,7 +6,7 @@
     <td>
       <a href="#" title="Home">⌂</a> »
       <%= link_to "Imperiální databáze národů", houses_path %> »
-      <a href="#">Velkorod</a>
+      <%= link_to @house.name, house_path(@house)%>
     </td>
 
     <%= render :partial => 'layouts/change_house' %>
