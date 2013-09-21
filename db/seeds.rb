@@ -99,6 +99,8 @@ Global.create(:setting => 'presun_leno', :cislo => 0.02)
 Global.create(:setting => 'presun_planeta', :cislo => 0.02)
 Global.create(:setting => 'presun_vyrobku', :cislo => 0.02)
 Global.create(:setting => 'max_hracu_malorod', :cislo => 10)
+Global.create(:setting => 'rozdiel_poctu_u_registracia', :cislo => 5)
+
 puts 'Global done'
 
 User.create(:username => 'Norma_Cenva', :nick => 'Norma Cenva', :email => 'normacenva@spojka.vg', :house_id => titani.id, :password => 'doktoros', :password_confirmation => 'doktoros', :admin => true)

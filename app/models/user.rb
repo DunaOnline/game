@@ -349,7 +349,6 @@ class User < ActiveRecord::Base
 			    msg_leno << ["//**Udalost na lenu #{field.name} : #{influence.effect.name}**//",influence]
 				end
 			end
-
 		end
 
 	  self.fields.each do |field|

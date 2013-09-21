@@ -30,25 +30,33 @@ class Message < ActiveRecord::Base
     end
   end
 
-  def vymaz(user, odoslana)
+  def vymaz(user, odoslana,prijata)
     if odoslana
-      recipients = Conversation.where('sender' => user, 'message_id' => self.id)
-      recipients.each do |r|
-        if r.deleted_by == "R"
-          r.update_attributes(:deleted_by => "RS")
-        else
-          r.update_attributes(:deleted_by => "S")
-        end
-      end
+	    recipients = Conversation.where('receiver' => user, 'message_id' => self.id)
+	    recipients.each do |r|
+		    if prijata
+			    r.update_attributes(:deleted_by => "SR")
+			    r.update_attributes(:opened => true) if r.opened == nil
+		    else
+			    if r.deleted_by == "S"
+				    r.update_attributes(:deleted_by => "SR")
+			    else
+				    r.update_attributes(:deleted_by => "R")
+			    end
+		    end
+
+	    end
+
     else
-      recipients = Conversation.where('receiver' => user, 'message_id' => self.id)
-      recipients.each do |r|
-        if r.deleted_by == "S"
-          r.update_attributes(:deleted_by => "SR")
-        else
-          r.update_attributes(:deleted_by => "R")
-        end
-      end
+	    recipients = Conversation.where('receiver' => user, 'message_id' => self.id)
+	    recipients.each do |r|
+		    if r.deleted_by == "S"
+			    r.update_attributes(:deleted_by => "SR")
+		    else
+			    r.update_attributes(:deleted_by => "R")
+		    end
+		    r.update_attributes(:opened => true) if r.opened == nil
+	    end
     end
   end
 

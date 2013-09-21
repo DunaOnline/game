@@ -286,5 +286,22 @@ class House < ActiveRecord::Base
     return zaokrouhlene
   end
 
+  def self.registration
+
+	  max = User.group(:house_id).count.max[1]
+	  pole = []
+	  House.playable.all.each do |h|
+		  if h.users.count + Constant.rozdiel_u_reg < max
+			   pole << [h.name,h.id]
+		  end
+	  end
+	  if pole == []
+		  House.playable.all.collect { |p| [p.name, p.id] }
+	  else
+		  pole
+	  end
+
+  end
+
   scope :playable, where(:playable => true)
 end
