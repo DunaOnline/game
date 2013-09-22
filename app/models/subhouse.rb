@@ -175,5 +175,6 @@ class Subhouse < ActiveRecord::Base
 	  self.house.votes.where(:typ => typ).group(:elective).limit(pocet).order('count_id desc, created_at').count('id')
   end
 
+  scope :without_subhouse, lambda{|subhouse| subhouse ? {:conditions => ["id != ?", subhouse.id]} : {} }
   scope :by_house, lambda{ |house| where(house_id: house) unless house.nil? }
 end

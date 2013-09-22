@@ -45,13 +45,12 @@ describe Message do
 		message = create(:message)
 		converssation = create(:conversation, :message_id => message.id, :sender => user.id, :receiver => user2.id, :deleted_by => nil)
 
-    # TODO mino opravit ;-)
-    #message.vymaz(user.id,true,true)
-    #
-		#expect(Conversation.find(converssation.id).deleted_by).to eq("S")
-    #
-		#message.vymaz(user2.id,false,true)
-		#expect(Conversation.find(converssation.id).deleted_by).to eq("SR")
+		message.vymaz(user.id,true)
+
+		expect(Conversation.find(converssation.id).deleted_by).to eq("S")
+
+		message.vymaz(user2.id,false)
+		expect(Conversation.find(converssation.id).deleted_by).to eq("SR")
 
 	end
 
@@ -67,8 +66,7 @@ describe Message do
 
 		expect(Conversation.where(:id => 1).exists?).to eq(true)
 		expect(Conversation.where(:id => 2).exists?).to eq(true)
-    # TODO mino opravit ;-)
-		#expect(Conversation.where(:id => 3)).to eq(komu)
+		expect(Conversation.where(:id => 3)).to eq(komu)
 		expect(Conversation.where(:message_id => message.id, :receiver => user.id).exists?).to eq(true)
 		expect(Conversation.where(:message_id => message.id, :receiver => user2.id).exists?).to eq(true)
 		expect(Conversation.find(1).message_id).to eq(message.id)
@@ -78,12 +76,11 @@ describe Message do
 
 		user1  = create(:user, :house => house, :nick => "simi")
 		message2 = create(:message, :druh => "N")
-    # TODO mino opravit ;-)
-    #message2.posli_postu(user2,"")
-    #expect(Conversation.where(:message_id => message2.id, :receiver => user.id).exists?).to eq(true)
-    #expect(Conversation.where(:message_id => message2.id, :receiver => user1.id).exists?).to eq(true)
-    #expect(Conversation.where(:message_id => message2.id, :receiver => user2.id).exists?).to eq(true)
-    #expect(Conversation.where(:message_id => message.id, :receiver => user1.id).exists?).to eq(false)
+		message2.posli_postu(user2,"")
+		expect(Conversation.where(:message_id => message2.id, :receiver => user.id).exists?).to eq(true)
+		expect(Conversation.where(:message_id => message2.id, :receiver => user1.id).exists?).to eq(true)
+		expect(Conversation.where(:message_id => message2.id, :receiver => user2.id).exists?).to eq(true)
+		expect(Conversation.where(:message_id => message.id, :receiver => user1.id).exists?).to eq(false)
 	end
 
 

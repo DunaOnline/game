@@ -303,5 +303,6 @@ class House < ActiveRecord::Base
 
   end
 
+  scope :without_house, lambda{|house| house ? {:conditions => ["id != ?", house.id]} : {} }
   scope :playable, where(:playable => true)
 end

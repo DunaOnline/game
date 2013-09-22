@@ -267,8 +267,6 @@ class User < ActiveRecord::Base
 		  end
 		  self.update_attribute(:vicegeneral,true)
 	  end
-
-
   end
 
   def zapis_operaci(content, kind = "U")
@@ -439,6 +437,7 @@ class User < ActiveRecord::Base
   def prijat_do_mr(mr)
 	  if self.subhouse == nil
 		  self.update_attributes(:subhouse_id => mr.id, :ziadost_subhouse => nil)
+		  self.hlasuj(self.subhouse.users.general,'general')
 		  self.zapis_operaci("Byl jste prijat do malorodu #{mr.name}")
 		  return true
 	  else
@@ -604,6 +603,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  scope :without_user, lambda{|user| user ? {:conditions => ["users.id != ?", user.id]} : {} }
   scope :ziadost, lambda {|house| where("ziadost_house = ?", house)}
   scope :malorod, lambda {|mr| where("ziadost_subhouse = ?", mr)}
   scope :dvorane, where(:court => true)
