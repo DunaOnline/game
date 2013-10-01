@@ -1,9 +1,11 @@
 class Production < ActiveRecord::Base
-  attr_accessible :resource_id, :user_id, :product_id, :amount
+  attr_accessible :resource_id, :user_id, :house_id, :subhouse_id, :product_id, :amount
 
-	belongs_to :user
+  belongs_to :user
+	belongs_to :house
+  belongs_to :subhouse
   belongs_to :resource
-	has_many :products
+	belongs_to :product
 
   #validates_presence_of :resource_id, :user_id, :product_id, :amount
 
@@ -25,5 +27,5 @@ class Production < ActiveRecord::Base
 
 
 
-
+	scope :active, where('amount > ?', 0)
 end

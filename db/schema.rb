@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 37) do
+ActiveRecord::Schema.define(:version => 40) do
 
   create_table "app_logy", :force => true do |t|
     t.datetime "cas",                      :null => false
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(:version => 37) do
     t.integer  "user_id",                                                                              :null => false
     t.integer  "field_id"
     t.date     "date",                                              :default => '2013-09-22',          :null => false
-    t.time     "time",                                              :default => '2000-01-01 22:27:58', :null => false
+    t.time     "time",                                              :default => '2000-01-01 18:40:26', :null => false
     t.integer  "order",                                                                                :null => false
     t.integer  "solar_income",                                      :default => 0
     t.integer  "exp_income",                                        :default => 0
@@ -222,8 +222,10 @@ ActiveRecord::Schema.define(:version => 37) do
     t.integer  "market_id"
     t.decimal  "amount"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "house_id"
+    t.integer  "subhouse_id"
   end
 
   create_table "markets", :force => true do |t|
@@ -231,8 +233,10 @@ ActiveRecord::Schema.define(:version => 37) do
     t.integer  "user_id"
     t.integer  "price"
     t.decimal  "amount"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "house_id"
+    t.integer  "subhouse_id"
   end
 
   create_table "messages", :force => true do |t|
@@ -253,7 +257,7 @@ ActiveRecord::Schema.define(:version => 37) do
     t.string   "kind"
     t.string   "content"
     t.date     "date",        :default => '2013-09-22'
-    t.time     "time",        :default => '2000-01-01 22:27:59'
+    t.time     "time",        :default => '2000-01-01 18:40:26'
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
   end
@@ -313,6 +317,7 @@ ActiveRecord::Schema.define(:version => 37) do
     t.integer  "subhouse_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "user_id"
   end
 
   create_table "products", :force => true do |t|

@@ -17,6 +17,8 @@
 class Subhouse < ActiveRecord::Base
   attr_accessible :name, :house_id, :solar, :melange, :material, :exp
 
+  has_many :markets
+  has_many :productions
   has_many :users
   belongs_to :house
 
@@ -38,6 +40,89 @@ class Subhouse < ActiveRecord::Base
 
   def pocet_userov
 	  self.users.count
+  end
+
+  def zapis_operaci(content)
+	  Operation.new(:kind => "M", :subhouse_id => self.id, :content => content, :date => Date.today, :time => Time.now).save
+  end
+
+  def bylo_poslano_trh(market,amount)
+	  self.zapis_operaci("Bylo poslano na trh zbozi #{market.show_area}, #{amount} ks, za #{market.price * amount} solaru")
+  end
+
+  def goods_to_buyer(typ, amount)
+	  case typ
+		  when "M"
+			  self.update_attribute(:material, self.material + amount)
+		  when "V"
+			  self.update_attribute(:parts, self.parts + amount)
+		  when "J"
+			  self.update_attribute(:melange, self.melange + amount)
+		  when "E"
+			  self.update_attribute(:exp, self.exp + amount)
+		  else
+			  production = self.productions.where(:product_id => typ).first
+			  if production
+			    production.update_attribute(:amount,production.amount + amount)
+			  else
+				  Production.new(
+						  :product_id => typ,
+						  :amount => amount,
+						  :subhouse_id => self.id
+				  ).save
+				end
+	  end
+  end
+
+  def sell_goods_subhouse(market)
+	  flag = false
+	  msg = ""
+	  amount = market.amount
+	  case market.area
+		  when "M"
+			  if amount > self.material
+				  msg = "Nemate dost #{market.show_area}"
+			  else
+				  self.update_attribute(:material, self.material - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+		  when "V"
+			  if amount > self.parts
+				  msg = "Nemate dost #{market.show_area}"
+			  else
+				  self.update_attribute(:parts, self.parts - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+		  when "J"
+			  if amount > self.melange
+				  msg = "Nemate dost #{market.show_area}"
+			  else
+				  self.update_attribute(:melange, self.melange - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+		  when "E"
+			  if amount > user.exp
+				  msg = "Nemate dost #{market.show_area}"
+			  else
+				  self.update_attribute(:exp, self.exp - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+		  else
+			  production = self.productions.where(:product_id => market.area).first
+			  if amount > production.amount
+				  msg = "Nemate dost #{market.show_area}"
+			  else
+				  production.update_attribute(:amount,production.amount - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+
+	  end
+	  return flag, msg
   end
 
   def move_to_house(suroviny,house)
@@ -140,6 +225,21 @@ class Subhouse < ActiveRecord::Base
 	  return msg, flag || flag1 || flag2
   end
 
+  def for_sale
+	  na_prodej = []
+	  vyrobky = self.productions.where("amount > ?", 0)
+	  vyrobky.each do |vyrobok|
+		  nazov = Product.find(vyrobok.product_id).title
+		  na_prodej << [nazov + " " + vyrobok.amount.to_s + "ks" ,vyrobok.product_id]
+
+	  end
+	  na_prodej << ['Materiál', 'M'] if self.material > 0
+	  na_prodej << ['Melanž', 'J']  if self.melange > 0
+	  na_prodej << ['Expy', 'E']  if self.exp > 0
+	  na_prodej << ['Vyrobky','V'] if self.parts > 0
+	  return na_prodej
+  end
+
   def check_availability(sol,mat,mel,exp,par)
 	  msg = ""
 	  flag = false
@@ -160,6 +260,28 @@ class Subhouse < ActiveRecord::Base
 		  msg += "#{par - self.parts} dilu" unless bpar
 	  end
 	  return msg, flag
+  end
+
+  def kapacita_tovaren
+	  kapacita = 0
+	  self.users.each do |user|
+		  kapacita += user.domovske_leno.kapacita_tovaren
+	  end
+	  kapacita * Constant.kapacita_t_mr
+  end
+
+  def vyuzitie_tovaren
+	  vyrobky = self.productions
+	  pocet_vyrobkov = 0
+	  vyrobky.each do |vyrobok|
+		  pocet_vyrobkov += vyrobok.amount
+	  end
+
+	  pocet_vyrobkov
+  end
+
+  def miesto_v_tovarni?(amount)
+	  self.vyuzitie_tovaren + amount <= self.kapacita_tovaren
   end
 
   def poradi_hlasu(typ, pocet = 5)

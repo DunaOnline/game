@@ -207,6 +207,7 @@ class Field < ActiveRecord::Base
 	  if source_production
 		  unless target_production
 			  target_production = Production.new(
+					  :user_id => target.user.id,
 					  :resource_id => target.resource.id,
 					  :product_id => vyrobok.id,
 					  :amount => 0
@@ -265,6 +266,7 @@ class Field < ActiveRecord::Base
 				  produkcia.update_attribute(:amount , produkcia.amount + pocet)
 			  else
 				  Production.new(
+						  :user_id => field.user.id,
 						  :resource_id => zdroje_lena.id,
 						  :product_id => coho.id,
 						  :amount => pocet
@@ -409,7 +411,7 @@ class Field < ActiveRecord::Base
 
 	  pocet_udalosti = Constant.pocet_udalosti.to_i
 	  pocet_udalosti.times do
-		  if udalost == rand(Constant.pravdepodobnost)
+		  if udalost == rand(100 / Constant.pravdepodobnost)
 			  if Effect.count > 0
 				  roll_effect = rand(Property.count) + 1
 				  effect = Effect.find(roll_effect)

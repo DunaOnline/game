@@ -65,9 +65,36 @@
           <li><%= img_zkusenosti %>
             <input type="text" size="3" title="Nastavte odvod">
         </td>
+
       </tr>
   <% end %>
 </table>
+<table class="tab1">
+
+     <tr>
+
+       <th>Produkty</th>
+       <th>Mnozstvo</th>
+       <th>Poslat</th>
+     </tr>
+      <% @productions.each do |production| %>
+      <%= form_tag send_products_path(:production => production.id) do %>
+      <tr>
+        <td>
+          <%= production.product.title %> // <%= production.amount %> ks
+        </td>
+        <td>
+          <%= number_field_tag(:amount, nil, :min => 1, :title => "Zadejte množství", :required => true) %>
+        </td>
+        <td>
+          <%= submit_tag 'Poslat', :class => "ok"%>
+        </td>
+      </tr>
+          <% end %>
+      <% end %>
+
+</table>
+
 
 <table class="tab1">
   <tr>

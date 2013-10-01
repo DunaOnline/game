@@ -5,7 +5,7 @@ class CreateMarkets < ActiveRecord::Migration
       t.integer :user_id
       t.integer :price
       t.decimal :amount
-
+      t.string :druh
       t.timestamps
     end
   end

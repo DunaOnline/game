@@ -3,9 +3,28 @@
   <%= @udalost.description%>
   <%= @leno.duration + 1 if @leno%>
   <%= @planet.duration + 1 if @planet%>
+  <table class="tab1 bottom">
+    <tbody>
+    <tr><td>
+      <%= form_tag :class => "inline_list" do  %>
+        <ul >
+          <li> Poplatok za odstranenie katastrofy</li>
+          <li><%= button_to @udalost.price * (@leno.duration + 1), oprava_katastrofy_path(:id => @leno.id,:typ => "L") if @leno%></li>
+          <li><%= button_to @udalost.price * (@planet.duration + 1), oprava_katastrofy_path(:id => @planet.id,:typ => "P") if @planet && current_user.leader?%></li>
+        </ul>
 
-  <%= button_to @udalost.price * (@leno.duration + 1), oprava_katastrofy_path(:id => @leno.id,:typ => "L") if @leno%>
-  <%= button_to @udalost.price * (@planet.duration + 1), oprava_katastrofy_path(:id => @planet.id,:typ => "P") if @planet && current_user.leader?%>
-  <%= link_to :back, sprava_path(:id => current_user), :class => "back_right_down" %>
 
+
+
+      <%= button_to @udalost.price * (@planet.duration + 1), oprava_katastrofy_path(:id => @planet.id,:typ => "P") if @planet && current_user.leader?%>
+
+      <% end %>
+    </td>
+    <td>
+      <%= link_to 'Spat', sprava_path(:id => current_user), :class => "back_right_down" %>
+    </td>
+    </tr>
+
+    </tbody>
+  </table>
 </div>

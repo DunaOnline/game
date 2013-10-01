@@ -20,7 +20,7 @@
 
       </li>
       <li>
-        Celková kapacita vaší výroby tomto lénu je <%= lena_s_tovarny.vyuzitie_tovaren %> / <%= lena_s_tovarny.kapacita_tovaren %> Z.
+        Celková kapacita vaší výroby na tomto lénu je <%= lena_s_tovarny.vyuzitie_tovaren %> / <%= lena_s_tovarny.kapacita_tovaren %> Z.
       </li>
     </ul>
 
@@ -36,7 +36,7 @@
             <%= hidden_field_tag :presunout_co, "Parts" %>
             <%= hidden_field_tag :tovarna, true %>
             <%= select_tag :target_field, options_from_collection_for_select(current_user.resourcy_s_tovarny, "id", "name"), :class => "tab", :title => "Zvolte cilove leno" %>
-            <%= number_field_tag :amount, nil,:min => 1, :class => "tab" %>
+            <%= number_field_tag :amount, nil,:min => 1, :class => "tab", :required => true %>
             <%= submit_tag 'Přesunout', :name => 'presunout', :class => 'ok4', :style => "margin-right: 30px;", :title => "PŘESUNOUT VYROBKY" %>
 
             </th>

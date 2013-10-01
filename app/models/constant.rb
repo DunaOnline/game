@@ -173,4 +173,16 @@ class Constant
 	  Global.vrat('rozdiel_poctu_u_registracia', 4)
   end
 
+	def self.kapacita_t_house
+		 Global.vrat('kapacita_tovaren_house', 4)
+	end
+
+	def self.kapacita_t_mr
+		Global.vrat('kapacita_tovaren_mr', 4)
+	end
+
+	def self.stiahnut_zbozi_trh
+		Global.vrat('stiahnut_zbozi_trh', 4)
+	end
+
 end

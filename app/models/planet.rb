@@ -230,7 +230,7 @@ class Planet < ActiveRecord::Base
 
 	  pocet_udalosti = Constant.pocet_udalosti.to_i
 	  pocet_udalosti.times do
-		  if udalost == rand(Constant.pravdepodobnost)
+		  if udalost == rand(100/ Constant.pravdepodobnost)
 			  if Property.count > 0
 				  roll_property = rand(Property.nahodne.count) + 1
 				  property = Property.nahodne.find(roll_property)

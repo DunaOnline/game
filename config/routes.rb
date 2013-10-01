@@ -71,6 +71,7 @@ DuneOnline::Application.routes.draw do
   match 'posli_rodove_suroviny' => 'houses#posli_rodove_suroviny', :as => :posli_rodove_suroviny
   match 'posli_mr_sur' => 'houses#posli_mr_sur', :as => :posli_mr_sur
   match 'prijmi_hrace' => 'houses#prijmi_hrace', :as => :prijmi_hrace
+  match 'send_products_house' => 'houses#send_products_house', :as => :send_products_house
 
   resources :discoverables
   
@@ -99,6 +100,7 @@ DuneOnline::Application.routes.draw do
 	match 'oprava_katastrofy' => 'users#oprava_katastrofy', :as => :oprava_katastrofy
   match 'zmena_hesla_f' => 'users#zmena_hesla_f', :as => :zmena_hesla_f
   match 'zmena_hesla' => 'users#zmena_hesla', :as => :zmena_hesla
+	match 'send_products' => 'users#send_products', :as => :send_products
 
 #  resources :admin
   match 'wipe' => 'admin#wipe', :as => :wipe

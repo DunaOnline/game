@@ -35,6 +35,7 @@
           <li><%= img_melanz %><%= format_mena(@subhouse.melange, 'mg') %></li>
           <li><%= img_zkusenosti %><%= format_mena(@subhouse.exp, 'exp', false) %></li>
           <li><%= img_vyrobky('Celkovo dilu') %><%= format_mena(@subhouse.parts, 'ks', true) %></li>
+          <li>Kapacita T: <%= @subhouse.vyuzitie_tovaren %> / <%= format_mena(@subhouse.kapacita_tovaren, 'ks', true) %></li>
         </td>
         <td>
           <li><%= img_solary %><%= text_field_tag 'user_solary', '0.00', :size => "3", :title => "Zadejte množství" %></li>
@@ -50,7 +51,7 @@
           <li><%= img_melanz %><%= text_field_tag 'mr_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'mr_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
           <li><%= img_vyrobky %><%= text_field_tag 'mr_parts', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
-          <li><%= select_tag :mr_id_suroviny, options_for_select(Subhouse.without_subhouse(current_user.subhouse).order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %> </li>
+          <li><%= select_tag :mr_id_suroviny, options_for_select(Subhouse.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %> </li>
 
         </td>
         <td>
@@ -59,12 +60,68 @@
           <li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'rodu_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_vyrobky %><%= text_field_tag 'rodu_parts', '0.00', :size => "3", :title => "Zadejte množství" %></li>
-          </td>
+          <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %></li>
+        </td>
+      </tr>
+  <% end %>
+</table>
+
+<% if @productions.count != 0 %>
+    <table class="tab1">
+      <tr>
+        <th></th>
+        <th>Produkt</th>
+        <th>Mnozstvo</th>
+      </tr>
+      <% @productions.each do |productions| %>
+          <tr>
+            <td></td>
+            <td><%= productions.product.title %></td>
+            <td><%= productions.amount %></td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>
+
+<% if @markets.count != 0 %>
+<table class="vyroba">
+  <tr>
+    <th colspan="4">Nakup malorodnych zasob na trhu</th>
+  </tr>
+  <tr>
+    <th>Tovar</th>
+
+    <th>Cena za kus [Sol]</th>
+    <th>Množství</th>
+    <th class="r" style="width:50px">Nákup</th>
+  </tr>
+
+  <%= render :partial => "market", :collection => @markets %>
+
+</table>
+<% end %>
+
+<table class="tab1">
+  <tr>
+    <th colspan="4">Predaj malorodnych zasob na trhu</th>
+  </tr>
+  <%= form_for(@market) do |f| %>
+      <tr>
+        <td>
+          <%= hidden_field_tag 'sent_from', 'MR' %>
+          <%= f.select :area, options_for_select(@subhouse.for_sale), :required => true, :name => "Vyberte komoditu k prodeji", :title => "Vyberte komoditu k prodeji", :class => "vyber" %>
+
+        </td>
+        <td><%= f.number_field :price, :required => true, :min => 1, :size => 3, :title => "Zadejte cenu" %></td>
+
+        <td><%= f.number_field :amount, :required => true, :min => 0.1, :step => "any", :size => 3, :title => "Zadejte množství", :step => "any" %></td>
+        <td><%= f.submit 'Prodávat', :class => "ok" %></td>
       </tr>
   <% end %>
 </table>
 
 <table class="tab1">
+  <tr><th colspan="4">Zozonam hracu v malorode</th></tr>
   <tr>
     <th>Nick</th>
     <th>Pocet Len</th>
@@ -108,8 +165,7 @@
     <td> Menovat Vicegenerala :</td>
     <td>
       <%= form_tag :menuj_vice do %>
-
-      <%= select_tag :vicegeneral, options_for_select(@subhouse.users.without_user(current_user).collect { |p| [p.nick, p.id] }, {:include_blank => false}), :class => "tab" %>
+      <%= select_tag :vicegeneral, options_for_select(@subhouse.users.collect { |p| [p.nick, p.id] }, {:include_blank => false}), :class => "tab" %>
           <%= submit_tag 'Menuj'%>
       <% end %>
     </td>

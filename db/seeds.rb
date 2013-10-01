@@ -100,6 +100,9 @@ Global.create(:setting => 'presun_planeta', :cislo => 0.02)
 Global.create(:setting => 'presun_vyrobku', :cislo => 0.02)
 Global.create(:setting => 'max_hracu_malorod', :cislo => 10)
 Global.create(:setting => 'rozdiel_poctu_u_registracia', :cislo => 5)
+Global.create(:setting => 'kapacita_tovaren_house', :cislo => 0.1)
+Global.create(:setting => 'kapacita_tovaren_mr', :cislo => 0.05)
+Global.create(:setting => 'stiahnut_zbozi_trh', :cislo => 0.7)
 
 puts 'Global done'
 

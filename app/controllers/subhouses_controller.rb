@@ -42,12 +42,12 @@ class SubhousesController < ApplicationController
   end
 
   def sprava_mr
-    if params[:id]
-      @subhouse = Subhouse.find(params[:id])
-      @ziadosti = User.malorod(@subhouse.id)
-    else
-      redirect_to current_user.house
-    end
+    @subhouse = current_user.subhouse
+    @ziadosti = User.malorod(@subhouse.id)
+	  @market = Market.new
+    @markets = Market.zobraz_trh_mr(@subhouse)
+    @productions = @subhouse.productions
+
   end
 
   def vyhod_mr

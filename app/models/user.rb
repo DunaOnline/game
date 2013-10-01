@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
   belongs_to :house
   belongs_to :subhouse
   has_many :fields
+  has_many :resources, :through => :fields
   has_many :votes, :foreign_key => 'elective'
 
   has_many :operations
@@ -267,6 +268,8 @@ class User < ActiveRecord::Base
 		  end
 		  self.update_attribute(:vicegeneral,true)
 	  end
+
+
   end
 
   def zapis_operaci(content, kind = "U")
@@ -297,9 +300,7 @@ class User < ActiveRecord::Base
     case typ
       when "M"
         self.domovske_leno.resource.update_attribute(:material, self.domovske_leno.resource.material + amount)
-      when "P"
-        self.domovske_leno.resource.update_attribute(:population, self.domovske_leno.resource.population + amount)
-	    when "V"
+      when "V"
 		    self.domovske_leno.resource.update_attribute(:parts, self.domovske_leno.resource.parts + amount)
       when "J"
         self.update_attribute(:melange, self.melange + amount)
@@ -317,22 +318,22 @@ class User < ActiveRecord::Base
 
   def for_sale
 	  na_prodej = []
-	  vyrobky = self.domovske_leno.resource.productions.where(["amount > ?", 0])
+	  vyrobky = self.domovske_leno.resource.productions.where("amount > ?", 0)
 	  vyrobky.each do |vyrobok|
 		  nazov = Product.find(vyrobok.product_id).title
 		  na_prodej << [nazov + " " + vyrobok.amount.to_s + "ks" ,vyrobok.product_id]
 
 	  end
-	  na_prodej << ['Materiál', 'M']
-	  na_prodej << ['Melanž', 'J']
-	  na_prodej << ['Expy', 'E']
-	  na_prodej << ['Populace', 'P']
-	  na_prodej << ['Vyrobky','V']
+	  na_prodej << ['Materiál', 'M'] if self.domovske_leno.resource.material > 0
+	  na_prodej << ['Melanž', 'J']  if self.melange > 0
+	  na_prodej << ['Expy', 'E']  if self.exp > 0
+	  na_prodej << ['Vyrobky','V'] if self.domovske_leno.resource.parts > 0
+	  na_prodej
   end
 
   def resourcy_s_tovarny
 	  tovarna = Building.where(:kind => "V").first
-	  self.fields.includes(:estates).where("estates.building_id = ?", tovarna.id)
+	  self.fields.includes(:estates).where("estates.building_id = ?", tovarna.id,)
 	end
 
   def factories_options
@@ -437,7 +438,6 @@ class User < ActiveRecord::Base
   def prijat_do_mr(mr)
 	  if self.subhouse == nil
 		  self.update_attributes(:subhouse_id => mr.id, :ziadost_subhouse => nil)
-		  self.hlasuj(self.subhouse.users.general,'general')
 		  self.zapis_operaci("Byl jste prijat do malorodu #{mr.name}")
 		  return true
 	  else
@@ -561,6 +561,69 @@ class User < ActiveRecord::Base
 	  return msg, flag
   end
 
+  def sell_goods(market)
+	  msg = ""
+	  flag = false
+	  amount = market.amount
+	  case market.area
+		  when "M"
+			  if amount > self.domovske_leno.resource.material
+				  msg += market.nemate_dost
+			  else
+				  self.domovske_leno.resource.update_attribute(:material, self.domovske_leno.resource.material - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+		  when "P"
+			  if amount > self.domovske_leno.resource.population
+				  msg += market.nemate_dost
+			  else
+				  self.domovske_leno.resource.update_attribute(:population, self.domovske_leno.resource.population - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+		  when "V"
+			  if amount > self.domovske_leno.resource.parts
+				  msg += market.nemate_dost
+			  else
+				  self.domovske_leno.resource.update_attribute(:parts, self.domovske_leno.resource.parts - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+		  when "J"
+			  if amount > self.melange
+				  msg += market.nemate_dost
+			  else
+				  self.update_attribute(:melange, self.melange - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+		  when "E"
+			  if amount > self.exp
+				  msg += market.nemate_dost
+			  else
+				  self.update_attribute(:exp, self.exp - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+		  else
+			  production = self.domovske_leno.resource.productions.where(:product_id => market.area).first
+			  if amount > production.amount
+				  msg += market.nemate_dost
+			  else
+				  production.update_attribute(:amount,production.amount - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+
+	  end
+	  return flag, msg
+  end
+
+  def bylo_poslano_trh(market,amount)
+	  market.zapis_obchodu(self.id,"Bylo poslano na trh zbozi #{market.show_area}, #{amount} ks, za #{market.price * amount} solaru")
+  end
+
   def posli_suroviny(h,mr)
 	  msg = ""
 	  sprava, flag = self.move_to_house(h)
@@ -593,6 +656,34 @@ class User < ActiveRecord::Base
 	  return msg, flag
   end
 
+  def move_products(production,amount)
+	  flag = false
+	  msg = ""
+	  if amount > 0
+		  if production.amount >= amount
+			  production.update_attribute(:amount, production.amount - amount)
+			  kam = self.house.productions.where(:product_id => production.product_id).first
+			  if kam
+					flag = true
+			    kam.update_attribute(:amount, kam.amount + amount)
+			  else
+				  Production.new(
+						  :house_id => self.house.id,
+						  :product_id => production.product_id,
+						  :amount => amount
+				  ).save
+				  flag = true
+				end
+		  else
+			  msg = "Nemozete presunut vyrobky"
+		  end
+	  else
+		 msg = "Musite zadat pocet vyrobkov na presun"
+		end
+	 return msg,flag
+  end
+
+
 
   private
 
@@ -603,7 +694,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  scope :without_user, lambda{|user| user ? {:conditions => ["users.id != ?", user.id]} : {} }
+  scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }
   scope :ziadost, lambda {|house| where("ziadost_house = ?", house)}
   scope :malorod, lambda {|mr| where("ziadost_subhouse = ?", mr)}
   scope :dvorane, where(:court => true)

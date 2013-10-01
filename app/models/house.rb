@@ -29,6 +29,8 @@ class House < ActiveRecord::Base
   has_many :operations
   has_many :syselaads
   has_many :subhouses
+  has_many :markets
+  has_many :productions
 
   def poradi_hlasu(typ, pocet = 5)
     hlasy = secti_hlasy(typ, pocet)
@@ -253,10 +255,41 @@ class House < ActiveRecord::Base
 	  House.find_by_name('Renegáti')
   end
 
+  def goods_to_buyer(typ, amount)
 
+	  case typ
+		  when "M"
+			  self.update_attribute(:material, self.material + amount)
+		  when "V"
+			  self.update_attribute(:parts, self.parts + amount)
+		  when "J"
+			  self.update_attribute(:melange, self.melange + amount)
+		  when "E"
+			  self.update_attribute(:exp, self.exp + amount)
+		  else
+			  production = self.productions.where(:product_id => typ).first
+			  if production
+				  production.update_attribute(:amount,production.amount + amount)
+			  else
+
+			  end
+	  end
+  end
+
+  def kapacita_tovaren
+	  kapacita = 0
+	  self.users.each do |user|
+		  kapacita += user.domovske_leno.kapacita_tovaren
+	  end
+	  kapacita / Constant.kapacita_t_house
+  end
+
+  def miesto_v_tovarni?(amount)
+	  self.kapacita_tovaren + amount.to_i <= self.kapacita_tovaren
+  end
 
   def zapis_operaci(content, kind = "N")
-    self.operations << Operation.new(:kind => kind, :content => content, :date => Date.today, :time => Time.now)
+    self.operations << Operation.new(:kind => kind, :content => content, :house_id => self.id, :date => Date.today, :time => Time.now)
   end
 
   def vliv
@@ -272,6 +305,89 @@ class House < ActiveRecord::Base
       vl / celk_vl
     end
   end
+
+  def bylo_poslano_trh(market,amount)
+	  self.zapis_operaci("Bylo poslano na trh zbozi #{market.show_area}, #{amount} ks, za #{market.price * amount} solaru")
+  end
+
+
+  def sell_goods_house(market)
+	  amount = market.amount
+	  case market.area
+		  when "M"
+			  if amount > self.material
+				  msg = "Nemate dost #{market.show_area}"
+			  else
+				  self.update_attribute(:material, self.material - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+		  when "V"
+			  if amount > self.parts
+				  msg = "Nemate dost #{market.show_area}"
+			  else
+				  self.update_attribute(:parts, self.parts - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+		  when "J"
+			  if amount > self.melange
+				  msg = "Nemate dost #{market.show_area}"
+			  else
+				  self.update_attribute(:melange, self.melange - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+		  when "E"
+			  if amount > self.exp
+				  msg = "Nemate dost #{market.show_area}"
+			  else
+				  self.update_attribute(:exp, self.exp - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+		  else
+			  production = self.productions.where(:product_id => market.area).first
+			  if amount > production.amount
+				  msg = "Nemate dost #{market.show_area}"
+			  else
+				  production.update_attribute(:amount,production.amount - amount)
+				  self.bylo_poslano_trh(market,amount)
+				  flag = true
+			  end
+
+	  end
+	  return flag, msg
+  end
+
+
+	  def move_product_house(production,amount)
+		  flag = false
+		  msg = ""
+		  if amount > 0
+			  if production.amount >= amount
+				  production.update_attribute(:amount, production.amount - amount)
+				  kam = self.house.productions.where(:product_id => production.product_id).first
+				  if kam
+					  flag = true
+					  kam.update_attribute(:amount, kam.amount + amount)
+				  else
+					  Production.new(
+							  :house_id => self.house.id,
+							  :product_id => production.product_id,
+							  :amount => amount
+					  ).save
+					  flag = true
+				  end
+			  else
+				  msg = "Nemozete presunut vyrobky"
+			  end
+		  else
+			  msg = "Musite zadat pocet vyrobkov na presun"
+		  end
+		  return msg,flag
+	  end
+
 
   def pocet_poslancu
     pomer = self.pomer_vlivu
@@ -301,6 +417,23 @@ class House < ActiveRecord::Base
 		  pole
 	  end
 
+  end
+
+
+
+  def for_sale
+	  na_prodej = []
+	  vyrobky = self.productions.where("amount > ?", 0)
+	  vyrobky.each do |vyrobok|
+		  nazov = Product.find(vyrobok.product_id).title
+		  na_prodej << [nazov + " " + vyrobok.amount.to_s + "ks" ,vyrobok.product_id]
+
+	  end
+	  na_prodej << ['Materiál', 'M'] if self.material > 0
+	  na_prodej << ['Melanž', 'J']  if self.melange > 0
+	  na_prodej << ['Expy', 'E']  if self.exp > 0
+	  na_prodej << ['Vyrobky','V'] if self.parts > 0
+	  return na_prodej
   end
 
   scope :without_house, lambda{|house| house ? {:conditions => ["id != ?", house.id]} : {} }

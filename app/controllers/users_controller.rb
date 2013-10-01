@@ -95,10 +95,22 @@ class UsersController < ApplicationController
     else
       @user = current_user
     end
+    @productions = @user.productions.active
     @planets = @user.najdi_planety
     @operations = @user.operations.uzivatelske.seradit.limit(5)
     @subhouse = Subhouse.new
 	  @subhouses = Subhouse.all
+  end
+
+  def send_products
+		amount = params[:amount]
+		production = Production.find(params[:production])
+		msg, flag = current_user.move_products(production,amount.to_i)
+	  if flag
+		redirect_to :back, :notice => "Vyrobky poslane"
+	  else
+		  redirect_to :back, :alert => msg
+	  end
   end
 
   def udalosti
@@ -110,6 +122,7 @@ class UsersController < ApplicationController
 			  @udalost = Environment.find(params[:id]).property
 			  @planet =  Environment.find(params[:id])
 		  else
+			  redirect_to current_user
 	  end
   end
 

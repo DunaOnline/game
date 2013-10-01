@@ -102,6 +102,7 @@ class HousesController < ApplicationController
     else
       @house = current_user.house
     end
+    @productions = @house.productions
     @vudce = @house.vudce
     @mentate = @house.mentate
     @army_mentate = @house.army_mentate
@@ -110,6 +111,30 @@ class HousesController < ApplicationController
     @generalove = @house.generalove
     @hraci = @house.users.order(:nick)
 	  @ziadosti = User.ziadost(@house.id)
+    @user = current_user
+    @markets = Market.zobraz_trh_house(@house)
+	  @market = Market.new
+  end
+
+  def send_products_house
+	  amount = params[:amount]
+	  production = Production.find(params[:production])
+	  msg, flag = current_user.house.move_product_house(production,amount.to_i)
+	  if flag
+		  redirect_to :back, :notice => "Vyrobky poslane"
+	  else
+		  redirect_to :back, :alert => msg
+	  end
+  end
+
+  def sell_products
+	  amount = params[:amount]
+
+	  if flag
+		  redirect_to :back, :notice => "Vyrobky poslane"
+	  else
+		  redirect_to :back, :alert => msg
+	  end
   end
 
   def prijmi_hrace

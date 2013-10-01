@@ -63,7 +63,7 @@
           </td>
           <td><%= f.number_field :price, :required => true, :min => 1, :size => 3, :title => "Zadejte cenu" %></td>
 
-          <td><%= f.number_field :amount, :required => true, :size => 3, :title => "Zadejte množství", :step => "any" %></td>
+          <td><%= f.number_field :amount, :required => true, :min => 0.1, :size => 3, :title => "Zadejte množství", :step => "any" %></td>
           <td><%= f.submit 'Prodávat', :class => "ok" %></td>
         </tr>
     <% end %>
