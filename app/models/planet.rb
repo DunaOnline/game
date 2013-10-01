@@ -192,101 +192,100 @@ class Planet < ActiveRecord::Base
   end
 
   def celkovy_parts(user)
-	  parts = 0.0
-	  for field in self.fields.vlastnik(user).includes(:resource) do
-		  parts += field.resource.parts
-	  end
-	  parts
+    parts = 0.0
+    for field in self.fields.vlastnik(user).includes(:resource) do
+      parts += field.resource.parts
+    end
+    parts
   end
 
   def kapacita_parts(user)
-	  tovarna = Building.where(:kind => "V").first
+    tovarna = Building.where(:kind => "V").first
 
-	  pocet_tovaren = 0
-	  for field in self.fields.vlastnik(user) do
-		  leno_s_tovarnou = field.estates.where(:building_id => tovarna.id).first
-		  pocet_tovaren += leno_s_tovarnou.number if leno_s_tovarnou
-	  end
-	  (pocet_tovaren * Constant.kapacita_tovaren).to_i
+    pocet_tovaren = 0
+    for field in self.fields.vlastnik(user) do
+      leno_s_tovarnou = field.estates.where(:building_id => tovarna.id).first
+      pocet_tovaren += leno_s_tovarnou.number if leno_s_tovarnou
+    end
+    (pocet_tovaren * Constant.kapacita_tovaren).to_i
   end
 
   def self.nahodna_udalost
-	  enviro = Environment.all
-	  enviro.each do |envi|
-		  if envi.duration == 0
-			  envi.destroy
-		  else
-			  envi.update_attribute(:duration,envi.duration - 1)
-		  end
-	  end
+    enviro = Environment.all
+    enviro.each do |envi|
+      if envi.duration == 0
+        envi.destroy
+      else
+        envi.update_attribute(:duration, envi.duration - 1)
+      end
+    end
 
-	  self.all.each do |planet|
-		  planet.udalost
-	  end
+    self.all.each do |planet|
+      planet.udalost
+    end
   end
 
   def udalost
-	  udalost = 0
+    udalost = 0
 
-	  pocet_udalosti = Constant.pocet_udalosti.to_i
-	  pocet_udalosti.times do
-		  if udalost == rand(100/ Constant.pravdepodobnost)
-			  if Property.count > 0
-				  roll_property = rand(Property.nahodne.count) + 1
-				  property = Property.nahodne.find(roll_property)
+    pocet_udalosti = Constant.pocet_udalosti.to_i
+    pocet_udalosti.times do
+      if udalost == rand(100/ Constant.pravdepodobnost)
+        if Property.count > 0
+          roll_property = rand(Property.nahodne.count) + 1
+          property = Property.nahodne.find(roll_property)
 
-						  Environment.new(
-								  :planet_id => self.id,
-								  :property_id => property.id,
-								  :duration => property.duration
-						  ).save
+          Environment.new(
+              :planet_id => self.id,
+              :property_id => property.id,
+              :duration => property.duration
+          ).save
 
 
+          self.house.zapis_operaci("Mimoriadna udalost na planete #{self.name} : #{property.name}")
 
-				  self.house.zapis_operaci("Mimoriadna udalost na planete #{self.name} : #{property.name}")
-
-				end
-		  end
-	  end
+        end
+      end
+    end
   end
 
   def udalost_bonus(typ)
-	  enviro_bonus = 1
-	  if self.environment
-		  case typ
-			  when "P"
-				  self.environment.each do |enviro|
-					  enviro_bonus += enviro.property.population_bonus * enviro.property.population_cost if enviro
+    enviro_bonus = 1
+    if self.environment
+      case typ
+        when "P"
+          self.environment.each do |enviro|
+            enviro_bonus += enviro.property.population_bonus * enviro.property.population_cost if enviro
 
-				  end
-			  when "PL"
-				  self.environment.each do |enviro|
-					  enviro_bonus += enviro.property.pop_limit_bonus  if enviro
-					end
-			  when "J"
-				  self.environment.each do |enviro|
-					  enviro_bonus += enviro.property.melange_bonus * enviro.property.melange_cost if enviro
-					end
-			  when "M"
-				  self.environment.each do |enviro|
-					  enviro_bonus += enviro.property.material_bonus * enviro.property.material_cost if enviro
-					end
-			  when "S"
-				  self.environment.each do |enviro|
-					  enviro_bonus += enviro.property.solar_bonus * enviro.property.solar_cost if enviro
-					end
-			  when "E"
-				  self.environment.each do |enviro|
-					  enviro_bonus += enviro.property.exp_bonus * enviro.property.exp_cost if enviro
-					end
-			  else
-				  enviro_bonus = 1
-		  end
-	  end
+          end
+        when "PL"
+          self.environment.each do |enviro|
+            enviro_bonus += enviro.property.pop_limit_bonus if enviro
+          end
+        when "J"
+          self.environment.each do |enviro|
+            enviro_bonus += enviro.property.melange_bonus * enviro.property.melange_cost if enviro
+          end
+        when "M"
+          self.environment.each do |enviro|
+            enviro_bonus += enviro.property.material_bonus * enviro.property.material_cost if enviro
+          end
+        when "S"
+          self.environment.each do |enviro|
+            enviro_bonus += enviro.property.solar_bonus * enviro.property.solar_cost if enviro
+          end
+        when "E"
+          self.environment.each do |enviro|
+            enviro_bonus += enviro.property.exp_bonus * enviro.property.exp_cost if enviro
+          end
+        else
+          enviro_bonus = 1
+      end
+    end
 
-	  enviro_bonus = enviro_bonus -1 if enviro_bonus > 2
-	  enviro_bonus
-	end
+    enviro_bonus = enviro_bonus -1 if enviro_bonus > 2
+    enviro_bonus
+  end
 
 
   scope :domovska, lambda { |user| where(:house_id => user.house.id, :planet_type_id => PlanetType.find_by_name("Domovská")) }

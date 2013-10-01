@@ -32,31 +32,31 @@ class Message < ActiveRecord::Base
 
   def vymaz(user, odoslana, prijata)
     if odoslana
-	    recipients = Conversation.where('receiver' => user, 'message_id' => self.id)
-	    recipients.each do |r|
-		    if prijata
-			    r.update_attributes(:deleted_by => "SR")
-			    r.update_attributes(:opened => true) if r.opened == nil
-		    else
-			    if r.deleted_by == "S"
-				    r.update_attributes(:deleted_by => "SR")
-			    else
-				    r.update_attributes(:deleted_by => "R")
-			    end
-		    end
+      recipients = Conversation.where('receiver' => user, 'message_id' => self.id)
+      recipients.each do |r|
+        if prijata
+          r.update_attributes(:deleted_by => "SR")
+          r.update_attributes(:opened => true) if r.opened == nil
+        else
+          if r.deleted_by == "S"
+            r.update_attributes(:deleted_by => "SR")
+          else
+            r.update_attributes(:deleted_by => "R")
+          end
+        end
 
-	    end
+      end
 
     else
-	    recipients = Conversation.where('receiver' => user, 'message_id' => self.id)
-	    recipients.each do |r|
-		    if r.deleted_by == "S"
-			    r.update_attributes(:deleted_by => "SR")
-		    else
-			    r.update_attributes(:deleted_by => "R")
-		    end
-		    r.update_attributes(:opened => true) if r.opened == nil
-	    end
+      recipients = Conversation.where('receiver' => user, 'message_id' => self.id)
+      recipients.each do |r|
+        if r.deleted_by == "S"
+          r.update_attributes(:deleted_by => "SR")
+        else
+          r.update_attributes(:deleted_by => "R")
+        end
+        r.update_attributes(:opened => true) if r.opened == nil
+      end
     end
   end
 
@@ -68,7 +68,7 @@ class Message < ActiveRecord::Base
 
     case self.druh
       when "M"
-	      recipients = User.where(:subhouse_id => malorod, :house_id => narod)
+        recipients = User.where(:subhouse_id => malorod, :house_id => narod)
       when "G"
         recipients = User.where(:general => true, :house_id => narod)
       when "N"
@@ -90,18 +90,18 @@ class Message < ActiveRecord::Base
         user = self.zisti_id_prijemcu(recipient) if recipient != "" && recipient != nil && self.zisti_id_prijemcu(recipient)
         if user
           self.vytvor_postu(self.user, user)
-	      end
+        end
       end
     end
 
   end
 
   def vytvor_postu(odosielatel, komu)
-      Conversation.new(
-          :message_id => self.id,
-          :sender => odosielatel.id,
-          :receiver => komu
-      ).save
+    Conversation.new(
+        :message_id => self.id,
+        :sender => odosielatel.id,
+        :receiver => komu
+    ).save
   end
 
 

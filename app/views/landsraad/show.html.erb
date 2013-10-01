@@ -2,51 +2,51 @@
 <% title @title %>
 
 <table class="land">
-	<tr>
-		<td class="none" colspan="4"></td>
-		<td background="image/	8	/imperator.png" rowspan="2" colspan ="2"></td>
-		<td class="none" colspan="4"></td>
-		<td class="none" rowspan="9" style="width:4px !important;"></td>
-		<td class="tdpr" rowspan="9" style="width:70px !important;">
-		<li>
-			<h2><%= @title %></h2>
-		<li>
-			<b>Imperátor: </b><%= link_to @imperator.nick, @imperator if @imperator %>
-		<li>
-			<b>Držitel pololéna: </b><%= link_to @spravce.nick, @spravce if @spravce %>
-		<li>
-			<b>Poslanci: </b> 
-			<% for poslanec in @poslanci do %>
-				<%= link_to poslanec.nick, poslanec %>
-			<% end %>
-			<br>
-			<br>
-		</td>
-	</tr>
-	<tr>
-		<% 8.times do %>
-			<td background="<%= asset_path(cesta_budovy('Atreides', 'dom')) %>"></td>
-		<% end %>
-	</tr>
-	<% 3.times do %>
-		<tr>
-			<% 10.times do %>
-				<td background="<%= asset_path(cesta_budovy('Atreides', 'dom')) %>"></td>
-			<% end %>
-		</tr>
-	<% end %>
+  <tr>
+    <td class="none" colspan="4"></td>
+    <td background="image/	8	/imperator.png" rowspan="2" colspan="2"></td>
+    <td class="none" colspan="4"></td>
+    <td class="none" rowspan="9" style="width:4px !important;"></td>
+    <td class="tdpr" rowspan="9" style="width:70px !important;">
+      <li>
+        <h2><%= @title %></h2>
+      <li>
+        <b>Imperátor: </b><%= link_to @imperator.nick, @imperator if @imperator %>
+      <li>
+        <b>Držitel pololéna: </b><%= link_to @spravce.nick, @spravce if @spravce %>
+      <li>
+        <b>Poslanci: </b>
+        <% for poslanec in @poslanci do %>
+            <%= link_to poslanec.nick, poslanec %>
+        <% end %>
+        <br>
+        <br>
+    </td>
+  </tr>
+  <tr>
+    <% 8.times do %>
+        <td background="<%= asset_path(cesta_budovy('Atreides', 'dom')) %>"></td>
+    <% end %>
+  </tr>
+  <% 3.times do %>
+      <tr>
+        <% 10.times do %>
+            <td background="<%= asset_path(cesta_budovy('Atreides', 'dom')) %>"></td>
+        <% end %>
+      </tr>
+  <% end %>
 </table>
 
 
 
 <table class="tab1">
-	<tr>
-		<th class="l" style="width:30px">Číslo</th>
-		<th style="width:50px">Stav</th>
-		<th>Znění zákona</th>
-		<th>Uzavření</th>
-		<th>Autor</th>
-		<th class="r" style="width:80px">Ano/Ne/Zdr.</th>
-	</tr>
+  <tr>
+    <th class="l" style="width:30px">Číslo</th>
+    <th style="width:50px">Stav</th>
+    <th>Znění zákona</th>
+    <th>Uzavření</th>
+    <th>Autor</th>
+    <th class="r" style="width:80px">Ano/Ne/Zdr.</th>
+  </tr>
   <%= render :partial => "zakon", :collection => @zakony %>
 </table>

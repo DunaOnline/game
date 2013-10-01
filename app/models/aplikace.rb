@@ -77,7 +77,6 @@ class Aplikace
     Production.delete_all
 
 
-
     for field in Field.all do
       if field.planet.domovska?
         field.vytvor_resource
@@ -160,10 +159,10 @@ class Aplikace
                             :system_name => "Mu Draconis")
 
     Planet.arrakis.fields << Field.create(:name => "Leno Arrakis",
-                                       :planet_id => arrakis.id,
-                                       :user_id => nil,
-                                       :pos_x => 1,
-                                       :pos_y => 1
+                                          :planet_id => arrakis.id,
+                                          :user_id => nil,
+                                          :pos_x => 1,
+                                          :pos_y => 1
     )
     arrakis_field = Field.find_by_planet_id(arrakis)
     arrakis_field.vytvor_resource

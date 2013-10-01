@@ -90,7 +90,7 @@ class EodsController < ApplicationController
         @material_income += eod.material_income
         @population_income += eod.population_income
         @melange_income += eod.melange_income
-	      #@parts_income += eod.parts_income
+        #@parts_income += eod.parts_income
       end
 
     else

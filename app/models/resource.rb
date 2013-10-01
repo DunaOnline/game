@@ -15,5 +15,5 @@ class Resource < ActiveRecord::Base
   attr_accessible :user_id, :field_id, :population, :material, :parts
 
   belongs_to :field
-	has_many :productions
+  has_many :productions
 end

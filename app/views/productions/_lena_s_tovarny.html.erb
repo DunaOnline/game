@@ -6,7 +6,7 @@
     <ul>
       <% @products.each do |product| %>
           <li>
-            <%= product.title%>
+            <%= product.title %>
           </li>
           <li>
             <%= product.vlastnim(lena_s_tovarny) %>
@@ -16,41 +16,39 @@
     </ul>
     <ul>
       <li>
-         <%= img_vyrobky "Výrobky na lenu" %> <%= lena_s_tovarny.resource.parts %>
+        <%= img_vyrobky "Výrobky na lenu" %> <%= lena_s_tovarny.resource.parts %>
 
       </li>
       <li>
-        Celková kapacita vaší výroby na tomto lénu je <%= lena_s_tovarny.vyuzitie_tovaren %> / <%= lena_s_tovarny.kapacita_tovaren %> Z.
+        Celková kapacita vaší výroby na tomto lénu je <%= lena_s_tovarny.vyuzitie_tovaren %>
+        / <%= lena_s_tovarny.kapacita_tovaren %> Z.
       </li>
     </ul>
 
 
-        <%= form_tag :presun_suroviny, :class => "bottom_div", :url => presun_suroviny_path do  %>
+    <%= form_tag :presun_suroviny, :class => "bottom_div", :url => presun_suroviny_path do %>
         <table class="tab3">
           <tr>
             <th>
 
-            Presun Dilu :
+              Presun Dilu :
 
-            <%= hidden_field_tag :source_field, lena_s_tovarny.id %>
-            <%= hidden_field_tag :presunout_co, "Parts" %>
-            <%= hidden_field_tag :tovarna, true %>
-            <%= select_tag :target_field, options_from_collection_for_select(current_user.resourcy_s_tovarny, "id", "name"), :class => "tab", :title => "Zvolte cilove leno" %>
-            <%= number_field_tag :amount, nil,:min => 1, :class => "tab", :required => true %>
-            <%= submit_tag 'Přesunout', :name => 'presunout', :class => 'ok4', :style => "margin-right: 30px;", :title => "PŘESUNOUT VYROBKY" %>
+              <%= hidden_field_tag :source_field, lena_s_tovarny.id %>
+              <%= hidden_field_tag :presunout_co, "Parts" %>
+              <%= hidden_field_tag :tovarna, true %>
+              <%= select_tag :target_field, options_from_collection_for_select(current_user.resourcy_s_tovarny, "id", "name"), :class => "tab", :title => "Zvolte cilove leno" %>
+              <%= number_field_tag :amount, nil, :min => 1, :class => "tab", :required => true %>
+              <%= submit_tag 'Přesunout', :name => 'presunout', :class => 'ok4', :style => "margin-right: 30px;", :title => "PŘESUNOUT VYROBKY" %>
 
             </th>
           </tr>
         </table>
 
-        <% end %>
-
-
+    <% end %>
 
 
   </div>
   <div style="clear: both;"></div>
-
 
 
 </div>

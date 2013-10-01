@@ -4,7 +4,7 @@
     <th colspan="10">Schvalit zakon</th>
   </tr>
   <% for law in @schvalene do %>
-  <tr>
+      <tr>
 
         <td><h3><%= law.label + ' - ' + law.title %></h3>
           <li>
@@ -12,20 +12,18 @@
           <li>
 
 
+            <%= form_tag podepisat_zakon_path do %>
 
-                <%= form_tag podepisat_zakon_path do %>
+                <%= hidden_field_tag :law_id, law.id %>
+                <%= submit_tag 'Ano', :class => "ok4" %>
+                <%= submit_tag 'Ne', :class => "ok4" %>
 
-                        <%= hidden_field_tag :law_id, law.id %>
-                        <%= submit_tag 'Ano',  :class => "ok4" %>
-                        <%= submit_tag 'Ne',  :class => "ok4" %>
-
-                    <% end %>
-
+            <% end %>
 
 
-            </td>
+        </td>
 
-  </tr>
+      </tr>
   <% end %>
 </table>
 
@@ -45,8 +43,8 @@
         <td><%= law.state %></td>
         <td><%= law.content %></td>
         <td class="ctr">---</td>
-        <td class="ctr"><%= link_to law.user.nick, law.user  %></td>
-        <td class="ctr"><%=  law.pomer_hlasu %></td>
+        <td class="ctr"><%= link_to law.user.nick, law.user %></td>
+        <td class="ctr"><%= law.pomer_hlasu %></td>
       </tr>
 
   <% end %>
@@ -68,8 +66,8 @@
         <td><%= law.state %></td>
         <td><%= law.content %></td>
         <td class="ctr"><%= law.updated_at.localtime %></td>
-        <td class="ctr"><%= link_to law.user.nick, law.user  %></td>
-        <td class="ctr"><%=  law.pomer_hlasu %></td>
+        <td class="ctr"><%= link_to law.user.nick, law.user %></td>
+        <td class="ctr"><%= law.pomer_hlasu %></td>
       </tr>
 
   <% end %>

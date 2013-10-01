@@ -82,7 +82,7 @@ class UsersController < ApplicationController
     elsif params[:imperator]
       ja.vol_imperatora(koho)
     elsif params[:general]
-	    ja.hlasuj(koho, 'general')
+      ja.hlasuj(koho, 'general')
     else
 
     end
@@ -99,90 +99,90 @@ class UsersController < ApplicationController
     @planets = @user.najdi_planety
     @operations = @user.operations.uzivatelske.seradit.limit(5)
     @subhouse = Subhouse.new
-	  @subhouses = Subhouse.all
+    @subhouses = Subhouse.all
   end
 
   def send_products
-		amount = params[:amount]
-		production = Production.find(params[:production])
-		msg, flag = current_user.move_products(production,amount.to_i)
-	  if flag
-		redirect_to :back, :notice => "Vyrobky poslane"
-	  else
-		  redirect_to :back, :alert => msg
-	  end
+    amount = params[:amount]
+    production = Production.find(params[:production])
+    msg, flag = current_user.move_products(production, amount.to_i)
+    if flag
+      redirect_to :back, :notice => "Vyrobky poslane"
+    else
+      redirect_to :back, :alert => msg
+    end
   end
 
   def udalosti
-	  case params[:typ]
-		  when "L"
-			  @udalost = Influence.find(params[:id]).effect
-			  @leno =  Influence.find(params[:id])
-		  when "P"
-			  @udalost = Environment.find(params[:id]).property
-			  @planet =  Environment.find(params[:id])
-		  else
-			  redirect_to current_user
-	  end
+    case params[:typ]
+      when "L"
+        @udalost = Influence.find(params[:id]).effect
+        @leno = Influence.find(params[:id])
+      when "P"
+        @udalost = Environment.find(params[:id]).property
+        @planet = Environment.find(params[:id])
+      else
+        redirect_to current_user
+    end
   end
 
   def zrus_udalost
-	  @udalost = Environment.find(params[:id])
+    @udalost = Environment.find(params[:id])
   end
 
   def opustit
-		  if current_user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first
-			  redirect_to :back, :notice => "Nemozte opustit renegatov"
-		  else
-		  narod = current_user.house
-		  current_user.opustit_narod
-		  redirect_to :back, :notice => "Opustili ste narod #{narod.name}"
-		  end
+    if current_user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first
+      redirect_to :back, :notice => "Nemozte opustit renegatov"
+    else
+      narod = current_user.house
+      current_user.opustit_narod
+      redirect_to :back, :notice => "Opustili ste narod #{narod.name}"
+    end
   end
 
   def opustit_mr
-	  mr = current_user.subhouse
-	  if current_user.opustit_mr
-		  redirect_to :back, :notice => "Opustili jste malorod #{mr.name}"
-	  else
-		  redirect_to :back, :alert => "Nemozte opustit malorod #{mr.name}"
-	  end
+    mr = current_user.subhouse
+    if current_user.opustit_mr
+      redirect_to :back, :notice => "Opustili jste malorod #{mr.name}"
+    else
+      redirect_to :back, :alert => "Nemozte opustit malorod #{mr.name}"
+    end
   end
 
   def ziadost
-	  if params[:id]
-		  user = User.find(params[:id])
-			  if msg = user.podat_ziadost(params[:narod])
-				  redirect_to :back, :notice => msg
-			  else
-				  redirect_to :back, :alert => msg
-			  end
-	  else
-		  redirect_to :back
-		end
+    if params[:id]
+      user = User.find(params[:id])
+      if msg = user.podat_ziadost(params[:narod])
+        redirect_to :back, :notice => msg
+      else
+        redirect_to :back, :alert => msg
+      end
+    else
+      redirect_to :back
+    end
   end
 
   def ziadost_malorod
-	  subhouse = Subhouse.find(params[:id])
-	  if current_user.update_attribute(:ziadost_subhouse,subhouse.id)
-		  redirect_to :back, :notice => "Ziadost do malorodu #{subhouse.name} bola podana"
-	  else
-		  redirect_to :back, :alert => "Nemuzte poslat zadost"
-	  end
+    subhouse = Subhouse.find(params[:id])
+    if current_user.update_attribute(:ziadost_subhouse, subhouse.id)
+      redirect_to :back, :notice => "Ziadost do malorodu #{subhouse.name} bola podana"
+    else
+      redirect_to :back, :alert => "Nemuzte poslat zadost"
+    end
   end
 
   def oprava_katastrofy
-	  if params[:typ] == "L"
-		  effect = Influence.find(params[:id])
-		  effect.odstran_katastrofu(current_user)
-		  redirect_to sprava_path(:id => current_user)
-	  elsif params[:typ] == "P"
-		  enviro = Environment.find(params[:id])
-		  enviro.odstran_katastrofu(current_user)
-		  redirect_to sprava_path(:id => current_user)
-	  else
-		  redirect_to sprava_path(:id => current_user)
-		end
+    if params[:typ] == "L"
+      effect = Influence.find(params[:id])
+      effect.odstran_katastrofu(current_user)
+      redirect_to sprava_path(:id => current_user)
+    elsif params[:typ] == "P"
+      enviro = Environment.find(params[:id])
+      enviro.odstran_katastrofu(current_user)
+      redirect_to sprava_path(:id => current_user)
+    else
+      redirect_to sprava_path(:id => current_user)
+    end
   end
 
 
@@ -235,12 +235,12 @@ class UsersController < ApplicationController
     mr = []
     rod << params[:rod_solary].to_f << params[:rod_melanz].to_f << params[:rod_zkusenosti].to_i << params[:rod_material].to_f << params[:rod_vyrobky].to_f
     mr << params[:mr_solary].to_f << params[:mr_melanz].to_f << params[:mr_zkusenosti].to_i << params[:mr_material].to_f << params[:mr_vyrobky].to_f
-    msg, flag = current_user.posli_suroviny(rod,mr)
+    msg, flag = current_user.posli_suroviny(rod, mr)
     if flag
-	    redirect_to :back, :notice => msg
+      redirect_to :back, :notice => msg
     else
-	    msg += "Nezadali ste mnozstvo na presun" if msg == ""
-	    redirect_to :back, :alert => msg
+      msg += "Nezadali ste mnozstvo na presun" if msg == ""
+      redirect_to :back, :alert => msg
     end
 
 

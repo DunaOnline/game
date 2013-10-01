@@ -1,17 +1,16 @@
-
 <% field, planet = current_user.zobraz_udalost %>
-  <% field.each do |f| %>
-      <div class="la field_event">
-        <%= f[0] %>
-        <%= link_to "udalosti", udalosti_path(:id => f[1],:typ => "L") %>
-      </div>
-     <%end%>
-  <% planet.each do |p|%>
+<% field.each do |f| %>
     <div class="la field_event">
-     <%= p[0] %>
-      <%= link_to "udalosti", udalosti_path(:id => p[1],:typ => "P") %>
+      <%= f[0] %>
+      <%= link_to "udalosti", udalosti_path(:id => f[1], :typ => "L") %>
     </div>
-  <%end%>
+<% end %>
+<% planet.each do |p| %>
+    <div class="la field_event">
+      <%= p[0] %>
+      <%= link_to "udalosti", udalosti_path(:id => p[1], :typ => "P") %>
+    </div>
+<% end %>
 
 
 

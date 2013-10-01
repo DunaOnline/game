@@ -29,7 +29,7 @@ class Constant
 
   #KPAP = Global.vrat('k_parts_produkce', 4)
   def self.kpap
-	  Global.vrat('k_parts_produkce', 4)
+    Global.vrat('k_parts_produkce', 4)
   end
 
   #KSV = Global.vrat('k_solar_vydej', 4)
@@ -84,7 +84,7 @@ class Constant
 
   #KVYNOSPAR = Global.vrat('k_parts_vynos', 4)
   def self.kvynospar
-	  Global.vrat('k_parts_vynos', 4)
+    Global.vrat('k_parts_vynos', 4)
   end
 
   # aplikace
@@ -93,7 +93,7 @@ class Constant
   # vypocty
   #KAPACITA_TOVAREN = Global.vrat('kapacita_tovaren', 4)
   def self.kapacita_tovaren
-	  Global.vrat('kapacita_tovaren', 4)
+    Global.vrat('kapacita_tovaren', 4)
   end
 
   #ZAKL_CENA_NOVE_PLANETY = Global.vrat('zakl_cena_planety', 4)
@@ -145,44 +145,44 @@ class Constant
     Global.vrat('konec_volby_imperatora', 2)
   end
 
-	def self.pravdepodobnost
-		Global.vrat('pravdepodobnost_eventu', 4)
-	end
+  def self.pravdepodobnost
+    Global.vrat('pravdepodobnost_eventu', 4)
+  end
 
-	def self.pocet_udalosti
-		Global.vrat('mozny_pocet_eventu_prepocet', 4)
-	end
+  def self.pocet_udalosti
+    Global.vrat('mozny_pocet_eventu_prepocet', 4)
+  end
 
   def self.presun_leno
-	  Global.vrat('presun_leno', 4)
+    Global.vrat('presun_leno', 4)
   end
 
   def self.presun_planeta
-	  Global.vrat('presun_planeta', 4)
+    Global.vrat('presun_planeta', 4)
   end
 
   def self.presun_vyrobku
-	  Global.vrat('presun_vyrobku', 4)
+    Global.vrat('presun_vyrobku', 4)
   end
 
-	def self.max_u_mr
-		Global.vrat('max_hracu_malorod', 4)
-	end
+  def self.max_u_mr
+    Global.vrat('max_hracu_malorod', 4)
+  end
 
   def self.rozdiel_u_reg
-	  Global.vrat('rozdiel_poctu_u_registracia', 4)
+    Global.vrat('rozdiel_poctu_u_registracia', 4)
   end
 
-	def self.kapacita_t_house
-		 Global.vrat('kapacita_tovaren_house', 4)
-	end
+  def self.kapacita_t_house
+    Global.vrat('kapacita_tovaren_house', 4)
+  end
 
-	def self.kapacita_t_mr
-		Global.vrat('kapacita_tovaren_mr', 4)
-	end
+  def self.kapacita_t_mr
+    Global.vrat('kapacita_tovaren_mr', 4)
+  end
 
-	def self.stiahnut_zbozi_trh
-		Global.vrat('stiahnut_zbozi_trh', 4)
-	end
+  def self.stiahnut_zbozi_trh
+    Global.vrat('stiahnut_zbozi_trh', 4)
+  end
 
 end

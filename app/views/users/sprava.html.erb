@@ -71,27 +71,27 @@
 </table>
 <table class="tab1">
 
-     <tr>
+  <tr>
 
-       <th>Produkty</th>
-       <th>Mnozstvo</th>
-       <th>Poslat</th>
-     </tr>
-      <% @productions.each do |production| %>
+    <th>Produkty</th>
+    <th>Mnozstvo</th>
+    <th>Poslat</th>
+  </tr>
+  <% @productions.each do |production| %>
       <%= form_tag send_products_path(:production => production.id) do %>
-      <tr>
-        <td>
-          <%= production.product.title %> // <%= production.amount %> ks
-        </td>
-        <td>
-          <%= number_field_tag(:amount, nil, :min => 1, :title => "Zadejte množství", :required => true) %>
-        </td>
-        <td>
-          <%= submit_tag 'Poslat', :class => "ok"%>
-        </td>
-      </tr>
-          <% end %>
+          <tr>
+            <td>
+              <%= production.product.title %> // <%= production.amount %> ks
+            </td>
+            <td>
+              <%= number_field_tag(:amount, nil, :min => 1, :title => "Zadejte množství", :required => true) %>
+            </td>
+            <td>
+              <%= submit_tag 'Poslat', :class => "ok" %>
+            </td>
+          </tr>
       <% end %>
+  <% end %>
 
 </table>
 
@@ -175,7 +175,7 @@
               <span><%= s.pocet_userov %> / <%= Constant.max_u_mr.to_i %></span>
             </td>
             <td>
-              <span><%= link_to 'Podat Ziadost', ziadost_malorod_url(:id => s.id)  %></span>
+              <span><%= link_to 'Podat Ziadost', ziadost_malorod_url(:id => s.id) %></span>
             </td>
 
 
@@ -191,7 +191,7 @@
         </td>
         <td>
           <%= form_tag @subhouse do %>
-              <%= text_field_tag 'Malorod','', :class => "tab" %>
+              <%= text_field_tag 'Malorod', '', :class => "tab" %>
               <%= submit_tag 'Zaloz' %>
           <% end %>
         </td>
@@ -207,13 +207,13 @@
       <% if @user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first %>
       <span>
          <%= form_tag ziadost_path(:id => @user) do %>
-            <% if current_user.ziadost_house%>
+            <% if current_user.ziadost_house %>
         Aktualna ziadost v narode <%= House.find(current_user.ziadost_house).name %>
         <% end %>
 
-            <%= select_tag :narod, options_for_select(House.playable.collect {|p| [ p.name, p.id ] }, {:include_blank => false}), :class => "tab" %>
+            <%= select_tag :narod, options_for_select(House.playable.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %>
 
-            <%= submit_tag 'Prihlasit sa do Naroda',  data:{ :confirm => "Ste si isty?"} %>
+            <%= submit_tag 'Prihlasit sa do Naroda', data: {:confirm => "Ste si isty?"} %>
          <% end %>
       </span>
       <% else %>

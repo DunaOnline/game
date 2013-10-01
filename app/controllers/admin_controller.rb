@@ -65,33 +65,33 @@ class AdminController < ApplicationController
   end
 
   def udalosti_admin
-	  @events = Environment.order(:started_at).all
-	  @influence = Influence.order(:started_at).all
+    @events = Environment.order(:started_at).all
+    @influence = Influence.order(:started_at).all
 
   end
 
   def update_udalost
-	  @event = Environment.find(params[:id])
-	  if params[:commit] == "Save"
-		  @event.update_attributes(params[:environment])
-		  redirect_to udalosti_path
-	  else
+    @event = Environment.find(params[:id])
+    if params[:commit] == "Save"
+      @event.update_attributes(params[:environment])
+      redirect_to udalosti_path
+    else
 
-	  end
+    end
   end
 
   def leno_update_udalost
-	  @effect = Influence.find(params[:id])
-	  if params[:commit] == "Save"
-		  @event.update_attributes(params[:effect])
-		  redirect_to udalosti_path
-	  else
+    @effect = Influence.find(params[:id])
+    if params[:commit] == "Save"
+      @event.update_attributes(params[:effect])
+      redirect_to udalosti_path
+    else
 
-	  end
+    end
   end
 
   def global_index
-	  @globals = Global.order(:setting).all
+    @globals = Global.order(:setting).all
   end
 
   def update_global

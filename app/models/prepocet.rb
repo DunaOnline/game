@@ -78,7 +78,7 @@ class Prepocet
         effect_pop = field.leno_udalost_bonus("P")
         population = field.vynos('population') * enviro_pop * effect_pop
 
-        parts = field.vynos('parts')   #enviro_parts
+        parts = field.vynos('parts') #enviro_parts
 
         vlastnik.update_attributes(
             :solar => vlastnik.solar + solar,
@@ -304,16 +304,15 @@ class Prepocet
     end
   end
 
-	def self.udalosti
+  def self.udalosti
 
-		puts 'udalosti'
-		Planet.nahodna_udalost
-		puts 'Enviroments done'
+    puts 'udalosti'
+    Planet.nahodna_udalost
+    puts 'Enviroments done'
 
-		Field.udalosti_lena
-		puts 'Effects done'
-	end
-
+    Field.udalosti_lena
+    puts 'Effects done'
+  end
 
 
 end

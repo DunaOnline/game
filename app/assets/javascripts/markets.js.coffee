@@ -12,12 +12,12 @@ $(document).ready ->
     area = $(this).val()
 
     switch area
-      when "M" then $("#market_amount").attr("step", "any").attr("min","0.1")
-      when "J" then $("#market_amount").attr("step", "any").attr("min","0.1")
-      when "E" then $("#market_amount").removeAttr("step") $("#market_amount").attr("min","1")
-      when "P" then $("#market_amount").removeAttr("step") $("#market_amount").attr("min","1")
+      when "M" then $("#market_amount").attr("step", "any").attr("min", "0.1")
+      when "J" then $("#market_amount").attr("step", "any").attr("min", "0.1")
+      when "E" then $("#market_amount").removeAttr("step") $("#market_amount").attr("min", "1")
+      when "P" then $("#market_amount").removeAttr("step") $("#market_amount").attr("min", "1")
       else
-        $("#market_amount").removeAttr("step").attr("min","1")
+        $("#market_amount").removeAttr("step").attr("min", "1")
 
   $(".vyroba #q").each ->
     $(this).next().attr('disabled', 'disabled')

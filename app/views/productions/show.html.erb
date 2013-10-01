@@ -1,16 +1,16 @@
-
 <%= form_for @production do %>
     <table class="tab0">
-      <tr>	<td>
-        <a href="index.htm" title="Home">⌂</a>
-        » <a>Výzkum a ekonomika</a>
-        » <a href="stat-databaze.htm">Výroba</a>
-      </td>
+      <tr>
+        <td>
+          <a href="index.htm" title="Home">⌂</a>
+          » <a>Výzkum a ekonomika</a>
+          » <a href="stat-databaze.htm">Výroba</a>
+        </td>
       </tr>
     </table>
 
 
-    <%= render :partial => "factory", object:  @fields_factories %>
+    <%= render :partial => "factory", object: @fields_factories %>
 
 
 
@@ -32,8 +32,6 @@
       </tr>
 
       <%= render :partial => "product", :collection => @products %>
-
-
 
 
     </table>

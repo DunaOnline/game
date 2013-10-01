@@ -1,9 +1,9 @@
 <tr>
   <th class="titel"><%= product.title %></th>
-  <td><%= product.parts  %></td>
-  <td><img src = "image/cssimage/material.png" alt="Materiál" title="Materiál"><%= product.material  %> kg  </td>
-  <td><%= product.melanz  %> mg</td>
-  <td><%= product.price  %> sol</td>
+  <td><%= product.parts %></td>
+  <td><img src="image/cssimage/material.png" alt="Materiál" title="Materiál"><%= product.material %> kg</td>
+  <td><%= product.melanz %> mg</td>
+  <td><%= product.price %> sol</td>
   <td><%= product.vlastnim(@fields_factories) %></td>
 
   <td><%= number_field_tag(product.title, nil, :min => 1, :title => "Zadejte množství") %></td>

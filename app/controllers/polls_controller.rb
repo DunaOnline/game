@@ -47,18 +47,16 @@ class PollsController < ApplicationController
     @poll.law_id = zakon.id
 
 
-
-
     if @poll.save
-	    Poll.zapis_hlasu(current_user.id,"Poslanec #{current_user.nick} hlasoval pro zakon #{zakon.label} - #{zakon.title} za #{@poll.choice} .")
-	    flash[:notice] = "Hlas bol prideleny"
-	    redirect_to landsraad_jednani_path
-	    #format.html { redirect_to 'landsraad_jednani', notice: 'Law was successfully created.' }
-	    #format.json { render json: @law, status: :created, location: @law }
+      Poll.zapis_hlasu(current_user.id, "Poslanec #{current_user.nick} hlasoval pro zakon #{zakon.label} - #{zakon.title} za #{@poll.choice} .")
+      flash[:notice] = "Hlas bol prideleny"
+      redirect_to landsraad_jednani_path
+      #format.html { redirect_to 'landsraad_jednani', notice: 'Law was successfully created.' }
+      #format.json { render json: @law, status: :created, location: @law }
     else
-	    flash[:error] = "Hlas nebol prideleny"
-	    redirect_to landsraad_jednani_path
-	  end
+      flash[:error] = "Hlas nebol prideleny"
+      redirect_to landsraad_jednani_path
+    end
     #respond_to do |format|
     #  if @poll.save
     #    format.html { redirect_to @poll, notice: 'Poll was successfully created.' }

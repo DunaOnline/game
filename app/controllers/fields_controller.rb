@@ -11,25 +11,25 @@ class FieldsController < ApplicationController
   def show
     @field = Field.find_by_id(params[:id])
     if @field
-	    @owner = @field.user
-	    user_lvl = @owner.tech_bonus("L")
-	    house_lvl = @owner.house.vyskumane_narodni_tech("L")
-	    if user_lvl && house_lvl
-	      @bonus = (2 - (user_lvl * house_lvl)).to_f
-	    end
+      @owner = @field.user
+      user_lvl = @owner.tech_bonus("L")
+      house_lvl = @owner.house.vyskumane_narodni_tech("L")
+      if user_lvl && house_lvl
+        @bonus = (2 - (user_lvl * house_lvl)).to_f
+      end
 
-	    if current_user.admin? || @owner == current_user
+      if current_user.admin? || @owner == current_user
 
-	    else
-	     redirect_to field_url(current_user.domovske_leno)
-	    end
+      else
+        redirect_to field_url(current_user.domovske_leno)
+      end
 
-	    @planet = @field.planet
-	    @resource = @field.resource
-	    @co_poslat = [["Materiál", "Material"], ["Populace", "Population"], ["Vyrobky", "Parts"]]
-	    @my_fields = current_user.fields
+      @planet = @field.planet
+      @resource = @field.resource
+      @co_poslat = [["Materiál", "Material"], ["Populace", "Population"], ["Vyrobky", "Parts"]]
+      @my_fields = current_user.fields
     else
-	    redirect_to field_url(current_user.domovske_leno)
+      redirect_to field_url(current_user.domovske_leno)
     end
   end
 
@@ -82,19 +82,19 @@ class FieldsController < ApplicationController
   def postavit_budovu
     @field = Field.find(params[:field])
     if @field.user == current_user || current_user.admin?
-	    @budova = Building.find(params[:budova])
-	    pocet_budov = params[:pocet_budov_stavba].to_i
+      @budova = Building.find(params[:budova])
+      pocet_budov = params[:pocet_budov_stavba].to_i
 
-	    message, postaveno = @field.postav_availability_check(@budova,pocet_budov)
-	    respond_to do |format|
-		    if postaveno
-			    format.html { redirect_to @field, notice: message }
-			    format.json { render json: @budova, status: :created, location: @budova }
-		    else
-			    format.html { redirect_to @field, alert: message }
-			    format.json { render json: @budova, status: :created, location: @budova }
-		    end
-	    end
+      message, postaveno = @field.postav_availability_check(@budova, pocet_budov)
+      respond_to do |format|
+        if postaveno
+          format.html { redirect_to @field, notice: message }
+          format.json { render json: @budova, status: :created, location: @budova }
+        else
+          format.html { redirect_to @field, alert: message }
+          format.json { render json: @budova, status: :created, location: @budova }
+        end
+      end
     else
       redirect_to :back, :error => "Na tomto poli nemůžeš stavět."
     end
@@ -159,26 +159,26 @@ class FieldsController < ApplicationController
     if source.drzitel(current_user) && target.drzitel(current_user)
       case str = source.move_resource(target, params[:presunout_co], params[:amount].to_i)
         when true
-	        flash[:notice] = "Suroviny přesunuty. "
-	        #if params[:tovarna]
-	        #  redirect_to productions_path
-	        #else
-		        redirect_to source
-		      #end
+          flash[:notice] = "Suroviny přesunuty. "
+          #if params[:tovarna]
+          #  redirect_to productions_path
+          #else
+          redirect_to source
+        #end
         else
           flash[:error] = str
           #if params[:tovarna]
-	         # redirect_to productions_path
+          # redirect_to productions_path
           #else
-	          redirect_to source
-          #end
+          redirect_to source
+        #end
       end
     else
       flash[:error] = "Můžeš posílat jen mezi svými lény."
       if params[:tovarna]
-	      redirect_to productions_path
+        redirect_to productions_path
       else
-	      redirect_to source
+        redirect_to source
       end
     end
 

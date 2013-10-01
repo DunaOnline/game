@@ -6,34 +6,34 @@
       » <%= link_to 'Malorod', subhouse_path(current_user.subhouse), :title => "Malorod" %>
     </td>
     <% if can? :update, @subhouse %>
-    <td class="tdd">
+        <td class="tdd">
           <%= link_to 'Sprava malorodu >>', sprava_mr_path(:id => current_user.subhouse) %>
-    </td>
+        </td>
     <% end %>
   </tr>
 </table>
 
 <h2>Zoznam hracu v malorode</h2>
-  <table class="tab1">
-    <tr>
-      <th>Nick</th>
-      <th>Pocet Len</th>
-      <th>Detaily</th>
-    </tr>
-    <% @subhouse.users.each do |user| %>
-        <tr>
-          <td>
-            <%= user.nick %>
-          </td>
-          <td>
-            <%= user.fields.count %>
-          </td>
-          <td>
-            <%= link_to 'Detail', user_path(user) %>
-          </td>
-        </tr>
-    <% end %>
-  </table>
+<table class="tab1">
+  <tr>
+    <th>Nick</th>
+    <th>Pocet Len</th>
+    <th>Detaily</th>
+  </tr>
+  <% @subhouse.users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.nick %>
+        </td>
+        <td>
+          <%= user.fields.count %>
+        </td>
+        <td>
+          <%= link_to 'Detail', user_path(user) %>
+        </td>
+      </tr>
+  <% end %>
+</table>
 
 <h2>Detaily MR</h2>
 
@@ -46,7 +46,7 @@
       <li><b>Členů: </b><%= @subhouse.users.count %>
 
         <br><br>
-      <li><%= link_to 'Malorodni posta', new_message_path ,:value => "Malorodni posta", :class => "ok3" %>
+      <li><%= link_to 'Malorodni posta', new_message_path, :value => "Malorodni posta", :class => "ok3" %>
 
     </td>
     <th>Solary</th>

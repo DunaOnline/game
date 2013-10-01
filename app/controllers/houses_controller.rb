@@ -110,41 +110,41 @@ class HousesController < ApplicationController
     @poslanci = @house.poslanci
     @generalove = @house.generalove
     @hraci = @house.users.order(:nick)
-	  @ziadosti = User.ziadost(@house.id)
+    @ziadosti = User.ziadost(@house.id)
     @user = current_user
     @markets = Market.zobraz_trh_house(@house)
-	  @market = Market.new
+    @market = Market.new
   end
 
   def send_products_house
-	  amount = params[:amount]
-	  production = Production.find(params[:production])
-	  msg, flag = current_user.house.move_product_house(production,amount.to_i)
-	  if flag
-		  redirect_to :back, :notice => "Vyrobky poslane"
-	  else
-		  redirect_to :back, :alert => msg
-	  end
+    amount = params[:amount]
+    production = Production.find(params[:production])
+    msg, flag = current_user.house.move_product_house(production, amount.to_i)
+    if flag
+      redirect_to :back, :notice => "Vyrobky poslane"
+    else
+      redirect_to :back, :alert => msg
+    end
   end
 
   def sell_products
-	  amount = params[:amount]
+    amount = params[:amount]
 
-	  if flag
-		  redirect_to :back, :notice => "Vyrobky poslane"
-	  else
-		  redirect_to :back, :alert => msg
-	  end
+    if flag
+      redirect_to :back, :notice => "Vyrobky poslane"
+    else
+      redirect_to :back, :alert => msg
+    end
   end
 
   def prijmi_hrace
-	  user = User.find(params[:id])
-	  if user.prijat_do_naroda(current_user.house)
-		  current_user.house.zapis_operaci("Byl prijat novy hrac #{user.nick}","N")
-		  redirect_to :back, :notice => "Hrac #{user.nick} bol prijaty do naroda"
-	  else
-		  redirect_to :back, :alert => "Nepodarilo sa prijat hraca"
-	  end
+    user = User.find(params[:id])
+    if user.prijat_do_naroda(current_user.house)
+      current_user.house.zapis_operaci("Byl prijat novy hrac #{user.nick}", "N")
+      redirect_to :back, :notice => "Hrac #{user.nick} bol prijaty do naroda"
+    else
+      redirect_to :back, :alert => "Nepodarilo sa prijat hraca"
+    end
 
   end
 
@@ -159,13 +159,13 @@ class HousesController < ApplicationController
     user << params[:user_solary].to_f << params[:user_melanz].to_f << params[:user_zkusenosti].to_i << params[:user_material].to_f << params[:user_parts].to_f
     narod << params[:rodu_solary].to_f << params[:rodu_melanz].to_f << params[:rodu_zkusenosti].to_i << params[:rodu_material].to_f << params[:rodu_parts].to_f
     mr << params[:mr_solary].to_f << params[:mr_melanz].to_f << params[:mr_zkusenosti].to_i << params[:mr_material].to_f << params[:mr_parts].to_f
-    msg, flag = rod.posli_rodove_suroviny(narod,user,mr,rodu,useru,mrdu)
+    msg, flag = rod.posli_rodove_suroviny(narod, user, mr, rodu, useru, mrdu)
     if flag
-	    redirect_to sprava_rod_path(:id => rod), :notice => msg
+      redirect_to sprava_rod_path(:id => rod), :notice => msg
     else
 
-	    msg += "Nezadali ste mnozstvo na presun" if msg == ""
-	    redirect_to sprava_rod_path(:id => rod), :alert => msg
+      msg += "Nezadali ste mnozstvo na presun" if msg == ""
+      redirect_to sprava_rod_path(:id => rod), :alert => msg
     end
   end
 

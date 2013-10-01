@@ -46,7 +46,7 @@ class Building < ActiveRecord::Base
   end
 
   def naklady_stavba_melange
-	  self.sum_bonus * self.melange_cost * Constant.kpv
+    self.sum_bonus * self.melange_cost * Constant.kpv
   end
 
   def sum_bonus
@@ -74,15 +74,12 @@ class Building < ActiveRecord::Base
   end
 
   def vynos_parts
-	  Constant.kvynospar * Constant.kpap
+    Constant.kvynospar * Constant.kpap
   end
 
   def nutna_pop
     self.population_cost * Constant.kpv
   end
-
-
-
 
 
 end

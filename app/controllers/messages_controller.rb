@@ -64,14 +64,14 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
 
-		      if @message.save
-			      @message.posli_postu(@message.recipients)
-		        format.html { redirect_to messages_url(:type => "Dorucena"), :notice => "Posta odoslana"}
-		        format.json { render json: @message }
-		      else
-			      format.html {redirect_to new_message_url, :alert => "Chybne udaje"}
-			      format.json { render json: @message.errors, status: :unprocessable_entity }
-			    end
+      if @message.save
+        @message.posli_postu(@message.recipients)
+        format.html { redirect_to messages_url(:type => "Dorucena"), :notice => "Posta odoslana" }
+        format.json { render json: @message }
+      else
+        format.html { redirect_to new_message_url, :alert => "Chybne udaje" }
+        format.json { render json: @message.errors, status: :unprocessable_entity }
+      end
 
 
     end

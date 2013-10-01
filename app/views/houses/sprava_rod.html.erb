@@ -58,37 +58,37 @@
   <% end %>
 </table>
 <% if @productions.count != 0 %>
-<table class="tab1">
-  <tr>
-    <th></th>
-    <th>Produkt</th>
-    <th>Mnozstvo</th>
-  </tr>
-  <% @productions.each do |productions| %>
-  <tr>
-    <td></td>
-   <td><%= productions.product.title %></td>
-    <td><%= productions.amount %></td>
-  </tr>
-  <% end %>
-</table>
+    <table class="tab1">
+      <tr>
+        <th></th>
+        <th>Produkt</th>
+        <th>Mnozstvo</th>
+      </tr>
+      <% @productions.each do |productions| %>
+          <tr>
+            <td></td>
+            <td><%= productions.product.title %></td>
+            <td><%= productions.amount %></td>
+          </tr>
+      <% end %>
+    </table>
 <% end %>
 <% if @markets.count != 0 %>
-<table class="vyroba">
-  <tr>
-    <th colspan="4">Nakup narodnych zasob na trhu</th>
-  </tr>
-  <tr>
-    <th>Tovar</th>
+    <table class="vyroba">
+      <tr>
+        <th colspan="4">Nakup narodnych zasob na trhu</th>
+      </tr>
+      <tr>
+        <th>Tovar</th>
 
-    <th>Cena za kus [Sol]</th>
-    <th>Množství</th>
-    <th class="r" style="width:50px">Nákup</th>
-  </tr>
+        <th>Cena za kus [Sol]</th>
+        <th>Množství</th>
+        <th class="r" style="width:50px">Nákup</th>
+      </tr>
 
-  <%= render :partial => "market", :collection => @markets %>
+      <%= render :partial => "market", :collection => @markets %>
 
-</table>
+    </table>
 <% end %>
 
 <table class="tab1">
@@ -110,7 +110,7 @@
         <td><%= f.submit 'Prodávat', :class => "ok" %></td>
       </tr>
   <% end %>
-  </table>
+</table>
 
 <table class="tab1">
   <tr>
@@ -165,7 +165,7 @@
                 <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "ArmyMentat" %>
             <% end %>
           </li>
-        <% end %>
+      <% end %>
 
     </td>
 
@@ -217,14 +217,14 @@
 <% if @ziadosti.count > 0 %>
     <table class="tab1">
       <tr>
-        <th>Meno Ziadatela  </th>
+        <th>Meno Ziadatela</th>
 
       </tr>
       <% @ziadosti.each do |ziadost| %>
-        <tr>
-          <td><%= link_to ziadost.nick, user_path(ziadost) %></td>
-          <td><%= button_to("Prijmout", prijmi_hrace_url(:id => ziadost.id),:confirm => "Are you sure?") %></td>
-        </tr>
+          <tr>
+            <td><%= link_to ziadost.nick, user_path(ziadost) %></td>
+            <td><%= button_to("Prijmout", prijmi_hrace_url(:id => ziadost.id), :confirm => "Are you sure?") %></td>
+          </tr>
       <% end %>
     </table>
 <% end %>

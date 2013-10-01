@@ -12,17 +12,17 @@
 #
 
 class Influence < ActiveRecord::Base
-	attr_accessible :effect_id, :field_id, :started_at, :duration
+  attr_accessible :effect_id, :field_id, :started_at, :duration
 
-	belongs_to :field
-	belongs_to :effect
+  belongs_to :field
+  belongs_to :effect
 
-	def odstran_katastrofu(user)
-		if user.solar >= self.effect.price
-			user.update_attribute(:solar,user.solar - self.effect.price * self.duration)
-			self.destroy
-			user.zapis_operaci("Odstranili sme katastrofu #{self.effect.name} na lenu #{self.field.name}, zaplatili sme #{self.effect.price * self.duration} .")
-		end
+  def odstran_katastrofu(user)
+    if user.solar >= self.effect.price
+      user.update_attribute(:solar, user.solar - self.effect.price * self.duration)
+      self.destroy
+      user.zapis_operaci("Odstranili sme katastrofu #{self.effect.name} na lenu #{self.field.name}, zaplatili sme #{self.effect.price * self.duration} .")
+    end
 
-	end
+  end
 end

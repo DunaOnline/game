@@ -23,9 +23,8 @@
 class Effect < ActiveRecord::Base
   attr_accessible :name, :population_bonus, :pop_limit_bonus, :melange_bonus, :material_bonus, :solar_bonus, :exp_bonus, :duration, :population_cost, :melange_cost, :material_cost, :solar_cost, :exp_cost, :typ, :description, :image, :price
 
- has_many :influences
- has_many :fields ,:through => :influences
-
+  has_many :influences
+  has_many :fields, :through => :influences
 
 
 end

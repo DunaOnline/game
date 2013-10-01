@@ -18,22 +18,22 @@ class ProductionsController < ApplicationController
   # GET /productions/1
   # GET /productions/1.json
   def show
-	  @kapacita = Constant.kapacita_tovaren
+    @kapacita = Constant.kapacita_tovaren
     @products = Product.zakladni
     @fields_factories = Field.find_by_id(params[:id])
-	  if @fields_factories
-		  if @fields_factories.user == current_user
-	    @production = Production.new
-	    respond_to do |format|
-	      format.html # show.html.erb
-	      format.json { render json: @production }
-	    end
-		  else
-			  redirect_to :back
-			end
-	  else
-		  redirect_to :back
-		end
+    if @fields_factories
+      if @fields_factories.user == current_user
+        @production = Production.new
+        respond_to do |format|
+          format.html # show.html.erb
+          format.json { render json: @production }
+        end
+      else
+        redirect_to :back
+      end
+    else
+      redirect_to :back
+    end
   end
 
   # GET /productions/new
@@ -60,60 +60,59 @@ class ProductionsController < ApplicationController
     field = Field.find(params[:leno])
     par = []
     vyrobky.each do |title|
-	    par << [[params[title]],[title]] unless params[title] == ""
+      par << [[params[title]], [title]] unless params[title] == ""
     end
     if par.any?
-	    if params[:commit]
-		    message, vyrobeno = field.vyroba_vyrobkov(par)
+      if params[:commit]
+        message, vyrobeno = field.vyroba_vyrobkov(par)
 
-		    respond_to do |format|
-		      if vyrobeno
-		        format.html { redirect_to production_url(field), notice: 'Vyrobky byli vyrobeny' }
-		        format.json { render json: @production, status: :created, location: @production }
-		      else
-			      format.html { redirect_to production_url(field), alert: message }
-			      format.json { render json: @production, status: :created, location: @production }
-		      end
-		    end
-	    elsif params[:zrusit]
-		    message, prodat = field.predaj_produktov(par)
-		    respond_to do |format|
-			    if prodat
-				    format.html { redirect_to production_url(field), notice: message }
-				    format.json { render json: @production, status: :created, location: @production }
-			    else
-				    format.html { redirect_to production_url(field), alert: message }
-				    format.json { render json: @production, status: :created, location: @production }
-			    end
-		    end
-	    end
+        respond_to do |format|
+          if vyrobeno
+            format.html { redirect_to production_url(field), notice: 'Vyrobky byli vyrobeny' }
+            format.json { render json: @production, status: :created, location: @production }
+          else
+            format.html { redirect_to production_url(field), alert: message }
+            format.json { render json: @production, status: :created, location: @production }
+          end
+        end
+      elsif params[:zrusit]
+        message, prodat = field.predaj_produktov(par)
+        respond_to do |format|
+          if prodat
+            format.html { redirect_to production_url(field), notice: message }
+            format.json { render json: @production, status: :created, location: @production }
+          else
+            format.html { redirect_to production_url(field), alert: message }
+            format.json { render json: @production, status: :created, location: @production }
+          end
+        end
+      end
     else
-	    redirect_to production_url(field), alert: "Zadejte prosim pocet vyrobku"
-	  end
+      redirect_to production_url(field), alert: "Zadejte prosim pocet vyrobku"
+    end
   end
 
   def presun_vyrobku
-	  source = Field.find(params[:source_production])
-	  target = Field.find(params[:target_production])
-	  vyrobok = Product.find(params[:presunout_co])
-	  mnozstvo = (params[:amount]).to_i
+    source = Field.find(params[:source_production])
+    target = Field.find(params[:target_production])
+    vyrobok = Product.find(params[:presunout_co])
+    mnozstvo = (params[:amount]).to_i
 
-	  if source.drzitel(current_user) && target.drzitel(current_user)
-		 case str = source.move_products(vyrobok,target,mnozstvo)
-			  when true
-				  flash[:notice] = "Vyrobky byli presunuty"
-				  redirect_to productions_path
-			  else
-			   flash[:error] = str
-				 redirect_to productions_path
-		 end
-	  else
-		 flash[:error] = "Můžeš posílat jen mezi svými lény."
-		 redirect_to productions_path
+    if source.drzitel(current_user) && target.drzitel(current_user)
+      case str = source.move_products(vyrobok, target, mnozstvo)
+        when true
+          flash[:notice] = "Vyrobky byli presunuty"
+          redirect_to productions_path
+        else
+          flash[:error] = str
+          redirect_to productions_path
+      end
+    else
+      flash[:error] = "Můžeš posílat jen mezi svými lény."
+      redirect_to productions_path
 
-	  end
-	end
-
+    end
+  end
 
 
   # PUT /productions/1
