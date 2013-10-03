@@ -65,22 +65,19 @@
             <ul>
 
 
-              <li><%= link_to ' Ekonomický výzkum', technologies_path %></li>
+              <li><%= link_to ' Výzkum hráče', technologies_path %></li>
 
-
-
-
-
-
-
+              <% if current_user.admin? || current_user.leader? || current_user.mentat? %>
+              <li><%= link_to 'Národní výzkum', narodni_vyskum_path %>
+              <% end %>
+              
               <% if can? :sprava_rod, House %>
                   <li><%= link_to "Kolonizovat planetu", kolonizuj_path %></li>
               <% end %>
-              <!-- <li><a href="#"> Vesmírný výzkum *</a>
-              <li><a href="#"> Výroba *</a>
-              <li><a href="#"> Obchod *</a> -->
+
               <li><%= link_to ' Trh', markets_path %></li>
-              <li><%= link_to ' Vyroba', productions_path %></li>
+              <li><%= link_to ' Trh - Vaše nabídky', my_offers_path %></li>
+              <li><%= link_to ' Výroba a transport výrobků', productions_path %></li>
             </ul>
         </ul>
       </td>
