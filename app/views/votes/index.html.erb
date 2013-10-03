@@ -8,15 +8,15 @@
     <th>Type</th>
   </tr>
   <% for vote in @votes %>
-    <tr>
-      <td><%= vote.house_id %></td>
-      <td><%= vote.elector %></td>
-      <td><%= vote.elective %></td>
-      <td><%= vote.type %></td>
-      <td><%= link_to "Show", vote %></td>
-      <td><%= link_to "Edit", edit_vote_path(vote) %></td>
-      <td><%= link_to "Destroy", vote, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
+      <tr>
+        <td><%= vote.house_id %></td>
+        <td><%= vote.elector %></td>
+        <td><%= vote.elective %></td>
+        <td><%= vote.type %></td>
+        <td><%= link_to "Show", vote %></td>
+        <td><%= link_to "Edit", edit_vote_path(vote) %></td>
+        <td><%= link_to "Destroy", vote, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
   <% end %>
 </table>
 

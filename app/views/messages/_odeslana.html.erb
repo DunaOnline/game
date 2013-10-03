@@ -1,0 +1,24 @@
+<tr xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" class="opica" data-druh="<%= odeslana.druh if odeslana.druh %>">
+  <td><%= link_to odeslana.created_at.localtime, '#', :class => "message" %>
+
+
+  </td>
+  <td><%= link_to odeslana.user.nick, odeslana.user %></td>
+  <td><%= link_to odeslana.user.house.name, odeslana.user.house %></td>
+  <td><%= odeslana.subject %>
+
+    <span class="fright">
+
+
+      <%= link_to image_tag('../assets/css/DO_cross.png'), odeslana, :confirm => "Naozaj chcete zmazat postu ?", :method => :delete, :class => 'delete_post', :remote => true %></span>
+  </td>
+
+</tr>
+<tr class="postaBody">
+  <td colspan="4">
+    <%= odeslana.body %>
+    <p>
+      <%= link_to 'Odpovedat', reply_path(:id => odeslana.id), :class => "reply" %>
+    </p>
+  </td>
+</tr>

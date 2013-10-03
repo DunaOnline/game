@@ -1,6 +1,6 @@
 class BuildingsController < ApplicationController
   authorize_resource # CanCan
-  
+
   def index
     @buildings = Building.all
   end
@@ -29,7 +29,7 @@ class BuildingsController < ApplicationController
   def update
     @building = Building.find(params[:id])
     if @building.update_attributes(params[:building])
-      redirect_to @building, :notice  => "Successfully updated building."
+      redirect_to @building, :notice => "Successfully updated building."
     else
       render :action => 'edit'
     end
@@ -40,7 +40,6 @@ class BuildingsController < ApplicationController
     @building.destroy
     redirect_to buildings_url, :notice => "Successfully destroyed building."
   end
-  
-  
-  
+
+
 end

@@ -1,137 +1,143 @@
 <%# encoding: utf-8 %>
 <% title "Přepočet" %>
 <table class="tab0">
-		<tr>	
-			<td>
-			<a href="#" title="Home">⌂</a>  
-			» <%= link_to "Statistika přepočtů", zobraz_eod_path %>
-			</td>
+  <tr>
+    <td>
+      <a href="#" title="Home">⌂</a>
+      » <%= link_to "Statistika přepočtů", zobraz_eod_path %>
+    </td>
 
-			<td class="tdd2">
-				<%= link_to "«", zobraz_eod_path(:date => @eods_global.date, :order => @eods_global.order, :kam => "prev") %> 
-				<%= format_date(@eods_global.date) + " - " + @eods_global.order.to_s %> 
-				<%= link_to "»", zobraz_eod_path(:date => @eods_global.date, :order => @eods_global.order, :kam => "next") %> 
-			</td>
-		</tr>
-	</table>
-	
-	<table class="tab1">
-		<tr>
-			<td class="tdpl" rowspan="2" style="width:120px; min-height: 150px; background-image: url(<%= asset_path 'planety/ekomentat2.png' %>) !important"></td>
-			<th style="width:120px"> Přepočet</th>
-			<th style="width:120px"> Poplatky</th>
-			<th style="width:120px"> Celkový zisk</th>
-			<th class="r"> Ve skladech</th>
-		</tr>
-		<tr>
-			<td>
-				<li><%= img_solary %> <font class="<%= trida_barvy(@solar_income) %>"><%= @solar_income %></font>
-				<li><%= img_material %> <font class="<%= trida_barvy(@material_income) %>"><%= @material_income %></font>
-				<li><%= img_melanz %> <font class="<%= trida_barvy(@melange_income) %>"><%= @melange_income %></font>
-				<li><%= img_populace %> <font class="<%= trida_barvy(@population_income) %>"><%= @population_income %></font>
-				<li><%= img_zkusenosti %> <font class="<%= trida_barvy(@exp_income) %>"><%= @exp_income %></font>
-			</td>
-			<td>
-				<li><%= img_solary %> <font class="oranzova">- 1000</font>
-				<li><%= img_material %> <font class="oranzova">-5</font>		
-				<li><%= img_melanz %> <font class="oranzova">- 5</font>	 
-				<li><%= img_populace %> <font class="oranzova">- 9900000</font>
-				<li><%= img_zkusenosti %> <font class="oranzova">- 5</font>	
-			</td>
-			<td>
-				<li><%= img_solary %> <font class="zelena">+10</font>
-				<li><%= img_material %> <font class="cervena">-5</font>		
-				<li><%= img_melanz %> <font class="zelena">+ 5</font>	 
-				<li><%= img_populace %> <font class="cervena">+ 0</font>
-				<li><%= img_zkusenosti %> <font class="zelena">+ 5</font>	
-			</td>
-			<td>
-				<li><%= img_solary %> 9000
-				<li><%= img_material %> 544		
-				<li><%= img_melanz %> 5 
-				<li><%= img_populace %> 1000000
-				<li><%= img_zkusenosti %> 55	
-			</td>
-		</tr>
-		<tr>
-			
-			<td class="none"></td>
-	     
-		</tr>
-		<tr>
-			<td class="tdpl" rowspan="2" style="width:120px; min-height: 150px; background-image: url(<%= asset_path 'planety/warmentat.png' %>) !important"></td>
-			<th> Síla armády</th>
-			<th> Armádní žold</th>
-			<th> Obrana</th>
-			<th class="r"> Útok</th>
-		</tr>
-		<tr>
-	     
-			<td>
-				<li><img src = <%= asset_path cesta_ikona("utok-pozemni")%>> 100
-				<li><img src = <%= asset_path cesta_ikona("obrana-pozemni")%>> 100
-				<li><img src = <%= asset_path cesta_ikona("utok-vesmir")%>> 100
-				<li><img src = <%= asset_path cesta_ikona("obrana-vesmir")%>> 100
-							
-			</td>
-		     
-			<td>
-				<li><%= img_solary %> <font class="oranzova">- 100.00</font>
-				<li><%= img_melanz %> <font class="oranzova"> - 5.00</font>			
-			</td>
-		     
-			<td>
-				<li>Dnes na vás nebyl veden žádný útok.
-			</td>
-		     
-			<td>
-				<li>Dobyl jste planetu hráče <a href="stat-databaze-profil.htm">Profil *</a> (Riches)
-				<li>Neúspěšně jste útočil na hráče <a href="stat-databaze-profil.htm">Profil *</a> (Riches)
-				<li>Neúspěšně jste útočil na hráče <a href="stat-databaze-profil.htm">Profil *</a> (Riches)
-			</td>
-	     
-		</tr>
-		<tr>
-	     
-			<td class="none"></td>
-	     
-		</tr>
-		<tr>
-	     
-			<td class="tdpl" rowspan="2" style="width:120px; background-image: url(<%= asset_path 'planety/landmentat.png' %>) !important">
-			<th> Imperátor</th>
-			<th> Držitel Arrakis</th>
-			<th> Vůdce národa</th>
-			<th class="r"> Mentaté národa</th>
-	         
-		</tr>
-		<tr>
-	     
-			<td>
-				<li><img src = "" alt="" class = "tdimg">	
-				<li><%= @imperator.house.leader if @imperator %>
-				<li><%= link_to @imperator.nick, @imperator if @imperator %> (<%= link_to @imperator.house.name, @imperator.house if @imperator %>)
-			</td>
-	     
-			<td>
-				<li><img src = "" alt="" class = "tdimg">	
-				<li><%= @arrakis.house.leader if @arrakis %>
-				<li><%= link_to @arrakis.nick, @arrakis if @arrakis %> (<%= link_to @arrakis.house.name, @arrakis.house if @arrakis %>) 
-			</td>
-	     
-			<td>
-				<li><img src = "" alt="" class = "tdimg">	
-				<li><%= @leader.house.leader if @leader %>
-				<li><%= link_to @leader.nick, @leader if @leader %> (<%= link_to @leader.house.name, @leader.house if @leader %>)
-			</td>
-	     
-			<td>
-				<% if @mentats %>
-					<% for mentat in @mentats do %>
-						<li><%= link_to mentat.nick, mentat %></li>
-					<% end %>
-				<% end %>
-			</td>
-	     
-		</tr>
-	</table>
+    <td class="tdd2">
+      <%= link_to "«", zobraz_eod_path(:date => @eods_global.date, :order => @eods_global.order, :kam => "prev") %>
+      <%= format_date(@eods_global.date) + " - " + @eods_global.order.to_s %>
+      <%= link_to "»", zobraz_eod_path(:date => @eods_global.date, :order => @eods_global.order, :kam => "next") %>
+    </td>
+  </tr>
+</table>
+
+<table class="tab1">
+  <tr>
+    <td class="tdpl" rowspan="2" style="width:120px; min-height: 150px; background-image: url(<%= asset_path 'planety/ekomentat2.png' %>) !important"></td>
+    <th style="width:120px"> Přepočet</th>
+    <th style="width:120px"> Poplatky</th>
+    <th style="width:120px"> Celkový zisk</th>
+    <th class="r"> Ve skladech</th>
+  </tr>
+  <tr>
+    <td>
+      <li><%= img_solary %> <span class="<%= trida_barvy(@solar_income) %>"><%= @solar_income %></span>
+      <li><%= img_material %> <span class="<%= trida_barvy(@material_income) %>"><%= @material_income %></span>
+      <li><%= img_melanz %> <span class="<%= trida_barvy(@melange_income) %>"><%= @melange_income %></span>
+      <li><%= img_populace %> <span class="<%= trida_barvy(@population_income) %>"><%= @population_income %></span>
+      <li><%= img_zkusenosti %> <span class="<%= trida_barvy(@exp_income) %>"><%= @exp_income %></span>
+      <li><%= img_vyrobky %> <span class="<%= trida_barvy(@parts_income) %>"><%= @parts_income %></span>
+    </td>
+    <td>
+      <li><%= img_solary %> <span class="zelena">+10</span>
+      <li><%= img_material %> <span class="cervena">-5</span>
+      <li><%= img_melanz %> <span class="zelena">-7</span>
+      <li><%= img_populace %> <span class="cervena">+ 0</span>
+      <li><%= img_zkusenosti %> <span class="zelena">+ 5</span>
+      <li><%= img_vyrobky %> <span class="oranzova">+ 5</span>
+    </td>
+    <td>
+      <li><%= img_solary %> <span class="oranzova"><%= @solar_income - 10 %></span>
+      <li><%= img_material %> <span class="oranzova"><%= @material_income - 5 %></span>
+      <li><%= img_melanz %> <span class="oranzova"><%= @melange_income - 7 %></span>
+      <li><%= img_populace %> <span class="oranzova"><%= @population_income - 0 %></span>
+      <li><%= img_zkusenosti %> <span class="oranzova"><%= @exp_income - 5 %></span>
+      <li><%= img_vyrobky %> <span class="oranzova"><%= @parts_income - 5 %></span>
+    </td>
+    <td>
+      <li><%= img_solary %> <%= current_user.solar %>
+      <li><%= img_material %> <%= current_user.celkovy_material %>
+      <li><%= img_melanz %> <%= current_user.melange %>
+      <li><%= img_populace %> <%= current_user.celkova_populace %>
+      <li><%= img_zkusenosti %> <%= current_user.exp %>
+      <li><%= img_vyrobky %>  <%= current_user.celkovy_parts %>
+    </td>
+  </tr>
+  <tr>
+
+    <td class="none"></td>
+
+  </tr>
+  <tr>
+    <td class="tdpl" rowspan="2" style="width:120px; min-height: 150px; background-image: url(<%= asset_path 'planety/warmentat.png' %>) !important"></td>
+    <th> Síla armády</th>
+    <th> Armádní žold</th>
+    <th> Obrana</th>
+    <th class="r"> Útok</th>
+  </tr>
+  <tr>
+
+    <td>
+      <li><img src= <%= asset_path cesta_ikona("utok-pozemni") %>> 100
+      <li><img src= <%= asset_path cesta_ikona("obrana-pozemni") %>> 100
+      <li><img src= <%= asset_path cesta_ikona("utok-vesmir") %>> 100
+      <li><img src= <%= asset_path cesta_ikona("obrana-vesmir") %>> 100
+
+    </td>
+
+    <td>
+      <li><%= img_solary %> <font class="oranzova">- 100.00</font>
+      <li><%= img_melanz %> <font class="oranzova"> - 5.00</font>
+    </td>
+
+    <td>
+      <li>Dnes na vás nebyl veden žádný útok.
+    </td>
+
+    <td>
+      <li>Dobyl jste planetu hráče <a href="stat-databaze-profil.htm">Profil *</a> (Riches)
+      <li>Neúspěšně jste útočil na hráče <a href="stat-databaze-profil.htm">Profil *</a> (Riches)
+      <li>Neúspěšně jste útočil na hráče <a href="stat-databaze-profil.htm">Profil *</a> (Riches)
+    </td>
+
+  </tr>
+  <tr>
+
+    <td class="none"></td>
+
+  </tr>
+  <tr>
+
+    <td class="tdpl" rowspan="2" style="width:120px; background-image: url(<%= asset_path 'planety/landmentat.png' %>) !important">
+      <th> Imperátor</th>
+      <th> Držitel Arrakis</th>
+      <th> Vůdce národa</th>
+      <th class="r"> Mentaté národa</th>
+
+  </tr>
+  <tr>
+
+    <td>
+      <li><img src="" alt="" class="tdimg">
+      <li><%= @imperator.house.leader if @imperator %>
+      <li><%= link_to @imperator.nick, @imperator if @imperator %>
+        (<%= link_to @imperator.house.name, @imperator.house if @imperator %>)
+    </td>
+
+    <td>
+      <li><img src="" alt="" class="tdimg">
+      <li><%= @arrakis.house.leader if @arrakis %>
+      <li><%= link_to @arrakis.nick, @arrakis if @arrakis %>
+        (<%= link_to @arrakis.house.name, @arrakis.house if @arrakis %>)
+    </td>
+
+    <td>
+      <li><img src="" alt="" class="tdimg">
+      <li><%= @leader.house.leader if @leader %>
+      <li><%= link_to @leader.nick, @leader if @leader %> (<%= link_to @leader.house.name, @leader.house if @leader %>)
+    </td>
+
+    <td>
+      <% if @mentats %>
+          <% for mentat in @mentats do %>
+              <li><%= link_to mentat.nick, mentat %></li>
+          <% end %>
+      <% end %>
+    </td>
+
+  </tr>
+</table>

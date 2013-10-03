@@ -6,7 +6,9 @@
   padding: 20px;
   background-color: #FCC;
   border: solid 2px #C66;
-  &:first-letter { text-transform: uppercase; }
+  &:first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .best_in_place {

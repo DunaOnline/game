@@ -1,0 +1,43 @@
+<%= form_for @production do %>
+    <table class="tab0">
+      <tr>
+        <td>
+          <a href="index.htm" title="Home">⌂</a>
+          » <a>Výzkum a ekonomika</a>
+          » <a href="stat-databaze.htm">Výroba</a>
+        </td>
+      </tr>
+    </table>
+
+
+    <%= render :partial => "factory", object: @fields_factories %>
+
+
+
+
+    <h2>Objednávka výroby</h2>
+
+    <table class="vyroba">
+
+      <tr>
+        <th class="none" style="width:100px"></th>
+        <th>Cena Vyrobku</th>
+        <th>Cena Materialu</th>
+        <th>Cena Melanze</th>
+        <th>Cena Soalaru</th>
+        <th>Objednáno</th>
+        <th>Vyrobit</th>
+
+
+      </tr>
+
+      <%= render :partial => "product", :collection => @products %>
+
+
+    </table>
+
+
+<% end %>
+<%= link_to 'Spat', productions_path %>
+
+

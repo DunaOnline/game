@@ -11,9 +11,14 @@
 //= require_tree .
 
 
-//funkcia na hide/show description pre technologiu 
-$(function () {
-    $(".descr").click(function () {
-        $(this).parent().next().toggle();
-    });
-});
+
+
+
+
+
+
+
+
+
+
+

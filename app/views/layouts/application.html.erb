@@ -1,70 +1,70 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= content_for?(:title) ? yield(:title) : "dunaonline.cz" %></title>
-    <%= stylesheet_link_tag "application" %>
-    <%= javascript_include_tag "application" %>
-    <%= csrf_meta_tag %>
-    <%= yield(:head) %>
-  </head>
-  <body>
-  
-  	<%= render 'layouts/lista' -%>
-  
-    <div id="body_wrapper">
-      <div class="planet"></div>
-      <div id="body_container">
-        <div id="body_container_b">
-          <% if current_user -%>
-            <%= render 'layouts/hlavicka' -%>
-          <% else %>
-            <%= render 'layouts/hlavicka_login' -%>
-          <% end -%>
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : "dunaonline.cz" %></title>
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tag %>
+  <%= yield(:head) %>
+</head>
+<body>
 
-          <div id="page_content">
-            <% flash.each do |name, msg| %>
-              <%= content_tag :div, msg, :id => "flash_#{name}" %>
-            <% end %>
+<%= render 'layouts/lista' -%>
 
-            <table>
-              <tr>
-                <td class="left">
-			<% if current_user -%>
-			
-				<% if current_user.admin? %>
-					<%= render 'layouts/administration' %>
-				<% end %>
-				
-				<%= render 'layouts/leve_pole' %>
-			<% else %>
-				<%= render 'layouts/leve_pole_login' -%>
-			<% end %>
-                </td>
+<div id="body_wrapper">
+  <div class="planet"></div>
+  <div id="body_container">
+    <div id="body_container_b">
+      <% if current_user -%>
+          <%= render 'layouts/hlavicka' -%>
+      <% else %>
+          <%= render 'layouts/hlavicka_login' -%>
+      <% end -%>
 
-                <td class="stred">
-			<% if current_user -%>
-				<%= yield %>
-			<% else %>
-				<%= render 'layouts/stred_login' -%>
-			<% end %>				
-                </td>
+      <div id="page_content">
+        <% flash.each do |name, msg| %>
+            <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <% end %>
 
-		<td class="prava">
-			<% if current_user -%>
-				<%= render 'layouts/prave_pole' %>
-			<% else %>
-				<%= render 'layouts/prave_pole_login' -%>
-			<% end %>
-		</td>
+        <table>
+          <tr>
+            <td class="left">
+              <% if current_user -%>
 
-              </tr>
+                  <% if current_user.admin? %>
+                      <%= render 'layouts/administration' %>
+                  <% end %>
 
-            </table>
-          </div>
+                  <%= render 'layouts/leve_pole' %>
+              <% else %>
+                  <%= render 'layouts/leve_pole_login' -%>
+              <% end %>
+            </td>
 
-          <%= render 'layouts/paticka' %>
-        </div>
+            <td class="stred">
+              <% if current_user -%>
+                  <%= yield %>
+              <% else %>
+                  <%= render 'layouts/stred_login' -%>
+              <% end %>
+            </td>
+
+            <td class="prava">
+              <% if current_user -%>
+                  <%= render 'layouts/prave_pole' %>
+              <% else %>
+                  <%= render 'layouts/prave_pole_login' -%>
+              <% end %>
+            </td>
+
+          </tr>
+
+        </table>
       </div>
+
+      <%= render 'layouts/paticka' %>
     </div>
-  </body>
+  </div>
+</div>
+</body>
 </html>

@@ -1,14 +1,14 @@
 <tr>
-	<td class="tdpl"  style="background-image: url(<%= asset_path cesta_budovy(@owner.house.name, obr) %>)"></td>
-	<td>
-		<h3><%= budova.name %> (<%= budova.level %>)</h3> 
-		<li><%= budova.description %>
-		<li><%= img_budovy %> <%= field.postaveno(budova) %> 
-    
-    
-<!-- Zde bude vliv budovy. Tedy celkoví kapacita měst, celková výroba ap)
+  <td class="tdpl" style="background-image: url(<%= asset_path cesta_budovy(@owner.house.name, obr) %>)"></td>
+  <td>
+    <h3><%= budova.name %> (<%= budova.level %>)</h3>
+    <li><%= budova.description %>
+    <li><%= img_budovy %> <%= field.postaveno(budova) %>
+
+
+      <!-- Zde bude vliv budovy. Tedy celkoví kapacita měst, celková výroba ap)
  
-    <li><%= img_populace "Kapacita měst"%> <font class="zelena">+ 10 000</font>
+    <li><%= img_populace "Kapacita měst" %> <font class="zelena">+ 10 000</font>
     <li><%= img_solary "Výnos soláry" %>
     <li><%= img_material "Výnos materiál" %>
     <li><%= img_zkusenosti "Výnos zkušenosti" %>
@@ -16,19 +16,35 @@
 -->
 
 
+  </td>
+  <td>
+    <li>
+      <%= img_solary %><%= number_with_precision(@bonus * budova.naklady_stavba_solary, precision: 2) %>
+    </li>
+    <li>
+      <%= img_material %><%= number_with_precision(@bonus * budova.naklady_stavba_material, precision: 2) %>
 
-	</td>
-	<td>
-		<li><%= img_solary %><%= number_with_precision(@bonus * budova.naklady_stavba_solary, precision: 2) %>  
-		<li><%= img_material %><%= number_with_precision(@bonus * budova.naklady_stavba_material, precision: 2) %> 
-		<%= form_tag postavit_budovu_path(:field => field, :budova => budova) do %>
-			<li><%= number_field_tag :pocet_budov_stavba, nil, :in => -21...21, :step => 1 %></li>
-			<li><%= submit_tag "Postavit" , :class => "oktab_95" %>
-		<% end %>
-	</td>
-	<td>
-		<li><%= img_solary %> 36 
-		<li><%= img_material %> 0
-		<li><%= number_field_tag :pocet_budov_vylepseni, nil, :in => -10...10, :step => 1 %></li>
-	</td>
+    </li>
+    <% if budova.naklady_stavba_melange > 0 %>
+        <li>
+
+          <%= img_melanz %>
+          <%= number_with_precision(@bonus * budova.naklady_stavba_melange, precision: 2) %>
+
+        </li>
+    <% end %>
+    <%= form_tag postavit_budovu_path(:field => field, :budova => budova) do %>
+        <li>
+          <%= number_field_tag :pocet_budov_stavba, nil, :in => -21...21, :step => 1, :required => true %>
+        </li>
+        <li>
+          <%= submit_tag "Postavit", :class => "oktab_95" %>
+        </li>
+    <% end %>
+  </td>
+  <td>
+    <li><%= img_solary %> 36
+    <li><%= img_material %> 0
+    <li><%= number_field_tag :pocet_budov_vylepseni, nil, :in => -10...10, :step => 1 %></li>
+  </td>
 </tr>

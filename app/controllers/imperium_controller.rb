@@ -7,7 +7,7 @@ class ImperiumController < ApplicationController
     @imperator = User.imperator
     @imperium = House.imperium
     @houses = House.playable
-    
+
     @arrakis = Planet.arrakis
     @leno = Field.find_by_planet_id(@arrakis)
     if @spravce
@@ -19,7 +19,7 @@ class ImperiumController < ApplicationController
     @operations = Operation.imperialni.seradit.limit(5)
     @hraci = User.order(:nick)
   end
-  
+
   def show
     @title = 'Imperium'
     @courtship = User.dvorane
@@ -28,7 +28,7 @@ class ImperiumController < ApplicationController
     @imperator = User.imperator
     @imperium = House.imperium
     @houses = House.playable
-    
+
     @arrakis = Planet.arrakis
     @leno = Field.find_by_planet_id(@arrakis)
     if @spravce
@@ -39,11 +39,11 @@ class ImperiumController < ApplicationController
     @gilde = Prepocet.melanz_gilde(@melange)
     @operations = Operation.imperialni.seradit.limit(5)
   end
-  
+
   def posli_imperialni_suroviny
-    rod = House.imperium    
+    rod = House.imperium
     msg = ''
-    
+
     if params[:rodu_solary].to_i > 0.0 || params[:rodu_melanz].to_f > 0.0
       rodu = House.find(params[:rod_id_suroviny])
       msg << "Rodu #{rodu.name} poslano "
@@ -57,8 +57,8 @@ class ImperiumController < ApplicationController
       rod.update_attribute(:melange, rod.melange - params[:rodu_melanz].to_f)
       rodu.update_attribute(:melange, rodu.melange + params[:rodu_melanz].to_f)
       msg << " #{params[:rodu_melanz]} mg melanze "
-    end 
-    
+    end
+
     flash[:notice] = msg
     Imperium.zapis_operaci(msg + " hracem #{current_user.nick}.")
     rodu.zapis_operaci(msg.gsub("Rodu #{rodu.name} poslano ", "Obdrzeno z imperialni pokladny ") + " od hrace #{current_user.nick}.")

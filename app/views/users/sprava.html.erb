@@ -1,30 +1,33 @@
 <%# encoding: utf-8 %>
 <% title "#{@user.nick} - správa" %>
-      <table class="tab1">
-      	<%= form_tag :posli_suroviny do %>
-		<tr>	
-			<td class="tdpl" rowspan="2" style="width:170px; background-image: url(<%= asset_path 'imghra/hracsklad.png' %>)">
-				<li><h2>Sklad hráče</h2>
-				<li><b>Vliv: </b><%= @user.influence %>
-				<li><b>Planet: </b><%= @planets.count %>
-				<li><b>Poli: </b><%= @user.fields.count %>
-				<br><br><br>
-				<li>	<%= submit_tag 'Poslat zvolené', :name => 'poslat', :class => 'ok' %>
-			</td>
-			<th>Stav skladu</th>
-			<!-- <th>Poslat Malorodu</th>
-			<th>Daň Malorodu [%]</th> -->
-			<th>Poslat Národu</th>
-			<th class="r">Projekt [%]</th>
-		</tr>
-		<tr >
-			<td>
-				<li><%= img_solary %><%= format_mena(@user.solar, 'S', false) %> 
-				<li><%= img_material %><%= format_mena(@user.celkovy_material, 'kg') %>&nbsp(<%= format_mena(@user.domovske_leno.resource.material, 'kg') %>)
-				<li><%= img_melanz %><%= format_mena(@user.melange, 'mg') %>
-				<li><%= img_zkusenosti %><%= format_mena(@user.exp, 'exp', false) %>
-			</td>
-			<!--<td>
+<table class="tab1">
+  <%= form_tag :posli_suroviny do %>
+      <tr>
+        <td class="tdpl" rowspan="2" style="width:170px; background-image: url(<%= asset_path 'imghra/hracsklad.png' %>)">
+          <li><h2>Sklad hráče</h2>
+          <li><b>Vliv: </b><%= @user.influence %>
+          <li><b>Planet: </b><%= @planets.count %>
+          <li><b>Poli: </b><%= @user.fields.count %>
+            <br><br><br>
+          <li>    <%= submit_tag 'Poslat zvolené', :name => 'poslat', :class => 'ok' %>
+        </td>
+        <th>Stav skladu</th>
+        <!-- <th>Poslat Malorodu</th>
+        <th>Daň Malorodu [%]</th> -->
+        <th>Poslat Národu</th>
+        <th>Poslat Malorodu</th>
+        <th class="r">Projekt [%]</th>
+      </tr>
+      <tr>
+        <td>
+          <li><%= img_solary %><%= format_mena(@user.solar, 'S', true) %>
+          <li><%= img_material %><%= format_mena(@user.celkovy_material, 'kg') %>
+            &nbsp(<%= format_mena(@user.domovske_leno.resource.material, 'kg') %>)
+          <li><%= img_melanz %><%= format_mena(@user.melange, 'mg') %>
+          <li><%= img_zkusenosti %><%= format_mena(@user.exp, 'exp', false) %>
+          <li><%= img_vyrobky %><%= format_mena(@user.celkovy_parts, 'ks') %>
+        </td>
+        <!--<td>
 				<li><%= img_solary %><input type="text" size="3" title="Zadejte množství">
 				<li><%= img_material %><input type="text" size="3" title="Zadejte množství">		
 				<li><%= img_melanz %><input type="text" size="3" title="Zadejte množství"> 
@@ -34,81 +37,213 @@
 				<li><%= img_solary %><input type="text" size="3" title="Nastavte daň">
 				<li><%= img_material %><input type="text" size="3" title="Nastavte daň">		
 				<li><%= img_melanz %><input type="text" size="3" title="Nastavte daň"> 
-				<li><%= img_zkusenosti %><input type="text" size="3" title="Nastavte daň"> --> 
-			</td>
-			<td>
-				<li><%= img_solary %><%= text_field_tag 'rod_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
-				<li><%= img_material %><%= text_field_tag 'rod_material', '0.00', :size => "3", :title => "Zadejte množství" %>	
-				<li><%= img_melanz %><%= text_field_tag 'rod_melanz', '0.00', :size => "3", :title => "Zadejte množství" %>
-				<li><%= img_zkusenosti %><%= text_field_tag 'rod_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %>
-			</td>
-			<td>
-				<li><%= img_solary %><input type="text" size="3" title="Nastavte odvod">
-				<li><%= img_material %><input type="text" size="3" title="Nastavte odvod">		
-				<li><%= img_melanz %><input type="text" size="3" title="Nastavte odvod"> 
-				<li><%= img_zkusenosti %><input type="text" size="3" title="Nastavte odvod"> 
-			</td>
-		</tr>
-		<% end %>
-	</table>
-	
-	<table class="tab1">
-		<tr>	
-			<td class="tdpl" rowspan="2" style="width:170px; background-image: url(<%= asset_path 'imghra/landsraad.png' %>)">
+				<li><%= img_zkusenosti %><input type="text" size="3" title="Nastavte daň">
+        </td>  -->
+        <td>
+          <li><%= img_solary %><%= text_field_tag 'rod_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= img_material %><%= text_field_tag 'rod_material', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= img_melanz %><%= text_field_tag 'rod_melanz', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= img_zkusenosti %><%= text_field_tag 'rod_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= img_vyrobky %><%= text_field_tag 'rod_vyrobky', '0.00', :size => "3", :title => "Zadejte množství" %>
+        </td>
+
+        <td>
+          <li><%= img_solary %><%= text_field_tag 'mr_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= img_material %><%= text_field_tag 'mr_material', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= img_melanz %><%= text_field_tag 'mr_melanz', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= img_zkusenosti %><%= text_field_tag 'mr_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %>
+          <li><%= img_vyrobky %><%= text_field_tag 'mr_vyrobky', '0.00', :size => "3", :title => "Zadejte množství" %>
+
+        </td>
+        <td>
+          <li><%= img_solary %>
+            <input type="text" size="3" title="Nastavte odvod">
+          <li><%= img_material %>
+            <input type="text" size="3" title="Nastavte odvod">
+          <li><%= img_melanz %>
+            <input type="text" size="3" title="Nastavte odvod">
+          <li><%= img_zkusenosti %>
+            <input type="text" size="3" title="Nastavte odvod">
+        </td>
+
+      </tr>
+  <% end %>
+</table>
+<table class="tab1">
+
+  <tr>
+
+    <th>Produkty</th>
+    <th>Mnozstvo</th>
+    <th>Poslat</th>
+  </tr>
+  <% @productions.each do |production| %>
+      <%= form_tag send_products_path(:production => production.id) do %>
+          <tr>
+            <td>
+              <%= production.product.title %> // <%= production.amount %> ks
+            </td>
+            <td>
+              <%= number_field_tag(:amount, nil, :min => 1, :title => "Zadejte množství", :required => true) %>
+            </td>
+            <td>
+              <%= submit_tag 'Poslat', :class => "ok" %>
+            </td>
+          </tr>
+      <% end %>
+  <% end %>
+
+</table>
+
+
+<table class="tab1">
+  <tr>
+    <td class="tdpl" rowspan="2" style="width:170px; background-image: url(<%= asset_path 'imghra/landsraad.png' %>)">
       <li><h2>Volby</h2>
-      </td>
-      <!-- <th>Volba Guvernéra</th> -->
-			<th>Volba vůdce</th>
-			<th>Volba poslance</th>
-		</tr>	
-    <tr>	
-			<!-- <td>
-				Nick <input type="text" size="20" Style="width:100px" title="Zadejte důvod" class = "tab" > 
-				<h3>Aktuální pořadí</h3>
-				<li>Vévoda [12]
-				<li>Vévoda [10]
-				<li>Vévoda [4]
-				<li>Vévoda [2]
-				<li>Vévoda [2]
-			</td>	 -->
-			<td>
-				<%= form_tag hlasovat_path(:user_id => @user) do %>
-					<%= select_tag("volit_id]", options_for_select(@user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %><%= submit_tag 'Ξ', :name => 'leader', :class => 'oki'  %>
-					<p>Váš hlas: <%= @user.koho_jsem_volil('leader') %></p>
-					<h3>Aktuální pořadí</h3>
-					  <% for user in @user.house.poradi_hlasu('leader') %>
-						<li><%= user[0].nick %> - <%= user[1] %></li>
-					  <% end %>
-				<% end %>
-			</td>	
-			<td>
-				<%= form_tag hlasovat_path(:user_id => @user) do %>
-					<%= select_tag("volit_id]", options_for_select(@user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %><%= submit_tag 'Ξ', :name => 'poslanec', :class => 'oki'  %>
-					<p>Váš hlas: <%= @user.koho_jsem_volil('poslanec') %></p>
-					<h3>Aktuální pořadí</h3>
-					  <% for user in @user.house.poradi_hlasu('poslanec') %>
-						<li><%= user[0].nick %> - <%= user[1] %></li>
-					  <% end %>
-				<% end %>
-			</td>		
-		</tr>			
-	</table>         
-	
-	<table class="tab1">
-	  <tr>
-    	<th>Obsah proběhlé akce</th>
-	    <th style="width:80px">Datum</th>
-    	<th style="width:80px">Cas</th>
-	  </tr>
-	  <% for operation in @operations %>
-    	<tr>
-    	  <td><%= operation.content %></td>
-	      <td><%= format_date(operation.date) %></td>
-    	  <td><%= format_time(operation.time) %></td>
-    	</tr>
-  	  <% end %>
-    <tr>
-	  	<td colspan="3"><%= link_to 'Zobrazit všechny proběhlé akce', operations_path(:jake => 'hrac') %></td>
-	  </tr>
-  	</table>              
+    </td>
+    <!-- <th>Volba Guvernéra</th> -->
+    <th>Volba vůdce</th>
+    <th>Volba poslance</th>
+    <th>Volba generala</th>
+  </tr>
+  <tr>
+    <!-- <td>
+        Nick <input type="text" size="20" Style="width:100px" title="Zadejte důvod" class = "tab" >
+        <h3>Aktuální pořadí</h3>
+        <li>Vévoda [12]
+        <li>Vévoda [10]
+        <li>Vévoda [4]
+        <li>Vévoda [2]
+        <li>Vévoda [2]
+    </td>	 -->
+    <td>
+      <%= form_tag hlasovat_path(:user_id => @user) do %>
+          <%= select_tag("volit_id", options_for_select(@user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %><%= submit_tag 'Ξ', :name => 'leader', :class => 'oki' %>
+          <p>Váš hlas: <%= @user.koho_jsem_volil('leader') %></p>
+
+          <h3>Aktuální pořadí</h3>
+          <% for user in @user.house.poradi_hlasu('leader') %>
+              <li><%= user[0].nick %> - <%= user[1] %></li>
+          <% end %>
+      <% end %>
+    </td>
+    <td>
+      <%= form_tag hlasovat_path(:user_id => @user) do %>
+          <%= select_tag("volit_id", options_for_select(@user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %><%= submit_tag 'Ξ', :name => 'poslanec', :class => 'oki' %>
+          <p>Váš hlas: <%= @user.koho_jsem_volil('poslanec') %></p>
+
+          <h3>Aktuální pořadí</h3>
+          <% for user in @user.house.poradi_hlasu('poslanec') %>
+              <li><%= user[0].nick %> - <%= user[1] %></li>
+          <% end %>
+      <% end %>
+    </td>
+    <% if @user.subhouse %>
+        <td>
+          <%= form_tag hlasovat_path(:user_id => @user) do %>
+              <%= select_tag("volit_id", options_for_select(@user.subhouse.users.order(:nick).collect { |p| [p.nick, p.id] })) %><%= submit_tag 'Ξ', :name => 'general', :class => 'oki' %>
+              <p>Váš hlas: <%= @user.koho_jsem_volil('general') %></p>
+
+              <h3>Aktuální pořadí</h3>
+              <% for user in @user.subhouse.poradi_hlasu('general') %>
+                  <li><%= user[0].nick %> - <%= user[1] %></li>
+              <% end %>
+          <% end %>
+        </td>
+    <% end %>
+  </tr>
+</table>
+
+<% if current_user.subhouse %>
+    <table class="tab1">
+      <tr>
+        <td>
+          <%= link_to 'Opustit malorod', opustit_mr_path %>
+        </td>
+
+      </tr>
+
+    </table>
+<% else %>
+    <table class="tab1">
+      <% @subhouses.each do |s| %>
+          <tr>
+            <td>
+              <span><%= s.name %> </span>
+            </td>
+            <td>
+              <span><%= s.pocet_userov %> / <%= Constant.max_u_mr.to_i %></span>
+            </td>
+            <td>
+              <span><%= link_to 'Podat Ziadost', ziadost_malorod_url(:id => s.id) %></span>
+            </td>
+
+
+          </tr>
+      <% end %>
+
+    </table>
+
+    <table class="tab1">
+      <tr>
+        <td>
+          <span>Zalozit malorod : </span>
+        </td>
+        <td>
+          <%= form_tag @subhouse do %>
+              <%= text_field_tag 'Malorod', '', :class => "tab" %>
+              <%= submit_tag 'Zaloz' %>
+          <% end %>
+        </td>
+
+      </tr>
+
+    </table>
+<% end %>
+
+<table class="tab1">
+  <tr>
+    <td>
+      <% if @user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first %>
+      <span>
+         <%= form_tag ziadost_path(:id => @user) do %>
+            <% if current_user.ziadost_house %>
+        Aktualna ziadost v narode <%= House.find(current_user.ziadost_house).name %>
+        <% end %>
+
+            <%= select_tag :narod, options_for_select(House.playable.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %>
+
+            <%= submit_tag 'Prihlasit sa do Naroda', data: {:confirm => "Ste si isty?"} %>
+         <% end %>
+      </span>
+      <% else %>
+      <span>
+
+        <%= link_to 'Opustit narod', opustit_path, :confirm => "Jste si jisti opustit narod #{current_user.house.name} ?" %>
+      </span>
+      <% end %>
+    </td>
+
+  </tr>
+
+</table>
+
+
+<table class="tab1">
+  <tr>
+    <th>Obsah proběhlé akce</th>
+    <th style="width:80px">Datum</th>
+    <th style="width:80px">Cas</th>
+  </tr>
+  <% for operation in @operations %>
+      <tr>
+        <td><%= operation.content %></td>
+        <td><%= format_date(operation.date) %></td>
+        <td><%= format_time(operation.time) %></td>
+      </tr>
+  <% end %>
+  <tr>
+    <td colspan="3"><%= link_to 'Zobrazit všechny proběhlé akce', operations_path(:jake => 'hrac') %></td>
+  </tr>
+</table>
 

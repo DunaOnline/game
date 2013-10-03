@@ -10,19 +10,21 @@ class Prepocet
       Prepocet.zpristupni_planety
       Prepocet.produkce_suroviny(order)
       Prepocet.produkce_melanz(order)
-      
+
+      Prepocet.udalosti
+
       Prepocet.kontrola_zakonu
-      
+
       if Constant.pristi_volby == Date.today
         Prepocet.zvol_poslance
       end
-      
+
       if Imperium.konec_volby_imperatora == Date.today
         Prepocet.zvol_imperatora
       end
 
       Prepocet.prepocti_vliv
-      
+
       Prepocet.odemkni
       puts b = Time.now
     end
@@ -37,10 +39,10 @@ class Prepocet
     end
     for user in User.all do
       Eod.new(
-        :user_id => user.id,
-        :date => Date.today,
-        :time => Time.now,
-        :order => order
+          :user_id => user.id,
+          :date => Date.today,
+          :time => Time.now,
+          :order => order
       ).save
     end
     puts "Eody vyvtoreny"
@@ -50,56 +52,76 @@ class Prepocet
   def self.produkce_suroviny(order)
     for field in Field.includes(:user, :buildings, :resource).all do
       vlastnik = field.user
+      narod = vlastnik.house if vlastnik
       if field.planet == Planet.arrakis
-        
+
       else
-        solar_exp = vlastnik.vyskumane_tech(2)
-        solar = field.vynos('solar') * ((solar_exp * 0.02) + 1)
-        exp_exp = vlastnik.vyskumane_tech(4)
-        exp = field.vynos('exp') * ((exp_exp * 0.02) + 1)
-        material_exp = vlastnik.vyskumane_tech(3)
-        material = field.vynos('material') * ((material_exp * 0.02) + 1)
-        population = field.vynos('population')
+        solar_exp = vlastnik.tech_bonus("S")
+        enviro_solar = field.planet.udalost_bonus("S")
+        effect_solar = field.leno_udalost_bonus("S")
+        solar_house_exp = narod.vyskumane_narodni_tech("S")
+        solar = field.vynos('solar') * (solar_exp + solar_house_exp) * enviro_solar * effect_solar
+
+        enviro_exp = field.planet.udalost_bonus("E")
+        effect_exp = field.leno_udalost_bonus("E")
+        exp_exp = vlastnik.tech_bonus("E")
+        exp_house_exp = narod.vyskumane_narodni_tech("E")
+        exp = (field.vynos('exp') * (exp_exp + exp_house_exp) * enviro_exp * effect_exp).round
+
+        enviro_material = field.planet.udalost_bonus("M")
+        effect_material = field.leno_udalost_bonus("M")
+        material_exp = vlastnik.tech_bonus("M")
+        material_house_exp = narod.vyskumane_narodni_tech("M")
+        material = field.vynos('material') * (material_exp + material_house_exp) * enviro_material * effect_material
+
+        enviro_pop = field.planet.udalost_bonus("P")
+        effect_pop = field.leno_udalost_bonus("P")
+        population = field.vynos('population') * enviro_pop * effect_pop
+
+        parts = field.vynos('parts') #enviro_parts
 
         vlastnik.update_attributes(
-          :solar => vlastnik.solar + solar,
-          :exp => vlastnik.exp + exp
+            :solar => vlastnik.solar + solar,
+            :exp => vlastnik.exp + exp
         )
         field.resource.update_attributes(
-          :material => field.resource.material + material,
-          :population => field.resource.population + population
+            :material => field.resource.material + material,
+            :population => field.resource.population + population,
+            :parts => field.resource.parts + parts
         )
         Eod.new(
-          :user_id => vlastnik.id,
-          :field_id => field.id,
-          :date => Date.today,
-          :time => Time.now,
-          :order => order,
-          :solar_income => solar,
-          :exp_income => exp,
-          :material_income => material,
-          :population_income => population
+            :user_id => vlastnik.id,
+            :field_id => field.id,
+            :date => Date.today,
+            :time => Time.now,
+            :order => order,
+            :solar_income => solar,
+            :exp_income => exp,
+            :material_income => material,
+            :population_income => population
         ).save
       end
     end
     puts "suroviny vyprodukovany "
   end
-  
+
   def self.produkce_melanz(order)
     puts "PRODUKUJI MELANZ"
-    tech = vlastnik.vyskumane_tech(5)
     arrakis = Planet.arrakis
     leno = Field.find_by_planet_id(arrakis)
     vlastnik = User.spravce_arrakis
+    #enviro_material = field.planet.udalost_bonus("M")
+    user_tech = vlastnik.tech_bonus("J") if vlastnik
+    house_tech = vlastnik.house.vyskumane_narodni_tech("J") if vlastnik
     if vlastnik
-      melange = leno.vynos('melange') * ((tech * 0.02) + 1)
+      melange = leno.vynos('melange') * (user_tech + house_tech)
     else
       melange = 0.0
     end
     Imperium.zapis_operaci("Bylo vytezeno #{melange} mg melanze.")
     Prepocet.rozdel_melanz(melange, order)
   end
-  
+
   def self.rozdel_melanz(melange, order)
     puts "ROZDELUJI MELANZ = " << melange.to_s
     #pocet = House.playable.count
@@ -108,12 +130,13 @@ class Prepocet
     Imperium.zapis_operaci("Vesmirne Gilde bylo odeslano #{gilde} mg melanze.")
     melange -= gilde
     odevzdano = 0.0
-    for house in House.playable.all do
+    House.playable.all.each do |house|
       rodu = melange * (house.melange_percent / 100.0)
       odevzdano += rodu
       house.zapis_operaci("Obdrzeno #{rodu} mg melanze.")
+      house.zapis_operaci("Obdrzeno #{rodu} mg melanze.")
       house.update_attribute(:melange, house.melange + rodu)
-      
+
       # TODO dodelat update vsem userum rodu
       #for eod in user.eods.where(:date => Date.today, :field_id => nil, :order => order).all do
       #  eod.update_attribute(:melange_income, podil)
@@ -124,14 +147,14 @@ class Prepocet
     imperium = House.imperium
     imperium.update_attribute(:melange, imperium.melange + imperiu)
   end
-  
+
   def self.melanz_gilde(melange)
     gilde = melange * (Constant.gilda_melanz_procenta / 100.0)
     if gilde < Constant.gilda_melanz_pevna
       return Constant.gilda_melanz_pevna
     else
       return gilde
-    end  
+    end
   end
 
   def self.zpristupni_planety
@@ -146,8 +169,8 @@ class Prepocet
   end
 
   def self.zmen_vudce(order)
-    houses = House.where('name NOT IN (?)', 'Renegáti, Impérium').includes(:users, :votes)
-    for house in houses do
+    houses = House.playable.includes(:users, :votes)
+    houses.each do |house|
       puts "Delam #{house.name}"
       old_vudce = house.users.where(:leader => true).first
       new_vudce = house.kdo_je_vitez('leader')
@@ -189,9 +212,9 @@ class Prepocet
     Aplikace.zamkni_hru
     puts "hra uzamcena"
   end
-  
+
   #######################################
-  
+
   def self.prepocti_vliv
     for h in House.playable do
       for u in h.users do
@@ -208,7 +231,7 @@ class Prepocet
     imp.update_attribute(:influence, celkovy_vliv)
     Imperium.zapis_operaci("Celkový vliv Impéria nyní činí #{celkovy_vliv}.")
   end
-  
+
   def self.zvol_poslance
     houses = House.playable
     for h in houses do
@@ -226,12 +249,12 @@ class Prepocet
     end
     Global.prepni('pristi_volby', 2, 4.weeks.from_now)
   end
-  
+
   def self.kontrola_zakonu
     Prepocet.ukonci_hlasovani
     Prepocet.zarad_zakony
   end
-  
+
   def self.ukonci_hlasovani
     puts "Ukoncuji hlasovani"
     for law in Law.projednavane do
@@ -240,17 +263,17 @@ class Prepocet
       end
     end
   end
-  
+
   def self.zarad_zakony
     until Law.projednavane.count == 3 || Law.zarazene.count == 0
-      Law.zarazene.order(:position).first.update_attributes(:state => Law::STATE[1], :submitted => Date.today)
+      Law.zarazene.order(:position).first.update_attributes(:state => Law::STATE[1], :enacted => Date.today)
     end
   end
-  
+
   def self.zvol_imperatora
     old_imp = User.imperator
     old_reg = User.regenti
-    
+
     if old_imp
       old_imp.update_attribute(:emperor, false)
       old_imp.zapis_operaci('Jiz dale nejsem Imperatorem.')
@@ -261,7 +284,7 @@ class Prepocet
         u.zapis_operaci('Jiz dale nejsem Regentem.')
       end
     end
-    
+
     imperium = House.imperium
     new_imp = imperium.poradi_hlasu('imperator', 3)
     pocet_hlasujicich = imperium.votes.where(:typ => 'imperator').count
@@ -274,11 +297,22 @@ class Prepocet
         u[0].zapis_operaci("Byl jsem zvolen Regentem.")
       end
     end
-    
+
     if new_imp
       Global.prepni('konec_volby_imperatora', 2, 2.week.from_now)
       Global.prepni('volba_imperatora', 1, false)
     end
   end
-  
+
+  def self.udalosti
+
+    puts 'udalosti'
+    Planet.nahodna_udalost
+    puts 'Enviroments done'
+
+    Field.udalosti_lena
+    puts 'Effects done'
+  end
+
+
 end

@@ -1,41 +1,41 @@
 class SyselaadsController < ApplicationController
   before_filter :admin_required, :except => [:index, :show]
-  
+
   def index
     rod = current_user.house
     case params[:kind]
-    when 'L'
-      @syselaads = Syselaad.landsraadsky
-    when 'N'
-      @syselaads = Syselaad.narodni.where(:house_id => rod)
-    when 'I'
-      @syselaads = Syselaad.imperialni
-    when 'S'
-      @syselaads = Syselaad.systemovy
-    when 'E'
-      @syselaads = Syselaad.mezinarodni
-    else
-      @syselaads = Syselaad.narodni.where(:house_id => rod)
+      when 'L'
+        @syselaads = Syselaad.landsraadsky
+      when 'N'
+        @syselaads = Syselaad.narodni.where(:house_id => rod)
+      when 'I'
+        @syselaads = Syselaad.imperialni
+      when 'S'
+        @syselaads = Syselaad.systemovy
+      when 'E'
+        @syselaads = Syselaad.mezinarodni
+      else
+        @syselaads = Syselaad.narodni.where(:house_id => rod)
     end
   end
 
   def show
     rod = current_user.house
     case params[:kind]
-    when 'L'
-      @syselaad = Syselaad.landsraadsky.first
-    when 'N'
-      @syselaad = Syselaad.narodni.where(:house_id => rod).first
-    when 'I'
-      @syselaad = Syselaad.imperialni.first
-    when 'S'
-      @syselaad = Syselaad.systemovy.first
-    when 'E'
-      @syselaad = Syselaad.mezinarodni.first
-    else
-      @syselaad = Syselaad.narodni.where(:house_id => rod).first
+      when 'L'
+        @syselaad = Syselaad.landsraadsky.first
+      when 'N'
+        @syselaad = Syselaad.narodni.where(:house_id => rod).first
+      when 'I'
+        @syselaad = Syselaad.imperialni.first
+      when 'S'
+        @syselaad = Syselaad.systemovy.first
+      when 'E'
+        @syselaad = Syselaad.mezinarodni.first
+      else
+        @syselaad = Syselaad.narodni.where(:house_id => rod).first
     end
-    
+
     @topics = @syselaad.topics.order("created_at DESC").page(params[:page])
   end
 
@@ -59,7 +59,7 @@ class SyselaadsController < ApplicationController
   def update
     @syselaad = Syselaad.find(params[:id])
     if @syselaad.update_attributes(params[:syselaad])
-      redirect_to @syselaad, :notice  => "Successfully updated syselaad."
+      redirect_to @syselaad, :notice => "Successfully updated syselaad."
     else
       render :action => 'edit'
     end

@@ -1,33 +1,44 @@
-  <div class="lh">
+<div class="lh">
   Administrace
-  </div>
-  <div class="l">
-    <h3>Prihlasovani: <%= link_to Aplikace.prihlaseni_povoleno?.to_s, :controller => "admin", :action => "prepni_povoleni_prihlasovani" %></h3>
-    <h3>Zakladani: <%= link_to Aplikace.zakladani_hracu_povoleno?.to_s, :controller => "admin", :action => "prepni_povoleni_zakladani" %></h3>
-    <h3><%= link_to "Zamkni hru", zamkni_hru_path %></h3>
-    <h3><%= link_to "Prepocti vliv", prepocti_vliv_path %></h3>
-    <h3><%= link_to "Spust prepocet", kompletni_prepocet_path %></h3>
-    <hr />
-    <h3>Admin hracu</h3>
-    <%= form_tag :zmen_prava do %>
-      <%= select_tag :user_id_prava, options_for_select(User.order(:username).all.collect { |p| [p.username, p.id] }, {:include_blank => false}) , :class => "tab" %>
+</div>
+<div class="l">
+  <h3>Prihlasovani: <%= link_to Aplikace.prihlaseni_povoleno?.to_s, :controller => "admin", :action => "prepni_povoleni_prihlasovani" %></h3>
+
+  <h3>Zakladani: <%= link_to Aplikace.zakladani_hracu_povoleno?.to_s, :controller => "admin", :action => "prepni_povoleni_zakladani" %></h3>
+
+  <h3><%= link_to "Zamkni hru", zamkni_hru_path %></h3>
+
+  <h3><%= link_to "Prepocti vliv", prepocti_vliv_path %></h3>
+
+  <h3><%= link_to "Spust prepocet", kompletni_prepocet_path %></h3>
+  <hr/>
+  <h3>Admin hracu</h3>
+  <%= form_tag :zmen_prava do %>
+      <%= select_tag :user_id_prava, options_for_select(User.order(:username).all.collect { |p| [p.username, p.id] }, {:include_blank => false}), :class => "tab" %>
       <%= submit_tag 'Vyber', :class => "oktab" %>
-    <% end %>
-    <hr />
-    <h3><%= link_to "Pridej suroviny", pridej_suroviny_path %></h3>
-    <h3><%= link_to "Prehled globals", global_index_path %></h3>
-    <hr />
-    <h3>Sweep session</h3>
-    <%= form_tag :sweep_session do %>
+  <% end %>
+  <hr/>
+  <h3><%= link_to "Pridej suroviny", pridej_suroviny_path %></h3>
+
+  <h3><%= link_to "Prehled globals", global_index_path %></h3>
+
+  <h3><%= link_to "Prehled udalosti", udalosti_admin_path %></h3>
+
+  <h3><%= link_to "Effect udalosti", Effect %></h3>
+
+  <h3><%= link_to "Property udalosti", Property %></h3>
+  <hr/>
+  <h3>Sweep session</h3>
+  <%= form_tag :sweep_session do %>
       <%= text_field_tag :hodin, nil, :maxlength => 5, :class => "tab" %>
       <%= submit_tag 'Sweep', :class => "oktab" %>
-    <% end %>
-    <hr />
-    <h3><%= link_to "WIPE", wipe_path, :confirm => 'Opravdu WIPE?' %></h3>
-    <hr />
-    <h3>Online hraci</h3>
-    <% for user in online_users %>
+  <% end %>
+  <hr/>
+  <h3><%= link_to "WIPE", wipe_path, :confirm => 'Opravdu WIPE?' %></h3>
+  <hr/>
+  <h3>Online hraci</h3>
+  <% for user in online_users %>
       <%= link_to user.username, user %>
-    <% end %>
+  <% end %>
 
-  </div>
+</div>

@@ -1,0 +1,18 @@
+<%= form_for @effect do |f| %>
+    <%= f.error_messages %>
+    <p>
+      <%= f.label :effect_id %><br/>
+      <%= f.text_field :effect_id %>
+    </p>
+    <p>
+      <%= f.label :field_id %><br/>
+      <%= f.text_field :field_id %>
+    </p>
+    <p>
+      <%= f.label :duration %><br/>
+      <%= f.text_field :duration %>
+    </p>
+
+    <p><%= f.submit "Save" %></p>
+    <%= link_to 'back', :back %>
+<% end %>

@@ -1,30 +1,33 @@
 <% title @topic.name %>
 <table class="tab3" style="height:18px;">
-	<tr>
-		<th colspan="2">
-			<% if logged_in? %><%= link_to "ODPOVĚDĚT", "#{new_post_path}?topic=#{@topic.id}" , :class => "ok4" %> <% end %>
-			<% if admin? %><%= link_to "Smazat vlákno", @topic, :confirm => 'Are you sure?', :method => :delete , :class => "ok4" %> <% end %>
-			<%= link_to "View All", syselaad_path(@topic.syselaad_id) , :class => "ok4" %>   
-		</th>
-	</tr>
-	<% for post in @posts %>
-	<tr>
-		<th colspan="2"><%= link_to post.user.nick, user_url(post.user) %> [<%= format_date_time post.created_at %>]</th>
-	</tr>
-	<tr>
-		<td><%= simple_format(post.content) %></td>
-		<td class="ava"> 
-			<% if logged_in? %>
-				<% if admin_or_owner?(post.user.id) %>
-					<%= link_to "Editovat", edit_post_path(post) %>
-					<br />
-					<%= link_to "Smazat", post, :confirm => 'Are you sute?', :method => :delete %>
-				<% end %>
-			<% end %> 
-		</td>
-	</tr>
-	<% end %>
-	<tr>
-		<%= paginate @posts %>
-	</tr>
+  <tr>
+    <th colspan="2">
+      <% if logged_in? %><%= link_to "ODPOVĚDĚT", "#{new_post_path}?topic=#{@topic.id}", :class => "ok4" %>
+      <% end %>
+      <% if admin? %><%= link_to "Smazat vlákno", @topic, :confirm => 'Are you sure?', :method => :delete, :class => "ok4" %>
+      <% end %>
+      <%= link_to "View All", syselaad_path(@topic.syselaad_id), :class => "ok4" %>
+    </th>
+  </tr>
+  <% for post in @posts %>
+      <tr>
+        <th colspan="2"><%= link_to post.user.nick, user_url(post.user) %> [<%= format_date_time post.created_at %>]
+        </th>
+      </tr>
+      <tr>
+        <td><%= simple_format(post.content) %></td>
+        <td class="ava">
+          <% if logged_in? %>
+              <% if admin_or_owner?(post.user.id) %>
+                  <%= link_to "Editovat", edit_post_path(post) %>
+                  <br/>
+                  <%= link_to "Smazat", post, :confirm => 'Are you sute?', :method => :delete %>
+              <% end %>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+  <tr>
+    <%= paginate @posts %>
+  </tr>
 </table>

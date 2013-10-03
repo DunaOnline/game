@@ -11,4 +11,16 @@
 #
 
 class Environment < ActiveRecord::Base
+
+  belongs_to :planet
+  belongs_to :property
+
+  def odstran_katastrofu(user)
+    if user.solar >= self.property.price
+      user.update_attribute(:solar, user.solar - self.property.price * self.duration)
+      self.destroy
+      user.zapis_operaci("Odstranili sme katastrofu #{self.property.name} na planete #{self.planet.name}, zaplatili sme #{self.property.price * self.duration} .")
+    end
+
+  end
 end

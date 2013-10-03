@@ -1,26 +1,26 @@
 <table class="tab3">
-	<%= form_for post do |f| %>
-	<%= f.error_messages %>
-	<% if params[:topic] %>
-		<%= hidden_field_tag 'post[topic_id]', params[:topic] %>
-	<% end %>
-	<tr>
-		<th colspan="10"> 
-    
-      <%= f.submit "ODESLAT", :title => "ODESLAT", :class => "ok4" %> 
-      <%= link_to "Zrušit" , posts_path , :class => "ok4"  %>
-      <%= link_to "Náhled", post , :class => "ok4" %>
-      <%= link_to "View All", posts_path , :class => "ok4" %>      
-      
-    </th>
-    
-	</tr>
-	<tr>
-		<td> 
-			<%= f.label :content %>
-			<br />
-			<%= f.text_area :content %> 
-		</td>
-	</tr>
-	<% end %>
+  <%= form_for post do |f| %>
+      <%= f.error_messages %>
+      <% if params[:topic] %>
+          <%= hidden_field_tag 'post[topic_id]', params[:topic] %>
+      <% end %>
+      <tr>
+        <th colspan="10">
+
+          <%= f.submit "ODESLAT", :title => "ODESLAT", :class => "ok4" %>
+          <%= link_to "Zrušit", posts_path, :class => "ok4" %>
+          <%= link_to "Náhled", post, :class => "ok4" %>
+          <%= link_to "View All", posts_path, :class => "ok4" %>
+
+        </th>
+
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :content %>
+          <br/>
+          <%= f.text_area :content %>
+        </td>
+      </tr>
+  <% end %>
 </table>

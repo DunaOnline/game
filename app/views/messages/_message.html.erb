@@ -1,0 +1,26 @@
+<tr xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" class="opica" data-druh="<%= message.druh if message.druh %>">
+  <td><%= link_to message.created_at.localtime, '#', :class => "message" %>
+
+    <% unless message.proctena(current_user) %>
+        <div class="precitanaimg"></div>
+    <% end %>
+
+  </td>
+  <td><%= link_to message.user.nick, message.user %></td>
+  <td><%= link_to message.user.house.name, message.user.house %></td>
+  <td><%= message.subject %>
+
+    <span class="fright">
+  <%= best_in_place message, :opened, :type => :checkbox, :classes => 'precitana' %>
+      <%= link_to image_tag('../assets/css/DO_cross.png'), message, :confirm => "Naozaj chcete zmazat postu ?", :method => :delete, :class => 'delete_post', :remote => true %></span>
+  </td>
+
+</tr>
+<tr class="postaBody">
+  <td colspan="4">
+    <%= message.body %>
+    <p>
+      <%= link_to 'Odpovedat', reply_path(:id => message.id), :class => "reply" %>
+    </p>
+  </td>
+</tr>

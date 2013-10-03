@@ -1,0 +1,75 @@
+<%# encoding: utf-8 %>
+<table class="tab1">
+  <tr>
+    <th colspan="10">Schvalit zakon</th>
+  </tr>
+  <% for law in @schvalene do %>
+      <tr>
+
+        <td><h3><%= law.label + ' - ' + law.title %></h3>
+          <li>
+            <%= law.content %>
+          <li>
+
+
+            <%= form_tag podepisat_zakon_path do %>
+
+                <%= hidden_field_tag :law_id, law.id %>
+                <%= submit_tag 'Ano', :class => "ok4" %>
+                <%= submit_tag 'Ne', :class => "ok4" %>
+
+            <% end %>
+
+
+        </td>
+
+      </tr>
+  <% end %>
+</table>
+
+
+<table class="tab1">
+  <tr>
+    <th class="l" style="width:30px">Číslo</th>
+    <th style="width:50px">Stav</th>
+    <th>Znění neprojednaných zákonů</th>
+    <th>Uzavření</th>
+    <th>Autor</th>
+    <th class="r" style="width:80px">Ano/Ne/Zdr.</th>
+  </tr>
+  <% for law in @projednavane do %>
+      <tr>
+        <td><%= law.label %></td>
+        <td><%= law.state %></td>
+        <td><%= law.content %></td>
+        <td class="ctr">---</td>
+        <td class="ctr"><%= link_to law.user.nick, law.user %></td>
+        <td class="ctr"><%= law.pomer_hlasu %></td>
+      </tr>
+
+  <% end %>
+
+</table>
+
+<table class="tab1">
+  <tr>
+    <th class="l" style="width:30px">Číslo</th>
+    <th style="width:50px">Stav</th>
+    <th>Zakony ktere jste podepsal</th>
+    <th>Uzavření</th>
+    <th>Autor</th>
+    <th class="r" style="width:80px">Ano/Ne/Zdr.</th>
+  </tr>
+  <% for law in @videne do %>
+      <tr>
+        <td><%= law.label %></td>
+        <td><%= law.state %></td>
+        <td><%= law.content %></td>
+        <td class="ctr"><%= law.updated_at.localtime %></td>
+        <td class="ctr"><%= link_to law.user.nick, law.user %></td>
+        <td class="ctr"><%= law.pomer_hlasu %></td>
+      </tr>
+
+  <% end %>
+
+</table>

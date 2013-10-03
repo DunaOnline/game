@@ -1,51 +1,51 @@
 <%# encoding: utf-8 %>
 <% if Aplikace.prihlaseni_povoleno? %>
-	<div class="lh">
-		Přihlásit se
-	</div>
-	<div class="l">
-		<%= form_tag sessions_path do %>
-			<li><%= text_field_tag :login , params[:login], :title => "Registrační e-mail nebo Login", :class => "i_email" %>
-			<li><%= password_field_tag :password, nil, :class => "i_key",  :title => "Vstupní heslo" %>
-			<li><%= submit_tag "Vstoupit do hry", :class => "ok2" %>
-		<% end %>
-	</div>
+    <div class="lh">
+      Přihlásit se
+    </div>
+    <div class="l">
+      <%= form_tag sessions_path do %>
+          <li><%= text_field_tag :login, params[:login], :title => "Registrační e-mail nebo Login", :class => "i_email" %>
+          <li><%= password_field_tag :password, nil, :class => "i_key", :title => "Vstupní heslo" %>
+          <li><%= submit_tag "Vstoupit do hry", :class => "ok2" %>
+      <% end %>
+    </div>
 <% end %>
 
 <% if Aplikace.zakladani_hracu_povoleno? %>
-	<div class="lh">
-		Rychlá registrace
-	</div>
-	<div class="l">
-		<%= form_tag({:controller => 'users', :action => 'create'}) do %>
-	        <li><%= text_field_tag "user[username]", nil, :class => "i_nick", :title => "Login = Přihlašovací údaj" %>
-            <li><%= text_field_tag "user[nick]", nil, :class => "i_nick", :title => "Nick = Jméno vaší postavy ve hře " %>
-            <li><%= select_tag("user[house_id]", options_for_select(House.playable.all.collect { |p| [p.name, p.id] }, {:include_blank => false})) %>
-            <li><%= text_field_tag "user[email]", nil, :class => "i_email", :title => "Registrační e-mail" %>
-            <li><%= password_field_tag "user[password]", nil, :class => "i_key", :title => "Vstupní heslo"%>
-            <li><%= password_field_tag "user[password_confirmation]", nil, :class => "i_key" , :title => "Kontrola vstupního hesla" %>
-            <li><%= submit_tag "Registrovat se", :class => "ok4", :title => "Rychlá registrace pro nové hráče je zároveň formulářem pro zaslání nového hesla k účtu. Nové heslo vám bude zasláno po vyplnění pole s Registračním e-mailem" %>
-        <% end %>
-	</div>	
+    <div class="lh">
+      Rychlá registrace
+    </div>
+    <div class="l">
+      <%= form_tag({:controller => 'users', :action => 'create'}) do %>
+          <li><%= text_field_tag "user[username]", nil, :class => "i_nick", :title => "Login = Přihlašovací údaj" %>
+          <li><%= text_field_tag "user[nick]", nil, :class => "i_nick", :title => "Nick = Jméno vaší postavy ve hře " %>
+          <li><%= select_tag("user[house_id]", options_for_select(House.registration, {:include_blank => false})) %>
+          <li><%= text_field_tag "user[email]", nil, :class => "i_email", :title => "Registrační e-mail" %>
+          <li><%= password_field_tag "user[password]", nil, :class => "i_key", :title => "Vstupní heslo" %>
+          <li><%= password_field_tag "user[password_confirmation]", nil, :class => "i_key", :title => "Kontrola vstupního hesla" %>
+          <li><%= submit_tag "Registrovat se", :class => "ok4", :title => "Rychlá registrace pro nové hráče je zároveň formulářem pro zaslání nového hesla k účtu. Nové heslo vám bude zasláno po vyplnění pole s Registračním e-mailem" %>
+      <% end %>
+    </div>
 <% end %>
 
-	
+
 <div class="lh">
-	Statistiky
+  Statistiky
 </div>
-	<div class="l">
-			
-		<li>Aktivních profilů:	<%= User.all.count - 1 %>
-		<li>Online hráčů:	<%= online_users.count %>
-		<li>Denní průměr:	0
+<div class="l">
 
-		<li>Probíhá:   
-		
-			<% if Aplikace.prihlaseni_povoleno? %>
-				<font class="zelena">Hra je otevřena</font>
-			<% else %>
-				<font class="oranzova">Hra uzavřena</font>
-			<% end %>
+  <li>Aktivních profilů:    <%= User.all.count - 1 %>
+  <li>Online hráčů:    <%= online_users.count %>
+  <li>Denní průměr: 0
 
-	</div>
+  <li>Probíhá:
+
+    <% if Aplikace.prihlaseni_povoleno? %>
+        <font class="zelena">Hra je otevřena</font>
+    <% else %>
+        <font class="oranzova">Hra uzavřena</font>
+    <% end %>
+
+    </div>
 		

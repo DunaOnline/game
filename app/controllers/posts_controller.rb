@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_filter :login_required
-  
+
   def index
     #@posts = Post.all
   end
@@ -48,5 +48,6 @@ class PostsController < ApplicationController
   def post
     @post ||= params[:id] ? Post.find(params[:id]) : Post.new(params[:post])
   end
+
   helper_method :post
 end

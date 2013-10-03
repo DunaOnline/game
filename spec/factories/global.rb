@@ -14,6 +14,6 @@
 
 FactoryGirl.define do
   factory :global do
-    sequence(:setting) {|n| "setting#{n}"}
+    sequence(:setting) { |n| "setting#{n}" }
   end
 end

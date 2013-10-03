@@ -18,21 +18,23 @@
 #
 
 class Law < ActiveRecord::Base
-  attr_accessible :label, :title, :content, :state, :position, :submitter, :submitted, :enacted, :signed 
-  
+  attr_accessible :label, :title, :content, :state, :position, :submitter, :submitted, :enacted, :signed
+
   has_many :polls
   has_many :users, :through => :polls
-  
-  has_many :submitters, :class_name => 'User', :primary_key => :submitter, :foreign_key => :id
-  
+
+  belongs_to :user, :foreign_key => :submitter
+
+  validates_presence_of :content, :title
+
   STATE = [
-    'Zarazen',
-    'Projednavan',
-    'Schvalen',
-    'Zamitnut',
-    'Podepsan'
+      'Zarazen',
+      'Projednavan',
+      'Schvalen',
+      'Zamitnut',
+      'Podepsan'
   ]
-  
+
   def self.create_label
     label = 'IZ' + Aplikace::VEK + '-'
     cislo = (Law.count + 1).to_s
@@ -42,20 +44,20 @@ class Law < ActiveRecord::Base
     label += cislo
     return label
   end
-  
+
   def self.create_position
     max_pos = Law.zarazene.maximum(:position).to_i
     max_pos += 1
     return max_pos
   end
-  
+
   def vyhodnot_zakon
     hlasy_pro = self.polls.pro
     hlasy_proti = self.polls.proti
     zdrzelo_se = self.polls.zdrzelo
-    
+
     celkem = hlasy_pro + hlasy_proti + zdrzelo_se
-    
+
     if hlasy_pro > hlasy_proti && hlasy_pro > (0.5 * celkem)
       self.update_attribute(:state, Law::STATE[2])
       Landsraad.zapis_operaci("Byl schvalen zakon #{self.label} - #{self.title} pomerem: #{self.pomer_hlasu}.")
@@ -63,25 +65,43 @@ class Law < ActiveRecord::Base
       self.update_attribute(:state, Law::STATE[3])
       Landsraad.zapis_operaci("Zakon #{self.label} - #{self.title} byl zamitnut pomerem: #{self.pomer_hlasu}.")
     end
-    
+
   end
-  
+
   def pomer_hlasu
     pro = self.polls.pro.count
     proti = self.polls.proti.count
     zdrzelo = self.polls.zdrzelo.count
-    
+
     return pro.to_s + '/' + proti.to_s + ' (' + zdrzelo.to_s + ')'
-    
+
   end
-  
+
+  def zahlasovane(user)
+    if self.polls.where(:user_id => user).first
+      self.polls.where(:user_id => user).first.choice
+    else
+      false
+    end
+  end
+
+  def imp_podepis(volba, user)
+    if volba == "Ano"
+      self.update_attributes(:signed => true, :state => Law::STATE[4])
+      Landsraad.zapis_hlasu_imp(user.id, "Byl podepsan zakon #{self.label} - #{self.title} .")
+    elsif volba == "Ne"
+      self.update_attributes(:signed => false, :state => Law::STATE[5])
+      Landsraad.zapis_hlasu_imp(user.id, "Byl zamitnout zakon #{self.label} - #{self.title} .")
+    end
+  end
+
   scope :zarazene, where(:state => Law::STATE[0])
   scope :projednavane, where(:state => Law::STATE[1])
   scope :schvalene, where(:state => Law::STATE[2])
   scope :zamitnute, where(:state => Law::STATE[3])
   scope :podepsane, where(:state => Law::STATE[4])
-  
-  scope :submited, lambda { |user| where(:submitter => user.id)}
-  
+
+  scope :submited, lambda { |user| where(:submitter => user.id) }
+
   scope :seradit, order(:position, :submitted, :enacted, :signed).includes(:users)
 end

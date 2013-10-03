@@ -20,36 +20,38 @@ class Planet < ActiveRecord::Base
 
   belongs_to :house
   belongs_to :planet_type
-  belongs_to :system, :primary_key => 'system_name', :foreign_key => 'system_name'
+  belongs_to :system, :primary_key => :system_name, :foreign_key => :system_name
   has_many :fields
-  
+  has_many :environment
+  has_many :property, :through => :environment
+
   def vytvor_pole(user)
     Field.new(
-      :planet_id => self.id,
-      :name => self.name + " - " + user.nick + " - " + (self.vlastni_pole(user).count + 1).to_s,
-      :user_id => user.id,
-      :pos_x => user.house.id,
-      :pos_y => user.id
+        :planet_id => self.id,
+        :name => self.name + ' - ' + user.nick + ' - ' + (self.vlastni_pole(user).count + 1).to_s,
+        :user_id => user.id,
+        :pos_x => user.house.id,
+        :pos_y => user.id
     )
   end
-  
+
   def oznaceni
-    self.system.id.to_s + "." + self.position.to_s
+    self.system.id.to_s + '.' + self.position.to_s
   end
-  
+
   def arrakis?
-    self.name == "Arrakis"
+    self.name == 'Arrakis'
   end
 
   def obsazenost
     max = self.max_poli
     aktualne = self.aktualne_obsazeno
-    aktualne.to_s + "/" + max.to_s
+    aktualne.to_s + '/' + max.to_s
   end
 
   def max_poli
-    if self.planet_type.name == "Domovská"
-      max_poli = "-"
+    if self.planet_type.name == 'Domovská'
+      max_poli = '-'
     else
       max_poli = self.planet_type.fields
     end
@@ -61,93 +63,94 @@ class Planet < ActiveRecord::Base
   end
 
   def background
-    if self.name == "Arrakis"
-      "planety/arrakis.png"
+    if self.name == 'Arrakis'
+      'planety/arrakis.png'
     else
       case self.planet_type.name
-      when "Měsíc"
-        "planety/1.png"
-      when "Typ Vesuvia"
-        "planety/2.png"
-      when "Pengaranský typ"
-        "planety/3.png"
-      when "Teranský typ"
-        "planety/4.png"
-      when "Dyrovský typ"
-        "planety/5.png"
-      when "Marganský typ"
-        "planety/6.png"
-      when "Domovská"
-        rod = self.house.name
-        if rod == "Titáni"
-          "planety/dpl-Titani.png"
-        elsif rod == "Renegáti"
-          "planety/dpl-renegati.png"
+        when 'Měsíc'
+          'planety/1.png'
+        when 'Typ Vesuvia'
+          'planety/2.png'
+        when 'Pengaranský typ'
+          'planety/3.png'
+        when 'Teranský typ'
+          'planety/4.png'
+        when 'Dyrovský typ'
+          'planety/5.png'
+        when 'Marganský typ'
+          'planety/6.png'
+        when 'Domovská'
+          rod = self.house.name
+          if rod == 'Titáni'
+            'planety/dpl-Titani.png'
+          elsif rod == 'Renegáti'
+            'planety/dpl-renegati.png'
+          else
+            'planety/dpl-' + rod + '.png'
+          end
         else
-          "planety/dpl-" + rod + ".png"
-        end
-      else
-      "planety/neznama.png"
+          'planety/neznama.png'
       end
     end
   end
-  
+
   def vlastni_pole(user)
     self.fields.where(:user_id => user.id)
   end
-  
+
   def zastoupeni_rodu
     self.fields.joins(:user, :house).includes(:house).count(:id, :group => 'houses.name')
     #self.fields.joins(:user, :house).count(:id, :group => :house)
   end
-  
+
   def cena_noveho_lena_mel
     Vypocty.cena_noveho_lena_melanz(self)
   end
+
   def cena_noveho_lena_sol
     Vypocty.cena_noveho_lena_solary(self)
   end
-  
+
   def vynos(user, ceho)
     vynos = 0.0
-    for field in self.fields.vlastnik(user).includes(:buildings) do
+    self.fields.vlastnik(user).includes(:buildings).each { |field|
       vynos += field.vynos(ceho)
-    end
+    }
     vynos
   end
-  
+
   def osidlitelna?(user)
     (self.house == user.house || self.available_to_all) && self.max_poli > self.fields.count
   end
-  
+
   def domovska?
-    self.planet_type_id == PlanetType.find_by_name("Domovská").id
+    self.planet_type_id == PlanetType.find_by_name('Domovská').id
   end
-  
+
   def self.arrakis
-    @duna ||= Planet.find_by_name("Arrakis")
+    @duna ||= Planet.find_by_name('Arrakis')
   end
-  
+
   def self.kaitan
-    @kaitan ||= Planet.find_by_name("Kaitan")
+    @kaitan ||= Planet.find_by_name('Kaitan')
   end
-  
+
   def melange_bonus
-    if vlastnik = User.spravce_arrakis
+    if (vlastnik = User.spravce_arrakis)
       vlastnik.melange_bonus
     else
       0.0
     end
   end
-  
+
   def agresivita_fremenu
     # TODO jak pocitat???
     10.0
   end
-  
+
   def zastoupene_rody
     a = []
-    for field in self.fields.includes(:user, :house) do
+    self.fields.includes(:user, :house).each { |field|
       if self == Planet.arrakis || self == Planet.kaitan
         rod = House.imperium.name
       else
@@ -158,11 +161,11 @@ class Planet < ActiveRecord::Base
       else
         a.assoc(rod)[1] += 1
       end
-    end
-    a.sort! { |a,b| a[1] <=> b[1] }
-    return a
+    }
+    a.sort! { |a, b| a[1] <=> b[1] }
+    a
   end
-  
+
   def dominantni_rod
     a = self.zastoupene_rody
     if a[0]
@@ -171,7 +174,7 @@ class Planet < ActiveRecord::Base
       ''
     end
   end
-  
+
   def celkova_populace(user)
     pop = 0.0
     for field in self.fields.vlastnik(user).includes(:resource) do
@@ -179,6 +182,7 @@ class Planet < ActiveRecord::Base
     end
     pop
   end
+
   def celkovy_material(user)
     mat = 0.0
     for field in self.fields.vlastnik(user).includes(:resource) do
@@ -186,13 +190,110 @@ class Planet < ActiveRecord::Base
     end
     mat
   end
-  
-  scope :domovska, lambda { |user| where(:house_id => user.house.id, :planet_type_id => PlanetType.find_by_name("Domovská"))}
-  scope :domovska_rodu, lambda { |house| where(:house_id => house.id, :planet_type_id => PlanetType.find_by_name("Domovská"))}
-  scope :domovske, where(:planet_type_id => PlanetType.find_by_name("Domovská"))
+
+  def celkovy_parts(user)
+    parts = 0.0
+    for field in self.fields.vlastnik(user).includes(:resource) do
+      parts += field.resource.parts
+    end
+    parts
+  end
+
+  def kapacita_parts(user)
+    tovarna = Building.where(:kind => 'V').first
+
+    pocet_tovaren = 0
+    self.fields.vlastnik(user).each { |field|
+      leno_s_tovarnou = field.estates.where(:building_id => tovarna.id).first
+      pocet_tovaren += leno_s_tovarnou.number if leno_s_tovarnou
+    }
+    (pocet_tovaren * Constant.kapacita_tovaren).to_i
+  end
+
+  def self.nahodna_udalost
+    enviro = Environment.all
+    enviro.each do |envi|
+      if envi.duration == 0
+        envi.destroy
+      else
+        envi.update_attribute(:duration, envi.duration - 1)
+      end
+    end
+
+    self.all.each do |planet|
+      planet.udalost
+    end
+  end
+
+  def udalost
+    udalost = 0
+
+    pocet_udalosti = Constant.pocet_udalosti.to_i
+    pocet_udalosti.times do
+      if udalost == rand(100/ Constant.pravdepodobnost)
+        if Property.count > 0
+          roll_property = rand(Property.nahodne.count) + 1
+          property = Property.nahodne.find(roll_property)
+
+          Environment.new(
+              :planet_id => self.id,
+              :property_id => property.id,
+              :duration => property.duration
+          ).save
+
+
+          self.house.zapis_operaci("Mimoriadna udalost na planete #{self.name} : #{property.name}")
+
+        end
+      end
+    end
+  end
+
+  def udalost_bonus(typ)
+    enviro_bonus = 1
+    if self.environment
+      case typ
+        when 'P'
+          self.environment.each do |enviro|
+            enviro_bonus += enviro.property.population_bonus * enviro.property.population_cost if enviro
+
+          end
+        when 'PL'
+          self.environment.each do |enviro|
+            enviro_bonus += enviro.property.pop_limit_bonus if enviro
+          end
+        when 'J'
+          self.environment.each do |enviro|
+            enviro_bonus += enviro.property.melange_bonus * enviro.property.melange_cost if enviro
+          end
+        when 'M'
+          self.environment.each do |enviro|
+            enviro_bonus += enviro.property.material_bonus * enviro.property.material_cost if enviro
+          end
+        when 'S'
+          self.environment.each do |enviro|
+            enviro_bonus += enviro.property.solar_bonus * enviro.property.solar_cost if enviro
+          end
+        when 'E'
+          self.environment.each do |enviro|
+            enviro_bonus += enviro.property.exp_bonus * enviro.property.exp_cost if enviro
+          end
+        else
+          enviro_bonus = 1
+      end
+    end
+
+    enviro_bonus = enviro_bonus -1 if enviro_bonus > 2
+    enviro_bonus
+  end
+
+
+  scope :domovska, lambda { |user| where(:house_id => user.house.id, :planet_type_id => PlanetType.find_by_name('Domovská')) }
+  scope :domovska_rodu, lambda { |house| where(:house_id => house.id, :planet_type_id => PlanetType.find_by_name('Domovská')) }
+  scope :domovske, where(:planet_type_id => PlanetType.find_by_name('Domovská'))
   scope :osidlitelna, where(:available_to_all => true)
-  scope :objevene, where("available_to_all = ? AND planet_type_id <> ? AND name <> ?", false, PlanetType.find_by_name("Domovská").try(:id), 'Arrakis')
+  scope :objevene, where('available_to_all = ? AND planet_type_id <> ? AND name <> ?', false, PlanetType.find_by_name('Domovská').try(:id), 'Arrakis')
   #scope :objevena, where(:available_to_all => false, :planet_type_id => PlanetType.find_by_name("Domovská"))
-  scope :viditelna, lambda { |house| where(:house_id => house.id, :available_to_all => false)}
+  scope :viditelna, lambda { |house| where(:house_id => house.id, :available_to_all => false) }
 
 end

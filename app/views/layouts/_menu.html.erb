@@ -4,23 +4,25 @@
     <tr>
       <td>
         <ul class="menu">
-          <li><a class="menukomunikace" title="Komunikace"></a>
+          <li><a class="menukomunikace" title="Komunikace"><%= current_user.neprocteno_sprav %></a>
             <ul>
-              <li><a href="#"> Doručená pošta *</a>
-              <li><a href="#"> Odeslaná pošta *</a>
-              <li><a href="#"> Poslat poštu *</a>
+              <li><%= link_to "Doručená pošta [" + current_user.neprocteno_sprav.to_s + "]", messages_path %>
+              <li><%= link_to "Odeslaná pošta", odeslana_posta_path %>
+              <li><%= link_to "Poslat poštu", new_message_path %>
                 <br>
-              <!-- <li><a href="#"> Malorodní Syselaad *</a>  -->
+                <!-- <li><a href="#"> Malorodní Syselaad *</a>  -->
               <li><%= link_to "Národní Syselaad", syselaad_path(:kind => 'N') %></li>
               <li><%= link_to "Mezinárodní Syselaad", syselaad_path(:kind => 'E') %></li>
               <!--
               <li><%= link_to "Imperialní Syselaad", syselaad_path(:kind => 'I') %></li>
               -->
               <% if current_user.landsraad? || current_user.admin? %>
-              <li><%= link_to "Landsraadní Syselaad", syselaad_path(:kind => 'L') %></li>
+                  <li><%= link_to "Landsraadní Syselaad", syselaad_path(:kind => 'L') %></li>
               <% end %>
               <!-- <li><a href="#"> Multifórum *</a>  -->
               <li><%= link_to "Systémový Syselaad", syselaad_path(:kind => 'S') %></li>
+              <br/>
+              <li><%= link_to 'Změna hesla', zmena_hesla_f_path %></li>
             </ul>
           </li>
         </ul>
@@ -33,18 +35,23 @@
               <li><%= link_to "Statistika přepočtů", zobraz_eod_path %>
               <li><a href="#"> Mezinárodní diplomacie *</a>
               <li><%= link_to 'Správa hráče a volby', sprava_path(:id => current_user) %>
-              <!-- <li><a href="#"> Správa Malorodu* </a>   -->
-                <% if can? :sprava_rod, House %>
-                <li><%= link_to 'Správa Velkorodu', sprava_rod_path(:id => current_user.house) %>
-                <% end %>
-                <% if can? :sprava, Imperium %>
-                <li><%= link_to 'Správa Impéria', sprava_imperia_path %></li>
+                <% if can? :sprava_mr, Subhouse %>
+                  <li><%= link_to 'Správa Malorod', sprava_mr_path(:id => current_user.subhouse) %>
+              <% end %>
+              <% if can? :sprava_rod, House %>
+                  <li><%= link_to 'Správa Velkorodu', sprava_rod_path(:id => current_user.house) %>
+              <% end %>
+              <% if can? :sprava, Imperium %>
+                  <li><%= link_to 'Správa Impéria', sprava_imperia_path %></li>
               <% end %>
               <li><%= link_to 'Přehled Imperia', imperium_path %></li>
               <% if current_user.landsraad? || current_user.admin? %>
-                <li><%= link_to 'Jednání Landsraadu', landsraad_jednani_path %></li>
+                  <li><%= link_to 'Jednání Landsraadu', landsraad_jednani_path %></li>
               <% else %>
-                <li><%= link_to 'Zasedání Landsraadu', landsraad_show_path %></li>
+                  <li><%= link_to 'Zasedání Landsraadu', landsraad_show_path %></li>
+              <% end %>
+              <% if current_user.emperor? || current_user.admin? %>
+                  <li><%= link_to 'Zákony na podepsání', imperator_zakony_path %></li>
               <% end %>
               <li><%= link_to 'Archiv Landsraadu', laws_path %></li>
             </ul>
@@ -54,27 +61,37 @@
 
       <td>
         <ul class="menu">
-          <li><a class="menuvyzkum"  title="Ekonomika a výzkum"></a>
+          <li><a class="menuvyzkum" title="Ekonomika a výzkum"></a>
             <ul>
-              <li><a href="technologies"> Ekonomický výzkum *</a>
-              <li><a href="technologies"> Výzkum armády *</a>
+
+
+              <li><%= link_to ' Ekonomický výzkum', technologies_path %></li>
+
+
+
+
+
+
+
               <% if can? :sprava_rod, House %>
-              <li><%= link_to "Kolonizovat planetu", kolonizuj_path %>
+                  <li><%= link_to "Kolonizovat planetu", kolonizuj_path %></li>
               <% end %>
               <!-- <li><a href="#"> Vesmírný výzkum *</a>
               <li><a href="#"> Výroba *</a>
               <li><a href="#"> Obchod *</a> -->
+              <li><%= link_to ' Trh', markets_path %></li>
+              <li><%= link_to ' Vyroba', productions_path %></li>
             </ul>
         </ul>
       </td>
 
       <td>
         <ul class="menu">
-          <li><a class="menuarmada"  title="Armádní velitelství"></a>
+          <li><a class="menuarmada" title="Armádní velitelství"></a>
             <ul>
               <li><a href="#"> Verbování jednotek *</a>
               <li><a href="#"> Rozdělení jednotek *</a>
-              <!--<li><a href="#"> Správa šablon jednotek *</a> -->
+                <!--<li><a href="#"> Správa šablon jednotek *</a> -->
               <li><a href="#"> Vyslat útok *</a>
                 <br>
               <li><a href="#"> Imperiální statistika bojů *</a>
@@ -85,13 +102,13 @@
 
       <td>
         <ul class="menu">
-          <li><a class="menugalaxy"  title="Správa lén*"></a>
+          <li><a class="menugalaxy" title="Správa lén*"></a>
             <ul>
               <li><%= link_to "Arrakis", zobraz_arrakis_path %>
               <li><%= link_to "Seznam vašich lén a planet", fields_path %>
               <li><%= link_to "Zástavba lén", current_user.domovske_leno %>
               <li><%= link_to "Léna k osídlení", planets_path %>
-              <br>
+                <br>
               <li><%= link_to "Imperialní kartografie", systems_path %></li>
               <li><%= link_to "Imperiální databáze hráčů", users_path %></li>
               <li><%= link_to "Imperiální databáze národů", houses_path %></li>

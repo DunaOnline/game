@@ -13,8 +13,8 @@ gem 'sqlite3'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails'#,   '~> 3.1.4'
-  gem 'coffee-rails'#, '~> 3.1.1'
+  gem 'sass-rails' #,   '~> 3.1.4'
+  gem 'coffee-rails' #, '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -45,7 +45,7 @@ end
 
 gem 'cancan'
 #gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions', :branch => 'rails3'
-gem 'kaminari'#, '0.10.4'
+gem 'kaminari' #, '0.10.4'
 #gem "calendar_date_select", :git => 'http://github.com/paneq/calendar_date_select.git', :branch => 'rails3test'
 gem 'decent_exposure'
 
@@ -63,3 +63,7 @@ gem 'randumb'
 group :development do
   gem 'meta_request', '0.2.0'
 end
+
+gem 'execjs'
+
+#gem 'therubyracer'

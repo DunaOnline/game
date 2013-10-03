@@ -2,86 +2,91 @@
 <% title "Planet" %>
 
 <table class="tab0">
-		<tr>
-			<td>
-				<a href="#" title="Home">⌂</a> » 
-				<%= link_to "Imperialní kartografie", systems_path %> » 
-        <a href="#">Informace o planetě</a>
-			</td>
-    </tr>
+  <tr>
+    <td>
+      <a href="#" title="Home">⌂</a> »
+      <%= link_to "Imperialní kartografie", systems_path %> »
+      <a href="#">Informace o planetě</a>
+    </td>
+  </tr>
 </table>
 
 
-	<table class="tab1">
-		<tr>
-			<td  class="none" width="230px"></td>
-			<td class="td1">Informace o planetě</td>
-			<td class="td1" width="110px">Bonusy planety</td>
-		</tr>
-		<tr>
-		<td class="tdpl" style="background-image: url(<%= asset_path @planet.background %>)">
-			<li><h2><%= @planet.name %></h2>
-			<li><%= link_to @planet.system_name, @planet.system %>
-			<li><%= @planet.oznaceni %>
-			<li><%= @planet.obsazenost %>
-		</td>
-		<td>
-			<li><b>Typ planety: </b><%= @planet.planet_type.name %>
-			<% if @planet.house %>
-				<li><b>Objevitele: </b><%= @planet.house.name %>
-			<% end %>
-			<li><b>Dominantní národ: </b><a href="stat-databaze-narod.htm">Riches *</a>
-				<br /><br />
-			<% if @planet.domovska? %>
-			
-			<% elsif @planet.arrakis? %>
-			
-			<% else %>
- 				<% if @planet.osidlitelna?(current_user) %>
-					<li><%= link_to "Osidlit pole (#{number_with_precision(@cena_noveho_lena_melanz, precision: 2)} mg a #{number_with_precision(@cena_noveho_lena_solary, precision: 2)} S)", :action => "osidlit_pole", :id => @planet, :cena_mel => @cena_noveho_lena_melanz, :cena_sol => @cena_noveho_lena_solray %>
-				<% else %>
-					<li>Vesmírná Gilda planetu ještě nezahrnula do pravidelných cest.</li>
-				<% end %>
-			<% end %>
-		</td>
-		<td>
-			<% pt = @planet.planet_type %>
-			<li><%= img_solary "Bonus soláry" %><font class="<%= trida_barvy(pt.solar_bonus) %>"><%= format_mena(pt.solar_bonus, "%") %></font>
-			<li><%= img_material "Bonus materiál" %><font class="<%= trida_barvy(pt.material_bonus) %>"><%= format_mena(pt.material_bonus, "%") %></font>		
-			<li><%= img_populace "Bonus populace" %><font class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%") %></font>
-			<li><%= img_zkusenosti "Bonus zkušenosti" %><font class="<%= trida_barvy(pt.exp_bonus) %>"><%= format_mena(pt.exp_bonus, "%") %></font>
-			<li><%= img_kasarna "Bonus ke kapacitě kasáren a kosmodromů" %><font class="cervena"> + 0%</font>
-		</td>
-		</tr>
-	</table>
+<table class="tab1">
+  <tr>
+    <td class="none" width="230px"></td>
+    <td class="td1">Informace o planetě</td>
+    <td class="td1" width="110px">Bonusy planety</td>
+  </tr>
+  <tr>
+    <td class="tdpl" style="background-image: url(<%= asset_path @planet.background %>)">
+      <li><h2><%= @planet.name %></h2>
+      <li><%= link_to @planet.system_name, @planet.system %>
+      <li><%= @planet.oznaceni %>
+      <li><%= @planet.obsazenost %>
+    </td>
+    <td>
+      <li><b>Typ planety: </b><%= @planet.planet_type.name %>
+        <% if @planet.house %>
+          <li><b>Objevitele: </b><%= @planet.house.name %>
+      <% end %>
+      <li><b>Dominantní národ: </b><a href="stat-databaze-narod.htm">Riches *</a>
+        <br/><br/>
+        <% if @planet.domovska? %>
 
-	<table class="tab1">
-	<tr>	
-		<td class="td1">Název obsazeného léna</td>
-		<td class="td1" width="100px">Souřadnice</td>
-		<td class="td1">Držitel léna</td>
-		<td class="td1">Národnost</td>
-		<td class="td1" width="100px">Akce</td>
-	</tr>
-	<% for field in @planet.fields do %>
-	<tr>	
-		<td class="tdp">
-			<% if field.drzitel(current_user) %>
-				<%= link_to field.name, field %>
-			<% else %>
-				<%= field.name %>
-			<% end %>
-		</td>
-		<td class="tdp"><%= field.oznaceni %></td>
-		<td class="tdp"><%= link_to field.user.nick, field.user %></td>
-		<td class="tdp"><%= link_to field.user.house.name, field.user.house %></td>
-		<td class="tdpa">
-			<a href="kom-poslat.htm" alt="Pošta"><%= img_posta %> *</a>
-			<a href="stat-databaze-profil.htm" alt="Útok"><%= img_utok %> *</a>
-		</td>
-	</tr>
-	<% end %>
-	
+        <% elsif @planet.arrakis? %>
+
+        <% else %>
+            <% if @planet.osidlitelna?(current_user) %>
+              <li><%= link_to "Osidlit pole (#{number_with_precision(@cena_noveho_lena_melanz, precision: 2)} mg a #{number_with_precision(@cena_noveho_lena_solary, precision: 2)} S)", :action => "osidlit_pole", :id => @planet, :cena_mel => @cena_noveho_lena_melanz, :cena_sol => @cena_noveho_lena_solray %>
+          <% else %>
+              <li>Vesmírná Gilda planetu ještě nezahrnula do pravidelných cest.</li>
+          <% end %>
+      <% end %>
+    </td>
+    <td>
+      <% pt = @planet.planet_type %>
+      <li><%= img_solary "Bonus soláry" %>
+        <font class="<%= trida_barvy(pt.solar_bonus) %>"><%= format_mena(pt.solar_bonus, "%") %></font>
+      <li><%= img_material "Bonus materiál" %>
+        <font class="<%= trida_barvy(pt.material_bonus) %>"><%= format_mena(pt.material_bonus, "%") %></font>
+      <li><%= img_populace "Bonus populace" %>
+        <font class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%") %></font>
+      <li><%= img_zkusenosti "Bonus zkušenosti" %>
+        <font class="<%= trida_barvy(pt.exp_bonus) %>"><%= format_mena(pt.exp_bonus, "%") %></font>
+      <li><%= img_kasarna "Bonus ke kapacitě kasáren a kosmodromů" %>
+        <font class="cervena"> + 0%</font>
+    </td>
+  </tr>
+</table>
+
+<table class="tab1">
+  <tr>
+    <td class="td1">Název obsazeného léna</td>
+    <td class="td1" width="100px">Souřadnice</td>
+    <td class="td1">Držitel léna</td>
+    <td class="td1">Národnost</td>
+    <td class="td1" width="100px">Akce</td>
+  </tr>
+  <% for field in @planet.fields do %>
+      <tr>
+        <td class="tdp">
+          <% if field.drzitel(current_user) %>
+              <%= link_to field.name, field %>
+          <% else %>
+              <%= field.name %>
+          <% end %>
+        </td>
+        <td class="tdp"><%= field.oznaceni %></td>
+        <td class="tdp"><%= link_to field.user.nick, field.user %></td>
+        <td class="tdp"><%= link_to field.user.house.name, field.user.house %></td>
+        <td class="tdpa">
+          <a href="kom-poslat.htm" alt="Pošta"><%= img_posta %> *</a>
+          <a href="stat-databaze-profil.htm" alt="Útok"><%= img_utok %> *</a>
+        </td>
+      </tr>
+  <% end %>
+
 </table>
 
 	

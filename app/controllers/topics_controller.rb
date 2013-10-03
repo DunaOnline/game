@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
-  before_filter :login_required, :except => [:index, :show]  
-  before_filter :admin_required, :only => :destroy 
+  before_filter :login_required, :except => [:index, :show]
+  before_filter :admin_required, :only => :destroy
 
   def index
     #@topics = Topic.all
@@ -18,18 +18,18 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(
-      :name => params[:topic][:name], 
-      :last_poster_id => current_user.id, 
-      :last_post_at => Time.now, 
-      :syselaad_id => params[:topic][:syselaad_id], 
-      :user_id => current_user.id
-    ) 
+        :name => params[:topic][:name],
+        :last_poster_id => current_user.id,
+        :last_post_at => Time.now,
+        :syselaad_id => params[:topic][:syselaad_id],
+        :user_id => current_user.id
+    )
     if @topic.save
       if @topic.posts << Post.new(
-          :content => params[:post][:content], 
+          :content => params[:post][:content],
           #:topic_id => @topic.id, 
           :user_id => current_user.id
-        )
+      )
         flash[:notice] = "Successfully created topic."
         redirect_to @topic.syselaad
       else
@@ -47,7 +47,7 @@ class TopicsController < ApplicationController
   def update
     @topic = Topic.find(params[:id])
     if @topic.update_attributes(params[:topic])
-      redirect_to @topic.syselaad, :notice  => "Successfully updated topic."
+      redirect_to @topic.syselaad, :notice => "Successfully updated topic."
     else
       render :action => 'edit'
     end

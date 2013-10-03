@@ -1,32 +1,70 @@
-<% title "Subhouse" %>
+<%# encoding: utf-8 %>
+<table class="tab0">
+  <tr>
+    <td>
+      <a href="index.htm" title="Home">⌂</a>
+      » <%= link_to 'Malorod', subhouse_path(current_user.subhouse), :title => "Malorod" %>
+    </td>
+    <% if can? :update, @subhouse %>
+        <td class="tdd">
+          <%= link_to 'Sprava malorodu >>', sprava_mr_path(:id => current_user.subhouse) %>
+        </td>
+    <% end %>
+  </tr>
+</table>
 
-<p>
-  <strong>Name:</strong>
-  <%= @subhouse.name %>
-</p>
-<p>
-  <strong>House:</strong>
-  <%= @subhouse.house_id %>
-</p>
-<p>
-  <strong>Solar:</strong>
-  <%= @subhouse.solar %>
-</p>
-<p>
-  <strong>Melange:</strong>
-  <%= @subhouse.melange %>
-</p>
-<p>
-  <strong>Material:</strong>
-  <%= @subhouse.material %>
-</p>
-<p>
-  <strong>Exp:</strong>
-  <%= @subhouse.exp %>
-</p>
+<h2>Zoznam hracu v malorode</h2>
+<table class="tab1">
+  <tr>
+    <th>Nick</th>
+    <th>Pocet Len</th>
+    <th>Detaily</th>
+  </tr>
+  <% @subhouse.users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.nick %>
+        </td>
+        <td>
+          <%= user.fields.count %>
+        </td>
+        <td>
+          <%= link_to 'Detail', user_path(user) %>
+        </td>
+      </tr>
+  <% end %>
+</table>
 
-<p>
-  <%= link_to "Edit", edit_subhouse_path(@subhouse) %> |
-  <%= link_to "Destroy", @subhouse, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", subhouses_path %>
-</p>
+<h2>Detaily MR</h2>
+
+<table class="tab1">
+  <tr>
+    <td class="tdpl" rowspan="2">
+      <li><h2><%= @subhouse.name %></h2>
+
+
+      <li><b>Členů: </b><%= @subhouse.users.count %>
+
+        <br><br>
+      <li><%= link_to 'Malorodni posta', new_message_path, :value => "Malorodni posta", :class => "ok3" %>
+
+    </td>
+    <th>Solary</th>
+    <th>Material</th>
+    <th>Melange</th>
+    <th>Exp</th>
+    <th>Dilu</th>
+
+  </tr>
+
+  <tr>
+    <td><%= img_solary %> <%= @subhouse.solar %></td>
+    <td><%= img_material %><%= @subhouse.material %></td>
+    <td><%= img_melanz %><%= @subhouse.melange %></td>
+    <td><%= img_zkusenosti %><%= @subhouse.exp %></td>
+    <td><%= img_vyrobky %><%= @subhouse.parts %></td>
+  </tr>
+</table>
+
+
+

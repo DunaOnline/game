@@ -20,6 +20,6 @@
 
 FactoryGirl.define do
   factory :house do
-    sequence(:name) {|n| "house#{n}"}
+    sequence(:name) { |n| "house#{n}" }
   end
 end

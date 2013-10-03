@@ -1,8 +1,8 @@
 # encoding: utf-8
 class SessionsController < ApplicationController
-  
+
   before_filter :login_required, :except => [:new, :create]
-  
+
   def new
   end
 

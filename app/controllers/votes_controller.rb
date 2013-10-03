@@ -1,6 +1,6 @@
 class VotesController < ApplicationController
   authorize_resource # CanCan
-  
+
   def index
     @votes = Vote.all
   end
@@ -29,7 +29,7 @@ class VotesController < ApplicationController
   def update
     @vote = Vote.find(params[:id])
     if @vote.update_attributes(params[:vote])
-      redirect_to @vote, :notice  => "Successfully updated vote."
+      redirect_to @vote, :notice => "Successfully updated vote."
     else
       render :action => 'edit'
     end

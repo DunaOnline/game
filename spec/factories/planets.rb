@@ -17,7 +17,7 @@
 
 FactoryGirl.define do
   factory :planet do
-    sequence(:name) {|n| "planet#{n}"}
+    sequence(:name) { |n| "planet#{n}" }
     planet_type
     house
   end

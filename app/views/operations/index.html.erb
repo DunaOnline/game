@@ -7,14 +7,14 @@
     <th style="width:80px">Cas</th>
   </tr>
   <% for operation in @operations %>
-    <tr>
-      <td><%= operation.content %></td>
-      <td><%= format_date(operation.date) %></td>
-      <td><%= format_time(operation.time) %></td>
-    </tr>
+      <tr>
+        <td><%= operation.content %></td>
+        <td><%= format_date(operation.date) %></td>
+        <td><%= format_time(operation.time) %></td>
+      </tr>
   <% end %>
   <tr>
-  	<%= paginate @operations %>
+    <%= paginate @operations %>
   </tr>
 </table>
 

@@ -17,7 +17,7 @@
 
 FactoryGirl.define do
   factory :planet_type do
-    sequence(:name) {|n| "planet_type#{n}"}
+    sequence(:name) { |n| "planet_type#{n}" }
     fields 20
   end
 end

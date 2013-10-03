@@ -29,7 +29,7 @@ class DiscoverablesController < ApplicationController
   def update
     @discoverable = Discoverable.find(params[:id])
     if @discoverable.update_attributes(params[:discoverable])
-      redirect_to @discoverable, :notice  => "Successfully updated discoverable."
+      redirect_to @discoverable, :notice => "Successfully updated discoverable."
     else
       render :action => 'edit'
     end

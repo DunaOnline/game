@@ -1,0 +1,36 @@
+<table class="tab1">
+
+  <tr>
+    <td class="tdpl" style="background-image: url(<%= asset_path cesta_budovy(current_user.house.name, "tov") %>)">
+
+      <li><%= submit_tag 'Vyrobit zadané množství', :class => "ok" %></li>
+      <li><%= submit_tag 'Zrušit zadané množství', :name => "zrusit", :class => "ok" %></li>
+      <%= hidden_field_tag 'leno', value = factory.id %>
+    </td>
+
+    <td>
+      <h3>Továrny na lenu  <%= link_to factory.name, factory %></h3>
+      <li>Továrny slouží k produkci výrobků. Tyto výrobky lze využít na vybavení vašich vojenských jednotek.</li>
+      <li>Celková kapacita vaší výroby tomto lénu je <%= factory.vyuzitie_tovaren %> / <%= factory.kapacita_tovaren %>
+        Z.
+      </li>
+      <br><br>
+      <li>
+        <%= img_vyrobky "Výrobky" %>
+
+
+        <%= factory.resource.parts %>
+
+
+      </li>
+
+    </td>
+
+    <td class="tdpl3" style="background-image: url(<%= asset_path cesta_budovy(current_user.house.name, "tov") %>); width: 150px;">
+
+      <%= select_tag("lena", options_for_select(current_user.factories_options)) %>
+      <%= link_to "Zobraz vybratou Tovaren", "", :class => "zobraz_tovaren select_tovaren" %>
+
+    </td>
+  </tr>
+</table>

@@ -7,7 +7,7 @@ class AddDetailsToUsers < ActiveRecord::Migration
     add_column :users, :facebook, :string, :default => ' '
     add_column :users, :presentation, :text, :default => ' '
     add_column :users, :active, :boolean, :default => true
-    
+
     User.all.each do |user|
       user.update_attributes!(:web => ' ')
       user.update_attributes!(:icq => ' ')

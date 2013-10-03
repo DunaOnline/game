@@ -32,7 +32,10 @@ class Ability
         can :manage, :all
       else
         cannot [:update, :delete], Global
+        cannot [:read, :update, :create, :delete], Product
         can [:read, :update], User
+        can [:zmena_hesla, :zmena_hesla_f], User
+        can [:read, :create], Subhouse
         #can [:update], User, :id => user.id
         can [:read, :osidlit_pole, :zobraz_arrakis], Planet
         can [:read], House
@@ -48,7 +51,7 @@ class Ability
         can [:show], Landsraad
         can [:read], Law
         can [:read], Poll
-      
+
         if user.emperor?
           can [:sprava, :posli_imperialni_suroviny], Imperium
           can [:create], Law
@@ -61,11 +64,12 @@ class Ability
         if user.leader?
           can [:kolonizuj, :sprava_rod], House do |house|
             user.try(:house) == house
-          end 
+          end
           #:id => user.house_id
           can [:pridel_pravo, :odeber_pravo], User do |hrac|
             hrac.house == user.house
           end
+          #can [:u_ziadost], User
           can [:create], Law
           can [:jednani], Landsraad
         end
@@ -94,9 +98,15 @@ class Ability
         if user.vezir?
           can [:sprava, :posli_imperialni_suroviny], Imperium
         end
+        if user.general?
+          can [:read, :update, :sprava_mr], Subhouse
+        end
+        if user.vicegeneral?
+          can [:read, :update, :sprava_mr], Subhouse
+        end
       end
     else
-      
+
     end
   end
 end

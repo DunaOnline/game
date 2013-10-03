@@ -1,0 +1,29 @@
+<table class="myOffers">
+  <tr>
+    <th>Tovar</th>
+
+    <th>Cena za kus [Sol]</th>
+    <th>Množství</th>
+    <th>Stahnout</th>
+    <th>Zlevnit</th>
+    <th>Zdrazet</th>
+  </tr>
+  <tr>
+    <th colspan="6">Moje ponuky</th>
+  </tr>
+  <%= render :partial => "my_offer", :collection => @markets %>
+  <% if current_user.general? %>
+      <tr>
+        <th colspan="6">Malorodne ponuky</th>
+      </tr>
+      <%= render :partial => "my_offer", :collection => @markets_mr %>
+  <% end %>
+  <% if current_user.leader? %>
+      <tr>
+        <th colspan="6">Narodne ponuky</th>
+      </tr>
+
+      <%= render :partial => "my_offer", :collection => @markets_h %>
+  <% end %>
+</table>
+<%= link_to 'Spat', markets_path %>

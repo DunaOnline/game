@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Aplikace
   include ApplicationHelper
-  
+
   VEK = '1'
 
   def self.prihlaseni_povoleno?
@@ -26,14 +26,14 @@ class Aplikace
 #  def self.cesta_pro_pdf(filename)
 #    Rails.root.join('pdfs', "#{filename}.pdf")
 #  end
-  
+
   def self.zamkni_hru
     if Aplikace.prihlaseni_povoleno?
       Global.prepni('login', 1, false)
     end
     Aplikace.odhlas_hrace
   end
-  
+
   def self.odemkni_hru
     unless Aplikace.prihlaseni_povoleno?
       Global.prepni('login', 1, true)
@@ -69,10 +69,18 @@ class Aplikace
     #Topic.delete_all
     Operation.delete_all
     Vote.delete_all
+    Message.delete_all
+    Conversation.delete_all
+    Market.delete_all
+    MarketHistory.delete_all
+    Research.delete_all
+    Production.delete_all
+
 
     for field in Field.all do
       if field.planet.domovska?
         field.vytvor_resource
+
         field.postav(Building.where(:kind => "L", :level => [1]).first, 2)
         field.postav(Building.where(:kind => "S", :level => [1]).first, 2)
         field.postav(Building.where(:kind => "M", :level => [1]).first, 2)
@@ -98,7 +106,7 @@ class Aplikace
         pla.delete
       end
     end
-    
+
     for disc in Discoverable.all do
       if Planet.find_by_name(disc.name)
 
@@ -109,7 +117,7 @@ class Aplikace
 
     for user in User.all do
       if user.admin?
-        user.hlasuj(User.find_by_username('Norma_Cenva'),'leader')
+        user.hlasuj(User.find_by_username('Norma_Cenva'), 'leader')
       else
         user.napln_suroviny
         user.update_attributes(:leader => false,
@@ -125,7 +133,7 @@ class Aplikace
                                :court => false,
                                :vezir => false,
                                :admin => false)
-        user.hlasuj(user,'leader')
+        user.hlasuj(user, 'leader')
       end
     end
 
@@ -150,11 +158,11 @@ class Aplikace
                             :position => 1,
                             :system_name => "Mu Draconis")
 
-    Planet.arrakis.fields << Field.new(:name => "Leno Arrakis",
-                                       :planet_id => arrakis.id,
-                                       :user_id => nil,
-                                       :pos_x => 1,
-                                       :pos_y => 1
+    Planet.arrakis.fields << Field.create(:name => "Leno Arrakis",
+                                          :planet_id => arrakis.id,
+                                          :user_id => nil,
+                                          :pos_x => 1,
+                                          :pos_y => 1
     )
     arrakis_field = Field.find_by_planet_id(arrakis)
     arrakis_field.vytvor_resource

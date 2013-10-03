@@ -152,5 +152,6 @@ describe User do
     expect(pp).to eq(1.05)
   end
 
+
 end
 

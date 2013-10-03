@@ -14,7 +14,7 @@
 
 FactoryGirl.define do
   factory :field do
-    sequence(:name) {|n| "field#{n}"}
+    sequence(:name) { |n| "field#{n}" }
     user
     planet
   end

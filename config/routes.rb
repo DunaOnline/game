@@ -1,4 +1,20 @@
 DuneOnline::Application.routes.draw do
+  resources :productions
+  match 'presun_vyrobku' => 'productions#presun_vyrobku', :as => :presun_vyrobku
+
+  resources :products
+
+
+	resources :markets
+	match 'buy' => 'markets#buy', :as => :buy
+	match 'my_offers' => 'markets#my_offers', :as => :my_offers
+	match 'zlevnit' => 'markets#zlevnit', :as => :zlevnit
+	match 'zdrazet' => 'markets#zdrazet', :as => :zdrazet
+
+	resources :messages
+	match 'reply' => 'messages#reply', :as => :reply
+	match 'odeslana_posta' => 'messages#odeslana_posta'
+
   resources :posts
 
   resources :topics
@@ -17,7 +33,7 @@ DuneOnline::Application.routes.draw do
   
   resources :technologies
   match 'vylepsi_technology' => 'technologies#vylepsi_technology', :as => :vylepsi_technology
-
+	match 'narodni_vyskum' => 'technologies#narodni_vyskum', :as => :narodni_vyskum
   resources :systems
 
   resources :votes
@@ -42,11 +58,20 @@ DuneOnline::Application.routes.draw do
   match 'zobraz_arrakis' => 'planets#zobraz_arrakis', :as => :zobraz_arrakis
 
   resources :subhouses
+  match 'sprava_mr/(:id)' => 'subhouses#sprava_mr', :as => :sprava_mr
+  match 'posli_mr_sur' => 'subhouses#posli_mr_sur', :as => :posli_mr_sur
+  match 'vyhod_mr/:id' => 'subhouses#vyhod_mr', :as => :vyhod_mr
+  match 'prijmi_hrace_mr' => 'subhouses#prijmi_hrace_mr', :as => :prijmi_hrace_mr
+  match 'menuj_vice' => 'subhouses#menuj_vice', :as => :menuj_vice
+
 
   resources :houses
   match 'kolonizuj' => 'houses#kolonizuj', :as => :kolonizuj
   match 'sprava_rod' => 'houses#sprava_rod', :as => :sprava_rod
   match 'posli_rodove_suroviny' => 'houses#posli_rodove_suroviny', :as => :posli_rodove_suroviny
+  match 'posli_mr_sur' => 'houses#posli_mr_sur', :as => :posli_mr_sur
+  match 'prijmi_hrace' => 'houses#prijmi_hrace', :as => :prijmi_hrace
+  match 'send_products_house' => 'houses#send_products_house', :as => :send_products_house
 
   resources :discoverables
   
@@ -64,9 +89,18 @@ DuneOnline::Application.routes.draw do
   match 'zmen_prava' => 'users#zmen_prava', :as => :zmen_prava
   match 'hlasovat' => 'users#hlasovat', :as => :hlasovat
   match 'sprava' => 'users#sprava', :as => :sprava
+	match 'opustit' => 'users#opustit', :as => :opustit
+	match 'opustit_mr' => 'users#opustit_mr', :as => :opustit_mr
+	match 'ziadost' => 'users#ziadost', :as => :ziadost
+	match 'ziadost_malorod' => 'users#ziadost_malorod', :as => :ziadost_malorod
   match 'pridel_pravo' => 'users#pridel_pravo', :as => :pridel_pravo
   match 'odeber_pravo' => 'users#odeber_pravo', :as => :odeber_pravo
   match 'posli_suroviny' => 'users#posli_suroviny', :as => :posli_suroviny
+	match 'udalosti' => 'users#udalosti', :as => :udalosti
+	match 'oprava_katastrofy' => 'users#oprava_katastrofy', :as => :oprava_katastrofy
+  match 'zmena_hesla_f' => 'users#zmena_hesla_f', :as => :zmena_hesla_f
+  match 'zmena_hesla' => 'users#zmena_hesla', :as => :zmena_hesla
+	match 'send_products' => 'users#send_products', :as => :send_products
 
 #  resources :admin
   match 'wipe' => 'admin#wipe', :as => :wipe
@@ -79,6 +113,9 @@ DuneOnline::Application.routes.draw do
   match 'global_index' => 'admin#global_index', :as => :global_index
   match 'update_global/:id' => 'admin#update_global', :as => :global
   match 'sweep_session' => 'admin#sweep_session', :as => :sweep_session
+	match 'udalosti_admin' => 'admin#udalosti_admin', :as => :udalosti_admin
+	match 'update_udalost/:id' => 'admin#update_udalost', :as => :environment
+	match 'leno_update_udalost/:id' => 'admin#leno_update_udalost', :as => :influence
   
   match 'show' => 'imperium#show', :as => :imperium
   match 'sprava_imperia' => 'imperium#sprava', :as => :sprava_imperia
@@ -87,6 +124,9 @@ DuneOnline::Application.routes.draw do
   match 'landsraad_show' => 'landsraad#show', :as => :landsraad_show
   match 'landsraad_jednani' => 'landsraad#jednani', :as => :landsraad_jednani
   match 'volba_imperatora' => 'landsraad#volba_imperatora', :as => :volba_imperatora
+	match 'imperator_zakony' => 'landsraad#imperator_zakony', :as => :imperator_zakony
+	match 'podepisat_zakon' => 'landsraad#podepisat_zakon', :as => :podepisat_zakon
+
   
   
   # The priority is based upon order of creation:

@@ -2,12 +2,14 @@ class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
       t.string :username, :null => false
-      t.string :nick, :null =>false
+      t.string :nick, :null => false
       t.string :email
       t.string :password_hash
       t.string :password_salt
       t.integer :house_id, :null => false
       t.integer :subhouse_id, :null => true
+      t.integer :ziadost_house, :null => true
+      t.integer :ziadost_subhouse, :null => true
       t.decimal :solar, :precision => 12, :scale => 4, :default => 0.0
       t.decimal :melange, :precision => 12, :scale => 4, :default => 0.0
       t.decimal :exp, :precision => 12, :scale => 4, :default => 0.0
@@ -24,6 +26,7 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :court, :default => false
       t.boolean :vezir, :default => false
       t.boolean :admin, :default => false
+
       t.timestamps
     end
 

@@ -1,16 +1,16 @@
 # encoding: utf-8
 class HousesController < ApplicationController
   #authorize_resource # CanCan
-  
+
   def index
     @houses = House.playable.order(:name)
     @rody = @houses
   end
 
   def show
-    if params[:id] == 1 or params[:id] == 2 or params[:id] == 3   # nezobrazime Titany, Imperium a Renegaty
+    if params[:id] == 1 or params[:id] == 2 or params[:id] == 3 # nezobrazime Titany, Imperium a Renegaty
       if current_user.admin?
-        @house = House.find(params[:id])      # pouze adminum
+        @house = House.find(params[:id]) # pouze adminum
       else
         @house = current_user.house
       end
@@ -52,7 +52,7 @@ class HousesController < ApplicationController
       unless @house.melange_percent == melange_percent
         Imperium.zapis_operaci("Procentualni podil zisku melanze zmenen z #{melange_percent} na novou hodnotu #{@house.melange_percent}. #{current_user.nick}")
       end
-      redirect_to @house, :notice  => "Successfully updated house."
+      redirect_to @house, :notice => "Successfully updated house."
     else
       render :action => 'edit'
     end
@@ -63,19 +63,19 @@ class HousesController < ApplicationController
     @house.destroy
     redirect_to houses_url, :notice => "Successfully destroyed house."
   end
-  
+
   def kolonizuj
     if params[:commit]
       house = House.find(params[:house])
-      
+
       cena_mel = params[:cena_mel].to_f
       cena_spoctena = Vypocty.cena_nove_planety_melanz.to_f
-      cena_mel = cena_spoctena if cena_spoctena > cena_mel 
-    
+      cena_mel = cena_spoctena if cena_spoctena > cena_mel
+
       cena_sol = params[:cena_sol].to_f
       cena_spoctena = Vypocty.cena_nove_planety_solary.to_f
       cena_sol = cena_spoctena if cena_spoctena > cena_sol
-      
+
       if cena_mel > house.melange
         flash[:error] = "Nedostatek melanze."
         redirect_to kolonizuj_path
@@ -88,20 +88,21 @@ class HousesController < ApplicationController
         house.update_attributes(:melange => house.melange - cena_mel, :solar => house.solar - cena_sol)
         redirect_to planeta
       end
-      
+
     else
       @house = current_user.house
       @cena_planety_mel = Vypocty.cena_nove_planety_melanz
       @cena_planety_sol = Vypocty.cena_nove_planety_solary
     end
   end
-  
+
   def sprava_rod
     if current_user.admin?
       @house = House.find(params[:id])
     else
       @house = current_user.house
     end
+    @productions = @house.productions
     @vudce = @house.vudce
     @mentate = @house.mentate
     @army_mentate = @house.army_mentate
@@ -109,73 +110,63 @@ class HousesController < ApplicationController
     @poslanci = @house.poslanci
     @generalove = @house.generalove
     @hraci = @house.users.order(:nick)
+    @ziadosti = User.ziadost(@house.id)
+    @user = current_user
+    @markets = Market.zobraz_trh_house(@house)
+    @market = Market.new
   end
-  
+
+  def send_products_house
+    amount = params[:amount]
+    production = Production.find(params[:production])
+    msg, flag = current_user.house.move_product_house(production, amount.to_i)
+    if flag
+      redirect_to :back, :notice => "Vyrobky poslane"
+    else
+      redirect_to :back, :alert => msg
+    end
+  end
+
+  def sell_products
+    amount = params[:amount]
+
+    if flag
+      redirect_to :back, :notice => "Vyrobky poslane"
+    else
+      redirect_to :back, :alert => msg
+    end
+  end
+
+  def prijmi_hrace
+    user = User.find(params[:id])
+    if user.prijat_do_naroda(current_user.house)
+      current_user.house.zapis_operaci("Byl prijat novy hrac #{user.nick}", "N")
+      redirect_to :back, :notice => "Hrac #{user.nick} bol prijaty do naroda"
+    else
+      redirect_to :back, :alert => "Nepodarilo sa prijat hraca"
+    end
+
+  end
+
   def posli_rodove_suroviny
     rod = current_user.house
-    
-    msg = ''
-    
-    if params[:user_solary].to_i > 0.0 || params[:user_melanz].to_f > 0.0 || params[:user_zkusenosti].to_i > 0.0 || params[:user_material].to_i > 0.0
-      komu = User.find(params[:user_id_suroviny])
-      msg << "Posláno hráči #{komu.nick} "
-      
-      if params[:user_solary].to_i > 0.0 && params[:user_solary].to_i <= rod.solar
-        rod.update_attribute(:solar, rod.solar - params[:user_solary].to_i)
-        komu.update_attribute(:solar, komu.solar + params[:user_solary].to_i)
-        msg << "soláry: #{params[:user_solary]} "
-      end
-      if params[:user_melanz].to_f > 0.0 && params[:user_melanz].to_f <= rod.melange
-        rod.update_attribute(:melange, rod.melange - params[:user_melanz].to_f)
-        komu.update_attribute(:melange, komu.melange + params[:user_melanz].to_f)
-        msg << "melanž: #{params[:user_melanz]} "
-      end
-      if params[:user_zkusenosti].to_i > 0.0 && params[:user_zkusenosti].to_i <= rod.exp
-        rod.update_attribute(:exp, rod.exp - params[:user_zkusenosti].to_i)
-        komu.update_attribute(:exp, komu.exp + params[:user_zkusenosti].to_i)
-        msg << "expy: #{params[:user_zkusenosti]} "
-      end
-      if params[:user_material].to_i > 0.0 && params[:user_material].to_i <= rod.material
-        rod.update_attribute(:material, rod.material - params[:user_material].to_i)
-        leno = komu.domovske_leno
-        leno.resource.update_attribute(:material, leno.resource.material + params[:user_material].to_i)
-        msg << "materiál: #{params[:user_material]} "
-      end
+    user = []
+    mr = []
+    narod = []
+    rodu = params[:rod_id_suroviny]
+    useru = params[:user_id_suroviny]
+    mrdu = params[:mr_id_suroviny]
+    user << params[:user_solary].to_f << params[:user_melanz].to_f << params[:user_zkusenosti].to_i << params[:user_material].to_f << params[:user_parts].to_f
+    narod << params[:rodu_solary].to_f << params[:rodu_melanz].to_f << params[:rodu_zkusenosti].to_i << params[:rodu_material].to_f << params[:rodu_parts].to_f
+    mr << params[:mr_solary].to_f << params[:mr_melanz].to_f << params[:mr_zkusenosti].to_i << params[:mr_material].to_f << params[:mr_parts].to_f
+    msg, flag = rod.posli_rodove_suroviny(narod, user, mr, rodu, useru, mrdu)
+    if flag
+      redirect_to sprava_rod_path(:id => rod), :notice => msg
+    else
 
-      rod.zapis_operaci(msg + " hráčem #{current_user.nick}.")
-      current_user.zapis_operaci(msg.gsub("Posláno hráči #{komu.nick} ", "Obdrženo z NS "))
+      msg += "Nezadali ste mnozstvo na presun" if msg == ""
+      redirect_to sprava_rod_path(:id => rod), :alert => msg
     end
-    
-    if params[:rodu_solary].to_i > 0.0 || params[:rodu_melanz].to_f > 0.0 || params[:rodu_zkusenosti].to_i > 0.0 || params[:rodu_material].to_i > 0.0
-      rodu = House.find(params[:rod_id_suroviny])
-      msg << "Posláno rodu #{rodu.name} "
-
-      if params[:rodu_solary].to_i > 0.0 && params[:rodu_solary].to_i <= rod.solar
-        rod.update_attribute(:solar, rod.solar - params[:rodu_solary].to_i)
-        rodu.update_attribute(:solar, rodu.solar + params[:rodu_solary].to_i)
-        msg << "soláry: #{params[:rodu_solary]} "
-      end
-      if params[:rodu_melanz].to_f > 0.0 && params[:rodu_melanz].to_f <= rod.melange
-        rod.update_attribute(:melange, rod.melange - params[:rodu_melanz].to_f)
-        rodu.update_attribute(:melange, rodu.melange + params[:rodu_melanz].to_f)
-        msg << "melanž: #{params[:rodu_melanz]} "
-      end
-      if params[:rodu_zkusenosti].to_i > 0.0 && params[:rodu_zkusenosti].to_i <= rod.exp
-        rod.update_attribute(:exp, rod.exp - params[:rodu_zkusenosti].to_i)
-        rodu.update_attribute(:exp, rodu.exp + params[:rodu_zkusenosti].to_i)
-        msg << "expy: #{params[:rodu_zkusenosti]} "
-      end
-      if params[:rodu_material].to_i > 0.0 && params[:rodu_material].to_i <= rod.material
-        rod.update_attribute(:material, rod.material - params[:rodu_material].to_i)
-        rodu.update_attribute(:material, rodu.material + params[:rodu_material].to_i)
-        msg << "materiál: #{params[:rodu_material]} "
-      end
-
-      rod.zapis_operaci(msg + " hráčem #{current_user.nick}.")
-      rodu.zapis_operaci(msg.gsub("Posláno rodu #{rodu.name} ", "Obdrženo od rodu #{rodu.name} "))
-    end
-    
-    flash[:notice] = msg
-    redirect_to sprava_rod_path(:id => rod)
   end
+
 end
