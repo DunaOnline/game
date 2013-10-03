@@ -158,7 +158,7 @@
     <table class="tab1">
       <tr>
         <td>
-          <%= link_to 'Opustit malorod', opustit_mr_path %>
+          <%= link_to 'Opustit váš Malorod', opustit_mr_path %>
         </td>
 
       </tr>
@@ -168,6 +168,10 @@
     <table class="tab1">
       <% @subhouses.each do |s| %>
           <tr>
+            <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'imghra/malorodnisklad.png' %>)">
+              <li><h2>Vstoupit do Malorodu</h2></li>
+
+            </td>
             <td>
               <span><%= s.name %> </span>
             </td>
@@ -175,24 +179,22 @@
               <span><%= s.pocet_userov %> / <%= Constant.max_u_mr.to_i %></span>
             </td>
             <td>
-              <span><%= link_to 'Podat Ziadost', ziadost_malorod_url(:id => s.id) %></span>
+              <span><%= link_to 'Podat žádost', ziadost_malorod_url(:id => s.id) %></span>
             </td>
 
 
           </tr>
       <% end %>
 
-    </table>
 
-    <table class="tab1">
       <tr>
         <td>
-          <span>Zalozit malorod : </span>
+          <span>Založit nový Malorod : </span>
         </td>
-        <td>
+        <td colspan="2">
           <%= form_tag @subhouse do %>
               <%= text_field_tag 'Malorod', '', :class => "tab" %>
-              <%= submit_tag 'Zaloz' %>
+              <%= submit_tag 'Založ malorod' %>
           <% end %>
         </td>
 
@@ -203,7 +205,10 @@
 
 <table class="tab1">
   <tr>
-    <td>
+      <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'imghra/narodnisklad.png' %>)">
+          <li><h2>Vstoupit do Velkorodu</h2></li>
+      </td>
+      <td>
       <% if @user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first %>
       <span>
          <%= form_tag ziadost_path(:id => @user) do %>
@@ -213,13 +218,13 @@
 
             <%= select_tag :narod, options_for_select(House.playable.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %>
 
-            <%= submit_tag 'Prihlasit sa do Naroda', data: {:confirm => "Ste si isty?"} %>
+            <%= submit_tag 'Přihlásit sa do Velkorodu', data: {:confirm => "Jste si jist pane?"} %>
          <% end %>
       </span>
       <% else %>
       <span>
 
-        <%= link_to 'Opustit narod', opustit_path, :confirm => "Jste si jisti opustit narod #{current_user.house.name} ?" %>
+        <%= link_to 'Opustit Velkorod', opustit_path, :confirm => "Jste si jisti opustit narod #{current_user.house.name} ?" %>
       </span>
       <% end %>
     </td>
