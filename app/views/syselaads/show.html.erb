@@ -1,5 +1,38 @@
 <%# encoding: utf-8 %>
 <% title @syselaad.name %>
+
+  
+    <table class="tab0">
+      <tr>
+        <td>
+          <a href="#" title="Home">⌂</a> » <a href="#" title="Syselaad - komunikační fóra">Syselaad</a>
+        </td>
+        <% if logged_in? %>
+        <td class="tdd">
+          <%= link_to " + Přidat vlákno ", new_topic_path(:syselaad => @syselaad.id) %>
+        </td>
+        <% end %>
+        
+        <td class="tdd">
+          <ul class="menud">
+            <li><a title="Volbou vstoupíte do jiného Syselaadu.">Změnit Syselaad »</a>
+              <ul>
+                <li class="filterPosta"><%= link_to "Národní", syselaad_path(:kind => 'N') %></li>
+                <li class="filterPosta"><%= link_to "Mezinárodní", syselaad_path(:kind => 'E') %></li>
+              <% if current_user.landsraad? || current_user.admin? %>
+                <li class="filterPosta"><%= link_to "Landsraadní", syselaad_path(:kind => 'L') %></li>
+              <% end %>
+                <li class="filterPosta"><%= link_to "Systémový", syselaad_path(:kind => 'S') %>
+                
+              </ul>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      
+    </table>
+  
+
 <table class="tab3">
   <tr>
     <th width="50%" height="20px">Téma vlákna Syselaadu</th>
@@ -24,13 +57,5 @@
     <%= paginate @topics %>
   </tr>
   </table>
-  <% if logged_in? %>
-    <table class="tab0">
-      <tr>
-        <td></td>
-        <td class="tdd"><%= link_to " + Přidat vlákno ", new_topic_path(:syselaad => @syselaad.id) %></td>
-      </tr>
-    </table>
-  <% end %>
 
 </br>
