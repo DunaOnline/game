@@ -9,7 +9,7 @@
         </td>
         <% if logged_in? %>
         <td class="tdd">
-          <%= link_to " + Přidat vlákno ", new_topic_path(:syselaad => @syselaad.id) %>
+          <%= link_to "  + Přidat nové vlákno ", new_topic_path(:syselaad => @syselaad.id) %>
         </td>
         <% end %>
         
@@ -35,27 +35,33 @@
 
 <table class="tab3">
   <tr>
-    <th width="50%" height="20px">Téma vlákna Syselaadu</th>
-    <th width="10%">Odpovědí</th>
-    <th width="40%">Poslední příspěvek</th>
-    <% if admin? %>
-    <th width="40%">Správa</th>
-    <% end %>
+    <th width="50%" height="25px"> Téma vlákna Syselaadu </th>
+    <th width="10%"> Odpovědí </th>
+    <th width="40%"> Poslední příspěvek </th>
   </tr>
   <% for topic in @topics %>
       <tr>
-        <td><%= link_to h(topic.name), topic_path(topic.id) %>
+        <td>
+        <% if admin? %>
+            <%= link_to image_tag('../assets/css/delete.png'), topic, :confirm => 'Opravdu chcete smazat toto vlákno?', :class => 'delete_post', :method => :delete %>
+        <% end %>
+        <%= link_to h(topic.name), topic_path(topic.id) %>
         <td><%= topic.posts.count - 1 %></td>
         <td class="right"><%= distance_of_time_in_words_to_now topic.last_post_at %> ago
           by <%= link_to topic.user.nick, "/users/#{topic.last_poster_id}" %></td>
-        <% if admin? %>
-            <td><%= link_to "Destroy", topic, :confirm => 'Are you sure?', :method => :delete %></td>
-        <% end %>
+        
       </tr>
   <% end %>
-  <tr>
-    <%= paginate @topics %>
-  </tr>
+  </table>
+  
+  <table class="tab0">
+      <tr>
+        <td>
+        </td>
+        <td>
+          <%= paginate @topics %>
+        </td>
+      </tr>
   </table>
 
 </br>

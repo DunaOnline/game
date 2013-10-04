@@ -2,12 +2,19 @@
     <%= f.error_messages %>
     <% if params[:syselaad] %><input type="hidden" id="topic_syselaad_id" name="topic[syselaad_id]" value="<%= params[:syselaad] %>" />
     <% end %>
-    <p>
-      <%= f.label :name %><br/>
-      <%= f.text_field :name %>
-    </p>
-    <p>
-      <textarea name="post[content]" cols="80" rows="20"><%= @post.content %></textarea>
-    </p>
-    <p><%= f.submit "Create" %></p>
+     
+      <table class="tab3">
+        <tr>
+          <th>
+            <%= f.submit " ZALOŽIT ", :class => "ok4" %>
+            <!-- <%= f.label :name %> -->
+            <%= f.text_field :name, :placeholder => "Název vlákna" %>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <textarea name="post[content]" cols="80" rows="20"><%= @post.content %></textarea>
+          </td>
+        </tr>
+      </table>
 <% end %>
