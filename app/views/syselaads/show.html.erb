@@ -2,9 +2,12 @@
 <% title @syselaad.name %>
 <table class="tab3">
   <tr>
-    <th width="50%">Téma vlákna Syselaadu</th>
+    <th width="50%" height="20px">Téma vlákna Syselaadu</th>
     <th width="10%">Odpovědí</th>
     <th width="40%">Poslední příspěvek</th>
+    <% if admin? %>
+    <th width="40%">Správa</th>
+    <% end %>
   </tr>
   <% for topic in @topics %>
       <tr>
@@ -20,10 +23,14 @@
   <tr>
     <%= paginate @topics %>
   </tr>
+  </table>
   <% if logged_in? %>
+    <table class="tab0">
       <tr>
-        <td colspan="10"><%= link_to "Založit nové vlákno tohoto Syselaadu", new_topic_path(:syselaad => @syselaad.id) %></td>
+        <td></td>
+        <td class="tdd"><%= link_to " + Přidat vlákno ", new_topic_path(:syselaad => @syselaad.id) %></td>
       </tr>
+    </table>
   <% end %>
-</table>
+
 </br>
