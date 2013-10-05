@@ -16,7 +16,7 @@
           <li><b>Národ: </b><%= @subhouse.house.name %></li>
           <li><b>Malorod: </b><%= @subhouse.name %></li>
           <li><b>Členů: </b><%= @subhouse.users.count %> / <%= Constant.max_u_mr %> </li>
-          <br/><br/>
+          <br/><br/><br/><br/><br/><br/>
           <li><%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok' %></li>
         </td>
 
@@ -33,7 +33,7 @@
           <li><%= img_melanz %><%= format_mena(@subhouse.melange, 'mg') %></li>
           <li><%= img_zkusenosti %><%= format_mena(@subhouse.exp, 'exp', false) %></li>
           <li><%= img_vyrobky('Celkovo dilu') %><%= format_mena(@subhouse.parts, 'ks', true) %></li>
-          <li>Kapacita T: <%= @subhouse.vyuzitie_tovaren %>
+          <li><%= img_vyrobky('Využití továren / kapacita') %><%= @subhouse.vyuzitie_tovaren %>
             / <%= format_mena(@subhouse.kapacita_tovaren, 'ks', true) %></li>
         </td>
         <td>

@@ -1,25 +1,51 @@
 <%# encoding: utf-8 %>
 <% title @title %>
+<table class="tab0">
+  <tr>
+    <td>
+      <a href="#" title="Home">⌂</a> »
+      <%= link_to 'Přehled Imperia', imperium_path %> »
+      <%= link_to 'Jednání Landsraadu', landsraad_jednani_path %>
+    </td>
+    
+    <% if current_user.emperor? || current_user.admin? %>
+      <td class="tdd">
+          <%= link_to 'Zákony k podepsání »', imperator_zakony_path %></li>
+      </td>
+    <% end %>
+  </tr>
+</table>
+
+
 <table class="land">
   <tr>
     <td class="none" colspan="4"></td>
-    <td background="image/	8	/imperator.png" rowspan="2" colspan="2"></td>
+    <% if @imperator %>
+      <td background="<%= asset_path 'imghra/emperor1.png' %>" rowspan="2" colspan="2" background-position="center center"></td>
+    <% else %>
+      <td background="<%= asset_path 'imghra/regent1.png' %>" rowspan="2" colspan="2" background-position="center"></td>
+    <% end %>
     <td class="none" colspan="4"></td>
     <td class="none" rowspan="9" style="width:4px !important;"></td>
-    <td class="tdpr" rowspan="9" style="width:70px !important;">
+    <td class="tdpr" rowspan="99" style="width:70px !important; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>) !important;">
       <li>
-        <h2><%= @title %></h2>
-      <li>
-        <b>Imperátor: </b><%= link_to @imperator.nick, @imperator if @imperator %>
-      <li>
-        <b>Držitel pololéna: </b><%= link_to @spravce.nick, @spravce if @spravce %>
+        <h2>Jednání Landsraadu</h2>
+      <% if @imperator %>
+        <li><b>Imperátor: </b> <%= link_to @imperator.nick, @imperator if @imperator %>
+        <% else %>
+        <li><h3>Regentská vláda</h3>
+      <% end %>
+      <% if @spravce %>
+        <li><b>Místodržící Arrakisu: </b> <%= link_to @spravce.nick, @spravce if @spravce %>
+        <% else %>
+        <li><h3>Místodržící nezvolen!</h3>
+      <% end %>
       <li>
         <b>Poslanci: </b>
         <% for poslanec in @poslanci do %>
-            <%= link_to poslanec.nick, poslanec %>
+            <%= link_to poslanec.nick, poslanec %>, 
         <% end %>
-        <br>
-        <br>
+               
 
     </td>
   </tr>

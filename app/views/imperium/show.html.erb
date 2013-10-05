@@ -1,4 +1,27 @@
 <%# encoding: utf-8 %>
+
+<table class="tab0">
+
+  <tr>
+    <td>
+      <a href="#" title="Home">⌂</a> »
+      <%= link_to 'Přehled Imperia', imperium_path %> 
+    </td>
+    <% if can? :sprava, Imperium %>            
+        <td class="tdd">
+          <%= link_to ' Sprava Impéria »', sprava_imperia_path %>
+        </td>
+    <% end %>
+    <% if current_user.landsraad? || current_user.admin? %>
+      <td class="tdd">
+        <%= link_to ' Jednání Landsraadu »', landsraad_jednani_path %>
+      </td>
+    <% end %>
+              
+              
+  </tr>
+
+</table>
 <% title @title %>
 <table class="tab1">
   <tr>
@@ -6,17 +29,31 @@
       <li>
         <h2>Imperium a Koření</h2>
       <li>
+        <% if @imperator %>
         <b>Imperátor: </b> <%= link_to @imperator.nick, @imperator if @imperator %>
+        <% else %>
+        <li><h3>Regentská vláda</h3>
+        <% end %>
       <li>
+        <% if @spravce %>
         <b>Místodržící Arrakisu: </b> <%= link_to @spravce.nick, @spravce if @spravce %>
+        <% else %>
+        <li><h3>Produkce Arrakisu není kontrolována!</h3>
+        <% end %>
       <li>
         <b>Známých planet: </b> <%= Planet.count %>
       <li>
         <b>Občanů Impéria: </b> <%= User.count %>
       <li>
-        <b>Celkový vliv: </b> <%= @imperium.influence %>
+        <b>Celkový vliv Impéria: </b> <%= @imperium.influence %>
         <br>
         <br>
+        <br>
+        <br>
+      <h3> Arrakis </h3>
+      <li> Je pustou pouštní planetou na okraji známého vesmíru. Je ale jediným místem
+      kde lze nalézt vzácné koření, melanž. 
+      <li> Místodržící je zvolen vůdci Impéria jako správce produkce této vzácné a důležité komodity, které je dále přerozdělováno mezi Velkorody a Vesmírnou Gildu.
     </td>
     <th>Přepočet</th>
     <th class="r">Podíl [%]</th>
