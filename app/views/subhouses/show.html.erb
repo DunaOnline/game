@@ -3,58 +3,38 @@
   <tr>
     <td>
       <a href="index.htm" title="Home">⌂</a>
-      » <%= link_to 'Malorod', subhouse_path(current_user.subhouse), :title => "Malorod" %>
+      » <%= link_to 'Přehled Malorodu', subhouse_path(current_user.subhouse), :title => "Malorod" %>
     </td>
+
+<!-- Odkazuje mne na psani nové pošty
+    
+    <td class="tdd">
+       <%= link_to ' Malorodní pošta »', new_message_path, :value => "Malorodní pošta" %>
+    </td>
+    
+-->
+
     <% if can? :update, @subhouse %>
         <td class="tdd">
-          <%= link_to 'Sprava malorodu >>', sprava_mr_path(:id => current_user.subhouse) %>
+          <%= link_to ' Spravovat malorod »', sprava_mr_path(:id => current_user.subhouse) %>
         </td>
     <% end %>
   </tr>
 </table>
 
-<h2>Zoznam hracu v malorode</h2>
 <table class="tab1">
   <tr>
-    <th>Nick</th>
-    <th>Pocet Len</th>
-    <th>Detaily</th>
-  </tr>
-  <% @subhouse.users.each do |user| %>
-      <tr>
-        <td>
-          <%= user.nick %>
-        </td>
-        <td>
-          <%= user.fields.count %>
-        </td>
-        <td>
-          <%= link_to 'Detail', user_path(user) %>
-        </td>
-      </tr>
-  <% end %>
-</table>
-
-<h2>Detaily MR</h2>
-
-<table class="tab1">
-  <tr>
-    <td class="tdpl" rowspan="2">
-      <li><h2><%= @subhouse.name %></h2>
-
-
-      <li><b>Členů: </b><%= @subhouse.users.count %>
-
-        <br><br>
-      <li><%= link_to 'Malorodni posta', new_message_path, :value => "Malorodni posta", :class => "ok3" %>
-
-    </td>
-    <th>Solary</th>
-    <th>Material</th>
-    <th>Melange</th>
-    <th>Exp</th>
-    <th>Dilu</th>
-
+    <td class="tdpl" rowspan="2" style="width:180px; background-image: url(<%= asset_path 'imghra/narodnisklad.png' %>)">
+      <li><h2>Malorodni sklad</h2></li>
+      <li><b>Národ: </b><%= @subhouse.house.name %></li>
+      <li><b>Malorod: </b><%= @subhouse.name %></li>
+      <li><b>Členů: </b><%= @subhouse.users.count %> / <%= Constant.max_u_mr %> </li>
+    </td>   
+    <th>Soláry</th>
+    <th>Materiál</th>
+    <th>Melanž</th>
+    <th>Zkušenosti</th>
+    <th>Výrobky</th>
   </tr>
 
   <tr>
@@ -65,6 +45,42 @@
     <td><%= img_vyrobky %><%= @subhouse.parts %></td>
   </tr>
 </table>
+
+<table class="tab1">
+  <tr>
+    <td class="tdpl" rowspan="11" style="width:180px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
+      <li><h2>Členové Malorodu</h2></li>
+      <li><b>Vicegenerál: </b><%= @subhouse.users.vicegeneral.first.nick if @subhouse.users.vicegeneral.first %></li>
+      <li><b>Clenu: </b><%= @subhouse.users.count %> / <%= Constant.max_u_mr %> </li>
+    </td>
+    <th>Jméno hráče</th>
+    <th>Síla</th>
+    <th>Vliv</th>
+    <th>Lén</th>   
+    <th>Akce</th>
+  </tr>
+  <% @subhouse.users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.nick %>
+        </td>
+        <td>
+        </td>
+        <td>
+          <%= user.influence %>
+        </td>
+        <td>
+          <%= user.fields.count %>
+        </td>
+        <td>
+          <%= link_to 'Profil', user_path(user) %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+
+
+
 
 
 
