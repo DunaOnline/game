@@ -10,13 +10,13 @@
       <a href="index.html" title="Home">⌂</a> »
 
 
-      <%= link_to "Ekonomický výzkum", technologies_path %>
+      <%= link_to "Váš výzkum", technologies_path %>
 
 
     </td>
     <% if current_user.admin? || current_user.leader? || current_user.mentat? %>
         <td class="tdd">
-          <%= link_to 'Narodni vyskum >>', narodni_vyskum_path %>
+          <%= link_to 'Národní výzkum »', narodni_vyskum_path %>
 
         </td>
     <% end %>
