@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ImperiumController < ApplicationController
   def sprava
     @title = 'Sprava Imperia'

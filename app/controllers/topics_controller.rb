@@ -1,3 +1,4 @@
+# encoding: utf-8
 class TopicsController < ApplicationController
   before_filter :login_required, :except => [:index, :show]
   before_filter :admin_required, :only => :destroy

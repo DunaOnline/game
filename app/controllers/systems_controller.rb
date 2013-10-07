@@ -1,3 +1,4 @@
+# encoding: utf-8
 class SystemsController < ApplicationController
   def index
     @systems = System.all
