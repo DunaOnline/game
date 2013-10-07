@@ -195,15 +195,15 @@ class UsersController < ApplicationController
         komu.stat_se("army_mentat")
       when "Diplomat"
         komu.stat_se("diplomat")
-      when "Dvoran"
+      when "Dvořan"
         komu.stat_se("court")
-        Imperium.zapis_operaci("#{current_user.nick} jmenoval hrace #{komu.nick} na pozici #{params[:commit]}.")
-      when "Vezir"
+        Imperium.zapis_operaci("#{current_user.nick} jmenoval hráče #{komu.nick} na pozici Dvořan.")
+      when "Vezír"
         komu.stat_se("vezir")
-        Imperium.zapis_operaci("#{current_user.nick} jmenoval hrace #{komu.nick} na pozici #{params[:commit]}.")
+        Imperium.zapis_operaci("#{current_user.nick} jmenoval hráče #{komu.nick} na pozici Vezír.")
     end
-    current_user.house.zapis_operaci("#{current_user.nick} jmenoval hrace #{komu.nick} na pozici #{params[:commit]}.")
-    komu.zapis_operaci("#{current_user.nick} me jmenoval na pozici #{params[:commit]}.")
+    current_user.house.zapis_operaci("#{current_user.nick} jmenoval hráč #{komu.nick} na pozici #{params[:commit]}.")
+    komu.zapis_operaci("#{current_user.nick} mě jmenoval na pozici #{params[:commit]}.")
     redirect_to :back
   end
 
@@ -218,14 +218,14 @@ class UsersController < ApplicationController
         komu.prestat_byt("diplomat")
       when "Court"
         komu.prestat_byt("court")
-        Imperium.zapis_operaci("#{current_user.nick} odvolal hrace #{komu.nick} z pozice Dvoran.")
+        Imperium.zapis_operaci("#{current_user.nick} odvolal hráče #{komu.nick} z pozice Dvořan.")
       when "Vezir"
         komu.prestat_byt("vezir")
-        Imperium.zapis_operaci("#{current_user.nick} odvolal hrace #{komu.nick} z pozice #{params[:pravo]}.")
+        Imperium.zapis_operaci("#{current_user.nick} odvolal hráče #{komu.nick} z pozice Vezír.")
 
     end
-    current_user.house.zapis_operaci("#{current_user.nick} odvolal hrace #{komu.nick} z pozice #{params[:pravo]}.")
-    komu.zapis_operaci("#{current_user.nick} me odvolal z pozice #{params[:pravo]}.")
+    current_user.house.zapis_operaci("#{current_user.nick} odvolal hráče #{komu.nick} z pozice #{params[:pravo]}.")
+    komu.zapis_operaci("#{current_user.nick} mě odvolal z pozice #{params[:pravo]}.")
     redirect_to :back
   end
 

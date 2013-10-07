@@ -41,7 +41,7 @@
         <br>
         <br>
       <li>
-        <input type="button" value="Potvrdit" class="ok">
+        <!--<input type="button" value="Potvrdit" class="ok">-->
     </td>
     <th>Přepočet</th>
     <th>Přesun ze skladu</th>
@@ -66,9 +66,9 @@
 				<%= img_solary "Prodejní cena melanže" %>
 				<input type="text" size="2" title="Zadejte prodejní cenu" style="width:25px">
 			</li>
-			<br />
+			<br />-->
 			<li><%= submit_tag 'Potvrdit', :name => 'potvrdit', :class => 'ok' %>
-      <% end %>  -->
+      <% end %>
     </td>
 
     <td>
@@ -117,9 +117,9 @@
     <td>
         <% for user in @veziri do %>
           <li>
-            <%= link_to user.nick, user, :class => "vezir" %>
+            <%= link_to user.nick, user, :class => 'vezir' %>
             <% if can? :odeber_pravo, User %>
-                <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Court" %>
+                <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Vezir" %>
             <% end %>
           </li>
         <% end %>
@@ -128,7 +128,7 @@
           <li>
               <%= form_tag :pridel_pravo do %>
                 <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-                <%= submit_tag 'Ξ', :class => 'oki' %>
+                <%= submit_tag 'Vezír' %>
             <% end %>
           </li>
       <% end %>
@@ -137,7 +137,7 @@
     <td>
         <% for user in @courtship do %>
           <li>
-            <%= link_to user.nick, user, :class => "court" %>
+            <%= link_to user.nick, user, :class => 'court' %>
             <% if can? :odeber_pravo, User %>
                 <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Court" %>
             <% end %>
@@ -148,7 +148,7 @@
           <li>
             <%= form_tag :pridel_pravo do %>
                 <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-                <%= submit_tag 'Ξ', :class => 'oki' %>
+                <%= submit_tag 'Dvořan' %>
             <% end %>
         <% end %>  
             
