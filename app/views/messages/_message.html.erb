@@ -12,7 +12,7 @@
 
     <span class="fright">
   <%= best_in_place message, :opened, :type => :checkbox, :classes => 'precitana' %>
-      <%= link_to image_tag('../assets/css/DO_cross.png'), message, :confirm => "Naozaj chcete zmazat postu ?", :method => :delete, :class => 'delete_post', :remote => true %></span>
+      <%= link_to image_tag('../assets/css/delete.png'), message, :confirm => "Opravdu chcete odstranit zpravu?", :method => :delete, :class => 'delete_post', :remote => true %></span>
   </td>
 
 </tr>
@@ -20,7 +20,7 @@
   <td colspan="4">
     <%= message.body %>
     <p>
-      <%= link_to 'Odpovedat', reply_path(:id => message.id), :class => "reply" %>
+      <%= link_to 'Odpovědět', reply_path(:id => message.id), :class => "reply" %>
     </p>
   </td>
 </tr>

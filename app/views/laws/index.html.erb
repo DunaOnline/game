@@ -1,7 +1,12 @@
 <table class="tab0">
 
   <tr>
-    <td></td>
+    <td>
+    <a href="#" title="Home">⌂</a> »
+      <%= link_to 'Přehled Imperia', imperium_path %> »
+      <%= link_to 'Archiv Landsraadu', laws_path %> »
+      <b><%= @title %></b>
+    </td>
 
     <td class="tdd">
 
@@ -11,17 +16,17 @@
 
           <ul>
 
-            <li><%= link_to 'Vsechny zakony', laws_path(:zakony => 'vsechny') %>
+            <li><%= link_to 'Všechny zákony', laws_path(:zakony => 'vsechny') %>
 
-            <li><%= link_to 'Zarazene zakony', laws_path(:zakony => 'zarazene') %>
+            <li><%= link_to 'Zařazené zákony', laws_path(:zakony => 'zarazene') %>
 
-            <li><%= link_to 'Projednavane zakony', laws_path(:zakony => 'projednavane') %>
+            <li><%= link_to 'Projednavané zákony', laws_path(:zakony => 'projednavane') %>
 
-            <li><%= link_to 'Schvalene zakony', laws_path(:zakony => 'schvalene') %>
+            <li><%= link_to 'Schvalené zákony', laws_path(:zakony => 'schvalene') %>
 
-            <li><%= link_to 'Zamitnute zakony', laws_path(:zakony => 'zamitnute') %>
+            <li><%= link_to 'Zamitnuté zákony', laws_path(:zakony => 'zamitnute') %>
 
-            <li><%= link_to 'Podepsane zakony', laws_path(:zakony => 'podepsane') %>
+            <li><%= link_to 'Podepsané zákony', laws_path(:zakony => 'podepsane') %>
 
           </ul>
 
@@ -35,29 +40,26 @@
 
 </table>
 
-<h1><%= @title %></h1>
-
 <table class="tab1">
   <tr>
-    <th>Label</th>
-    <th>Title</th>
-    <th>Content</th>
+    <th>Název a autor</th>
+    <th>Obsah zákona</th>
     <th>State</th>
     <th>Position</th>
-    <th>Submitter</th>
     <th>Submitted</th>
-    <th>Enacted</th>
-    <th>Signed</th>
+    <th>Přijat</th>
+    <th>Podpis</th>
   </tr>
 
   <% @laws.each do |law| %>
       <tr>
-        <td><%= law.label %></td>
-        <td><%= law.title %></td>
+        <td>  <%= law.label %></td>
+              <li><%= law.title %>
+              <li><%= law.submitters.first.nick %>
+        </td>
         <td><%= law.content %></td>
         <td><%= law.state %></td>
         <td><%= law.position %></td>
-        <td><%= law.user.nick %></td>
         <td><%= law.submitted %></td>
         <td><%= law.enacted %></td>
         <td><%= law.signed %></td>

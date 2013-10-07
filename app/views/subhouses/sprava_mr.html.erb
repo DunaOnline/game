@@ -3,10 +3,8 @@
   <tr>
     <td>
       <a href="index.htm" title="Home">⌂</a>
-      » <%= link_to 'Malorod', subhouse_path(current_user.subhouse), :title => "Malorod" %>
-    </td>
-    <td class="tdd">
-      <%= link_to '<<  Malorod', subhouse_path(current_user.subhouse) %>
+      » <%= link_to 'Přehled Malorodu', subhouse_path(current_user.subhouse) %>
+      » <a href="index.htm" title="Home">Sprava Malorodu</a>
     </td>
   </tr>
 </table>
@@ -17,8 +15,8 @@
           <li><h2>Malorodni sklad</h2></li>
           <li><b>Národ: </b><%= @subhouse.house.name %></li>
           <li><b>Malorod: </b><%= @subhouse.name %></li>
-          <li><b>Clenu: </b><%= @subhouse.users.count %> / <%= Constant.max_u_mr %> </li>
-          <br/><br/>
+          <li><b>Členů: </b><%= @subhouse.users.count %> / <%= Constant.max_u_mr %> </li>
+          <br/><br/><br/><br/><br/><br/>
           <li><%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok' %></li>
         </td>
 
@@ -35,7 +33,7 @@
           <li><%= img_melanz %><%= format_mena(@subhouse.melange, 'mg') %></li>
           <li><%= img_zkusenosti %><%= format_mena(@subhouse.exp, 'exp', false) %></li>
           <li><%= img_vyrobky('Celkovo dilu') %><%= format_mena(@subhouse.parts, 'ks', true) %></li>
-          <li>Kapacita T: <%= @subhouse.vyuzitie_tovaren %>
+          <li><%= img_vyrobky('Využití továren / kapacita') %><%= @subhouse.vyuzitie_tovaren %>
             / <%= format_mena(@subhouse.kapacita_tovaren, 'ks', true) %></li>
         </td>
         <td>
@@ -70,19 +68,21 @@
 <% if @productions.count != 0 %>
     <table class="tab1">
       <tr>
-        <th></th>
+        <td class="tdpl" rowspan="2" style="width:160px; background-image: url(<%= asset_path 'imghra/market.png' %>)">
+        </td>
         <th>Produkt</th>
-        <th>Mnozstvo</th>
+        <th>Množství</th>
       </tr>
-      <% @productions.each do |productions| %>
+        <% @productions.each do |productions| %>
           <tr>
-            <td></td>
-            <td><%= productions.product.title %></td>
-            <td><%= productions.amount %></td>
+                <td><%= productions.product.title %></td>
+                <td><%= productions.amount %></td>
           </tr>
-      <% end %>
+        <% end %>
     </table>
 <% end %>
+
+<!--- NAKUP?? Prosim popsat o co jde :) -->
 
 <% if @markets.count != 0 %>
     <table class="vyroba">
@@ -102,10 +102,20 @@
     </table>
 <% end %>
 
+
 <table class="tab1">
   <tr>
-    <th colspan="4">Predaj malorodnych zasob na trhu</th>
+    <td class="tdpl" rowspan="2" style="width:160px; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
+      <li><h2>Prodej komodit</h2></li>
+      <br>
+      
+    </td>
+    <th>Komodita</th>
+    <th>Cena/Kus</th>
+    <th>Množství</th>
+    <th width="45px">Akce</th>
   </tr>
+  <!-- PRODEJ Z MALORODNICH ZASOB -->
   <%= form_for(@market) do |f| %>
       <tr>
         <td>
@@ -115,17 +125,22 @@
         </td>
         <td><%= f.number_field :price, :required => true, :min => 1, :size => 3, :title => "Zadejte cenu" %></td>
 
-        <td><%= f.number_field :amount, :required => true, :min => 0.1, :step => "any", :size => 3, :title => "Zadejte množství", :step => "any" %></td>
-        <td><%= f.submit 'Prodávat', :class => "ok" %></td>
+        <td><%= f.number_field :amount, :required => true, :min => 0.1, :step => "any", :size => 3, :title => "Zadejte množství", :step => "any" %> </td>
+        
+        <td><%= f.submit 'Nabídnout', :class => "ok" %></td>
       </tr>
   <% end %>
+  
 </table>
 
 <table class="tab1">
   <tr>
-    <th colspan="4">Zozonam hracu v malorode</th>
-  </tr>
-  <tr>
+    <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
+      <li><h2>Členové Malorodu</h2></li>
+      <li><b>Vicegenerál: </b><%= @subhouse.users.vicegeneral.first.nick if @subhouse.users.vicegeneral.first %></li>
+      <li><b>Clenu: </b><%= @subhouse.users.count %> / <%= Constant.max_u_mr %> </li>
+    </td>
+
     <th>Nick</th>
     <th>Pocet Len</th>
     <th>Vojenska Sila</th>
@@ -147,34 +162,32 @@
         </td>
       </tr>
   <% end %>
-</table>
-<% if @ziadosti.count > 0 %>
-    <table class="tab1">
-      <tr>
-        <th> Meno Ziadatela</th>
-
-      </tr>
-      <% @ziadosti.each do |ziadost| %>
-          <tr>
-            <td><%= link_to ziadost.nick, user_path(ziadost) %></td>
-            <td><%= button_to("Prijmout", prijmi_hrace_mr_url(:id => ziadost.id), :confirm => "Naozaj chcete prijat hrace ?") %></td>
-          </tr>
-      <% end %>
-    </table>
-<% end %>
-
-<table class="tab1">
-  <tr>
-    <td> Menovat Vicegenerala :</td>
-    <td>
+     <tr>
+        <td colspan="4">
       <%= form_tag :menuj_vice do %>
           <%= select_tag :vicegeneral, options_for_select(@subhouse.users.collect { |p| [p.nick, p.id] }, {:include_blank => false}), :class => "tab" %>
-          <%= submit_tag 'Menuj' %>
+          <%= submit_tag 'Jmenovat Vicegenerálem', :class => 'ok' %> 
       <% end %>
+       </td>
+      </tr>
+  </table>
+  
+<% if @ziadosti.count > 0 %>
+<table class="tab1">
+  <tr>
+    <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'imghra/market.png' %>)">
+      <li><h2>Žádosti o vstup</h2></li>
+      <br>
     </td>
-    <td>Aktualny Vicegeneral : <%= @subhouse.users.vicegeneral.first.nick if @subhouse.users.vicegeneral.first %></td>
+    <th> Jméno žadatele</th>
+    <th> Akce</th>
+
   </tr>
-
-
+      <% @ziadosti.each do |ziadost| %>
+  <tr>
+     <td><%= link_to ziadost.nick, user_path(ziadost) %></td>
+     <td><%= button_to("Prijmout", prijmi_hrace_mr_url(:id => ziadost.id), :confirm => "Naozaj chcete prijat hrace ?") %></td>
+  </tr>
+      <% end %>
 </table>
-
+<% end %>

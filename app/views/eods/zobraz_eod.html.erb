@@ -59,7 +59,7 @@
   </tr>
   <tr>
 
-    <td class="none"></td>
+<!-- JESTE NENI ARMADA    <td class="none"></td>
 
   </tr>
   <tr>
@@ -96,7 +96,7 @@
 
   </tr>
   <tr>
-
+-->
     <td class="none"></td>
 
   </tr>
@@ -112,21 +112,21 @@
   <tr>
 
     <td>
-      <li><img src="" alt="" class="tdimg">
+      <li><img src="<%= asset_path 'imghra/emperor.png' %>" alt="" class="tdimg">
       <li><%= @imperator.house.leader if @imperator %>
       <li><%= link_to @imperator.nick, @imperator if @imperator %>
         (<%= link_to @imperator.house.name, @imperator.house if @imperator %>)
     </td>
 
     <td>
-      <li><img src="" alt="" class="tdimg">
+      <li><img src="<%= asset_path 'imghra/mistodrzici.png' %>" alt="" class="tdimg">
       <li><%= @arrakis.house.leader if @arrakis %>
       <li><%= link_to @arrakis.nick, @arrakis if @arrakis %>
         (<%= link_to @arrakis.house.name, @arrakis.house if @arrakis %>)
     </td>
 
     <td>
-      <li><img src="" alt="" class="tdimg">
+      <li><img src="<%= asset_path 'imghra/leader.png' %>" alt="" class="tdimg">
       <li><%= @leader.house.leader if @leader %>
       <li><%= link_to @leader.nick, @leader if @leader %> (<%= link_to @leader.house.name, @leader.house if @leader %>)
     </td>

@@ -1,21 +1,43 @@
 <%# encoding: utf-8 %>
 <% title @title %>
 
+<table class="tab0">
+
+  <tr>
+    <td>
+      <a href="#" title="Home">⌂</a> »
+      <%= link_to 'Přehled Imperia', imperium_path %> »
+      <a href="#">Správa Impéria</a>
+    </td>
+  </tr>
+
+</table>
+
 <table class="tab1">
   <tr>
     <td class="tdpl" rowspan="2" style="padding: 10px; width:270px; background-image: url(<%= asset_path 'imghra/arrakis.png' %>) !important">
       <li>
-        <h2>Imperium a Koření</h2>
+        <h2>Kontrola koření</h2>
       <li>
-        <b>Imperátor: </b> <%= link_to @imperator.nick, @imperator if @imperator %>
-      <li>
+        <% if @spravce %>
         <b>Místodržící Arrakisu: </b> <%= link_to @spravce.nick, @spravce if @spravce %>
+        <% else %>
+        <li><h3>Produkce Arrakisu není kontrolována!</h3>
+        <% end %>
       <li>
         <b>Známých planet: </b> <%= Planet.count %>
       <li>
         <b>Občanů Impéria: </b> <%= User.count %>
       <li>
         <b>Celkový vliv: </b> <%= @imperium.influence %>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <br>
         <br>
       <li>
@@ -29,12 +51,14 @@
     <%= render :partial => 'melange_flow' %>
 
     <td>
-      <%= form_tag :posli_imperialni_suroviny do %>
+    <%= form_tag :posli_imperialni_suroviny do %>
           <h3>Poslat Velkorodu</h3>
 
           <li><%= img_solary %><%= text_field_tag 'rodu_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
           <li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %>
           <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %>
+            
+
             <br/>
             <!-- <h3>Prodej na trhu</h3>
 			<li><%= img_melanz "Množství melanže na trhu." %> 1000</li> 
@@ -54,6 +78,7 @@
             <%= best_in_place house, :melange_percent %>
           </li>
       <% end %>
+      
     </td>
 
   </tr>
@@ -68,16 +93,28 @@
   <tr>
     <td class="tdpl" rowspan="2" style="width: 270px !important; background-image: url(<%= asset_path 'imghra/dvur_v.png' %>) !important; Background-position: top !important;">
       <li><h2>Imperiální dvůr</h2>
-      <li><b>Členové dvora: </b>
-        <% for user in @courtship do %>
-          <li>
-            <%= link_to user.nick, user, :class => "court" %>
-            <% if can? :odeber_pravo, User %>
-                <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Court" %>
-            <% end %>
-          </li>
-      <% end %>
-      <li><b>Veziri: </b>
+      <% if @imperator %>
+        <li><b>Imperátor: </b> <%= link_to @imperator.nick, @imperator if @imperator %>
+        <li><b>Velkorod:</b> <%= @imperator.house.name %> 
+        <li>
+        <li>Imperátor z planety Kaitan chrání naše Impérium. Konroluje produkci melanže a drží vzdorné Velkorody na uzdě.
+        Vezíři pracují jako zástupci jeho vznešenosti a lidé, keří se stali dvořany, získali v Impériu značný vliv. 
+        <li>Imperátorovou jedinnou kontrolou je vznešený Landsraad a jeho zákony. 
+      <% else %>
+        <li><h3>Regentská vláda</h3>
+        <li>Během regentské vlády jsou možnosti Impéria značně omezeny. 
+        Úkolem říšských regentů je držet produkci melanže a udržet srávný chod Impéria, 
+        než bude zvolen právoplatný vůdce.
+      <% end %> 
+    </td>
+
+    <th>Vezíři</th>
+
+    <th class="r">Členové dvora</th>
+  </tr>
+
+  <tr>
+    <td>
         <% for user in @veziri do %>
           <li>
             <%= link_to user.nick, user, :class => "vezir" %>
@@ -85,39 +122,38 @@
                 <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Court" %>
             <% end %>
           </li>
+        <% end %>
+        
+        <% if can? :pridel_pravo, User %>
+          <li>
+              <%= form_tag :pridel_pravo do %>
+                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
+                <%= submit_tag 'Ξ', :class => 'oki' %>
+            <% end %>
+          </li>
       <% end %>
     </td>
-
-    <th style="width: 150px">Imperátor</th>
-
-    <th class="r">Přidělení práv</th>
-  </tr>
-
-  <tr>
-    <td style="min-height: 170px;">
-      <li><img src="image/avatar/id3.png" alt="" class="tdimg">
-        <% if @imperator %>
-          <li><%= link_to @imperator.nick, @imperator, :class => :emperor %> <%= @imperator.house.name %>
-      <% end %>
-    </td>
-
+    
     <td>
-
-      <% if can? :pridel_pravo, User %>
+        <% for user in @courtship do %>
+          <li>
+            <%= link_to user.nick, user, :class => "court" %>
+            <% if can? :odeber_pravo, User %>
+                <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Court" %>
+            <% end %>
+          </li>
+        <% end %>
+        
+        <% if can? :pridel_pravo, User %>
           <li>
             <%= form_tag :pridel_pravo do %>
                 <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-                <%= submit_tag 'Dvoran', :class => 'oktab_auto' %>
+                <%= submit_tag 'Ξ', :class => 'oki' %>
             <% end %>
-          </li>
-          <li>
-            <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-                <%= submit_tag 'Vezir', :class => 'oktab_auto' %>
-            <% end %>
-          </li>
-      <% end %>
+        <% end %>  
+            
     </td>
+
   </tr>
 
 </table>

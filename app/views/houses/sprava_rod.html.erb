@@ -93,12 +93,16 @@
 
 <table class="tab1">
   <tr>
-    <th colspan="4">Predaj narodnych zasob na trhu</th>
-  </tr>
+    <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
+              <li><h2>Prodej na trhu</h2></li>
+              <li><%= f.submit 'Nabídnout', :class => "ok" %>
+    </td>
   <%= form_for(@market) do |f| %>
-
-
-      <tr>
+    <th>Komodita</th>
+    <th>Cena za kus [Sol]</th>
+    <th>Množství</th>
+  </tr>
+  <tr>  
         <td>
           <%= hidden_field_tag 'sent_from', 'H' %>
           <%= f.select :area, options_for_select(@house.for_sale), :name => "Vyberte komoditu k prodeji", :title => "Vyberte komoditu k prodeji", :class => "vyber" %>
@@ -107,7 +111,7 @@
         <td><%= f.number_field :price, :required => true, :min => 1, :size => 3, :title => "Zadejte cenu" %></td>
 
         <td><%= f.number_field :amount, :required => true, :min => 0.1, :step => "any", :size => 3, :title => "Zadejte množství", :step => "any" %></td>
-        <td><%= f.submit 'Prodávat', :class => "ok" %></td>
+        
       </tr>
   <% end %>
 </table>

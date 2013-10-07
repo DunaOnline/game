@@ -1,12 +1,11 @@
 <tr>
 
-  <th class="descr"><%= technology.name %></th>
+  <th class="descr" style="width: 180px !important; background-image: url(<%= asset_path 'budovy/Riches/i_arm.png' %>) !important; Background-position: top !important" ;"><%= technology.name %></th>
 
 
 
   <%= form_tag vylepsi_technology_path(:technology => technology.id, :user_id => current_user), :class => 'vylepsiTech' do %>
-
-      <td class="v2" title="Vylepsi"><%= submit_tag number_with_precision technology.cena_technology(current_user), :precision => 0 %></td>
+    <td class="v2" title="Vylepsi"><%= submit_tag number_with_precision technology.cena_technology(current_user), :precision => 0 %></td>
   <% end %>
 
 

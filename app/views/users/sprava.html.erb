@@ -4,11 +4,11 @@
   <%= form_tag :posli_suroviny do %>
       <tr>
         <td class="tdpl" rowspan="2" style="width:170px; background-image: url(<%= asset_path 'imghra/hracsklad.png' %>)">
-          <li><h2>Sklad hráče</h2>
-          <li><b>Vliv: </b><%= @user.influence %>
+          <li><h2>Vaše panství</h2>
+          <li><b>Vliv v Impériu: </b><%= @user.influence %>
           <li><b>Planet: </b><%= @planets.count %>
-          <li><b>Poli: </b><%= @user.fields.count %>
-            <br><br><br>
+          <li><b>Celkem lén: </b><%= @user.fields.count %>
+            <br><br><br><br><br>
           <li>    <%= submit_tag 'Poslat zvolené', :name => 'poslat', :class => 'ok' %>
         </td>
         <th>Stav skladu</th>
@@ -154,20 +154,26 @@
   </tr>
 </table>
 
-<% if current_user.subhouse %>
-    <table class="tab1">
-      <tr>
+<table class="tab1">
+  <tr>
+      <td class="tdpl" rowspan="99" style="width:170px; background-image: url(<%= asset_path 'imghra/narodnisklad.png' %>)">
+          <li><h2>Vaše vazalství</h2></li>
+      </td>
+
         <td>
-          <%= link_to 'Opustit malorod', opustit_mr_path %>
-        </td>
+          <% if current_user.subhouse %>
+            <%= link_to 'Opustit váš Malorod', opustit_mr_path %>
+          <% else %>
+          <%= form_tag @subhouse do %>
+              <%= text_field_tag 'Malorod', '', :class => "tab" %>
+              <%= submit_tag 'Založit nový malorod', :class => 'ok4' %>
+          <% end %>
+          <% @subhouses.each do |s| %>
+            <tr>
+            <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'imghra/malorodnisklad.png' %>)">
+              <li><h2>Vstoupit do Malorodu</h2></li>
 
-      </tr>
-
-    </table>
-<% else %>
-    <table class="tab1">
-      <% @subhouses.each do |s| %>
-          <tr>
+            </td>
             <td>
               <span><%= s.name %> </span>
             </td>
@@ -175,35 +181,16 @@
               <span><%= s.pocet_userov %> / <%= Constant.max_u_mr.to_i %></span>
             </td>
             <td>
-              <span><%= link_to 'Podat Ziadost', ziadost_malorod_url(:id => s.id) %></span>
+              <span><%= link_to 'Podat žádost', ziadost_malorod_url(:id => s.id) %></span>
             </td>
 
-
           </tr>
-      <% end %>
-
-    </table>
-
-    <table class="tab1">
-      <tr>
-        <td>
-          <span>Zalozit malorod : </span>
-        </td>
-        <td>
-          <%= form_tag @subhouse do %>
-              <%= text_field_tag 'Malorod', '', :class => "tab" %>
-              <%= submit_tag 'Zaloz' %>
           <% end %>
-        </td>
 
-      </tr>
-
-    </table>
 <% end %>
 
-<table class="tab1">
-  <tr>
-    <td>
+<tr>
+      <td>
       <% if @user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first %>
       <span>
          <%= form_tag ziadost_path(:id => @user) do %>
@@ -213,13 +200,13 @@
 
             <%= select_tag :narod, options_for_select(House.playable.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %>
 
-            <%= submit_tag 'Prihlasit sa do Naroda', data: {:confirm => "Ste si isty?"} %>
+            <%= submit_tag 'Přihlásit sa do Velkorodu', data: {:confirm => "Jste si jist pane?"}, :class => 'ok4' %>
          <% end %>
       </span>
       <% else %>
       <span>
 
-        <%= link_to 'Opustit narod', opustit_path, :confirm => "Jste si jisti opustit narod #{current_user.house.name} ?" %>
+        <%= link_to 'Opustit Velkorod', opustit_path, :confirm => "Jste si jisti opustit narod #{current_user.house.name} ?" %>
       </span>
       <% end %>
     </td>
