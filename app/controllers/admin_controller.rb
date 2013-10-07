@@ -48,6 +48,9 @@ class AdminController < ApplicationController
               :melange => user.melange + params[:melange_user].to_f,
               :exp => user.exp + params[:expy_user].to_f
           )
+          user.domovske_leno.resource.update_attributes(
+              :material => user.domovske_leno.resource.material + params[:material_user].to_f
+          )
           redirect_to user
         when "rodu"
           house = House.find(params[:house_id_suroviny])

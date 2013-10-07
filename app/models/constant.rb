@@ -185,4 +185,8 @@ class Constant
     Global.vrat('stiahnut_zbozi_trh', 4)
   end
 
+  def self.modifikator_produkce
+    20
+  end
+
 end

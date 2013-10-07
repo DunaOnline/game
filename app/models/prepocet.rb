@@ -60,23 +60,25 @@ class Prepocet
         enviro_solar = field.planet.udalost_bonus("S")
         effect_solar = field.leno_udalost_bonus("S")
         solar_house_exp = narod.vyskumane_narodni_tech("S")
-        solar = field.vynos('solar') * (solar_exp + solar_house_exp) * enviro_solar * effect_solar
+        solar = field.vynos('solar') * solar_exp * solar_house_exp * enviro_solar * effect_solar * nahoda_produkce
 
         enviro_exp = field.planet.udalost_bonus("E")
         effect_exp = field.leno_udalost_bonus("E")
         exp_exp = vlastnik.tech_bonus("E")
         exp_house_exp = narod.vyskumane_narodni_tech("E")
-        exp = (field.vynos('exp') * (exp_exp + exp_house_exp) * enviro_exp * effect_exp).round
+        exp = (field.vynos('exp') * exp_exp * exp_house_exp * enviro_exp * effect_exp * nahoda_produkce).round
 
         enviro_material = field.planet.udalost_bonus("M")
         effect_material = field.leno_udalost_bonus("M")
         material_exp = vlastnik.tech_bonus("M")
         material_house_exp = narod.vyskumane_narodni_tech("M")
-        material = field.vynos('material') * (material_exp + material_house_exp) * enviro_material * effect_material
+        material = field.vynos('material') * material_exp * material_house_exp * enviro_material * effect_material * nahoda_produkce
 
-        enviro_pop = field.planet.udalost_bonus("P")
-        effect_pop = field.leno_udalost_bonus("P")
-        population = field.vynos('population') * enviro_pop * effect_pop
+        enviro_pop = field.planet.udalost_bonus("L")
+        effect_pop = field.leno_udalost_bonus("L")
+        population_exp = vlastnik.tech_bonus("L")
+        population_house_exp = narod.vyskumane_narodni_tech("L")
+        population = (field.vynos('population') * population_exp * population_house_exp * enviro_pop * effect_pop * nahoda_produkce).round
 
         parts = field.vynos('parts') #enviro_parts
 
@@ -114,12 +116,16 @@ class Prepocet
     user_tech = vlastnik.tech_bonus("J") if vlastnik
     house_tech = vlastnik.house.vyskumane_narodni_tech("J") if vlastnik
     if vlastnik
-      melange = leno.vynos('melange') * (user_tech + house_tech)
+      melange = leno.vynos('melange') * (user_tech + house_tech) * nahoda_produkce
     else
       melange = 0.0
     end
     Imperium.zapis_operaci("Bylo vytezeno #{melange} mg melanze.")
     Prepocet.rozdel_melanz(melange, order)
+  end
+
+  def self.nahoda_produkce
+    ((100.0 + (Constant.modifikator_produkce / 2)) - rand(Constant.modifikator_produkce))/100
   end
 
   def self.rozdel_melanz(melange, order)

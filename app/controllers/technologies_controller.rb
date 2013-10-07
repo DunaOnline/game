@@ -54,32 +54,32 @@ class TechnologiesController < ApplicationController
     if params[:narodni] == "true"
       cena_tech = @technology.cena_narodni_technology(current_user.house)
       if @technology.vylepseno_narodni(current_user.house_id) == @technology.max_lvl_narodni
-        flash[:error] = "Narodni Vyzkum na nejvissi urovni"
+        flash[:error] = 'Národni výzkum na nejvyšší úrovni'
         redirect_to :action => 'narodni_vyskum'
       else
         if cena_tech > current_user.house.exp
-          flash[:error] = "Nedostatok zkusenosti pro vynalezeni, potreba #{(cena_tech - current_user.house.exp).round(0)} exp."
+          flash[:error] = "Nedostatek zkušeností pro vynalezeni, potřeba #{(cena_tech - current_user.house.exp).round(0)} exp."
           redirect_to :action => 'narodni_vyskum'
         else
           @technology.vylepsi_narodni(current_user.house_id)
           current_user.update_attributes(:exp => (current_user.house.exp - cena_tech))
-          flash[:notice] = "Narodni Vyzkum byl vynalezen ."
+          flash[:notice] = 'Národni výzkum byl dokončen.'
           redirect_to :action => 'narodni_vyskum'
         end
       end
     else
       cena_tech = @technology.cena_technology(current_user)
       if @technology.vylepseno(current_user) == @technology.max_lvl
-        flash[:error] = "Vyzkum na nejvissi urovni"
+        flash[:error] = 'Výzkum na nejvyšší úrovni'
         redirect_to :action => 'index'
       else
         if cena_tech > current_user.exp
-          flash[:error] = "Nedostatok zkusenosti pro vynalezeni, potreba #{(cena_tech - current_user.exp).round(0)} exp."
+          flash[:error] = "Nedostatek zkušeností pro vynalezeni, potřeba #{(cena_tech - current_user.exp).round(0)} exp."
           redirect_to :action => 'index'
         else
           @technology.vylepsi(current_user)
           current_user.update_attributes(:exp => (current_user.exp - cena_tech))
-          flash[:notice] = "Vyzkum byl vynalezen ."
+          flash[:notice] = 'Výzkum byl dokončen.'
           redirect_to :action => 'index'
         end
       end
