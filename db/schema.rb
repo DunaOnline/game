@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(:version => 40) do
     t.integer  "user_id",                                                                              :null => false
     t.integer  "field_id"
     t.date     "date",                                              :default => '2013-09-22',          :null => false
-    t.time     "time",                                              :default => '2000-01-01 18:40:26', :null => false
+    t.time     "time",                                              :default => '2000-01-01 22:27:58', :null => false
     t.integer  "order",                                                                                :null => false
     t.integer  "solar_income",                                      :default => 0
     t.integer  "exp_income",                                        :default => 0
@@ -257,7 +257,7 @@ ActiveRecord::Schema.define(:version => 40) do
     t.string   "kind"
     t.string   "content"
     t.date     "date",        :default => '2013-09-22'
-    t.time     "time",        :default => '2000-01-01 18:40:26'
+    t.time     "time",        :default => '2000-01-01 22:27:59'
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
   end

@@ -27,13 +27,7 @@ class Law < ActiveRecord::Base
 
   validates_presence_of :content, :title
 
-  STATE = [
-      'Zarazen',
-      'Projednavan',
-      'Schvalen',
-      'Zamitnut',
-      'Podepsan'
-  ]
+  STATE = %w(Zarazen Projednavan Schvalen Zamitnut Podepsan)
 
   def self.create_label
     label = 'IZ' + Aplikace::VEK + '-'
@@ -52,13 +46,22 @@ class Law < ActiveRecord::Base
   end
 
   def vyhodnot_zakon
-    hlasy_pro = self.polls.pro
-    hlasy_proti = self.polls.proti
-    zdrzelo_se = self.polls.zdrzelo
+    hlasy_pro = self.polls.pro.count
+    hlasy_proti = self.polls.proti.count
+    zdrzelo_se = self.polls.zdrzelo.count
 
     celkem = hlasy_pro + hlasy_proti + zdrzelo_se
 
-    if hlasy_pro > hlasy_proti && hlasy_pro > (0.5 * celkem)
+    puts "pro"
+    puts hlasy_pro
+    puts "proti"
+    puts hlasy_proti
+    puts "zdrzelo se"
+    puts zdrzelo_se
+    puts "celkem"
+    puts celkem
+
+    if (hlasy_pro > hlasy_proti) && (hlasy_pro > (0.5 * celkem))
       self.update_attribute(:state, Law::STATE[2])
       Landsraad.zapis_operaci("Byl schvalen zakon #{self.label} - #{self.title} pomerem: #{self.pomer_hlasu}.")
     else
@@ -86,10 +89,10 @@ class Law < ActiveRecord::Base
   end
 
   def imp_podepis(volba, user)
-    if volba == "Ano"
+    if volba == 'Ano'
       self.update_attributes(:signed => true, :state => Law::STATE[4])
       Landsraad.zapis_hlasu_imp(user.id, "Byl podepsan zakon #{self.label} - #{self.title} .")
-    elsif volba == "Ne"
+    elsif volba == 'Ne'
       self.update_attributes(:signed => false, :state => Law::STATE[5])
       Landsraad.zapis_hlasu_imp(user.id, "Byl zamitnout zakon #{self.label} - #{self.title} .")
     end
