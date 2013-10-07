@@ -36,9 +36,9 @@
               <li><a href="#"> Mezinárodní diplomacie *</a>
               <li><%= link_to 'Správa hráče a volby', sprava_path(:id => current_user) %>
                 <% if can? :sprava_mr, Subhouse %>
-                  <li><%= link_to 'Správa Malorod', sprava_mr_path(:id => current_user.subhouse) %>
+                  <li><%= link_to 'Správa Malorodu', sprava_mr_path(:id => current_user.subhouse) %>
               <% end %>
-              <li><%= link_to 'Přehled Malorodu', subhouse_path(current_user.subhouse) %></li>
+              <li><%= link_to 'Přehled Malorodu', current_user.subhouse if current_user.subhouse %></li>
               <% if can? :sprava_rod, House %>
                   <li><%= link_to 'Správa Velkorodu', sprava_rod_path(:id => current_user.house) %>
               <% end %>

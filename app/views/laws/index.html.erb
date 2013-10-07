@@ -44,25 +44,23 @@
   <tr>
     <th>Název a autor</th>
     <th>Obsah zákona</th>
-    <th>State</th>
-    <th>Position</th>
-    <th>Submitted</th>
+    <th>Stav</th>
+    <th>Zařazen</th>
     <th>Přijat</th>
     <th>Podpis</th>
   </tr>
 
   <% @laws.each do |law| %>
       <tr>
-        <td>  <%= law.label %></td>
-              <li><%= law.title %>
-              <li><%= law.submitters.first.nick %>
+        <td><%= law.label %>
+              <li><%= law.title %></li>
+              <li><%= link_to law.user.nick, law.user %></li>
         </td>
         <td><%= law.content %></td>
         <td><%= law.state %></td>
-        <td><%= law.position %></td>
-        <td><%= law.submitted %></td>
-        <td><%= law.enacted %></td>
-        <td><%= law.signed %></td>
+        <td><%= format_date law.submitted %></td>
+        <td><%= format_date law.enacted %></td>
+        <td><%= format_date law.signed %></td>
       </tr>
   <% end %>
 </table>
