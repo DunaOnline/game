@@ -160,7 +160,7 @@
           <li><h2>Vaše vazalství</h2></li>
       </td>
 
-        <td>
+        <td colspan="3">
           <% if current_user.subhouse %>
             <%= link_to 'Opustit váš Malorod', opustit_mr_path %>
           <% else %>
@@ -170,10 +170,6 @@
           <% end %>
           <% @subhouses.each do |s| %>
             <tr>
-            <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'imghra/malorodnisklad.png' %>)">
-              <li><h2>Vstoupit do Malorodu</h2></li>
-
-            </td>
             <td>
               <span><%= s.name %> </span>
             </td>
@@ -190,7 +186,7 @@
 <% end %>
 
 <tr>
-      <td>
+      <td  colspan="3">
       <% if @user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first %>
       <span>
          <%= form_tag ziadost_path(:id => @user) do %>
