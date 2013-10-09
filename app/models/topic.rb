@@ -17,6 +17,7 @@ class Topic < ActiveRecord::Base
 
   belongs_to :syselaad
   belongs_to :user
+  belongs_to :last_poster, class_name: 'User'
   has_many :posts, :dependent => :destroy
 
 end
