@@ -57,6 +57,7 @@ end
 gem 'whenever', :require => false
 
 gem 'best_in_place'
+gem 'thin'
 
 gem 'active_record_or'
 gem 'randumb'
