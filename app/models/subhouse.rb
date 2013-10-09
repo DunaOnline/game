@@ -25,7 +25,7 @@ class Subhouse < ActiveRecord::Base
   def obsazenost_mr
     flag = true
     Subhouse.by_house(self.house_id).all.each do |subhouse|
-      if subhouse.users.count > Constant.max_u_mr / 3 || true
+      if subhouse.users.count > Constant.max_u_mr / 3
         flag = true
       else
         flag = false
