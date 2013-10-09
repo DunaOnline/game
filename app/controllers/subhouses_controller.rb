@@ -22,9 +22,9 @@ class SubhousesController < ApplicationController
       @subhouse.save
       @subhouse.prirad_mr(current_user)
       current_user.update_attribute(:general, true)
-      redirect_to :back, :notice => "Malorod uspesne zalozeny"
+      redirect_to :back, :notice => 'Malorod úspěšně založený.'
     else
-      redirect_to :back, :alert => "Nemozte zalozit malorod"
+      redirect_to :back, :alert => 'Nemůžete založit malorod dokud nejsou naplněné již existující.'
     end
   end
 
@@ -53,11 +53,12 @@ class SubhousesController < ApplicationController
   def vyhod_mr
     user = User.find(params[:id])
     mr = user.subhouse
-    if user.update_attribute(:subhouse_id, nil)
-      redirect_to :back, :notice => "Vyhostili ste hrace #{user.nick} z malorodu"
-      user.zapis_operaci("Byl jste vyhosten z malorodu #{mr.name}")
+    if user.update_attributes(:subhouse_id => nil, :vicegeneral => false, :general => false)
+      user.zapis_operaci("Byl jsi vyhoštěn z malorodu #{mr.name}")
+      mr.zapis_operaci("Z malorodu byl vyhoštěn hráč #{user.nick}.")
+      redirect_to :back, :notice => "Vyhostil jsi hráče #{user.nick} z malorodu"
     else
-      redirect_to :back, :alert => "Nemuzte vyhostit hrace #{user.nick}"
+      redirect_to :back, :alert => "Nemůžeš vyhostit hráče #{user.nick}"
     end
   end
 
@@ -85,7 +86,7 @@ class SubhousesController < ApplicationController
     if flag
       redirect_to sprava_mr_path(:id => malorod), :notice => msg
     else
-      msg += "Nezadali ste mnozstvo na presun" if msg == ""
+      msg += "Nezadal jsi množství na přesun" if msg == ""
       redirect_to sprava_mr_path(:id => malorod), :alert => msg
     end
   end
