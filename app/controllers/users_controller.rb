@@ -165,9 +165,9 @@ class UsersController < ApplicationController
   def ziadost_malorod
     subhouse = Subhouse.find(params[:id])
     if current_user.update_attribute(:ziadost_subhouse, subhouse.id)
-      redirect_to :back, :notice => "Ziadost do malorodu #{subhouse.name} bola podana"
+      redirect_to :back, :notice => "Žádost do malorodu #{subhouse.name} byla podána"
     else
-      redirect_to :back, :alert => "Nemuzte poslat zadost"
+      redirect_to :back, :alert => "Nemůžte poslat žádost"
     end
   end
 

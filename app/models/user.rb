@@ -390,7 +390,7 @@ class User < ActiveRecord::Base
   def opustit_mr
     subhouse = self.subhouse
 
-    self.update_attribute(:subhouse_id, nil)
+    self.update_attributes(:subhouse_id => nil, :vicegeneral => false, :general => false)
     if subhouse.users.count == 0
       subhouse.house.update_attributes(:solar => subhouse.house.solar + subhouse.solar, :material => subhouse.house.material + subhouse.material,
                                        :melange => subhouse.house.melange + subhouse.melange, :exp => subhouse.house.exp + subhouse.exp, :parts => subhouse.house.parts + subhouse.parts)
@@ -428,7 +428,8 @@ class User < ActiveRecord::Base
         o.destroy
       end
       self.update_attributes(:house_id => house.id, :ziadost_house => nil)
-      self.zapis_operaci("Byl jste prijat do naroda #{house.name}, Opustili sme renegaty")
+      self.zapis_operaci("Byl jsi přijat do národa #{house.name}. Opustil jsi renegáty.")
+      house.zapis_operaci("Do národa byl přijat hráč #{self.nick}.")
       return true
     end
     return false
@@ -437,7 +438,8 @@ class User < ActiveRecord::Base
   def prijat_do_mr(mr)
     if self.subhouse == nil
       self.update_attributes(:subhouse_id => mr.id, :ziadost_subhouse => nil)
-      self.zapis_operaci("Byl jste prijat do malorodu #{mr.name}")
+      self.zapis_operaci("Byl jste přijat do malorodu #{mr.name}.")
+      mr.zapis_operaci("Do malorodu byl přijat hráč #{self.nick}.")
       return true
     else
       return false

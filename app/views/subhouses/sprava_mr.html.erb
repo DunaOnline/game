@@ -186,7 +186,7 @@
       <% @ziadosti.each do |ziadost| %>
   <tr>
      <td><%= link_to ziadost.nick, user_path(ziadost) %></td>
-     <td><%= button_to("Prijmout", prijmi_hrace_mr_url(:id => ziadost.id), :confirm => "Naozaj chcete prijat hrace ?") %></td>
+     <td><%= button_to("Přijmout", prijmi_hrace_mr_url(:id => ziadost.id), :confirm => "Opravdu chcete přijmout hráče?") %></td>
   </tr>
       <% end %>
 </table>

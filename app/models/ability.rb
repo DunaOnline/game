@@ -82,8 +82,10 @@ class Ability
         if user.diplomat?
         end
         if user.general?
+          can [:vyhod_mr, :prijmi_hrace_mr, :posli_mr_sur, :menuj_vice], Subhouse, :id => user.subhouse_id
         end
         if user.vicegeneral?
+          can [:prijmi_hrace_mr, :posli_mr_sur], Subhouse, :id => user.subhouse_id
         end
         if user.arrakis?
           can [:postavit_arrakis], Field
