@@ -99,7 +99,7 @@ class UsersController < ApplicationController
     @planets = @user.najdi_planety
     @operations = @user.operations.uzivatelske.seradit.limit(5)
     @subhouse = Subhouse.new
-    @subhouses = Subhouse.all
+    @subhouses = @user.house.subhouses
   end
 
   def send_products
