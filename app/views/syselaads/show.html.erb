@@ -48,7 +48,7 @@
         <%= link_to h(topic.name), topic_path(topic.id) %>
         <td><%= topic.posts.count - 1 %></td>
         <td class="right"><%= distance_of_time_in_words_to_now topic.last_post_at %> ago
-          by <%= link_to topic.user.nick, "/users/#{topic.last_poster_id}" %></td>
+          by <%= link_to topic.last_poster.nick, "/users/#{topic.last_poster_id}" %></td>
         
       </tr>
   <% end %>
