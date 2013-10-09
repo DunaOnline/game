@@ -1,3 +1,4 @@
+# encoding: utf-8
 class SubhousesController < ApplicationController
   authorize_resource # CanCan
 
