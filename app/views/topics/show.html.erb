@@ -4,8 +4,8 @@
   <tr>
     <td class="drob">
       <a href="#" title="Home">⌂</a>
-      » <a href="#">Syselaad</a>
-      » <a href="#">Otevřené vlákno diskuse</a>
+      » <%= link_to @topic.syselaad.name, syselaad_path(@topic.syselaad_id) %>
+      » <%= link_to @topic.name, '#' %></a>
     </td>
     <% if admin? %>
       <td class="tdd">
