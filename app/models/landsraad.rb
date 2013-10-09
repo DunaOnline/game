@@ -17,6 +17,7 @@ class Landsraad
     hracu = User.count
     pocet = (hracu / Landsraad::POMER_POSLANCE_NA_HRACE) * 20
     pocet = 20 if pocet < 20
+    return pocet
   end
 
 end
