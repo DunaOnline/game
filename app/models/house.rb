@@ -404,7 +404,7 @@ class House < ActiveRecord::Base
 
   def self.registration
 
-    max = User.group(:house_id).count.max[1]
+    max = User.group(:house_id).count.sort {|a,b| b[1] <=> a[1]}[0][1]
     pole = []
     House.playable.all.each do |h|
       if h.users.count + Constant.rozdiel_u_reg < max
