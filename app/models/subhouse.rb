@@ -20,6 +20,7 @@ class Subhouse < ActiveRecord::Base
   has_many :markets
   has_many :productions
   has_many :users
+  has_many :operations
   belongs_to :house
 
   def obsazenost_mr
@@ -43,7 +44,7 @@ class Subhouse < ActiveRecord::Base
   end
 
   def zapis_operaci(content)
-    Operation.new(:kind => "M", :subhouse_id => self.id, :content => content, :date => Date.today, :time => Time.now).save
+    self.operations << Operation.new(:kind => "M", :subhouse_id => self.id, :content => content, :date => Date.today, :time => Time.now)
   end
 
   def bylo_poslano_trh(market, amount)

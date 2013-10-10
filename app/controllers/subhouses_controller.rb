@@ -8,6 +8,7 @@ class SubhousesController < ApplicationController
 
   def show
     @subhouse = Subhouse.find(params[:id])
+    @operations = @subhouse.operations.malorodni.seradit.limit(5)
   end
 
   def new
@@ -23,6 +24,7 @@ class SubhousesController < ApplicationController
       @subhouse.save
       @subhouse.prirad_mr(current_user)
       current_user.update_attribute(:general, true)
+      @subhouse.zapis_operaci('Založení malorodu.')
       redirect_to :back, :notice => 'Malorod úspěšně založený.'
     else
       redirect_to :back, :alert => 'Nemůžete založit malorod dokud nejsou naplněné již existující.'
@@ -66,7 +68,9 @@ class SubhousesController < ApplicationController
   def prijmi_hrace_mr
     user = User.find(params[:id])
     if user.prijat_do_mr(current_user.subhouse)
-      redirect_to :back, :notice => "Hrac #{user.nick} bol prijaty do malorodu"
+      msg = "Hráč #{user.nick} byl přijat do malorodu."
+      current_user.subhouse.zapis_operaci(msg)
+      redirect_to :back, :notice => msg
     else
       redirect_to :back, :alert => "Nepodarilo sa prijat hraca"
     end
@@ -85,6 +89,8 @@ class SubhousesController < ApplicationController
     mr << params[:mr_solary].to_f << params[:mr_melanz].to_f << params[:mr_zkusenosti].to_i << params[:mr_material].to_f << params[:mr_parts].to_f
     msg, flag = malorod.posli_mr_suroviny(narod, user, mr, rodu, useru, mrdu)
     if flag
+      current_user.zapis_operaci(msg)
+      malorod.zapis_operaci(msg)
       redirect_to sprava_mr_path(:id => malorod), :notice => msg
     else
       msg += "Nezadal jsi množství na přesun" if msg == ""

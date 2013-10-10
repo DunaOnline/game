@@ -159,7 +159,7 @@ class FieldsController < ApplicationController
     if source.drzitel(current_user) && target.drzitel(current_user)
       case str = source.move_resource(target, params[:presunout_co], params[:amount].to_i.abs)
         when true
-          flash[:notice] = "Suroviny přesunuty. "
+          flash[:notice] = "Suroviny přesunuty."
           #if params[:tovarna]
           #  redirect_to productions_path
           #else

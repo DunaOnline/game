@@ -42,6 +42,7 @@
               <% if can? :sprava_rod, House %>
                   <li><%= link_to 'Správa Velkorodu', sprava_rod_path(:id => current_user.house) %>
               <% end %>
+              <li><%= link_to 'Přehled Národa', current_user.house %></li>
               <% if can? :sprava, Imperium %>
                   <li><%= link_to 'Správa Impéria', sprava_imperia_path %></li>
               <% end %>
