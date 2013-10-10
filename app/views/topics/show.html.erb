@@ -28,16 +28,18 @@
 <table class="tab3" style="height:18px;">
   <% for post in @posts %>
     <tr>
-        <td class="tdpl" style="width:100px !important">
-        <b><%= link_to post.user.nick, user_url(post.user) %></b>
-        <br>[<%= format_date_time post.created_at %>]
-        <% if logged_in? %>
+        <td class="tdpl" style="padding: 0px !important; width:100px !important; background-image: url(<%= asset_path 'budovy/Riches/dom.png' %>) !important; background-repeat: repeat;">
+        <div class="poster" ><b><%= link_to post.user.nick, user_url(post.user) %></b>
+        <br><%= format_date_time post.created_at %>
+        <% if logged_in? %> 
             <% if admin_or_owner?(post.user.id) %>
-                <br><%= link_to  "Editovat", edit_post_path(post) %>
-                <br><%= link_to image_tag('../assets/css/delete.png'), post, :confirm => 'Opravdu smazat příspěvek?', :method => :delete %>
+                <br><%= link_to  "Editovat", edit_post_path(post) %> |
+                <%= link_to "Smazat", post, :confirm => 'Opravdu smazat příspěvek?', :method => :delete %>
               <% end %>
           <% end %>
-          <br><br>
+          </div>
+          
+          
         </td>
 
   
