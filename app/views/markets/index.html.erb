@@ -5,29 +5,42 @@
       <a href="index.htm" title="Home">⌂</a>
       » <%= link_to 'Obchod', markets_path, :title => "Obchod" %>
     </td>
+    
+    <td class="tdd">
+          <%= link_to 'Spravovat nabídky »', my_offers_path %>
+    </td>
+    
+    <td class="tdd">
+          <a href="#" id="newOffer">Přidat vaši nabídku »</a>
+    </td>
+      
   </tr>
 </table>
-<div id="market">
-  <span class="heading">Na trhu mozete predavat zbozi</span>
-  <table class="tab0">
-    <tr>
-      <td>
 
-      </td>
-      <td class="tdd">
-        <%= link_to 'Moje ponuky >>', my_offers_path %>
-      </td>
-    </tr>
-  </table>
+<div id="market">
+  <span class="heading">Přehled aktuálního zboží na trhu</span>
+  
+<table class="tab0" style="margin:20px !important"> 
+  <tr> 
+    <td >
+      <br><br><br>
+      <h3>Doporučené ceny:</h3>
+      <li><%= img_material %> 5 - 100 </li>
+      <li><%= img_melanz %> 400 - 10,000 </li>
+    </td>
+  </tr>
+</table>
 
 
 </div>
+
+  <br>
 <!--<div id="obrazok">-->
 
 <!--</div>-->
 <table class="vyroba">
   <tr>
-    <th>Tovar</th>
+    <th>Komodita</th>
 
     <th>Cena za kus [Sol]</th>
     <th>Množství</th>
@@ -40,13 +53,12 @@
 
 <!-- !!!!!!!!! KONEC - OBLAST ZMĚNY  V KÓDU PRO TUTO STRÁNKU !!!!! -->
 
-<a href="#" id="newOffer">Pridat ponuku</a>
 <div id="offerForm">
 
 
   <table class="vyroba">
     <tr>
-      <th>Nová nabídka</th>
+      <th>Komodita k nabídnutí</th>
       <th>Cena za kus [Sol]</th>
 
       <th>Množství k prodeji</th>

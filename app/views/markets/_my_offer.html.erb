@@ -7,20 +7,20 @@
 
 
   <td>
-    <%= link_to 'Strata 30% zbozi', my_offer, :confirm => "are you sure?", :method => :delete, :remote => true, :class => 'delete_market' %>
+    <%= link_to 'Ztráta 30% zboží', my_offer, :confirm => "Jste si jistý? Přijdete o 30% z nabízené komodity!", :method => :delete, :remote => true, :class => 'delete_market' %>
   </td>
   <% if ((Time.now - my_offer.updated_at) / 3600).round > 1 %>
       <td>
         <% if my_offer.price != 1 %>
-            <%= link_to 'Zlevnit o 10%', zlevnit_path(:market => my_offer.id), :confirm => "are you sure?", :class => 'delete_market' %>
+            <%= link_to 'Zlevnit o 10%', zlevnit_path(:market => my_offer.id), :confirm => "Jste si jistý?", :class => 'delete_market' %>
         <% end %>
       </td>
       <td>
-        <%= link_to 'Zdrazet o 10%', zdrazet_path(:market => my_offer.id), :confirm => "are you sure?", :class => 'delete_market' %>
+        <%= link_to 'Zdražit o 10%', zdrazet_path(:market => my_offer.id), :confirm => "Jste si jistý?", :class => 'delete_market' %>
       </td>
   <% else %>
-      <td>Mozete zlacnit kazdu hodinu</td>
-      <td>Mozete zdrazet kazdu hodinu</td>
+      <td>Jednou za hodinu</td>
+      <td>Jednou za hodinu</td>
 
 
   <% end %>

@@ -1,29 +1,64 @@
+<table class="tab0">
+  <tr>
+    <td>
+      <a href="index.htm" title="Home">⌂</a>
+      » <%= link_to 'Obchod', markets_path, :title => "Obchod" %>
+      » <%= link_to 'Spravovat nabídky', my_offers_path %>
+    </td>
+          
+  </tr>
+</table>
+
 <table class="myOffers">
   <tr>
-    <th>Tovar</th>
-
-    <th>Cena za kus [Sol]</th>
+    <th class="tdpl" rowspan="99" style="width:100px; background-image: url(<%= asset_path 'imghra/hracsklad.png' %>)">
+      <h3>Vaše</h3>
+    </th>
+    <th>Komodita</th>
+    <th>Cena</th>
     <th>Množství</th>
-    <th>Stahnout</th>
+    <th>Zrušit</th>
     <th>Zlevnit</th>
-    <th>Zdrazet</th>
+    <th>Zdražit</th>
   </tr>
-  <tr>
-    <th colspan="6">Moje ponuky</th>
-  </tr>
-  <%= render :partial => "my_offer", :collection => @markets %>
-  <% if current_user.general? %>
-      <tr>
-        <th colspan="6">Malorodne ponuky</th>
-      </tr>
-      <%= render :partial => "my_offer", :collection => @markets_mr %>
-  <% end %>
-  <% if current_user.leader? %>
-      <tr>
-        <th colspan="6">Narodne ponuky</th>
-      </tr>
 
-      <%= render :partial => "my_offer", :collection => @markets_h %>
-  <% end %>
+  <%= render :partial => "my_offer", :collection => @markets %>
 </table>
-<%= link_to 'Spat', markets_path %>
+
+
+  
+  <% if current_user.general? %>
+    <table class="myOffers">
+      <tr>
+        <th class="tdpl" rowspan="99" style="width:100px; background-image: url(<%= asset_path 'imghra/malorodnisklad.png' %>)">
+          <h3>Malorodní</h3>
+        </th>
+        <th>Komodita</th>
+        <th>Cena</th>
+        <th>Množství</th>
+        <th>Zrušit</th>
+        <th>Zlevnit</th>
+        <th>Zdražit</th>
+      </tr>
+          <%= render :partial => "my_offer", :collection => @markets_mr %>
+    </table>
+  <% end %>
+ 
+  
+  <% if current_user.leader? %>
+    <table class="myOffers">
+      <tr>
+        <th class="tdpl" rowspan="99" style="width:100px; background-image: url(<%= asset_path 'imghra/narodnisklad.png' %>)">
+          <h3>Národní</h3>
+        </th>
+        <th>Komodita</th>
+        <th>Cena</th>
+        <th>Množství</th>
+        <th>Zrušit</th>
+        <th>Zlevnit</th>
+        <th>Zdražit</th>
+      </tr> 
+          <%= render :partial => "my_offer", :collection => @markets_h %>
+    </table>
+  <% end %>
+
