@@ -157,7 +157,7 @@ class FieldsController < ApplicationController
     source = Field.find(params[:source_field])
     target = Field.find(params[:target_field])
     if source.drzitel(current_user) && target.drzitel(current_user)
-      case str = source.move_resource(target, params[:presunout_co], params[:amount].to_i)
+      case str = source.move_resource(target, params[:presunout_co], params[:amount].to_i.abs)
         when true
           flash[:notice] = "Suroviny přesunuty. "
           #if params[:tovarna]
