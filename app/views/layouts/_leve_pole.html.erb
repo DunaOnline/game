@@ -1,3 +1,9 @@
+
+<div class="la">
+  <%= link_to "Nepřečtená pošta [" + current_user.neprocteno_sprav.to_s + "]", messages_path %>
+</div>
+
+
 <% field, planet = current_user.zobraz_udalost %>
 <% field.each do |f| %>
     <div class="la field_event">

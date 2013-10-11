@@ -4,7 +4,7 @@
     <tr>
       <td>
         <ul class="menu">
-          <li><a class="menukomunikace" title="Komunikace"><%= current_user.neprocteno_sprav %></a>
+          <li><a class="menukomunikace" title="Komunikace"></a>
             <ul>
               <li><%= link_to "Doručená pošta [" + current_user.neprocteno_sprav.to_s + "]", messages_path %>
               <li><%= link_to "Odeslaná pošta", odeslana_posta_path %>
