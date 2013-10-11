@@ -147,6 +147,34 @@ module ApplicationHelper
     #cesta += ".png"
 
   end
+  
+  def cesta_rod(rod, typ)
+    cesta = "/assets/budovy/"
+    case rod
+      when "Atreides"
+        cesta += "Atreides/"
+      when "Corrino"
+        cesta += "Corrino/"
+      when "Ekaz"
+        cesta += "Ekaz/"
+      when "Harkonnen"
+        cesta += "Harkonnen/"
+      when "Moritani"
+        cesta += "Moritani/"
+      when "Riches"
+        cesta += "Riches/"
+      when "Vernio"
+        cesta += "Vernio/"
+      when "Titáni"
+        cesta += "Titani/"
+      when "Impérium"
+        cesta += "Imperium/"
+    end
+    cesta += typ + ".png"
+    #cesta += typ
+    #cesta += ".png"
+
+  end
 
   def obrazek_budovy(rod, typ)
     image_tag(cesta_budovy(rod, typ))

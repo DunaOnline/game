@@ -1345,6 +1345,21 @@ td.none {
     border: 1px solid #696969 !important;
 }
 
+
+.forum {vertical-align: top;}
+
+    .forum img {
+        max-width: 200px;
+        max-height: 300px;
+        margin: 5px 5px 5px 10px;
+        vertical-align: middle;
+        border: solid 1px #a9a9a9;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 2px;
+        float: right;
+    }
+
     /* ++++++++++++++++++++ Tabulky - TAB0 = Drobe?kov? navigace ++++++++++++++++++++ */
 
 table.tab0 {
@@ -1571,6 +1586,17 @@ table.tab3 th {
 
 table.tab3 li {
     list-style: none;
+}
+
+table.tab3 iframe {
+    max-width: 200px;
+    max-height: 300px;
+    margin: 2px 3px 2px 0;
+    vertical-align: middle;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 }
 
 table.tab3 input {
@@ -2203,7 +2229,7 @@ td.tdo {
     padding: 4px 5px 7px 5px; 
     background-image: url(<%= asset_path 'css/tcerna.png' %>);
     font-size: 11px;
-    margin-bottom:3px;
+    margin-top:3px;
 }
 
     .poster b {
