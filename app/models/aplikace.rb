@@ -56,7 +56,7 @@ class Aplikace
 
   def self.wipe
     puts "WIPE"
-    AppLog.delete_all
+    #AppLog.delete_all
     Eod.delete_all
     Environment.delete_all
     Estate.delete_all
@@ -75,10 +75,11 @@ class Aplikace
     MarketHistory.delete_all
     Research.delete_all
     Production.delete_all
+    Subhouse.delete_all
 
 
     for field in Field.all do
-      if field.planet.domovska?
+      if field.planet.domovska? && field.user.house != House.renegat
         field.vytvor_resource
 
         field.postav(Building.where(:kind => "L", :level => [1]).first, 2)
@@ -119,21 +120,26 @@ class Aplikace
       if user.admin?
         user.hlasuj(User.find_by_username('Norma_Cenva'), 'leader')
       else
-        user.napln_suroviny
-        user.update_attributes(:leader => false,
-                               :mentat => false,
-                               :army_mentat => false,
-                               :diplomat => false,
-                               :general => false,
-                               :vicegeneral => false,
-                               :landsraad => false,
-                               :arrakis => false,
-                               :emperor => false,
-                               :regent => false,
-                               :court => false,
-                               :vezir => false,
-                               :admin => false)
-        user.hlasuj(user, 'leader')
+	      if user.house == House.renegat
+		      user.destroy
+	      else
+		      user.napln_suroviny
+		      user.update_attributes(:leader => false,
+		                             :mentat => false,
+		                             :army_mentat => false,
+		                             :diplomat => false,
+		                             :general => false,
+		                             :vicegeneral => false,
+		                             :landsraad => false,
+		                             :arrakis => false,
+		                             :emperor => false,
+		                             :regent => false,
+		                             :court => false,
+		                             :vezir => false,
+		                             :admin => false)
+		      user.hlasuj(user, 'leader')
+	      end
+
       end
     end
 
