@@ -148,6 +148,35 @@ module ApplicationHelper
 
   end
   
+  def hodnost_barva(hodnost)
+    case hodnost
+      when "Admin"
+        cesta += "a.admin"
+      when "Emperor"
+        cesta += "a.emperor"
+      when "Arrakis"
+        cesta += "a.regent"
+      when "Regent"
+        cesta += "a.regent"
+      when "Leader"
+        cesta += "a.leader"
+      when "Vezir"
+        cesta += "a.regent"
+      when "Mentat"
+        cesta += "a.mentat"
+      when "Army mentat"
+        cesta += "a.army_mentat"
+      when "Diplomat"
+        cesta += "a.diplomat"
+      when "Landsraad"
+        cesta += "a.poslanec"
+      when "General"
+        cesta += "a.general"
+      else
+        cesta += ""
+    end
+  end
+  
   def cesta_rod(rod, typ)
     cesta = "/assets/budovy/"
     case rod

@@ -35,7 +35,7 @@
       <tr>
         <td class="tdpl" style="background-image: url(<%= asset_path planeta.background %>)">
           <li><h2><%= link_to planeta.name, planeta %></h2>
-          <li><%= link_to planeta.system_name, planeta.system %> sektor
+          <li><%= link_to planeta.system_name, planeta.system %>
           <li><%= planeta.oznaceni %>]
           <li><%= planeta.obsazenost %>
 
@@ -47,12 +47,11 @@
           <% end %>
           <!--<li><b>Dominantní národ: </b><a href="stat-databaze-narod.htm">Riches (33) *</a>
           <li><b>Další národy:</b> Atreides (12), Corrino (10), Ekaz (7), Harkonnenové (2)-->
-          <li><b>Vaše léna:</b>
-            <% for field in planeta.fields.where(:user_id => current_user) do %>
-                <%= link_to field.name, field %>;
-            <% end %>
-            <br><br>
-          <%= link_to 'Seznam vlastníků lén na planetě', planeta.system %>
+          <% for field in planeta.fields.where(:user_id => current_user) do %>
+              <br><b>Názvy vašich lén:</b>
+              <li><%= link_to field.name, field %>
+          <% end %>
+              
         </td>
         <td>
           <li><%= img_solary "Bonus soláry" %>

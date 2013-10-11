@@ -30,17 +30,33 @@
         <% if @planet.house %>
           <li><b>Objevitele: </b><%= @planet.house.name %>
       <% end %>
-      <li><b>Dominantní národ: </b><a href="stat-databaze-narod.htm">Riches *</a>
-        <br/><br/>
+      <!-- <li><b>Dominantní národ: </b><a href="stat-databaze-narod.htm">Riches *</a> -->
         <% if @planet.domovska? %>
-
+            <br><br>
+            <li><i>
+              Můj lorde, léna na domovských planetách jsou dědičným územím s dlouholetou historii. 
+              Nové léno zde proto nelze osídlit. 
+              Zkusme se porozhlédnout po lepším místě, například <%= link_to "zde", planets_path %>.
+            </i></li>
         <% elsif @planet.arrakis? %>
 
         <% else %>
             <% if @planet.osidlitelna?(current_user) %>
-              <li><%= link_to "Osidlit pole (#{number_with_precision(@cena_noveho_lena_melanz, precision: 2)} mg a #{number_with_precision(@cena_noveho_lena_solary, precision: 2)} S)", :action => "osidlit_pole", :id => @planet, :cena_mel => @cena_noveho_lena_melanz, :cena_sol => @cena_noveho_lena_solray %>
+              <br><br>
+              
+              <li><i>
+                  Můj lorde, planeta je vhodna k osídlení. 
+                  Pokud jsou na povrchu jěště volné oblasti, lze osídlit více než jendo léno.
+                  Dávejte ale pozor, nová území se na zaplněném světě špatně hledají! Proto rostou náklady s počtem již na planetě osídlených lén.
+              </i></li>
+              <br>
+              <li><%= link_to "Osidlit nové léno za #{number_with_precision(@cena_noveho_lena_melanz, precision: 2)} mg a #{number_with_precision(@cena_noveho_lena_solary, precision: 2)} S", :action => "osidlit_pole", :id => @planet, :cena_mel => @cena_noveho_lena_melanz, :cena_sol => @cena_noveho_lena_solray %></li>
           <% else %>
-              <li>Vesmírná Gilda planetu ještě nezahrnula do pravidelných cest.</li>
+              <br><br>
+              <li><i>
+                  Je mi líto můj pane, Vesmírná Gilda tento svět ještě nezahrnula do obchodních cest. 
+                  Proto není vhodné ji osídlit! Zkusme se porozhlédnout po lepším místě, například <%= link_to "zde", planets_path %>.
+              </i></li>
           <% end %>
       <% end %>
     </td>
@@ -60,33 +76,37 @@
   </tr>
 </table>
 
-<table class="tab1">
-  <tr>
-    <td class="td1">Název obsazeného léna</td>
-    <td class="td1" width="100px">Souřadnice</td>
-    <td class="td1">Držitel léna</td>
-    <td class="td1">Národnost</td>
-    <td class="td1" width="100px">Akce</td>
-  </tr>
-  <% for field in @planet.fields do %>
+<% if @planet.domovska? %>
+<% elsif @planet.arrakis? %>
+<% elsif @planet.osidlitelna?(current_user) %>
+
+    <table class="tab1">
       <tr>
-        <td class="tdp">
-          <% if field.drzitel(current_user) %>
-              <%= link_to field.name, field %>
-          <% else %>
-              <%= field.name %>
-          <% end %>
-        </td>
-        <td class="tdp"><%= field.oznaceni %></td>
-        <td class="tdp"><%= link_to field.user.nick, field.user %></td>
-        <td class="tdp"><%= link_to field.user.house.name, field.user.house %></td>
-        <td class="tdpa">
-          <a href="kom-poslat.htm" alt="Pošta"><%= img_posta %> *</a>
-          <a href="stat-databaze-profil.htm" alt="Útok"><%= img_utok %> *</a>
-        </td>
+        <td class="td1">Název obsazeného léna</td>
+        <td class="td1" width="100px">Souřadnice</td>
+        <td class="td1">Držitel léna</td>
+        <td class="td1">Národnost</td>
+        <td class="td1" width="100px">Akce</td>
       </tr>
-  <% end %>
-
-</table>
-
+      <% for field in @planet.fields do %>
+          <tr>
+            <td class="tdp">
+              <% if field.drzitel(current_user) %>
+                  <%= link_to field.name, field %>
+              <% else %>
+                  <%= field.name %>
+              <% end %>
+            </td>
+            <td class="tdp"><%= field.oznaceni %></td>
+            <td class="tdp"><%= link_to field.user.nick, field.user %></td>
+            <td class="tdp"><%= link_to field.user.house.name, field.user.house %></td>
+            <td class="tdpa">
+              <a href="kom-poslat.htm" alt="Pošta"><%= img_posta %> *</a>
+              <a href="stat-databaze-profil.htm" alt="Útok"><%= img_utok %> *</a>
+            </td>
+          </tr>
+      <% end %>
+    
+    </table>
+<% end %>
 	

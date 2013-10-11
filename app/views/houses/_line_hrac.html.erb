@@ -1,9 +1,9 @@
 <tr>
   <td><%= link_to user.nick, user %></td>
-  <td><a href="stat-databaze-narod.htm">Eseland *</a></td>
-  <td>5%</td>
-  <td>11111</td>
-  <td>11111</td>
+  <td><%= link_to user.subhouse.name, user.subhouse if user.subhouse %></td>
+  <td>5%*</td>
+  <td>11111*</td>
+  <td>11111*</td>
   <td><%= user.influence %></td>
   <td><%= user.fields.count %></td>
   <td>

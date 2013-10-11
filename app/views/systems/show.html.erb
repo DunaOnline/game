@@ -47,14 +47,13 @@
             <% if planeta.house %>
               <li><b>Objevitele: </b><%= planeta.house.name %>
           <% end %>
-          <li><b>Dominantní národ: </b><a href="#">Riches (33) *</a>
-          <li><b>Další národy:</b> Atreides (12), Corrino (10), Ekaz (7), Harkonnenové (2)
-          <li><b>Vaše léna:</b>
-            <% for field in planeta.fields.where(:user_id => current_user) do %>
-                <%= link_to field.name, field %>;
-            <% end %>
-            <br><br>
-          <li><a href="#">Seznam vlastníků lén na planetě *</a>
+          <!-- <li><b>Dominantní národ: </b><a href="#">Riches (33) *</a>
+          <li><b>Další národy:</b> Atreides (12), Corrino (10), Ekaz (7), Harkonnenové (2) -->
+          <% for field in planeta.fields.where(:user_id => current_user) do %>
+              <br><b>Názvy vašich lén:</b>
+              <li><%= link_to field.name, field %>
+          <% end %>
+          <!-- <li><a href="#">Seznam vlastníků lén na planetě *</a> -->
         </td>
         <td>
           <li><%= img_solary "Bonus soláry" %>
