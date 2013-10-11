@@ -57,43 +57,61 @@ class Aplikace
   def self.wipe
     puts "WIPE"
     #AppLog.delete_all
+    #puts 'AppLogy deleted'
     Eod.delete_all
+    puts 'EOD deleted'
     Environment.delete_all
+    puts 'Enviro deleted'
     Estate.delete_all
+    puts 'Estate deleted'
     Resource.delete_all
+    puts 'Resources deleted'
     Influence.delete_all
+    puts 'Influence deleted'
     Law.delete_all
+    puts 'Law deleted'
     Poll.delete_all
+    puts 'Poll deleted'
     #Syselaad.delete_all
     #Post.delete_all
     #Topic.delete_all
     Operation.delete_all
+    puts 'Operation deleted'
     Vote.delete_all
+    puts 'Vote deleted'
     Message.delete_all
+    puts 'Message deleted'
     Conversation.delete_all
+    puts 'Conversation deleted'
     Market.delete_all
+    puts 'Market deleted'
     MarketHistory.delete_all
+    puts 'Market hisotry deleted'
     Research.delete_all
+    puts 'Research deleted'
     Production.delete_all
+    puts 'Production deleted'
     Subhouse.delete_all
+    puts 'Subhouse deleted'
 
 
     for field in Field.all do
       if field.planet.domovska? && field.user.house != House.renegat
         field.vytvor_resource
 
-        field.postav(Building.where(:kind => "L", :level => [1]).first, 2)
+        field.postav(Building.where(:kind => "L", :level => [1]).first, 1)
         field.postav(Building.where(:kind => "S", :level => [1]).first, 2)
         field.postav(Building.where(:kind => "M", :level => [1]).first, 2)
-        field.postav(Building.where(:kind => "E", :level => [1]).first, 2)
+        field.postav(Building.where(:kind => "E", :level => [1]).first, 1)
       else
         field.delete
       end
 
     end
+    puts 'Fields deleted'
 
     for hou in House.playable do
-      hou.update_attributes(:solar => 10000.0, :melange => 50.0, :material => 50000.0, :exp => 100.0, :melange_percent => 3.0)
+      hou.update_attributes(:solar => 10000.0, :melange => 50.0, :material => 5000.0, :exp => 1000.0, :melange_percent => 3.0)
     end
 
     for hou in House.all do
@@ -142,6 +160,7 @@ class Aplikace
 
       end
     end
+    puts 'Users done'
 
     for house in House.playable do
       i = 0
@@ -164,7 +183,7 @@ class Aplikace
                             :position => 1,
                             :system_name => "Mu Draconis")
 
-    Planet.arrakis.fields << Field.create(:name => "Leno Arrakis",
+    Planet.arrakis.fields << Field.create(:name => "Léno Arrakis",
                                           :planet_id => arrakis.id,
                                           :user_id => nil,
                                           :pos_x => 1,
@@ -177,6 +196,12 @@ class Aplikace
     harvester = Building.where(:name => "Továrna na koření").first
     arrakis_field.postav(harvester, 10)
     puts "Budovy na Arrakis postaveny"
+
+    imperium = House.imperium
+    imperium.update_attributes(
+        :solar => 40000.0,
+        :melange => 5000.0
+    )
 
     #for house in House.playable do
     #  Syselaad.create(
@@ -209,10 +234,10 @@ class Aplikace
     #  topic.posts << Post.create(:topic_id => topic.id, :user_id => 1, :content => 'Vítejte!')
     #end
 
+    #TODO než bude jmenování implementované...
     User.find_by_username('Doktor').jmenuj_spravcem
 
     puts 'Prepocet spusten'
-    Prepocet.prepocti_vliv
     Prepocet.kompletni_prepocet
     puts 'Prepocet dokoncen'
 
