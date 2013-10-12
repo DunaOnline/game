@@ -60,6 +60,23 @@ class Message < ActiveRecord::Base
     end
   end
 
+  def druh_posty
+	  t = ""
+	  case self.druh
+		  when "I"
+			  t = "Imperialni"
+		  when "N"
+			  t = "Narodni"
+		  when "M"
+			  t = "Malorodni"
+		  when "G"
+			  t = "Generalum"
+		  when "D"
+			  t = "Diplomaticka"
+
+	  end
+  end
+
 
   def posli_postu(komu)
     #self.update_attribute(:user_id, odosielatel.id)

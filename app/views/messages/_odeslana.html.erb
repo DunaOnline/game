@@ -3,7 +3,11 @@
 
 
   </td>
-  <td><%= link_to odeslana.user.nick, odeslana.user %></td>
+  <% if odeslana.recipients%>
+  <td><%= link_to odeslana.conversations.first.user.nick, odeslana.conversations.first.user, :title => "#{odeslana.recipients}" %></td>
+  <% else %>
+  <td><%= odeslana.druh_posty %></td>
+  <% end %>
   <td><%= link_to odeslana.user.house.name, odeslana.user.house %></td>
   <td><%= odeslana.subject %>
 
