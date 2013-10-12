@@ -1,3 +1,4 @@
+# encoding: utf-8
 class MarketsController < ApplicationController
   # GET /markets
   # GET /markets.json
@@ -46,25 +47,29 @@ class MarketsController < ApplicationController
   # POST /markets.json
   def create
     @market = Market.new(params[:market])
-    if params[:sent_from] == "H"
-      flag, msg = current_user.house.sell_goods_house(@market)
-      @market.house_id = current_user.house_id
-      @market.user_id = 0
+    if @market.amount > 0 && @market.price > 0
+	    if params[:sent_from] == "H"
+	      flag, msg = current_user.house.sell_goods_house(@market)
+	      @market.house_id = current_user.house_id
+	      @market.user_id = 0
 
-    elsif params[:sent_from] == "MR"
-      flag, msg = current_user.subhouse.sell_goods_subhouse(@market)
-      @market.subhouse_id= current_user.subhouse_id
-      @market.user_id = 0
-    else
-      flag, msg = current_user.sell_goods(@market)
-      @market.user_id= current_user.id
-    end
+	    elsif params[:sent_from] == "MR"
+	      flag, msg = current_user.subhouse.sell_goods_subhouse(@market)
+	      @market.subhouse_id= current_user.subhouse_id
+	      @market.user_id = 0
+	    else
+	      flag, msg = current_user.sell_goods(@market)
+	      @market.user_id= current_user.id
+	    end
 
-    if flag && @market.save
-      redirect_to :back, :notice => 'Ponuka bola uspesne vytvorena'
+	    if flag && @market.save
+	      redirect_to :back, :notice => 'Nabídka byla úspěšně vytvořena.'
+	    else
+	      redirect_to :back, :alert => 'Nabídka nebyla vytvořena.'
+	    end
     else
-      redirect_to :back, :alert => 'Ponuka nebola uspesne vytvorena'
-    end
+	    redirect_to :back, :alert => 'Nabídka musí být kladná.'
+	  end
     #respond_to do |format|
     #
     # if flag && @market.save

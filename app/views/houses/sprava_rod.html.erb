@@ -93,11 +93,12 @@
 
 <table class="tab1">
   <tr>
+    <%= form_for(@market) do |f| %>
     <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
               <li><h2>Prodej na trhu</h2></li>
               <li><%= submit_tag 'Nabídnout', :class => "ok" %>
     </td>
-  <%= form_for(@market) do |f| %>
+
     <th>Komodita</th>
     <th>Cena za kus [Sol]</th>
     <th>Množství</th>
