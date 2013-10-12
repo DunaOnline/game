@@ -28,7 +28,7 @@
 <table class="tab3" style="height:18px;">
   <% for post in @posts %>
     <tr>
-        <td class="tdpl" style="padding: 0px !important; width:100px !important; background-image: url(<%= cesta_rod(post.user.house.name, "dom") %>) !important; background-repeat: repeat;">
+        <td class="tdpl" style="word-break:break-all; padding: 0px !important; width:100px !important; background-image: url(<%= cesta_rod(post.user.house.name, "dom") %>) !important; background-repeat: repeat;">
         <div class="poster" ><b><a class=""><%= link_to post.user.nick, user_url(post.user) %></a></b>
         <br><%= format_date_time post.created_at %>
         <% if logged_in? %> 
@@ -43,7 +43,7 @@
         </td>
 
   
-        <td class="forum">
+        <td class="forum" style="word-break:break-all">
           <%= simple_format(post.content) %>
         </td>
   </tr>

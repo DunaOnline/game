@@ -7,19 +7,19 @@
       <tr>
         <th colspan="10">
 
-          <%= f.submit "ODESLAT", :title => "ODESLAT", :class => "ok4" %>
-          <%= link_to "Zrušit", posts_path, :class => "ok4" %>
+          <%= f.submit "ODESLAT ODPOVĚD", :title => "ODESLAT", :class => "ok4" %>
+<!---     <%= link_to "Zrušit", posts_path, :class => "ok4" %>
           <%= link_to "Náhled", post, :class => "ok4" %>
           <%= link_to "View All", posts_path, :class => "ok4" %>
-
+--->
         </th>
 
       </tr>
       <tr>
         <td>
-          <%= f.label :content %>
-          <br/>
-          <%= f.text_area :content %>
+          <!--- <%= f.label :content %> -->
+          
+          <%= f.text_area :content,:class => "text_area" %>
         </td>
       </tr>
   <% end %>

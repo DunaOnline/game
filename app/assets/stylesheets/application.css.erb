@@ -1,8 +1,9 @@
 body {
     color: #fff;
     background-color: #000;
-    background-image: url(<%= asset_path 'css/bg_new.jpg' %>);
+    background-image: url(<%= asset_path 'css/bg_new0.jpg' %>);
     background-repeat: no-repeat;
+    background-position: top center;
     font-family: Calibri, Arial, Verdana;
     font-size: 13px;
     text-align: justify;
@@ -75,9 +76,18 @@ input.i_nick {
     background-image: url(<%= asset_path 'css/adresat.png' %>) !important;
 }
 
+input.i_predmet {
+    background-image: url(<%= asset_path 'css/predmet.png' %>) !important;
+}
+
 input.i_key {
     background-image: url(<%= asset_path 'css/key.png' %>) !important;
 }
+
+.text_area {
+    max-width:675px; 
+    max-height:800px
+    }
 
 div.l select {
     margin: 7px 2px 5px 2px;

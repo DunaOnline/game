@@ -8,12 +8,12 @@
           <th>
             <%= f.submit " ZALOŽIT ", :class => "ok4" %>
             <!-- <%= f.label :name %> -->
-            <%= f.text_field :name, :placeholder => "Název vlákna" %>
+            <%= f.text_field :name, :placeholder => "Název vlákna", :class => "i_predmet" %>
           </th>
         </tr>
         <tr>
           <td>
-            <textarea name="post[content]" cols="80" rows="20"><%= @post.content %></textarea>
+            <textarea class ="text_area"; name="post[content]" cols="80" rows="20" ><%= @post.content %></textarea>
           </td>
         </tr>
       </table>
