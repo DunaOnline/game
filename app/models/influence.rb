@@ -19,7 +19,7 @@ class Influence < ActiveRecord::Base
 
   def odstran_katastrofu(user)
     if user.solar >= self.price
-      user.update_attribute(:solar, user.solar - self.effect.price * self.duration)
+      user.update_attribute(:solar, user.solar - self.price)
       self.destroy
       user.zapis_operaci("Odstranili sme katastrofu #{self.effect.name} na lenu #{self.field.name}, zaplatili sme #{self.price} .")
     end
