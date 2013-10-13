@@ -6,9 +6,9 @@
     <% end %>
 
   </td>
-  <td><%= link_to message.user.nick, message.user %></td>
+  <td><%= link_to message.user.nick, message.user, :class => message.user.barvicky, :title => message.user.barvicky %></td>
   <td><%= link_to message.user.house.name, message.user.house %></td>
-  <td><%= message.subject %>
+  <td style="color: <%= message.farba%>;"><%= message.subject %>
 
     <span class="fright">
   <%= best_in_place message, :opened, :type => :checkbox, :classes => 'precitana' %>

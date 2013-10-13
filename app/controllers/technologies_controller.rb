@@ -63,7 +63,7 @@ class TechnologiesController < ApplicationController
           redirect_to :action => 'narodni_vyskum'
         else
           @technology.vylepsi_narodni(current_user.house_id)
-          current_user.update_attributes(:exp => (current_user.house.exp - cena_tech))
+          current_user.house.update_attributes(:exp => (current_user.house.exp - cena_tech))
           flash[:notice] = 'Národni výzkum byl dokončen.'
           redirect_to :action => 'narodni_vyskum'
         end

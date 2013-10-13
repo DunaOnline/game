@@ -30,7 +30,9 @@
             <h2><%= @user.nick %></h2>
 
         <% end %>
-
+      </th>
+      <th>
+        <%= link_to "Napsat Postu", new_message_path(:test => @user.nick) %>
       </th>
 
 <!---      <td style="text-align: right !important;">

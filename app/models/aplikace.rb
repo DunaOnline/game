@@ -96,13 +96,14 @@ class Aplikace
 
 
     for field in Field.all do
-      if field.planet.domovska? && field.user.house != House.renegat
-        field.vytvor_resource
-
-        field.postav(Building.where(:kind => "L", :level => [1]).first, 1)
-        field.postav(Building.where(:kind => "S", :level => [1]).first, 2)
-        field.postav(Building.where(:kind => "M", :level => [1]).first, 2)
-        field.postav(Building.where(:kind => "E", :level => [1]).first, 1)
+      if field.planet.domovska? && (field.user.house != House.renegat if field.user)
+        unless field.planet == Planet.arrakis
+		      field.vytvor_resource
+	        field.postav(Building.where(:kind => "L", :level => [1]).first, 1)
+	        field.postav(Building.where(:kind => "S", :level => [1]).first, 2)
+	        field.postav(Building.where(:kind => "M", :level => [1]).first, 2)
+	        field.postav(Building.where(:kind => "E", :level => [1]).first, 1)
+	      end
       else
         field.delete
       end
@@ -175,21 +176,21 @@ class Aplikace
     end
     puts 'Vychozi planety objeveny'
 
-    arrakis = Planet.create(:name => 'Arrakis',
-                            :planet_type_id => PlanetType.find_by_name('Marganský typ').id,
-                            :house_id => House.find_by_name('Impérium').id,
-                            :available_to_all => false,
-                            :discovered_at => Date.today,
-                            :position => 1,
-                            :system_name => "Mu Draconis")
-
+    #arrakis = Planet.create(:name => 'Arrakis',
+    #                        :planet_type_id => PlanetType.find_by_name('Marganský typ').id,
+    #                        :house_id => House.find_by_name('Impérium').id,
+    #                        :available_to_all => false,
+    #                        :discovered_at => Date.today,
+    #                        :position => 1,
+    #                        :system_name => "Mu Draconis")
+    planet_arrakis = Planet.arrakis
     Planet.arrakis.fields << Field.create(:name => "Léno Arrakis",
-                                          :planet_id => arrakis.id,
+                                          :planet_id => planet_arrakis.id,
                                           :user_id => nil,
                                           :pos_x => 1,
                                           :pos_y => 1
     )
-    arrakis_field = Field.find_by_planet_id(arrakis)
+    arrakis_field = Field.find_by_planet_id(planet_arrakis)
     arrakis_field.vytvor_resource
     arraken = Building.where(:name => "Arraken").first
     arrakis_field.postav(arraken, 1)

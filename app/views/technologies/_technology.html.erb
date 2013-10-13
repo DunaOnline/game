@@ -1,15 +1,19 @@
 <tr>
 
-  <th class="descr" style="width: 180px !important; background-image: url(<%= asset_path 'budovy/Riches/i_arm.png' %>) !important; Background-position: top !important" ;"><%= technology.name %></th>
-
+  <th class="descr" style="background-image: url(<%= asset_path cesta_budovy(current_user.house.name, technology.image_url) %>);,width:180px;"><%= technology.name %></th>
+  <% vylep = technology.vylepseno(current_user) %>
 
 
   <%= form_tag vylepsi_technology_path(:technology => technology.id, :user_id => current_user), :class => 'vylepsiTech' do %>
-    <td class="v2" title="Vylepsi"><%= submit_tag number_with_precision technology.cena_technology(current_user), :precision => 0 %></td>
-  <% end %>
+      <% if vylep != technology.max_lvl %>
+    <td class="v2" title="Vylepsi"><%= submit_tag (number_with_precision technology.cena_technology(current_user) , :precision => 0).to_s + " exp" %></td>
+      <% else %>
+          <td class="v2" title="Vylepsi"><%= submit_tag "MAX", :disabled => true %></td>
+<% end %>
+      <% end %>
 
 
-  <% vylep = technology.vylepseno(current_user) %>
+
   <% technology.max_lvl.times do |lvl| %>
 
 

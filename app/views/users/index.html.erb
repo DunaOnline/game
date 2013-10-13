@@ -34,9 +34,10 @@
         <td><%= user.influence %></td>
         <td><%= user.fields.count %></td>
         <td>
-          <a href="#" alt="Pošta"><img src="image/cssimage/posta.png" alt="Napsat hráči" title="Napsat hráči"></a>
+          <%= link_to image_tag("css/post0.png"), new_message_path(:test => user.nick), :title => "Napsat hráči"%>
           <a href="#" alt="Útok"><img src="image/cssimage/zautocit.png" alt="Zautočit na hráče" title="Zautočit na hráče"></a>
-          <a href="#" alt="Profil"><img src="image/avatar/id1.png" alt="Profil hráče" title="Profil hráče"></a>
+          <%= link_to image_tag("css/adresat.png"), user_path(user), :alt => "Profil hráče", :title => "Profil hráče" %>
+
         </td>
       </tr>
   <% end %>

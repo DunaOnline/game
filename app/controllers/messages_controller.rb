@@ -1,3 +1,4 @@
+# encoding: utf-8
 class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
@@ -16,24 +17,15 @@ class MessagesController < ApplicationController
   end
 
 
-  # GET /messages/1
-  # GET /messages/1.json
-  # TODO "procist"
-  #def show
-  #  @postum = Message.find(params[:id])
-  #  Message.procist(@postum)
-  #  respond_to do |format|
-  #    format.html # show.html.erb
-  #    format.json { render json: @postum }
-  #  end
-  #end
+
 
   # GET /messages/new
   # GET /messages/new.json
   def new
-
+	  temp = (params[:test])
     @recipient_array = User.all.map &:nick
     @message = Message.new
+	  @message.recipients = temp if temp
 
 
     respond_to do |format|

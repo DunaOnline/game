@@ -420,7 +420,7 @@ class Field < ActiveRecord::Base
               :effect_id => effect.id,
               :duration => effect.duration
           ).save
-          if self.name == "Leno Arrakis"
+          if self.planet == Planet.arrakis
             #self.user.zapis_operaci("Mimoriadna udalost #{effect.name}")
           else
             self.user.zapis_operaci("Mimoriadna udalost na lenu #{self.name} : #{effect.name}")

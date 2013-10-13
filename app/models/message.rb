@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Message < ActiveRecord::Base
   attr_accessible :body, :subject, :recipients, :user_id, :druh
 
@@ -71,10 +72,26 @@ class Message < ActiveRecord::Base
 			  t = "Malorodni"
 		  when "G"
 			  t = "Generalum"
+		  when "L"
+			  t = "Landsraadni"
 		  when "D"
 			  t = "Diplomaticka"
+		  when "A"
+			  t = "Admin"
 
 	  end
+  end
+
+  def opica(user)
+	 options = []
+	 options << ['Hromadná pošta', nil]
+	 options << ['Malorodní', 'M']
+	 options << ['Generálům', 'G'] if user.mentat? || user.leader? || user.army_mentat?
+	 options << ['Národní', 'N'] if user.mentat? || user.leader? || user.army_mentat?
+	 options << ['Landsraadni', 'L'] if user.landsraad? || user.emperor?
+	 options << ['Diplomatická', 'D'] if user.diplomat? || user.mentat? || user.leader? || user.army_mentat?
+	 options << ['Imperiální', 'I'] if user.admin? || user.emperor?
+	 options << ['Admin', 'A'] if user.admin?
   end
 
 
@@ -91,9 +108,13 @@ class Message < ActiveRecord::Base
       when "N"
         recipients = User.where(:house_id => narod)
       when "D"
-        recipients = User.where(:house_id => narod, :diplomat => true)
+        recipients = User.where("army_mentat = ? OR mentat = ? OR diplomat = ? OR emperor <= ? AND house_id >= ?",true,true,true,true,narod)
+	    when "L"
+		    recipients = User.where(:landsraad => true)
       when "I"
         recipients = User.all
+	    when "A"
+		    recipients = User.all
       else
         recipients = []
     end
@@ -111,6 +132,26 @@ class Message < ActiveRecord::Base
       end
     end
 
+  end
+
+  def farba
+	  case self.druh
+		  when "M"
+			  "#ff4500"
+		  when "L"
+			  "#40e0d0"
+		  when "A"
+			  "#fff; font-weight: bold"
+		  when "G"
+			  "#ff4500"
+		  when "D"
+			  "#fffafa"
+		  when "N"
+			  "#ff0000"
+		  when "I"
+			  "#da70d6"
+
+	  end
   end
 
   def vytvor_postu(odosielatel, komu)

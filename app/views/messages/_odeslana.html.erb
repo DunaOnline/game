@@ -6,7 +6,7 @@
   <% if odeslana.recipients%>
   <td><%= link_to odeslana.conversations.first.user.nick, odeslana.conversations.first.user, :title => "#{odeslana.recipients}" %></td>
   <% else %>
-  <td><%= odeslana.druh_posty %></td>
+  <td><span style="color: <%= odeslana.farba %>;"><%= odeslana.druh_posty %></span></td>
   <% end %>
   <td><%= link_to odeslana.user.house.name, odeslana.user.house %></td>
   <td><%= odeslana.subject %>

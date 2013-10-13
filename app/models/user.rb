@@ -289,7 +289,7 @@ class User < ActiveRecord::Base
     technologie = Technology.where(:bonus_type => bonus_type).first
     vyskumane_tech = self.researches.where('technology_id' => technologie.id).first if technologie
     if vyskumane_tech
-      vyskumane_tech.lvl * technologie.bonus
+      vyskumane_tech.lvl * technologie.bonus + 1
     else
       1
     end
@@ -682,6 +682,36 @@ class User < ActiveRecord::Base
       msg = "Musite zadat pocet vyrobkov na presun"
     end
     return msg, flag
+  end
+
+  def barvicky
+
+		  if self.emperor?
+			  "emperor"
+		  elsif self.regent?
+			  "regent"
+		  elsif self.arrakis?
+			  "arrakis"
+		  elsif self.admin?
+			  "admin"
+		  elsif self.leader?
+			  "leader"
+		  elsif self.vezir?
+			   "vezir"
+		  elsif self.landsraad?
+			   "poslanec"
+		  elsif self.mentat?
+			  "mentat"
+		  elsif self.army_mentat?
+			  "army_mentat"
+		  elsif self.diplomat?
+			   "diplomat"
+		  elsif self.court?
+			  "court"
+		  elsif self.general?
+			  "general"
+
+	  end
   end
 
 
