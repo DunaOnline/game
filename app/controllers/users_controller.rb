@@ -126,9 +126,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def zrus_udalost
-    @udalost = Environment.find(params[:id])
-  end
+
 
   def opustit
     if current_user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first
@@ -173,15 +171,21 @@ class UsersController < ApplicationController
 
   def oprava_katastrofy
     if params[:typ] == "L"
-      effect = Influence.find(params[:id])
-      effect.odstran_katastrofu(current_user)
-      redirect_to sprava_path(:id => current_user)
+      infl = Influence.find(params[:id])
+      if infl.odstran_katastrofu(current_user)
+	      redirect_to sprava_path(:id => current_user), :notice => "Zbavili jste se naslednu katastrofy #{infl.effect.name} Zaplatili jste #{infl.effect.price * (infl.duration + 1)}"
+      else
+	      redirect_to :back, :alert => "Nepodarilo sa odstranit katastrofu"
+      end
     elsif params[:typ] == "P"
       enviro = Environment.find(params[:id])
-      enviro.odstran_katastrofu(current_user)
-      redirect_to sprava_path(:id => current_user)
+      if enviro.odstran_katastrofu(current_user)
+	      redirect_to sprava_path(:id => current_user), :notice => "Zbavili jste se naslednu katastrofy #{enviro.property.name} Zaplatili jste #{enviro.property.price * (enviro.duration + 1)}"
+      else
+	      redirect_to :back, :alert => "Nepodarilo sa odstranit katastrofu"
+      end
     else
-      redirect_to sprava_path(:id => current_user)
+      redirect_to :back
     end
   end
 

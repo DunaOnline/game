@@ -1,23 +1,33 @@
 <div class="tovarna_obrazok">
   <span class="heading"><%= @udalost.name %></span>
-  <%= @udalost.description %>
-  <%= @leno.duration + 1 if @leno %>
-  <%= @planet.duration + 1 if @planet %>
+  <table class="tab1" style="margin-top: 0px;">
+     <tbody>
+     <tr>
+       <td>
+       <%= @udalost.description %>
+       </td>
+       </tr>
+     <tr>
+       <td>
+      Trvanie : <%= @leno.duration + 1 if @leno %>
+       <%= @planet.duration + 1 if @planet %>
+       </td>
+     </tr>
+     </tbody>
+  </table>
   <table class="tab1 bottom">
     <tbody>
     <tr>
       <td>
-        <%= form_tag :class => "inline_list" do %>
+
             <ul>
+              <% id = @leno if @leno %>
+              <% id = @planet if @planet %>
               <li> Poplatok za odstranenie katastrofy</li>
-              <li><%= button_to @udalost.price * (@leno.duration + 1), oprava_katastrofy_path(:id => @leno.id, :typ => "L") if @leno %></li>
-              <li><%= button_to @udalost.price * (@planet.duration + 1), oprava_katastrofy_path(:id => @planet.id, :typ => "P") if @planet && current_user.leader? %></li>
+              <%= form_tag oprava_katastrofy_path(:id => id, :typ => @leno ? "L" : "P"), :class => "inline_list" do %>
+              <li><%= button_to @leno.price.to_s + " S", oprava_katastrofy_path(:id => @leno.id, :typ => "L") if @leno %></li>
+              <li><%= button_to @planet.price.to_s + " S", oprava_katastrofy_path(:id => @planet.id, :typ => "P") if @planet && current_user.leader? %></li>
             </ul>
-
-
-
-
-            <%= button_to @udalost.price * (@planet.duration + 1), oprava_katastrofy_path(:id => @planet.id, :typ => "P") if @planet && current_user.leader? %>
 
         <% end %>
       </td>
