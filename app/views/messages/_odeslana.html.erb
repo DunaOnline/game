@@ -8,7 +8,7 @@
   <% else %>
   <td><span style="color: <%= odeslana.farba %>;"><%= odeslana.druh_posty %></span></td>
   <% end %>
-  <td><%= link_to odeslana.user.house.name, odeslana.user.house %></td>
+  <td style="background-image: url(<%= cesta_rod(odeslana.conversations.first.user.house.name, 'dom')%>)!important "><%= link_to odeslana.conversations.first.user.house.name, odeslana.conversations.first.user.house %></td>
   <td><%= odeslana.subject %>
 
     <span class="fright">
