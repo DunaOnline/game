@@ -35,7 +35,7 @@ class System < ActiveRecord::Base
       a << planet.zastoupene_rody
     end
 
-    #puts 'zastoupene rody : ' << a.to_s
+    puts 'zastoupene rody : ' << a.to_s
 
     for zastupce in a do
       unless zastupce == []

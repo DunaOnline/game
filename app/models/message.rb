@@ -82,7 +82,7 @@ class Message < ActiveRecord::Base
 	  end
   end
 
-  def opica(user)
+  def druh_posty(user)
 	 options = []
 	 options << ['Hromadná pošta', nil]
 	 options << ['Malorodní', 'M']
@@ -92,6 +92,7 @@ class Message < ActiveRecord::Base
 	 options << ['Diplomatická', 'D'] if user.diplomat? || user.mentat? || user.leader? || user.army_mentat?
 	 options << ['Imperiální', 'I'] if user.admin? || user.emperor?
 	 options << ['Admin', 'A'] if user.admin?
+	 options
   end
 
 

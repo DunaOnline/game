@@ -94,15 +94,17 @@ class Aplikace
     Subhouse.delete_all
     puts 'Subhouse deleted'
 
-    arrakis = Planet.arrakis
+
     for field in Field.all do
       if field.planet.domovska? && (field.user.house != House.renegat if field.user)
-        unless field.planet == arrakis
+        if field.planet != Planet.arrakis
 		      field.vytvor_resource
 	        field.postav(Building.where(:kind => "L", :level => [1]).first, 1)
 	        field.postav(Building.where(:kind => "S", :level => [1]).first, 2)
 	        field.postav(Building.where(:kind => "M", :level => [1]).first, 2)
 	        field.postav(Building.where(:kind => "E", :level => [1]).first, 1)
+        else
+	        field.delete
 	      end
       else
         field.delete
@@ -121,8 +123,6 @@ class Aplikace
 
     for pla in Planet.all do
       if pla.domovska?
-
-      elsif pla == arrakis
 
       else
         pla.delete
@@ -185,7 +185,7 @@ class Aplikace
     #                        :discovered_at => Date.today,
     #                        :position => 1,
     #                        :system_name => "Mu Draconis")
-    planet_arrakis = arrakis
+    planet_arrakis = Planet.arrakis
     Planet.arrakis.fields << Field.create(:name => "Léno Arrakis",
                                           :planet_id => planet_arrakis.id,
                                           :user_id => nil,
