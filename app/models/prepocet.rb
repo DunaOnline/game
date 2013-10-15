@@ -253,7 +253,7 @@ class Prepocet
         u[0].zapis_operaci("Nyni jsem poslancem.")
       end
     end
-    Global.prepni('pristi_volby', 2, 4.weeks.from_now)
+    Global.prepni('pristi_volby', 2, 1.week.from_now)
   end
 
   def self.kontrola_zakonu

@@ -1,4 +1,17 @@
 DuneOnline::Application.routes.draw do
+  match '/help' => 'help#help', :as => :help
+  match '/help/landsraad' => 'help#landsraad', :as => :help_landsraad
+  match '/help/suroviny' => 'help#suroviny', :as => :help_suroviny
+  match '/help/planety_a_lena' => 'help#planety_a_lena', :as => :help_planety_a_lena
+  match '/help/budovy' => 'help#budovy', :as => :help_budovy
+  match '/help/arrakis' => 'help#arrakis', :as => :help_arrakis
+  match '/help/transport' => 'help#transport', :as => :help_transport
+  match '/help/presun' => 'help#presun', :as => :help_presun
+  match '/help/trh' => 'help#trh', :as => :help_trh
+  match '/help/vyzkum' => 'help#vyzkum', :as => :help_vyzkum
+  match '/help/komunikace' => 'help#komunikace', :as => :help_komunikace
+  match '/help/sprava' => 'help#sprava', :as => :help_sprava
+
   resources :productions
   match 'presun_vyrobku' => 'productions#presun_vyrobku', :as => :presun_vyrobku
 
