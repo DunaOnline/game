@@ -66,9 +66,16 @@
 <% if Imperium.volba_imperatora? && current_user.landsraad? %>
     <table class="tab1">
       <tr>
-        <th>
-          <%= link_to "Volba Imperatora - Datum voleb: #{format_date @datum_volby}", volba_imperatora_path %>
-        </th>
+        <td style="padding: 0 10px 10px 10px; width:270px; background-image: url(<%= asset_path 'imghra/kolonizace.png' %>) !important">
+          <h3>Volba Imperátora</h3>
+          <li>Kandidáti na Imperátora potřebují nejméně 60% hlasů, aby mohli usednout na trůn. 
+          <li>Pokud nebude Imperátor zvolen během těchto voleb, ujmou se správy regenti a volba se bude opakovat za 3dny.
+          <br>Regenty se mohou stát až 3 kandidáti s nejvyšším počtem hlasů.
+          <li>Regenti dokáží krátkodobě spravovat říši, ale nemohou jmenovat držitele pololéna na Arrakis!
+          <br><br>
+          Volby budou uzavřeny: #{format_date @datum_volby}  
+          <%= link_to "Přejít k volbě Imperátora", volba_imperatora_path %>
+        </td>
       </tr>
     </table>
 <% end %>
