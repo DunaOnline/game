@@ -138,12 +138,12 @@
     <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
       <li><h2>Členové Malorodu</h2></li>
       <li><b>Vicegenerál: </b><%= @subhouse.users.vicegeneral.first.nick if @subhouse.users.vicegeneral.first %></li>
-      <li><b>Clenu: </b><%= @subhouse.users.count %> / <%= Constant.max_u_mr %> </li>
+      <li><b>Členů: </b><%= @subhouse.users.count %> / <%= Constant.max_u_mr %> </li>
     </td>
 
     <th>Nick</th>
-    <th>Pocet Len</th>
-    <th>Vojenska Sila</th>
+    <th>Počet lén</th>
+    <th>Vojenská síla</th>
     <th>Vyhostit</th>
   </tr>
   <% @subhouse.users.each do |user| %>
