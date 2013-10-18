@@ -115,6 +115,9 @@ DuneOnline::Application.routes.draw do
   match 'zmena_hesla' => 'users#zmena_hesla', :as => :zmena_hesla
 	match 'send_products' => 'users#send_products', :as => :send_products
 
+
+	mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'
+
 #  resources :admin
   match 'wipe' => 'admin#wipe', :as => :wipe
   match 'prepni_prihlasovani' => 'admin#prepni_povoleni_prihlasovani'

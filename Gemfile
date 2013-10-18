@@ -43,6 +43,8 @@ group :test, :development do
   gem 'factory_girl_rails'
 end
 
+gem 'rails_admin'
+
 gem 'cancan'
 #gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions', :branch => 'rails3'
 gem 'kaminari' #, '0.10.4'
