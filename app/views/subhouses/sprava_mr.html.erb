@@ -158,18 +158,28 @@
           333
         </td>
         <td>
-          <%= link_to 'Vyhostit', vyhod_mr_path(user) %>
+          <%= link_to 'Vyhostit', vyhod_mr_path(user) if current_user.general %>
         </td>
       </tr>
   <% end %>
      <tr>
         <td colspan="4">
-      <%= form_tag :menuj_vice do %>
+      <%= form_tag menuj_vice_path(:menuj => true) do %>
           <%= select_tag :vicegeneral, options_for_select(@subhouse.users.collect { |p| [p.nick, p.id] }, {:include_blank => false}), :class => "tab" %>
           <%= submit_tag 'Jmenovat Vicegenerálem', :class => 'ok' %> 
       <% end %>
        </td>
       </tr>
+      <tr>
+         <th colspan="3">Vicegeneralove</th>
+         <th>Odebrat Vicegenerala</th>
+      </tr>
+  <% @vice.each do |v| %>
+  <tr>
+    <td colspan="3"><%= v.nick %></td>
+    <td><%= link_to "Odeber", menuj_vice_path(:id => v.id) %></td>
+  </tr>
+  <% end %>
   </table>
   
 <% if @ziadosti.count > 0 %>

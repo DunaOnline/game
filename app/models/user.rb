@@ -131,6 +131,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def odhlasuj(typ)
+	  vote = Vote.where(:house_id => self.house.id, :elector => self.id, :typ => typ).first
+	  vote.delete if vote
+  end
+
   def koho_jsem_volil(typ)
     voleno = self.house.votes.where(:typ => typ, :elector => self.id).first
     if voleno
@@ -259,17 +264,11 @@ class User < ActiveRecord::Base
   end
 
   def menuj_vice
-    stary = self.subhouse.users.vicegeneral.first
-    if stary == self
-      false
-    else
-      if stary
-        stary.update_attribute(:vicegeneral, false)
-      end
-      self.update_attribute(:vicegeneral, true)
-    end
+    self.update_attribute(:vicegeneral, true)
+  end
 
-
+  def zober_vice
+	  self.update_attribute(:vicegeneral, false)
   end
 
   def zapis_operaci(content, kind = "U")
@@ -385,6 +384,7 @@ class User < ActiveRecord::Base
         :duration => 100,
         :started_at => Date.today
     )
+	  self.odhlasuj("leader")
   end
 
   def opustit_mr
@@ -395,9 +395,10 @@ class User < ActiveRecord::Base
       subhouse.house.update_attributes(:solar => subhouse.house.solar + subhouse.solar, :material => subhouse.house.material + subhouse.material,
                                        :melange => subhouse.house.melange + subhouse.melange, :exp => subhouse.house.exp + subhouse.exp, :parts => subhouse.house.parts + subhouse.parts)
       self.house.zapis_operaci("Byl rozpusten malorod #{subhouse.name} do narodnych skladu pribudlo #{subhouse.solar} solaru, #{subhouse.material} materialu, #{subhouse.melange} mg,
- #{subhouse.exp} expu a #{subhouse.parts} dilu")
+                                #{subhouse.exp} expu a #{subhouse.parts} dilu")
       subhouse.delete
     end
+    self.odhlasuj("general")
 
   end
 
@@ -439,7 +440,7 @@ class User < ActiveRecord::Base
     if self.subhouse == nil
       self.update_attributes(:subhouse_id => mr.id, :ziadost_subhouse => nil)
       self.zapis_operaci("Byl jste přijat do malorodu #{mr.name}.")
-      mr.zapis_operaci("Do malorodu byl přijat hráč #{self.nick}.")
+      mr.zapis_operaci("Hráč #{self.nick} byl přijat do malorodu.")
       return true
     else
       return false

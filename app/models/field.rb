@@ -343,7 +343,7 @@ class Field < ActiveRecord::Base
     flag = self.check_availability(what, amount) if self.planet == to.planet
 
     flag = self.check_availability(what, amount, "planeta") if self.planet != to.planet
-    if flag
+    if flag == "S"
 
       case what
         when 'Population'
@@ -387,6 +387,8 @@ class Field < ActiveRecord::Base
         else
           "Toto nelze poslat"
       end
+    elsif flag == "I"
+	    "Nemáte dost solaru na presun. "
     else
       "Nedostatek surovin na odchozím léně"
     end
@@ -470,20 +472,25 @@ class Field < ActiveRecord::Base
   def check_availability(what, amount, typ="leno")
     poplatok = Constant.presun_leno if typ == "leno"
     poplatok = Constant.presun_planeta if typ == "planeta"
+
     if poplatok <= self.user.solar
       case what
         when 'Population'
           self.resource.population >= amount
+		      flag = "S"
         when 'Material'
           self.resource.material >= amount
+          flag = "S"
         when 'Parts'
           self.resource.parts >= amount
+          flag = "S"
         else
-          false
+	        flag = "F"
       end
     else
-      false
+	    flag = "I"
     end
+	  flag
   end
 
   def zapis_udalosti(user, content)

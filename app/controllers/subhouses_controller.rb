@@ -7,8 +7,13 @@ class SubhousesController < ApplicationController
   end
 
   def show
-    @subhouse = Subhouse.find(params[:id])
-    @operations = @subhouse.operations.malorodni.seradit.limit(5)
+	  if Subhouse.find(params[:id]) == current_user.subhouse
+	    @subhouse = Subhouse.find(params[:id])
+	    @operations = @subhouse.operations.malorodni.seradit.limit(5)
+	  else
+		  @subhouse = current_user.subhouse
+		  @operations = @subhouse.operations.malorodni.seradit.limit(5)
+		end
   end
 
   def new
@@ -50,7 +55,7 @@ class SubhousesController < ApplicationController
     @market = Market.new
     @markets = Market.zobraz_trh_mr(@subhouse)
     @productions = @subhouse.productions
-
+	  @vice = @subhouse.users.vicegeneral
   end
 
   def vyhod_mr
@@ -68,8 +73,6 @@ class SubhousesController < ApplicationController
   def prijmi_hrace_mr
     user = User.find(params[:id])
     if user.prijat_do_mr(current_user.subhouse)
-      msg = "Hráč #{user.nick} byl přijat do malorodu."
-      current_user.subhouse.zapis_operaci(msg)
       redirect_to :back, :notice => msg
     else
       redirect_to :back, :alert => "Nepodarilo sa prijat hraca"
@@ -99,13 +102,22 @@ class SubhousesController < ApplicationController
   end
 
   def menuj_vice
-    user = User.find(params[:vicegeneral])
-    if user.menuj_vice
-      redirect_to :back, :notice => "#{user.nick} bol zvoleny za Vicegenerala"
-    else
-      redirect_to :back, :alert => "#{user.nick} uz je Vicegeneral"
-    end
+	  if params[:menuj] == "true"
+	    user = User.find(params[:vicegeneral])
+	    if user
+		    user.menuj_vice
+		    redirect_to :back, :notice => "Hrac #{user.nick} bol zvoleny za Vicegenerala"
+		  else
+			  redirect_to :back, :alert => "Hlasovani se nezdarilo"
+	    end
+	  else
+	    user = User.find(params[:id])
+		  user.zober_vice
+	    redirect_to :back, :notice => "Hraci #{user.nick} byl odebran titul Vicegenerala"
+		end
   end
+
+
 
   def destroy
     @subhouse = Subhouse.find(params[:id])

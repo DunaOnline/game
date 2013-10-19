@@ -113,7 +113,8 @@ class MarketsController < ApplicationController
   def destroy
     @market = Market.find(params[:id])
     if @market.destroy
-      current_user.goods_to_buyer(@market.area, @market.amount * Constant.stiahnut_zbozi_trh)
+	    current_user.goods_to_buyer(@market.area, @market.amount * Constant.stiahnut_zbozi_trh).ceil if @market.area == "E"
+      current_user.goods_to_buyer(@market.area, @market.amount * Constant.stiahnut_zbozi_trh) if @market.area != "E"
       @market.zapis_obchodu(current_user, "Zbozi bylo stahnuto z trhu bylo straceno #{@market.amount * 0.3} ks #{@market.show_area}")
     end
 
@@ -158,17 +159,20 @@ class MarketsController < ApplicationController
 
   def buy
     amount = params[:q]
-    @market = Market.find(params[:market])
-    who = params[:who]
-    msg = ""
+    unless amount.to_f < 0
+	    @market = Market.find(params[:market])
+	    who = params[:who]
+	    msg = ""
 
-    msg, flag = @market.whos_buying(who, current_user, amount.to_f)
-    if  flag
-      redirect_to :back, :notice => msg
+	    msg, flag = @market.whos_buying(who, current_user, amount.to_f)
+	    if  flag
+	      redirect_to :back, :notice => msg
+	    else
+	      redirect_to :back, :alert => msg
+	    end
     else
-      redirect_to :back, :alert => msg
-    end
-
+	   redirect_to :back, :alert => "Hodnota musi byt kladna"
+	  end
 
   end
 

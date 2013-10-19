@@ -52,7 +52,7 @@
           <li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'rodu_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_vyrobky %><%= text_field_tag 'rodu_parts', '0.00', :size => "3", :title => "Zadejte množství" %></li>
-          <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %></li>
+          <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.without_house(@house).order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %></li>
         </td>
       </tr>
   <% end %>

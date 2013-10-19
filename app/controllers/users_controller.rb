@@ -139,11 +139,13 @@ class UsersController < ApplicationController
   end
 
   def opustit_mr
-    mr = current_user.subhouse
-    if current_user.opustit_mr
+    mr = current_user.subhouse if current_user.subhouse
+
+    if mr
+      current_user.opustit_mr
       redirect_to :back, :notice => "Opustili jste malorod #{mr.name}"
     else
-      redirect_to :back, :alert => "Nemozte opustit malorod #{mr.name}"
+      redirect_to :back, :alert => "Nejste clenem malorodu"
     end
   end
 

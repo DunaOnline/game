@@ -105,7 +105,7 @@ class Subhouse < ActiveRecord::Base
           flag = true
         end
       when "E"
-        if amount > user.exp
+        if amount > self.exp
           msg = "Nemate dost #{market.show_area}"
         else
           self.update_attribute(:exp, self.exp - amount)
@@ -288,7 +288,7 @@ class Subhouse < ActiveRecord::Base
     hlasy = secti_hlasy(typ, pocet)
     poradi = []
     hlasy.each do |key, val|
-      poradi << [User.find(key), val]
+      poradi << [User.find(key), val] if User.find(key).subhouse == self
     end
     return poradi
   end
