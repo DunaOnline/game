@@ -18,7 +18,7 @@
 #
 
 class House < ActiveRecord::Base
-  attr_accessible :name, :leader, :solar, :melange, :material, :exp, :playable, :melange_percent
+  attr_accessible :name, :leader, :solar, :melange, :material, :exp, :playable, :melange_percent, :parts
   attr_accessible :influence
 
   has_many :researches
@@ -138,6 +138,7 @@ class House < ActiveRecord::Base
         self.update_attributes(:solar => self.solar - h_solar, :material => self.material - h_material, :melange => self.melange - h_melange, :exp => self.exp - h_exp, :parts => self.parts - h_parts)
         msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_material} kg, #{h_melange} mg, #{h_exp} exp, #{h_parts} dilu od naroda #{self.name}"
         self.zapis_operaci(msg)
+	      house.zapis_operaci(msg)
       else
         msg += sprava
       end
@@ -166,6 +167,7 @@ class House < ActiveRecord::Base
         self.update_attributes(:solar => self.solar - mr_solar, :material => self.material - mr_material, :melange => self.melange - mr_melange, :exp => self.exp - mr_exp, :parts => self.parts - mr_parts)
         msg ="Posláno malorodu #{mr.name} #{mr_solar} solaru, #{mr_material} kg, #{mr_melange} mg, #{mr_exp} exp, #{mr_parts} dilu od naroda #{self.name}"
         self.zapis_operaci(msg)
+	      mr.zapis_operaci(msg)
       else
         msg += sprava
       end
@@ -195,6 +197,7 @@ class House < ActiveRecord::Base
         self.update_attributes(:solar => self.solar - u_solar, :material => self.material - u_material, :melange => self.melange - u_melange, :exp => self.exp - u_exp, :parts => self.parts - u_parts)
         msg +="Posláno hraci #{user.nick} #{u_solar} solaru, #{u_material} kg, #{u_melange} mg, #{u_exp} exp, #{u_parts} dilu od naroda #{self.name}"
         self.zapis_operaci(msg)
+	      user.zapis_operaci(msg)
       else
         msg += sprava
       end

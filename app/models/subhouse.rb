@@ -15,7 +15,7 @@
 #
 
 class Subhouse < ActiveRecord::Base
-  attr_accessible :name, :house_id, :solar, :melange, :material, :exp
+  attr_accessible :name, :house_id, :solar, :melange, :material, :exp, :parts
 
   has_many :markets
   has_many :productions
@@ -24,15 +24,17 @@ class Subhouse < ActiveRecord::Base
   belongs_to :house
 
   def obsazenost_mr
-    flag = true
+    flag = 0
     Subhouse.by_house(self.house_id).all.each do |subhouse|
-      if subhouse.users.count > Constant.max_u_mr / 3
-        flag = true
-      else
-        flag = false
+      unless subhouse.users.count > Constant.max_u_mr / Constant.perc_mr_obs
+        flag += 1
       end
     end
-    flag
+    if flag >= Constant.poc_prazdnych_mr
+	    return false
+    else
+	    return true
+    end
   end
 
   def prirad_mr(user)
@@ -203,8 +205,7 @@ class Subhouse < ActiveRecord::Base
         user.update_attributes(:solar => user.solar + u_solar, :melange => user.melange + u_melange, :exp => user.exp + u_exp)
         self.update_attributes(:solar => self.solar - u_solar, :material => self.material - u_material, :melange => self.melange - u_melange, :exp => self.exp - u_exp, :parts => self.parts - u_parts)
         msg += "Posláno hraci #{user.nick} #{u_solar} solaru, #{u_material} kg, #{u_melange} mg, #{u_exp} exp, #{u_parts} dilu od malorodu #{self.name}"
-        self.house.zapis_operaci(msg)
-      else
+        else
         msg += sprava
       end
     end

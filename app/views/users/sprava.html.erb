@@ -15,7 +15,9 @@
         <!-- <th>Poslat Malorodu</th>
         <th>Daň Malorodu [%]</th> -->
         <th>Poslat Národu</th>
+        <% if @user.subhouse %>
         <th>Poslat Malorodu</th>
+        <% end %>
         <th class="r">Projekt [%]</th>
       </tr>
       <tr>
@@ -46,7 +48,7 @@
           <li><%= img_zkusenosti %><%= text_field_tag 'rod_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %>
           <li><%= img_vyrobky %><%= text_field_tag 'rod_vyrobky', '0.00', :size => "3", :title => "Zadejte množství" %>
         </td>
-
+        <% if @user.subhouse %>
         <td>
           <li><%= img_solary %><%= text_field_tag 'mr_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
           <li><%= img_material %><%= text_field_tag 'mr_material', '0.00', :size => "3", :title => "Zadejte množství" %>
@@ -55,6 +57,7 @@
           <li><%= img_vyrobky %><%= text_field_tag 'mr_vyrobky', '0.00', :size => "3", :title => "Zadejte množství" %>
 
         </td>
+        <% end %>
         <td>
           <li><%= img_solary %>
             <input type="text" size="3" title="Nastavte odvod">

@@ -28,7 +28,7 @@
 
   <% for user in @users do %>
       <tr>
-        <td><%= link_to user.nick, user %></td>
+        <td><%= link_to user.nick, user, :class => user.barvicky, :title => user.barvicky %></td>
         <td><%= link_to user.house.name, user.house %></td>
         <td>11111***</td>
         <td><%= user.influence %></td>

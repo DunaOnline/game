@@ -3,7 +3,7 @@ class Technology < ActiveRecord::Base
 
   has_many :researches
   has_many :users, :through => :researches
-  has_one :effect
+
 
   validates_uniqueness_of :name
 

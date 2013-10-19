@@ -103,6 +103,8 @@ Global.create(:setting => 'rozdiel_poctu_u_registracia', :cislo => 5)
 Global.create(:setting => 'kapacita_tovaren_house', :cislo => 0.1)
 Global.create(:setting => 'kapacita_tovaren_mr', :cislo => 0.05)
 Global.create(:setting => 'stiahnut_zbozi_trh', :cislo => 0.7)
+Global.create(:setting => 'perc_zalozenia_noveho_mr', :cislo => 0.3)
+Global.create(:setting => 'pocet_prazdnych_mr', :cislo => 2)
 
 puts 'Global done'
 

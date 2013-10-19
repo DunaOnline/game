@@ -46,7 +46,7 @@ class SyselaadsController < ApplicationController
   def create
     @syselaad = Syselaad.new(params[:syselaad])
     if @syselaad.save
-      redirect_to @syselaad, :notice => "Successfully created syselaad."
+      redirect_to @syselaad, :notice => "Uspesne jste vytvorili syselaad."
     else
       render :action => 'new'
     end
@@ -59,7 +59,7 @@ class SyselaadsController < ApplicationController
   def update
     @syselaad = Syselaad.find(params[:id])
     if @syselaad.update_attributes(params[:syselaad])
-      redirect_to @syselaad, :notice => "Successfully updated syselaad."
+      redirect_to @syselaad, :notice => "Uspesne zmeneny syselaad."
     else
       render :action => 'edit'
     end
@@ -68,6 +68,6 @@ class SyselaadsController < ApplicationController
   def destroy
     @syselaad = Syselaad.find(params[:id])
     @syselaad.destroy
-    redirect_to syselaads_url, :notice => "Successfully destroyed syselaad."
+    redirect_to syselaads_url, :notice => "Uspesne zmazany syselaad."
   end
 end

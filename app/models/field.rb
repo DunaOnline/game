@@ -498,6 +498,6 @@ class Field < ActiveRecord::Base
   end
 
   scope :vlastnik, lambda { |user| where(:user_id => user.id) }
-
+  scope :without_field, lambda { |field| field ? {:conditions => ["id != ?", field.id]} : {} }
 
 end

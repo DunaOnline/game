@@ -82,7 +82,7 @@ class Message < ActiveRecord::Base
 	  end
   end
 
-  def druh_posty(user)
+  def list_druhu_posty(user)
 	 options = []
 	 options << ['Hromadná pošta', nil]
 	 options << ['Malorodní', 'M']

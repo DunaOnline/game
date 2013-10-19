@@ -20,7 +20,7 @@
 </tr>
 <tr class="postaBody">
   <td colspan="4">
-    <%= odeslana.body %>
+    <%= simple_format(odeslana.body) %>
     <p>
       <%= link_to 'Odpovedat', reply_path(:id => odeslana.id), :class => "reply" %>
     </p>

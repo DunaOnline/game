@@ -22,7 +22,7 @@ class MessagesController < ApplicationController
   # GET /messages/new
   # GET /messages/new.json
   def new
-	  temp = (params[:test])
+	  temp = (params[:nick])
     @recipient_array = User.all.map &:nick
     @message = Message.new
 	  @message.recipients = temp if temp

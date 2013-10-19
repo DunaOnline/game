@@ -45,7 +45,7 @@ class Market < ActiveRecord::Base
       else
         enough_for = buyer_house.solar / self.price if amount <= self.amount
         enough_for = self.amount if amount > self.amount
-        self.b_goods_h(enough_for, buyer_house) if self.s_goods(amount)
+        self.b_goods_h(enough_for, buyer_house) if self.s_goods(enough_for)
       end
     end
   end
@@ -218,12 +218,22 @@ class Market < ActiveRecord::Base
     "Nemate dost #{self.show_area} na predaj"
   end
 
+  def stahnout_wrap(user)
+	  user.goods_to_buyer(self.area, self.amount * Constant.stiahnut_zbozi_trh).ceil if self.area == "E" && self.user_id > 0
+	  user.goods_to_buyer(self.area, self.amount * Constant.stiahnut_zbozi_trh) if self.area != "E" && self.user_id > 0
+	  user.subhouse.goods_to_buyer(self.area, self.amount * Constant.stiahnut_zbozi_trh).ceil if self.area == "E" && self.subhouse_id > 0
+	  user.subhouse.goods_to_buyer(self.area, self.amount * Constant.stiahnut_zbozi_trh) if self.area != "E" && self.subhouse_id > 0
+	  user.house.goods_to_buyer(self.area, self.amount * Constant.stiahnut_zbozi_trh).ceil if self.area == "E" && self.house_id > 0
+	  user.house.goods_to_buyer(self.area, self.amount * Constant.stiahnut_zbozi_trh) if self.area != "E" && self.house_id > 0
+  end
+
   private
   def default_values
     self.user_id ||= 0
     self.house_id ||= 0
     self.subhouse_id ||= 0
   end
+
 
   scope :trh, where('amount > ?', 0)
 

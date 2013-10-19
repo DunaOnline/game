@@ -169,6 +169,14 @@ class Constant
     Global.vrat('max_hracu_malorod', 4)
   end
 
+  def self.perc_mr_obs
+	  Global.vrat('perc_zalozenia_noveho_mr', 4)
+  end
+
+  def self.poc_prazdnych_mr
+	  Global.vrat('pocet_prazdnych_mr', 4)
+  end
+
   def self.rozdiel_u_reg
     Global.vrat('rozdiel_poctu_u_registracia', 4)
   end

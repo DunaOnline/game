@@ -30,6 +30,7 @@ class SubhousesController < ApplicationController
       @subhouse.prirad_mr(current_user)
       current_user.update_attribute(:general, true)
       @subhouse.zapis_operaci('Založení malorodu.')
+      current_user.zapis_operaci("Založili jste malorod #{@subhouse.name}")
       redirect_to :back, :notice => 'Malorod úspěšně založený.'
     else
       redirect_to :back, :alert => 'Nemůžete založit malorod dokud nejsou naplněné již existující.'
@@ -73,9 +74,9 @@ class SubhousesController < ApplicationController
   def prijmi_hrace_mr
     user = User.find(params[:id])
     if user.prijat_do_mr(current_user.subhouse)
-      redirect_to :back, :notice => msg
+      redirect_to :back, :notice => "Prijali jste hrace"
     else
-      redirect_to :back, :alert => "Nepodarilo sa prijat hraca"
+      redirect_to :back, :alert => "Mate maximalni pocet hracu"
     end
   end
 
@@ -87,9 +88,9 @@ class SubhousesController < ApplicationController
     rodu = params[:rod_id_suroviny]
     useru = params[:user_id_suroviny]
     mrdu = params[:mr_id_suroviny]
-    user << params[:user_solary].to_f << params[:user_melanz].to_f << params[:user_zkusenosti].to_i << params[:user_material].to_f << params[:user_parts].to_f
-    narod << params[:rodu_solary].to_f << params[:rodu_melanz].to_f << params[:rodu_zkusenosti].to_i << params[:rodu_material].to_f << params[:rodu_parts].to_f
-    mr << params[:mr_solary].to_f << params[:mr_melanz].to_f << params[:mr_zkusenosti].to_i << params[:mr_material].to_f << params[:mr_parts].to_f
+    user << params[:user_solary].to_f.abs << params[:user_melanz].to_f.abs << params[:user_zkusenosti].to_i.abs << params[:user_material].to_f.abs << params[:user_parts].to_f.abs
+    narod << params[:rodu_solary].to_f.abs << params[:rodu_melanz].to_f.abs << params[:rodu_zkusenosti].to_i.abs << params[:rodu_material].to_f.abs << params[:rodu_parts].to_f.abs
+    mr << params[:mr_solary].to_f.abs << params[:mr_melanz].to_f.abs << params[:mr_zkusenosti].to_i.abs << params[:mr_material].to_f.abs << params[:mr_parts].to_f.abs
     msg, flag = malorod.posli_mr_suroviny(narod, user, mr, rodu, useru, mrdu)
     if flag
       current_user.zapis_operaci(msg)

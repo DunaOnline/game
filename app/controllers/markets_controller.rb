@@ -47,6 +47,7 @@ class MarketsController < ApplicationController
   # POST /markets.json
   def create
     @market = Market.new(params[:market])
+    if @market.amount && @market.price
     if @market.amount > 0 && @market.price > 0
 	    if params[:sent_from] == "H"
 	      flag, msg = current_user.house.sell_goods_house(@market)
@@ -85,7 +86,9 @@ class MarketsController < ApplicationController
     # end
     #
     #end
-
+    else
+	    redirect_to :back ,:alert => "Nevyplnil jste hodnoty"
+	  end
   end
 
   # PUT /markets/1
@@ -113,8 +116,7 @@ class MarketsController < ApplicationController
   def destroy
     @market = Market.find(params[:id])
     if @market.destroy
-	    current_user.goods_to_buyer(@market.area, @market.amount * Constant.stiahnut_zbozi_trh).ceil if @market.area == "E"
-      current_user.goods_to_buyer(@market.area, @market.amount * Constant.stiahnut_zbozi_trh) if @market.area != "E"
+	    @market.stahnout_wrap(current_user)
       @market.zapis_obchodu(current_user, "Zbozi bylo stahnuto z trhu bylo straceno #{@market.amount * 0.3} ks #{@market.show_area}")
     end
 

@@ -437,7 +437,8 @@ class User < ActiveRecord::Base
   end
 
   def prijat_do_mr(mr)
-    if self.subhouse == nil
+
+    if self.subhouse == nil && mr.users <= Constant.max_u_mr
       self.update_attributes(:subhouse_id => mr.id, :ziadost_subhouse => nil)
       self.zapis_operaci("Byl jste přijat do malorodu #{mr.name}.")
       mr.zapis_operaci("Hráč #{self.nick} byl přijat do malorodu.")
@@ -527,6 +528,7 @@ class User < ActiveRecord::Base
         self.domovske_leno.resource.update_attributes(:material => self.domovske_leno.resource.material - h_material, :parts => self.domovske_leno.resource.parts - h_parts)
         msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_material} kg, #{h_melange} mg, #{h_exp} exp, #{h_parts} dilu od hraca #{self.nick}"
         self.zapis_operaci(msg)
+	      house.zapis_operaci(msg)
       else
         msg += sprava
       end
@@ -551,11 +553,12 @@ class User < ActiveRecord::Base
       sprava, flag = self.check_availability(mr_solar, mr_material, mr_melange, mr_exp, mr_parts)
       if flag == true
         mr = self.subhouse
-        mr.update_attributes(:solar => mr.solar + mr_solar, :melange => mr.melange + mr_melange, :exp => mr.exp + mr_exp, :material => mr.material + mr_material, :parts => mr.parts + mr_parts)
+        mr.update_attributes(:solar => mr.solar + mr_solar, :melange => mr.melange + mr_melange, :exp => mr.exp + mr_exp, :parts => mr.parts + mr_parts, :material => mr.material + mr_material)
         self.update_attributes(:solar => self.solar - mr_solar, :melange => self.melange - mr_melange, :exp => self.exp - mr_exp)
         self.domovske_leno.resource.update_attributes(:material => self.domovske_leno.resource.material - mr_material, :parts => self.domovske_leno.resource.parts - mr_parts)
         msg ="Posláno malorodu #{mr.name} #{mr_solar} solaru, #{mr_material} kg, #{mr_melange} mg, #{mr_exp} exp, #{mr_parts} dilu od hraca #{self.nick}"
         self.zapis_operaci(msg)
+	      mr.zapis_operaci(msg)
       else
         msg += sprava
       end
@@ -688,29 +691,29 @@ class User < ActiveRecord::Base
   def barvicky
 
 		  if self.emperor?
-			  "emperor"
+			  "Emperor"
 		  elsif self.regent?
-			  "regent"
+			  "Regent"
 		  elsif self.arrakis?
-			  "arrakis"
+			  "Drzitel Pololena"
 		  elsif self.admin?
-			  "admin"
+			  "Admin"
 		  elsif self.leader?
-			  "leader"
+			  "Leader"
 		  elsif self.vezir?
-			   "vezir"
+			   "Vezir"
 		  elsif self.landsraad?
-			   "poslanec"
+			   "Poslanec"
 		  elsif self.mentat?
-			  "mentat"
+			  "Mentat"
 		  elsif self.army_mentat?
-			  "army_mentat"
+			  "Army_mentat"
 		  elsif self.diplomat?
-			   "diplomat"
+			   "Diplomat"
 		  elsif self.court?
-			  "court"
+			  "Court"
 		  elsif self.general?
-			  "general"
+			  "General"
 
 	  end
   end
