@@ -78,7 +78,7 @@ class House < ActiveRecord::Base
     technologie = Technology.where(:bonus_type => bonus_type).first
     vyskumane_tech = self.researches.where(:technology_id => technologie.id).first if technologie
     if vyskumane_tech
-      vyskumane_tech.lvl * technologie.house_bonus
+      (vyskumane_tech.lvl * technologie.house_bonus) + 1
     else
       1
     end
