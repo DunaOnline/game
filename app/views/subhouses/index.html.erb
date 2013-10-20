@@ -1,25 +1,68 @@
-<% title "Subhouses" %>
-
-<table>
+<%# encoding: utf-8 %>
+<table class="tab0" xmlns="http://www.w3.org/1999/html">
   <tr>
-    <th>Name</th>
-    <th>House</th>
-    <th>Solar</th>
-    <th>Melange</th>
-    <th>Material</th>
-    <th>Exp</th>
-  </tr>
-  <% for subhouse in @subhouses %>
-      <tr>
-        <td><%= subhouse.name %></td>
-        <td><%= subhouse.house_id %></td>
-        <td><%= subhouse.solar %></td>
-        <td><%= subhouse.melange %></td>
-        <td><%= subhouse.material %></td>
-        <td><%= subhouse.exp %></td>
+    <td>
+      <a href="index.htm" title="Home">⌂</a>
+      » <%= link_to 'Přehled Malorodu Naroda', subhouses_path, :title => "Malorod" %>
+    </td>
 
-      </tr>
-  <% end %>
+
+
+    <td class="tdd">
+       <%= link_to ' Malorodní pošta »', new_message_path(:typ => "M"), :value => "Malorodní pošta" %>
+    </td>
+
+
+
+
+  </tr>
 </table>
+
+
+
+
+
+
+  <% @subhouses.each do |s| %>
+    <table class="tab1">
+      <tr>
+        <td class="tdpl" rowspan="11" style="width:180px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
+          <li><h2><%= link_to s.name, subhouse_path(s)%></h2></li>
+          <li><b>Vicegenerál: </b><%= s.users.vicegeneral.first.nick if s.users.vicegeneral.first %></li>
+          <li><b>Clenu: </b><%= s.users.count %> / <%= Constant.max_u_mr %> </li>
+          <li><%= button_to 'Podat žádost', ziadost_malorod_url(:id => s.id), :class => "oktab_auto" %></li>
+        </td>
+        <th>Jméno hráče</th>
+        <th>Síla</th>
+        <th>Vliv</th>
+        <th>Lén</th>
+        <th>Posta</th>
+      </tr>
+      <% s.users.each do |u| %>
+          <tr>
+            <td>
+              <%= link_to u.nick, u, :class => u.barvicky, :title => u.barvicky %>
+            </td>
+            <td>
+            </td>
+            <td>
+              <%= u.influence.round(2) %>
+            </td>
+            <td>
+              <%= u.fields.count %>
+            </td>
+            <td>
+              <%= link_to img_posta, new_message_path(:nick => u.nick) %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  <% end %>
+
+
+
+
+
+
 
 

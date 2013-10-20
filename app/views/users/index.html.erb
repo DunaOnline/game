@@ -34,7 +34,7 @@
         <td><%= user.influence %></td>
         <td><%= user.fields.count %></td>
         <td>
-          <%= link_to image_tag("css/post0.png"), new_message_path(:test => user.nick), :title => "Napsat hráči"%>
+          <%= link_to image_tag("css/post0.png"), new_message_url(:nick => user.nick ), :title => "Napsat hráči"%>
           <a href="#" alt="Útok"><img src="image/cssimage/zautocit.png" alt="Zautočit na hráče" title="Zautočit na hráče"></a>
           <%= link_to image_tag("css/adresat.png"), user_path(user), :alt => "Profil hráče", :title => "Profil hráče" %>
 

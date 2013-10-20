@@ -22,10 +22,12 @@ class MessagesController < ApplicationController
   # GET /messages/new
   # GET /messages/new.json
   def new
+	  typ = (params[:typ])
 	  temp = (params[:nick])
     @recipient_array = User.all.map &:nick
     @message = Message.new
 	  @message.recipients = temp if temp
+	  @message.druh = typ if typ
 
 
     respond_to do |format|

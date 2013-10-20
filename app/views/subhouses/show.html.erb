@@ -3,25 +3,26 @@
   <tr>
     <td>
       <a href="index.htm" title="Home">⌂</a>
-      » <%= link_to 'Přehled Malorodu', subhouse_path(current_user.subhouse), :title => "Malorod" %>
+      » <%= link_to 'Přehled Malorodu', subhouse_path(@subhouse), :title => "Malorod" %>
     </td>
 
-<!-- Odkazuje mne na psani nové pošty
-    
+
+    <% if current_user.subhouse == @subhouse %>
     <td class="tdd">
-       <%= link_to ' Malorodní pošta »', new_message_path, :value => "Malorodní pošta" %>
+       <%= link_to ' Malorodní pošta »', new_message_path(:typ => "M"), :value => "Malorodní pošta" %>
     </td>
     
--->
+
 
     <% if can? :update, @subhouse %>
         <td class="tdd">
           <%= link_to ' Spravovat malorod »', sprava_mr_path(:id => current_user.subhouse) %>
         </td>
     <% end %>
+    <% end %>
   </tr>
 </table>
-
+<% if current_user.subhouse == @subhouse %>
 <table class="tab1">
   <tr>
     <td class="tdpl" rowspan="2" style="width:180px; background-image: url(<%= asset_path 'imghra/narodnisklad.png' %>)">
@@ -45,6 +46,7 @@
     <td><%= img_vyrobky %><%= @subhouse.parts %></td>
   </tr>
 </table>
+<% end %>
 
 <table class="tab1">
   <tr>
@@ -57,12 +59,12 @@
     <th>Síla</th>
     <th>Vliv</th>
     <th>Lén</th>   
-    <th>Akce</th>
+    <th>Posta</th>
   </tr>
   <% @subhouse.users.each do |user| %>
       <tr>
         <td>
-          <%= user.nick %>
+          <%= link_to user.nick, user, :class => user.barvicky, :title => user.barvicky %>
         </td>
         <td>
         </td>
@@ -73,12 +75,12 @@
           <%= user.fields.count %>
         </td>
         <td>
-          <%= link_to 'Profil', user_path(user) %>
+          <%= link_to img_posta, new_message_path(:nick => user.nick) %>
         </td>
       </tr>
   <% end %>
 </table>
-
+<% if current_user.subhouse == @subhouse %>
 <table class="tab1">
   <tr>
     <th colspan="2">Prehled poslednich akci malorodu</th>
@@ -97,3 +99,4 @@
       </tr>
   <% end %>
 </table>
+<% end %>

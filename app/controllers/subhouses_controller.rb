@@ -7,13 +7,11 @@ class SubhousesController < ApplicationController
   end
 
   def show
-	  if Subhouse.find(params[:id]) == current_user.subhouse
+
 	    @subhouse = Subhouse.find(params[:id])
 	    @operations = @subhouse.operations.malorodni.seradit.limit(5)
-	  else
-		  @subhouse = current_user.subhouse
-		  @operations = @subhouse.operations.malorodni.seradit.limit(5)
-		end
+
+
   end
 
   def new

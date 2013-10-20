@@ -164,11 +164,15 @@ class UsersController < ApplicationController
 
   def ziadost_malorod
     subhouse = Subhouse.find(params[:id])
-    if current_user.update_attribute(:ziadost_subhouse, subhouse.id) && !current_user.subhouse
-      redirect_to :back, :notice => "Žádost do malorodu #{subhouse.name} byla podána"
+    if !current_user.subhouse
+	    if current_user.update_attribute(:ziadost_subhouse, subhouse.id)
+	      redirect_to :back, :notice => "Žádost do malorodu #{subhouse.name} byla podána"
+	    else
+	      redirect_to :back, :alert => "Nemůžte poslat žádost"
+	    end
     else
-      redirect_to :back, :alert => "Nemůžte poslat žádost"
-    end
+	    redirect_to :back, :alert => "Nesmite byt clenem malorodu na podani zadosti"
+	  end
   end
 
   def oprava_katastrofy

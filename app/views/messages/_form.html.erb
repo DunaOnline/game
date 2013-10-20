@@ -59,7 +59,7 @@
 
             <%= f.text_field :recipients, :placeholder => "Adresat, Adresáti", :title => "Adresát", :value => @old_msg ? @old_msg.user.nick : @message.recipients, :class => "i_nick" %>
 
-            <%= f.select :druh, options_for_select(@message.list_druhu_posty(current_user)) %>
+            <%= f.select :druh, options_for_select(@message.list_druhu_posty(current_user), @message.druh) %>
 
 <!--        <input type="button" value="B" title="Tučné" class="ok4">
             <input type="button" value="I" title="Zkosené" class="ok4">

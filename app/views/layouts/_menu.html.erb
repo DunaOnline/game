@@ -39,9 +39,11 @@
                   <li><%= link_to 'Správa Malorodu', sprava_mr_path(:id => current_user.subhouse) %>
               <% end %>
               <li><%= link_to 'Přehled Malorodu', current_user.subhouse if current_user.subhouse %></li>
+              <li><%= link_to 'Seznam Malorodu', subhouses_path %></li>
               <% if can? :sprava_rod, House %>
                   <li><%= link_to 'Správa Velkorodu', sprava_rod_path(:id => current_user.house) %>
               <% end %>
+
               <li><%= link_to 'Přehled Národa', current_user.house %></li>
               <% if can? :sprava, Imperium %>
                   <li><%= link_to 'Správa Impéria', sprava_imperia_path %></li>

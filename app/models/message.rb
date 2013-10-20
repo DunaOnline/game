@@ -82,10 +82,11 @@ class Message < ActiveRecord::Base
 	  end
   end
 
+
   def list_druhu_posty(user)
 	 options = []
 	 options << ['Hromadná pošta', nil]
-	 options << ['Malorodní', 'M']
+	 options << ['Malorodní', 'M'] if user.subhouse
 	 options << ['Generálům', 'G'] if user.mentat? || user.leader? || user.army_mentat?
 	 options << ['Národní', 'N'] if user.mentat? || user.leader? || user.army_mentat?
 	 options << ['Landsraadni', 'L'] if user.landsraad? || user.emperor?
