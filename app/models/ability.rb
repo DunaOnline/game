@@ -35,8 +35,8 @@ class Ability
 	      can :dashboard              # grant access to the dashboard
         can :manage, :all
       else
-	      cannot :access, :rails_admin   # grant access to rails_admin
-	      cannot :dashboard              # grant access to the dashboard
+	      #cannot :access, :rails_admin   # grant access to rails_admin
+	      #cannot :dashboard              # grant access to the dashboard
         cannot [:update, :delete], Global
         cannot [:read, :update, :create, :delete], Product
         can [:read, :update], User

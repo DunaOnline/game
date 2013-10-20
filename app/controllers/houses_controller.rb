@@ -159,7 +159,7 @@ class HousesController < ApplicationController
     user << params[:user_solary].to_f.abs << params[:user_melanz].to_f.abs << params[:user_zkusenosti].to_i.abs << params[:user_material].to_f.abs << params[:user_parts].to_f.abs
     narod << params[:rodu_solary].to_f.abs << params[:rodu_melanz].to_f.abs << params[:rodu_zkusenosti].to_i.abs << params[:rodu_material].to_f.abs << params[:rodu_parts].to_f.abs
     mr << params[:mr_solary].to_f.abs << params[:mr_melanz].to_f.abs << params[:mr_zkusenosti].to_i.abs << params[:mr_material].to_f.abs << params[:mr_parts].to_f.abs
-    msg, flag = rod.posli_rodove_suroviny(narod, user, mr, rodu, useru, mrdu)
+    msg, flag = rod.posli_rodove_suroviny(narod, user, mr, rodu, useru, mrdu, current_user)
     if flag
       redirect_to sprava_rod_path(:id => rod), :notice => msg
     else

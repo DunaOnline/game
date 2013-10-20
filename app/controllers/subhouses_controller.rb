@@ -26,12 +26,15 @@ class SubhousesController < ApplicationController
     @subhouse.house_id = current_user.house.id
 
     if @subhouse.obsazenost_mr
-      @subhouse.save
-      @subhouse.prirad_mr(current_user)
-      current_user.update_attribute(:general, true)
-      @subhouse.zapis_operaci('Založení malorodu.')
-      current_user.zapis_operaci("Založili jste malorod #{@subhouse.name}")
-      redirect_to :back, :notice => 'Malorod úspěšně založený.'
+      if @subhouse.save
+	      @subhouse.prirad_mr(current_user)
+	      current_user.update_attribute(:general, true)
+	      @subhouse.zapis_operaci('Založení malorodu.')
+        current_user.zapis_operaci("Založili jste malorod #{@subhouse.name}")
+        redirect_to :back, :notice => 'Malorod úspěšně založený.'
+      else
+	      redirect_to :back, :alert => "Prosim vyplnte jmeno mezi 3 az 8 pismenami. "
+	    end
     else
       redirect_to :back, :alert => 'Nemůžete založit malorod dokud nejsou naplněné již existující.'
     end
@@ -91,7 +94,7 @@ class SubhousesController < ApplicationController
     user << params[:user_solary].to_f.abs << params[:user_melanz].to_f.abs << params[:user_zkusenosti].to_i.abs << params[:user_material].to_f.abs << params[:user_parts].to_f.abs
     narod << params[:rodu_solary].to_f.abs << params[:rodu_melanz].to_f.abs << params[:rodu_zkusenosti].to_i.abs << params[:rodu_material].to_f.abs << params[:rodu_parts].to_f.abs
     mr << params[:mr_solary].to_f.abs << params[:mr_melanz].to_f.abs << params[:mr_zkusenosti].to_i.abs << params[:mr_material].to_f.abs << params[:mr_parts].to_f.abs
-    msg, flag = malorod.posli_mr_suroviny(narod, user, mr, rodu, useru, mrdu)
+    msg, flag = malorod.posli_mr_suroviny(narod, user, mr, rodu, useru, mrdu, current_user)
     if flag
       current_user.zapis_operaci(msg)
       malorod.zapis_operaci(msg)

@@ -50,7 +50,7 @@
           <li><%= img_melanz %><%= text_field_tag 'mr_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'mr_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
           <li><%= img_vyrobky %><%= text_field_tag 'mr_parts', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
-          <li><%= select_tag :mr_id_suroviny, options_for_select(Subhouse.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %> </li>
+          <li><%= select_tag :mr_id_suroviny, options_for_select(Subhouse.by_house(current_user.house).without_subhouse(@subhouse).order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %> </li>
 
         </td>
         <td>

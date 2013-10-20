@@ -117,7 +117,7 @@ class House < ActiveRecord::Base
     planet
   end
 
-  def move_to_house(suroviny, house)
+  def move_to_house(suroviny, house, posiela)
     msg = ""
     presun = false
     suroviny.each do |sur|
@@ -136,7 +136,7 @@ class House < ActiveRecord::Base
         house = House.find(house)
         house.update_attributes(:solar => house.solar + h_solar, :material => house.material + h_material, :melange => house.melange + h_melange, :exp => house.exp + h_exp, :parts => house.parts + h_parts)
         self.update_attributes(:solar => self.solar - h_solar, :material => self.material - h_material, :melange => self.melange - h_melange, :exp => self.exp - h_exp, :parts => self.parts - h_parts)
-        msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_material} kg, #{h_melange} mg, #{h_exp} exp, #{h_parts} dilu od naroda #{self.name}"
+        msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_material} kg, #{h_melange} mg, #{h_exp} exp, #{h_parts} dilu od naroda #{self.name}. Poslal #{posiela.nick}. "
         self.zapis_operaci(msg)
 	      house.zapis_operaci(msg)
       else
@@ -146,7 +146,7 @@ class House < ActiveRecord::Base
     return msg, flag
   end
 
-  def move_to_mr(suroviny, mr)
+  def move_to_mr(suroviny, mr, posiela)
     msg = ""
     presun = false
     suroviny.each do |n_sur|
@@ -165,7 +165,7 @@ class House < ActiveRecord::Base
         mr = Subhouse.find(mr)
         mr.update_attributes(:solar => mr.solar + mr_solar, :melange => mr.melange + mr_melange, :exp => mr.exp + mr_exp, :material => mr.material + mr_material, :parts => mr.parts + mr_parts)
         self.update_attributes(:solar => self.solar - mr_solar, :material => self.material - mr_material, :melange => self.melange - mr_melange, :exp => self.exp - mr_exp, :parts => self.parts - mr_parts)
-        msg ="Posláno malorodu #{mr.name} #{mr_solar} solaru, #{mr_material} kg, #{mr_melange} mg, #{mr_exp} exp, #{mr_parts} dilu od naroda #{self.name}"
+        msg ="Posláno malorodu #{mr.name} #{mr_solar} solaru, #{mr_material} kg, #{mr_melange} mg, #{mr_exp} exp, #{mr_parts} dilu od naroda #{self.name}. Poslal #{posiela.nick}"
         self.zapis_operaci(msg)
 	      mr.zapis_operaci(msg)
       else
@@ -175,7 +175,7 @@ class House < ActiveRecord::Base
     return msg, flag
   end
 
-  def move_to_user(suroviny, user)
+  def move_to_user(suroviny, user, posiela)
     msg = ""
     presun = false
     suroviny.each do |n_sur|
@@ -195,7 +195,7 @@ class House < ActiveRecord::Base
         user.domovske_leno.resource.update_attributes(:material => user.domovske_leno.resource.material + u_material, :parts => user.domovske_leno.resource.parts + u_parts)
         user.update_attributes(:solar => user.solar + u_solar, :melange => user.melange + u_melange, :exp => user.exp + u_exp)
         self.update_attributes(:solar => self.solar - u_solar, :material => self.material - u_material, :melange => self.melange - u_melange, :exp => self.exp - u_exp, :parts => self.parts - u_parts)
-        msg +="Posláno hraci #{user.nick} #{u_solar} solaru, #{u_material} kg, #{u_melange} mg, #{u_exp} exp, #{u_parts} dilu od naroda #{self.name}"
+        msg +="Posláno hraci #{user.nick} #{u_solar} solaru, #{u_material} kg, #{u_melange} mg, #{u_exp} exp, #{u_parts} dilu od naroda #{self.name}. Poslal #{posiela.nick}"
         self.zapis_operaci(msg)
 	      user.zapis_operaci(msg)
       else
@@ -206,12 +206,12 @@ class House < ActiveRecord::Base
   end
 
 
-  def posli_rodove_suroviny(h, u, mr, narod, user, malorod)
+  def posli_rodove_suroviny(h, u, mr, narod, user, malorod, posiela)
 
     msg = ""
-    sprava, flag = self.move_to_house(h, narod)
-    sprava1, flag1 = self.move_to_user(u, user)
-    sprava2, flag2 = self.move_to_mr(mr, malorod)
+    sprava, flag = self.move_to_house(h, narod, posiela)
+    sprava1, flag1 = self.move_to_user(u, user, posiela)
+    sprava2, flag2 = self.move_to_mr(mr, malorod, posiela)
     msg += sprava if sprava
     msg += sprava1 if sprava1
     msg += sprava2 if sprava2

@@ -101,6 +101,10 @@ class Constant
     Global.vrat('zakl_cena_planety', 4)
   end
 
+  def self.cena_noveho_lena
+	  Global.vrat('cena_noveho_lena_od_poctu',4)
+  end
+
   #ZAKL_CENA_NOVEHO_LENA = Global.vrat('zakl_cena_lena', 4)
   def self.zakl_cena_lena
     Global.vrat('zakl_cena_lena', 4)

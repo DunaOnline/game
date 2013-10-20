@@ -13,7 +13,7 @@ class Vypocty
 
   def self.cena_noveho_lena_melanz(planeta)
     zakl_cena = Constant.kmev * Constant.zakl_cena_lena
-    (zakl_cena + zakl_cena * (planeta.fields.count / 100.0)).round(2)
+    (zakl_cena + zakl_cena * (planeta.fields.count / planeta.planet_type.fields)).round(2)
   end
 
   def self.cena_noveho_lena_solary(planeta)

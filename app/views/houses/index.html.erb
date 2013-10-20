@@ -39,22 +39,22 @@
         </td>
 
         <td style="text-align: center !important">
-          <%= link_to house.vudce.nick, house.vudce, :class => "leader" if house.vudce %>
+          <%= link_to house.vudce.nick, house.vudce, :class => "Leader", :title => "Leader" if house.vudce %>
         </td>
         <td>
           <% for user in house.mentate do %>
-              <li><%= link_to user.nick, user, :class => "mentat" %></li>
+              <li><%= link_to user.nick, user, :class => "Mentat", :title => "Mentat" %></li>
           <% end %>
           <% for user in house.army_mentate do %>
-              <li><%= link_to user.nick, user, :class => "army_mentat" %></li>
+              <li><%= link_to user.nick, user, :class => "Army_mentat", :title => "Army_mentat" %></li>
           <% end %>
           <% for user in house.diplomate do %>
-              <li><%= link_to user.nick, user, :class => "diplomat" %></li>
+              <li><%= link_to user.nick, user, :class => "Diplomat", :title => "Diplomat" %></li>
           <% end %>
         </td>
         <td>
           <% for user in house.poslanci do %>
-              <li><%= link_to user.nick, user, :class => "poslanec" %></li>
+              <li><%= link_to user.nick, user, :class => "Poslanec", :title => "Poslanec" %></li>
           <% end %>
         </td>
 
