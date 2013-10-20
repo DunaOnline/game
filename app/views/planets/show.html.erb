@@ -98,7 +98,7 @@
               <% end %>
             </td>
             <td class="tdp"><%= field.oznaceni %></td>
-            <td class="tdp"><%= link_to field.user.nick, field.user, :class => user.barvicky, :title => user.barvicky %></td>
+            <td class="tdp"><%= link_to field.user.nick, field.user, :class => field.user.barvicky, :title => field.user.barvicky %></td>
             <td class="tdp"><%= link_to field.user.house.name, field.user.house %></td>
             <td class="tdpa">
               <%= link_to img_posta, new_message_path(:nick => field.user.nick) %>
