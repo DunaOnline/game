@@ -162,7 +162,7 @@ class Planet < ActiveRecord::Base
         a.assoc(rod)[1] += 1
       end
     }
-    a.sort! { |a, b| a[1] <=> b[1] }
+    a.sort_by {|h| [ h[1],h[1] ]}
     a
   end
 

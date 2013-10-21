@@ -31,7 +31,9 @@ class Field < ActiveRecord::Base
   def vytvor_resource
     # nejak mi nefunguje after_create tak jak ma
     unless self.resource
-      Resource.new(:user_id => self.user_id, :field_id => self.id, :population => 100000, :material => 2000.0, :parts => 0).save
+	    pop = Constant.vytvor_resource_pop
+	    mat = Constant.vytvor_resource_mat
+      Resource.new(:user_id => self.user_id, :field_id => self.id, :population => pop, :material => mat, :parts => 0).save
     end
   end
 
@@ -123,8 +125,8 @@ class Field < ActiveRecord::Base
   def postav_availability_check(budova, pocet_budov)
 
     tech = self.user.tech_bonus("L")
-
-    bonus = (2 - tech).to_f
+    house_lvl = self.user.house.vyskumane_narodni_tech("L")
+    bonus = 2 - (tech * house_lvl)
 
     cena_sol = budova.naklady_stavba_solary * bonus
     cena_mat = budova.naklady_stavba_material * bonus

@@ -47,7 +47,7 @@ class System < ActiveRecord::Base
       end
     end
 
-    b.sort! { |a, b| a[1] <=> b[1] }
+    b.sort_by {|h| [ h[1],h[1] ]}
     return b
   end
 

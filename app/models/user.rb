@@ -74,6 +74,8 @@ class User < ActiveRecord::Base
 
   validates :username, :presence => true, :uniqueness => true
   validates :password, :presence => true, :on => :create
+  validates :nick, :presence => true, :uniqueness => true
+  validates_length_of :nick, :minimum => 3, :maximum => 19
   validates_confirmation_of :password
   validates_uniqueness_of :email, :allow_blank => true
   validates_format_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"
@@ -134,6 +136,15 @@ class User < ActiveRecord::Base
   def odhlasuj(typ)
 	  vote = Vote.where(:house_id => self.house.id, :elector => self.id, :typ => typ).first
 	  vote.delete if vote
+  end
+
+  def odhlasuj_gene
+	  self.subhouse.users.each do |u|
+		  unless self == u
+		    vote = Vote.where(:house_id => self.house.id, :elector => u.id, :typ => "general").first
+			  vote.elective == self.id ? vote.delete : {}
+			end
+	  end
   end
 
   def koho_jsem_volil(typ)
@@ -389,7 +400,9 @@ class User < ActiveRecord::Base
 
   def opustit_mr
     subhouse = self.subhouse
-
+    if self.general
+	     self.odhlasuj_gene
+    end
     self.update_attributes(:subhouse_id => nil, :vicegeneral => false, :general => false)
     if subhouse.users.count == 0
       subhouse.house.update_attributes(:solar => subhouse.house.solar + subhouse.solar, :material => subhouse.house.material + subhouse.material,

@@ -107,13 +107,14 @@
   <tr>
     <td class="tdpl" rowspan="2" style="width:160px; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
       <li><h2>Prodej komodit</h2></li>
-      <br>
+      <li><%= submit_tag 'Nabídnout', :class => "ok" %>
+
       
     </td>
     <th>Komodita</th>
     <th>Cena/Kus</th>
     <th>Množství</th>
-    <th width="45px">Akce</th>
+
   </tr>
   <!-- PRODEJ Z MALORODNICH ZASOB -->
   <%= form_for(@market) do |f| %>
@@ -127,7 +128,7 @@
 
         <td><%= f.number_field :amount, :required => true, :min => 0.1, :step => "any", :size => 3, :title => "Zadejte množství", :step => "any" %> </td>
         
-        <td><%= f.submit 'Nabídnout', :class => "ok" %></td>
+
       </tr>
   <% end %>
   
@@ -201,3 +202,25 @@
       <% end %>
 </table>
 <% end %>
+
+<table class="tab1">
+  <tr>
+    <th colspan="2">Prehled poslednich akci malorodu</th>
+    <th><%= link_to 'Všechny akce', operations_path(:jake => 'malorod') %></th>
+  </tr>
+  <tr>
+    <th>Obsah akce</th>
+    <th style="width:80px">Datum</th>
+    <th style="width:80px">Čas</th>
+  </tr>
+  <% for operation in @operations %>
+      <tr>
+        <td><%= operation.content %></td>
+        <td><%= format_date(operation.date) %></td>
+        <td><%= format_time(operation.time) %></td>
+      </tr>
+  <% end %>
+  <tr>
+    <td colspan="3"><%= link_to 'Zobrazit všechny proběhlé akce', operations_path(:jake => 'malorod') %></td>
+  </tr>
+</table>

@@ -122,6 +122,15 @@ class Constant
     Global.vrat('budov_na_leno', 4)
   end
 
+  def self.vytvor_resource_pop
+	  Global.vrat('vytvor_resource_pop', 4)
+  end
+
+  def self.vytvor_resource_mat
+	  Global.vrat('vytvor_resource_mat', 4)
+  end
+
+
   #VYNOS_BEZ_POP = 0.1
   def self.vynos_bez_pop
     0.1

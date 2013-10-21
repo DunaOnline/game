@@ -23,7 +23,7 @@ class Subhouse < ActiveRecord::Base
   has_many :operations
   belongs_to :house
 
-  validates_length_of :name, :minimum => 3, :maximum => 8
+  validates_length_of :name, :minimum => 3, :maximum => 20
   #validates_presence_of :name
 
   def obsazenost_mr

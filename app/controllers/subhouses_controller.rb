@@ -58,6 +58,7 @@ class SubhousesController < ApplicationController
     @markets = Market.zobraz_trh_mr(@subhouse)
     @productions = @subhouse.productions
 	  @vice = @subhouse.users.vicegeneral
+    @operations = @subhouse.operations.malorodni.seradit.limit(5)
   end
 
   def vyhod_mr
@@ -94,8 +95,7 @@ class SubhousesController < ApplicationController
     mr << params[:mr_solary].to_f.abs << params[:mr_melanz].to_f.abs << params[:mr_zkusenosti].to_i.abs << params[:mr_material].to_f.abs << params[:mr_parts].to_f.abs
     msg, flag = malorod.posli_mr_suroviny(narod, user, mr, rodu, useru, mrdu, current_user)
     if flag
-      current_user.zapis_operaci(msg)
-      malorod.zapis_operaci(msg)
+
       redirect_to sprava_mr_path(:id => malorod), :notice => msg
     else
       msg += "Nezadal jsi množství na přesun" if msg == ""

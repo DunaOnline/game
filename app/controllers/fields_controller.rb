@@ -6,6 +6,8 @@ class FieldsController < ApplicationController
     @planets = current_user.osidlene_planety
     @domovska = Planet.domovska(current_user).first
     @pole_domovska = @domovska.fields.vlastnik(current_user).first
+    @co_poslat = [["Materiál", "Material"], ["Populace", "Population"], ["Vyrobky", "Parts"]]
+    @my_fields = current_user.fields
   end
 
   def show
@@ -14,9 +16,7 @@ class FieldsController < ApplicationController
       @owner = @field.user
       user_lvl = @owner.tech_bonus("L")
       house_lvl = @owner.house.vyskumane_narodni_tech("L")
-      if user_lvl && house_lvl
-        @bonus = (2 - (user_lvl * house_lvl)).to_f
-      end
+      @bonus = 2 - (user_lvl * house_lvl).to_f
 
       if current_user.admin? || @owner == current_user
 
@@ -163,14 +163,14 @@ class FieldsController < ApplicationController
           #if params[:tovarna]
           #  redirect_to productions_path
           #else
-          redirect_to source
+          redirect_to :back
         #end
         else
           flash[:error] = str
           #if params[:tovarna]
           # redirect_to productions_path
           #else
-          redirect_to source
+          redirect_to :back
         #end
       end
     else
@@ -178,7 +178,7 @@ class FieldsController < ApplicationController
       if params[:tovarna]
         redirect_to productions_path
       else
-        redirect_to source
+        redirect_to :back
       end
     end
 

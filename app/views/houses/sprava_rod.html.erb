@@ -250,3 +250,25 @@
   </tr>
 </table>
 
+<table class="tab1">
+  <tr>
+    <th colspan="2">Prehled poslednich akci malorodu</th>
+    <th><%= link_to 'Všechny akce', operations_path(:jake => 'malorod') %></th>
+  </tr>
+  <tr>
+    <th>Obsah akce</th>
+    <th style="width:80px">Datum</th>
+    <th style="width:80px">Čas</th>
+  </tr>
+  <% for operation in @operations %>
+      <tr>
+        <td><%= operation.content %></td>
+        <td><%= format_date(operation.date) %></td>
+        <td><%= format_time(operation.time) %></td>
+      </tr>
+  <% end %>
+  <tr>
+    <td colspan="3"><%= link_to 'Zobrazit všechny proběhlé akce', operations_path(:jake => 'narod') %></td>
+  </tr>
+</table>
+

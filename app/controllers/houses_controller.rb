@@ -114,6 +114,7 @@ class HousesController < ApplicationController
     @user = current_user
     @markets = Market.zobraz_trh_house(@house)
     @market = Market.new
+    @operations = @house.operations.narodni.seradit.limit(5)
   end
 
   def send_products_house
