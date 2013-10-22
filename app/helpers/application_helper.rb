@@ -145,7 +145,7 @@ module ApplicationHelper
     cesta += typ + ".png"
     #cesta += typ
     #cesta += ".png"
-
+	  cesta
   end
   
   def hodnost_barva(hodnost)

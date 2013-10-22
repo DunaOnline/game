@@ -8,6 +8,8 @@ class FieldsController < ApplicationController
     @pole_domovska = @domovska.fields.vlastnik(current_user).first
     @co_poslat = [["Materiál", "Material"], ["Populace", "Population"], ["Vyrobky", "Parts"]]
     @my_fields = current_user.fields
+	  @exp_bonus = []
+	  @effect_bonus = []
   end
 
   def show

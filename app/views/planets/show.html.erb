@@ -39,7 +39,11 @@
               Zkusme se porozhlédnout po lepším místě, například <%= link_to "zde", planets_path %>.
             </i></li>
         <% elsif @planet.arrakis? %>
-
+        <% elsif @planet.fields.count == @planet.planet_type.fields %>
+          <br><br>
+          <li><i>
+            Můj lorde, vycerpali jste volne mista na planete, podivejte se po dalsich <%= link_to "zde", planets_path %>.
+          </i></li>
         <% else %>
             <% if @planet.osidlitelna?(current_user) %>
               <br><br>

@@ -47,8 +47,11 @@
           <% end %>
           <!--<li><b>Dominantní národ: </b><a href="stat-databaze-narod.htm">Riches (33) *</a>
           <li><b>Další národy:</b> Atreides (12), Corrino (10), Ekaz (7), Harkonnenové (2)-->
+          <% if planeta.fields.where(:user_id => current_user) %>
+          <br><b>Názvy vašich lén:</b>
+          <% end %>
           <% for field in planeta.fields.where(:user_id => current_user) do %>
-              <br><b>Názvy vašich lén:</b>
+
               <li><%= link_to field.name, field %>
           <% end %>
               

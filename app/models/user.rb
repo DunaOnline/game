@@ -451,7 +451,7 @@ class User < ActiveRecord::Base
 
   def prijat_do_mr(mr)
 
-    if self.subhouse == nil && mr.users <= Constant.max_u_mr
+    if self.subhouse == nil && mr.users.count <= Constant.max_u_mr
       self.update_attributes(:subhouse_id => mr.id, :ziadost_subhouse => nil)
       self.zapis_operaci("Byl jste přijat do malorodu #{mr.name}.")
       mr.zapis_operaci("Hráč #{self.nick} byl přijat do malorodu.")

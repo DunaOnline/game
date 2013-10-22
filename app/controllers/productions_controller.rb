@@ -60,7 +60,7 @@ class ProductionsController < ApplicationController
     field = Field.find(params[:leno])
     par = []
     vyrobky.each do |title|
-      par << [[params[title]], [title]] unless params[title] == ""
+      par << [([params[title]]), [title]] unless params[title] == ""
     end
     if par.any?
       if params[:commit]

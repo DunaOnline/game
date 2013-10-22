@@ -1,6 +1,6 @@
 <tr>
 
-  <th class="descr"  style="width: 180px; background-image: url(<%= asset_path 'budovy/Riches/i_arm.png' %>);" > <%= technology.name %></th>
+  <th class="descr"  style="width: 180px; background-image: url(<%= cesta_budovy(current_user.house.name, technology.image_url) %>);" > <%= technology.name %></th>
 
 
   <% vylep = technology.vylepseno_narodni(current_user.house_id) %>

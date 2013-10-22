@@ -30,10 +30,11 @@
   <tr>
     <td class="none"></td>
     <th class="l" style="width:140px">Vaše léna</th>
-    <th style="width:90px">Kapacita</th>
+    <th style="width:80px">Kapacita</th>
     <th style="width:90px">Na planetě</th>
-    <th style="width:90px">Produkce</th>
-    <th class="r" style="width:80px">Bonusy</th>
+    <th style="width:85px">Produkce</th>
+    <th class="r" style="width:100px">Bonusy</th>
+
   </tr>
 
   <tr>
@@ -67,32 +68,47 @@
 
     <td>
       <li><%= img_solary "Výnos soláry" %>
-        <span class="<%= trida_barvy(@domovska.vynos(current_user, 'solar')) %>"><%= format_mena(@domovska.vynos(current_user, 'solar'), "S") %></span>
+        <span class="<%= trida_barvy(@domovska.vynos(current_user, 'solar')) %>"><%= format_mena(@domovska.vynos(current_user, 'solar'), "S",false) %></span>
       </li>
       <li><%= img_material "Výnos materiál" %>
-        <span class="<%= trida_barvy(@domovska.vynos(current_user, 'material')) %>"><%= format_mena(@domovska.vynos(current_user, 'material'), "kg") %></span>
+        <span class="<%= trida_barvy(@domovska.vynos(current_user, 'material')) %>"><%= format_mena(@domovska.vynos(current_user, 'material'), "kg",false) %></span>
       </li>
       <li><%= img_populace "Výnos populace" %>
-        <span class="<%= trida_barvy(@domovska.vynos(current_user, 'population')) %>"><%= format_mena(@domovska.vynos(current_user, 'population'), "k") %></span>
+        <span class="<%= trida_barvy(@domovska.vynos(current_user, 'population')) %>"><%= format_mena(@domovska.vynos(current_user, 'population'), "k",false) %></span>
       </li>
       <li><%= img_zkusenosti "Výnos zkušenosti" %>
-        <span class="<%= trida_barvy(@domovska.vynos(current_user, 'exp')) %>"><%= format_mena(@domovska.vynos(current_user, 'exp'), "exp") %></span>
+        <span class="<%= trida_barvy(@domovska.vynos(current_user, 'exp')) %>"><%= format_mena(@domovska.vynos(current_user, 'exp'), "exp",false) %></span>
       </li>
     </td>
 
     <td>
       <% pt = @domovska.planet_type %>
       <li><%= img_solary "Bonus soláry" %>
-        <span class="<%= trida_barvy(pt.solar_bonus) %>"><%= format_mena(pt.solar_bonus, "%") %></span></li>
+        <span class="<%= trida_barvy(pt.solar_bonus) %>"><%= format_mena(pt.solar_bonus, "%",false) %></span>
+      <span class="<%= trida_barvy((@domovska.fields.first.leno_udalost_bonus("S")-1)*100) %>">
+          <%= format_mena((@domovska.fields.first.leno_udalost_bonus("S")-1)*100, "%",false) %></span></li>
       <li><%= img_material "Bonus materiál" %>
-        <span class="<%= trida_barvy(pt.material_bonus) %>"><%= format_mena(pt.material_bonus, "%") %></span></li>
+        <span class="<%= trida_barvy(pt.material_bonus) %>"><%= format_mena(pt.material_bonus, "%",false) %></span>
+         <span class="<%= trida_barvy((@domovska.fields.first.leno_udalost_bonus("M")-1)*100) %>">
+          <%= format_mena((@domovska.fields.first.leno_udalost_bonus("M")-1)*100, "%",false) %></span></li>
+      <li><%= img_melanz "Bonus melange" %>
+        <span class="<%= trida_barvy(0) %>">
+          <%= format_mena(0, "%",false) %></span>
+        <span class="<%= trida_barvy((@domovska.fields.first.leno_udalost_bonus("J")-1)*100) %>">
+          <%= format_mena((@domovska.fields.first.leno_udalost_bonus("J")-1)*100, "%",false) %></span></li>
       <li><%= img_populace "Bonus populace" %>
-        <span class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%") %></span></li>
+        <span class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%",false) %></span>
+      <span class="<%= trida_barvy((@domovska.fields.first.leno_udalost_bonus("P")-1)*100) %>">
+          <%= format_mena((@domovska.fields.first.leno_udalost_bonus("P")-1)*100, "%",false) %></span></li>
       <li><%= img_zkusenosti "Bonus zkušenosti" %>
-        <span class="<%= trida_barvy(pt.exp_bonus) %>"><%= format_mena(pt.exp_bonus, "%") %></span></li>
+        <span class="<%= trida_barvy(pt.exp_bonus) %>"><%= format_mena(pt.exp_bonus, "%",false) %></span>
+      <span class="<%= trida_barvy((@domovska.fields.first.leno_udalost_bonus("E")-1)*100) %>">
+          <%= format_mena((@domovska.fields.first.leno_udalost_bonus("E")-1)*100, "%",false) %></span></li>
       <li><%= img_kasarna "Bonus ke kapacitě kasáren a kosmodromů" %>
         <span class="cervena"> + 0%</span></li>
     </td>
+
+
   </tr>
 
   <% for planet in @planets do %>

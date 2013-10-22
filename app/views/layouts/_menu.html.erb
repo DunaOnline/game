@@ -11,6 +11,7 @@
               <li><%= link_to "Poslat poštu", new_message_path %>
                 <br>
                 <!-- <li><a href="#"> Malorodní Syselaad *</a>  -->
+              <li><%= link_to "Malorodní Syselaad", syselaad_path(:kind => 'M') %></li>
               <li><%= link_to "Národní Syselaad", syselaad_path(:kind => 'N') %></li>
               <li><%= link_to "Mezinárodní Syselaad", syselaad_path(:kind => 'E') %></li>
               <!--

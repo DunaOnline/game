@@ -241,7 +241,7 @@ class Field < ActiveRecord::Base
 
     vyrobky.each do |vyrobok|
       pocet = vyrobok[0]
-      pocet = pocet[0].to_i
+      pocet = pocet[0].to_i.abs
       coho = Product.where(:title => vyrobok[1]).first
 
       total_material += coho.material * pocet
@@ -467,7 +467,7 @@ class Field < ActiveRecord::Base
           enviro_bonus = 1
       end
     end
-    enviro_bonus = enviro_bonus -1 if enviro_bonus > 2
+
     enviro_bonus
   end
 
