@@ -78,7 +78,8 @@ class Message < ActiveRecord::Base
 			  t = "Diplomaticka"
 		  when "A"
 			  t = "Admin"
-
+		  else
+			  t = "Hromadná pošta"
 	  end
   end
 
@@ -139,19 +140,19 @@ class Message < ActiveRecord::Base
   def farba
 	  case self.druh
 		  when "M"
-			  "#ff4500"
+			  "malorodni"
 		  when "L"
-			  "#40e0d0"
+			  "landraadni"
 		  when "A"
-			  "#fff; font-weight: bold"
+			  "adminska"
 		  when "G"
-			  "#ff4500"
+			  "generalum"
 		  when "D"
-			  "#fffafa"
+			  "diplomaticka"
 		  when "N"
-			  "#ff0000"
+			  "narodni"
 		  when "I"
-			  "#da70d6"
+			  "imperialni"
 
 	  end
   end

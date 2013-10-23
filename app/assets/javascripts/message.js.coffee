@@ -24,6 +24,8 @@ $(document).ready ->
       $(".druhPosty").append(this.innerText)
       druh = this.innerText.substr(0, 1)
       if druh == "S" then pagination(messages) else pagination($('tr[data-druh=' + druh + ']'))
+  $('a[disabled=disabled]').click (event)->
+    event.preventDefault()
 
 
 messagesToShow = (page, messages) ->

@@ -14,6 +14,8 @@ class SyselaadsController < ApplicationController
         @syselaads = Syselaad.systemovy
       when 'E'
         @syselaads = Syselaad.mezinarodni
+	    when 'M'
+		    @syselaads = Syselaad.malorodni.where(:subhouse_id => current_user.subhouse)
       else
         @syselaads = Syselaad.narodni.where(:house_id => rod)
     end
@@ -32,6 +34,8 @@ class SyselaadsController < ApplicationController
         @syselaad = Syselaad.systemovy.first
       when 'E'
         @syselaad = Syselaad.mezinarodni.first
+	    when 'M'
+		    @syselaads = Syselaad.malorodni.where(:subhouse_id => current_user.subhouse).first
       else
         @syselaad = Syselaad.narodni.where(:house_id => rod).first
     end
