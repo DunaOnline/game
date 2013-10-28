@@ -150,18 +150,20 @@ class Planet < ActiveRecord::Base
 
   def zastoupene_rody
     a = []
-    self.fields.includes(:user, :house).each { |field|
+    self.fields.includes(:user, :house).each do |field|
       if self == Planet.arrakis || self == Planet.kaitan
         rod = House.imperium.name
       else
         rod = field.user.house.name
       end
-      if a.assoc(rod) == nil
-        a << [rod, 1]
-      else
-        a.assoc(rod)[1] += 1
-      end
-    }
+      unless rod
+	      if a.assoc(rod) == nil
+	        a << [rod, 1]
+	      else
+	        a.assoc(rod)[1] += 1
+	      end
+	    end
+    end
     a.sort_by {|h| [ h[1],h[1] ]}
     a
   end

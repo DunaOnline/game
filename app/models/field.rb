@@ -389,7 +389,7 @@ class Field < ActiveRecord::Base
         else
           "Toto nelze poslat"
       end
-    elsif flag == "I"
+      flag == "I"
 	    "Nemáte dost solaru na presun. "
     else
       "Nedostatek surovin na odchozím léně"
@@ -476,18 +476,14 @@ class Field < ActiveRecord::Base
     poplatok = Constant.presun_planeta if typ == "planeta"
 
     if poplatok <= self.user.solar
+	    flag = "F"
       case what
         when 'Population'
-          self.resource.population >= amount
-		      flag = "S"
+		      flag = "S" if self.resource.population >= amount
         when 'Material'
-          self.resource.material >= amount
-          flag = "S"
+          flag = "S" if self.resource.material >= amount
         when 'Parts'
-          self.resource.parts >= amount
-          flag = "S"
-        else
-	        flag = "F"
+          flag = "S" if self.resource.parts >= amount
       end
     else
 	    flag = "I"

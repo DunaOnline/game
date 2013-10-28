@@ -100,4 +100,8 @@ class MessagesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+	def trash
+		posta = params[:message_ids]
+	end
 end
