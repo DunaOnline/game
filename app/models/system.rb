@@ -30,33 +30,43 @@ class System < ActiveRecord::Base
     #return dom_rod
     a = []
     b = []
+    if self.planets != []
+	    for planet in self.planets do
+		    x = planet.zastoupene_rody
+		    a << x if x != []
+	    end
 
-    for planet in self.planets do
-      a << planet.zastoupene_rody
-    end
+	    puts 'zastoupene rody : ' << a.to_s
 
-    puts 'zastoupene rody : ' << a.to_s
-
-    for zastupce in a do
-      unless zastupce == []
-        if b.assoc(zastupce[0]) == nil
-          b << [zastupce[0], zastupce[1]]
-        else
-          b.assoc(zastupce[0])[1] += zastupce[1]
-        end
-      end
-    end
-
-    b.sort_by {|h| [ h[1],h[1] ]}
-    return b
+	    #for zastupce in a do
+	    #
+		   # if b.assoc(zastupce[0]) == nil
+			 #   b << [zastupce[0], zastupce[1]]
+		   # else
+			 #   b.assoc(zastupce[0])[1] += zastupce[1]
+		   # end
+	    #
+	    #end
+	    a.each do |pl|
+		    pl.sort_by { |x| x[1] }.reverse
+	    end
+	    #if a
+	    # a.sort_by {|h| [ h[1],h[1] ]}
+	    #end
+	    return a
+	  end
   end
 
   def dominantni_rod
-    a = self.zastoupene_rody
-    if a[0]
-      a[0][0][0]
-    else
-      ''
-    end
+	  x = self.zastoupene_rody
+	  if x != [] && x
+	    a = x
+	    if a[0]
+	      a[0][0][0]
+	    else
+	      ''
+	    end
+
+		end
   end
 end
