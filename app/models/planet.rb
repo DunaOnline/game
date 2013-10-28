@@ -156,7 +156,7 @@ class Planet < ActiveRecord::Base
       else
         rod = field.user.house.name
       end
-      unless rod
+      if rod
 	      if a.assoc(rod) == nil
 	        a << [rod, 1]
 	      else
