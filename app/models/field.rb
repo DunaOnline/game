@@ -342,9 +342,9 @@ class Field < ActiveRecord::Base
 
   def move_resource(to, what, amount)
 
-    flag = self.check_availability(what, amount) if self.planet == to.planet
+    flag = self.check_availability(what, amount,to) if self.planet == to.planet
 
-    flag = self.check_availability(what, amount, "planeta") if self.planet != to.planet
+    flag = self.check_availability(what, amount, to, "planeta") if self.planet != to.planet
     if flag == "S"
 
       case what
@@ -359,6 +359,8 @@ class Field < ActiveRecord::Base
       end
     elsif flag == "I"
 	    "Nemáte dost solaru na presun. "
+    elsif flag == "N"
+	    "Nemáte dostatecnou kapacitu na prichozim lenu. "
     else
       "Nedostatek surovin na odchozím léně"
     end
@@ -476,7 +478,7 @@ class Field < ActiveRecord::Base
     enviro_bonus
   end
 
-  def check_availability(what, amount, typ="leno")
+  def check_availability(what, amount, to, typ="leno")
     poplatok = Constant.presun_leno if typ == "leno"
     poplatok = Constant.presun_planeta if typ == "planeta"
 
@@ -487,8 +489,12 @@ class Field < ActiveRecord::Base
 		      flag = "S" if self.resource.population >= amount
         when 'Material'
           flag = "S" if self.resource.material >= amount
-        when 'Parts'
-          flag = "S" if self.resource.parts >= amount
+	      when 'Parts'
+		      if self.resource.parts >= amount && self.resource.parts + amount <= to.kapacita_tovaren
+            flag = "S"
+		      else
+			      flag = "N"
+		      end
       end
     else
 	    flag = "I"
