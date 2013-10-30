@@ -26,6 +26,7 @@ DuneOnline::Application.routes.draw do
 
 	resources :messages
 	match 'reply' => 'messages#reply', :as => :reply
+  match 'trash' => 'messages#trash', :as => :trash
 	match 'odeslana_posta' => 'messages#odeslana_posta'
 
   resources :posts

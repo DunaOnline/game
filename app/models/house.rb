@@ -98,6 +98,14 @@ class House < ActiveRecord::Base
     self.planets.count
   end
 
+  def volne_planety
+	  if Discoverable.kolonizovatelna.all != []
+	    true
+	  else
+		  false
+	  end
+  end
+
   def kolonizuj_planetu
     disc = Discoverable.kolonizovatelna.order("RANDOM()").first
     typ = disc.planet_type_id

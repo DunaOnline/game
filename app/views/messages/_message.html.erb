@@ -12,6 +12,7 @@
 
     <span class="fright">
   <%= best_in_place message, :opened, :type => :checkbox, :classes => 'precitana' %>
+      <%= check_box_tag 'message_ids[]', message.id, false, :class => "grey_checkbox" %>
       <%= link_to image_tag('../assets/css/delete.png'), message, :confirm => "Opravdu chcete odstranit zpravu?", :method => :delete, :class => 'delete_post', :remote => true %></span>
   </td>
 

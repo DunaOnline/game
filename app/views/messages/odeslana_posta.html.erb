@@ -39,9 +39,13 @@
 
 
 
-
+  <%= form_tag trash_path %>
   <%= render :partial => "odeslana", :collection => @messages %>
-  <tr id="novaposta">
+  <tr>
+    <td colspan="4" ><%= submit_tag "Vymaz", :class => "fright", :confirm => "Opravdu chcete odstranit zpravu?" %></td>
+
+
+  </tr>
 
 
 </table>

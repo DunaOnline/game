@@ -103,5 +103,19 @@ class MessagesController < ApplicationController
 
 	def trash
 		posta = params[:message_ids]
+		if posta
+			posta.each do |p|
+				msg = Message.find(p)
+				conversation = msg.conversations.first
+				odoslana = conversation.sender == current_user.id
+				prijata = conversation.receiver == current_user.id
+				msg.vymaz(current_user.id, odoslana, prijata)
+
+			end
+
+			redirect_to messages_url(:type => "Dorucena"), :notice => "Posta bola vymazana"
+		else
+			redirect_to messages_url(:type => "Dorucena"), :alert => "Vyber postu na vymaz"
+		end
 	end
 end

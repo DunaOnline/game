@@ -349,51 +349,56 @@ class Field < ActiveRecord::Base
 
       case what
         when 'Population'
-          self.resource.update_attribute(:population, self.resource.population - amount.abs)
-          to.resource.update_attribute(:population, to.resource.population + amount.abs)
-          if self.planet == to.planet
-
-            self.user.preprava_cost(amount, "leno")
-            self.zapis_udalosti(self.user, "Bylo presunuto #{amount} populacie z #{self.name} na #{to.name} leno, za presun mezi leny jsme zaplatili #{amount * Constant.presun_planeta} solaru")
-          else
-
-            self.user.preprava_cost(amount, "planeta")
-            self.zapis_udalosti(self.user, "Bylo presunuto #{amount} populacie z #{self.name} na #{to.name} leno, za presun mezi planetami jsme zaplatili #{amount * Constant.presun_planeta} solaru")
-          end
+           self.move_population(amount,to)
         when 'Material'
-          self.resource.update_attribute(:material, self.resource.material - amount.abs)
-          to.resource.update_attribute(:material, to.resource.material + amount.abs)
-          if self.planet == to.planet
-
-            self.user.preprava_cost(amount, "leno")
-            self.zapis_udalosti(self.user, "Bylo presunuto #{amount} materialu z #{self.name} na #{to.name} leno, za presun mezi leny jsme zaplatili #{amount * Constant.presun_planeta} solaru")
-          else
-
-            self.user.preprava_cost(amount, "planeta")
-            self.zapis_udalosti(self.user, "Bylo presunuto #{amount} materialu z #{self.name} na #{to.name} leno, za presun mezi planetami jsme zaplatili #{amount * Constant.presun_planeta} solaru")
-          end
-
+           self.move_parts(amount,to)
         when 'Parts'
-          self.resource.update_attribute(:parts, self.resource.parts - amount.abs)
-          to.resource.update_attribute(:parts, to.resource.parts + amount.abs)
-          if self.planet == to.planet
-
-            self.user.preprava_cost(amount, "leno")
-            self.zapis_udalosti(self.user, "Bylo presunuto #{amount} vyrobku z #{self.name} na #{to.name} leno, za presun mezi leny jsme zaplatili #{amount * Constant.presun_planeta} solaru")
-          else
-
-            self.user.preprava_cost(amount, "planeta")
-            self.zapis_udalosti(self.user, "Bylo presunuto #{amount} vyrobku z #{self.name} na #{to.name} leno, za presun mezi planetami jsme zaplatili #{amount * Constant.presun_planeta} solaru")
-          end
-
+           self.move_parts(amount,to)
         else
           "Toto nelze poslat"
       end
-      flag == "I"
+    elsif flag == "I"
 	    "Nemáte dost solaru na presun. "
     else
       "Nedostatek surovin na odchozím léně"
     end
+  end
+
+  def move_population(amount,to)
+	  self.resource.update_attribute(:population, self.resource.population - amount.abs)
+	  to.resource.update_attribute(:population, to.resource.population + amount.abs)
+	  if self.planet == to.planet
+		  self.user.preprava_cost(amount, "leno")
+		  self.zapis_udalosti(self.user, "Bylo presunuto #{amount} populacie z #{self.name} na #{to.name} leno, za presun mezi leny jsme zaplatili #{amount * Constant.presun_planeta} solaru")
+	  else
+
+		  self.user.preprava_cost(amount, "planeta")
+		  self.zapis_udalosti(self.user, "Bylo presunuto #{amount} populacie z #{self.name} na #{to.name} leno, za presun mezi planetami jsme zaplatili #{amount * Constant.presun_planeta} solaru")
+	  end
+  end
+
+  def move_material(amount,to)
+	  self.resource.update_attribute(:material, self.resource.material - amount.abs)
+	  to.resource.update_attribute(:material, to.resource.material + amount.abs)
+	  if self.planet == to.planet
+		  self.user.preprava_cost(amount, "leno")
+		  self.zapis_udalosti(self.user, "Bylo presunuto #{amount} materialu z #{self.name} na #{to.name} leno, za presun mezi leny jsme zaplatili #{amount * Constant.presun_planeta} solaru")
+	  else
+		  self.user.preprava_cost(amount, "planeta")
+		  self.zapis_udalosti(self.user, "Bylo presunuto #{amount} materialu z #{self.name} na #{to.name} leno, za presun mezi planetami jsme zaplatili #{amount * Constant.presun_planeta} solaru")
+	  end
+  end
+
+  def move_parts(amount,to)
+	  self.resource.update_attribute(:parts, self.resource.parts - amount.abs)
+	  to.resource.update_attribute(:parts, to.resource.parts + amount.abs)
+	  if self.planet == to.planet
+		  self.user.preprava_cost(amount, "leno")
+		  self.zapis_udalosti(self.user, "Bylo presunuto #{amount} vyrobku z #{self.name} na #{to.name} leno, za presun mezi leny jsme zaplatili #{amount * Constant.presun_planeta} solaru")
+	  else
+		  self.user.preprava_cost(amount, "planeta")
+		  self.zapis_udalosti(self.user, "Bylo presunuto #{amount} vyrobku z #{self.name} na #{to.name} leno, za presun mezi planetami jsme zaplatili #{amount * Constant.presun_planeta} solaru")
+	  end
   end
 
   def self.udalosti_lena

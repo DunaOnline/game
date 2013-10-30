@@ -140,7 +140,7 @@ class Prepocet
       rodu = melange * (house.melange_percent / 100.0)
       odevzdano += rodu
       house.zapis_operaci("Obdrzeno #{rodu} mg melanze.")
-      house.zapis_operaci("Obdrzeno #{rodu} mg melanze.")
+      #house.zapis_operaci("Obdrzeno #{rodu} mg melanze.")
       house.update_attribute(:melange, house.melange + rodu)
 
       # TODO dodelat update vsem userum rodu
