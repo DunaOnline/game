@@ -54,15 +54,6 @@ Planet.create(:name => 'Tulapin V', :planet_type_id => domovska.id, :house_id =>
 Planet.create(:name => 'Arrakis', :planet_type_id => sest.id, :house_id => House.find_by_name('Impérium').id, :available_to_all => false, :discovered_at => Date.today, :position => 1, :system_name => "Mu Draconis")
 puts 'Planet done'
 
-titania = Planet.find_by_name('Titánia')
-arrakis = Planet.arrakis
-arrakis.fields << Field.new(:name => "Leno Arrakis",
-                            :user_id => nil,
-                            :pos_x => 1,
-                            :pos_y => 1
-)
-puts "Leno Arrakis done"
-
 Global.create(:setting => 'login', :value => false)
 Global.create(:setting => 'signup', :value => false)
 Global.create(:setting => 'pristi_volby', :datum => 1.week.from_now)
@@ -109,6 +100,15 @@ Global.create(:setting => 'vytvor_resource_pop', :cislo => 10000)
 Global.create(:setting => 'vytvor_resource_mat', :cislo => 1000)
 
 puts 'Global done'
+
+titania = Planet.find_by_name('Titánia')
+arrakis = Planet.arrakis
+arrakis.fields << Field.new(:name => "Leno Arrakis",
+                            :user_id => nil,
+                            :pos_x => 1,
+                            :pos_y => 1
+)
+puts "Leno Arrakis done"
 
 User.create(:username => 'Norma_Cenva', :nick => 'Norma Cenva', :email => 'normacenva@spojka.vg', :house_id => titani.id, :password => 'doktoros', :password_confirmation => 'doktoros', :admin => true)
 User.create(:username => 'Doktor', :nick => 'Doktor', :email => 'admin@dunaonline.cz', :house_id => titani.id, :password => 'abcd1234', :password_confirmation => 'abcd1234', :admin => true)
