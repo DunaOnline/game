@@ -1,0 +1,22 @@
+﻿# DUNAONLINE
+
+Webova strategicka hra z prostredi sveta Duny Franka Herberta
+
+Stav: alpha
+
+## Changelog
+
+### 0.3.3
+* zavedeno formatovani v syselaadech
+* pridan prehled surovin na planetach
+
+### 0.3.2
+* grafické upravy a opravy
+* nastavení materiálu do začátku
+* úpravy v sekci budovy
+* úpravy transportu surovin
+* presmerovani "zastavba len" na domovske leno
+
+### 0.3.1
+* přidány přehledy hráčů a národů
+* grafické upravy
