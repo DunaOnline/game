@@ -2,7 +2,7 @@
 
 Webová strategická hra z prostředí světa Duny Franka Herberta
 
-Stav: alpha
+Stav: alpha 2
 
 ## Changelog
 
