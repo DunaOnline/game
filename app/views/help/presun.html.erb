@@ -1,5 +1,16 @@
-<%= render :partial => 'index' %>
+<table class="tab0">
+  <tr>
+    <td class="drob">
+      <%= link_to '⌂', help_path %>
+      » <%= link_to 'Přesun', help_presun_path %>
 
-<h3 id="presun">Přesun surovin hráče Malorudu nebo Velkorodu</h3>
-<li>Pokud hráč posílá materiál a výrobky Malorodu či Velkorodu, posílá je z domovské planety. Je tedy potřeba přesunout komodity na domovskou planetu a poté dále.</li>
-<li>Výzkumné body, melanž a Soláry jsou globálním platidlem, které hráč vlastní globálně na všech planetách.</li>
+    </td>
+
+    <%= render :partial => 'index' %>
+    
+  </tr>
+</table>
+
+<h2 id="presun">Přesun surovin hráče Malorudu nebo Velkorodu</h2>
+Pokud hráč posílá materiál a výrobky Malorodu či Velkorodu, posílá je z domovské planety. Je tedy potřeba přesunout komodity na domovskou planetu a poté dále.
+<br>Výzkumné body, melanž a Soláry jsou globálním platidlem, které hráč vlastní globálně na všech planetách.

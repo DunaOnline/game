@@ -1,9 +1,40 @@
-<%= render :partial => 'index' %>
+<table class="tab0">
+  <tr>
+    <td class="drob">
+      <%= link_to '⌂', help_path %>
+      » <%= link_to 'Budovy', help_budovy_path %>
 
-<h3 id="budovy">Budovy</h3>
-<li><b>Město</b> - Produkuje novou populaci. Zvýšení přírůstku je ovlivněno výzkumem.</li>
-<li><b>Trh</b> - Slouží k produkování Solárů. Zvýšení produkce je ovlivněno výzkumem.</li>
-<li><b>Důl</b> - Slouží k produkci Materiálu. Zvýšení produkce je ovlivněno výzkumem.</li>
-<li><b>Laboratoř</b> - Slouží k produkci Výzkumných bodů (Expů). Zvýšení produkce je ovlivněno výzkumem.</li>
-<li><b>Továrna</b> - Slouží k produkci výrobků.  Zvýšení produkce je ovlivněno výzkumem.</li>
-<li><b>Planetární obrana (PO)</b> - Vytváří obranu proti útoku z vesmíru.  Zvýšení produkce je ovlivněno výzkumem.</li>
+    </td>
+
+    <%= render :partial => 'index' %>
+    
+  </tr>
+</table>
+
+<h2 id="budovy">Budovy</h3>
+<p>Budovy jsou základem ekonomiky celé hry. Bez budov není možné vybudovat vaše
+dominantní postavení ve hře. Bez dobré produkce nezajistíte vaši armádu a pokud 
+nemáte dostatek Měst pro růst populace, přijdete o část vašeho vlivu.</p> 
+
+<p>Budovy <b>boříte</b> zadáním záporné hodnoty při stavbě.</p>
+ 
+<h3>Město</h3>
+Poskytuje prostor pro vaši novou populaci. Populace produkuje část vašeho vlivu. Zvýšení přírůstku a kapacity města je ovlivněno výzkumem infrastruktury.  
+<br>Krom měst je možné <%= link_to 'Investicemi do infrastruktury', help_vyzkum_path %> získat další budovy. Mezi nové budovy patří Velkoměsto (7. level Investice do infrastruktury) a Metropole (14. level Investice do infrastruktury). Vyspělejší konglomeráty mají větší základní kapacitu.
+
+<h3>Trh</h3>
+Slouží k produkci Solárů. Soláry vyděláte také obchodováním na <%= link_to 'trhu', help_trh_path %>. Krom obchodu je využijete při stavbě dalších budov, verbování jednotek, odvodu žoldu na jednotky, osídlování nových lén či <li><%= link_to 'Transportu surovin', help_transport_path %></li>.
+<br>Zvýšení produkce je ovlivněno <%= link_to 'Investicemi do ekonomiky', help_vyzkum_path %>. Krom trhu jsou ve hře další dvě vyspělejší budovy - Banka (7. level Investice do ekonomiky) a Sídlo CHOAMu  (14. level Investice do ekonomiky). Vyspělejší budovy mají navýšenou základní produkci. 
+
+<h3>Důl</h3>
+Slouží k produkci Materiálu. Materiál při stavbě dalších budov, verbování jednotek a výrobě výrobků.
+<br>Zvýšení produkce materiálu je ovlivněno <%= link_to 'Investicí do průmyslu', help_vyzkum_path %>. Opět se otevírají vyspělejší budovy a to Hlubinný důl (7. level) a Orbitální doly (14. level).
+
+<h3>Laboratoř</h3>
+Slouží k produkci Výzkumných bodů (Expů), ty poté můžete investovat do vašeho a nebo národního <%= link_to 'výzkumu', help_vyzkum_path %>. Zvýšení produkce je ovlivněno <%= link_to 'Investicemi do výzkumu', help_vyzkum_path %> a vyspělejší budovy nazýváme Laboratoř (7. level) a Univerzita (14. level).
+
+<h3>Manufaktura</h3>
+Slouží k produkci vašich výrobků. Z nich poté vyrábíte jednotky nebo komodity k prodeji. Zvýšení produkce je ovlivněno <%= link_to 'Investicemi do výroby', help_vyzkum_path %> a vyspělejší budova je jen jedna. Multifakturu získáte na 7. levelu. 
+
+<h3>Planetární obrana (PO)</h3>
+Vytváří obranu proti útoku z vesmíru.  

@@ -1,12 +1,28 @@
-<h2  id="ekonomika">Obsah nápovědy:</h2>
+<table class="tab0">
+  <tr>
+    <td class="drob">
+      <%= link_to '⌂', help_path %>
+
+    </td>
+
+    <%= render :partial => 'index' %>
+    
+  </tr>
+</table>
+<p>Vítejte v nápovědě hry DunaOnline. Pro zjištění toho co hledáte, vyberte 
+jednu z kapitol.</p>
+
+<p>Pokud vám něco v helpu schází, napiště na tar@dunaonline.cz a my vaše dotazy doplníme. </p>
+ 
+<h2  id="ekonomika">Kapitoly nápovědy:</h2>
 
 <ul>
-  <li><%= link_to 'Suroviny, komodity', help_suroviny_path %></li>
-  <li><%= link_to 'Planety a léna', help_planety_a_lena_path %></li>
-  <li><%= link_to 'Budovy', help_budovy_path %></li>
-  <li><%= link_to 'Arrakis', help_arrakis_path %></li>
-  <li><%= link_to 'Transport', help_transport_path %></li>
-  <li><%= link_to 'Přesun', help_presun_path %></li>
+  <li><%= link_to 'Suroviny, komodity', help_suroviny_path %> - Informace o herních surovinách a jejich využití.</li>
+  <li><%= link_to 'Planety a léna', help_planety_a_lena_path %> - Informace o planetách, lénech, kolonizaci a osídlení.</li>
+  <li><%= link_to 'Budovy', help_budovy_path %> - Informace o jednotlivých budovách.</li>
+  <li><%= link_to 'Arrakis', help_arrakis_path %> - Informace o jedinečné planetě.</li>
+  <li><%= link_to 'Transport', help_transport_path %> - Informace o transportu surovin mezi lény.</li>
+  <li><%= link_to 'Přesun', help_presun_path %> - Informace o přesunu surovin do dalších skladů.</li>
   <li><%= link_to 'Trh', help_trh_path %></li>
   <li><%= link_to 'Výzkum', help_vyzkum_path %></li>
   <li><%= link_to 'Správa', help_sprava_path %></li>
