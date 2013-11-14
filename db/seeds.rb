@@ -54,6 +54,8 @@ Planet.create(:name => 'Tulapin V', :planet_type_id => domovska.id, :house_id =>
 Planet.create(:name => 'Arrakis', :planet_type_id => sest.id, :house_id => House.find_by_name('Impérium').id, :available_to_all => false, :discovered_at => Date.today, :position => 1, :system_name => "Mu Draconis")
 puts 'Planet done'
 
+
+
 Global.create(:setting => 'login', :value => false)
 Global.create(:setting => 'signup', :value => false)
 Global.create(:setting => 'pristi_volby', :datum => 1.week.from_now)
@@ -98,6 +100,10 @@ Global.create(:setting => 'perc_zalozenia_noveho_mr', :cislo => 0.3)
 Global.create(:setting => 'pocet_prazdnych_mr', :cislo => 2)
 Global.create(:setting => 'vytvor_resource_pop', :cislo => 10000)
 Global.create(:setting => 'vytvor_resource_mat', :cislo => 1000)
+Global.create(:setting => 'rozdiel_poctu_u_registracia', :cislo => 10)
+Global.create(:setting => 'cena_noveho_lena_od_poctu', :cislo => 1)
+
+
 
 puts 'Global done'
 
@@ -136,6 +142,8 @@ puts 'Property done'
 
 Effect.create(:name => "opica", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
               :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R", :description => "BlaBla",:image => "/img",:price => 300)
+Effect.create(:name => "Renegat", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
+              :population_cost => 0.5, :melange_cost => 0.5, :material_cost => 0.5, :solar_cost => 0.5, :exp_cost => 0.5, :typ => "M", :description => "BlaBla",:image => "/img",:price => 300)
 puts 'Effects done'
 
 Technology.create(:name => "Investice do Infrastruktury", :discovered => 1, :description => "-2% cena budov
