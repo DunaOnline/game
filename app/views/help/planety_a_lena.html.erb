@@ -1,15 +1,24 @@
-<%= render :partial => 'index' %>
+<table class="tab0">
+  <tr>
+    <td class="drob">
+      <%= link_to '⌂', help_path %>
+      » <%= link_to 'Planety a léna', help_planety_a_lena_path %>
 
-<h3 id="planety">Planety</h3>
-<li>Planetu obsazují samy Velkorody díky kolonizaci. </li>
-<li>Kolonizace je finančně značně náročná a platí Melanž a Soláry. Cena kolonizace roste s počtem planet v Impériu.</li>
-<li>Na planetě je hned několik lén k osídlení. Planety mají také různý bonus do produkce. </li>
+    </td>
 
-<h3 id="lena">Léna</h3>
-<li>Léna jsou území na planetách, které si mohou osídlit hráči jako území pro stavbu budov. </li>
-<li>Za Osídlení léna se platí Melanž a Soláry. Cena léna roste s počtem lén, která jsou již na planetě osídlena.</li>
+    <%= render :partial => 'index' %>
+    
+  </tr>
+</table>
 
-<h3 id="lena">Události na planetách a lénech</h3>
-<li>Na planetě nebo léně může dojít k události, která ovlivní celkovou produkci.</li>
-<li>Důsledky jsou kladné nebo i záporné bonusy.</li>
-<li>Poplatkem lze událost zrušit.</li>
+<h2 id="planety">Planety</h3>
+Planetu obsazují samy Velkorody díky kolonizaci. Kolonizace je finančně značně náročná a platí Melanž a Soláry. Cena kolonizace roste s počtem planet v Impériu.
+<br>Na planetě je hned několik lén k osídlení. Planety mají také různý bonus do produkce. Tyto bonusy a počet lén ovlivňuje typ planety.
+
+<h2 id="lena">Léna a jejich osídlení</h3>
+Léna jsou území na planetách, které si mohou osídlit hráči jako území pro stavbu <%= link_to 'budov', help_budovy_path %>. 
+<br>Pokud chcete osídlit nové území, můete si najít pímo sektor v "Imperiální kartografii" a nebo použít volbu "Léna k osídlení". Za Osídlení léna se platí Melanž a Soláry. Cena léna roste s počtem lén, která jsou již na planetě osídlena.
+
+<h2 id="lena">Události na planetách a lénech</h3>
+Na planetě nebo léně může dojít k události, která ovlivní celkovou produkci. Důsledkem jsou kladné nebo i záporné bonusy.
+Poplatkem lze ale vliv události zrušit.

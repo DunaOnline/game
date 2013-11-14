@@ -1,8 +1,28 @@
-<%= render :partial => 'index' %>
+<table class="tab0">
+  <tr>
+    <td class="drob">
+      <%= link_to '⌂', help_path %>
+      » <%= link_to 'Arrakis', help_arrakis_path %>
 
-<h3 id="arrakis">Arrakis</h3>
-<li>Je planetou kde je produkována melanž. Tato planeta je jen jedna jediná ve známém vesmíru.</li>
-<li>Zde lze budovat Továrny na koření. Produkce továren je ovlivněno výzkumem investice do koření. Pro impérium je vhodné postavit co nejdříve maximální počet Továren a aby Místodržící měl vysoký výzkum v Investice do koření. </li>
-<li>Držitel léna na Arrakis je hráč zvolený Landsraadem. Jmenuje jej Imperátor. Jinak je nazývám Místodržící nebo Správce pololéna</li>
-<li>Pokud je Místodržící odvolán v následujícím přepočtu není produkována melanž. Místodržícího je možné pasovat až po třech dnech.</li>
-<li>Vyprodukovaná melanž je přeposílána do Landraadu a Landsraad ji přerozděluje dále mezi rody. Hráčům melanž zasílá vedení Velkorodů.</li>
+    </td>
+
+    <%= render :partial => 'index' %>
+    
+  </tr>
+</table>
+
+
+
+<h2 id="arrakis">Arrakis</h2>
+<p>Je planetou kde je produkována melanž. Tato planeta je jen jedna jediná ve 
+známém vesmíru. Lze zde budovat Továrny na koření. Produkce továren je ovlivněno výzkumem 
+investice do koření. Pro impérium je vhodné postavit co nejdříve maximální počet
+ Továren a aby Místodržící měl vysoký výzkum v Investice do koření. </p>
+<p>Držitel léna na Arrakis je hráč zvolený Landsraadem. Jmenuje jej pouze  Imperátor. 
+Jinak je nazývám Místodržící nebo Správce pololéna.</p>
+<p>Pokud je Místodržící odvolán v následujícím přepočtu není produkována melanž. 
+Místodržícího je možné pasovat až po třech dnech.</p>
+<p>Vyprodukovaná melanž je přeposílána do Landraadu a Landsraad ji přerozděluje 
+dále mezi rody. Hráčům melanž zasílá vedení Velkorodů.</p>
+
+<p>Více infotmací najdete na <a href="http://www.webring.org/l/rd?ring=ibad;id=12;url=http%3A%2F%2Fencyklopedie%2Edune%2Ecz%2Findex%2Eht"  target="_blank">Encyklopedii Duny</a>.</p>
