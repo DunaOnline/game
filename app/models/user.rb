@@ -394,7 +394,7 @@ class User < ActiveRecord::Base
         :effect_id => Effect.find_by_typ("M").id,
         :duration => 100,
         :started_at => Date.today
-    )
+    ).save
 	  self.odhlasuj("leader")
   end
 
@@ -420,13 +420,13 @@ class User < ActiveRecord::Base
     infl = self.domovske_leno.influence.where(:effect_id => Effect.find_by_typ("M").id).first
     if infl
 
-      if  infl.started_at + 7 >= Date.today
+      if  infl.started_at + 7.days <= Date.today
 
         self.update_attributes(:house_id => House.renegat.id, :ziadost_house => house_id)
         self.zapis_operaci("Podali sme zadosti o prijeti do naroda #{house.name}")
         return "Podali sme zadosti o prijeti do naroda #{house.name}"
       else
-        return "Musite pockat este #{Date.today - infl.started_at }"
+        return "Musite pockat este #{((infl.started_at + 7) - Date.today ).to_i } dnu. "
       end
     else
       return "Nieste renegat"

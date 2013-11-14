@@ -414,11 +414,10 @@ class House < ActiveRecord::Base
   end
 
   def self.registration
-
-    max = User.group(:house_id).count.sort {|a,b| b[1] <=> a[1]}[0][1]
+    min = User.group(:house_id).count.sort {|b,a| b[1] <=> a[1]}[0][1]
     pole = []
     House.playable.all.each do |h|
-      if h.users.count + Constant.rozdiel_u_reg < max
+      if h.users.count < min + Constant.rozdiel_u_reg
         pole << [h.name, h.id]
       end
     end

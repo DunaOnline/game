@@ -237,11 +237,13 @@ class Field < ActiveRecord::Base
     total_melanz = 0
     total_price = 0
     total_parts = 0
+    total_pocet = 0
     vyrobeno = false
 
     vyrobky.each do |vyrobok|
       pocet = vyrobok[0]
       pocet = pocet[0].to_i.abs
+      total_pocet += pocet
       coho = Product.where(:title => vyrobok[1]).first
 
       total_material += coho.material * pocet
@@ -254,41 +256,46 @@ class Field < ActiveRecord::Base
     melanz = field.user.melange >= total_melanz
     price = field.user.solar >= total_price
     parts = zdroje_lena.parts >= total_parts
+    miesto = field.kapacita_tovaren > field.vyuzitie_tovaren + total_pocet
 
     oznamenie = ""
+    if miesto
+	    if material && melanz && price && parts
+	      vyrobky.each do |vyrobok|
+	        pocet = vyrobok[0]
+	        pocet = pocet[0].to_i
+	        coho = Product.where(:title => vyrobok[1]).first
 
-    if material && melanz && price && parts
-      vyrobky.each do |vyrobok|
-        pocet = vyrobok[0]
-        pocet = pocet[0].to_i
-        coho = Product.where(:title => vyrobok[1]).first
+	        produkcia = Production.where(:resource_id => zdroje_lena.id, :product_id => coho.id).first
+	        if produkcia
+	          produkcia.update_attribute(:amount, produkcia.amount + pocet)
+	        else
+	          Production.new(
+	              :user_id => field.user.id,
+	              :resource_id => zdroje_lena.id,
+	              :product_id => coho.id,
+	              :amount => pocet
+	          ).save
+	        end
+	        self.zapis_udalosti(self.user, "Bylo nakoupeno #{pocet} ks #{coho.title} za #{coho.material * pocet} kg, #{coho.melanz * pocet} mg,
+					#{coho.price * pocet} solaru a #{coho.parts * pocet} vyrobku")
+	      end
 
-        produkcia = Production.where(:resource_id => zdroje_lena.id, :product_id => coho.id).first
-        if produkcia
-          produkcia.update_attribute(:amount, produkcia.amount + pocet)
-        else
-          Production.new(
-              :user_id => field.user.id,
-              :resource_id => zdroje_lena.id,
-              :product_id => coho.id,
-              :amount => pocet
-          ).save
-        end
-        self.zapis_udalosti(self.user, "Bylo nakoupeno #{pocet} ks #{coho.title} za #{coho.material * pocet} kg, #{coho.melanz * pocet} mg,
-				#{coho.price * pocet} solaru a #{coho.parts * pocet} vyrobku")
-      end
-
-      zdroje_lena.update_attributes(:material => zdroje_lena.material - total_material, :parts => zdroje_lena.parts - total_parts)
-      field.user.update_attributes(:solar => field.user.solar - total_price, :melange => field.user.melange - total_melanz)
-      vyrobeno = true
+	      zdroje_lena.update_attributes(:material => zdroje_lena.material - total_material, :parts => zdroje_lena.parts - total_parts)
+	      field.user.update_attributes(:solar => field.user.solar - total_price, :melange => field.user.melange - total_melanz)
+	      vyrobeno = true
+	    else
+	      oznamenie += "Chybi vam "
+	      oznamenie += (total_material - zdroje_lena.material).to_s + " kg materialu " unless material
+	      oznamenie += (total_melanz - field.user.melange).to_s + " mg melanze " unless melanz
+	      oznamenie += (total_parts - zdroje_lena.parts).to_s + " vyrobkov " unless parts
+	      oznamenie += (total_price - field.user.solar).to_s + " solaru " unless price
+	      oznamenie += "."
+	    end
     else
-      oznamenie += "Chybi vam "
-      oznamenie += (total_material - zdroje_lena.material).to_s + " kg materialu " unless material
-      oznamenie += (total_melanz - field.user.melange).to_s + " mg melanze " unless melanz
-      oznamenie += (total_parts - zdroje_lena.parts).to_s + " vyrobkov " unless parts
-      oznamenie += (total_price - field.user.solar).to_s + " solaru " unless price
-      oznamenie += "."
+	    oznamenie += "Nemate dostatek mista v tovarni"
     end
+
     return oznamenie, vyrobeno
   end
 
@@ -351,7 +358,7 @@ class Field < ActiveRecord::Base
         when 'Population'
            self.move_population(amount,to)
         when 'Material'
-           self.move_parts(amount,to)
+           self.move_material(amount,to)
         when 'Parts'
            self.move_parts(amount,to)
         else
