@@ -379,8 +379,9 @@ class User < ActiveRecord::Base
           msg_pla << ["//**Udalost na planete #{field.planet.name} : #{environment.property.name}**//", environment]
         end
       end
-      return msg_leno, msg_pla
+
     end
+    return msg_leno, msg_pla
   end
 
   def opustit_narod
