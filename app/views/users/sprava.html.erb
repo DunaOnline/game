@@ -162,6 +162,10 @@
               <% end %>
           <% end %>
         </td>
+    <% else %>
+      <td>Nejste členem Malorodu a proto nemůžete volit generála!
+      <br><br>Buď <%= link_to 'vstupte do Malorodu', subhouses_path %> nebo pokud 
+      máte dostatek zkušeností založte nový Malorod ve "Vaše vazaství".</td>
     <% end %>
   </tr>
 </table>

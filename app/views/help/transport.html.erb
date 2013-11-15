@@ -1,6 +1,20 @@
-<%= render :partial => 'index' %>
+<table class="tab0">
+  <tr>
+    <td class="drob">
+      <%= link_to '⌂', help_path %>
+      » <%= link_to 'Transport surovin', help_transport_path %>
 
-<h3 id="transport">Přesun surovin mezi lény</h3>
-<li>Mezi lény je možné přesunout vyprodukovaný materiál, výrobky a populaci. Poplatek za přesun je 5% přesouvané komodity.</li>
-<li>Pokud je léno dobyto a jsou na něm obsaženy komodity, hráči je zasláno na domovské léno 20% těchto surovin a zbylé suroviny získává dobyvatel. </li>
-<li>Výzkumné body, melanž a Soláry jsou globálním platidlem, které hráč vlastní globálně na všech planetách.</li>
+    </td>
+
+    <%= render :partial => 'index' %>
+    
+  </tr>
+</table>
+
+<h2 id="transport">Přesun surovin mezi lény</h3>
+Mezi lény je možné přesunout vyprodukovaný materiál, výrobky a populaci. Poplatek 
+za přesun je 5% přesouvané suroviny nebo komodity.
+<br>Pokud je léno dobyto a jsou na něm obsaženy komodity, hráči je zasláno na 
+domovské léno 20% těchto surovin a zbylé suroviny získává dobyvatel. 
+<br>Výzkumné body, melanž a Soláry jsou platidla, která hráč vlastní 
+globálně na všech planetách.

@@ -1,17 +1,26 @@
-<%= render :partial => 'index' %>
+<table class="tab0">
+  <tr>
+    <td class="drob">
+      <%= link_to '⌂', help_path %>
+      » <%= link_to 'Výzkum', help_vyzkum_path %>
 
-<h2 id="vyzkum">Výzkum</h2>
+    </td>
 
-<h3 id="vyzkum_hrac">Výzkum hráče</h3>
+    <%= render :partial => 'index' %>
+    
+  </tr>
+</table>
+
+<h2 id="vyzkum_hrac">Výzkum hráče</h2>
 Vývojem výzkumu získáváte bonusy a nové typy budov. Platidlem za výzkum jsou zkušenosti (expy) produkované v laboratořích.
 
-<h3 id="vyzkum_narodni">Malorodní výzkum</h3>
+<h2 id="vyzkum_narodni">Malorodní výzkum</h2>
 Stejně jako u výzkumu hráče ziskáváte bonusy do několika odvětví, tentokrát ale v rámci malorodu.
 
-<h3 id="vyzkum_narodni">Národní výzkum</h3>
+<h2 id="vyzkum_narodni">Národní výzkum</h2>
 Stejně jako u výzkumu hráče ziskáváte bonusy do několika odvětví, tentokrát ale v rámci celého rodu.
 
-<h3 id="vyzkum_druhy">Přehled odvětví výzkumu</h3>
+<h2 id="vyzkum_druhy">Přehled odvětví výzkumu</h2>
 
 <li><b>Investice do infrastruktury</b> - -2% cena budov  7. lvl = povolení stavby Velkoměsto 14. lvl = povolení stavby Metropole</li>
 <li><b>Investice do ekonomiky</b> - +2% produkce solárů Trh 7. lvl = povolení stavby Banka 14. lvl = povolení stavby Sídlo CHOAMu</li>

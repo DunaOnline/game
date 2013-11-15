@@ -1,4 +1,15 @@
-<%= render :partial => 'index' %>
+<table class="tab0">
+  <tr>
+    <td class="drob">
+      <%= link_to '⌂', help_path %>
+      » <%= link_to 'Suroviny', help_suroviny_path %>
+
+    </td>
+
+    <%= render :partial => 'index' %>
+    
+  </tr>
+</table>
 
 <h3 id="suroviny">Suroviny, komodity</h3>
 <li><b>Soláry</b> - hlavní platidlo hry. Platí se jím za stavbu budov, nákup jednotek, kolonizaci a osidlování lén. Je produkováno v Tržišti (a z něj vyvinutých budov).</li>
