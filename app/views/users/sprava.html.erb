@@ -1,3 +1,12 @@
+<table class="tab0">
+  <tr>
+    <td class="drob">
+      <%= link_to '⌂', help_path %>
+      » <%= link_to 'Správa hráče a volby', sprava_path(:id => current_user) %>
+    </td>
+  </tr>
+</table>
+
 <%# encoding: utf-8 %>
 <% title "#{@user.nick} - správa" %>
 <table class="tab1">
@@ -14,17 +23,17 @@
         <th>Stav skladu</th>
         <!-- <th>Poslat Malorodu</th>
         <th>Daň Malorodu [%]</th> -->
-        <th>Poslat Národu</th>
+        <th style="width:100px">Poslat Národu</th>
         <% if @user.subhouse %>
-        <th>Poslat Malorodu</th>
+        <th style="width:100px">Poslat Malorodu</th>
         <% end %>
-        <th class="r">Projekt [%]</th>
+        <!--- <th class="r">Projekt [%]</th> -->
       </tr>
       <tr class="break_word">
         <td>
           <li><%= img_solary %><%= format_mena(@user.solar, 'S', true) %>
-          <li><%= img_material %><%= format_mena(@user.celkovy_material, 'kg') %>
-            &nbsp(<%= format_mena(@user.domovske_leno.resource.material, 'kg') %>)
+          <li><%= img_material %><%= format_mena(@user.celkovy_material, 'kg') %> 
+          | <%= format_mena(@user.domovske_leno.resource.material, 'kg na DP') %>
           <li><%= img_melanz %><%= format_mena(@user.melange, 'mg') %>
           <li><%= img_zkusenosti %><%= format_mena(@user.exp, 'exp', false) %>
           <li><%= img_vyrobky %><%= format_mena(@user.celkovy_parts, 'ks') %>
@@ -58,7 +67,7 @@
 
         </td>
         <% end %>
-        <td>
+        <!--- <td>
           <li><%= img_solary %>
             <input type="text" size="3" title="Nastavte odvod">
           <li><%= img_material %>
@@ -67,7 +76,7 @@
             <input type="text" size="3" title="Nastavte odvod">
           <li><%= img_zkusenosti %>
             <input type="text" size="3" title="Nastavte odvod">
-        </td>
+        </td>  --->
 
       </tr>
   <% end %>

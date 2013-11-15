@@ -7,21 +7,16 @@
     </td>
 
 
-
+  <% if can? :sprava_mr, Subhouse %>
     <td class="tdd">
        <%= link_to ' Malorodní pošta »', new_message_path(:typ => "M"), :value => "Malorodní pošta" %>
     </td>
-
+  <% end %>
 
 
 
   </tr>
 </table>
-
-
-
-
-
 
   <% @subhouses.each do |s| %>
     <table class="tab1">
@@ -30,7 +25,11 @@
           <li><h2><%= link_to s.name, subhouse_path(s)%></h2></li>
           <li><b>Vicegenerál: </b><%= s.users.vicegeneral.first.nick if s.users.vicegeneral.first %></li>
           <li><b>Clenu: </b><%= s.users.count %> / <%= Constant.max_u_mr %> </li>
+          
+          <% if current_user.subhouse %>
+          <% else %>
           <li><%= button_to 'Podat žádost', ziadost_malorod_url(:id => s.id), :class => "oktab_auto" %></li>
+          <% end %>
         </td>
         <th>Jméno hráče</th>
         <th>Síla</th>
