@@ -210,4 +210,8 @@ class Constant
     20
   end
 
+	def self.dni_v_renegatoch
+		Global.vrat('dni_v_renegatoch', 4)
+	end
+
 end

@@ -397,6 +397,12 @@ class User < ActiveRecord::Base
         :started_at => Date.today
     ).save
 	  self.odhlasuj("leader")
+    self.odhlasuj_gene
+	  self.reset_hodnosti
+  end
+
+  def reset_hodnosti
+	  self.update_attributes(:vicegeneral => false, :general => false, :mentat => false, :army_mentat => false, :leader => false)
   end
 
   def opustit_mr
@@ -421,13 +427,13 @@ class User < ActiveRecord::Base
     infl = self.domovske_leno.influence.where(:effect_id => Effect.find_by_typ("M").id).first
     if infl
 
-      if  infl.started_at + 7.days <= Date.today
+      if  infl.started_at + Constant.dni_v_renegatoch.days <= Date.today
 
         self.update_attributes(:house_id => House.renegat.id, :ziadost_house => house_id)
         self.zapis_operaci("Podali sme zadosti o prijeti do naroda #{house.name}")
         return "Podali sme zadosti o prijeti do naroda #{house.name}"
       else
-        return "Musite pockat este #{((infl.started_at + 7) - Date.today ).to_i } dnu. "
+        return "Musite pockat este #{((infl.started_at + Constant.dni_v_renegatoch.days) - Date.today ).to_i } dnu. "
       end
     else
       return "Nieste renegat"
@@ -439,7 +445,7 @@ class User < ActiveRecord::Base
     if self.house == House.renegat
       field = self.domovske_leno
       field.update_attribute(:planet_id, Planet.domovska_rodu(house).first.id)
-      if o = Influence.where(:field_id => field, :effect_id => Effect.find_by_typ("M"))
+      if o = Influence.where(:field_id => field, :effect_id => Effect.find_by_typ("M")).first
         o.destroy
       end
       self.update_attributes(:house_id => house.id, :ziadost_house => nil)
