@@ -397,29 +397,29 @@ class User < ActiveRecord::Base
         :started_at => Date.today
     ).save
 	  self.odhlasuj("leader")
-    self.odhlasuj_gene
-	  self.reset_hodnosti
+    self.opustit_mr
+	  self.reset_hodnosti_naroda
   end
 
-  def reset_hodnosti
-	  self.update_attributes(:vicegeneral => false, :general => false, :mentat => false, :army_mentat => false, :leader => false)
+  def reset_hodnosti_naroda
+	  self.update_attributes(:mentat => false, :army_mentat => false, :leader => false)
   end
 
   def opustit_mr
     subhouse = self.subhouse
-    if self.general
-	     self.odhlasuj_gene
-    end
-    self.update_attributes(:subhouse_id => nil, :vicegeneral => false, :general => false)
-    if subhouse.users.count == 0
-      subhouse.house.update_attributes(:solar => subhouse.house.solar + subhouse.solar, :material => subhouse.house.material + subhouse.material,
-                                       :melange => subhouse.house.melange + subhouse.melange, :exp => subhouse.house.exp + subhouse.exp, :parts => subhouse.house.parts + subhouse.parts)
-      self.house.zapis_operaci("Byl rozpusten malorod #{subhouse.name} do narodnych skladu pribudlo #{subhouse.solar} solaru, #{subhouse.material} materialu, #{subhouse.melange} mg,
-                                #{subhouse.exp} expu a #{subhouse.parts} dilu")
-      subhouse.delete
-    end
-    self.odhlasuj("general")
+    if subhouse
+	    self.odhlasuj_gene
 
+	    self.update_attributes(:subhouse_id => nil, :vicegeneral => false, :general => false)
+	    if subhouse.users.count == 0
+		    subhouse.house.update_attributes(:solar => subhouse.house.solar + subhouse.solar, :material => subhouse.house.material + subhouse.material,
+		                                     :melange => subhouse.house.melange + subhouse.melange, :exp => subhouse.house.exp + subhouse.exp, :parts => subhouse.house.parts + subhouse.parts)
+		    self.house.zapis_operaci("Byl rozpusten malorod #{subhouse.name} do narodnych skladu pribudlo #{subhouse.solar} solaru, #{subhouse.material} materialu, #{subhouse.melange} mg,
+	                                #{subhouse.exp} expu a #{subhouse.parts} dilu")
+		    subhouse.delete
+	    end
+	    self.odhlasuj("general")
+	  end
   end
 
   def podat_ziadost(house_id)
@@ -445,7 +445,8 @@ class User < ActiveRecord::Base
     if self.house == House.renegat
       field = self.domovske_leno
       field.update_attribute(:planet_id, Planet.domovska_rodu(house).first.id)
-      if o = Influence.where(:field_id => field, :effect_id => Effect.find_by_typ("M")).first
+      o = Influence.where(:field_id => field, :effect_id => Effect.find_by_typ("M")).first
+      if o
         o.destroy
       end
       self.update_attributes(:house_id => house.id, :ziadost_house => nil)
