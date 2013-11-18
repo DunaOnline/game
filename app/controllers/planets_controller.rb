@@ -13,11 +13,11 @@ class PlanetsController < ApplicationController
     else
       @fields = @planet.fields
       tech_bonus = current_user.tech_bonus("J")
-      bonus = tech_bonus
+
       f_count = current_user.fields.count
       global_bonus = Constant.cena_noveho_lena * f_count
-      @cena_noveho_lena_melanz = (@planet.cena_noveho_lena_mel * bonus * global_bonus).round(2)
-      @cena_noveho_lena_solary = (@planet.cena_noveho_lena_sol * bonus * global_bonus).round(2)
+      @cena_noveho_lena_melanz = (@planet.cena_noveho_lena_mel * tech_bonus * global_bonus).round(2)
+      @cena_noveho_lena_solary = (@planet.cena_noveho_lena_sol * tech_bonus * global_bonus).round(2)
     end
   end
 
@@ -62,12 +62,12 @@ class PlanetsController < ApplicationController
   def osidlit_pole
     @planet = Planet.find(params[:id])
     tech_bonus = current_user.tech_bonus("J")
-    bonus = tech_bonus
+
     f_count = current_user.fields.count
     global_bonus = Constant.cena_noveho_lena * f_count
     if @planet.osidlitelna?(current_user)
-      cena_mel = (@planet.cena_noveho_lena_mel * bonus * global_bonus).round(2)
-      cena_sol = (@planet.cena_noveho_lena_sol * bonus * global_bonus).round(2)
+      cena_mel = (@planet.cena_noveho_lena_mel * tech_bonus * global_bonus).round(2)
+      cena_sol = (@planet.cena_noveho_lena_sol * tech_bonus * global_bonus).round(2)
       if cena_mel > current_user.melange
         flash[:error] = "Nedostatek melanze (chybi #{cena_mel - current_user.melange} mg)."
         redirect_to @planet

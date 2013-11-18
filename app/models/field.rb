@@ -346,9 +346,22 @@ class Field < ActiveRecord::Base
 
   end
 
+  def suroviny(what)
+	  case what
+		  when 'Population'
+			  self.resource.population
+		  when 'Material'
+			  self.resource.material
+		  when 'Parts'
+			  self.resource.parts
+		  else
+			  0
+	  end
+  end
 
-  def move_resource(to, what, amount)
 
+  def move_resource(to, what, amount, all)
+	  amount = all ? self.suroviny(what) : amount
     flag = self.check_availability(what, amount,to) if self.planet == to.planet
 
     flag = self.check_availability(what, amount, to, "planeta") if self.planet != to.planet
