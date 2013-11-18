@@ -76,10 +76,12 @@
 <% if @markets.count != 0 %>
     <table class="vyroba">
       <tr>
-        <th colspan="4">Nakup narodnych zasob na trhu</th>
-      </tr>
-      <tr>
-        <th>Tovar</th>
+        <td class="tdpl" rowspan="99" style="width:140px; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
+            <li><h2>Nákup na trhu</h2></li>
+            <li>Nakupte suroviny z trhu přímo do vašeho národního skladu. 
+            Soláry budou převedeny z vašeho herního účtu.</li>  
+        </td>
+        <th>Komodita</th>
 
         <th>Cena za kus [Sol]</th>
         <th>Množství</th>
@@ -94,7 +96,7 @@
 <table class="tab1">
   <tr>
     <%= form_for(@market) do |f| %>
-    <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
+    <td class="tdpl" rowspan="99" style="width:140px; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
               <li><h2>Prodej na trhu</h2></li>
               <li><%= submit_tag 'Nabídnout', :class => "ok" %>
     </td>
@@ -120,7 +122,8 @@
 <table class="tab1">
   <tr>
     <td class="tdpl" rowspan="4" style="width:170px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
-      <li><h2>Národní byrokracie</h2>
+      <li><h2>Národní byrokracie</h2></li>
+      <li>Práva smí přidělit pouze vůdce Velkorodu.</li>
     </td>
     <th class="l">Vůdce národa</th>
     <th>Mentat</th>
@@ -179,7 +182,7 @@
   <tr>
     <th class="l">Diplomat</th>
     <th>Generál</th>
-    <th class="l">Poslanec</th>
+    <th class="l">Senátoři</th>
 
 
   </tr>

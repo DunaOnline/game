@@ -15,7 +15,7 @@
       <li>
         <b>Držitel pololéna: </b><%= link_to @spravce.nick, @spravce if @spravce %>
       <li>
-        <b>Poslanci: </b>
+        <b>Senátoři: </b>
         <% for poslanec in @poslanci do %>
             <%= link_to poslanec.nick, poslanec %>
         <% end %>

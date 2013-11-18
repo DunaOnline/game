@@ -34,6 +34,7 @@
         <li><b>Imperátor: </b> <%= link_to @imperator.nick, @imperator if @imperator %>
         <% else %>
         <li><h3>Regentská vláda</h3>
+        
       <% end %>
       <% if @spravce %>
         <li><b>Místodržící Arrakisu: </b> <%= link_to @spravce.nick, @spravce if @spravce %>
@@ -41,7 +42,7 @@
         <li><h3>Místodržící nezvolen!</h3>
       <% end %>
       <li>
-        <b>Poslanci: </b>
+        <b>Senátoři: </b>
         <% for poslanec in @poslanci do %>
             <%= link_to poslanec.nick, poslanec %>, 
         <% end %>
