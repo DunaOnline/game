@@ -48,11 +48,14 @@ class HousesController < ApplicationController
   def update
     @house = House.find(params[:id])
     melange_percent = @house.melange_percent
-    if @house.update_attributes(params[:house])
+    mel = params[:house].to_hash
+    mel["melange_percent"]= mel["melange_percent"].to_i.abs
+
+    if @house.update_attributes(mel)
       unless @house.melange_percent == melange_percent
         Imperium.zapis_operaci("Procentualni podil zisku melanze zmenen z #{melange_percent} na novou hodnotu #{@house.melange_percent}. #{current_user.nick}")
       end
-      redirect_to @house, :notice => "Successfully updated house."
+      redirect_to @house, :notice => "Procentualni podil zisku melanze uspesne zmenen"
     else
       render :action => 'edit'
     end

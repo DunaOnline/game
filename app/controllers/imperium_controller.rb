@@ -44,20 +44,26 @@ class ImperiumController < ApplicationController
   def posli_imperialni_suroviny
     rod = House.imperium
     msg = ''
+    rodu = House.find(params[:rod_id_suroviny])
+    sol = params[:rodu_solary].to_i.abs
+    mel = params[:rodu_melanz].to_f.abs
 
-    if params[:rodu_solary].to_i > 0.0 || params[:rodu_melanz].to_f > 0.0
-      rodu = House.find(params[:rod_id_suroviny])
-      msg << "Rodu #{rodu.name} poslano "
+
+    msg << "Rodu #{rodu.name} poslano "
+
+    if sol <= rod.solar
+      rod.update_attribute(:solar, rod.solar - sol)
+      rodu.update_attribute(:solar, rodu.solar + sol)
+      msg << " #{sol} S "
+    else
+	    msg << " 0 S,"
     end
-    if params[:rodu_solary].to_i > 0.0 && params[:rodu_solary].to_i <= rod.solar
-      rod.update_attribute(:solar, rod.solar - params[:rodu_solary].to_i)
-      rodu.update_attribute(:solar, rodu.solar + params[:rodu_solary].to_i)
-      msg << " #{params[:rodu_solary]} S "
-    end
-    if params[:rodu_melanz].to_f > 0.0 && params[:rodu_melanz].to_f <= rod.melange
-      rod.update_attribute(:melange, rod.melange - params[:rodu_melanz].to_f)
-      rodu.update_attribute(:melange, rodu.melange + params[:rodu_melanz].to_f)
-      msg << " #{params[:rodu_melanz]} mg melanze "
+    if mel <= rod.melange
+      rod.update_attribute(:melange, rod.melange - mel)
+      rodu.update_attribute(:melange, rodu.melange + mel)
+      msg << " #{mel} mg melanze "
+    else
+	    msg << " 0 mg"
     end
 
     flash[:notice] = msg
