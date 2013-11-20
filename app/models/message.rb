@@ -111,7 +111,7 @@ class Message < ActiveRecord::Base
       when "N"
         recipients = User.where(:house_id => narod)
       when "D"
-        recipients = User.where("army_mentat = ? OR mentat = ? OR diplomat = ? OR emperor <= ? AND house_id >= ?",true,true,true,true,narod)
+        recipients = User.where("leader = ? OR diplomat = ? ",true,true)
 	    when "L"
 		    recipients = User.where(:landsraad => true)
       when "I"
