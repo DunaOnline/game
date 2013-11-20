@@ -87,20 +87,22 @@
           <li><a class="menuvyzkum" title="Ekonomika a výzkum"></a>
             <ul>
               <li><%= link_to "Statistika přepočtů", zobraz_eod_path %>
-
+              
+              <br>
+              
               <li><%= link_to ' Váš výzkum', technologies_path %></li>
 
               <% if current_user.admin? || current_user.leader? || current_user.mentat? %>
               <li><%= link_to 'Národní výzkum', narodni_vyskum_path %>
               <% end %>
               
-              <% if can? :sprava_rod, House %>
-                  <li><%= link_to "Kolonizovat planetu", kolonizuj_path %></li>
-              <% end %>
+              <li><%= link_to ' Výroba a transport výrobků', productions_path %></li>
+              
+              <br>
 
               <li><%= link_to ' Trh', markets_path %></li>
               <li><%= link_to ' Trh - Vaše nabídky', my_offers_path %></li>
-              <li><%= link_to ' Výroba a transport výrobků', productions_path %></li>
+              
             </ul>
         </ul>
       </td>
@@ -130,6 +132,9 @@
               <li><%= link_to "Léna k osídlení", planets_path %>
                 <br>
               <li><%= link_to "Arrakis", zobraz_arrakis_path %>
+              <% if can? :sprava_rod, House %>
+                  <li><%= link_to "Kolonizovat planetu", kolonizuj_path %></li>
+              <% end %>
                 <br>
               <li><%= link_to "Imperialní kartografie", systems_path %></li>
               <li><%= link_to "Imperiální databáze hráčů", users_path %></li>
