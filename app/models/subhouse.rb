@@ -40,6 +40,16 @@ class Subhouse < ActiveRecord::Base
     end
   end
 
+  def nastav_generala
+	  votes = Hash.new
+	  self.users.each do |u|
+		  u.update_attribute(:general,false)
+		  votes[u.id] = u.votes.where(:typ => 'general').count
+	  end
+	  general = User.find(votes.select.max[0])
+	  general.update_attribute(:general,true)
+  end
+
   def prirad_mr(user)
     user.update_attribute(:subhouse_id, self.id)
   end

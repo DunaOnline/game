@@ -6,7 +6,12 @@ class UsersController < ApplicationController
 
 
   def index
-    @users = User.where(:house_id => House.playable).order(:nick).page(params[:page])
+	  if params[:sort] == nil
+		  @users = User.where(:house_id => House.playable).order(:nick).page(params[:page])
+	  else
+		  @users = User.where(:house_id => House.playable).order(params[:sort] + ' ' + params[:direction]).page(params[:page])
+	  end
+
   end
 
   def new
@@ -83,6 +88,7 @@ class UsersController < ApplicationController
     elsif params[:imperator]
       ja.vol_imperatora(koho)
     elsif params[:general]
+	    ja.subhouse.nastav_generala
       ja.hlasuj(koho, 'general')
     else
 

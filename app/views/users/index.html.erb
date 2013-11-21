@@ -1,4 +1,5 @@
 <%# encoding: utf-8 %>
+
 <% title "Databáze hráčů" %>
 
 <table class="tab0">
@@ -18,10 +19,10 @@
 
 <table class="tab2">
   <tr>
-    <th class="l">Jméno hráče</th>
-    <th>Národ</th>
+    <th class="l"><%= sortable 'nick', 'Jméno hráče' %></th>
+    <th><%= sortable 'house_id', 'Národ'  %></th>
     <th>Celková síla</th>
-    <th>Vliv</th>
+    <th><%= sortable 'influence', 'Vliv' %></th>
     <th style="width:80px">Počet lén</th>
     <th class="r" style="width:75px">Akce</th>
   </tr>
