@@ -11,24 +11,41 @@
   </tr>
 </table>
 
-<h3 id="suroviny">Suroviny</h3>
+<table class="tab1">
+  <tr>
+      <td class="tdpl" style="width:160px; background-image: url(<%= asset_path 'imghra/arrakis_v.png' %>)">
+          <h2 id="suroviny">Suroviny</h2>
+      </td>
+      <td>
+
 Produkce surovin je zasažená náhodou 0.9 až 1.1. Je tedy možné, že produkce po 
 přepočtu bude vyšší nebo nižsí než je klasická produkce.
-<br><%= img_solary %> <b>Soláry</b> - hlavní platidlo hry. Platí se jím za stavbu 
+<br><br><%= img_solary %> <b>Soláry</b> <br> Hlavní platidlo hry. Platí se jím za stavbu 
 budov, nákup jednotek, kolonizaci a osidlování lén. Je produkováno v Tržišti 
 (a z něj vyvinutých budov).
-<br><%= img_material %> <b>Materiál</b> - stavební komodita. Platí se jím za 
+<br><br><%= img_material %> <b>Materiál</b> <br> Stavební komodita. Platí se jím za 
 stavbu budov, výrobu výrobků a zbroje. Je produkováno v Dolech (a z nich 
 vyvinutých budov).
-<br><%= img_melanz %> <b>Melanž</b> - komodita pro kolonizaci a nákup speciálních 
+<br><br><%= img_melanz %> <b>Melanž</b> <br> Komodita pro kolonizaci a nákup speciálních 
 jednotek. Je produkována pouze na planetě Arrakis. O její přerozděleni mezi rody 
 rozhoduje Landsraad. Hráčům je dále zasílá vedení rodu.  
-<br><%= img_populace %> <b>Populace</b> - komodita nutná pro produkci budov a 
+<br><br><%= img_populace %> <b>Populace</b> <br> Komodita nutná pro produkci budov a 
 verbování jednotek. Populace také navyšuje vliv. Obyvatelé se rodí ve Městech 
 (a z něj vyvinutých budov). 
-<br><%= img_zkusenosti %> <b>Výzkumné body (expy)</b> - komodita pro nákup výzkumu. 
+<br><br><%= img_zkusenosti %> <b>Výzkumné body (expy)</b> <br> Komodita pro nákup výzkumu. 
 Jsou produkovány v Laboratořích  (a z nich vyvinutých budov).
-<br><%= img_vyrobky %> <b>Výrobky</b> - Výrobky jsou produkovány v Továrnách 
+
+       </td>
+  
+  </tr> <tr>
+  
+  <td class="tdpl" style="width:160px; background-image: url(<%= asset_path 'img/e1.png' %>)">
+          <h2>Továrny</h2>
+      </td>
+      <td> 
+
+
+<%= img_vyrobky %> <b>Výrobky</b> <br> Výrobky jsou produkovány v Továrnách 
 (a z nich vyvinutých budov). Slouží k vybavení vašich vojenských jednotek nebo 
 výrobě dalších obchodovatelných komodit. Výrobky lze skladovat jen v továrnách, 
 kde se dále spracovávají. Není proto možné je přesouvat na jiné planety, než na 
@@ -36,8 +53,16 @@ ty které mají továrny postaveny.
 <br><i>V současnosti jsou továrny a výrobky ve slepé uličce. Posun proběhne s
 vývojem armády. </i>
 
+       </td>
+  
+  </tr> <tr>
+  
+  <td class="tdpl" style="width:160px; background-image: url(<%= asset_path 'img/e3.png' %>)">
+          <h2>Vliv</h2>
+      </td>
+      <td> 
 
-<h3>Vliv</h3>
+
 Vliv roste, nebo klesá, u všech rodů během celé hry. Podle vlivu rodu získá 
 rod počet zástupců v Landsraadu. 
 
@@ -49,3 +74,7 @@ v jednom ze sektorů ve <%= link_to "Imperialní kartografii", systems_path %>.
 politické hodnosti kombinovat. Vždy se bere jen ta nejvýše dosažená. Pořadí 
 hodnosti podle bonusu vlivu je: <i>Imperátor > Správce > Regent > Leader > Poslanec
  > Dvořan > Vezír > Mentati > Diplomat > Generál > ViceGenerál</i>
+ 
+       </td>
+  </tr>
+</table>

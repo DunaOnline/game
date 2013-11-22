@@ -3,8 +3,9 @@
   <%= link_to "Nepřečtená pošta [" + current_user.neprocteno_sprav.to_s + "]", messages_path %>
 </div>
 
-<!--- <% if Imperium.volba_imperatora? %>
-  <div class="la" styl="background-image: url(images/budovy/Corrino/dom.png) !important;"> 
+<!----
+ <% if Imperium.volba_imperatora? %>
+  <div class="la"> 
     <% if current_user.landsraad? %>
       <%= link_to "Přejít k volbě", volba_imperatora_path %>
     <% else %>
@@ -12,8 +13,8 @@
     <% end %>
   </div>
 <% end %>
+---->
 
---->
 
 <% field, planet = current_user.zobraz_udalost %>
 <% field.each do |f| %>

@@ -13,7 +13,7 @@
 
 <table class="tab1">
   <tr>
-      <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'imghra/kolonizace.png' %>)">
+      <td class="tdpl" style="width:160px; background-image: url(<%= asset_path 'imghra/kolonizace.png' %>)">
           <h2 id="planety">Planety</h3>
           <br><br><a href="http://www.dune.cz/encyklopedie/Kategorie:Plan%C3%A9ty"  target="_blank">Encyklopedie Duny</a>
       </td>
@@ -22,30 +22,35 @@
         Planetu obsazují samy Velkorody díky kolonizaci. Kolonizace je finančně 
         značně náročná a platí Melanž a Soláry. Cena kolonizace roste s počtem 
         planet v Impériu.
+        <br>
         <br>Na planetě je hned několik lén k osídlení. Planety mají také různý 
         bonus do produkce. Tyto bonusy a počet lén ovlivňuje typ planety.
 
       </td>
   
   </tr><tr>
-      <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'imghra/hracsklad.png' %>)">
+      <td class="tdpl" style="width:160px; background-image: url(<%= asset_path 'imghra/hracsklad.png' %>)">
           <h2 id="lena">Léna a jejich osídlení</h3>
       </td>
       <td>
       
         Léna jsou menší celky na planetách, které si mohou osídlit hráči jako 
         území pro stavbu <%= link_to 'budov', help_budovy_path %>. 
+        <br>
         <br>Pokud chcete osídlit nové území, můžete si najít přímo sektor v 
         "<%= link_to "Imperialní kartografii", systems_path %>" a nebo použít 
         volbu "<%= link_to "Léna k osídlení", planets_path %>". Za 
         osídlení nového léna se platí Melanž a Soláry. Cena nového léna roste s 
         počtem lén, která již vlastníte a zárověň s počtem lén na planetě již 
         osídlených.
+        <br>
+        <br>Léna mají různé bonusy do produkce jednolivých surovin. Tyto bonusy 
+        a počet lén ovlivňuje typ planety.
 
       </td>
   
   </tr><tr>
-      <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'img/asteroid.png' %>)">
+      <td class="tdpl" style="width:160px; background-image: url(<%= asset_path 'img/e2.png' %>)">
           <h2 id="lena">Události na planetách a lénech</h3>
       </td>
       <td>
@@ -53,6 +58,7 @@
         Na planetě nebo léně může dojít k události, která ovlivní celkovou 
         produkci. Důsledkem jsou kladné nebo i záporné bonusy. Aktivní událost se 
         hlásí vlevo nad národní nástěnkou. 
+        <br>
         <br>Za poplatek lze událost zrušit. Cena za zrušení události je různá a v 
         případě planetární události na málo osídlené planetě se jeji eliminace 
         nemusí vyplatit.
