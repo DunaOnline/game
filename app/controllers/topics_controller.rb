@@ -9,6 +9,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
+    authorize! :read, @topic
     @posts = @topic.posts.order("created_at DESC").page(params[:page])
   end
 

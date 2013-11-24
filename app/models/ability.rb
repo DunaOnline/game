@@ -59,6 +59,13 @@ class Ability
         can [:show], Landsraad
         can [:read], Law
         can [:read], Poll
+        can [:read], Syselaad, :house_id => user.house.id
+        can [:read], Syselaad, :subhouse_id => user.subhouse.id if user.subhouse
+        can [:read], Syselaad, :kind => ['S', 'E']
+
+        can [:read], Topic, :syselaad => { :house_id => user.house.id }
+        can [:read], Topic, :syselaad => { :subhouse_id => user.subhouse.id } if user.subhouse
+        can [:read], Topic, :syselaad => { :kind => ['S', 'E'] }
 
         if user.emperor?
           can [:sprava, :posli_imperialni_suroviny], Imperium
