@@ -10,7 +10,7 @@ class Technology < ActiveRecord::Base
   def cena_technology(user)
     research = self.researches.where(:user_id => user).first
     if research
-      ((research.lvl * 0.02)+1) * self.price
+      (((research.lvl * 0.02)+1) * Constant.cena_technology_pocet * self.price).round(0)
     else
       self.price
     end
@@ -19,7 +19,7 @@ class Technology < ActiveRecord::Base
   def cena_narodni_technology(house)
     research = self.researches.where(:house_id => house.id).first
     if research
-      ((research.lvl * 0.02)+1) * self.price * house.users.count
+      (((research.lvl * 0.02)+1) * Constant.cena_n_technology_pocet * self.price * house.users.count).round(0)
     else
       self.price * house.users.count
     end
@@ -29,7 +29,6 @@ class Technology < ActiveRecord::Base
     research = self.researches.where(:user_id => user.id).first
     if research
       research.update_attribute(:lvl, research.lvl+1)
-
     else
       Research.new(
           :technology_id => self.id,
@@ -83,6 +82,13 @@ class Technology < ActiveRecord::Base
     levely
   end
 
+  def upg_b_levely
+	  if self.upgrade_building_lvl
+		  levely = self.upgrade_building_lvl.split('*').map(&:to_i)
+	  end
+	  levely
+  end
+
   def cesta_technologie(typ)
     cesta = "technologie/"
     case self.id
@@ -113,5 +119,6 @@ class Technology < ActiveRecord::Base
 
   end
 
+  scope :nazov_podla_typu, lambda { |type| where(:bonus_type => type) }
 end
 

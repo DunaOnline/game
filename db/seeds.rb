@@ -102,8 +102,14 @@ Global.create(:setting => 'vytvor_resource_pop', :cislo => 10000)
 Global.create(:setting => 'vytvor_resource_mat', :cislo => 1000)
 Global.create(:setting => 'rozdiel_poctu_u_registracia', :cislo => 10)
 Global.create(:setting => 'cena_noveho_lena_od_poctu', :cislo => 1)
-
-
+Global.create(:setting => 'dni_v_renegatoch', :cislo => 3)
+Global.create(:setting => 'cena_technology_pocet', :cislo => 1.01)
+Global.create(:setting => 'cena_narodni_technology_pocet', :cislo => 1.03)
+Global.create(:setting => 'presun_populace', :cislo => 0.01)
+Global.create(:setting => 'presun_populace_planeta', :cislo => 0.03)
+Global.create(:setting => 'naklady_upgrade_stavba_material_od_poctu', :cislo => 1.02)
+Global.create(:setting => 'naklady_upgrade_stavba_melange_od_poctu', :cislo => 1.02)
+Global.create(:setting => 'naklady_upgrade_stavba_solary_od_poctu', :cislo => 1.02)
 
 puts 'Global done'
 
