@@ -32,6 +32,7 @@
   </tr>
   <% for planeta in @planets do %>
       <% pt = planeta.planet_type %>
+      <% unless planeta.fields.count == planeta.max_poli %>
       <tr>
         <td class="tdpl" style="background-image: url(<%= asset_path planeta.background %>)">
           <li><h2><%= link_to planeta.name, planeta %></h2>
@@ -58,25 +59,26 @@
         </td>
         <td>
           <li><%= img_solary "Bonus soláry" %>
-            <font class="<%= trida_barvy(pt.solar_bonus) %>"><%= format_mena(pt.solar_bonus, "%") %></font>
+            <span class="<%= trida_barvy(pt.solar_bonus) %>"><%= format_mena(pt.solar_bonus, "%") %></span>
           <li><%= img_material "Bonus materiál" %>
-            <font class="<%= trida_barvy(pt.material_bonus) %>"><%= format_mena(pt.material_bonus, "%") %></font>
+            <span class="<%= trida_barvy(pt.material_bonus) %>"><%= format_mena(pt.material_bonus, "%") %></span>
           <li><%= img_populace "Bonus populace" %>
-            <font class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%") %></font>
+            <span class="<%= trida_barvy(pt.population_bonus) %>"><%= format_mena(pt.population_bonus, "%") %></span>
           <li><%= img_zkusenosti "Bonus zkušenosti" %>
-            <font class="<%= trida_barvy(pt.exp_bonus) %>"><%= format_mena(pt.exp_bonus, "%") %></font>
+            <span class="<%= trida_barvy(pt.exp_bonus) %>"><%= format_mena(pt.exp_bonus, "%") %></span>
         </td>
         <td>
           <li><%= img_vyrobky "Bonus výroby" %>
-            <font class="cervena"> + 0%</font>
+            <span class="cervena"> + 0%</span>
           <li><%= img_kasarna "Navýšení kapacity kasáren" %>
-            <font class="cervena"> + 0%</font>
+            <span class="cervena"> + 0%</span>
           <li><%= img_kosmodrom "Navýšení kapacity kosmodromů" %>
-            <font class="cervena"> + 0%</font>
+            <span class="cervena"> + 0%</span>
           <li><%= img_po "Navýšení obrany" %>
-            <font class="cervena"> + 0%</font>
+            <span class="cervena"> + 0%</span>
         </td>
       </tr>
+      <% end %>
   <% end %>
 </table>
 

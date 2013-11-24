@@ -222,14 +222,16 @@ class User < ActiveRecord::Base
     if technology
 
       lvl = technology.vylepseno(self)
-
+      levely = technology.levely
       case lvl
-        when 0..6
+        when levely[0]..levely[1]
           Building.where(:kind => kind, :level => [1]).all
-        when 7..13
+        when levely[1]..levely[2]
           Building.where(:kind => kind, :level => [1, 2]).all
-        when 14..17
+        when levely[2]..17
           Building.where(:kind => kind).all
+	      else
+		      Building.where(:kind => kind, :level => [1]).all(:group => "name")
       end
     else
       Building.where(:kind => kind, :level => [1]).all(:group => "name")
@@ -515,6 +517,7 @@ class User < ActiveRecord::Base
 
   def preprava_cost(amount, typ)
     if typ == "leno"
+
       House.imperium.update_attribute(:solar, House.imperium.solar + (amount * Constant.presun_leno))
       self.update_attribute(:solar, self.solar - (amount * Constant.presun_leno))
       return true
@@ -738,6 +741,20 @@ class User < ActiveRecord::Base
 
 	  end
   end
+
+  def upgrades_b_available_by_technology(building)
+	  lvl = 0
+	  if Technology.where(:bonus_type => building.kind).first
+		  tech = Technology.where(:bonus_type => building.kind).first
+		  count = 1
+		  tech.upg_b_levely.each do |t|
+			  lvl = t if building.level == count
+			  count += 1
+		  end
+	  end
+	 	lvl
+  end
+
 
 
   private

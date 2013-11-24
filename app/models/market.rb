@@ -18,7 +18,7 @@ class Market < ActiveRecord::Base
       if self.buy_check(user, amount)
         self.b_goods_u(amount, user) if self.s_goods(amount)
       else
-        enough_for = solary / self.price if amount <= self.amount
+        enough_for = (solary / self.price).round(2) if amount <= self.amount
         enough_for = self.amount if amount > self.amount
         self.b_goods_u(enough_for, user) if self.s_goods(enough_for)
       end
@@ -26,7 +26,7 @@ class Market < ActiveRecord::Base
   end
 
   def b_goods_u(amount, user)
-    user.update_attribute(:solar, user.solar - amount * self.price)
+    user.update_attribute(:solar, (user.solar - amount * self.price).round(2))
     user.goods_to_buyer(self.area, amount)
     self.update_attribute(:amount, self.amount - amount)
     MarketHistory.new(
@@ -43,7 +43,7 @@ class Market < ActiveRecord::Base
       if self.buy_check(buyer_house, amount)
         self.b_goods_h(amount, buyer_house) if self.s_goods(amount)
       else
-        enough_for = buyer_house.solar / self.price if amount <= self.amount
+        enough_for = (buyer_house.solar / self.price).round(2) if amount <= self.amount
         enough_for = self.amount if amount > self.amount
         self.b_goods_h(enough_for, buyer_house) if self.s_goods(enough_for)
       end
@@ -61,7 +61,7 @@ class Market < ActiveRecord::Base
   end
 
   def b_goods_h(amount, buyer_house)
-    buyer_house.update_attribute(:solar, buyer_house.solar - amount * self.price)
+    buyer_house.update_attribute(:solar, (buyer_house.solar - amount * self.price).round(2))
     buyer_house.goods_to_buyer(self.area, amount)
     self.update_attribute(:amount, self.amount - amount)
     MarketHistory.new(
@@ -78,7 +78,7 @@ class Market < ActiveRecord::Base
       if self.buy_check(buyer_suhouse, amount)
         self.b_goods_mr(amount, buyer_suhouse) if self.s_goods(amount)
       else
-        enough_for = buyer_suhouse.solar / self.price if amount <= self.amount
+        enough_for = (buyer_suhouse.solar / self.price).round(2) if amount <= self.amount
         enough_for = self.amount if amount > self.amount
         self.b_goods_mr(enough_for, buyer_suhouse) if self.s_goods(enough_for)
       end
@@ -86,7 +86,7 @@ class Market < ActiveRecord::Base
   end
 
   def b_goods_mr(amount, buyer_subhouse)
-    buyer_subhouse.update_attribute(:solar, buyer_subhouse.solar - amount * self.price)
+    buyer_subhouse.update_attribute(:solar, (buyer_subhouse.solar - amount * self.price).round(2))
     buyer_subhouse.goods_to_buyer(self.area, amount)
     self.update_attribute(:amount, self.amount - amount)
     MarketHistory.new(

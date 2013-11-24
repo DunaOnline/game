@@ -56,7 +56,7 @@
 
           <li><%= img_solary %><%= text_field_tag 'rodu_solary', '0.00', :size => "3", :title => "Zadejte množství" %>
           <li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %>
-          <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %>
+          <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :include_blank => true %>
             
 
             <br/>

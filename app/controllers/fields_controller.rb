@@ -102,6 +102,37 @@ class FieldsController < ApplicationController
     end
   end
 
+  def vylepsi_budovu
+	  @field = Field.find(params[:field])
+	  if @field.user == current_user || current_user.admin?
+		  @budova = Building.find(params[:budova])
+		  pocet_upg = params[:pocet_budov_vylepseni].to_i
+		  if pocet_upg == 0
+			  postaveno = false
+			  message = "Nezadali jste mnozsti vylepseni"
+		  else
+			  if pocet_upg > 0
+				  postaveno, message = @field.upgrade_availability_check(@budova, pocet_upg)
+			  else
+				  postaveno, message = @field.upgrade_sell_availability_check(@budova, pocet_upg.abs)
+			  end
+		  end
+
+
+		  respond_to do |format|
+			  if postaveno
+				  format.html { redirect_to @field, notice: message }
+				  format.json { render json: @budova, status: :created, location: @budova }
+			  else
+				  format.html { redirect_to @field, alert: message }
+				  format.json { render json: @budova, status: :created, location: @budova }
+			  end
+		  end
+	  else
+		  redirect_to :back, :error => "Na tomto poli nemůžeš vylepšovat."
+	  end
+  end
+
   def postavit_arrakis
     @spravce = User.spravce_arrakis
     if @spravce == current_user

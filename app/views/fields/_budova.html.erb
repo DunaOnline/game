@@ -1,7 +1,7 @@
-<tr>
+<tr xmlns="http://www.w3.org/1999/html">
   <td class="tdpl" style="background-image: url(<%= asset_path cesta_budovy(@owner.house.name, obr) %>)"></td>
   <td>
-    <h3><%= budova.name %> (<%= budova.level %>)</h3>
+    <h3><%= budova.name %> (<%= budova.level %>) <%= "("+budova.actual_upgrade(field).to_s+")" if budova.can_be_upgraded(field) %></h3>
     <li><%= budova.description %>
     <li><%= img_budovy %> <%= field.postaveno(budova) %>
 
@@ -42,13 +42,29 @@
         </li>
     <% end %>
   </td>
-  
-<!-- Skrývám upgrade budov dokud nebude funkční  
+
+
   <td>
-    <li><%= img_solary %> 36
-    <li><%= img_material %> 0
-    <li><%= number_field_tag :pocet_budov_vylepseni, nil, :in => -10...10, :step => 1 %></li>
+    <% if budova.can_be_upgraded(field) %>
+
+                <%= form_tag vylepsi_budovu_path(:field => field, :budova => budova) do %>
+                <li><%= img_solary %> <%= budova.upg_sol_cost %>
+                <li><%= img_material %> <%= budova.upg_mat_cost %>
+                <% if budova.upg_mel_cost > 0 %>
+                    <li><%= img_melanz %> <%= budova.upg_mel_cost %>
+                <% end %>
+                <li><%= number_field_tag :pocet_budov_vylepseni, nil, :in => -10...11, :step => 1 %></li>
+                <%= submit_tag "Vylepsit", :class => "oktab_95"   %>
+
+        <% end %>
+    <% else %>
+
+
+            Budova sa neda vylepsit
+
+    <% end %>
   </td>
--->
+
+
 
 </tr>

@@ -38,6 +38,8 @@ class Ability
 	      #cannot :access, :rails_admin   # grant access to rails_admin
 	      #cannot :dashboard              # grant access to the dashboard
         cannot [:update, :delete], Global
+        cannot [:delete, :update], Message
+        cannot [:delete], Conversation
         cannot [:read, :update, :create, :delete], Product
         can [:read, :update], User
         can [:zmena_hesla, :zmena_hesla_f], User
@@ -45,7 +47,7 @@ class Ability
         #can [:update], User, :id => user.id
         can [:read, :osidlit_pole, :zobraz_arrakis], Planet
         can [:read], House
-        can [:read, :update, :prejmenuj_pole, :postavit_budovu, :presun_suroviny], Field, :user_id => user.id
+        can [:read, :update, :prejmenuj_pole, :postavit_budovu, :presun_suroviny, :vylepsi_budovu], Field, :user_id => user.id
         can [:read, :update], Resource
         can [:read, :create], Vote
         cannot [:update, :delete], Operation

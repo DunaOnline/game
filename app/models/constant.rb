@@ -214,4 +214,32 @@ class Constant
 		Global.vrat('dni_v_renegatoch', 4)
 	end
 
+	def self.cena_technology_pocet
+		Global.vrat('cena_technology_pocet', 4)
+	end
+
+  def self.cena_n_technology_pocet
+	  Global.vrat('cena_narodni_technology_pocet', 4)
+  end
+
+  def self.presun_populace
+	  Global.vrat('presun_populace', 4)
+  end
+
+  def self.presun_populace_planeta
+	  Global.vrat('presun_populace_planeta', 4)
+  end
+
+  def self.naklady_upgrade_stavba_melange
+	  Global.vrat('naklady_upgrade_stavba_melange_od_poctu', 4)
+  end
+
+  def self.naklady_upgrade_stavba_material
+	  Global.vrat('naklady_upgrade_stavba_material_od_poctu', 4)
+  end
+
+  def self.naklady_upgrade_stavba_solary
+	  Global.vrat('naklady_upgrade_stavba_solary_od_poctu', 4)
+  end
+
 end

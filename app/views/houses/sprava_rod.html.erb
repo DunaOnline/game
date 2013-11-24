@@ -34,7 +34,7 @@
           <li><%= img_melanz %><%= text_field_tag 'user_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'user_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
           <li><%= img_vyrobky %><%= text_field_tag 'user_parts', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
-          <li><%= select_tag :user_id_suroviny, options_for_select(@house.users.order(:nick).all.collect { |p| [p.nick, p.id] }, {:include_blank => false}), :class => "tab" %> </li>
+          <li><%= select_tag :user_id_suroviny, options_for_select(@house.users.order(:nick).all.collect { |p| [p.nick, p.id] }), :class => "tab", :include_blank => true %> </li>
         </td>
         <td>
           <li><%= img_solary %><%= text_field_tag 'mr_solary', '0.00', :size => "3", :title => "Zadejte množství" %></li>
@@ -42,7 +42,7 @@
           <li><%= img_melanz %><%= text_field_tag 'mr_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'mr_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
           <li><%= img_vyrobky %><%= text_field_tag 'mr_parts', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
-          <li><%= select_tag :mr_id_suroviny, options_for_select(@house.subhouses.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %> </li>
+          <li><%= select_tag :mr_id_suroviny, options_for_select(@house.subhouses.order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :include_blank => true %> </li>
 
 
         </td>
@@ -52,7 +52,7 @@
           <li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'rodu_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_vyrobky %><%= text_field_tag 'rodu_parts', '0.00', :size => "3", :title => "Zadejte množství" %></li>
-          <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.without_house(@house).order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab" %></li>
+          <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.without_house(@house).order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :include_blank => true %></li>
         </td>
       </tr>
   <% end %>
@@ -76,11 +76,12 @@
 <% if @markets.count != 0 %>
     <table class="vyroba">
       <tr>
-        <td class="tdpl" rowspan="99" style="width:140px; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
-            <li><h2>Nákup na trhu</h2></li>
-         
-        </td>
-        <th>Komodita</th>
+                <td class="tdpl" rowspan="99" style="width:140px; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
+                    <li><h2>Nákup na trhu</h2></li>
+
+                </td>
+               <th>Komodita</th>
+
 
         <th>Cena za kus [Sol]</th>
         <th>Množství</th>
@@ -95,7 +96,7 @@
 <table class="tab1">
   <tr>
     <%= form_for(@market) do |f| %>
-    <td class="tdpl" rowspan="99" style="width:140px; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
+    <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
               <li><h2>Prodej na trhu</h2></li>
               <li><%= submit_tag 'Nabídnout', :class => "ok" %>
     </td>
@@ -121,8 +122,7 @@
 <table class="tab1">
   <tr>
     <td class="tdpl" rowspan="4" style="width:170px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
-      <li><h2>Národní byrokracie</h2></li>
-      <li>Práva smí přidělit pouze vůdce Velkorodu.</li>
+      <li><h2>Národní byrokracie</h2>
     </td>
     <th class="l">Vůdce národa</th>
     <th>Mentat</th>
@@ -181,7 +181,7 @@
   <tr>
     <th class="l">Diplomat</th>
     <th>Generál</th>
-    <th class="l">Senátoři</th>
+    <th class="l">Poslanec</th>
 
 
   </tr>
@@ -230,7 +230,7 @@
       <% @ziadosti.each do |ziadost| %>
           <tr>
             <td><%= link_to ziadost.nick, user_path(ziadost) %></td>
-            <td><%= button_to("Prijmout", prijmi_hrace_url(:id => ziadost.id), :confirm => "Are you sure?") %></td>
+            <td><%= button_to("Prijmout", prijmi_hrace_url(:id => ziadost.id), :confirm => "Jste si jist Pane?") %></td>
           </tr>
       <% end %>
     </table>

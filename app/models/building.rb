@@ -49,6 +49,18 @@ class Building < ActiveRecord::Base
     self.sum_bonus * self.melange_cost * Constant.kpv
   end
 
+  def naklady_upgrade_stavba_melange
+	  self.upg_mel_cost * Constant.naklady_upgrade_stavba_melange
+  end
+
+  def naklady_upgrade_stavba_material
+	  self.upg_mat_cost * Constant.naklady_upgrade_stavba_material
+  end
+
+  def naklady_upgrade_stavba_solary
+	  self.upg_sol_cost * Constant.naklady_upgrade_stavba_solary
+  end
+
   def sum_bonus
     self.population_bonus + self.melange_bonus + self.material_bonus + self.solar_bonus + self.exp_bonus + 1
   end
@@ -81,5 +93,24 @@ class Building < ActiveRecord::Base
     self.population_cost * Constant.kpv
   end
 
+	def can_be_upgraded(field)
+		self.melange_bonus && self.solar_bonus && self.material_bonus && self.max_upg_lvl
+	end
 
+  def max_upgraded(current_upg_lvl)
+	  self.max_upg_lvl == current_upg_lvl
+  end
+
+  def actual_upgrade(field)
+	  if self.estates.where(:field_id => field.id).first
+		  if (self.estates.where(:field_id => field.id).first).upgrade_lvl
+			  (self.estates.where(:field_id => field.id).first).upgrade_lvl
+		  else
+			  0
+		  end
+		else
+		  0
+	  end
+
+  end
 end

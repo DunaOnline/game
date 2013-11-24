@@ -122,6 +122,89 @@ class Field < ActiveRecord::Base
     end
   end
 
+  def upgrade_availability_check(budova, pocet_vylepseni)
+	  flag = false
+	  msg = "Nemate dostatek surovin chybi vam : "
+	  cena_sol = budova.upg_sol_cost
+	  cena_mat = budova.upg_mat_cost
+	  cena_mel = budova.upg_mel_cost
+	  mat_na_poli = self.resource.material
+	  estate = budova.estates.where(:field_id => self.id).first
+	  if estate
+		  estate_upg_lvl = estate.upgrade_lvl ? estate.upgrade_lvl : 0
+		  max_lvl = budova.max_upg_lvl
+		  if estate_upg_lvl != max_lvl
+			  lvl = max_lvl > estate_upg_lvl
+				  solary = cena_sol * pocet_vylepseni <= self.user.solar
+				  material = cena_mat * pocet_vylepseni <= mat_na_poli
+				  melange = cena_mel * pocet_vylepseni <= self.user.melange
+
+				if solary && material && melange && lvl
+
+					  if !estate.upgrade_lvl
+						  pocet_vylepseni = ((pocet_vylepseni > max_lvl) ? max_lvl : pocet_vylepseni)
+						  estate.update_attribute(:upgrade_lvl,pocet_vylepseni)
+					  else
+						  pocet_vylepseni = (((pocet_vylepseni + estate.upgrade_lvl) > max_lvl )? max_lvl - estate.upgrade_lvl : pocet_vylepseni)
+						  estate.update_attribute(:upgrade_lvl,estate.upgrade_lvl + pocet_vylepseni)
+					  end
+					  self.user.update_attributes(:melange => self.user.melange - cena_mel * pocet_vylepseni, :solar => self.user.solar - cena_sol * pocet_vylepseni)
+					  self.resource.update_attribute(:material,mat_na_poli - cena_mat * pocet_vylepseni)
+					  msg = "Budova byla vylepsena #{pocet_vylepseni} krat, zaplatili jsme #{cena_sol * pocet_vylepseni} sol, #{cena_mat * pocet_vylepseni} kg a #{cena_mel * pocet_vylepseni} mg."
+					  self.user.zapis_operaci(msg)
+					  flag = true
+				else
+					  msg += "#{(cena_sol * pocet_vylepseni) - self.user.solar} sol " if !solary
+					  msg += "#{(cena_mat * pocet_vylepseni) - self.user.solar} kg " if !material
+					  msg += "#{(cena_mel * pocet_vylepseni) - self.user.solar} mg " if !melange
+					  msg += "."
+				end
+		  else
+			  flag = false
+			  msg = "Vylepseni je na max levelu"
+			end
+
+	  else
+		  msg = "Nemate postavenu budovu tohoto typu"
+		end
+	  return flag, msg
+  end
+
+  def upgrade_sell_availability_check(budova, pocet_vylepseni)
+	  flag = false
+	  msg = ""
+	  cena_sol = budova.upg_sol_cost / 2
+	  cena_mat = budova.upg_mat_cost / 2
+	  cena_mel = budova.upg_mel_cost / 2
+	  mat_na_poli = self.resource.material
+	  estate = budova.estates.where(:field_id => self.id).first
+
+	  lvl = estate.upgrade_lvl ? estate.upgrade_lvl : 0 > 0
+	  if lvl
+		  upgrade = estate.upgrade_lvl
+		  if upgrade > pocet_vylepseni
+			  estate.update_attribute(:upgrade_lvl, upgrade - pocet_vylepseni)
+			  self.user.update_attributes(:melange => self.user.melange + cena_mel * pocet_vylepseni, :solar => self.user.solar + cena_sol * pocet_vylepseni)
+			  self.resource.update_attribute(:material,mat_na_poli + cena_mat * pocet_vylepseni)
+			  msg = "Bylo prodano #{pocet_vylepseni} vylepseni, ziskali jsme #{cena_sol * pocet_vylepseni} sol, #{cena_mat * pocet_vylepseni} kg a #{cena_mel * pocet_vylepseni} mg."
+		    self.user.zapis_operaci(msg)
+			  flag = true
+		  elsif upgrade == 0
+			  flag = false
+			  msg = "Nemate zadne vylepseni na prodej"
+		  else
+			  estate.update_attribute(:upgrade_lvl, 0)
+			  self.user.update_attributes(:melange => self.user.melange + cena_mel * upgrade, :solar => self.user.solar + cena_sol * upgrade)
+			  self.resource.update_attribute(:material,mat_na_poli + cena_mat * upgrade)
+			  msg = "Bylo prodano #{pocet_vylepseni} vylepseni, ziskali jsme #{cena_sol * upgrade} sol, #{cena_mat * upgrade} kg a #{cena_mel * upgrade} mg."
+			  self.user.zapis_operaci(msg)
+			  flag = true
+		  end
+	  end
+
+	 return flag, msg
+  end
+
   def postav_availability_check(budova, pocet_budov)
 
     tech = self.user.tech_bonus("L")
@@ -361,6 +444,7 @@ class Field < ActiveRecord::Base
 
 
   def move_resource(to, what, amount, all)
+
 	  amount = all ? self.suroviny(what) : amount
     flag = self.check_availability(what, amount,to) if self.planet == to.planet
 
@@ -501,11 +585,12 @@ class Field < ActiveRecord::Base
   def check_availability(what, amount, to, typ="leno")
     poplatok = Constant.presun_leno if typ == "leno"
     poplatok = Constant.presun_planeta if typ == "planeta"
-
+    poplatok = Constant.presun_populace if what == "Population" && typ == "leno"
+    poplatok = Constant.presun_populace_planeta if what == "Population" && typ == "planeta"
     if poplatok <= self.user.solar
 	    flag = "F"
       case what
-        when 'Population'
+	      when 'Population'
 		      flag = "S" if self.resource.population >= amount
         when 'Material'
           flag = "S" if self.resource.material >= amount

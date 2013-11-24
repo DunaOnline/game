@@ -37,8 +37,11 @@ class MessagesController < ApplicationController
   end
 
   def reply
-    @old_msg = Message.find(params[:id])
-    @old_msg.body << "<br>--"
+	  msg = Message.find(params[:id])
+	  if msg.conversations.where(:receiver => current_user.id).first || msg.conversations.where(:sender => current_user.id).first
+	    @old_msg = msg
+	    @old_msg.body << "<br>--"
+	  end
     @recipient_array = User.all.map &:nick
     @message = Message.new
 
