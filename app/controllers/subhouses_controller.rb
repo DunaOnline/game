@@ -22,20 +22,25 @@ class SubhousesController < ApplicationController
     @subhouse = Subhouse.new
     @subhouse.name = (params[:Malorod])
     @subhouse.house_id = current_user.house.id
-
-    if @subhouse.obsazenost_mr
-      if @subhouse.save
-	      @subhouse.prirad_mr(current_user)
-	      current_user.update_attribute(:general, true)
-	      @subhouse.zapis_operaci('Založení malorodu.')
-        current_user.zapis_operaci("Založili jste malorod #{@subhouse.name}")
-        redirect_to :back, :notice => 'Malorod úspěšně založený.'
-      else
-	      redirect_to :back, :alert => "Prosim vyplnte jmeno mezi 3 az 8 pismenami. "
+    user = User.find(params[:user_id])
+    if !user.subhouse
+	    if @subhouse.obsazenost_mr
+	      if @subhouse.save
+		      @subhouse.prirad_mr(current_user)
+		      current_user.update_attribute(:general, true)
+		      current_user.hlasuj(current_user,"general")
+		      @subhouse.zapis_operaci('Založení malorodu.')
+	        current_user.zapis_operaci("Založili jste malorod #{@subhouse.name}")
+	        redirect_to :back, :notice => 'Malorod úspěšně založený.'
+	      else
+		      redirect_to :back, :alert => "Prosim vyplnte jmeno mezi 3 az 8 pismenami. "
+		    end
+	    else
+	      redirect_to :back, :alert => 'Nemůžete založit malorod dokud nejsou naplněné již existující.'
 	    end
     else
-      redirect_to :back, :alert => 'Nemůžete založit malorod dokud nejsou naplněné již existující.'
-    end
+	    redirect_to :back, :alert => 'Jiz jste clenem malorodu.'
+	  end
   end
 
   def edit
@@ -64,13 +69,18 @@ class SubhousesController < ApplicationController
   def vyhod_mr
     user = User.find(params[:id])
     mr = user.subhouse
-    if user.update_attributes(:subhouse_id => nil, :vicegeneral => false, :general => false)
-      user.zapis_operaci("Byl jsi vyhoštěn z malorodu #{mr.name}")
-      mr.zapis_operaci("Z malorodu byl vyhoštěn hráč #{user.nick}.")
-      redirect_to :back, :notice => "Vyhostil jsi hráče #{user.nick} z malorodu"
+    if mr.pocet_vyhosteni == Constant.vyhostenie_hraca_mr_max_per_day
+	    if user.update_attributes(:subhouse_id => nil, :vicegeneral => false, :general => false)
+		    mr.update_attribute(:pocet_vyhosteni, mr.pocet_vyhosteni + 1)
+	      user.zapis_operaci("Byl jsi vyhoštěn z malorodu #{mr.name}")
+	      mr.zapis_operaci("Z malorodu byl vyhoštěn hráč #{user.nick}.")
+	      redirect_to :back, :notice => "Vyhostil jsi hráče #{user.nick} z malorodu"
+	    else
+	      redirect_to :back, :alert => "Nemůžeš vyhostit hráče #{user.nick}"
+	    end
     else
-      redirect_to :back, :alert => "Nemůžeš vyhostit hráče #{user.nick}"
-    end
+	    redirect_to :back, :alert => "Nemuzes vyhodit vice hracu za den."
+	  end
   end
 
   def prijmi_hrace_mr
@@ -93,13 +103,17 @@ class SubhousesController < ApplicationController
     user << params[:user_solary].to_f.abs << params[:user_melanz].to_f.abs << params[:user_zkusenosti].to_i.abs << params[:user_material].to_f.abs << params[:user_parts].to_f.abs
     narod << params[:rodu_solary].to_f.abs << params[:rodu_melanz].to_f.abs << params[:rodu_zkusenosti].to_i.abs << params[:rodu_material].to_f.abs << params[:rodu_parts].to_f.abs
     mr << params[:mr_solary].to_f.abs << params[:mr_melanz].to_f.abs << params[:mr_zkusenosti].to_i.abs << params[:mr_material].to_f.abs << params[:mr_parts].to_f.abs
-    msg, flag = malorod.posli_mr_suroviny(narod, user, mr, rodu, useru, mrdu, current_user)
-    if flag
+    unless rodu == "" && useru == "" && mrdu == ""
+	    msg, flag = malorod.posli_mr_suroviny(narod, user, mr, rodu, useru, mrdu, current_user)
+	      if flag
 
-      redirect_to sprava_mr_path(:id => malorod), :notice => msg
+		      redirect_to sprava_mr_path(:id => malorod), :notice => msg
+	      else
+		      msg += "Nezadal jsi množství na přesun" if msg == ""
+		      redirect_to sprava_mr_path(:id => malorod), :alert => msg
+	      end
     else
-      msg += "Nezadal jsi množství na přesun" if msg == ""
-      redirect_to sprava_mr_path(:id => malorod), :alert => msg
+	    redirect_to sprava_mr_path(:id => malorod), :alert => "Zadejte prosim komu poslat suroviny"
     end
   end
 

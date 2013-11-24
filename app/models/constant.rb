@@ -242,4 +242,16 @@ class Constant
 	  Global.vrat('naklady_upgrade_stavba_solary_od_poctu', 4)
   end
 
+	def self.zapnout_nahodnou_produkci
+		Global.vrat('zapnout_nahodnou_produkci', 1)
+	end
+
+  def self.vyhostenie_hraca_mr_max_per_day
+	  Global.vrat('pocet_vyhosteni_mr', 4)
+  end
+
+  def self.vyhostenie_hraca_n_max_per_day
+	  Global.vrat('pocet_vyhosteni_narod', 4)
+  end
+
 end

@@ -41,12 +41,14 @@
               
               <% if can? :sprava_mr, Subhouse %>
                   <li><%= link_to 'Správa Malorodu', sprava_mr_path(:id => current_user.subhouse) %>
+                  <li><%= link_to 'Malorod', current_user.subhouse if current_user.subhouse %></li>
               <% else %>
                   <li><%= link_to 'Malorod', current_user.subhouse if current_user.subhouse %></li>
               <% end %>
               
               <% if can? :sprava_rod, House %>
                   <li><%= link_to 'Správa Velkorodu', sprava_rod_path(:id => current_user.house) %>
+                  <li><%= link_to 'Velkorod', current_user.house %></li>
               <% else %>
                   <li><%= link_to 'Velkorod', current_user.house %></li>
               <% end %>

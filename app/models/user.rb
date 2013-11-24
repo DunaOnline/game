@@ -142,7 +142,7 @@ class User < ActiveRecord::Base
 	  self.subhouse.users.each do |u|
 		  unless self == u
 		    vote = Vote.where(:house_id => self.house.id, :elector => u.id, :typ => "general").first
-			  vote.elective == self.id ? vote.delete : {}
+			  vote ? vote.elective : {} == self.id ? vote ? vote.delete : {} : {}
 			end
 	  end
   end
@@ -390,6 +390,7 @@ class User < ActiveRecord::Base
     narod = self.house
     field = self.domovske_leno
     field.update_attribute(:planet_id, Planet.domovska_rodu(House.renegat).first.id)
+    self.house.zapis_operaci("Hrac #{self.nick} opustil narod.")
     self.update_attribute(:house_id, House.renegat.id)
     self.zapis_operaci("Opustili jste narod #{narod.name}")
     Influence.new(
@@ -401,6 +402,30 @@ class User < ActiveRecord::Base
 	  self.odhlasuj("leader")
     self.opustit_mr
 	  self.reset_hodnosti_naroda
+  end
+
+  def vyhostit_hrace(kym)
+		if self.house != House.renegat
+			narod = self.house
+			field = self.domovske_leno
+			narod.update_attribute(:pocet_vyhosteni, (narod.pocet_vyhosteni + 1))
+			field.update_attribute(:planet_id, Planet.domovska_rodu(House.renegat).first.id)
+			self.house.zapis_operaci("Hrac #{self.nick} byl vyhosten hracem #{kym}.")
+			self.update_attribute(:house_id, House.renegat.id)
+			self.zapis_operaci("Byl jste vyhosten z naroda #{narod.name}.")
+			Influence.new(
+					:field_id => field.id,
+					:effect_id => Effect.find_by_typ("M").id,
+					:duration => 100,
+					:started_at => Date.today
+			).save
+			self.odhlasuj("leader")
+			self.opustit_mr
+			self.reset_hodnosti_naroda
+			return true
+		else
+			false
+		end
   end
 
   def reset_hodnosti_naroda

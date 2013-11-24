@@ -126,6 +126,19 @@ class HousesController < ApplicationController
     @operations = @house.operations.narodni.seradit.limit(5)
   end
 
+  def vyhosteni_hrace
+	  user = User.find(params[:user_id])
+	  if current_user.house.pocet_vyhosteni != Constant.vyhostenie_hraca_n_max_per_day
+		  if user.vyhostit_hrace(user.nick)
+			  redirect_to :back, :notice => "Hrac byl vyhosten."
+		  else
+			  redirect_to :back, :notice => "Nepodarilo sa vyhostit hrace."
+		  end
+	  else
+		  redirect_to :back, :notice => "Dosiahli jste limit na vyhosteni hracu na prepocet."
+		end
+  end
+
   def send_products_house
     amount = params[:amount]
     production = Production.find(params[:production])
@@ -169,14 +182,18 @@ class HousesController < ApplicationController
     user << params[:user_solary].to_f.abs << params[:user_melanz].to_f.abs << params[:user_zkusenosti].to_i.abs << params[:user_material].to_f.abs << params[:user_parts].to_f.abs
     narod << params[:rodu_solary].to_f.abs << params[:rodu_melanz].to_f.abs << params[:rodu_zkusenosti].to_i.abs << params[:rodu_material].to_f.abs << params[:rodu_parts].to_f.abs
     mr << params[:mr_solary].to_f.abs << params[:mr_melanz].to_f.abs << params[:mr_zkusenosti].to_i.abs << params[:mr_material].to_f.abs << params[:mr_parts].to_f.abs
-    msg, flag = rod.posli_rodove_suroviny(narod, user, mr, rodu, useru, mrdu, current_user)
-    if flag
-      redirect_to sprava_rod_path(:id => rod), :notice => msg
-    else
+    unless rodu == "" && useru == "" && mrdu == ""
+	    msg, flag = rod.posli_rodove_suroviny(narod, user, mr, rodu, useru, mrdu, current_user)
+	    if flag
+	      redirect_to sprava_rod_path(:id => rod), :notice => msg
+	    else
 
-      msg += "Nezadali ste mnozstvo na presun" if msg == ""
-      redirect_to sprava_rod_path(:id => rod), :alert => msg
-    end
+	      msg += "Nezadali ste mnozstvo na presun" if msg == ""
+	      redirect_to sprava_rod_path(:id => rod), :alert => msg
+	    end
+    else
+	    redirect_to sprava_rod_path(:id => rod), :alert => "Zadejte prosim komu poslat suroviny"
+	  end
   end
 
 end

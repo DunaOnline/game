@@ -60,6 +60,7 @@ class Prepocet
         enviro_solar = field.planet.udalost_bonus("S")
         effect_solar = field.leno_udalost_bonus("S")
         solar_house_exp = narod.vyskumane_narodni_tech("S")
+
         solar = field.vynos('solar') * solar_exp * solar_house_exp * enviro_solar * effect_solar * nahoda_produkce
 
         enviro_exp = field.planet.udalost_bonus("E")
@@ -78,7 +79,7 @@ class Prepocet
         effect_pop = field.leno_udalost_bonus("L")
         population_exp = vlastnik.tech_bonus("L")
         population_house_exp = narod.vyskumane_narodni_tech("L")
-        population = (field.vynos('population') * population_exp * population_house_exp * enviro_pop * effect_pop * nahoda_produkce).round
+        population = (field.vynos('population') * population_exp * population_house_exp * enviro_pop * effect_pop * nahoda_produkce).round(0)
 
         parts = field.vynos('parts') #enviro_parts
 
@@ -100,7 +101,14 @@ class Prepocet
             :solar_income => solar,
             :exp_income => exp,
             :material_income => material,
-            :population_income => population
+            :population_income => population,
+            :parts_income =>  parts,
+            :solar_store => vlastnik.solar,
+            :exp_store => vlastnik.exp,
+            :material_store => field.resource.material,
+            :population_store => field.resource.population,
+            :melange_store => vlastnik.melange,
+            :parts_store => field.resource.parts
         ).save
       end
     end
@@ -125,7 +133,11 @@ class Prepocet
   end
 
   def self.nahoda_produkce
-    ((100.0 + (Constant.modifikator_produkce / 2)) - rand(Constant.modifikator_produkce))/100
+	  if Constant.zapnout_nahodnou_produkci == true
+      ((100.0 + (Constant.modifikator_produkce / 2)) - rand(Constant.modifikator_produkce))/100
+	  else
+		  1
+		end
   end
 
   def self.rozdel_melanz(melange, order)

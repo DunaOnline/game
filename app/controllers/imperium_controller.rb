@@ -49,28 +49,37 @@ class ImperiumController < ApplicationController
 	    sol = params[:rodu_solary].to_i.abs
 	    mel = params[:rodu_melanz].to_f.abs
 
+	    if sol > 0 || mel > 0
+		    msg << "Rodu #{rodu.name} poslano "
 
-	    msg << "Rodu #{rodu.name} poslano "
+		    if sol <= rod.solar
+		      rod.update_attribute(:solar, rod.solar - sol)
+		      rodu.update_attribute(:solar, rodu.solar + sol)
+		      msg << " #{sol} S "
+		    else
+			    msg << " #{rod.solar} S,"
+			    rodu.update_attribute(:solar, rodu.solar + rod.solar)
+			    rod.update_attribute(:solar, rod.solar - rod.solar)
+		    end
+		    if mel <= rod.melange
+		      rod.update_attribute(:melange, rod.melange - mel)
+		      rodu.update_attribute(:melange, rodu.melange + mel)
+		      msg << " #{mel} mg melanze "
+		    else
+			    msg << " #{rod.melange} mg"
+			    rodu.update_attribute(:melange, rodu.melange + rod.melange)
+			    rod.update_attribute(:melange, rod.melange - rod.melange)
+		    end
 
-	    if sol <= rod.solar
-	      rod.update_attribute(:solar, rod.solar - sol)
-	      rodu.update_attribute(:solar, rodu.solar + sol)
-	      msg << " #{sol} S "
+		    flash[:notice] = msg
+		    Imperium.zapis_operaci(msg + " hracem #{current_user.nick}.")
+		    rodu.zapis_operaci(msg.gsub("Rodu #{rodu.name} poslano ", "Obdrzeno z imperialni pokladny ") + " od hrace #{current_user.nick}.")
+		    redirect_to sprava_imperia_path
 	    else
-		    msg << " 0 S,"
-	    end
-	    if mel <= rod.melange
-	      rod.update_attribute(:melange, rod.melange - mel)
-	      rodu.update_attribute(:melange, rodu.melange + mel)
-	      msg << " #{mel} mg melanze "
-	    else
-		    msg << " 0 mg"
+		    flash[:alert] = "Nemuzes posilat nulu."
+		    redirect_to sprava_imperia_path
 	    end
 
-	    flash[:notice] = msg
-	    Imperium.zapis_operaci(msg + " hracem #{current_user.nick}.")
-	    rodu.zapis_operaci(msg.gsub("Rodu #{rodu.name} poslano ", "Obdrzeno z imperialni pokladny ") + " od hrace #{current_user.nick}.")
-	    redirect_to sprava_imperia_path
     else
 	    flash[:alert] = "Nesvolil jste si národ."
 	    redirect_to sprava_imperia_path

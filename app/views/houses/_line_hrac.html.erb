@@ -9,6 +9,7 @@
   <td>
     <%= link_to img_posta, new_message_path(:nick => user.nick), :title => "Napsat hráči"%>
 
-    <a><%= img_utok "Zautočit na hráče" %></a>
+    <%= link_to img_utok,  nil, :title => "Zautočit na hráče" %>
+    <%= link_to img_cancel_s, vyhosteni_hrace_path(:user_id => user.id), :title => "Vyhostit hrace" if user.house.id != House.renegat.id%>
   </td>
 </tr>

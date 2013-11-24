@@ -85,7 +85,7 @@ class Ability
           can [:sprava_rod], House, :id => user.house_id
         end
         if user.mentat?
-          can [:kolonizuj, :sprava_rod], House, :id => user.house_id
+          can [:kolonizuj, :sprava_rod, :posli_rodove_suroviny], House, :id => user.house_id
         end
         if user.diplomat?
         end

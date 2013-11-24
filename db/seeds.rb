@@ -110,6 +110,9 @@ Global.create(:setting => 'presun_populace_planeta', :cislo => 0.03)
 Global.create(:setting => 'naklady_upgrade_stavba_material_od_poctu', :cislo => 1.02)
 Global.create(:setting => 'naklady_upgrade_stavba_melange_od_poctu', :cislo => 1.02)
 Global.create(:setting => 'naklady_upgrade_stavba_solary_od_poctu', :cislo => 1.02)
+Global.create(:setting => 'zapnout_nahodnou_produkci', :value => true)
+Global.create(:setting => 'pocet_vyhosteni_narod', :cislo => 5)
+Global.create(:setting => 'pocet_vyhosteni_mr', :cislo => 3)
 
 puts 'Global done'
 

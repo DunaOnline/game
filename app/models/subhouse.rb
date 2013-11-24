@@ -149,7 +149,7 @@ class Subhouse < ActiveRecord::Base
         presun = true
       end
     end
-    if presun
+    if presun && house != ""
       h_solar = suroviny[0]
       h_melange = suroviny[1]
       h_exp = suroviny[2]
@@ -166,6 +166,8 @@ class Subhouse < ActiveRecord::Base
       else
         msg += sprava
       end
+    else
+	    msg = "Nezadali jste narod." if presun
     end
     return msg, flag
   end
@@ -178,7 +180,7 @@ class Subhouse < ActiveRecord::Base
         presun = true
       end
     end
-    if presun
+    if presun && mr != ""
       mr_solar = suroviny[0]
       mr_melange = suroviny[1]
       mr_exp = suroviny[2]
@@ -195,6 +197,8 @@ class Subhouse < ActiveRecord::Base
       else
         msg += sprava
       end
+    else
+	    msg = "Nezadali jste malorod." if presun
     end
     return msg, flag
   end
@@ -207,7 +211,7 @@ class Subhouse < ActiveRecord::Base
         presun = true
       end
     end
-    if presun
+    if presun  && user != ""
       u_solar = suroviny[0]
       u_melange = suroviny[1]
       u_exp = suroviny[2]
@@ -225,6 +229,8 @@ class Subhouse < ActiveRecord::Base
       else
         msg += sprava
       end
+    else
+	    msg = "Nezadali jste hrace." if presun
     end
     return msg, flag
   end

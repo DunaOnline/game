@@ -25,12 +25,12 @@
   </tr>
   <tr>
     <td>
-      <li><%= img_solary %> <span class="<%= trida_barvy(@solar_income) %>"><%= @solar_income %></span>
-      <li><%= img_material %> <span class="<%= trida_barvy(@material_income) %>"><%= @material_income %></span>
-      <li><%= img_melanz %> <span class="<%= trida_barvy(@melange_income) %>"><%= @melange_income %></span>
-      <li><%= img_populace %> <span class="<%= trida_barvy(@population_income) %>"><%= @population_income %></span>
-      <li><%= img_zkusenosti %> <span class="<%= trida_barvy(@exp_income) %>"><%= @exp_income %></span>
-      <li><%= img_vyrobky %> <span class="<%= trida_barvy(@parts_income) %>"><%= @parts_income %></span>
+      <li><%= img_solary %> <span class="<%= trida_barvy(@solar_income) %>"><%= format_mena(@solar_income,"S") %></span>
+      <li><%= img_material %> <span class="<%= trida_barvy(@material_income) %>"><%= format_mena(@material_income,"kg") %></span>
+      <li><%= img_melanz %> <span class="<%= trida_barvy(@melange_income) %>"><%= format_mena(@melange_income,"mg") %></span>
+      <li><%= img_populace %> <span class="<%= trida_barvy(@population_income) %>"><%= format_mena(@population_income,"pop") %></span>
+      <li><%= img_zkusenosti %> <span class="<%= trida_barvy(@exp_income) %>"><%= format_mena(@exp_income,"exp") %></span>
+      <li><%= img_vyrobky %> <span class="<%= trida_barvy(@parts_income) %>"><%= format_mena(@parts_income,"ks") %></span>
     </td>
     <td>
       <li><%= img_solary %> <span class="zelena">+10</span>
@@ -49,12 +49,12 @@
       <li><%= img_vyrobky %> <span class="oranzova"><%= @parts_income - 5 %></span>
     </td>
     <td>
-      <li><%= img_solary %> <%= current_user.solar %>
-      <li><%= img_material %> <%= current_user.celkovy_material %>
-      <li><%= img_melanz %> <%= current_user.melange %>
-      <li><%= img_populace %> <%= current_user.celkova_populace %>
-      <li><%= img_zkusenosti %> <%= current_user.exp %>
-      <li><%= img_vyrobky %>  <%= current_user.celkovy_parts %>
+      <li><%= img_solary %> <%= @eods_fields.last.solar_store %>
+      <li><%= img_material %> <%= @eods_fields.last.material_store %>
+      <li><%= img_melanz %> <%= @eods_fields.last.melange_store %>
+      <li><%= img_populace %> <%= @eods_fields.last.population_store %>
+      <li><%= img_zkusenosti %> <%= @eods_fields.last.exp_store %>
+      <li><%= img_vyrobky %>  <%= @eods_fields.last.parts_store %>
     </td>
   </tr>
   <tr>

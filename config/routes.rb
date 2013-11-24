@@ -86,6 +86,7 @@ DuneOnline::Application.routes.draw do
   match 'posli_mr_sur' => 'houses#posli_mr_sur', :as => :posli_mr_sur
   match 'prijmi_hrace' => 'houses#prijmi_hrace', :as => :prijmi_hrace
   match 'send_products_house' => 'houses#send_products_house', :as => :send_products_house
+  match 'vyhosteni_hrace' => 'houses#vyhosteni_hrace', :as => :vyhosteni_hrace
 
   resources :discoverables
   

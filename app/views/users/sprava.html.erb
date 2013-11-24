@@ -181,6 +181,7 @@
             <%= link_to 'Opustit váš Malorod', opustit_mr_path %>
           <% else %>
           <%= form_tag @subhouse do %>
+              <%= hidden_field_tag 'user_id', current_user.id %>
               <%= text_field_tag 'Malorod', '', :class => "tab" %>
               <%= submit_tag 'Založit nový malorod', :class => 'ok4' %>
           <% end %>
