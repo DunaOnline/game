@@ -17,13 +17,14 @@
             <li><%= @udalost.description %></li>
               <br>
               <br>
-              <br>
-              <br>
+
             <li><b>Trvání:</b> <%= @leno.duration + 1 if @leno %> <%= @planet.duration + 1 if @planet %>
         <% id = @leno if @leno %>
         <% id = @planet if @planet %>
         
-             Je možné investovat finance do jejího řešení a událost tak eliminovat.
+             <li>Je možné investovat finance do jejího řešení a událost tak eliminovat.</li>
+              <br>
+              <br>
              
               <%= form_tag oprava_katastrofy_path(:id => id, :typ => @leno ? "L" : "P"), :class => "inline_list" do %>
               
