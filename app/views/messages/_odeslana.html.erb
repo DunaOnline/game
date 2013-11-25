@@ -1,3 +1,4 @@
+# encoding: UTF-8
 <tr xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" class="opica" data-druh="<%= odeslana.druh if odeslana.druh %>">
   <td><%= link_to odeslana.created_at.localtime, '#', :class => "message" %>
 
@@ -15,7 +16,7 @@
     <span class="fright">
      <%= check_box_tag 'message_ids[]', odeslana.id, false, :class => "grey_checkbox"  %>
 
-      <%= link_to image_tag('../assets/css/delete.png'), odeslana, :confirm => "Opravdu chcete odstranit zprávu?", :method => :delete, :class => 'delete_post', :remote => true %></span>
+      <%= link_to image_tag('../assets/css/delete.png'), odeslana, :confirm => "Opravdu chcete odstranit zprï¿½vu?", :method => :delete, :class => 'delete_post', :remote => true %></span>
   </td>
 
 </tr>
@@ -23,7 +24,7 @@
   <td colspan="4">
     <%= simple_format(odeslana.body) %>
     <p>
-      <%= link_to 'Odpovìdìt', reply_path(:id => odeslana.id), :class => "reply" %>
+      <%= link_to 'Odpovï¿½dï¿½t', reply_path(:id => odeslana.id), :class => "reply" %>
     </p>
   </td>
 </tr>
