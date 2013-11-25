@@ -10,7 +10,7 @@
               <li><%= link_to "Odeslaná pošta", odeslana_posta_path %>
               <li><%= link_to "Poslat poštu", new_message_path %>
                 <br>
-              <% if current_user.landsraad? || current_user.admin? %>
+              <% if current_user.subhouse %>
                 <li><%= link_to 'Malorodní Syselaad', syselaad_path(:kind => 'M') %></li>
               <% end %>
               <li><%= link_to "Národní Syselaad", syselaad_path(:kind => 'N') %></li>

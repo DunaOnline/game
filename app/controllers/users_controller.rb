@@ -134,8 +134,6 @@ class UsersController < ApplicationController
     end
   end
 
-
-
   def opustit
     if current_user.domovske_leno.planet == Planet.domovska_rodu(House.renegat).first
       redirect_to :back, :notice => "Nemozte opustit renegatov"
@@ -172,15 +170,15 @@ class UsersController < ApplicationController
 
   def ziadost_malorod
     subhouse = Subhouse.find(params[:id])
-    if !current_user.subhouse
-	    if current_user.update_attribute(:ziadost_subhouse, subhouse.id)
-	      redirect_to :back, :notice => "Žádost do malorodu #{subhouse.name} byla podána"
-	    else
-	      redirect_to :back, :alert => "Nemůžte poslat žádost"
-	    end
+    unless current_user.subhouse
+      if current_user.update_attribute(:ziadost_subhouse, subhouse.id)
+        redirect_to :back, :notice => "Žádost do malorodu #{subhouse.name} byla podána"
+      else
+        redirect_to :back, :alert => "Nemůžte poslat žádost"
+      end
     else
-	    redirect_to :back, :alert => "Nesmite byt clenem malorodu na podani zadosti"
-	  end
+      redirect_to :back, :alert => "Nesmite byt clenem malorodu na podani zadosti"
+    end
   end
 
   def oprava_katastrofy

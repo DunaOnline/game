@@ -89,6 +89,7 @@ class SubhousesController < ApplicationController
   def prijmi_hrace_mr
     user = User.find(params[:id])
     if user.prijat_do_mr(current_user.subhouse)
+      user.hlasuj(current_user.subhouse.users.general.first, 'general')
       redirect_to :back, :notice => "Prijali jste hrace"
     else
       redirect_to :back, :alert => "Mate maximalni pocet hracu"
