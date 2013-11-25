@@ -16,6 +16,8 @@ class Syselaad < ActiveRecord::Base
   attr_accessible :house_id, :subhouse_id, :kind, :name, :description
 
   belongs_to :house
+  has_one :syselaad
+  belongs_to :subhouse
   has_many :topics, :dependent => :destroy
 
   # KIND:

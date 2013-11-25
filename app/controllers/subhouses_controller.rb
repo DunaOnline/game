@@ -7,11 +7,8 @@ class SubhousesController < ApplicationController
   end
 
   def show
-
-	    @subhouse = Subhouse.find(params[:id])
-	    @operations = @subhouse.operations.malorodni.seradit.limit(5)
-
-
+    @subhouse = Subhouse.find(params[:id])
+    @operations = @subhouse.operations.malorodni.seradit.limit(5)
   end
 
   def new
@@ -26,6 +23,12 @@ class SubhousesController < ApplicationController
     if !user.subhouse
 	    if @subhouse.obsazenost_mr
 	      if @subhouse.save
+          sys = Syselaad.create(:subhouse_id => @subhouse.id, :kind => 'M', :name => "Syselaad malorodu #{@subhouse.name}")
+          top = Topic.create(:syselaad_id => sys.id, :user_id => 1, :name => 'Úvod', :last_poster_id => 1, :last_post_at => Time.now)
+          sys.topics << top
+          post = Post.create(:topic_id => top.id, :user_id => 1, :content => 'Vítejte!')
+          top.posts << post
+
 		      @subhouse.prirad_mr(current_user)
 		      current_user.update_attribute(:general, true)
 		      current_user.hlasuj(current_user,"general")

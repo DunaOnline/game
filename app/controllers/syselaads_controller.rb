@@ -35,7 +35,7 @@ class SyselaadsController < ApplicationController
       when 'E'
         @syselaad = Syselaad.mezinarodni.first
 	    when 'M'
-		    @syselaads = Syselaad.malorodni.where(:subhouse_id => current_user.subhouse).first
+		    @syselaad = Syselaad.malorodni.where(:subhouse_id => current_user.subhouse).first
       else
         @syselaad = Syselaad.narodni.where(:house_id => rod).first
     end
