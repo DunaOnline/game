@@ -107,6 +107,7 @@ class UsersController < ApplicationController
     @operations = @user.operations.uzivatelske.seradit.limit(5)
     @subhouse = Subhouse.new
     @subhouses = @user.house.subhouses
+    @datum_volby = Constant.pristi_volby
   end
 
   def send_products

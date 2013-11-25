@@ -410,16 +410,20 @@ class House < ActiveRecord::Base
 
 
   def pocet_poslancu
-    pomer = self.pomer_vlivu
-    poslancu = Landsraad.pocet_poslancu * pomer
-    zaokrouhlene = poslancu.round(0)
-    if poslancu < zaokrouhlene
-      zaokrouhlene -= 1
-    else
-      zaokrouhlene += 1
-    end
+    vliv_na_poslance = House.imperium.influence / Constant.pocet_senatoru
 
-    return zaokrouhlene
+    poslancu = (self.influence / vliv_na_poslance).floor
+
+    #pomer = self.pomer_vlivu
+    #poslancu = Landsraad.pocet_poslancu * pomer
+    #zaokrouhlene = poslancu.round(0)
+    #if poslancu < zaokrouhlene
+    #  zaokrouhlene -= 1
+    #else
+    #  zaokrouhlene += 1
+    #end
+
+    return poslancu
   end
 
   def self.registration
