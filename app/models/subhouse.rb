@@ -43,10 +43,12 @@ class Subhouse < ActiveRecord::Base
   def nastav_generala
 	  votes = Hash.new
 	  self.users.each do |u|
-		  u.update_attribute(:general,false)
+		  if u.general
+		   u.update_attribute(:general,false)
+		  end
 		  votes[u.id] = u.votes.where(:typ => 'general').count
 	  end
-	  general = User.find(votes.select.max[0])
+	  general = User.find(votes.max_by{|k,v| v}[0])                   #votes.values.max
 	  general.update_attribute(:general,true)
   end
 
@@ -318,7 +320,7 @@ class Subhouse < ActiveRecord::Base
   end
 
   def secti_hlasy(typ, pocet)
-    self.house.votes.where(:typ => typ).group(:elective).limit(pocet).order('count_id desc, created_at').count('id')
+	  self.house.votes.where(:typ => typ).group(:elective).limit(pocet).order('count_id desc, created_at').count('id')
   end
 
   scope :without_subhouse, lambda { |subhouse| subhouse ? {:conditions => ["id != ?", subhouse.id]} : {} }

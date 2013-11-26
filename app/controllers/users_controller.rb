@@ -88,8 +88,8 @@ class UsersController < ApplicationController
     elsif params[:imperator]
       ja.vol_imperatora(koho)
     elsif params[:general]
-	    ja.subhouse.nastav_generala
       ja.hlasuj(koho, 'general')
+      ja.subhouse.nastav_generala
     else
 
     end
