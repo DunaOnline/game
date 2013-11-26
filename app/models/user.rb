@@ -216,7 +216,7 @@ class User < ActiveRecord::Base
   end
 
   def dovolene_budovy(kind)
-    # TODO dovolene budovy podle tech levelu
+
     technology = Technology.where(:bonus_type => kind).first
 
     if technology
@@ -224,11 +224,11 @@ class User < ActiveRecord::Base
       lvl = technology.vylepseno(self)
       levely = technology.levely
       case lvl
-        when levely[0]..levely[1]
+        when levely[0]...levely[1]
           Building.where(:kind => kind, :level => [1]).all
-        when levely[1]..levely[2]
+        when levely[1]...levely[2]
           Building.where(:kind => kind, :level => [1, 2]).all
-        when levely[2]..17
+        when levely[2]..levely.max
           Building.where(:kind => kind).all
 	      else
 		      Building.where(:kind => kind, :level => [1]).all(:group => "name")
