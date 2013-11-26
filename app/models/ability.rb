@@ -63,8 +63,8 @@ class Ability
         can [:read], Syselaad, :subhouse_id => user.subhouse.id if user.subhouse
         can [:read], Syselaad, :kind => ['S', 'E']
 
-        can [:read], Topic, :syselaad => { :house_id => user.house.id }
-        can [:read], Topic, :syselaad => { :subhouse_id => user.subhouse.id } if user.subhouse
+        can [:read, :create], Topic, :syselaad => { :house_id => user.house.id }
+        can [:read, :create], Topic, :syselaad => { :subhouse_id => user.subhouse.id } if user.subhouse
         can [:read], Topic, :syselaad => { :kind => ['S', 'E'] }
 
         if user.emperor?
@@ -72,9 +72,11 @@ class Ability
           can [:create], Law
           can [:create, :edit], Poll
           can [:jednani], Landsraad
+          can [:read, :create], Topic, :syselaad => { :kind => ['L', 'I'] }
         end
         if user.regent?
           can [:sprava, :posli_imperialni_suroviny], Imperium
+          can [:read, :create], Topic, :syselaad => { :kind => ['L', 'I'] }
         end
         if user.leader?
           can [:kolonizuj, :sprava_rod], House do |house|
@@ -87,6 +89,7 @@ class Ability
           #can [:u_ziadost], User
           can [:create], Law
           can [:jednani], Landsraad
+          can [:read, :create], Topic, :syselaad => { :kind => ['L'] }
         end
         if user.army_mentat?
           can [:sprava_rod], House, :id => user.house_id
@@ -98,28 +101,28 @@ class Ability
         end
         if user.general?
           can [:vyhod_mr, :prijmi_hrace_mr, :posli_mr_sur, :menuj_vice], Subhouse, :id => user.subhouse_id
+          can [:read, :update, :sprava_mr], Subhouse, :id => user.subhouse_id
         end
         if user.vicegeneral?
           can [:prijmi_hrace_mr, :posli_mr_sur], Subhouse, :id => user.subhouse_id
+          can [:read, :update, :sprava_mr], Subhouse, :id => user.subhouse_id
         end
         if user.arrakis?
           can [:postavit_arrakis], Field
+          can [:read, :create], Topic, :syselaad => { :kind => ['L'] }
         end
         if user.landsraad?
           can [:create], Law
           can [:create, :edit], Poll
           can [:jednani], Landsraad
+          can [:read, :create], Topic, :syselaad => { :kind => ['L'] }
         end
         if user.court?
+          can [:read, :create], Topic, :syselaad => { :kind => ['I'] }
         end
         if user.vezir?
           can [:sprava, :posli_imperialni_suroviny], Imperium
-        end
-        if user.general?
-          can [:read, :update, :sprava_mr], Subhouse
-        end
-        if user.vicegeneral?
-          can [:read, :update, :sprava_mr], Subhouse
+          can [:read, :create], Topic, :syselaad => { :kind => ['L', 'I'] }
         end
       end
     else
