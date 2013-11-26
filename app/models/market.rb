@@ -20,6 +20,7 @@ class Market < ActiveRecord::Base
       else
         enough_for = (solary / self.price).round(2) if amount <= self.amount
         enough_for = self.amount if amount > self.amount
+        enough_for -= 0.01 if enough_for * self.price > solary
         self.b_goods_u(enough_for, user) if self.s_goods(enough_for)
       end
     end
@@ -43,8 +44,9 @@ class Market < ActiveRecord::Base
       if self.buy_check(buyer_house, amount)
         self.b_goods_h(amount, buyer_house) if self.s_goods(amount)
       else
-        enough_for = (buyer_house.solar / self.price).round(2) if amount <= self.amount
-        enough_for = self.amount if amount > self.amount
+        enough_for = (buyer_house.solar / self.price).round(2)
+        enough_for = self.amount if enough_for > self.amount
+        enough_for -= 0.01 if enough_for * self.price > buyer_house.solar
         self.b_goods_h(enough_for, buyer_house) if self.s_goods(enough_for)
       end
     end
@@ -80,6 +82,7 @@ class Market < ActiveRecord::Base
       else
         enough_for = (buyer_suhouse.solar / self.price).round(2) if amount <= self.amount
         enough_for = self.amount if amount > self.amount
+        enough_for -= 0.01 if enough_for * self.price > buyer_suhouse.solar
         self.b_goods_mr(enough_for, buyer_suhouse) if self.s_goods(enough_for)
       end
     end
