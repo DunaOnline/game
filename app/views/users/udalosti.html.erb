@@ -12,7 +12,7 @@
     <tr>
         <td style="padding: 10px; width:270px; height: 200px; background-image: url(<%= asset_path 'img/e1.png' %>) !important">
 
-          <div>
+
             <h2><%= @udalost.name %></h2>
             <li><%= @udalost.description %></li>
               <br>
@@ -29,10 +29,10 @@
               <%= form_tag oprava_katastrofy_path(:id => id, :typ => @leno ? "L" : "P"), :class => "inline_list" do %>
               
               <li> 
-                <%= button_to @leno.price.to_s + " S", oprava_katastrofy_path(:id => @leno.id, :typ => "L") if @leno %>
+                <%= button_to @leno.price.to_s + " S", oprava_katastrofy_path(:id => @leno.id, :typ => "L") if @leno && @leno.field.user == current_user%>
               </li>
               <li>
-                <%= button_to @planet.price.to_s + " S", oprava_katastrofy_path(:id => @planet.id, :typ => "P") if @planet && current_user.leader? %>
+                <%= button_to @planet.price.to_s + " S", oprava_katastrofy_path(:id => @planet.id, :typ => "P") if @planet && current_user.leader? && current_user.house == @planet.planet.house %>
               </li>
 
              

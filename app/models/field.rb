@@ -587,7 +587,7 @@ class Field < ActiveRecord::Base
     poplatok = Constant.presun_planeta if typ == "planeta"
     poplatok = Constant.presun_populace if what == "Population" && typ == "leno"
     poplatok = Constant.presun_populace_planeta if what == "Population" && typ == "planeta"
-    if poplatok <= self.user.solar
+    if poplatok * amount <= self.user.solar
 	    flag = "F"
       case what
 	      when 'Population'

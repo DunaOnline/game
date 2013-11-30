@@ -374,16 +374,22 @@ class User < ActiveRecord::Base
         end
       end
     end
-
-    self.fields.each do |field|
-      field.planet.environment.each do |environment|
-        if environment
-          msg_pla << ["//**Udalost na planete #{field.planet.name} : #{environment.property.name}**//", environment]
-        end
-      end
-
+    self.planets.each do |p|
+	    p.environment.each do |environment|
+	      if environment
+	        msg_pla << ["//**Udalost na planete #{field.planet.name} : #{environment.property.name}**//", environment]
+	      end
+	    end
     end
     return msg_leno, msg_pla
+  end
+
+  def planets
+	  planets = []
+	  self.fields.each do |p|
+		  planets << p.planet if planets.assoc(p.planet)
+	  end
+	  planets
   end
 
   def opustit_narod

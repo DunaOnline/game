@@ -37,10 +37,16 @@ class Ability
       else
 	      #cannot :access, :rails_admin   # grant access to rails_admin
 	      #cannot :dashboard              # grant access to the dashboard
+
+	      cannot [:sprava_rod, :posli_rodove_suroviny, :vyhosteni_hrace], House
+	      cannot [:sprava_mr, :posli_mr_sur], Subhouse
+	      cannot [:posli_imperialni_suroviny], Imperium
         cannot [:update, :delete], Global
         cannot [:delete, :update], Message
         cannot [:delete], Conversation
         cannot [:read, :update, :create, :delete], Product
+        can [:read, :update], Message, :conversations => { :sender => user.id }
+        can [:read, :update], Message, :conversations => { :receiver => user.id }
         can [:read, :update], User
         can [:zmena_hesla, :zmena_hesla_f], User
         can [:read, :create], Subhouse
@@ -79,6 +85,7 @@ class Ability
           can [:read, :create], Topic, :syselaad => { :kind => ['L', 'I'] }
         end
         if user.leader?
+	        can [:vyhosteni_hrace], House, :house_id => user.house.id
           can [:kolonizuj, :sprava_rod], House do |house|
             user.try(:house) == house
           end
@@ -104,7 +111,7 @@ class Ability
           can [:read, :update, :sprava_mr], Subhouse, :id => user.subhouse_id
         end
         if user.vicegeneral?
-          can [:prijmi_hrace_mr, :posli_mr_sur], Subhouse, :id => user.subhouse_id
+          can [:prijmi_hrace_mr, :posli_mr_sur], Subhouse, :subhouse_id => user.subhouse_id
           can [:read, :update, :sprava_mr], Subhouse, :id => user.subhouse_id
         end
         if user.arrakis?

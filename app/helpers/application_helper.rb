@@ -99,6 +99,10 @@ module ApplicationHelper
     image_tag("planety/arrakis_arraken.png", :alt => title, :title => title)
   end
 
+  def img_trash(title = "Odstranit zpr�vu")
+	  image_tag('css/delete.png', :alt => title, :title => title)
+  end
+
   def online_users
     @online_users = []
     sessions = Session.order("created_at ASC").all

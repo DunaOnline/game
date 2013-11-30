@@ -16,7 +16,7 @@
     <span class="fright">
      <%= check_box_tag 'message_ids[]', odeslana.id, false, :class => "grey_checkbox"  %>
 
-      <%= link_to image_tag('../assets/css/delete.png'), odeslana, :confirm => "Opravdu chcete odstranit zpr�vu?", :method => :delete, :class => 'delete_post', :remote => true %></span>
+      <%= link_to img_trash, odeslana, :confirm => "Opravdu chcete odstranit zpr�vu?", :method => :delete, :class => 'delete_post', :remote => true %></span>
   </td>
 
 </tr>

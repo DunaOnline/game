@@ -10,6 +10,8 @@
     <%= link_to img_posta, new_message_path(:nick => user.nick), :title => "Napsat hráči"%>
 
     <%= link_to img_utok,  nil, :title => "Zautočit na hráče" %>
-    <%= link_to img_cancel_s, vyhosteni_hrace_path(:user_id => user.id), :title => "Vyhostit hrace" if user.house.id != House.renegat.id%>
+
+    <%= link_to img_trash("Vyhostit hráče"), vyhosteni_hrace_path(:user_id => user.id), :confirm => "Jste si jist ?", :title => "Vyhostit hráče" if user.house.id != House.renegat.id && current_user.general && current_user.house == user.house  %>
+
   </td>
 </tr>
