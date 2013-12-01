@@ -53,7 +53,7 @@ class Prepocet
     for field in Field.includes(:user, :buildings, :resource).all do
       vlastnik = field.user
       narod = vlastnik.house if vlastnik
-      if field.planet == Planet.arrakis
+      if field.planet == Arrakis.planeta
 
       else
         solar_exp = vlastnik.tech_bonus("S")
@@ -117,7 +117,7 @@ class Prepocet
 
   def self.produkce_melanz(order)
     puts "PRODUKUJI MELANZ"
-    arrakis = Planet.arrakis
+    arrakis = Arrakis.planeta
     leno = Field.find_by_planet_id(arrakis)
     vlastnik = User.spravce_arrakis
     #enviro_material = field.planet.udalost_bonus("M")

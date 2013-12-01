@@ -8,7 +8,7 @@ class PlanetsController < ApplicationController
 
   def show
     @planet = Planet.find(params[:id])
-    if @planet == Planet.arrakis
+    if @planet == Arrakis.planeta
       return redirect_to zobraz_arrakis_path
     else
       @fields = @planet.fields
@@ -88,7 +88,7 @@ class PlanetsController < ApplicationController
   end
 
   def zobraz_arrakis
-    @arrakis = Planet.arrakis
+    @arrakis = Arrakis.planeta
     @arrakis_field = Field.find_by_planet_id(@arrakis)
     @arrakis_resource = @arrakis_field.resource
     @arraken = Building.where(:name => "Arraken", :level => [1]).first

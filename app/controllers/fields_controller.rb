@@ -136,7 +136,7 @@ class FieldsController < ApplicationController
   def postavit_arrakis
     @spravce = User.spravce_arrakis
     if @spravce == current_user
-      @arrakis = Planet.arrakis
+      @arrakis = Arrakis.planeta
       @arrakis_field = Field.find_by_planet_id(@arrakis)
       @arrakis_resource = @arrakis_field.resource
       #@arraken = Building.where(:kind => "A", :level => [1]).first

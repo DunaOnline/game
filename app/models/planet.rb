@@ -127,10 +127,6 @@ class Planet < ActiveRecord::Base
     self.planet_type_id == PlanetType.find_by_name('Domovská').id
   end
 
-  def self.arrakis
-    @duna ||= Planet.find_by_name('Arrakis')
-  end
-
   def self.kaitan
     @kaitan ||= Planet.find_by_name('Kaitan')
   end
@@ -143,15 +139,10 @@ class Planet < ActiveRecord::Base
     end
   end
 
-  def agresivita_fremenu
-    # TODO jak pocitat???
-    10.0
-  end
-
   def zastoupene_rody
     a = []
     self.fields.includes(:user, :house).each do |field|
-      if self == Planet.arrakis || self == Planet.kaitan
+      if self == Arrakis.planeta || self == Planet.kaitan
         rod = House.imperium.name
       else
         rod = field.user.house.name
