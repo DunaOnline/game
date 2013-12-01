@@ -9,7 +9,7 @@ class ImperiumController < ApplicationController
     @imperium = House.imperium
     @houses = House.playable
 
-    @arrakis = Planet.arrakis
+    @arrakis = Arrakis.planeta
     @leno = Field.find_by_planet_id(@arrakis)
     if @spravce
       @melange = @leno.vynos('melange')
@@ -30,7 +30,7 @@ class ImperiumController < ApplicationController
     @imperium = House.imperium
     @houses = House.playable
 
-    @arrakis = Planet.arrakis
+    @arrakis = Arrakis.planeta
     @leno = Field.find_by_planet_id(@arrakis)
     if @spravce
       @melange = @leno.vynos('melange')

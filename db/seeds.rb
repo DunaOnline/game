@@ -117,7 +117,7 @@ Global.create(:setting => 'pocet_vyhosteni_mr', :cislo => 3)
 puts 'Global done'
 
 titania = Planet.find_by_name('Titánia')
-arrakis = Planet.arrakis
+arrakis = Arrakis.planeta
 arrakis.fields << Field.new(:name => "Leno Arrakis",
                             :user_id => nil,
                             :pos_x => 1,

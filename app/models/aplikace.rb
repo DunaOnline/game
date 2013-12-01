@@ -94,7 +94,7 @@ class Aplikace
     Subhouse.delete_all
     puts 'Subhouse deleted'
 
-    arrakis = Planet.arrakis
+    arrakis = Arrakis.planeta
     for field in Field.all do
       if field.planet.domovska? && (field.user.house != House.renegat if field.user)
         unless field.planet == arrakis
@@ -185,8 +185,8 @@ class Aplikace
     #                        :discovered_at => Date.today,
     #                        :position => 1,
     #                        :system_name => "Mu Draconis")
-    planet_arrakis = Planet.arrakis
-    Planet.arrakis.fields << Field.create(:name => "Léno Arrakis",
+    planet_arrakis = Arrakis.planeta
+    Arrakis.planeta.fields << Field.create(:name => "Léno Arrakis",
                                           :planet_id => planet_arrakis.id,
                                           :user_id => nil,
                                           :pos_x => 1,
