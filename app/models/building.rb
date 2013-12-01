@@ -28,7 +28,7 @@
 class Building < ActiveRecord::Base
   attr_accessible :name, :level, :kind, :description, :population_bonus, :pop_limit_bonus, :melange_bonus, :material_bonus
   attr_accessible :solar_bonus, :exp_bonus, :population_cost, :melange_cost, :material_cost
-  attr_accessible :solar_cost, :exp_cost, :prerequisity_1, :prerequisity_2, :prerequisity_3
+  attr_accessible :solar_cost, :exp_cost, :prerequisity_1, :prerequisity_2, :prerequisity_3, :upg_mat_cost, :upg_mel_cost, :upg_sol_cost, :max_upg_lvl, :upg_profit
 
   has_many :fields, :through => :estates
   has_many :estates

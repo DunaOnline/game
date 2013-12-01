@@ -1,5 +1,5 @@
 class Technology < ActiveRecord::Base
-  attr_accessible :description, :name, :price, :max_lvl, :bonus, :subhouse_bonus, :house_bonus, :bonus_type, :image_url, :image_lvl, :discovered
+  attr_accessible :description, :name, :price, :max_lvl, :bonus, :subhouse_bonus, :house_bonus, :bonus_type, :image_url, :image_lvl, :discovered, :technology_type, :upgrade_building_lvl, :house_id, :subhouse_id
 
   has_many :researches
   has_many :users, :through => :researches
