@@ -209,8 +209,8 @@ class Prepocet
         unless new_vudce.blank?
           new_vudce.update_attribute(:leader, true)
           new_vudce.zapis_operaci("Byl jsem zvolen novym vudcem.")
-          new_vudce.update_attribute(:landsraad, true)
-          new_vudce.zapis_operaci("Mam pristup do Landsraadu.")
+          #new_vudce.update_attribute(:landsraad, true)
+          #new_vudce.zapis_operaci("Mam pristup do Landsraadu.")
           n_vudce = new_vudce.nick
         end
         house.zapis_operaci("Zvolen novy vudce #{n_vudce}.") unless n_vudce == 'nikdo'

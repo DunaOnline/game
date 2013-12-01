@@ -127,6 +127,7 @@ class House < ActiveRecord::Base
 
   def move_to_house(suroviny, house, posiela)
     msg = ""
+
     presun = false
 
 	    suroviny.each do |sur|
@@ -143,11 +144,25 @@ class House < ActiveRecord::Base
 	      sprava, flag = self.check_availability(h_solar, h_material, h_melange, h_exp, h_parts)
 	      if flag == true
 	        house = House.find(house)
+	        houses = House.playable
+	        if houses.include?(house)
 	        house.update_attributes(:solar => house.solar + h_solar, :material => house.material + h_material, :melange => house.melange + h_melange, :exp => house.exp + h_exp, :parts => house.parts + h_parts)
 	        self.update_attributes(:solar => self.solar - h_solar, :material => self.material - h_material, :melange => self.melange - h_melange, :exp => self.exp - h_exp, :parts => self.parts - h_parts)
 	        msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_material} kg, #{h_melange} mg, #{h_exp} exp, #{h_parts} dilu od naroda #{self.name}. Poslal #{posiela.nick}. "
 	        self.zapis_operaci(msg)
 		      house.zapis_operaci(msg)
+	        else
+		        if h_exp > 0 || h_material > 0 || h_parts > 0
+			        msg += "Imperiu muzete poslat jenom solary a melanz."
+			        flag = false
+			      else
+		        house.update_attributes(:solar => house.solar + h_solar, :melange => house.melange + h_melange)
+		        self.update_attributes(:solar => self.solar - h_solar, :melange => self.melange - h_melange)
+		        msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_melange} mg od naroda #{self.name}. Poslal #{posiela.nick}. "
+		        self.zapis_operaci(msg)
+		        house.zapis_operaci(msg)
+			      end
+	        end
 	      else
 	        msg += sprava
 	      end
@@ -458,6 +473,6 @@ class House < ActiveRecord::Base
     return na_prodej
   end
 
-  scope :without_house, lambda { |house| house ? {:conditions => ["id != ?", house.id]} : {} }
+  scope :without_house, lambda { |house| house ? {:conditions => ["id != ?", house]} : {} }
   scope :playable, where(:playable => true)
 end
