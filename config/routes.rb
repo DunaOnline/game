@@ -63,7 +63,7 @@ DuneOnline::Application.routes.draw do
   match 'postavit_budovu' => 'fields#postavit_budovu', :as => :postavit_budovu
   match 'postavit_arrakis' => 'fields#postavit_arrakis', :as => :postavit_arrakis
   match 'presun_suroviny' => 'fields#presun_suroviny', :as => :presun_suroviny
-
+  match 'vylepsi_budovu' => 'fields#vylepsi_budovu', :as => :vylepsi_budovu
   resources :properties
 
   resources :planets
