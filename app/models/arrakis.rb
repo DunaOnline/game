@@ -32,4 +32,25 @@ class Arrakis
     Global.prepni('agrese_fremenu', 4, nova_agrese)
   end
 
+  def self.sniz_agresi_fremenu(o_kolik)
+    Global.prepni('agrese_fremenu', 4, Arrakis.agresivita_fremenu - o_kolik)
+  end
+
+  def self.kontrola_fremenu
+    agr = Arrakis.agresivita_fremenu
+    rnd = rand(10000)/100.0+1
+    if rnd <= agr
+      harv = Arrakis.harvester
+      stare_harv = harv.number
+      nove_harv = (harv.number * (1-(agr/2)/100)).round
+      harv.update_attribute(:number, nove_harv)
+      Global.prepni('agrese_fremenu', 4, agr/2)
+      Imperium.zapis_operaci("Na Arrakis Fremeni zaútočili na sklizňové operace a zničili #{stare_harv-nove_harv} Továren na koření.")
+      Imperium.zapis_operaci("Pravděpodobnost jejich další agrese je #{Arrakis.agresivita_fremenu.round(2)}%.")
+    else
+      Arrakis.zvys_agresi_fremenu
+      Imperium.zapis_operaci("Pravděpodobnost útoku fremenů se zvýšila na #{Arrakis.agresivita_fremenu.round(2)}%.")
+    end
+  end
+
 end

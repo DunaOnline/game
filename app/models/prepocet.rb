@@ -9,6 +9,7 @@ class Prepocet
       Prepocet.zmen_vudce(order)
       Prepocet.zpristupni_planety
       Prepocet.produkce_suroviny(order)
+      Arrakis.kontrola_fremenu
       Prepocet.produkce_melanz(order)
 
       Prepocet.udalosti

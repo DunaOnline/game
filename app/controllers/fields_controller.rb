@@ -137,7 +137,7 @@ class FieldsController < ApplicationController
     @spravce = User.spravce_arrakis
     if @spravce == current_user
       @arrakis = Arrakis.planeta
-      @arrakis_field = Field.find_by_planet_id(@arrakis)
+      @arrakis_field = Arrakis.leno
       @arrakis_resource = @arrakis_field.resource
       #@arraken = Building.where(:kind => "A", :level => [1]).first
       @harvester = Building.where(:kind => "J", :level => [1]).first
@@ -158,16 +158,10 @@ class FieldsController < ApplicationController
         redirect_to zobraz_arrakis_path
       else
         if pocet_budov > 0
-          # TODO mozna zrusit... tezit se muze jak chce ale poleze nespkojenost fremenu a utoky cervu...
-          if pocet_budov > @arrakis_field.volne_misto
-            flash[:error] = "Tolik budov nelze postavit."
-            redirect_to zobraz_arrakis_path
-          else
-            current_user.update_attribute(:solar, current_user.solar - (cena_sol * pocet_budov))
-            @arrakis_resource.update_attribute(:material, mat_na_poli - (cena_mat * pocet_budov))
-            @arrakis_field.postav(@harvester, pocet_budov)
-            redirect_to zobraz_arrakis_path
-          end
+          current_user.update_attribute(:solar, current_user.solar - (cena_sol * pocet_budov))
+          @arrakis_resource.update_attribute(:material, mat_na_poli - (cena_mat * pocet_budov))
+          @arrakis_field.postav(@harvester, pocet_budov)
+          redirect_to zobraz_arrakis_path
         else
           if pocet_budov.abs > @field.postaveno(@harvester)
             flash[:error] = "Tolik budov nelze prodat."
