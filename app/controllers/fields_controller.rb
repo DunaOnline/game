@@ -7,7 +7,11 @@ class FieldsController < ApplicationController
     @domovska = Planet.domovska(current_user).first
     @pole_domovska = @domovska.fields.vlastnik(current_user).first
     @co_poslat = [["Materiál", "Material"], ["Populace", "Population"], ["Vyrobky", "Parts"]]
-    @my_fields = current_user.fields
+    if current_user.arrakis
+      @my_fields = current_user.fields << Arrakis.leno
+    else
+	    @my_fields = current_user.fields
+    end
 	  @exp_bonus = []
 	  @effect_bonus = []
   end

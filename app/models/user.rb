@@ -228,7 +228,7 @@ class User < ActiveRecord::Base
           Building.where(:kind => kind, :level => [1]).all
         when levely[1]...levely[2]
           Building.where(:kind => kind, :level => [1, 2]).all
-        when levely[2]..levely.max
+        when levely[2]..technology.max_lvl
           Building.where(:kind => kind).all
 	      else
 		      Building.where(:kind => kind, :level => [1]).all(:group => "name")
@@ -435,7 +435,7 @@ class User < ActiveRecord::Base
   end
 
   def reset_hodnosti_naroda
-	  self.update_attributes(:mentat => false, :army_mentat => false, :leader => false)
+	  self.update_attributes(:mentat => false, :army_mentat => false, :leader => false, :landsraad => false, :vezir => false, :court => false)
   end
 
   def opustit_mr
