@@ -6,7 +6,7 @@ class Arrakis
   end
 
   def self.leno
-    @duna_field ||= Arrakis.planeta.fields.first
+    Arrakis.planeta.fields.first
   end
 
   def self.zdroje

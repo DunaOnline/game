@@ -139,8 +139,8 @@ class FieldsController < ApplicationController
 
   def postavit_arrakis
     @spravce = User.spravce_arrakis
+    @arrakis = Arrakis.planeta
     if @spravce == current_user
-      @arrakis = Arrakis.planeta
       @arrakis_field = Arrakis.leno
       @arrakis_resource = @arrakis_field.resource
       #@arraken = Building.where(:kind => "A", :level => [1]).first
@@ -179,7 +179,7 @@ class FieldsController < ApplicationController
         end
       end
     else
-      redirect @arrakis
+      redirect_to @arrakis
     end
 
   end
