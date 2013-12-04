@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  after_filter :show_session, :save_output_html, :update_akce, :clear_session
-  before_filter :log_akce
+  #after_filter :show_session, :save_output_html, :update_akce, :clear_session
+  #before_filter :log_akce
   before_filter :login_required
   before_filter :admin_required, :only => [:clear_session]
 

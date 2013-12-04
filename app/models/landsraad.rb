@@ -20,4 +20,14 @@ class Landsraad
     return pocet
   end
 
+  def self.rozpustit
+    User.update_all(:landsraad => false)
+    User.poslanci.each { |u|
+      u.update_attribute(:landsraad, false)
+      u.zapis_operaci('Landsraad byl rozpuštěn, už nejsem senátorem.')
+    }
+    Vote.delete_all(:typ => 'imperator')
+    Imperium.zapis_operaci('Landsraad byl rozpuštěn.')
+  end
+
 end

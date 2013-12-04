@@ -1,6 +1,7 @@
 # encoding: utf-8
 class AdminController < ApplicationController
-#  authorize_resource # CanCan
+  authorize_resource :class => false # CanCan
+  check_authorization # CanCan
 
   def prepni_povoleni_prihlasovani
     login = Aplikace.prihlaseni_povoleno?
@@ -116,6 +117,16 @@ class AdminController < ApplicationController
 
   def wipe
     Aplikace.wipe
+    redirect_to :back
+  end
+
+  def rozpust_landsraad
+    Landsraad.rozpustit
+    redirect_to :back
+  end
+
+  def odvolat_imperatora
+    Imperium.odvolej_imperatora
     redirect_to :back
   end
 

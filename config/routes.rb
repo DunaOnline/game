@@ -122,6 +122,8 @@ DuneOnline::Application.routes.draw do
 
 #  resources :admin
   match 'wipe' => 'admin#wipe', :as => :wipe
+  match 'rozpust_landsraad' => 'admin#rozpust_landsraad', :as => :rozpust_landsraad
+  match 'odvolat_imperatora' => 'admin#odvolat_imperatora', :as => :odvolat_imperatora
   match 'prepni_prihlasovani' => 'admin#prepni_povoleni_prihlasovani'
   match 'prepni_zakladani' => 'admin#prepni_povoleni_zakladani'
   match 'zamkni_hru' => 'admin#zamkni_hru', :as => :zamkni_hru

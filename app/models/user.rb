@@ -363,7 +363,6 @@ class User < ActiveRecord::Base
     resourcy
   end
 
-
   def zobraz_udalost
     msg_leno = []
     msg_pla = []
@@ -785,8 +784,6 @@ class User < ActiveRecord::Base
 	  end
 	 	lvl
   end
-
-
 
   private
 

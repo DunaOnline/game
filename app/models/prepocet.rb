@@ -256,10 +256,8 @@ class Prepocet
     for h in houses do
       pocet_poslancu = h.pocet_poslancu
       for u in h.poslanci do
-        unless u.leader?
-          u.update_attribute(:landsraad, false)
-          u.zapis_operaci("Jiz nejsem poslancem.")
-        end
+        u.update_attribute(:landsraad, false)
+        u.zapis_operaci("Jiz nejsem poslancem.")
       end
       for u in h.poradi_hlasu('poslanec', pocet_poslancu) do
         u[0].update_attribute(:landsraad, true)
@@ -277,7 +275,7 @@ class Prepocet
   def self.ukonci_hlasovani
     puts "Ukoncuji hlasovani"
     for law in Law.projednavane do
-      if law.submitted.to_date == 3.days.ago.to_date
+      if law.submitted.to_date < 2.days.ago.to_date
         law.vyhodnot_zakon
       end
     end

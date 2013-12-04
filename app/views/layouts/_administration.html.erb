@@ -10,7 +10,7 @@
 
   <h3><%= link_to "Prepocti vliv", prepocti_vliv_path %></h3>
 
-  <h3><%= link_to "Spust prepocet", kompletni_prepocet_path %></h3>
+  <h3><%= link_to "Spust prepocet", kompletni_prepocet_path, :confirm => 'Opravdu přepočet?' %></h3>
   <hr/>
   <h3>Admin hracu</h3>
   <%= form_tag :zmen_prava do %>
@@ -27,6 +27,10 @@
   <h3><%= link_to "Effect udalosti", Effect %></h3>
 
   <h3><%= link_to "Property udalosti", Property %></h3>
+
+  <h3><%= link_to "Rozpusť landsraad", rozpust_landsraad_path, :confirm => 'Opravdu rozpustit Landsraad?' %></h3>
+
+  <h3><%= link_to "Odvolej Imperátora", odvolat_imperatora_path, :confirm => 'Opravdu Odvolat Imperátora a celé vedení Impéria?' %></h3>
 
   <h3><%= link_to "Rails Admin", rails_admin_path %></h3>
   <hr/>
