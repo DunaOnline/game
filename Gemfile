@@ -69,4 +69,5 @@ end
 
 gem 'execjs'
 
+gem 'newrelic_rpm'
 #gem 'therubyracer'
