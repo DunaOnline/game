@@ -11,10 +11,34 @@
   </tr>
 </table>
 
-<h2 id="transport">Přesun surovin mezi lény</h3>
-Mezi lény je možné přesunout vyprodukovaný materiál, výrobky a populaci. Poplatek 
-za přesun je 5% přesouvané suroviny nebo komodity.
-<br>Pokud je léno dobyto a jsou na něm obsaženy komodity, hráči je zasláno na 
-domovské léno 20% těchto surovin a zbylé suroviny získává dobyvatel. 
-<br>Výzkumné body, melanž a Soláry jsou platidla, která hráč vlastní 
-globálně na všech planetách.
+<table class="tab1">
+  <tr>
+      <td class="tdpl" style="width:160px; height:140px; background-image: url(<%= asset_path 'imghra/arrakis_v.png' %>)">
+          <h2>Horizontální transport</h2>
+          
+      </td>
+      <td>
+        <p>Přesun surovin mezi lény stejného hráče
+        Mezi lény je možné přesunout vyprodukovaný materiál, výrobky a populaci. Poplatek 
+        za přesun je 5% přesouvané suroviny nebo komodity.
+        <p>Pokud je léno dobyto a jsou na něm obsaženy komodity, hráči je zasláno na 
+        domovské léno 20% těchto surovin a zbylé suroviny získává dobyvatel. 
+        <p>Výzkumné body, melanž a Soláry jsou platidla, která hráč vlastní 
+        globálně na všech planetách.
+      </td>
+  
+  </tr> <tr>
+  
+      <td class="tdpl" style="width:160px; height:140px; background-image: url(<%= asset_path 'imghra/mistodrzici.png' %>)">
+          <h2>Vertikální transport</h2>
+      </td>
+      <td>
+        <p>Přesun surovin hráče jiným hráčům pomocí skladů Malorudu nebo Velkorodu
+        <p>Pokud hráč posílá materiál a výrobky Malorodu či Velkorodu, posílá je 
+        z domovské planety. Je tedy potřeba přesunout komodity horizontalním transportem
+        na domovskou planetu a poté dále.
+        <p>Výzkumné body, melanž a Soláry jsou globálním platidlem, které hráč 
+        vlastní globálně na všech planetách. 
+      </td>
+  </tr>
+</table>

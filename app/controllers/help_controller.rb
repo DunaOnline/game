@@ -6,6 +6,10 @@ class HelpController < ApplicationController
 
   end
 
+  def hodnosti
+
+  end
+  
   def suroviny
 
   end
@@ -35,6 +39,10 @@ class HelpController < ApplicationController
   end
 
   def vyzkum
+  
+  end
+
+  def velkordy
 
   end
 
