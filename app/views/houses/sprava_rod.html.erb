@@ -1,5 +1,6 @@
 <%# encoding: utf-8 %>
 <% title "Správa velkorodu #{@house.name}" %>
+
 <table class="tab1">
   <%= form_tag :posli_rodove_suroviny do %>
       <tr>
@@ -13,10 +14,10 @@
           <li><%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok' %></li>
         </td>
 
-        <th style="width:120px">Stav skladu</th>
-        <th style="width:120px">Zaslat hráči</th>
-        <th style="width:120px">Zaslat Malorodu</th>
-        <th class="r">Zaslat Velkorodu</th>
+        <th>Stav skladu</th>
+        <th style="width:100px">Zaslat hráči</th>
+        <th style="width:100px">Zaslat Malorodu</th>
+        <th style="width:100px">Zaslat Velkorodu</th>
       </tr>
 
       <tr>
@@ -34,7 +35,7 @@
           <li><%= img_melanz %><%= text_field_tag 'user_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'user_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
           <li><%= img_vyrobky %><%= text_field_tag 'user_parts', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
-          <li><%= select_tag :user_id_suroviny, options_for_select(@house.users.order(:nick).all.collect { |p| [p.nick, p.id] }), :class => "tab", :include_blank => true %> </li>
+          <li><%= select_tag :user_id_suroviny, options_for_select(@house.users.order(:nick).all.collect { |p| [p.nick, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %> </li>
         </td>
         <td>
           <li><%= img_solary %><%= text_field_tag 'mr_solary', '0.00', :size => "3", :title => "Zadejte množství" %></li>
@@ -42,7 +43,7 @@
           <li><%= img_melanz %><%= text_field_tag 'mr_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'mr_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
           <li><%= img_vyrobky %><%= text_field_tag 'mr_parts', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
-          <li><%= select_tag :mr_id_suroviny, options_for_select(@house.subhouses.order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :include_blank => true %> </li>
+          <li><%= select_tag :mr_id_suroviny, options_for_select(@house.subhouses.order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %> </li>
 
 
         </td>
@@ -52,17 +53,150 @@
           <li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'rodu_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_vyrobky %><%= text_field_tag 'rodu_parts', '0.00', :size => "3", :title => "Zadejte množství" %></li>
-          <li><%= select_tag :rod_id_suroviny, options_for_select(House.without_house(@house.id).without_house(1).without_house(3).order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :include_blank => true %></li>
+          <li><%= select_tag :rod_id_suroviny, options_for_select(House.without_house(@house.id).without_house(1).without_house(3).order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %></li>
         </td>
       </tr>
   <% end %>
 </table>
+
+<!-- NÁRODNÍ BYROKRACIE -->
+
+<table class="tab1">
+  <tr>
+    <td class="tdpl" 
+    <% if can? :pridel_pravo, User %>
+    rowspan="2"
+    <% end %> 
+    
+    style="width:140px !important; height: 140px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
+      <li><h2>Národní byrokracie</h2></li>
+      
+      <p><b>Vůdce:</b> <%= link_to @vudce.nick, @vudce, :class => "Leader" if @vudce %></b>
+      
+      <p><b>Generálové:</b> 
+      <% for user in @generalove do %>
+          <%= link_to user.nick, user, :class => "General" %>,
+      <% end %>
+      </p>
+      
+    </td>
+    
+    <th style="width:120px !Important">Mentat</th>
+    <th style="width:120px !Important">Vojenský mentat</th>
+    <th style="width:120px !Important">Diplomat</th>
+    <th style="width:120px !Important">Senátor</th>
+
+  </tr>
+  <tr>
+
+    <td>
+      
+      
+        <% for user in @mentate do %>
+          <li>
+            <%= link_to user.nick, user, :class => "Mentat" %>
+            <% if can? :odeber_pravo, User %>
+                <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Mentat" %>
+            <% end %>
+          </li>
+      <% end %>
+      
+      <% if can? :pridel_pravo, User %>
+          
+          <br><h3>Přidělit práva:</h3>
+          <li>
+            <%= form_tag :pridel_pravo do %>
+                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important" %>
+                <%= submit_tag 'Ξ', :class => 'oktab_auto' %>
+            <% end %>
+          </li>
+      <% end %>
+    </td>
+
+    <td>
+      
+      
+        <% for user in @army_mentate do %>
+          <li>
+            <%= link_to user.nick, user, :class => "Army_mentat" %>
+            <% if can? :odeber_pravo, User %>
+                <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "ArmyMentat" %>
+            <% end %>
+          </li>
+      <% end %>
+      
+      <% if can? :pridel_pravo, User %>
+          <br><h3>Přidělit práva:</h3>
+          <li>
+            <%= form_tag :pridel_pravo do %>
+                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important" %>
+                <%= submit_tag 'Ξ', :class => 'oktab_auto' %>
+            <% end %>
+          </li>
+      <% end %>
+
+    </td>
+
+    <td>
+      
+      
+        <% for user in @diplomate do %>
+          <li>
+            <%= link_to user.nick, user, :class => "Diplomat" %>
+            <% if can? :odeber_pravo, User %>
+                <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Diplomat" %>
+            <% end %>
+          </li>
+      <% end %>
+      
+      <% if can? :pridel_pravo, User %>
+          <br><h3>Přidělit práva:</h3>
+          <li>
+            <%= form_tag :pridel_pravo do %>
+                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important"  %>
+                <%= submit_tag 'Ξ', :class => 'oktab_auto' %>
+            <% end %>
+          </li>
+      <% end %>
+    </td>
+    
+    <td>
+      <% for user in @poslanci do %>
+          <li><%= link_to user.nick, user, :class => "Poslanec" %></li>
+      <% end %>
+    </td> 
+    
+  </tr>
+</table>
+
+<!-- ZADOST O VSTUP -->
+
+<% if @ziadosti.count > 0 %>
+    <table class="tab1">
+      <tr>
+        <th>Jméno žadatele</th>
+        <th>Akce</th>
+
+      </tr>
+      
+      <% @ziadosti.each do |ziadost| %>
+          <tr>
+            <td><%= link_to ziadost.nick, user_path(ziadost) %></td>
+            <td><%= button_to("Prijmout", prijmi_hrace_url(:id => ziadost.id), :confirm => "Jste si jist Pane?") %></td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>
+
+<!-- TRHY -->
+
 <% if @productions.count != 0 %>
     <table class="tab1">
       <tr>
         <th></th>
         <th>Produkt</th>
-        <th>Mnozstvo</th>
+        <th>Množství</th>
+        
       </tr>
       <% @productions.each do |productions| %>
           <tr>
@@ -73,10 +207,11 @@
       <% end %>
     </table>
 <% end %>
+
 <% if @markets.count != 0 %>
     <table class="vyroba">
       <tr>
-                <td class="tdpl" rowspan="99" style="width:140px; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
+                <td class="tdpl" rowspan="99" style="width:150px !important; background-image: url(<%= asset_path 'imghra/market_buy.png' %>)">
                     <li><h2>Nákup na trhu</h2></li>
 
                 </td>
@@ -85,7 +220,8 @@
 
         <th>Cena za kus [Sol]</th>
         <th>Množství</th>
-        <th class="r" style="width:50px">Nákup</th>
+        <th class="r" >Nakoupit množství</th>
+        <th style="width:60px !important">Akce</th>
       </tr>
 
       <%= render :partial => "market", :collection => @markets %>
@@ -93,17 +229,19 @@
     </table>
 <% end %>
 
-<table class="tab1">
+<%= form_for(@market) do |f| %>
+<table class="vyroba">
   <tr>
-    <%= form_for(@market) do |f| %>
-    <td class="tdpl" rowspan="99" style="width:160px; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
+    
+    <td class="tdpl" rowspan="99" style="width:140px !important; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
               <li><h2>Prodej na trhu</h2></li>
-              <li><%= submit_tag 'Nabídnout', :class => "ok" %>
+                         
     </td>
 
     <th>Komodita</th>
     <th>Cena za kus [Sol]</th>
-    <th>Množství</th>
+    <th>Prodat množství</th>
+    <th style="width:60px !important">Akce</th>
   </tr>
   <tr>  
         <td>
@@ -114,127 +252,13 @@
         <td><%= f.number_field :price, :required => true, :min => 1, :size => 3, :title => "Zadejte cenu" %></td>
 
         <td><%= f.number_field :amount, :required => true, :min => 0.1, :step => "any", :size => 3, :title => "Zadejte množství", :step => "any" %></td>
+        <td><%= submit_tag 'PRODAT', :class => "ok" %></td>
         
       </tr>
-  <% end %>
+  
 </table>
-
-<table class="tab1">
-  <tr>
-    <td class="tdpl" rowspan="4" style="width:170px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
-      <li><h2>Národní byrokracie</h2>
-    </td>
-    <th class="l">Vůdce národa</th>
-    <th>Mentat</th>
-    <th class="r">Vojenský mentat</th>
-
-  </tr>
-  <tr>
-
-    <td>
-      <%= link_to @vudce.nick, @vudce if @vudce %>
-    </td>
-
-    <td>
-      <% if can? :pridel_pravo, User %>
-          <li>
-            <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-                <%= submit_tag 'Mentat', :class => 'oktab_auto' %>
-            <% end %>
-          </li>
-      <% end %>
-      <li><h3>Držitelé práv</h3>
-        <% for user in @mentate do %>
-          <li>
-            <%= link_to user.nick, user, :class => "mentat" %>
-            <% if can? :odeber_pravo, User %>
-                <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Mentat" %>
-            <% end %>
-          </li>
-      <% end %>
-    </td>
-
-    <td>
-      <% if can? :pridel_pravo, User %>
-          <li>
-            <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-                <%= submit_tag 'ArmyMentat', :class => 'oktab_auto' %>
-            <% end %>
-          </li>
-      <% end %>
-      <li><h3>Držitelé práv</h3>
-        <% for user in @army_mentate do %>
-          <li>
-            <%= link_to user.nick, user, :class => "army_mentat" %>
-            <% if can? :odeber_pravo, User %>
-                <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "ArmyMentat" %>
-            <% end %>
-          </li>
-      <% end %>
-
-    </td>
-
-
-  </tr>
-  <tr>
-    <th class="l">Diplomat</th>
-    <th>Generál</th>
-    <th class="l">Poslanec</th>
-
-
-  </tr>
-
-
-  <tr>
-    <td>
-      <% if can? :pridel_pravo, User %>
-          <li>
-            <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) %>
-                <%= submit_tag 'Diplomat', :class => 'oktab_auto' %>
-            <% end %>
-          </li>
-      <% end %>
-      <li><h3>Držitelé práv</h3>
-        <% for user in @diplomate do %>
-          <li>
-            <%= link_to user.nick, user, :class => "diplomat" %>
-            <% if can? :odeber_pravo, User %>
-                <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Diplomat" %>
-            <% end %>
-          </li>
-      <% end %>
-    </td>
-
-    <td>
-      <% for user in @generalove do %>
-          <li><%= link_to user.nick, user, :class => "general" %></li>
-      <% end %>
-    </td>
-    <td>
-      <% for user in @poslanci do %>
-          <li><%= link_to user.nick, user, :class => "poslanec" %></li>
-      <% end %>
-    </td>
-
-  </tr>
-</table>
-<% if @ziadosti.count > 0 %>
-    <table class="tab1">
-      <tr>
-        <th>Meno Ziadatela</th>
-
-      </tr>
-      <% @ziadosti.each do |ziadost| %>
-          <tr>
-            <td><%= link_to ziadost.nick, user_path(ziadost) %></td>
-            <td><%= button_to("Prijmout", prijmi_hrace_url(:id => ziadost.id), :confirm => "Jste si jist Pane?") %></td>
-          </tr>
-      <% end %>
-    </table>
 <% end %>
+
 <table class="tab1">
   <tr>
     <td rowspan="2" style="padding: 0 10px 10px 10px; width:270px; background-image: url(<%= asset_path 'imghra/kolonizace.png' %>) !important">

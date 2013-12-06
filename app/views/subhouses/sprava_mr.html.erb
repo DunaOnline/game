@@ -87,14 +87,16 @@
 <% if @markets.count != 0 %>
     <table class="vyroba">
       <tr>
-        <th colspan="4">Nakup malorodnych zasob na trhu</th>
-      </tr>
-      <tr>
-        <th>Tovar</th>
+          <td class="tdpl" rowspan="99" style="width:140px; background-image: url(<%= asset_path 'imghra/market_sell.png' %>)">
+              <li><h2>Nákup na trhu</h2></li>
+              <li><%= submit_tag 'Nakoupit', :class => "ok" %>
+
+          </td>
+        <th>Komodita</th>
 
         <th>Cena za kus [Sol]</th>
         <th>Množství</th>
-        <th class="r" style="width:50px">Nákup</th>
+        <th class="r" style="width:50px">Nakoupit</th>
       </tr>
 
       <%= render :partial => "market", :collection => @markets %>

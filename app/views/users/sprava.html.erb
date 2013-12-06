@@ -81,42 +81,45 @@
       </tr>
   <% end %>
 </table>
-<table class="tab1">
 
-  <tr>
-
-    <th>Produkty</th>
-    <th>Mnozstvo</th>
-    <th>Poslat</th>
-  </tr>
   <% @productions.each do |production| %>
       <%= form_tag send_products_path(:production => production.id) do %>
-          <tr>
-            <td>
-              <%= production.product.title %> // <%= production.amount %> ks
-            </td>
-            <td>
-              <%= number_field_tag(:amount, nil, :min => 1, :title => "Zadejte množství", :required => true) %>
-            </td>
-            <td>
-              <%= submit_tag 'Poslat', :class => "ok" %>
-            </td>
-          </tr>
+          <table class="tab1">
+          
+            <tr>
+          
+              <th>Produkty</th>
+              <th>Mnozstvo</th>
+              <th>Poslat</th>
+            </tr>
+  
+            <tr>
+              <td>
+                <%= production.product.title %> // <%= production.amount %> ks
+              </td>
+              <td>
+                <%= number_field_tag(:amount, nil, :min => 1, :title => "Zadejte množství", :required => true) %>
+              </td>
+              <td>
+                <%= submit_tag 'Poslat', :class => "ok" %>
+              </td>
+            </tr>
+          </table>
       <% end %>
   <% end %>
 
-</table>
+
 
 
 <table class="tab1">
   <tr>
-    <td class="tdpl" rowspan="2" style="width:170px; background-image: url(<%= asset_path 'imghra/landsraad.png' %>)">
+    <td class="tdpl" rowspan="2" style="width:170px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
       <li><h2>Volby</h2>
     </td>
     <!-- <th>Volba Guvernéra</th> -->
-    <th>Volba vůdce</th>
-    <th>Volba senátora</th>
-    <th>Volba generala</th>
+    <th style="width:150px">Volba vůdce</th>
+    <th style="width:150px">Volba senátora</th>
+    <th style="width:150px">Volba generala</th>
   </tr>
   <tr>
     <!-- <td>
