@@ -18,8 +18,8 @@
     </div>
     <div class="l">
       <%= form_tag({:controller => 'users', :action => 'create'}) do %>
-          <li><%= text_field_tag "user[username]", nil, :class => "i_nick", :title => "Login = Přihlašovací údaj", :placeholder => "Login" %>
-          <li><%= text_field_tag "user[nick]", nil, :class => "i_nick", :title => "Nick = Jméno vaší postavy ve hře ", :placeholder => "Herní jméno" %>
+          <li><%= text_field_tag "user[username]", nil, :class => "i_nick", :title => "Login = Přihlašovací údaj. Maximálně je povoleno 19 znaků.", :placeholder => "Login" %>
+          <li><%= text_field_tag "user[nick]", nil, :class => "i_nick", :title => "Nick = Jméno vaší postavy ve hře Maximálně je povoleno 19 znaků.", :placeholder => "Herní jméno" %>
           <li><%= select_tag("user[house_id]", options_for_select(House.registration, {:include_blank => false})) %>
           <li><%= text_field_tag "user[email]", nil, :class => "i_email", :title => "Registrační e-mail", :placeholder => "Registrační e-mail" %>
           <li><%= password_field_tag "user[password]", nil, :class => "i_key", :title => "Vstupní heslo", :placeholder => "Vaše heslo" %>
