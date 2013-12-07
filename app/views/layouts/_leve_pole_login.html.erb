@@ -1,5 +1,4 @@
 <%# encoding: utf-8 %>
-<% if Aplikace.prihlaseni_povoleno? %>
     <div class="lh">
       Přihlásit se
     </div>
@@ -10,7 +9,6 @@
           <li><%= submit_tag "Vstoupit do hry", :class => "ok2" %>
       <% end %>
     </div>
-<% end %>
 
 <% if Aplikace.zakladani_hracu_povoleno? %>
     <div class="lh">
