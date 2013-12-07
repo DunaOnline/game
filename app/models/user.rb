@@ -289,7 +289,9 @@ class User < ActiveRecord::Base
   end
 
   def vliv
-    vl = self.politicke_postaveni * (self.fields.count + (self.celkova_populace / 100000.0))
+    cp = self.celkova_populace
+    cp = 20000000.0 if cp > 20000000.0
+    vl = self.politicke_postaveni * (self.fields.count + (cp / 100000.0))
     return vl.round(4)
   end
 

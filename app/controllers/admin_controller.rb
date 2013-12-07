@@ -130,4 +130,9 @@ class AdminController < ApplicationController
     redirect_to :back
   end
 
+  def vynuluj_vliv
+    User.update_all('influence = 0.0')
+    redirect_to :back
+  end
+
 end
