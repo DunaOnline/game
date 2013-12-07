@@ -8,6 +8,7 @@ class ImperiumController < ApplicationController
     @imperator = User.imperator
     @imperium = House.imperium
     @houses = House.playable
+    @regenti = User.regenti
 
     @arrakis = Arrakis.planeta
     @leno = Field.find_by_planet_id(@arrakis)
@@ -29,6 +30,7 @@ class ImperiumController < ApplicationController
     @imperator = User.imperator
     @imperium = House.imperium
     @houses = House.playable
+    @regenti = User.regenti
 
     @arrakis = Arrakis.planeta
     @leno = Field.find_by_planet_id(@arrakis)

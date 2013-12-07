@@ -15,10 +15,10 @@
               <% end %>
               <li><%= link_to "Národní Syselaad", syselaad_path(:kind => 'N') %></li>
               <li><%= link_to "Mezinárodní Syselaad", syselaad_path(:kind => 'E') %></li>
-              <% if current_user.emperor? || current_user.admin? || current_user.vezir? || current_user.court? %>
+              <% if current_user.emperor? || current_user.regent? || current_user.admin? || current_user.vezir? || current_user.court? %>
               <li><%= link_to "Imperialní Syselaad", syselaad_path(:kind => 'I') %></li>
               <% end %>
-              <% if current_user.landsraad? || current_user.admin? %>
+              <% if current_user.landsraad? || current_user.emperor? || current_user.regent? || current_user.vezir? || current_user.admin? %>
                   <li><%= link_to "Landsraadní Syselaad", syselaad_path(:kind => 'L') %></li>
               <% end %>
               <!-- <li><a href="#"> Multifórum *</a>  -->

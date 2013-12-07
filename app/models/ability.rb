@@ -76,12 +76,14 @@ class Ability
         if user.emperor?
           can [:sprava, :posli_imperialni_suroviny], Imperium
           can [:create], Law
-          can [:create, :edit], Poll
+          #can [:create, :edit], Poll
           can [:jednani], Landsraad
           can [:read, :create], Topic, :syselaad => { :kind => ['L', 'I'] }
         end
         if user.regent?
           can [:sprava, :posli_imperialni_suroviny], Imperium
+          can [:create], Law
+          can [:jednani], Landsraad
           can [:read, :create], Topic, :syselaad => { :kind => ['L', 'I'] }
         end
         if user.leader?

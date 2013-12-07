@@ -95,7 +95,7 @@
       <li><h2>Imperiální dvůr</h2>
       <% if @imperator %>
         
-        <li><b class="Emperor">Imperátor</b> <%= link_to @imperator.nick, @imperator, :class => 'Emperor' if @imperator %></a>
+        <li><b class="Emperor">Imperátor</b> <%= link_to @imperator.nick, @imperator, :class => 'Emperor' if @imperator %>
         <%= @imperator.house.name  %> 
         <br><br>
         <li>Imperátor z planety Kaitan chrání naše Impérium. Konroluje produkci melanže a drží vzdorné Velkorody na uzdě.
@@ -105,6 +105,9 @@
       <% else %>
       
         <li><h3>Regentská vláda</h3>
+          <% for reg in @regenti do %>
+              <%= link_to reg.nick, reg %>&nbsp;
+          <% end %>
         <li>Během regentské vlády jsou možnosti Impéria značně omezeny. 
         Úkolem říšských regentů je držet produkci melanže a udržet srávný chod Impéria, 
         než bude zvolen právoplatný vůdce.

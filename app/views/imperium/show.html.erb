@@ -30,9 +30,12 @@
         <h2>Imperium a Koření</h2>
       <li>
         <% if @imperator %>
-        <b>Imperátor: </b> <%= link_to @imperator.nick, @imperator if @imperator %>
+            <b>Imperátor: </b> <%= link_to @imperator.nick, @imperator if @imperator %>
         <% else %>
-        <li><h3>Regentská vláda</h3>
+            <li><h3>Regentská vláda</h3>
+              <% for reg in @regenti do %>
+                <%= link_to reg.nick, reg %>
+              <% end %>
         <% end %>
       <li>
         <% if @spravce %>
