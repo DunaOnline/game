@@ -42,7 +42,7 @@
             </td>
 
             <td class="stred">
-              <% if current_user -%>
+              <% if current_user || params[:controller] == 'help' -%>
                   <%= yield %>
               <% else %>
                   <%= render 'layouts/stred_login' -%>
