@@ -785,6 +785,14 @@ class User < ActiveRecord::Base
 	 	lvl
   end
 
+  def pristup_do_is? # Imperialni syselaad
+    self.emperor? || self.regent? || self.admin? || self.vezir? || self.court? || self.arrakis?
+  end
+
+  def pristup_do_ls? # Landsraadni syselaad
+    self.emperor? || self.regent? || self.admin? || self.vezir? || self.leader? || self.diplomat?
+  end
+
   private
 
   def prepare_password
