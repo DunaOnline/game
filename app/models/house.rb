@@ -427,7 +427,7 @@ class House < ActiveRecord::Base
   def pocet_poslancu
     vliv_na_poslance = House.imperium.influence / Constant.pocet_senatoru
 
-    poslancu = (self.influence / vliv_na_poslance).floor
+    poslancu = (self.influence / vliv_na_poslance).floor + 1
 
     #pomer = self.pomer_vlivu
     #poslancu = Landsraad.pocet_poslancu * pomer

@@ -132,6 +132,7 @@ class AdminController < ApplicationController
 
   def vynuluj_vliv
     User.update_all('influence = 0.0')
+    House.update_all('influence = 0.0')
     redirect_to :back
   end
 

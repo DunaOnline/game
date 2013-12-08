@@ -55,6 +55,7 @@ class User < ActiveRecord::Base
   belongs_to :subhouse
   has_many :fields
   has_many :resources, :through => :fields
+  has_many :estates, :through => :fields
   has_many :votes, :foreign_key => 'elective'
 
   has_many :operations
@@ -289,9 +290,13 @@ class User < ActiveRecord::Base
   end
 
   def vliv
-    cp = self.celkova_populace
-    cp = 20000000.0 if cp > 20000000.0
-    vl = self.politicke_postaveni * (self.fields.count + (cp / 100000.0))
+    #cp = self.celkova_populace
+    #cp = 20000000.0 if cp > 20000000.0
+    vliv = 0.0
+    self.estates.each { |e|
+      vliv += (e.number * Building.vliv_za_budovu(e.building.kind))
+    }
+    vl = self.politicke_postaveni * vliv
     return vl.round(4)
   end
 

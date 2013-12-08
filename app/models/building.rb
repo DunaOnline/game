@@ -113,4 +113,23 @@ class Building < ActiveRecord::Base
 	  end
 
   end
+
+  def self.vliv_za_budovu(k)
+    case k
+      when 'L'
+        1.0
+      when 'S'
+        0.5
+      when 'M'
+        1.0
+      when 'E'
+        1.5
+      when 'O'
+        0.2
+      when 'V'
+        0.7
+      else
+        0.0
+    end
+  end
 end
