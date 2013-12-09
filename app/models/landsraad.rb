@@ -28,6 +28,7 @@ class Landsraad
     }
     Vote.delete_all(:typ => 'imperator')
     Imperium.zapis_operaci('Landsraad byl rozpuštěn.')
+    Global.prepni('pristi_volby', 2, 3.days.from_now)
   end
 
 end

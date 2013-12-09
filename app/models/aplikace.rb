@@ -198,6 +198,7 @@ class Aplikace
     arrakis_field.postav(arraken, 1)
     harvester = Building.where(:name => "Továrna na koření").first
     arrakis_field.postav(harvester, 10)
+    Global.prepni('agrese_fremenu', 4, 10)
     puts "Budovy na Arrakis postaveny"
 
     imperium = House.imperium

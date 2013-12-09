@@ -17,4 +17,5 @@ class Vote < ActiveRecord::Base
   belongs_to :house
   belongs_to :user #, :foreign_key => 'elective'
 
+  scope :imperatorske, where(:typ => 'imperator')
 end

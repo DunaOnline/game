@@ -38,6 +38,9 @@ class Imperium
       a.update_attribute(:arrakis, false)
       a.zapis_operaci('Byl jsem odvolán z pozice Správce Arrakis.')
     } if User.spravce_arrakis
+
+    Global.prepni('konec_volby_imperatora', 2, 3.days.from_now)
+    Global.prepni('volba_imperatora', 1, true)
   end
 
 end

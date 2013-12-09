@@ -305,20 +305,25 @@ class Prepocet
     imperium = House.imperium
     new_imp = imperium.poradi_hlasu('imperator', 3)
     pocet_hlasujicich = imperium.votes.where(:typ => 'imperator').count
-    if new_imp[0][1] > pocet_hlasujicich * 0.6
+    if new_imp[0] && new_imp[0][1] > pocet_hlasujicich * 0.6
       new_imp[0][0].update_attribute(:emperor, true)
       new_imp[0][0].zapis_operaci('Byl jsem zvolen Imperatorem.')
+      Imperium.zapis_operaci("Byl zvolen nový Imperátor - #{new_imp[0][0].nick}.")
     else
+      regnick = ''
       for u in new_imp do
         u[0].update_attribute(:regent, true)
         u[0].zapis_operaci("Byl jsem zvolen Regentem.")
+        regnick += u[0].nick + ' '
       end
+      Imperium.zapis_operaci("Byla zvolena Regentská vláda - #{regnick}.")
     end
 
     if new_imp
-      Global.prepni('konec_volby_imperatora', 2, 2.week.from_now)
+      #Global.prepni('konec_volby_imperatora', 2, 2.week.from_now)
       Global.prepni('volba_imperatora', 1, false)
     end
+    Vote.imperatorske.delete_all
   end
 
   def self.udalosti
