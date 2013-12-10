@@ -64,11 +64,14 @@
 <table class="tab1">
   <tr>
     <td class="tdpl" 
-    <% if can? :pridel_pravo, User %>
-    rowspan="2"
-    <% end %> 
-    
-    style="width:140px !important; height: 140px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
+      <% if can? :pridel_pravo, User %>
+        rowspan="3"
+      <% else %>
+        rowspan="2"
+      <% end %>
+       
+       style="width:140px !important; height: 140px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
+     
       <li><h2>Národní byrokracie</h2></li>
       
       <p><b>Vůdce:</b> <%= link_to @vudce.nick, @vudce, :class => "Leader" if @vudce %></b>
@@ -90,33 +93,22 @@
   <tr>
 
     <td>
-      
-      
-        <% for user in @mentate do %>
+      <% for user in @mentate do %>
+          
           <li>
             <%= link_to user.nick, user, :class => "Mentat" %>
             <% if can? :odeber_pravo, User %>
                 <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Mentat" %>
             <% end %>
           </li>
+ 
       <% end %>
       
-      <% if can? :pridel_pravo, User %>
-          
-          <br><h3>Přidělit práva:</h3>
-          <li>
-            <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important" %>
-                <%= submit_tag 'Ξ', :class => 'oktab_auto' %>
-            <% end %>
-          </li>
-      <% end %>
     </td>
 
     <td>
       
-      
-        <% for user in @army_mentate do %>
+      <% for user in @army_mentate do %>
           <li>
             <%= link_to user.nick, user, :class => "Army_mentat" %>
             <% if can? :odeber_pravo, User %>
@@ -125,22 +117,11 @@
           </li>
       <% end %>
       
-      <% if can? :pridel_pravo, User %>
-          <br><h3>Přidělit práva:</h3>
-          <li>
-            <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important" %>
-                <%= submit_tag 'Ξ', :class => 'oktab_auto' %>
-            <% end %>
-          </li>
-      <% end %>
-
     </td>
 
     <td>
-      
-      
-        <% for user in @diplomate do %>
+         
+      <% for user in @diplomate do %>
           <li>
             <%= link_to user.nick, user, :class => "Diplomat" %>
             <% if can? :odeber_pravo, User %>
@@ -149,24 +130,54 @@
           </li>
       <% end %>
       
-      <% if can? :pridel_pravo, User %>
-          <br><h3>Přidělit práva:</h3>
-          <li>
-            <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important"  %>
-                <%= submit_tag 'Ξ', :class => 'oktab_auto' %>
-            <% end %>
-          </li>
-      <% end %>
     </td>
     
-    <td>
+    <td 
+      <% if can? :pridel_pravo, User %>
+        rowspan="2"
+      <% else %>
+        rowspan="1"
+      <% end %> 
+    >
       <% for user in @poslanci do %>
           <li><%= link_to user.nick, user, :class => "Poslanec" %></li>
       <% end %>
     </td> 
     
-  </tr>
+  </tr> 
+
+<% if can? :pridel_pravo, User %>
+  
+  <tr>
+    <td>
+
+            <%= form_tag :pridel_pravo do %>
+                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important" %>
+                <%= submit_tag 'Ξ', :name => 'Mentat', :class => 'oktab_auto' %>
+            <% end %>
+
+     </td>
+     <td>
+
+            <%= form_tag :pridel_pravo do %>
+                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important" %>
+                <%= submit_tag 'Ξ', :name => 'ArmyMentat', :class => 'oktab_auto' %>
+            <% end %>
+           
+     </td>
+     <td>
+
+            <%= form_tag :pridel_pravo do %>
+                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important"  %>
+                <%= submit_tag 'Ξ', :name => 'Diplomat', :class => 'oktab_auto' %>
+            <% end %>
+                
+     </td> 
+      
+  </tr> 
+  
+<% end %>   
+      
 </table>
 
 <!-- ZADOST O VSTUP -->
