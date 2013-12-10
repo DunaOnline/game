@@ -1,7 +1,9 @@
 <%# encoding: utf-8 %>
 <% title @title %>
 
-<table class="tab0">
+<% if can? :sprava, Imperium %>
+
+
 
   <tr>
     <td>
@@ -11,6 +13,8 @@
     </td>
   </tr>
 
+<table class="tab0">
+  
 </table>
 
 <table class="tab1">
@@ -166,3 +170,11 @@
 </table>
 
 <%= render :partial => 'imperium_operace' %>
+
+<% else %>
+
+<b>Pokud jsi do těchto míst cestoval pomocí Vesmírné Gildy, potom ti s politováním
+musím oznámit, že jsi asi zabloudil! Doporučuji ti návrat na 
+původní pozici a vyžádat si od Gildy reklamační formulář. </b> 
+
+<% end %>
