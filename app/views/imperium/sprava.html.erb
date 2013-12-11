@@ -3,18 +3,14 @@
 
 <% if can? :sprava, Imperium %>
 
-
-
+<table class="tab0">
   <tr>
     <td>
       <a href="#" title="Home">⌂</a> »
       <%= link_to 'Přehled Imperia', imperium_path %> »
       <a href="#">Správa Impéria</a>
     </td>
-  </tr>
-
-<table class="tab0">
-  
+  </tr>  
 </table>
 
 <table class="tab1">
@@ -173,8 +169,11 @@
 
 <% else %>
 
-<b>Pokud jsi do těchto míst cestoval pomocí Vesmírné Gildy, potom ti s politováním
+<h3>Navigátor pravděpodobně trpí vesmirnou nemocí!</h3>
+<p>Pokud jsi do těchto míst cestoval pomocí Vesmírné Gildy, potom ti s politováním
 musím oznámit, že jsi asi zabloudil! Doporučuji ti návrat na 
-původní pozici a vyžádat si od Gildy reklamační formulář. </b> 
+původní pozici a vyžádat si od Gildy reklamační formulář. 
+</p>
+<p>Pokud jsi cestoval sám na vlastní pěst, zbytečně ryskuješ svůj život.</p> 
 
 <% end %>
