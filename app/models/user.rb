@@ -434,6 +434,7 @@ class User < ActiveRecord::Base
 			self.odhlasuj("leader")
 			self.opustit_mr
 			self.reset_hodnosti_naroda
+			self.zrus_hlasy
 			return true
 		else
 			false
@@ -442,6 +443,14 @@ class User < ActiveRecord::Base
 
   def reset_hodnosti_naroda
 	  self.update_attributes(:mentat => false, :army_mentat => false, :leader => false, :landsraad => false, :vezir => false, :court => false)
+  end
+
+  def zrus_hlasy
+	  votes = Vote.where(:house_id => self.house.id, :elective => self.id)
+	  votes.each do |v|
+		  v.delete
+	  end
+
   end
 
   def opustit_mr

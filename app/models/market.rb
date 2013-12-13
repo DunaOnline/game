@@ -223,11 +223,11 @@ class Market < ActiveRecord::Base
 
   def stahnout_wrap(user)
 	  user.goods_to_buyer(self.area, (self.amount * Constant.stiahnut_zbozi_trh).ceil) if self.area == "E" && self.user_id > 0
-	  user.goods_to_buyer(self.area, self.amount * Constant.stiahnut_zbozi_trh) if self.area != "E" && self.user_id > 0
+	  user.goods_to_buyer(self.area, self.amount * Constant.stiahnut_zbozi_trh).round(2) if self.area != "E" && self.user_id > 0
 	  user.subhouse.goods_to_buyer(self.area, (self.amount * Constant.stiahnut_zbozi_trh).ceil) if self.area == "E" && self.subhouse_id > 0
-	  user.subhouse.goods_to_buyer(self.area, self.amount * Constant.stiahnut_zbozi_trh) if self.area != "E" && self.subhouse_id > 0
+	  user.subhouse.goods_to_buyer(self.area, self.amount * Constant.stiahnut_zbozi_trh).round(2) if self.area != "E" && self.subhouse_id > 0
 	  user.house.goods_to_buyer(self.area, (self.amount * Constant.stiahnut_zbozi_trh).ceil) if self.area == "E" && self.house_id > 0
-	  user.house.goods_to_buyer(self.area, self.amount * Constant.stiahnut_zbozi_trh) if self.area != "E" && self.house_id > 0
+	  user.house.goods_to_buyer(self.area, self.amount * Constant.stiahnut_zbozi_trh).round(2) if self.area != "E" && self.house_id > 0
   end
 
   private

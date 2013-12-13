@@ -12,7 +12,7 @@ class PlanetsController < ApplicationController
       return redirect_to zobraz_arrakis_path
     else
       @fields = @planet.fields
-      tech_bonus = 1 - current_user.tech_bonus("J") == 1 ? 0 : current_user.tech_bonus("J")
+      tech_bonus = 2 - current_user.tech_bonus("J") #== 1 ? 0 : current_user.tech_bonus("J")
 
       f_count = current_user.fields.count
       global_bonus = Constant.cena_noveho_lena * f_count
