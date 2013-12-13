@@ -45,7 +45,7 @@
   <% end %>
  
   
-  <% if current_user.leader? %>
+  <% if current_user.leader? || current_user.mentat? %>
     <table class="myOffers">
       <tr>
         <th class="tdpl" rowspan="99" style="width:100px; background-image: url(<%= asset_path 'imghra/narodnisklad.png' %>)">
