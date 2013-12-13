@@ -152,24 +152,24 @@
     <td>
 
             <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important" %>
-                <%= submit_tag 'Ξ', :name => 'Mentat', :class => 'oktab_auto' %>
+                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important"  %>
+                <li><%= submit_tag 'Mentat', :class => 'ok6' %>
             <% end %>
 
      </td>
      <td>
 
             <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important" %>
-                <%= submit_tag 'Ξ', :name => 'ArmyMentat', :class => 'oktab_auto' %>
+                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important"  %>
+                <li><%= submit_tag 'ArmyMentat', :class => 'ok6' %>
             <% end %>
            
      </td>
      <td>
 
             <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important"  %>
-                <%= submit_tag 'Ξ', :name => 'Diplomat', :class => 'oktab_auto' %>
+                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important"   %>
+                <li><%= submit_tag 'Diplomat', :class => 'ok6' %>
             <% end %>
                 
      </td> 

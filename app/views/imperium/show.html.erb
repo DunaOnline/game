@@ -17,57 +17,32 @@
         <%= link_to ' Jednání Landsraadu »', landsraad_jednani_path %>
       </td>
     <% end %>
-              
-              
+    </td>          
+                
   </tr>
 
+
+
 </table>
+
+
+
 <% title @title %>
-<table class="tab1">
-  <tr>
-    <td class="tdpl" rowspan="2" style="padding: 10px; width:300px; background-image: url(<%= asset_path 'imghra/arrakis.png' %>) !important">
-      <li>
-        <h2>Imperium a Koření</h2>
-      <li>
-        <% if @imperator %>
-            <b>Imperátor: </b> <%= link_to @imperator.nick, @imperator if @imperator %>
-        <% else %>
-            <li><h3>Regentská vláda</h3>
-              <% for reg in @regenti do %>
-                <%= link_to reg.nick, reg %>
-              <% end %>
-        <% end %>
-      <li>
-        <% if @spravce %>
-        <b>Místodržící Arrakisu: </b> <%= link_to @spravce.nick, @spravce if @spravce %>
-        <% else %>
-        <li><h3>Produkce Arrakisu není kontrolována!</h3>
-        <% end %>
-      <li>
-        <b>Známých planet: </b> <%= Planet.count %>
-      <li>
-        <b>Občanů Impéria: </b> <%= User.count %>
-      <li>
-        <b>Celkový vliv Impéria: </b> <%= @imperium.influence %>
-        <br>
-        <br>
-        <br>
-        <br>
-      <h3> Arrakis </h3>
-      <li> Je pustou pouštní planetou na okraji známého vesmíru. Je ale jediným místem
-      kde lze nalézt vzácné koření, melanž. 
-      <li> Místodržící je zvolen vůdci Impéria jako správce produkce této vzácné a důležité komodity, které je dále přerozdělováno mezi Velkorody a Vesmírnou Gildu.
-    </td>
-    <th>Přepočet</th>
-    <th class="r">Podíl [%]</th>
-  </tr>
-  <tr>
-    <%= render :partial => 'melange_flow' %>
 
-    <%= render :partial => 'rody_podil' %>
+<table class="tab1">
+  <tr>  
+    <%= render :partial => 'dvur' %>
+    <%= render :partial => 'melange_flow' %>          
   </tr>
 </table>
-<table class="tab1">
-  <%= render :partial => 'dvur' %>
-</table>
-<%= render :partial => 'imperium_operace' %>
+
+
+    
+
+    
+
+
+
+
+
+
