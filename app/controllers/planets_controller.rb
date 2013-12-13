@@ -61,7 +61,7 @@ class PlanetsController < ApplicationController
 
   def osidlit_pole
     @planet = Planet.find(params[:id])
-    tech_bonus = current_user.tech_bonus("J")
+    tech_bonus = 2 - current_user.tech_bonus("J")
 
     f_count = current_user.fields.count
     global_bonus = Constant.cena_noveho_lena * f_count

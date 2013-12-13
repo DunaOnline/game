@@ -152,7 +152,7 @@ class House < ActiveRecord::Base
 	        self.zapis_operaci(msg)
 		      house.zapis_operaci(msg)
 	        else
-		        if h_exp > 0 || h_material > 0 || h_parts > 0
+		        if h_exp > 0 || h_parts > 0
 			        msg += "Imperiu muzete poslat jenom solary a melanz."
 			        flag = false
 			      else
@@ -264,10 +264,10 @@ class House < ActiveRecord::Base
     else
       flag = false
       msg += "Chybi vam "
-      msg += "#{sol - self.solar} solaru" unless bsol
-      msg += "#{mat - self.material} materialu" unless bmat
-      msg += "#{mel - self.melange} materialu" unless bmel
-      msg += "#{exp - self.exp} exp" unless bexp
+      msg += "#{sol - self.solar} solaru," unless bsol
+      msg += "#{mat - self.material} kg materialu," unless bmat
+      msg += "#{mel - self.melange} mg melange," unless bmel
+      msg += "#{exp - self.exp} exp," unless bexp
       msg += "#{par - self.parts} dilu" unless bpar
     end
     return msg, flag
@@ -283,7 +283,7 @@ class House < ActiveRecord::Base
   end
 
   def self.imperium
-    @imperium ||= House.find_by_name('Impérium')
+	  House.find_by_name('Impérium')
   end
 
   def self.renegat
