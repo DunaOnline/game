@@ -88,21 +88,23 @@
 <% end %>
 
 
-<% if current_user.emperor? %>
 
+<% if current_user.emperor? || current_user.admin? %> 
   <table class="tab1">
+ 
     <tr>
       <td class="tdpl" rowspan="3" style="width: 270px !important; background-image: url(<%= asset_path 'imghra/dvur_v.png' %>) !important; Background-position: top !important;" >
         <li><h2>Imperiální dvůr</h2>
         Zde vyberete vaše zástupce, nebo členy dvora. Členům dvora poté můžete zasílat obnosy z Imperiálního skladu. Je tedy vhodné mezi ně přidat i správce pololéna.
-  
-  
       </td>
       <th style="width:120px">Členové dvora</th>
       <th style="width:120px">Vezíři</th>
       <th style="width:120px">Místodržící</th>
-    </tr><tr>
+    </tr>
+<% if current_user.emperor? || current_user.admin? %>     
+    <tr>
       <td>
+
         <% for user in @courtship do %>
           <li>
             <%= link_to user.nick, user, :class => 'Dvur' %>
@@ -111,6 +113,7 @@
             <% end %>
           </li>
         <% end %>
+
       </td>
       <td>
       <% for user in @veziri do %>
@@ -121,29 +124,37 @@
             <% end %>
           </li>
         <% end %>
+
       </td>
       <td>
       </td>
-    </tr><tr>
+    </tr>
+<% end %>    
+<% if current_user.emperor? || current_user.admin? %>     
+    <tr>
       <td>
+
         <%= form_tag :pridel_pravo do %>
               <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important"  %>
                 <li><%= submit_tag 'Dvořan', :class => 'ok6'  %>
         <% end %>  
       </td>
       <td>
+
         <%= form_tag :pridel_pravo do %>
                 <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important" %>
                 <li><%= submit_tag 'Vezír', :class => 'ok6' %>
         <% end %>
+
       </td>
       <td>
       </td>
-    </tr>  
-    
+    </tr>
+ 
+   
   </table>
-
-<% end %>
+    <% end %>     <% end %> 
+ 
   
 <%= render :partial => 'imperium_operace' %>
 
