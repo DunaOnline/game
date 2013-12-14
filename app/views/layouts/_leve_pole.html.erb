@@ -18,10 +18,13 @@
 <% field, planet = current_user.zobraz_udalost %>
 <% field.each do |f| %>
     <div class="la field_event" style="background-image: url(/assets/imghra/udalost.png) !important">
-      Objevila se událost na vašem léně
+      
+      <!--- CHTĚLO BY TO ZNĚNÍ:
+      
+      Objevila se událost "xxx" na vašem léně "xxx". --->
+      
       <%= f[0] %>
-      jménem
-      .
+      
       <%= link_to "Více..", udalosti_path(:id => f[1], :typ => "L") %>
     </div>
 <% end %>
