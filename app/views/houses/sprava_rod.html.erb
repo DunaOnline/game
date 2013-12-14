@@ -59,6 +59,11 @@
   <% end %>
 </table>
 
+
+<!-- NÁRODNÍ NASTENKA -->
+
+<%= render 'nastenka' %>
+
 <!-- NÁRODNÍ BYROKRACIE -->
 
 <table class="tab1">
@@ -71,14 +76,14 @@
       <% end %>
        
        style="width:140px !important; height: 140px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
-     
-      <li><h2>Národní byrokracie</h2></li>
+           
+      <h2>Národní byrokracie</h2>
       
       <p><b>Vůdce:</b> <%= link_to @vudce.nick, @vudce, :class => "Leader" if @vudce %></b>
       
-      <p><b>Generálové:</b> 
+      <p><b>Generálové Malorodů:</b> 
       <% for user in @generalove do %>
-          <%= link_to user.nick, user, :class => "General" %>,
+          <li><%= link_to user.nick, user, :class => "General" %></li>
       <% end %>
       </p>
       
