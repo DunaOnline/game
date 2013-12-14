@@ -367,7 +367,7 @@ class User < ActiveRecord::Base
     self.fields.each do |field|
       field.influence.each do |influence|
         if influence && influence.effect.typ != "M"
-          msg_leno << ["//**Udalost na lenu #{field.name} : #{influence.effect.name}**//", influence]
+          msg_leno << ["Probíhá událost *#{influence.effect.name}* na vašem léně *#{field.name}*. ", influence]
         end
       end
     end

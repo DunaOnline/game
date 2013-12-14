@@ -19,13 +19,9 @@
 <% field.each do |f| %>
     <div class="la field_event" style="background-image: url(/assets/imghra/udalost.png) !important">
       
-      <!--- CHTĚLO BY TO ZNĚNÍ:
-      
-      Objevila se událost "xxx" na vašem léně "xxx". --->
-      
       <%= f[0] %>
       
-      <%= link_to "Více..", udalosti_path(:id => f[1], :typ => "L") %>
+      Více informací najdete <%= link_to "zde.", udalosti_path(:id => f[1], :typ => "L") %>
     </div>
 <% end %>
 <% planet.each do |p| %>
