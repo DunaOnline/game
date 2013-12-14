@@ -20,74 +20,70 @@
 
 <% if can? :sprava, Imperium %>
 
-<!-- SPRAVA IMPERIALNIHO SKLADU -->
-
-<%= form_tag :posli_imperialni_suroviny do %>
-
-<table class="tab1">
-  <tr>
-     <td class="tdpl" rowspan="2" style="padding: 10px; width:170px; background-image: url(<%= asset_path 'imghra/dvur_v.png' %>) !important; background-position: top !important">
-      <li>
-        <h2>Imperiální sklad</h2>
-      <li>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <%= submit_tag 'Potvrdit', :name => 'potvrdit', :class => 'ok' %>
-     </td>
-      <th>Stav skladů</th>
-      <th style="width:100px">Zaslat Velkorodům</th>
-      <th style="width:100px">Zaslat hráči</th>
-      <th style="width:100px">CHOAM [%]</th>
-  </tr><tr>
-  
-    <td>
-    <li><%= img_solary "Solary" %> <%= format_mena(@imperium.solar, 'S') %><li>
-    <li><%= img_material "Materiála" %> <%= format_mena(@imperium.material, 'kg') %></li>
-    <li><%= img_melanz "Koření" %> <%= format_mena(@imperium.melange, 'mg') %><li>
-    
-    </td>
-  
-    <td>
-      <li><%= img_solary %><%= text_field_tag 'rodu_solary', '0.00', :size => "3", :title => "Zadejte množství" %></li>
-      <li><%= img_material %><%= text_field_tag 'rodu_material', '0.00', :size => "3", :title => "Zadejte množství" %></li>
-      <li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+      <!-- SPRAVA IMPERIALNIHO SKLADU -->
       
-      <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %></li>
-    </td>
-    
-    <td
-    <li><%= img_solary %><%= text_field_tag 'user_solary', '0.00', :size => "3", :title => "Zadejte množství" %></li>
-          <li><%= img_material %><%= text_field_tag 'user_material', '0.00', :size => "3", :title => "Zadejte množství" %></li>
-          <li><%= img_melanz %><%= text_field_tag 'user_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
-          
-<!-- Prosím o dokončení posílání členům dvora !!!
-
-          <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %></li>
-          
---->
-
-    </td>
-    
-    <td>
-       <% for house in @houses do %>
-            
-              <span title="<%= house.name %>"><%= obrazek_budovy(house.name, 'erb') %></span>
-              <%= best_in_place house, :melange_percent, :type => :input %>
-            
-        <% end %>
+      <%= form_tag :posli_imperialni_suroviny do %>
+      
+      <table class="tab1">
+        <tr>
+           <td class="tdpl" rowspan="2" style="padding: 10px; width:170px; background-image: url(<%= asset_path 'imghra/dvur_v.png' %>) !important; background-position: top !important">
+            <li>
+              <h2>Imperiální sklad</h2>
+            <li>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <%= submit_tag 'Potvrdit', :name => 'potvrdit', :class => 'ok' %>
+           </td>
+            <th>Stav skladů</th>
+            <th style="width:100px">Zaslat Velkorodům</th>
+            <th style="width:100px">Zaslat hráči</th>
+            <th style="width:100px">CHOAM [%]</th>
+        </tr><tr>
         
-    </td>
-
-
+          <td>
+          <li><%= img_solary "Solary" %> <%= format_mena(@imperium.solar, 'S') %><li>
+          <li><%= img_material "Materiála" %> <%= format_mena(@imperium.material, 'kg') %></li>
+          <li><%= img_melanz "Koření" %> <%= format_mena(@imperium.melange, 'mg') %><li>
           
+          </td>
+        
+          <td>
+            <li><%= img_solary %><%= text_field_tag 'rodu_solary', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+            <li><%= img_material %><%= text_field_tag 'rodu_material', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+            <li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+            
+            <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %></li>
+          </td>
+          
+          <td
+          <li><%= img_solary %><%= text_field_tag 'user_solary', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+                <li><%= img_material %><%= text_field_tag 'user_material', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+                <li><%= img_melanz %><%= text_field_tag 'user_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
+                
+      <!-- Prosím o dokončení posílání členům dvora !!!
+      
+                <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %></li>
+                
+      --->
+      
+          </td>
+          
+          <td>
+             <% for house in @houses do %>
+                  
+                    <span title="<%= house.name %>"><%= obrazek_budovy(house.name, 'erb') %></span>
+                    <%= best_in_place house, :melange_percent, :type => :input %>
+                  
+              <% end %>
+              
+          </td>
+                    
 </table>
 
 <% end %>
-
-
 
 <% if current_user.emperor? || current_user.admin? %> 
   <table class="tab1">
