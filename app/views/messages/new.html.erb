@@ -7,7 +7,17 @@
 
     </td>
     
-
+    <td class="tdd">
+      <ul class="menud">
+        <li><a title="Filtrováním přenastavíte zobrazená data.">Zrušit a přejít na »</a>
+          <ul>
+              <li><%= link_to "Doručená pošta [" + current_user.neprocteno_sprav.to_s + "]", messages_path %>
+              <li><%= link_to "Odeslaná pošta", odeslana_posta_path %>
+              <li><%= link_to "Začít novou zprávu", new_message_path %>
+          </ul>
+        </li>
+      </ul>
+    </td>
 
 
   </tr>

@@ -1,14 +1,32 @@
 <% title "Nový příspěvek" %>
 
-<table class="tab0">
-  <tr>
-    <td class="drob">
-      <a href="#" title="Home">⌂</a>
-      » <a href="#">Syselaad</a>
-      » <a href="#">Zaslání odpovědi</a>
-    </td>
-  </tr>
-</table>
+    <table class="tab0">
+      <tr>
+        <td>
+          <a href="#" title="Home">⌂</a> » <a href="#" title="Syselaad - komunikační fóra">Syselaad</a> »  <a href="#">Nový příspěvek</a>
+          
+        </td>
+        <% if logged_in? %>
+                
+        <td class="tdd">
+          <ul class="menud">
+            <li><a title="Volbou vstoupíte do jiného Syselaadu.">Přejít na Syselaad »</a>
+              <ul>
+                <li class="filterPosta"><%= link_to "Národní", syselaad_path(:kind => 'N') %></li>
+                <li class="filterPosta"><%= link_to "Mezinárodní", syselaad_path(:kind => 'E') %></li>
+              <% if current_user.landsraad? || current_user.admin? %>
+                <li class="filterPosta"><%= link_to "Landsraadní", syselaad_path(:kind => 'L') %></li>
+              <% end %>
+                <li class="filterPosta"><%= link_to "Systémový", syselaad_path(:kind => 'S') %>
+                
+              </ul>
+            </li>
+          </ul>
+        </td>
+        <% end %>
+      </tr>
+      
+    </table>
 
 <%= render 'form' %>
 

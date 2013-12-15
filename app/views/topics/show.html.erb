@@ -8,18 +8,30 @@
       » <%= link_to @topic.name, '#' %></a>
     </td>
     <% if admin? %>
-      <td class="tdd">
-        <%= link_to "Smazat vlákno", @topic, :confirm => 'Opravdu chcete smazat toto vlákno?', :method => :delete %>
+      <td class="ne" style="width:50px !important">
+        <%= link_to " SMAZAT ", @topic, :confirm => 'Opravdu chcete smazat  celé toto vlákno?', :method => :delete %>
       </td>
     <% end %>
     <% if logged_in? %>
-      <td class="tdd" style="width:55px !important">
+      <td class="ano" style="width:70px !important">
         <%= link_to " ODPOVĚDĚT ", "#{new_post_path}?topic=#{@topic.id}" %>
       </td>
     <% end %>
-    <!-- <td class="tdd">
-      <%= link_to " Zpět ", syselaad_path(@topic.syselaad_id) %>
-    </td> -->
+      <td class="tdd">
+                <ul class="menud">
+                  <li><a title="Volbou vstoupíte do jiného Syselaadu.">Přejít na Syselaad »</a>
+                    <ul>
+                      <li class="filterPosta"><%= link_to "Národní", syselaad_path(:kind => 'N') %></li>
+                      <li class="filterPosta"><%= link_to "Mezinárodní", syselaad_path(:kind => 'E') %></li>
+                    <% if current_user.landsraad? || current_user.admin? %>
+                      <li class="filterPosta"><%= link_to "Landsraadní", syselaad_path(:kind => 'L') %></li>
+                    <% end %>
+                      <li class="filterPosta"><%= link_to "Systémový", syselaad_path(:kind => 'S') %>
+                      
+              </ul>
+            </li>
+          </ul>
+        </td>
 
 
   </tr>
