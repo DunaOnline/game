@@ -6,12 +6,12 @@
   <td>11111*</td>
   <td><%= user.influence %></td>
   <td><%= user.fields.count %></td>
-  <td>
+  <td class="left_align">
     <%= link_to img_posta, new_message_path(:nick => user.nick), :title => "Napsat hráči"%>
 
     <%= link_to img_utok,  nil, :title => "Zautočit na hráče" %>
 
-    <%= link_to img_trash("Vyhostit hráče"), vyhosteni_hrace_path(:user_id => user.id), :confirm => "Jste si jist ?", :title => "Vyhostit hráče" if user.house.id != House.renegat.id && current_user.general && current_user.house == user.house  %>
+    <%= link_to img_trash("Vyhostit hráče"), vyhosteni_hrace_path(:user_id => user.id), :confirm => "Jste si jist ?", :title => "Vyhostit hráče" if user.house.id != House.renegat.id && current_user.house == user.house  %>
 
   </td>
 </tr>

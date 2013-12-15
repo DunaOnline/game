@@ -135,8 +135,8 @@ class User < ActiveRecord::Base
   end
 
   def zrus_hlasy(typ)
-		Vote.where(:house_id => self.house.id, :elector => u.id, :typ => typ).delete_all
-		Vote.where(:house_id => self.house.id, :elector => self.id, :typ => typ).delete_all
+		Vote.where(:elective => self.id, :typ => typ).delete_all
+		Vote.where(:elector => self.id, :typ => typ).delete_all
   end
 
   def koho_jsem_volil(typ)

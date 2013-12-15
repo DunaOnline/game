@@ -128,7 +128,7 @@ class HousesController < ApplicationController
 
   def vyhosteni_hrace
 	  user = User.find(params[:user_id])
-	  if current_user.house.pocet_vyhosteni != Constant.vyhostenie_hraca_n_max_per_day
+	  if current_user.house.pocet_vyhosteni != Constant.vyhostenie_hraca_n_max_per_day && !user.leader?
 		  if user.vyhostit_hrace(user.nick)
 			  redirect_to :back, :notice => "Hrac byl vyhosten."
 		  else
