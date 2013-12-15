@@ -473,6 +473,11 @@ class House < ActiveRecord::Base
     return na_prodej
   end
 
+
+  def edit_dashboard(content)
+	  self.update_attribute(:house_dashboard,content)
+  end
+
   scope :without_house, lambda { |house| house ? {:conditions => ["id != ?", house]} : {} }
   scope :playable, where(:playable => true)
 end

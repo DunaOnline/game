@@ -89,7 +89,7 @@ DuneOnline::Application.routes.draw do
   match 'prijmi_hrace' => 'houses#prijmi_hrace', :as => :prijmi_hrace
   match 'send_products_house' => 'houses#send_products_house', :as => :send_products_house
   match 'vyhosteni_hrace' => 'houses#vyhosteni_hrace', :as => :vyhosteni_hrace
-
+  match 'vyves_nastenku' => 'houses#vyves_nastenku', :as => :vyves_nastenku
   resources :discoverables
   
 #  match 'user/edit' => 'users#edit', :as => :edit_current_user

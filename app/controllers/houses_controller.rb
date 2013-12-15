@@ -139,6 +139,15 @@ class HousesController < ApplicationController
 		end
   end
 
+  def vyves_nastenku
+	   content = params[:dashboard]
+
+	  if current_user.house.edit_dashboard(content)
+		  redirect_to :back, :notice => "Nastenka upravena"
+	  end
+
+  end
+
   def send_products_house
     amount = params[:amount]
     production = Production.find(params[:production])

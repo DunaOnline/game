@@ -10,18 +10,18 @@
         
         
         
-        
+        <%= form_tag :vyves_nastenku %>
         </td>
         <th>
 
-          <*%= f.submit "ZVEREJNIT NÁSTENKU", :title => "ODESLAT", :class => "ok4" %*>
+          <%= submit_tag "ZVEREJNIT NÁSTENKU", :title => "ODESLAT", :class => "ok4" %>
 
         </th>
 
       </tr>
       <tr>
         <td>
-          <*%= f.text_area :content,:class => "text_area" %*>
+          <%= text_area_tag 'dashboard', 'dashboard', class: 'text_area' %>
         </td>
       </tr>
 </table>
