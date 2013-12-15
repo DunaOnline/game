@@ -399,7 +399,7 @@ class User < ActiveRecord::Base
     Influence.new(
         :field_id => field.id,
         :effect_id => Effect.find_by_typ("M").id,
-        :duration => 100,
+        :duration => Constant.dni_v_renegatoch,
         :started_at => Date.today
     ).save
 	  self.odhlasuj("leader")
@@ -421,7 +421,7 @@ class User < ActiveRecord::Base
 			Influence.new(
 					:field_id => field.id,
 					:effect_id => Effect.find_by_typ("M").id,
-					:duration => 100,
+					:duration => Constant.dni_v_renegatoch,
 					:started_at => Date.today
 			).save
 
