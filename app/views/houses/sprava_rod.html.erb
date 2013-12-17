@@ -61,7 +61,7 @@
 
 
 <!-- NÁRODNÍ NASTENKA -->
-<% if current_user.leader || current_user.mentat %>
+<% if current_user.admin || current_user.leader || current_user.mentat %>
 <%= render 'nastenka' %>
 <% end %>
 

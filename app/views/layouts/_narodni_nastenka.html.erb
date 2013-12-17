@@ -3,6 +3,6 @@
   Národní nástěnka
 </div>
 <div class="l">
-  <%= current_user.house.house_dashboard %>
+  <%= current_user.house.house_dashboard.html_safe if current_user.house.house_dashboard %>
 
 </div>
