@@ -13,7 +13,7 @@ class PlanetsController < ApplicationController
     else
       @fields = @planet.fields
       tech_bonus = 2 - current_user.tech_bonus("J") #== 1 ? 0 : current_user.tech_bonus("J")
-      nar_tech_bonus = 2 - current_user.house.tech_bonus("J")
+      nar_tech_bonus = 2 - current_user.house.vyskumane_narodni_tech("J")
       f_count = current_user.fields.count
       global_bonus = Constant.cena_noveho_lena * f_count
       @cena_noveho_lena_melanz = (@planet.cena_noveho_lena_mel * nar_tech_bonus * tech_bonus * global_bonus).round(2)
