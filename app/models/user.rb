@@ -403,6 +403,7 @@ class User < ActiveRecord::Base
         :started_at => Date.today
     ).save
 	  self.odhlasuj("leader")
+    self.update_attribute(:ziadost_subhouse,nil) if self.ziadost_subhouse
     self.opustit_mr
 	  self.reset_hodnosti_naroda
 	  self.zrus_hlasy("leader")
@@ -425,6 +426,7 @@ class User < ActiveRecord::Base
 					:started_at => Date.today
 			).save
 
+			self.update_attribute(:ziadost_subhouse,nil) if self.ziadost_subhouse
 			self.opustit_mr
 			self.reset_hodnosti_naroda
 			self.zrus_hlasy("leader")
