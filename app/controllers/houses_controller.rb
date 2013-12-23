@@ -143,6 +143,7 @@ class HousesController < ApplicationController
 	   content = params[:dashboard]
 
 	  if current_user.house.edit_dashboard(content)
+		  current_user.house.zapis_operaci("Nastenka byla upravena hracem #{current_user.nick}")
 		  redirect_to :back, :notice => "Nastenka upravena"
 	  end
 

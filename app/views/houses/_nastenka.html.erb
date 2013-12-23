@@ -1,5 +1,5 @@
 <table class="tab3">
-
+  <%= form_tag :vyves_nastenku do %>
       <tr>
         <td rowspan="2" class="tdpl" rowspan="2" style="background-image: url(<%= asset_path 'imghra/narodnisklad.png' %>)">
         
@@ -10,7 +10,7 @@
         
         
         
-        <%= form_tag :vyves_nastenku %>
+
         </td>
         <th style="width: 536px !important">
 
@@ -24,4 +24,5 @@
           <%= text_area_tag 'dashboard', current_user.house.house_dashboard, class: 'text_area' %>
         </td>
       </tr>
+      <% end %>
 </table>
