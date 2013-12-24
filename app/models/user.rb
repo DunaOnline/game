@@ -810,6 +810,7 @@ class User < ActiveRecord::Base
   scope :without_user, lambda { |user| user ? {:conditions => ["id != ?", user.id]} : {} }
   scope :ziadost, lambda { |house| where("ziadost_house = ?", house) }
   scope :malorod, lambda { |mr| where("ziadost_subhouse = ?", mr) }
+  scope :clenove_dvora, where("vezir = ? OR court = ?",true,true)
   scope :dvorane, where(:court => true)
   scope :veziri, where(:vezir => true)
   scope :poslanci, where(:landsraad => true)

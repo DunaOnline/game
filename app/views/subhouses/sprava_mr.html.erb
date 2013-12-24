@@ -65,6 +65,12 @@
   <% end %>
 </table>
 
+
+<!-- MALORODNÍ NASTENKA -->
+<% if current_user.admin || current_user.general || current_user.vicegeneral %>
+    <%= render 'nastenka' %>
+<% end %>
+
 <% if @productions.count != 0 %>
     <table class="tab1">
       <tr>

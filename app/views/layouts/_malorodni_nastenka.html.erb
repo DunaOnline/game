@@ -1,0 +1,8 @@
+<%# encoding: utf-8 %>
+<div class="lh">
+  Malorodní nástěnka
+</div>
+<div class="l">
+  <%= current_user.subhouse.dashboard.html_safe if current_user.subhouse && current_user.subhouse.dashboard %>
+
+</div>

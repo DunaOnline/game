@@ -149,6 +149,16 @@ class HousesController < ApplicationController
 
   end
 
+  def vyves_imp_nastenku
+	  content = params[:dashboard]
+
+	  if House.imperium.edit_dashboard(content)
+		  House.imperium.zapis_operaci("Nastenka byla upravena hracem #{current_user.nick}")
+		  redirect_to :back, :notice => "Nastenka upravena"
+	  end
+
+  end
+
   def send_products_house
     amount = params[:amount]
     production = Production.find(params[:production])

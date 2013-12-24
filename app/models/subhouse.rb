@@ -92,6 +92,8 @@ class Subhouse < ActiveRecord::Base
     end
   end
 
+
+
   def sell_goods_subhouse(market)
     flag = false
     msg = ""
@@ -321,6 +323,10 @@ class Subhouse < ActiveRecord::Base
 
   def secti_hlasy(typ, pocet)
 	  self.house.votes.where(:typ => typ).group(:elective).limit(pocet).order('count_id desc, created_at').count('id')
+  end
+
+  def edit_dashboard(content)
+	  self.update_attribute(:dashboard,content)
   end
 
   scope :without_subhouse, lambda { |subhouse| subhouse ? {:conditions => ["id != ?", subhouse.id]} : {} }
