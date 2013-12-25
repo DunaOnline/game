@@ -343,7 +343,7 @@ class User < ActiveRecord::Base
 
   def resourcy_s_tovarny
     tovarna = Building.where(:kind => "V").first
-    self.fields.includes(:estates).where("estates.building_id = ? AND estates.number > ?", tovarna.id, 0)
+    self.fields.includes(:estates).where("estates.building_id = ?", tovarna.id,)
   end
 
   def factories_options
