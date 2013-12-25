@@ -38,8 +38,8 @@ class Ability
 	      #cannot :access, :rails_admin   # grant access to rails_admin
 	      #cannot :dashboard              # grant access to the dashboard
 
-	      cannot [:sprava_rod, :posli_rodove_suroviny, :vyhosteni_hrace], House
-	      cannot [:sprava_mr, :posli_mr_sur], Subhouse
+	      cannot [:sprava_rod, :posli_rodove_suroviny, :vyhosteni_hrace, :vyves_imp_nastenku, :vyves_nastenku], House
+	      cannot [:sprava_mr, :posli_mr_sur, :vyves_mr_nastenku], Subhouse
 	      cannot [:posli_imperialni_suroviny], Imperium
         cannot [:update, :delete], Global
         cannot [:delete, :update], Message
@@ -76,18 +76,20 @@ class Ability
         if user.emperor?
           can [:sprava, :posli_imperialni_suroviny], Imperium
           can [:create], Law
+          can [:vyves_imp_nastenku], House
           #can [:create, :edit], Poll
           can [:jednani], Landsraad
           can [:read, :create], Topic, :syselaad => { :kind => ['L', 'I'] }
         end
         if user.regent?
           can [:sprava, :posli_imperialni_suroviny], Imperium
+          can [:vyves_imp_nastenku], House
           can [:create], Law
           can [:jednani], Landsraad
           can [:read, :create], Topic, :syselaad => { :kind => ['L', 'I'] }
         end
         if user.leader?
-	        can [:vyhosteni_hrace], House, :house_id => user.house.id
+	        can [:vyhosteni_hrace, :vyves_nastenku], House, :house_id => user.house.id
           can [:kolonizuj, :sprava_rod], House do |house|
             user.try(:house) == house
           end
@@ -104,17 +106,17 @@ class Ability
           can [:sprava_rod], House, :id => user.house_id
         end
         if user.mentat?
-          can [:kolonizuj, :sprava_rod, :posli_rodove_suroviny], House, :id => user.house_id
+          can [:kolonizuj, :sprava_rod, :posli_rodove_suroviny, :vyves_nastenku], House, :id => user.house_id
         end
         if user.diplomat?
         end
         if user.general?
           can [:vyhod_mr, :prijmi_hrace_mr, :posli_mr_sur, :menuj_vice], Subhouse, :id => user.subhouse_id
-          can [:read, :update, :sprava_mr], Subhouse, :id => user.subhouse_id
+          can [:read, :update, :sprava_mr, :vyves_mr_nastenku], Subhouse, :id => user.subhouse_id
         end
         if user.vicegeneral?
           can [:prijmi_hrace_mr, :posli_mr_sur], Subhouse, :subhouse_id => user.subhouse_id
-          can [:read, :update, :sprava_mr], Subhouse, :id => user.subhouse_id
+          can [:read, :update, :sprava_mr, :vyves_mr_nastenku], Subhouse, :id => user.subhouse_id
         end
         if user.arrakis?
           can [:postavit_arrakis], Field
