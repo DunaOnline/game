@@ -11,7 +11,11 @@
           <li><b>Planet: </b><%= @house.pocet_planet %></li>
           <li><b>Občanů: </b><%= @house.users.count %></li>
           <br/><br/>
+          <% if current_user.leader? || current_user.mentat? %>
           <li><%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok' %></li>
+          <% else %>
+
+          <% end %>
         </td>
 
         <th>Stav skladu</th>
