@@ -402,7 +402,7 @@ class User < ActiveRecord::Base
         :duration => 100,
         :started_at => Date.today
     ).save
-	  self.odhlasuj("leader")
+
     self.update_attribute(:ziadost_subhouse,nil) if self.ziadost_subhouse
     self.opustit_mr
 	  self.reset_hodnosti_naroda
