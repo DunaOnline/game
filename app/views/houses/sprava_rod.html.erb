@@ -80,7 +80,7 @@
            
       <h2>Národní byrokracie</h2>
       
-      <p><b>Vůdce:</b> <%= link_to @vudce.nick, @vudce, :class => "Leader" if @vudce %></b>
+      <p><b>Vůdce:</b> <%= link_to @vudce.nick, @vudce, :class => "Leader" if @vudce %></p>
       
       <p><b>Generálové Malorodů:</b> 
       <% for user in @generalove do %>
@@ -90,10 +90,10 @@
       
     </td>
     
-    <th style="width:120px !Important">Mentat</th>
-    <th style="width:120px !Important">Vojenský mentat</th>
-    <th style="width:120px !Important">Diplomat</th>
-    <th style="width:120px !Important">Senátor</th>
+    <th style="width: 120px !important">Mentat</th>
+    <th style="width: 120px !important">Vojenský mentat</th>
+    <th style="width: 120px !important">Diplomat</th>
+    <th style="width: 120px !important">Senátor</th>
 
   </tr>
   <tr>

@@ -58,16 +58,16 @@
             <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %></li>
           </td>
           
-          <td
+          <td>
           <li><%= img_solary %><%= text_field_tag 'user_solary', '0.00', :size => "3", :title => "Zadejte množství" %></li>
                 <li><%= img_material %><%= text_field_tag 'user_material', '0.00', :size => "3", :title => "Zadejte množství" %></li>
                 <li><%= img_melanz %><%= text_field_tag 'user_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
                 
-      <!-- Prosím o dokončení posílání členům dvora !!!
+
       
-                <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %></li>
+                <li><%= select_tag :user_id_suroviny, options_for_select(@clenove_dvora.order(:nick).all.collect { |p| [p.nick, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %></li>
                 
-      --->
+
       
           </td>
           
@@ -84,6 +84,11 @@
 </table>
 
 <% end %>
+
+    <!-- IMPERIALNÍ NASTENKA -->
+    <% if current_user.admin || current_user.emperor || current_user.regent %>
+        <%= render 'nastenka' %>
+    <% end %>
 
 <% if current_user.emperor? || current_user.admin? %> 
   <table class="tab1">
