@@ -32,13 +32,13 @@ class TopicsController < ApplicationController
           #:topic_id => @topic.id, 
           :user_id => current_user.id
       )
-        flash[:notice] = "Successfully created topic."
-        redirect_to @topic.syselaad
+        flash[:notice] = "Uspesne jste vytvoril vlakno."
+        redirect_to syselaad_path(@topic.syselaad.kind)
       else
-        redirect :action => 'new'
+	      redirect_to :back, :alert => "Milosti zabudli jste napsat obsah vlakna."
       end
     else
-      render :action => 'new'
+	    redirect_to :back, :alert => "Chybi jmeno vlakna."
     end
   end
 
@@ -49,7 +49,7 @@ class TopicsController < ApplicationController
   def update
     @topic = Topic.find(params[:id])
     if @topic.update_attributes(params[:topic])
-      redirect_to @topic.syselaad, :notice => "Successfully updated topic."
+      redirect_to syselaad_path(@topic.syselaad.kind), :notice => "Vlakno uspesne zmazano."
     else
       render :action => 'edit'
     end

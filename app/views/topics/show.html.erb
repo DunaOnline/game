@@ -4,7 +4,7 @@
   <tr>
     <td class="drob">
       <a href="#" title="Home">⌂</a>
-      » <%= link_to @topic.syselaad.name, syselaad_path(@topic.syselaad_id) %>
+      » <%= link_to @topic.syselaad.name, syselaad_path(@topic.syselaad.kind) %>
       » <%= link_to @topic.name, '#' %></a>
     </td>
     <% if admin? %>
@@ -55,7 +55,7 @@
         </td>
 
   
-        <td class="forum" style="word-break:break-word">
+        <td class="forum" style="word-break: break-word;">
           <%= simple_format(post.content) %>
         </td>
   </tr>

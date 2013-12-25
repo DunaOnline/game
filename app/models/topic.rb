@@ -15,6 +15,8 @@
 class Topic < ActiveRecord::Base
   attr_accessible :syselaad_id, :user_id, :name, :last_poster_id, :last_post_at
 
+  validates_presence_of :name
+
   belongs_to :syselaad
   belongs_to :user
   belongs_to :last_poster, class_name: 'User'
