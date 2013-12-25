@@ -5,7 +5,8 @@
     <table class="tab0">
       <tr>
         <td>
-          <a href="#" title="Home">⌂</a> » <a href="#" title="Syselaad - komunikační fóra">Syselaad</a>
+          <a href="#" title="Home">⌂</a>
+          » <%= link_to @syselaad.syselaad_name, '#', :title => @syselaad.syselaad_name %>
         </td>
         <% if logged_in? %>
         <td class="tdd">

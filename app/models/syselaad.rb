@@ -1,3 +1,4 @@
+# encoding: utf-8
 # == Schema Information
 #
 # Table name: syselaads
@@ -32,6 +33,25 @@ class Syselaad < ActiveRecord::Base
   def most_recent_post
     topic = Topic.first(:order => 'last_post_at DESC', :conditions => ['syselaad_id = ?', self.id])
     return topic
+  end
+
+  def syselaad_name
+	  case self.kind
+		  when 'L'
+			  "Landsraadsky Syselaad"
+		  when 'N'
+			  "Národní Syselaad"
+		  when 'I'
+			  "Imperialní Syselaad"
+		  when 'S'
+			  "Systemovy Syselaad"
+		  when 'E'
+			  "Medzinárodní Syselaad"
+		  when 'M'
+			  "Malorodní Syselaad"
+		  else
+			  "Syselaad"
+	  end
   end
 
   scope :malorodni, where(:kind => "M")

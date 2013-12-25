@@ -14,6 +14,7 @@ class TopicsController < ApplicationController
   end
 
   def new
+	  @syselaad = Syselaad.find(params[:syselaad]) if params[:syselaad]
     @topic = Topic.new
     @post = Post.new
   end
@@ -35,6 +36,7 @@ class TopicsController < ApplicationController
         flash[:notice] = "Uspesne jste vytvoril vlakno."
         redirect_to syselaad_path(@topic.syselaad.kind)
       else
+	      @topic.delete
 	      redirect_to :back, :alert => "Milosti zabudli jste napsat obsah vlakna."
       end
     else
@@ -49,7 +51,7 @@ class TopicsController < ApplicationController
   def update
     @topic = Topic.find(params[:id])
     if @topic.update_attributes(params[:topic])
-      redirect_to syselaad_path(@topic.syselaad.kind), :notice => "Vlakno uspesne zmazano."
+      redirect_to syselaad_path(@topic.syselaad.kind), :notice => "Vlakno uspesne upraveno."
     else
       render :action => 'edit'
     end
@@ -58,6 +60,6 @@ class TopicsController < ApplicationController
   def destroy
     @topic = Topic.find(params[:id])
     @topic.destroy
-    redirect_to "/syselaads/#{@topic.syselaad_id}", :notice => "Successfully destroyed topic."
+    redirect_to syselaad_path(@topic.syselaad.kind), :notice => "Vlakno uspesne zmazano."
   end
 end

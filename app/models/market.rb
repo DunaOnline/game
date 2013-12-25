@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Market < ActiveRecord::Base
   after_initialize :default_values
 
