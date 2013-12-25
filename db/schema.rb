@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 45) do
+ActiveRecord::Schema.define(:version => 46) do
 
   create_table "app_logy", :force => true do |t|
     t.datetime "cas",                      :null => false
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(:version => 45) do
     t.integer  "planet_id",                             :null => false
     t.integer  "property_id",                           :null => false
     t.integer  "duration",                              :null => false
-    t.date     "started_at",  :default => '2013-12-13'
+    t.date     "started_at",  :default => '2013-12-24'
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
@@ -118,8 +118,8 @@ ActiveRecord::Schema.define(:version => 45) do
   create_table "eods", :force => true do |t|
     t.integer  "user_id",                                                                              :null => false
     t.integer  "field_id"
-    t.date     "date",                                              :default => '2013-12-13',          :null => false
-    t.time     "time",                                              :default => '2000-01-01 17:31:53', :null => false
+    t.date     "date",                                              :default => '2013-12-24',          :null => false
+    t.time     "time",                                              :default => '2000-01-01 21:32:14', :null => false
     t.integer  "order",                                                                                :null => false
     t.float    "solar_income",                                      :default => 0.0
     t.integer  "exp_income",                                        :default => 0
@@ -196,6 +196,7 @@ ActiveRecord::Schema.define(:version => 45) do
     t.datetime "updated_at",                                                       :null => false
     t.decimal  "influence"
     t.integer  "pocet_vyhosteni",                                :default => 0
+    t.text     "house_dashboard"
   end
 
   add_index "houses", ["name"], :name => "index_houses_on_name"
@@ -204,7 +205,7 @@ ActiveRecord::Schema.define(:version => 45) do
     t.integer  "effect_id",                            :null => false
     t.integer  "field_id",                             :null => false
     t.integer  "duration",                             :null => false
-    t.date     "started_at", :default => '2013-12-13'
+    t.date     "started_at", :default => '2013-12-24'
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
   end
@@ -267,8 +268,8 @@ ActiveRecord::Schema.define(:version => 45) do
     t.integer  "subhouse_id"
     t.string   "kind"
     t.string   "content"
-    t.date     "date",        :default => '2013-12-13'
-    t.time     "time",        :default => '2000-01-01 17:31:53'
+    t.date     "date",        :default => '2013-12-24'
+    t.time     "time",        :default => '2000-01-01 21:32:14'
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
   end
@@ -295,7 +296,7 @@ ActiveRecord::Schema.define(:version => 45) do
     t.string   "system_name"
     t.integer  "position"
     t.boolean  "available_to_all", :default => false
-    t.date     "discovered_at",    :default => '2013-12-13'
+    t.date     "discovered_at",    :default => '2013-12-24'
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
   end
