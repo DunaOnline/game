@@ -3,12 +3,12 @@ class HousesController < ApplicationController
   #authorize_resource # CanCan
 
   def index
-    @houses = House.playable.order(:name)
+    @houses = House.without_house(1).without_house(2).order(:name)
     @rody = @houses
   end
 
   def show
-    if params[:id] == 1 or params[:id] == 2 or params[:id] == 3 # nezobrazime Titany, Imperium a Renegaty
+    if params[:id] == 1 or params[:id] == 2 #or params[:id] == 3  nezobrazime Titany, Imperium a Renegaty
       if current_user.admin?
         @house = House.find(params[:id]) # pouze adminum
       else
