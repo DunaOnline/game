@@ -41,7 +41,7 @@
   <% for post in @posts %>
     <tr>
         <td class="tdpl" style="word-break:break-all; padding: 0px !important; width:130px !important; background-image: url(<%= cesta_rod(post.user.house.name, "dom") %>) !important; background-repeat: repeat;">
-        <div class="poster" ><b><a class=""><%= link_to post.user.nick, user_url(post.user) %></a></b>
+        <div class="poster" ><b><a class=""><%= link_to post.user.nick, user_url(post.user), :class => post.user.barvicky, :title => post.user.barvicky %></a></b>
         <br><%= format_date_time post.created_at %>
         <% if logged_in? %> 
             <% if admin_or_owner?(post.user.id) %>

@@ -773,7 +773,6 @@ class User < ActiveRecord::Base
 			  "Court"
 		  elsif self.general?
 			  "General"
-
 	  end
   end
 
