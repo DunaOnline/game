@@ -327,13 +327,15 @@ class Prepocet
   end
 
   def self.udalosti
+	  if Constant.start_veku + Constant.pocet_dni_bez_udalosti_od_zac_veku.days < Constant.start_veku
+	  puts 'udalosti'
+		  Planet.nahodna_udalost
+		  puts 'Enviroments done'
 
-    puts 'udalosti'
-    Planet.nahodna_udalost
-    puts 'Enviroments done'
+		  Field.udalosti_lena
+		  puts 'Effects done'
+	  end
 
-    Field.udalosti_lena
-    puts 'Effects done'
   end
 
 
