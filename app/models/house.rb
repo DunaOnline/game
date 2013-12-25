@@ -153,12 +153,12 @@ class House < ActiveRecord::Base
 		      house.zapis_operaci(msg)
 	        else
 		        if h_exp > 0 || h_parts > 0
-			        msg += "Imperiu muzete poslat jenom solary a melanz."
+			        msg += "Imperiu muzete poslat jenom solary, melanz a material."
 			        flag = false
 			      else
-		        house.update_attributes(:solar => house.solar + h_solar, :melange => house.melange + h_melange)
-		        self.update_attributes(:solar => self.solar - h_solar, :melange => self.melange - h_melange)
-		        msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_melange} mg od naroda #{self.name}. Poslal #{posiela.nick}. "
+		        house.update_attributes(:solar => house.solar + h_solar, :melange => house.melange + h_melange, :material => house.material + h_material)
+		        self.update_attributes(:solar => self.solar - h_solar, :melange => self.melange - h_melange, :material => self.material - h_material)
+		        msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_melange} mg a #{h_material} kg od naroda #{self.name}. Poslal #{posiela.nick}. "
 		        self.zapis_operaci(msg)
 		        house.zapis_operaci(msg)
 			      end

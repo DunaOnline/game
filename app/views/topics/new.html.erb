@@ -3,7 +3,7 @@
   <tr>
     <td class="drob">
       <a href="#" title="Home">⌂</a>
-      » <%= link_to 'Syselaad', syselaad_path(@syselaad.kind) %>
+      » <%= link_to @syselaad.syselaad_name, syselaad_path(@syselaad.kind) if @syselaad %>
       » <a href="#">Založit nové vlákno diskuse</a>
     </td>
   </tr>
