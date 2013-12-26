@@ -19,6 +19,8 @@ DuneOnline::Application.routes.draw do
 
   resources :products
 
+  resources :surveys
+
 
 	resources :markets
 	match 'buy' => 'markets#buy', :as => :buy
