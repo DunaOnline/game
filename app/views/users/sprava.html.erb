@@ -148,7 +148,11 @@
           <p>Váš hlas: <%= @user.koho_jsem_volil('poslanec') %></p>
           <p>Volby budou uzavřeny: <br/><%= format_date @datum_volby %></p>
 
-          <h3>Aktuální pořadí</h3>
+          <h3 class="descr" title="<%for user in @user.house.poradi_hlasu('poslanec',@user.house.users.count) %>
+              <%= user[0].nick %> - <%= user[1] %>
+           <% end %> "
+          >
+            Aktuální pořadí</h3>
           <% for user in @user.house.poradi_hlasu('poslanec') %>
               <li><%= user[0].nick %> - <%= user[1] %></li>
           <% end %>
