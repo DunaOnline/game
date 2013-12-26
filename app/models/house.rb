@@ -50,28 +50,28 @@ class House < ActiveRecord::Base
     vitez.each_key { |key| return User.find(key) }
   end
 
-  def vudce
-    self.users.where(:leader => true).first
+  def vudce(b = true)
+    self.users.where(:leader => b).first
   end
 
-  def mentate
-    self.users.where(:mentat => true).order(:nick).all
+  def mentate(b = true)
+    self.users.where(:mentat => b).order(:nick).all
   end
 
-  def army_mentate
-    self.users.where(:army_mentat => true).order(:nick).all
+  def army_mentate(b = true)
+    self.users.where(:army_mentat => b).order(:nick).all
   end
 
-  def diplomate
-    self.users.where(:diplomat => true).order(:nick).all
+  def diplomate(b = true)
+    self.users.where(:diplomat => b).order(:nick).all
   end
 
-  def generalove
-    self.users.where(:general => true).order(:nick).all
+  def generalove(b = true)
+    self.users.where(:general => b).order(:nick).all
   end
 
-  def poslanci
-    self.users.where(:landsraad => true).order(:nick).all
+  def poslanci(b = true)
+    self.users.where(:landsraad => b).order(:nick).all
   end
 
   def vyskumane_narodni_tech(bonus_type)

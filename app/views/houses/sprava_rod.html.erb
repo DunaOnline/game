@@ -162,7 +162,7 @@
     <td>
 
             <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important"  %>
+                <%= select_tag :user_id, options_for_select(@house.mentate(false).collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important"  %>
                 <li><%= submit_tag 'Mentat', :class => 'ok6' %>
             <% end %>
 
@@ -170,7 +170,7 @@
      <td>
 
             <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important"  %>
+                <%= select_tag :user_id, options_for_select(@house.army_mentate(false).collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important"  %>
                 <li><%= submit_tag 'ArmyMentat', :class => 'ok6' %>
             <% end %>
            
@@ -178,7 +178,7 @@
      <td>
 
             <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important"   %>
+                <%= select_tag :user_id, options_for_select(@house.diplomate(false).collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important"   %>
                 <li><%= submit_tag 'Diplomat', :class => 'ok6' %>
             <% end %>
                 
@@ -299,8 +299,8 @@
 
 <table class="tab1">
   <tr>
-    <th colspan="2">Prehled poslednich akci malorodu</th>
-    <th><%= link_to 'Všechny akce', operations_path(:jake => 'malorod') %></th>
+    <th colspan="2">Prehled poslednich akci Velkorodu</th>
+    <th><%= link_to 'Všechny akce', operations_path(:jake => 'narod') %></th>
   </tr>
   <tr>
     <th>Obsah akce</th>

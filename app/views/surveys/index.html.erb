@@ -1,0 +1,37 @@
+<h1>Listing products</h1>
+
+<table>
+  <tr>
+    <th>House</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Material</th>
+    <th>Melanz</th>
+    <th>Parts</th>
+    <th>Solar</th>
+    <th>Druh</th>
+    <th>Image</th>
+    <th></th>
+
+  </tr>
+
+  <% @products.each do |product| %>
+      <tr>
+        <td><%= product.house_id %></td>
+        <td><%= product.title %></td>
+        <td><%= product.description %></td>
+        <td><%= product.material %></td>
+        <td><%= product.melanz %></td>
+        <td><%= product.parts %></td>
+        <td><%= product.price %></td>
+        <td><%= product.druh %></td>
+        <td><%= product.img %></td>
+        <td><%= link_to 'Edit', edit_product_path(product) %></td>
+
+      </tr>
+  <% end %>
+</table>
+
+<br/>
+
+<%= link_to 'New Product', new_product_path %>
