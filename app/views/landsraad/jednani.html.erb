@@ -95,6 +95,8 @@
         <td style="width:25%"><h3><%= law.label + ' - ' + law.title %></h3>
           <li>
             <%= law.content %>
+          </li>
+
           <li>
             <% if current_user.landsraad? %>
                 <% temp = law.zahlasovane(current_user) %>
@@ -110,7 +112,14 @@
                     <% end %>
                 <% end %>
             <% end %>
-
+            </li>
+            <li>
+              Aktualny stav hlasov :</br>
+              <%= law.pomer_hlasu %>
+            </li>
+            <li>
+              Zakon zarazen : <%= law.submitted %>
+            </li>
             </td>
     <% end %>
   </tr>
