@@ -160,7 +160,7 @@ class House < ActiveRecord::Base
 		        self.update_attributes(:solar => self.solar - h_solar, :melange => self.melange - h_melange, :material => self.material - h_material)
 		        msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_melange} mg a #{h_material} kg od naroda #{self.name}. Poslal #{posiela.nick}. "
 		        self.zapis_operaci(msg)
-		        house.zapis_operaci(msg)
+		        house.zapis_operaci(msg,"I")
 			      end
 	        end
 	      else

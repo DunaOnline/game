@@ -85,9 +85,9 @@ class HousesController < ApplicationController
       elsif cena_sol > house.solar
         flash[:error] = "Nedostatek Solaru."
         redirect_to kolonizuj_path
-      elsif cena_sol > house.solar
-	      flash[:error] = "Nedostatek Solaru."
-	      redirect_to kolonizuj_path
+      #elsif cena_sol > house.solar
+	     # flash[:error] = "Nedostatek Solaru."
+	     # redirect_to kolonizuj_path
       elsif !house.volne_planety
 	      flash[:error] = "Vsechny planety kolonizovany"
 	      redirect_to kolonizuj_path
