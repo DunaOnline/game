@@ -20,7 +20,7 @@ class Planet < ActiveRecord::Base
 
   belongs_to :house
   belongs_to :planet_type
-  belongs_to :system, :primary_key => :system_name, :foreign_key => :system_name
+  belongs_to :system, :primary_key => :system_name
   has_many :fields
   has_many :environment
   has_many :property, :through => :environment
