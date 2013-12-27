@@ -20,16 +20,7 @@
   <table class="profil">
     <tr>
       <th style="text-align: left !important;">
-
-        <% if @user == current_user %>
-
-            <h2><%= best_in_place @user, :nick %></h2>
-
-        <% else %>
-
-            <h2><%= @user.nick %></h2>
-
-        <% end %>
+        <h2><%= @user.nick %></h2>
       </th>
       <th>
         <%= link_to "Poslat poštu", new_message_path(:nick => @user.nick) %>
