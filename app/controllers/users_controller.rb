@@ -7,9 +7,9 @@ class UsersController < ApplicationController
 
   def index
 	  if params[:sort] == nil
-		  @users = User.where(:house_id => House.playable).order(:nick).page(params[:page])
+		  @users = User.where(:house_id => House.without_house(1).without_house(2)).order(:nick).page(params[:page])
 	  else
-		  @users = User.where(:house_id => House.playable).order(params[:sort] + ' ' + params[:direction]).page(params[:page])
+		  @users = User.where(:house_id => House.without_house(1).without_house(2)).order(params[:sort] + ' ' + params[:direction]).page(params[:page])
 	  end
 
   end

@@ -258,4 +258,12 @@ class Constant
 	  Global.vrat('pocet_vyhosteni_narod', 4)
   end
 
+  def self.start_veku
+	  Global.vrat('start_veku', 2)
+  end
+
+  def self.pocet_dni_bez_udalosti_od_zac_veku
+	  Global.vrat('pocet_dni_bez_udalosti_od_zac_veku', 4)
+  end
+
 end

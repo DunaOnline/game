@@ -1,6 +1,6 @@
 language: ruby
 before_script:
-  - cp config/database.example.yml config/database.yml
+  - cp config/database.yml config/database.yml
   - bundle exec rake db:setup
   - bundle exec rake db:test:prepare
 rvm:

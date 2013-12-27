@@ -1,0 +1,28 @@
+<h1>Listing survey</h1>
+
+<table>
+  <tr>
+    <th>Content</th>
+    <th>House</th>
+    <th>Subhouse</th>
+    <th>User</th>
+
+
+  </tr>
+
+  <% @surveys.each do |survey| %>
+      <tr>
+        <td><%= survey.content %></td>
+        <td><%= survey.house_id %></td>
+        <td><%= survey.subhouse_id %></td>
+        <td><%= survey.user_id %></td>
+
+        <td><%= link_to 'Edit', edit_survey_path(survey) %></td>
+
+      </tr>
+  <% end %>
+</table>
+
+<br/>
+
+<%= link_to 'New Survey', new_survey_path %>

@@ -9,7 +9,7 @@
 
     <td class="tdd">
       <ul class="menud">
-        <li><a title="Filtrováním přenastavíte zobrazená data.">Filtrovat druh »</a>
+        <li><a title="Filtrováním přenastavíte zobrazená data.">Druh doruč. pošty »</a>
           <ul>
             <li class="filterPosta"><a href="#">Soukromá zpráva</a>
 
@@ -22,6 +22,19 @@
         </li>
       </ul>
     </td>
+    
+    <td class="tdd">
+      <ul class="menud">
+        <li><a title="Filtrováním přenastavíte zobrazená data.">Přejít na »</a>
+          <ul>
+              <li><%= link_to "Doručená pošta [" + current_user.neprocteno_sprav.to_s + "]", messages_path %>
+              <li><%= link_to "Odeslaná pošta", odeslana_posta_path %>
+              <li><%= link_to "Poslat poštu", new_message_path %>
+          </ul>
+        </li>
+      </ul>
+    </td>
+    
   </tr>
   <tr>
     <td colspan="2" class="center"><span class="druhPosty"></span></td>

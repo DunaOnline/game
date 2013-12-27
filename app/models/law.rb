@@ -27,7 +27,7 @@ class Law < ActiveRecord::Base
 
   validates_presence_of :content, :title
 
-  STATE = %w(Zarazen Projednavan Schvalen Zamitnut Podepsan)
+  STATE = %w(Zarazen Projednavan Schvalen Zamitnut Podepsan Odmitnut)
 
   def self.create_label
     label = 'IZ' + Aplikace::VEK + '-'

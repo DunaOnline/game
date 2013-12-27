@@ -39,8 +39,13 @@ class SyselaadsController < ApplicationController
       else
         @syselaad = Syselaad.narodni.where(:house_id => rod).first
     end
+    if params[:sort] == nil
+	    @topics = @syselaad.topics.order("created_at DESC").page(params[:page])
+    else
+	    @topics = @syselaad.topics.order(params[:sort] + ' ' + params[:direction]).page(params[:page])
+    end
 
-    @topics = @syselaad.topics.order("created_at DESC").page(params[:page])
+
   end
 
   def new

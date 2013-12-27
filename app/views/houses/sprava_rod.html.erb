@@ -11,7 +11,11 @@
           <li><b>Planet: </b><%= @house.pocet_planet %></li>
           <li><b>Občanů: </b><%= @house.users.count %></li>
           <br/><br/>
+          <% if current_user.admin? || current_user.leader? || current_user.mentat? %>
           <li><%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok' %></li>
+          <% else %>
+
+          <% end %>
         </td>
 
         <th>Stav skladu</th>
@@ -59,64 +63,62 @@
   <% end %>
 </table>
 
+
+<!-- NÁRODNÍ NASTENKA -->
+<% if current_user.admin || current_user.leader || current_user.mentat %>
+<%= render 'nastenka' %>
+<% end %>
+
 <!-- NÁRODNÍ BYROKRACIE -->
 
 <table class="tab1">
   <tr>
     <td class="tdpl" 
-    <% if can? :pridel_pravo, User %>
-    rowspan="2"
-    <% end %> 
-    
-    style="width:140px !important; height: 140px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
-      <li><h2>Národní byrokracie</h2></li>
+      <% if can? :pridel_pravo, User %>
+        rowspan="3"
+      <% else %>
+        rowspan="2"
+      <% end %>
+       
+       style="width:140px !important; height: 140px; background-image: url(<%= asset_path 'imghra/landsraad_v.png' %>)">
+           
+      <h2>Národní byrokracie</h2>
       
-      <p><b>Vůdce:</b> <%= link_to @vudce.nick, @vudce, :class => "Leader" if @vudce %></b>
+      <p><b>Vůdce:</b> <%= link_to @vudce.nick, @vudce, :class => "Leader" if @vudce %></p>
       
-      <p><b>Generálové:</b> 
+      <p><b>Generálové Malorodů:</b> 
       <% for user in @generalove do %>
-          <%= link_to user.nick, user, :class => "General" %>,
+          <li><%= link_to user.nick, user, :class => "General" %></li>
       <% end %>
       </p>
       
     </td>
     
-    <th style="width:120px !Important">Mentat</th>
-    <th style="width:120px !Important">Vojenský mentat</th>
-    <th style="width:120px !Important">Diplomat</th>
-    <th style="width:120px !Important">Senátor</th>
+    <th style="width: 120px !important">Mentat</th>
+    <th style="width: 120px !important">Vojenský mentat</th>
+    <th style="width: 120px !important">Diplomat</th>
+    <th style="width: 120px !important">Senátor</th>
 
   </tr>
   <tr>
 
     <td>
-      
-      
-        <% for user in @mentate do %>
+      <% for user in @mentate do %>
+          
           <li>
             <%= link_to user.nick, user, :class => "Mentat" %>
             <% if can? :odeber_pravo, User %>
                 <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Mentat" %>
             <% end %>
           </li>
+ 
       <% end %>
       
-      <% if can? :pridel_pravo, User %>
-          
-          <br><h3>Přidělit práva:</h3>
-          <li>
-            <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important" %>
-                <%= submit_tag 'Ξ', :class => 'oktab_auto' %>
-            <% end %>
-          </li>
-      <% end %>
     </td>
 
     <td>
       
-      
-        <% for user in @army_mentate do %>
+      <% for user in @army_mentate do %>
           <li>
             <%= link_to user.nick, user, :class => "Army_mentat" %>
             <% if can? :odeber_pravo, User %>
@@ -125,22 +127,11 @@
           </li>
       <% end %>
       
-      <% if can? :pridel_pravo, User %>
-          <br><h3>Přidělit práva:</h3>
-          <li>
-            <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important" %>
-                <%= submit_tag 'Ξ', :class => 'oktab_auto' %>
-            <% end %>
-          </li>
-      <% end %>
-
     </td>
 
     <td>
-      
-      
-        <% for user in @diplomate do %>
+         
+      <% for user in @diplomate do %>
           <li>
             <%= link_to user.nick, user, :class => "Diplomat" %>
             <% if can? :odeber_pravo, User %>
@@ -149,24 +140,54 @@
           </li>
       <% end %>
       
-      <% if can? :pridel_pravo, User %>
-          <br><h3>Přidělit práva:</h3>
-          <li>
-            <%= form_tag :pridel_pravo do %>
-                <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:90px !important"  %>
-                <%= submit_tag 'Ξ', :class => 'oktab_auto' %>
-            <% end %>
-          </li>
-      <% end %>
     </td>
     
-    <td>
+    <td 
+      <% if can? :pridel_pravo, User %>
+        rowspan="2"
+      <% else %>
+        rowspan="1"
+      <% end %> 
+    >
       <% for user in @poslanci do %>
           <li><%= link_to user.nick, user, :class => "Poslanec" %></li>
       <% end %>
     </td> 
     
-  </tr>
+  </tr> 
+
+<% if can? :pridel_pravo, User %>
+  
+  <tr>
+    <td>
+
+            <%= form_tag :pridel_pravo do %>
+                <%= select_tag :user_id, options_for_select(@house.mentate(false).collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important"  %>
+                <li><%= submit_tag 'Mentat', :class => 'ok6' %>
+            <% end %>
+
+     </td>
+     <td>
+
+            <%= form_tag :pridel_pravo do %>
+                <%= select_tag :user_id, options_for_select(@house.army_mentate(false).collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important"  %>
+                <li><%= submit_tag 'ArmyMentat', :class => 'ok6' %>
+            <% end %>
+           
+     </td>
+     <td>
+
+            <%= form_tag :pridel_pravo do %>
+                <%= select_tag :user_id, options_for_select(@house.diplomate(false).collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important"   %>
+                <li><%= submit_tag 'Diplomat', :class => 'ok6' %>
+            <% end %>
+                
+     </td> 
+      
+  </tr> 
+  
+<% end %>   
+      
 </table>
 
 <!-- ZADOST O VSTUP -->
@@ -278,8 +299,8 @@
 
 <table class="tab1">
   <tr>
-    <th colspan="2">Prehled poslednich akci malorodu</th>
-    <th><%= link_to 'Všechny akce', operations_path(:jake => 'malorod') %></th>
+    <th colspan="2">Prehled poslednich akci Velkorodu</th>
+    <th><%= link_to 'Všechny akce', operations_path(:jake => 'narod') %></th>
   </tr>
   <tr>
     <th>Obsah akce</th>

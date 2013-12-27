@@ -69,6 +69,16 @@ class SubhousesController < ApplicationController
     @operations = @subhouse.operations.malorodni.seradit.limit(5)
   end
 
+  def vyves_mr_nastenku
+	  content = params[:dashboard]
+
+	  if current_user.subhouse.edit_dashboard(content)
+		  current_user.subhouse.zapis_operaci("Nastenka byla upravena hracem #{current_user.nick}")
+		  redirect_to :back, :notice => "Nastenka upravena"
+	  end
+
+  end
+
   def vyhod_mr
     user = User.find(params[:id])
     mr = user.subhouse

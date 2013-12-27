@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 40) do
+ActiveRecord::Schema.define(:version => 46) do
 
   create_table "app_logy", :force => true do |t|
     t.datetime "cas",                      :null => false
@@ -47,6 +47,11 @@ ActiveRecord::Schema.define(:version => 40) do
     t.integer  "prerequisity_3"
     t.datetime "created_at",                                                       :null => false
     t.datetime "updated_at",                                                       :null => false
+    t.integer  "upg_mat_cost"
+    t.integer  "upg_mel_cost"
+    t.integer  "upg_sol_cost"
+    t.integer  "max_upg_lvl"
+    t.integer  "upg_profit"
   end
 
   add_index "buildings", ["kind"], :name => "index_buildings_on_kind"
@@ -101,7 +106,7 @@ ActiveRecord::Schema.define(:version => 40) do
     t.integer  "planet_id",                             :null => false
     t.integer  "property_id",                           :null => false
     t.integer  "duration",                              :null => false
-    t.date     "started_at",  :default => '2013-11-19'
+    t.date     "started_at",  :default => '2013-12-24'
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
@@ -113,20 +118,20 @@ ActiveRecord::Schema.define(:version => 40) do
   create_table "eods", :force => true do |t|
     t.integer  "user_id",                                                                              :null => false
     t.integer  "field_id"
-    t.date     "date",                                              :default => '2013-11-19',          :null => false
-    t.time     "time",                                              :default => '2000-01-01 18:07:55', :null => false
+    t.date     "date",                                              :default => '2013-12-24',          :null => false
+    t.time     "time",                                              :default => '2000-01-01 21:32:14', :null => false
     t.integer  "order",                                                                                :null => false
-    t.integer  "solar_income",                                      :default => 0
+    t.float    "solar_income",                                      :default => 0.0
     t.integer  "exp_income",                                        :default => 0
     t.decimal  "material_income",    :precision => 12, :scale => 4, :default => 0.0
     t.integer  "population_income",                                 :default => 0
-    t.integer  "solar_expense",                                     :default => 0
+    t.float    "solar_expense",                                     :default => 0.0
     t.integer  "exp_expense",                                       :default => 0
     t.decimal  "material_expense",   :precision => 12, :scale => 4, :default => 0.0
     t.integer  "population_expense",                                :default => 0
     t.decimal  "melange_income",     :precision => 12, :scale => 4, :default => 0.0
     t.decimal  "melange_expense",    :precision => 12, :scale => 4, :default => 0.0
-    t.integer  "solar_store",                                       :default => 0
+    t.float    "solar_store",                                       :default => 0.0
     t.integer  "exp_store",                                         :default => 0
     t.decimal  "material_store",     :precision => 12, :scale => 4, :default => 0.0
     t.integer  "population_store",                                  :default => 0
@@ -137,6 +142,9 @@ ActiveRecord::Schema.define(:version => 40) do
     t.string   "mentats"
     t.datetime "created_at",                                                                           :null => false
     t.datetime "updated_at",                                                                           :null => false
+    t.float    "parts_store",                                       :default => 0.0
+    t.float    "parts_income",                                      :default => 0.0
+    t.float    "parts_expense",                                     :default => 0.0
   end
 
   create_table "estates", :force => true do |t|
@@ -145,6 +153,7 @@ ActiveRecord::Schema.define(:version => 40) do
     t.integer  "number",      :default => 1, :null => false
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+    t.integer  "upgrade_lvl"
   end
 
   add_index "estates", ["building_id"], :name => "index_estates_on_building_id"
@@ -186,6 +195,8 @@ ActiveRecord::Schema.define(:version => 40) do
     t.datetime "created_at",                                                       :null => false
     t.datetime "updated_at",                                                       :null => false
     t.decimal  "influence"
+    t.integer  "pocet_vyhosteni",                                :default => 0
+    t.text     "house_dashboard"
   end
 
   add_index "houses", ["name"], :name => "index_houses_on_name"
@@ -194,7 +205,7 @@ ActiveRecord::Schema.define(:version => 40) do
     t.integer  "effect_id",                            :null => false
     t.integer  "field_id",                             :null => false
     t.integer  "duration",                             :null => false
-    t.date     "started_at", :default => '2013-11-19'
+    t.date     "started_at", :default => '2013-12-24'
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
   end
@@ -257,8 +268,8 @@ ActiveRecord::Schema.define(:version => 40) do
     t.integer  "subhouse_id"
     t.string   "kind"
     t.string   "content"
-    t.date     "date",        :default => '2013-11-19'
-    t.time     "time",        :default => '2000-01-01 18:07:55'
+    t.date     "date",        :default => '2013-12-24'
+    t.time     "time",        :default => '2000-01-01 21:32:14'
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
   end
@@ -285,7 +296,7 @@ ActiveRecord::Schema.define(:version => 40) do
     t.string   "system_name"
     t.integer  "position"
     t.boolean  "available_to_all", :default => false
-    t.date     "discovered_at",    :default => '2013-11-19'
+    t.date     "discovered_at",    :default => '2013-12-24'
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
   end
@@ -392,13 +403,14 @@ ActiveRecord::Schema.define(:version => 40) do
   create_table "subhouses", :force => true do |t|
     t.string   "name"
     t.integer  "house_id"
-    t.decimal  "solar",      :precision => 12, :scale => 4, :default => 0.0
-    t.decimal  "melange",    :precision => 12, :scale => 4, :default => 0.0
-    t.decimal  "material",   :precision => 12, :scale => 4, :default => 0.0
-    t.decimal  "parts",      :precision => 12, :scale => 4, :default => 0.0
-    t.integer  "exp",                                       :default => 0
-    t.datetime "created_at",                                                 :null => false
-    t.datetime "updated_at",                                                 :null => false
+    t.decimal  "solar",           :precision => 12, :scale => 4, :default => 0.0
+    t.decimal  "melange",         :precision => 12, :scale => 4, :default => 0.0
+    t.decimal  "material",        :precision => 12, :scale => 4, :default => 0.0
+    t.decimal  "parts",           :precision => 12, :scale => 4, :default => 0.0
+    t.integer  "exp",                                            :default => 0
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
+    t.integer  "pocet_vyhosteni",                                :default => 0
   end
 
   add_index "subhouses", ["house_id"], :name => "index_subhouses_on_house_id"
@@ -432,8 +444,12 @@ ActiveRecord::Schema.define(:version => 40) do
     t.string   "image_url"
     t.string   "image_lvl"
     t.integer  "discovered"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "technology_type"
+    t.string   "upgrade_building_lvl"
+    t.integer  "house_id"
+    t.integer  "subhouse_id"
   end
 
   create_table "topics", :force => true do |t|

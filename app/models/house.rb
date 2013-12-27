@@ -50,28 +50,28 @@ class House < ActiveRecord::Base
     vitez.each_key { |key| return User.find(key) }
   end
 
-  def vudce
-    self.users.where(:leader => true).first
+  def vudce(b = true)
+    self.users.where(:leader => b).first
   end
 
-  def mentate
-    self.users.where(:mentat => true).order(:nick).all
+  def mentate(b = true)
+    self.users.where(:mentat => b).order(:nick).all
   end
 
-  def army_mentate
-    self.users.where(:army_mentat => true).order(:nick).all
+  def army_mentate(b = true)
+    self.users.where(:army_mentat => b).order(:nick).all
   end
 
-  def diplomate
-    self.users.where(:diplomat => true).order(:nick).all
+  def diplomate(b = true)
+    self.users.where(:diplomat => b).order(:nick).all
   end
 
-  def generalove
-    self.users.where(:general => true).order(:nick).all
+  def generalove(b = true)
+    self.users.where(:general => b).order(:nick).all
   end
 
-  def poslanci
-    self.users.where(:landsraad => true).order(:nick).all
+  def poslanci(b = true)
+    self.users.where(:landsraad => b).order(:nick).all
   end
 
   def vyskumane_narodni_tech(bonus_type)
@@ -152,15 +152,15 @@ class House < ActiveRecord::Base
 	        self.zapis_operaci(msg)
 		      house.zapis_operaci(msg)
 	        else
-		        if h_exp > 0 || h_material > 0 || h_parts > 0
-			        msg += "Imperiu muzete poslat jenom solary a melanz."
+		        if h_exp > 0 || h_parts > 0
+			        msg += "Imperiu muzete poslat jenom solary, melanz a material."
 			        flag = false
 			      else
-		        house.update_attributes(:solar => house.solar + h_solar, :melange => house.melange + h_melange)
-		        self.update_attributes(:solar => self.solar - h_solar, :melange => self.melange - h_melange)
-		        msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_melange} mg od naroda #{self.name}. Poslal #{posiela.nick}. "
+		        house.update_attributes(:solar => house.solar + h_solar, :melange => house.melange + h_melange, :material => house.material + h_material)
+		        self.update_attributes(:solar => self.solar - h_solar, :melange => self.melange - h_melange, :material => self.material - h_material)
+		        msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_melange} mg a #{h_material} kg od naroda #{self.name}. Poslal #{posiela.nick}. "
 		        self.zapis_operaci(msg)
-		        house.zapis_operaci(msg)
+		        house.zapis_operaci(msg,"I")
 			      end
 	        end
 	      else
@@ -264,10 +264,10 @@ class House < ActiveRecord::Base
     else
       flag = false
       msg += "Chybi vam "
-      msg += "#{sol - self.solar} solaru" unless bsol
-      msg += "#{mat - self.material} materialu" unless bmat
-      msg += "#{mel - self.melange} materialu" unless bmel
-      msg += "#{exp - self.exp} exp" unless bexp
+      msg += "#{sol - self.solar} solaru," unless bsol
+      msg += "#{mat - self.material} kg materialu," unless bmat
+      msg += "#{mel - self.melange} mg melange," unless bmel
+      msg += "#{exp - self.exp} exp," unless bexp
       msg += "#{par - self.parts} dilu" unless bpar
     end
     return msg, flag
@@ -283,7 +283,7 @@ class House < ActiveRecord::Base
   end
 
   def self.imperium
-    @imperium ||= House.find_by_name('Impérium')
+	  House.find_by_name('Impérium')
   end
 
   def self.renegat
@@ -471,6 +471,11 @@ class House < ActiveRecord::Base
     na_prodej << ['Expy', 'E'] if self.exp > 0
     na_prodej << ['Vyrobky', 'V'] if self.parts > 0
     return na_prodej
+  end
+
+
+  def edit_dashboard(content)
+	  self.update_attribute(:house_dashboard,content)
   end
 
   scope :without_house, lambda { |house| house ? {:conditions => ["id != ?", house]} : {} }

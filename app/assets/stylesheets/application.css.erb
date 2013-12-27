@@ -797,6 +797,20 @@ div.ra {
     border: #ffdb30 1px solid;
 }
 
+.ok6 {
+    width: 120px !important; 
+    margin-left: 2px;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/td1.png' %>) !important;
+    background-repeat: repeat !important;
+    font-weight: bold !important;
+}
+
+.ok6:hover {
+    color: #ffdb30;
+    border: #ffdb30 1px solid;
+}
+
 .okuni {
     /*padding: auto 5px auto 5px !important;*/
     width: auto !important;
@@ -907,12 +921,12 @@ input.oktab_95:hover {
 
     /* ++++++++++++++++++++ Form?tov?n? textu ++++++++++++++++++++ */
 h1 {
-    font-size: 1.5em;
+    font-size: 1.7em;
     font-stretch: expanded;
     font-weight: bold;
-    color: #ff8c00;
-    padding: 5px 0 5px 0;
-    margin: 15px 0 0 0;
+    color: #ffdb30;;
+    padding: 5px 0 3px 0;
+    margin: 15px 0 5px 0;
     text-decoration: none;
     border-bottom: 1px solid #ffdb30;
 }
@@ -973,9 +987,34 @@ a.Emperor {
     text-decoration: none;
     margin: 0px;
     color: #da70d6;
+    font-weight: bold;
 }
 
 a.Emperor:hover {
+    text-decoration: underline;
+}
+
+a.Dvur {
+    text-decoration: none;
+    margin: 0px;
+    color: #db7093;
+}
+
+a.Dvur:hover {
+    text-decoration: underline;
+}
+
+a.Court {
+    text-decoration: none;
+    margin: 0px;
+    color: #db7093;
+}
+
+a.Court:hover {
+    text-decoration: underline;
+}
+
+a.Regent:hover {
     text-decoration: underline;
 }
 
@@ -985,9 +1024,16 @@ a.Regent {
     color: #da70d6;
 }
 
-a.Regent:hover {
+a.Vezir:hover {
     text-decoration: underline;
 }
+
+a.Vezir {
+    text-decoration: none;
+    margin: 0px;
+    color: #da70d6;
+}
+
 
     /*a.duce { text-decoration:none;  margin:0px; color:#1e90ff;	}		*/
     /*duce:hover{text-decoration:underline;}	*/
@@ -1015,7 +1061,7 @@ a.Diplomat:hover {
 a.Army_mentat {
     text-decoration: none;
     margin: 0px;
-    color: #6b8e23;
+    color: #00fa9a;
 }
 
 a.Army_mentat:hover {
@@ -1076,6 +1122,33 @@ td.tdd {
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
+
+td.ne {
+    margin: 0 !important;
+    width: auto !important;
+    text-align: center !important;
+    padding: 2px 7px 2px 7px !important;
+    background-image: url(<%= asset_path 'css/tcerna2.png' %>);
+    border: solid 1px #a2a2a2;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+    td.ne:hover {background-image: url(<%= asset_path 'css/tcervena.png' %>); }
+
+td.ano {
+    margin: 0 !important;
+    text-align: center !important;
+    padding: 2px 7px 2px 7px !important;
+    background-image: url(<%= asset_path 'css/tcerna2.png' %>);
+    border: solid 1px #a2a2a2;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+
 
 .menud {
     color: #000000;
@@ -2865,7 +2938,12 @@ html {
 .grey_checkbox{
     background: url(css/tseda.png);
 }
-
+.select_2{
+    width: 200px;
+}
+.left_align a{
+    float: left;
+}
 
 
 

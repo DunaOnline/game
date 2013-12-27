@@ -64,22 +64,27 @@
   <% end %>
 </table>
 
-<% if Imperium.volba_imperatora? && current_user.landsraad? %>
+<!--- VYZVA K VOLBĚ IMPERÁTORA --->
+
+<% if Imperium.volba_imperatora? %>
+
     <table class="tab1">
       <tr>
-        <td style="padding: 0 10px 10px 10px; width:270px; background-image: url(<%= asset_path 'imghra/kolonizace.png' %>) !important">
-          <h3>Volba Imperátora</h3>
-          <li>Kandidáti na Imperátora potřebují nejméně 60% hlasů, aby mohli usednout na trůn. 
-          <li>Pokud nebude Imperátor zvolen během těchto voleb, ujmou se správy regenti a volba se bude opakovat za 3dny.
-          <br>Regenty se mohou stát až 3 kandidáti s nejvyšším počtem hlasů.
-          <li>Regenti dokáží krátkodobě spravovat říši, ale nemohou jmenovat držitele pololéna na Arrakis!
+        <td style="padding: 0 10px 10px 10px; width:270px; background-image: url(<%= asset_path 'imghra/vobyimperatora_v.png' %>) !important">
+          <h1>Volba Imperátora</h1>
+          <p><i>Dle Imperiální ústavy je potřeba pro získání Imperiálního trůnu více jak 60 % hlasů. Pokud není zvolen Imperátor, stanou se tři kandidáti s nejvyšším počtem hlasů Regenty - Správci říše.</i></p>
+      <p><i>Nové volby jsou vyvolány hlasováním v Landsraadu o nedůvěře hlavě imperia nebo Regentům.</i></p>
+          <p>Regenti dokáží krátkodobě spravovat říši, ale nemohou jmenovat držitele pololéna na Arrakis!  </p>
           <br><br>
           Volby budou uzavřeny: <%= format_date @datum_volby %>
           <%= link_to "Přejít k volbě Imperátora", volba_imperatora_path %>
         </td>
       </tr>
     </table>
-<% end %>
+
+    <% end %>
+
+<!--- HLASOVÁNÍ O ZÁKONU --->
 
 <table class="tab1">
   <tr>
@@ -90,6 +95,8 @@
         <td style="width:25%"><h3><%= law.label + ' - ' + law.title %></h3>
           <li>
             <%= law.content %>
+          </li>
+
           <li>
             <% if current_user.landsraad? %>
                 <% temp = law.zahlasovane(current_user) %>
@@ -105,7 +112,14 @@
                     <% end %>
                 <% end %>
             <% end %>
-
+            </li>
+            <li>
+              Aktualny stav hlasov :</br>
+              <%= law.pomer_hlasu %>
+            </li>
+            <li>
+              Zakon zarazen : <%= law.submitted %>
+            </li>
             </td>
     <% end %>
   </tr>

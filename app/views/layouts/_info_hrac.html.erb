@@ -1,6 +1,6 @@
 <div class="inf">
   <%= obrazek_budovy(current_user.house.name, "erb") %>
-  <%= link_to current_user.nick, current_user, :class => "a1" %>
+  <%= link_to current_user.nick, current_user, :class => current_user.barvicky, :title => current_user.barvicky %>
   <br>
   <% for hodnost in current_user.najdi_hodnosti do %>
       <a><%= hodnost %></a>

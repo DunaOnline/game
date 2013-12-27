@@ -4,22 +4,34 @@
   <tr>
     <td class="drob">
       <a href="#" title="Home">⌂</a>
-      » <%= link_to @topic.syselaad.name, syselaad_path(@topic.syselaad_id) %>
+      » <%= link_to @topic.syselaad.name, syselaad_path(@topic.syselaad.kind) %>
       » <%= link_to @topic.name, '#' %></a>
     </td>
     <% if admin? %>
-      <td class="tdd">
-        <%= link_to "Smazat vlákno", @topic, :confirm => 'Opravdu chcete smazat toto vlákno?', :method => :delete %>
+      <td class="ne" style="width:50px !important">
+        <%= link_to " SMAZAT ", @topic, :confirm => 'Opravdu chcete smazat  celé toto vlákno?', :method => :delete %>
       </td>
     <% end %>
     <% if logged_in? %>
-      <td class="tdd" style="width:55px !important">
+      <td class="ano" style="width:70px !important">
         <%= link_to " ODPOVĚDĚT ", "#{new_post_path}?topic=#{@topic.id}" %>
       </td>
     <% end %>
-    <!-- <td class="tdd">
-      <%= link_to " Zpět ", syselaad_path(@topic.syselaad_id) %>
-    </td> -->
+      <td class="tdd">
+                <ul class="menud">
+                  <li><a title="Volbou vstoupíte do jiného Syselaadu.">Přejít na Syselaad »</a>
+                    <ul>
+                      <li class="filterPosta"><%= link_to "Národní", syselaad_path(:kind => 'N') %></li>
+                      <li class="filterPosta"><%= link_to "Mezinárodní", syselaad_path(:kind => 'E') %></li>
+                    <% if current_user.landsraad? || current_user.admin? %>
+                      <li class="filterPosta"><%= link_to "Landsraadní", syselaad_path(:kind => 'L') %></li>
+                    <% end %>
+                      <li class="filterPosta"><%= link_to "Systémový", syselaad_path(:kind => 'S') %>
+                      
+              </ul>
+            </li>
+          </ul>
+        </td>
 
 
   </tr>
@@ -29,7 +41,7 @@
   <% for post in @posts %>
     <tr>
         <td class="tdpl" style="word-break:break-all; padding: 0px !important; width:130px !important; background-image: url(<%= cesta_rod(post.user.house.name, "dom") %>) !important; background-repeat: repeat;">
-        <div class="poster" ><b><a class=""><%= link_to post.user.nick, user_url(post.user) %></a></b>
+        <div class="poster" ><b><a class=""><%= link_to post.user.nick, user_url(post.user), :class => post.user.barvicky, :title => post.user.barvicky %></a></b>
         <br><%= format_date_time post.created_at %>
         <% if logged_in? %> 
             <% if admin_or_owner?(post.user.id) %>
@@ -43,7 +55,7 @@
         </td>
 
   
-        <td class="forum" style="word-break:break-word">
+        <td class="forum" style="word-break: break-word;">
           <%= simple_format(post.content) %>
         </td>
   </tr>

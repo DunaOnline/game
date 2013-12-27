@@ -19,6 +19,8 @@ DuneOnline::Application.routes.draw do
 
   resources :products
 
+  resources :surveys
+
 
 	resources :markets
 	match 'buy' => 'markets#buy', :as => :buy
@@ -79,7 +81,7 @@ DuneOnline::Application.routes.draw do
   match 'vyhod_mr/:id' => 'subhouses#vyhod_mr', :as => :vyhod_mr
   match 'prijmi_hrace_mr' => 'subhouses#prijmi_hrace_mr', :as => :prijmi_hrace_mr
   match 'menuj_vice' => 'subhouses#menuj_vice', :as => :menuj_vice
-
+  match 'vyves_mr_nastenku' => 'subhouses#vyves_mr_nastenku', :as => :vyves_mr_nastenku
 
   resources :houses
   match 'kolonizuj' => 'houses#kolonizuj', :as => :kolonizuj
@@ -89,6 +91,8 @@ DuneOnline::Application.routes.draw do
   match 'prijmi_hrace' => 'houses#prijmi_hrace', :as => :prijmi_hrace
   match 'send_products_house' => 'houses#send_products_house', :as => :send_products_house
   match 'vyhosteni_hrace' => 'houses#vyhosteni_hrace', :as => :vyhosteni_hrace
+  match 'vyves_nastenku' => 'houses#vyves_nastenku', :as => :vyves_nastenku
+  match 'vyves_imp_nastenku' => 'houses#vyves_imp_nastenku', :as => :vyves_imp_nastenku
 
   resources :discoverables
   

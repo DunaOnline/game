@@ -1,26 +1,27 @@
+<!--- volba imperátora -->
+
+<% if Imperium.volba_imperatora? %>
+
+  <div class="la" style="background-image: url(/assets/imghra/vobyimperatora.png) !important"> 
+      <%= link_to "Probíhaji volby Imperátora!", volba_imperatora_path %>
+  </div>
+<% end %>
+
+<!--- POŠTA -->
 
 <div class="la">
   <%= link_to "Nepřečtená pošta [" + current_user.neprocteno_sprav.to_s + "]", messages_path %>
 </div>
 
-<!----
- <% if Imperium.volba_imperatora? %>
-  <div class="la"> 
-    <% if current_user.landsraad? %>
-      <%= link_to "Přejít k volbě", volba_imperatora_path %>
-    <% else %>
-       Probíhaji volby Imperátora!
-    <% end %>
-  </div>
-<% end %>
----->
-
+<!--- UDÁLOST LÉNA -->
 
 <% field, planet = current_user.zobraz_udalost %>
 <% field.each do |f| %>
-    <div class="la field_event">
+    <div class="la field_event" style="background-image: url(/assets/imghra/udalost.png) !important">
+      
       <%= f[0] %>
-      <%= link_to "udalosti", udalosti_path(:id => f[1], :typ => "L") %>
+      
+      Více informací najdete <%= link_to "zde.", udalosti_path(:id => f[1], :typ => "L") %>
     </div>
 <% end %>
 <% planet.each do |p| %>
@@ -31,5 +32,6 @@
 <% end %>
 
 
-
+<%= render 'layouts/imperialni_nastenka' %>
 <%= render 'layouts/narodni_nastenka' %>
+<%= render 'layouts/malorodni_nastenka' %>

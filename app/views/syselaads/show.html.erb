@@ -5,7 +5,8 @@
     <table class="tab0">
       <tr>
         <td>
-          <a href="#" title="Home">⌂</a> » <a href="#" title="Syselaad - komunikační fóra">Syselaad</a>
+          <a href="#" title="Home">⌂</a>
+          » <%= link_to @syselaad.syselaad_name, '#', :title => @syselaad.syselaad_name %>
         </td>
         <% if logged_in? %>
         <td class="tdd">
@@ -37,7 +38,7 @@
   <tr>
     <th width="50%" height="25px"> Téma vlákna Syselaadu </th>
     <th width="10%"> Odpovědí </th>
-    <th width="40%"> Poslední příspěvek </th>
+    <th width="40%"> <%= sortable 'updated_at', 'Poslední příspěvek' %> </th>
   </tr>
   <% for topic in @topics %>
       <tr>
@@ -48,7 +49,7 @@
         <%= link_to h(topic.name), topic_path(topic.id) %>
         <td><%= topic.posts.count - 1 %></td>
         <td class="right"><%= distance_of_time_in_words_to_now topic.last_post_at %> ago
-          by <%= link_to topic.last_poster.nick, "/users/#{topic.last_poster_id}" %></td>
+          by <%= link_to topic.last_poster.nick, "/users/#{topic.last_poster_id}", :class => topic.last_poster.barvicky, :title => topic.last_poster.barvicky %></td>
         
       </tr>
   <% end %>

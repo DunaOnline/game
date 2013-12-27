@@ -134,18 +134,9 @@ class User < ActiveRecord::Base
     end
   end
 
-  def odhlasuj(typ)
-	  vote = Vote.where(:house_id => self.house.id, :elector => self.id, :typ => typ).first
-	  vote.delete if vote
-  end
-
-  def odhlasuj_gene
-	  self.subhouse.users.each do |u|
-		  unless self == u
-		    vote = Vote.where(:house_id => self.house.id, :elector => u.id, :typ => "general").first
-			  vote ? vote.elective : {} == self.id ? vote ? vote.delete : {} : {}
-			end
-	  end
+  def zrus_hlasy(typ)
+		Vote.where(:elective => self.id, :typ => typ).delete_all
+		Vote.where(:elector => self.id, :typ => typ).delete_all
   end
 
   def koho_jsem_volil(typ)
@@ -352,7 +343,7 @@ class User < ActiveRecord::Base
 
   def resourcy_s_tovarny
     tovarna = Building.where(:kind => "V").first
-    self.fields.includes(:estates).where("estates.building_id = ?", tovarna.id,)
+    self.fields.includes(:estates).where("estates.building_id = ? AND estates.number > ?", tovarna.id, 0)
   end
 
   def factories_options
@@ -376,7 +367,7 @@ class User < ActiveRecord::Base
     self.fields.each do |field|
       field.influence.each do |influence|
         if influence && influence.effect.typ != "M"
-          msg_leno << ["//**Udalost na lenu #{field.name} : #{influence.effect.name}**//", influence]
+          msg_leno << ["Probíhá událost *#{influence.effect.name}* na vašem léně *#{field.name}*. ", influence]
         end
       end
     end
@@ -411,9 +402,12 @@ class User < ActiveRecord::Base
         :duration => 100,
         :started_at => Date.today
     ).save
-	  self.odhlasuj("leader")
+
+    self.update_attribute(:ziadost_subhouse,nil) if self.ziadost_subhouse
     self.opustit_mr
 	  self.reset_hodnosti_naroda
+	  self.zrus_hlasy("leader")
+    self.zrus_hlasy("landsraad")
   end
 
   def vyhostit_hrace(kym)
@@ -431,9 +425,12 @@ class User < ActiveRecord::Base
 					:duration => 100,
 					:started_at => Date.today
 			).save
-			self.odhlasuj("leader")
+
+			self.update_attribute(:ziadost_subhouse,nil) if self.ziadost_subhouse
 			self.opustit_mr
 			self.reset_hodnosti_naroda
+			self.zrus_hlasy("leader")
+			self.zrus_hlasy("poslanec")
 			return true
 		else
 			false
@@ -444,10 +441,12 @@ class User < ActiveRecord::Base
 	  self.update_attributes(:mentat => false, :army_mentat => false, :leader => false, :landsraad => false, :vezir => false, :court => false)
   end
 
+
+
   def opustit_mr
     subhouse = self.subhouse
     if subhouse
-	    self.odhlasuj_gene
+	    self.zrus_hlasy("general")
 
 	    self.update_attributes(:subhouse_id => nil, :vicegeneral => false, :general => false)
 	    if subhouse.users.count == 0
@@ -457,7 +456,6 @@ class User < ActiveRecord::Base
 	                                #{subhouse.exp} expu a #{subhouse.parts} dilu")
 		    subhouse.delete
 	    end
-	    self.odhlasuj("general")
 	  end
   end
 
@@ -775,7 +773,6 @@ class User < ActiveRecord::Base
 			  "Court"
 		  elsif self.general?
 			  "General"
-
 	  end
   end
 
@@ -812,6 +809,7 @@ class User < ActiveRecord::Base
   scope :without_user, lambda { |user| user ? {:conditions => ["id != ?", user.id]} : {} }
   scope :ziadost, lambda { |house| where("ziadost_house = ?", house) }
   scope :malorod, lambda { |mr| where("ziadost_subhouse = ?", mr) }
+  scope :clenove_dvora, where("vezir = ? OR court = ?",true,true)
   scope :dvorane, where(:court => true)
   scope :veziri, where(:vezir => true)
   scope :poslanci, where(:landsraad => true)

@@ -3,12 +3,12 @@ class HousesController < ApplicationController
   #authorize_resource # CanCan
 
   def index
-    @houses = House.playable.order(:name)
+    @houses = House.without_house(1).without_house(2).order(:name)
     @rody = @houses
   end
 
   def show
-    if params[:id] == 1 or params[:id] == 2 or params[:id] == 3 # nezobrazime Titany, Imperium a Renegaty
+    if params[:id] == 1 or params[:id] == 2 #or params[:id] == 3  nezobrazime Titany, Imperium a Renegaty
       if current_user.admin?
         @house = House.find(params[:id]) # pouze adminum
       else
@@ -85,9 +85,9 @@ class HousesController < ApplicationController
       elsif cena_sol > house.solar
         flash[:error] = "Nedostatek Solaru."
         redirect_to kolonizuj_path
-      elsif cena_sol > house.solar
-	      flash[:error] = "Nedostatek Solaru."
-	      redirect_to kolonizuj_path
+      #elsif cena_sol > house.solar
+	     # flash[:error] = "Nedostatek Solaru."
+	     # redirect_to kolonizuj_path
       elsif !house.volne_planety
 	      flash[:error] = "Vsechny planety kolonizovany"
 	      redirect_to kolonizuj_path
@@ -128,7 +128,7 @@ class HousesController < ApplicationController
 
   def vyhosteni_hrace
 	  user = User.find(params[:user_id])
-	  if current_user.house.pocet_vyhosteni != Constant.vyhostenie_hraca_n_max_per_day
+	  if current_user.house.pocet_vyhosteni != Constant.vyhostenie_hraca_n_max_per_day && !user.leader?
 		  if user.vyhostit_hrace(user.nick)
 			  redirect_to :back, :notice => "Hrac byl vyhosten."
 		  else
@@ -137,6 +137,26 @@ class HousesController < ApplicationController
 	  else
 		  redirect_to :back, :notice => "Dosiahli jste limit na vyhosteni hracu na prepocet."
 		end
+  end
+
+  def vyves_nastenku
+	   content = params[:dashboard]
+
+	  if current_user.house.edit_dashboard(content)
+		  current_user.house.zapis_operaci("Nastenka byla upravena hracem #{current_user.nick}")
+		  redirect_to :back, :notice => "Nastenka upravena"
+	  end
+
+  end
+
+  def vyves_imp_nastenku
+	  content = params[:dashboard]
+
+	  if House.imperium.edit_dashboard(content)
+		  House.imperium.zapis_operaci("Nastenka byla upravena hracem #{current_user.nick}")
+		  redirect_to :back, :notice => "Nastenka upravena"
+	  end
+
   end
 
   def send_products_house

@@ -58,6 +58,7 @@ puts 'Planet done'
 
 Global.create(:setting => 'login', :value => false)
 Global.create(:setting => 'signup', :value => false)
+Global.create(:setting => 'start_veku', :datum => Date.today)
 Global.create(:setting => 'pristi_volby', :datum => 1.week.from_now)
 Global.create(:setting => 'zakl_cena_planety', :cislo => 200.00)
 Global.create(:setting => 'zakl_cena_lena', :cislo => 15.00)
@@ -113,6 +114,10 @@ Global.create(:setting => 'naklady_upgrade_stavba_solary_od_poctu', :cislo => 1.
 Global.create(:setting => 'zapnout_nahodnou_produkci', :value => true)
 Global.create(:setting => 'pocet_vyhosteni_narod', :cislo => 5)
 Global.create(:setting => 'pocet_vyhosteni_mr', :cislo => 3)
+Global.create(:setting => 'pocet_dni_bez_udalosti_od_zac_veku', :cislo => 3)
+Global.create(:setting => 'agrese_fremenu', :cislo => 10)
+Global.create(:setting => 'hranice_harvesteru', :cislo => 30)
+Global.create(:setting => 'pocet_senatoru', :cislo => 20)
 
 puts 'Global done'
 
