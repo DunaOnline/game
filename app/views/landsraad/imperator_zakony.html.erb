@@ -64,10 +64,10 @@
 
 <table class="tab1">
   <tr>
-    <th class="l" style="width:30px">Číslo</th>
-    <th style="width:50px">Stav</th>
+    <th class="l" style="width:30px"><%= sortable 'label', 'Číslo' %></th>
+    <th style="width:50px"><%= sortable 'state', 'Stav' %></th>
     <th>Zakony ktere jste podepsal</th>
-    <th>Uzavření</th>
+    <th><%= sortable 'updated_at', 'Uzavření' %></th>
     <th>Autor</th>
     <th class="r" style="width:80px">Ano/Ne/Zdr.</th>
   </tr>
@@ -82,5 +82,7 @@
       </tr>
 
   <% end %>
-
+  <tr>
+    <%= paginate @videne %>
+  </tr>
 </table>

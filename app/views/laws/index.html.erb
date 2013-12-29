@@ -1,3 +1,4 @@
+<%# encoding: utf-8 %>
 <table class="tab0">
 
   <tr>
@@ -16,17 +17,19 @@
 
           <ul>
 
-            <li><%= link_to 'Všechny zákony', laws_path(:zakony => 'vsechny') %>
+            <li><%= link_to 'Všechny zákony', laws_path(:zakony => 'vsechny') %> </li>
 
-            <li><%= link_to 'Zařazené zákony', laws_path(:zakony => 'zarazene') %>
+            <li><%= link_to 'Zařazené zákony', laws_path(:zakony => 'zarazene') %>  </li>
 
-            <li><%= link_to 'Projednavané zákony', laws_path(:zakony => 'projednavane') %>
+            <li><%= link_to 'Projednavané zákony', laws_path(:zakony => 'projednavane') %> </li>
 
-            <li><%= link_to 'Schvalené zákony', laws_path(:zakony => 'schvalene') %>
+            <li><%= link_to 'Schvalené zákony', laws_path(:zakony => 'schvalene') %>  </li>
 
-            <li><%= link_to 'Zamitnuté zákony', laws_path(:zakony => 'zamitnute') %>
+            <li><%= link_to 'Zamitnuté zákony', laws_path(:zakony => 'zamitnute') %>  </li>
 
-            <li><%= link_to 'Podepsané zákony', laws_path(:zakony => 'podepsane') %>
+            <li><%= link_to 'Podepsané zákony', laws_path(:zakony => 'podepsane') %>  </li>
+
+            <li><%= link_to 'Platné zákony', laws_path(:zakony => 'platne') %>  </li>
 
           </ul>
 
@@ -42,12 +45,15 @@
 
 <table class="tab1">
   <tr>
+    <%= paginate @laws %>
+  </tr>
+  <tr>
     <th>Název a autor</th>
     <th>Obsah zákona</th>
-    <th>Stav</th>
-    <th>Zařazen</th>
-    <th>Přijat</th>
-    <th>Podpis</th>
+    <th><%= sortable 'state', 'Stav'  %></th>
+    <th><%= sortable 'submitted', 'Zařazen'  %></th>
+    <th><%= sortable 'enacted', 'Přijat'  %></th>
+    <th><%= sortable 'signed', 'Podpis'  %></th>
   </tr>
 
   <% @laws.each do |law| %>
@@ -63,5 +69,6 @@
         <td><%= format_date law.signed %></td>
       </tr>
   <% end %>
+
 </table>
 

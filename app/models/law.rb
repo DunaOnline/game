@@ -111,6 +111,7 @@ class Law < ActiveRecord::Base
   scope :zamitnute, where(:state => Law::STATE[3])
   scope :podepsane, where(:state => Law::STATE[4])
   scope :odmitnute, where(:state => Law::STATE[5])
+  scope :platne, where(:state => Law::STATE[6])
 
   scope :submited, lambda { |user| where(:submitter => user.id) }
 

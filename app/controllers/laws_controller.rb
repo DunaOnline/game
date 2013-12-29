@@ -6,21 +6,58 @@ class LawsController < ApplicationController
   # GET /laws.json
   def index
     if params[:zakony] == 'vsechny'
-      @laws = Law.seradit
+	    if params[:sort] == nil
+		    @laws = Law.seradit.page(params[:page])
+	    else
+		    @laws = Law.order(params[:sort] + ' ' + params[:direction]).page(params[:page])
+	    end
     elsif params[:zakony] == 'zarazene'
-      @laws = Law.zarazene.seradit
+      if params[:sort] == nil
+	      @laws = Law.zarazene.seradit.page(params[:page])
+      else
+	      @laws = Law.zarazene.order(params[:sort] + ' ' + params[:direction]).page(params[:page])
+      end
     elsif params[:zakony] == 'projednavane'
-      @laws = Law.projednavane.seradit
+	    if params[:sort] == nil
+		    @laws = Law.projednavane.seradit.page(params[:page])
+	    else
+		    @laws = Law.projednavane.order(params[:sort] + ' ' + params[:direction]).page(params[:page])
+	    end
     elsif params[:zakony] == 'schvalene'
-      @laws = Law.schvalene.seradit
+	    if params[:sort] == nil
+		    @laws = Law.schvalene.seradit.page(params[:page])
+	    else
+		    @laws = Law.schvalene.order(params[:sort] + ' ' + params[:direction]).page(params[:page])
+	    end
     elsif params[:zakony] == 'zamitnute'
-      @laws = Law.zamitnute.seradit
+	    if params[:sort] == nil
+		    @laws = Law.zamitnute.seradit.page(params[:page])
+	    else
+		    @laws = Law.zamitnute.order(params[:sort] + ' ' + params[:direction]).page(params[:page])
+	    end
     elsif params[:zakony] == 'podepsane'
-      @laws = Law.podepsane.seradit
+	    if params[:sort] == nil
+		    @laws = Law.podepsane.seradit.page(params[:page])
+	    else
+		    @laws = Law.podepsane.order(params[:sort] + ' ' + params[:direction]).page(params[:page])
+	    end
+    elsif params[:zakony] == 'platne'
+	    if params[:sort] == nil
+		    @laws = Law.platne.seradit.page(params[:page])
+	    else
+		    @laws = Law.platne.order(params[:sort] + ' ' + params[:direction]).page(params[:page])
+	    end
     else
-      @laws = Law.podepsane.seradit
+	    if params[:sort] == nil
+		    @laws = Law.podepsane.seradit.page(params[:page])
+	    else
+		    @laws = Law.podepsane.order(params[:sort] + ' ' + params[:direction]).page(params[:page])
+	    end
     end
-
+    if params[:sort] == nil
+	  else
+	    @laws = @laws.order(params[:sort] + ' ' + params[:direction]).page(params[:page])
+    end
     if params[:zakony]
       @title = params[:zakony].capitalize + ' zakony'
     else

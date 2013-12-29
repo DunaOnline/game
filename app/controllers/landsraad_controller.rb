@@ -43,8 +43,12 @@ class LandsraadController < ApplicationController
   def imperator_zakony
     @schvalene = Law.schvalene.order(:enacted, :position).where(:signed => nil)
     @projednavane = Law.projednavane.order(:submitted, :position)
-    @videne = Law.order(:position).where(:signed => [true, false])
 
+    if params[:sort] == nil
+	    @videne = Law.order(:position).where(:state => [Law::STATE[4], Law::STATE[6]]).page(params[:page])
+    else
+	    @videne = Law.where(:state => [Law::STATE[4], Law::STATE[6]]).order(params[:sort] + ' ' + params[:direction]).page(params[:page])
+    end
   end
 
   def podepisat_zakon
