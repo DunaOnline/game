@@ -275,7 +275,7 @@ class Prepocet
   def self.ukonci_hlasovani
     puts "Ukoncuji hlasovani"
     for law in Law.projednavane do
-      if law.submitted.to_date < 2.days.ago.to_date
+      if law.enacted.to_date < 2.days.ago.to_date
         law.vyhodnot_zakon
       end
     end

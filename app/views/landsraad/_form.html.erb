@@ -1,0 +1,24 @@
+<table class="tab3">
+  <%= form_for(@law) do |f| %>
+
+      <tr>
+        <th colspan="10">
+          <%= f.submit "PŘEDLOŽIT NOVÝ ZÁKON", :title => "PŘEDLOŽIT", :class => "ok4 lfloat" if !refused_law %>
+          <%= f.submit "PŘEDLOŽIT UPRAVENÝ ZÁKON", :title => "PŘEDLOŽIT", :class => "ok4 lfloat" if refused_law %>
+
+
+          <span class="lfloat zakon_title">
+
+        <%= f.text_field :title, :placeholder => "Nazev zakonu" if !refused_law %>
+        <%= f.text_field :title, :placeholder => "Nazev zakonu" if refused_law %>
+      </span>
+
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <%= f.text_area :content %>
+        </td>
+      </tr>
+  <% end %>
+</table>

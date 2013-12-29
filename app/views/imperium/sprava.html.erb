@@ -109,7 +109,7 @@
         <% for user in @courtship do %>
           <li>
             <%= link_to user.nick, user, :class => 'Dvur' %>
-            <% if current_user.emperor? %>
+            <% if current_user.admin? || current_user.emperor? %>
                 <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => user, :pravo => "Court" %>
             <% end %>
           </li>

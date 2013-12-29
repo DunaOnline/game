@@ -28,7 +28,15 @@ class LandsraadController < ApplicationController
     @law = Law.new
 
     @hlas = Poll.new
+	  if params[:refused] != nil
+		  @law = Law.find(params[:refused])
+		  if @law.refused && @law.user == current_user
+			  @law.polls.delete_all
+		  else
+			  @law = Law.new
+		  end
 
+	  end
 
   end
 
@@ -72,4 +80,6 @@ class LandsraadController < ApplicationController
 
     # end
   end
+
+
 end

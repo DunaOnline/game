@@ -117,39 +117,27 @@
               Aktualny stav hlasov :</br>
               <%= law.pomer_hlasu %>
             </li>
-            <li>
-              Zakon zarazen : <%= law.submitted %>
-            </li>
+            <% if law.refused %>
+              <li style="color:red;">
+                Zakon znovuzarazen : <%= law.enacted %>
+              </li>
+            <% else %>
+              <li>
+                Zakon zarazen : <%= law.enacted %>
+              </li>
+            <% end %>
+
             </td>
     <% end %>
   </tr>
 </table>
+
 <% if current_user.landsraad? %>
-    <table class="tab3">
-      <%= form_for(@law) do |f| %>
-
-          <tr>
-            <th colspan="10">
-              <%= f.submit "PŘEDLOŽIT NOVÝ ZÁKON", :title => "PŘEDLOŽIT", :class => "ok4 lfloat" %>
-
-
-              <span class="lfloat zakon_title">
-
-        <%= f.text_field :title, :placeholder => "Nazev zakonu" %>
-
-      </span>
-
-            </th>
-          </tr>
-          <tr>
-            <td>
-              <%= f.text_area :content %>
-            </td>
-          </tr>
-      <% end %>
-    </table>
-<% else %>
-
+    <% if @law %>
+    <%= render :partial => 'form', :locals => {:refused_law => @law} %>
+    <% else %>
+    <%= render :partial => 'form', :locals => {:refused_law => false} %>
+    <% end %>
 <% end %>
 
 <table class="tab1">

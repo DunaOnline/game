@@ -264,6 +264,10 @@ class Constant
 
   def self.pocet_dni_bez_udalosti_od_zac_veku
 	  Global.vrat('pocet_dni_bez_udalosti_od_zac_veku', 4)
+	end
+
+  def self.odmietnutie_zakona_msg
+	  Global.vrat('odmietnutie_zakona_msg', 4)
   end
 
 end

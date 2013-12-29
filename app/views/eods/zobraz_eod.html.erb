@@ -32,21 +32,21 @@
       <li><%= img_zkusenosti %> <span class="<%= trida_barvy(@exp_income) %>"><%= format_mena(@exp_income,"exp") %></span>
       <li><%= img_vyrobky %> <span class="<%= trida_barvy(@parts_income) %>"><%= format_mena(@parts_income,"ks") %></span>
     </td>
+    <!--<td>-->
+      <!--<li><%= img_solary %> <span class="zelena">+10</span>-->
+      <!--<li><%= img_material %> <span class="cervena">-5</span>-->
+      <!--<li><%= img_melanz %> <span class="zelena">-7</span>-->
+      <!--<li><%= img_populace %> <span class="cervena">+ 0</span>-->
+      <!--<li><%= img_zkusenosti %> <span class="zelena">+ 5</span>-->
+      <!--<li><%= img_vyrobky %> <span class="oranzova">+ 5</span>-->
+    <!--</td>-->
     <td>
-      <li><%= img_solary %> <span class="zelena">+10</span>
-      <li><%= img_material %> <span class="cervena">-5</span>
-      <li><%= img_melanz %> <span class="zelena">-7</span>
-      <li><%= img_populace %> <span class="cervena">+ 0</span>
-      <li><%= img_zkusenosti %> <span class="zelena">+ 5</span>
-      <li><%= img_vyrobky %> <span class="oranzova">+ 5</span>
-    </td>
-    <td>
-      <li><%= img_solary %> <span class="oranzova"><%= @solar_income - 10 %></span>
-      <li><%= img_material %> <span class="oranzova"><%= @material_income - 5 %></span>
-      <li><%= img_melanz %> <span class="oranzova"><%= @melange_income - 7 %></span>
-      <li><%= img_populace %> <span class="oranzova"><%= @population_income - 0 %></span>
-      <li><%= img_zkusenosti %> <span class="oranzova"><%= @exp_income - 5 %></span>
-      <li><%= img_vyrobky %> <span class="oranzova"><%= @parts_income - 5 %></span>
+      <li><%= img_solary %> <span class="oranzova"><%= @solar_income %></span>
+      <li><%= img_material %> <span class="oranzova"><%= @material_income %></span>
+      <li><%= img_melanz %> <span class="oranzova"><%= @melange_income %></span>
+      <li><%= img_populace %> <span class="oranzova"><%= @population_income %></span>
+      <li><%= img_zkusenosti %> <span class="oranzova"><%= @exp_income %></span>
+      <li><%= img_vyrobky %> <span class="oranzova"><%= @parts_income %></span>
     </td>
     <td>
       <li><%= img_solary %> <%= @eods_fields.last.solar_store %>

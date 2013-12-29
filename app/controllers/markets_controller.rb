@@ -95,7 +95,7 @@ class MarketsController < ApplicationController
   # PUT /markets/1.json
   def update
     @market = Market.find(params[:id])
-    opica = (params[:market])
+
     respond_to do |format|
       #if
       if @market.update_attributes(params[:market])

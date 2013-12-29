@@ -90,19 +90,19 @@ class LawsController < ApplicationController
 
   # PUT /laws/1
   # PUT /laws/1.json
-  #def update
-  #  @law = Law.find(params[:id])
-  #
-  #  respond_to do |format|
-  #    if @law.update_attributes(params[:law])
-  #      format.html { redirect_to @law, notice: 'Law was successfully updated.' }
-  #      format.json { head :ok }
-  #    else
-  #      format.html { render action: "edit" }
-  #      format.json { render json: @law.errors, status: :unprocessable_entity }
-  #    end
-  #  end
-  #end
+  def update
+    @law = Law.find(params[:id])
+    @law.state = Law::STATE[1]
+    respond_to do |format|
+      if @law.update_attributes(params[:law])
+        format.html { redirect_to :back, notice: 'Law was successfully updated.' }
+        format.json { head :ok }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @law.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # DELETE /laws/1
   # DELETE /laws/1.json

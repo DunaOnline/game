@@ -97,6 +97,11 @@ class Message < ActiveRecord::Base
 	 options
   end
 
+  def self.system_msg(content,subject,receiver)
+	  msg = Message.create(:body => content, :user_id => 1, :subject => subject)
+	  msg.posli_postu(receiver)
+  end
+
 
   def posli_postu(komu)
     #self.update_attribute(:user_id, odosielatel.id)
@@ -124,7 +129,7 @@ class Message < ActiveRecord::Base
     recipients.each do |recipient|
       self.vytvor_postu(self.user, recipient.id)
     end
-    if komu
+    if komu && !self.nil?
       komu.split(",").each do |recipient|
         recipient = recipient.strip
         #user = nil

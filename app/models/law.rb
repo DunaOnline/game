@@ -18,7 +18,7 @@
 #
 
 class Law < ActiveRecord::Base
-  attr_accessible :label, :title, :content, :state, :position, :submitter, :submitted, :enacted, :signed
+  attr_accessible :label, :title, :content, :state, :position, :submitter, :submitted, :enacted, :signed, :refused
 
   has_many :polls
   has_many :users, :through => :polls
@@ -27,7 +27,8 @@ class Law < ActiveRecord::Base
 
   validates_presence_of :content, :title
 
-  STATE = %w(Zarazen Projednavan Schvalen Zamitnut Podepsan Odmitnut)
+  STATE = %w(Zarazen Projednavan Schvalen Zamitnut Podepsan Odmitnout Platny)
+
 
   def self.create_label
     label = 'IZ' + Aplikace::VEK + '-'
@@ -61,9 +62,14 @@ class Law < ActiveRecord::Base
     puts "celkem"
     puts celkem
 
-    if (hlasy_pro > hlasy_proti) && (hlasy_pro > (0.5 * celkem))
+    if (hlasy_pro > hlasy_proti) && (hlasy_pro > ((self.refused? ? 0.6 : 0.5) * celkem))
+	    if self.refused?
+		    self.update_attribute(:state, Law::STATE[6])
+		    Landsraad.zapis_operaci("Byl uzakonen znovu voleny zakon #{self.label} - #{self.title} pomerem: #{self.pomer_hlasu}.")
+	    else
       self.update_attribute(:state, Law::STATE[2])
       Landsraad.zapis_operaci("Byl schvalen zakon #{self.label} - #{self.title} pomerem: #{self.pomer_hlasu}.")
+	    end
     else
       self.update_attribute(:state, Law::STATE[3])
       Landsraad.zapis_operaci("Zakon #{self.label} - #{self.title} byl zamitnut pomerem: #{self.pomer_hlasu}.")
@@ -90,10 +96,11 @@ class Law < ActiveRecord::Base
 
   def imp_podepis(volba, user)
     if volba == 'Ano'
-      self.update_attributes(:signed => true, :state => Law::STATE[4])
+      self.update_attributes(:signed => Time.now, :state => Law::STATE[4])
       Landsraad.zapis_hlasu_imp(user.id, "Byl podepsan zakon #{self.label} - #{self.title} .")
     elsif volba == 'Ne'
-      self.update_attributes(:signed => false, :state => Law::STATE[5])
+	    Message.system_msg(Constant.odmietnutie_zakona_msg,"Vas zakon byl zamitnut",self.user.nick)
+      self.update_attributes(:refused => true, :state => Law::STATE[5])
       Landsraad.zapis_hlasu_imp(user.id, "Byl zamitnout zakon #{self.label} - #{self.title} .")
     end
   end
@@ -103,6 +110,7 @@ class Law < ActiveRecord::Base
   scope :schvalene, where(:state => Law::STATE[2])
   scope :zamitnute, where(:state => Law::STATE[3])
   scope :podepsane, where(:state => Law::STATE[4])
+  scope :odmitnute, where(:state => Law::STATE[5])
 
   scope :submited, lambda { |user| where(:submitter => user.id) }
 
