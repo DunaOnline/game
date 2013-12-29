@@ -38,12 +38,24 @@ class Prepocet
     else
       order = 1
     end
+
     for user in User.all do
+	    mentats = user.house.mentate.collect { |p| [p.id] }.map(&:inspect).join(' ')
       Eod.new(
           :user_id => user.id,
           :date => Date.today,
           :time => Time.now,
-          :order => order
+          :order => order,
+          :solar_store => user.solar,
+          :exp_store => user.exp,
+          :material_store => user.celkovy_material,
+          :population_store => user.celkova_populace,
+          :melange_store => user.melange,
+          :parts_store => user.celkovy_parts,
+          :imperator => User.imperator ? User.imperator.id : {},
+          :arrakis => User.spravce_arrakis ? User.spravce_arrakis.id : {},
+          :leader => user.house.vudce ? user.house.vudce.id : {},
+          :mentats => mentats
       ).save
     end
     puts "Eody vyvtoreny"
@@ -104,12 +116,6 @@ class Prepocet
             :material_income => material,
             :population_income => population,
             :parts_income =>  parts,
-            :solar_store => vlastnik.solar,
-            :exp_store => vlastnik.exp,
-            :material_store => field.resource.material,
-            :population_store => field.resource.population,
-            :melange_store => vlastnik.melange,
-            :parts_store => field.resource.parts
         ).save
       end
     end

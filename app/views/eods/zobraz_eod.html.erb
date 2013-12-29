@@ -19,7 +19,7 @@
   <tr>
     <td class="tdpl" rowspan="2" style="width:120px; min-height: 150px; background-image: url(<%= asset_path 'planety/ekomentat2.png' %>) !important"></td>
     <th style="width:120px"> Přepočet</th>
-    <th style="width:120px"> Poplatky</th>
+    <!--<th style="width:120px"> Poplatky</th>-->
     <th style="width:120px"> Celkový zisk</th>
     <th class="r"> Ve skladech</th>
   </tr>
@@ -49,12 +49,12 @@
       <li><%= img_vyrobky %> <span class="oranzova"><%= @parts_income %></span>
     </td>
     <td>
-      <li><%= img_solary %> <%= @eods_fields.last.solar_store %>
-      <li><%= img_material %> <%= @eods_fields.last.material_store %>
-      <li><%= img_melanz %> <%= @eods_fields.last.melange_store %>
-      <li><%= img_populace %> <%= @eods_fields.last.population_store %>
-      <li><%= img_zkusenosti %> <%= @eods_fields.last.exp_store %>
-      <li><%= img_vyrobky %>  <%= @eods_fields.last.parts_store %>
+      <li><%= img_solary %> <%= @eods_global.solar_store %>
+      <li><%= img_material %> <%= @eods_global.material_store %>
+      <li><%= img_melanz %> <%= @eods_global.melange_store %>
+      <li><%= img_populace %> <%= @eods_global.population_store %>
+      <li><%= img_zkusenosti %> <%= @eods_global.exp_store %>
+      <li><%= img_vyrobky %>  <%= @eods_global.parts_store %>
     </td>
   </tr>
   <tr>
@@ -112,10 +112,10 @@
   <tr>
 
     <td>
-      <li><img src="<%= asset_path 'imghra/emperor.png' %>" alt="" class="tdimg">
-      <li><%= @imperator.house.leader if @imperator %>
+      <li><img src="<%= asset_path 'imghra/emperor.png' %>" alt="" class="tdimg"> </li>
+      <li><%= @imperator.house.leader if @imperator %>  </li>
       <li><%= link_to @imperator.nick, @imperator if @imperator %>
-        (<%= link_to @imperator.house.name, @imperator.house if @imperator %>)
+        (<%= link_to @imperator.house.name, @imperator.house if @imperator %>)  </li>
     </td>
 
     <td>

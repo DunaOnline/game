@@ -64,14 +64,14 @@ class EodsController < ApplicationController
     end
 
     @eods_global = current_user.eods.where(:date => date, :order => order, :field_id => nil).first
-    @eods_fields = current_user.eods.where(:date => date, :order => order)
+    @eods_fields = current_user.eods.where(:date => date, :order => order).all
     if @eods_global && @eods_fields
-      @imperator = User.find(@eods_global.imperator).includes(:house) if @eods_global.imperator
-      @arrakis = User.find(@eods_global.arrakis).includes(:house) if @eods_global.arrakis
+      @imperator = User.find(@eods_global.imperator) if @eods_global.imperator
+      @arrakis = User.find(@eods_global.arrakis) if @eods_global.arrakis
       @leader = User.find(@eods_global.leader) if @eods_global.leader
       if @eods_global.mentats
         mentats = []
-        @eods_global.mentats.split('').each do |id|
+        @eods_global.mentats.split.each do |id|
           mentats << id.to_i
         end
         @mentats = User.where(:id => mentats)
