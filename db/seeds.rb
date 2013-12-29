@@ -118,7 +118,7 @@ Global.create(:setting => 'pocet_dni_bez_udalosti_od_zac_veku', :cislo => 3)
 Global.create(:setting => 'agrese_fremenu', :cislo => 10)
 Global.create(:setting => 'hranice_harvesteru', :cislo => 30)
 Global.create(:setting => 'pocet_senatoru', :cislo => 20)
-
+Global.create(:setting => 'start_veku', :datum => Date.today)
 puts 'Global done'
 
 titania = Planet.find_by_name('Titánia')
@@ -154,7 +154,7 @@ Property.create(:name => "Asteroid",:description => "BlaBla",:image => "/img",:p
 								:exp_bonus => 1.2, :duration => 2, :population_cost => 1.0, :melange_cost => 1.0, :material_cost => 1.0, :solar_cost => 1.0, :exp_cost => 1.0, :exp_cost => 1.0, :typ => "R")
 puts 'Property done'
 
-Effect.create(:name => "opica", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
+Effect.create(:name => "Test Effect", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
               :population_cost => 1, :melange_cost => 1, :material_cost => 1, :solar_cost => 1, :exp_cost => 1, :typ => "R", :description => "BlaBla",:image => "/img",:price => 300)
 Effect.create(:name => "Renegat", :population_bonus => 1, :pop_limit_bonus => 1, :melange_bonus => 1, :material_bonus => 1, :solar_bonus => 1, :exp_bonus => 1, :duration => 2,
               :population_cost => 0.5, :melange_cost => 0.5, :material_cost => 0.5, :solar_cost => 0.5, :exp_cost => 0.5, :typ => "M", :description => "BlaBla",:image => "/img",:price => 300)
