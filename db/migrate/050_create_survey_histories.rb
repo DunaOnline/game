@@ -1,4 +1,4 @@
-class CreateSurveyHistory < ActiveRecord::Migration
+class CreateSurveyHistories < ActiveRecord::Migration
 	def change
 		create_table :survey_histories do |t|
 			t.text :content
