@@ -568,9 +568,12 @@ class User < ActiveRecord::Base
   def move_to_house(suroviny)
     msg = ""
     presun = false
+    male = false
     suroviny.each do |sur|
-      if sur > 0
+      if sur >= 0.01
         presun = true
+      elsif sur > 0 && sur < 0.01
+	      male = true
       end
     end
     if presun
@@ -591,6 +594,8 @@ class User < ActiveRecord::Base
       else
         msg += sprava
       end
+    else
+	    msg = "Zadane mnozstvo je moc male" if male
     end
     return msg, flag
   end
@@ -598,9 +603,12 @@ class User < ActiveRecord::Base
   def move_to_mr(suroviny)
     msg = ""
     presun = false
+    male = false
     suroviny.each do |n_sur|
-      if n_sur > 0
+      if n_sur >= 0.01
         presun = true
+      elsif n_sur > 0 && n_sur < 0.01
+	      male = true
       end
     end
     if presun
@@ -621,6 +629,8 @@ class User < ActiveRecord::Base
       else
         msg += sprava
       end
+    else
+	    msg = "Zadane mnozstvo je moc male" if male
     end
     return msg, flag
   end

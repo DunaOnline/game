@@ -41,9 +41,10 @@ class UsersController < ApplicationController
       @user.napln_suroviny
 
       session[:user_id] = @user.id
-      redirect_to @user, :notice => "Thank you for signing up! You are now logged in."
+      redirect_to @user, :notice => "Dekujeme za registraci! Jste prihlasen pane."
     else
       @houses = House.playable.all
+      flash[:error] = "Nespravne vyplnena registrace"
       render :action => 'new'
     end
   end

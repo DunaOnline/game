@@ -23,6 +23,7 @@
                     <ul>
                       <li class="filterPosta"><%= link_to "Národní", syselaad_path(:kind => 'N') %></li>
                       <li class="filterPosta"><%= link_to "Mezinárodní", syselaad_path(:kind => 'E') %></li>
+                      <li class="filterPosta"><%= link_to "Imperiální", syselaad_path(:kind => 'I') %></li>
                     <% if current_user.landsraad? || current_user.admin? %>
                       <li class="filterPosta"><%= link_to "Landsraadní", syselaad_path(:kind => 'L') %></li>
                     <% end %>

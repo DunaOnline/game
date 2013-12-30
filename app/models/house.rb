@@ -127,12 +127,13 @@ class House < ActiveRecord::Base
 
   def move_to_house(suroviny, house, posiela)
     msg = ""
-
     presun = false
-
+    male = false
 	    suroviny.each do |sur|
-	      if sur > 0
+	      if sur >= 0.1
 	        presun = true
+	      elsif sur > 0 && sur < 0.01
+		      male = true
 	      end
 	    end
 	    if presun  && house != ""
@@ -168,6 +169,7 @@ class House < ActiveRecord::Base
 	      end
 	    else
 		    msg = "Nezadali jste narod." if presun
+		    msg = "Poslane mnozstvo je moc male." if male
 	    end
 	  return msg, flag
   end
@@ -175,10 +177,12 @@ class House < ActiveRecord::Base
   def move_to_mr(suroviny, mr, posiela)
     msg = ""
     presun = false
-
-	    suroviny.each do |n_sur|
-	      if n_sur > 0
+    male = false
+	    suroviny.each do |m_sur|
+	      if m_sur >= 0.01
 	        presun = true
+	      elsif m_sur > 0 && m_sur < 0.01
+		      male = true
 	      end
 	    end
 	    if presun  && mr != ""
@@ -200,6 +204,7 @@ class House < ActiveRecord::Base
 	      end
 	    else
 		    msg = "Nezadali jste malorod." if presun
+		    msg = "Poslane mnozstvo je moc male." if male
 	    end
     return msg, flag
   end
@@ -207,10 +212,12 @@ class House < ActiveRecord::Base
   def move_to_user(suroviny, user, posiela)
     msg = ""
     presun = false
-
+    male = false
 	    suroviny.each do |n_sur|
-	      if n_sur > 0
+	      if n_sur >= 0.01
 	        presun = true
+	      elsif n_sur > 0 && n_sur < 0.01
+		      male = true
 	      end
 	    end
 	    if presun && user != ""
@@ -233,6 +240,7 @@ class House < ActiveRecord::Base
 	      end
 	    else
 		    msg = "Nezdali jste hrace." if presun
+		    msg = "Poslane mnozstvo je moc male." if male
 	    end
     return msg, flag
   end

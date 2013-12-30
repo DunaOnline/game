@@ -52,8 +52,8 @@ class ImperiumController < ApplicationController
     if params[:rod_id_suroviny] != ""
 	    rodu = House.find(params[:rod_id_suroviny])
 	    sol = params[:rodu_solary].to_i.abs
-	    mel = params[:rodu_melanz].to_f.abs
-	    mat = params[:rodu_material].to_f.abs
+	    mel = params[:rodu_melanz].to_f.round(2).abs
+	    mat = params[:rodu_material].to_f.round(2).abs
 
 	    if sol > 0 || mel > 0 || mat > 0
 		    msg << "Rodu #{rodu.name} poslano "
@@ -97,8 +97,8 @@ class ImperiumController < ApplicationController
     elsif params[:user_id_suroviny] != ""
 	    hraci = User.find(params[:user_id_suroviny])
 	    sol = params[:user_solary].to_i.abs
-	    mel = params[:user_melanz].to_f.abs
-	    mat = params[:user_material].to_f.abs
+	    mel = params[:user_melanz].to_f.round(2).abs
+	    mat = params[:user_material].to_f.round(2).abs
 
 	    if sol > 0 || mel > 0 || mat > 0
 		    msg << "Hraci #{hraci.nick} poslano "

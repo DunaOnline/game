@@ -127,6 +127,7 @@ class HousesController < ApplicationController
   end
 
   def vyhosteni_hrace
+	  if current_user.leader || current_user.mentat
 	  user = User.find(params[:user_id])
 	  if current_user.house.pocet_vyhosteni != Constant.vyhostenie_hraca_n_max_per_day && !user.leader?
 		  if user.vyhostit_hrace(user.nick)
@@ -136,6 +137,9 @@ class HousesController < ApplicationController
 		  end
 	  else
 		  redirect_to :back, :notice => "Dosiahli jste limit na vyhosteni hracu na prepocet."
+	  end
+	  else
+		  redirect_to :back, :notice => "Nemate opravneni."
 		end
   end
 
@@ -160,6 +164,7 @@ class HousesController < ApplicationController
   end
 
   def send_products_house
+	  if current_user.leader || current_user.mentat
     amount = params[:amount]
     production = Production.find(params[:production])
     msg, flag = current_user.house.move_product_house(production, amount.to_i)
@@ -168,30 +173,27 @@ class HousesController < ApplicationController
     else
       redirect_to :back, :alert => msg
     end
-  end
-
-  def sell_products
-    amount = params[:amount]
-
-    if flag
-      redirect_to :back, :notice => "Vyrobky poslane"
-    else
-      redirect_to :back, :alert => msg
-    end
+	  else
+		  redirect_to :back, :notice => "Nemate opravneni."
+	  end
   end
 
   def prijmi_hrace
-    user = User.find(params[:id])
-    if user.prijat_do_naroda(current_user.house)
-      current_user.house.zapis_operaci("Byl prijat novy hrac #{user.nick}", "N")
-      redirect_to :back, :notice => "Hrac #{user.nick} bol prijaty do naroda"
-    else
-      redirect_to :back, :alert => "Nepodarilo sa prijat hraca"
-    end
-
+	  if current_user.leader || current_user.mentat
+	    user = User.find(params[:id])
+	    if user.prijat_do_naroda(current_user.house)
+	      current_user.house.zapis_operaci("Byl prijat novy hrac #{user.nick}", "N")
+	      redirect_to :back, :notice => "Hrac #{user.nick} bol prijaty do naroda"
+	    else
+	      redirect_to :back, :alert => "Nepodarilo sa prijat hraca"
+	    end
+	  else
+		  redirect_to :back, :notice => "Nemate opravneni."
+	  end
   end
 
   def posli_rodove_suroviny
+	  if current_user.leader || current_user.mentat
     rod = current_user.house
     user = []
     mr = []
@@ -213,6 +215,9 @@ class HousesController < ApplicationController
 	    end
     else
 	    redirect_to sprava_rod_path(:id => rod), :alert => "Zadejte prosim komu poslat suroviny"
+    end
+	  else
+		  redirect_to :back, :notice => "Nemate opravneni."
 	  end
   end
 
