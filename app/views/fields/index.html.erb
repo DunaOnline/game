@@ -7,8 +7,8 @@
     <td>
       <a href="#" title="Home">⌂</a> »
       <%= link_to "Imperialní kartografie", systems_path %> »
-      <%= link_to "Seznam vašich lén a planet", fields_path %> »
-      <%= link_to "Přesun materiálu", fields_path %>
+      <%= link_to "Přehled vašich lén", fields_path %> »
+      <%= link_to "Komodity na planetách", fields_path %>
     </td>
   </tr>
 
@@ -30,12 +30,10 @@
 
 <table class="tab2">
   <tr>
-    <td class="none"></td>
-    <th class="l" style="width:140px">Vaše léna</th>
-    <th style="width:80px">Kapacita</th>
-    <th style="width:90px">Na planetě</th>
-    <th style="width:85px">Produkce</th>
-    <th class="r" style="width:100px">Bonusy</th>
+    <td class="none" style="width:170px"></td>
+    <th> Na planetě </th>
+    <th> Produkce </th>
+    <th style="width:120px"> Bonusy </th>
 
   </tr>
 
@@ -44,45 +42,51 @@
       <li><h2><%= link_to @domovska.name, @domovska %></h2></li>
       <li><%= @domovska.system_name %></li>
       <li><%= @domovska.oznaceni %></li>
+      <li><b>Vaše léna:</b> 
+      <%= link_to @pole_domovska.name, @pole_domovska %>, 
+      </li>
     </td>
 
     <td>
-      <li><%= link_to @pole_domovska.name, @pole_domovska %></li>
-    </td>
-
-    <td>
-
-      <li><%= img_populace "Celková kapacita měst" %> 1000000</li>
-      <li><%= img_vyrobky "Celková kapacita výroby" %><%= @pole_domovska.kapacita_tovaren %></li>
-
-      <li><%= img_kasarna "Celková kapacita kasáren" %> 1000</li>
-      <!-- <li><%= img_kosmodrom "Celková kapacita kosmodromů" %> 1000</li> -->
-    </td>
-
-    <td>
-      <li><%= img_populace "Populace na planetě" %> <%= @pole_domovska.resource.population %></li>
-      <li><%= img_material "Materiál uložený na planetě" %> <%= @pole_domovska.resource.material %></li>
-      <li><%= img_vyrobky "Vyrobky uložený na planetě" %><%= @pole_domovska.resource.parts.to_i %></li>
-      <!-- <li><%= img_melanz "Melanž uložená na planetě" %> !!!</li>
-		<li><%= img_kasarna "Obsazená kapacita kasáren" %> !!!</li>
-		<li><%= img_kosmodrom "Celková kapacita kosmodromů" %> !1000</li> -->
+      <li><%= img_solary "Soláry" %> <i style="color:#a9a9a9">globální</i></li>
+      <li><%= img_material "Materiál uložený na planetě" %> <%= @pole_domovska.resource.material %> </li>
+      <li><%= img_populace "Populace na planetě" %> <%= @pole_domovska.resource.population %> <i style="color:#a9a9a9"></i> </li>
+      <li><%= img_zkusenosti "Zkušenosti" %> <i style="color:#a9a9a9">globální</i></li>
+      <li><%= img_vyrobky "Vyrobky uložený na planetě" %> <%= @pole_domovska.resource.parts.to_i %> <i style="color:#a9a9a9">(max. <%= @pole_domovska.kapacita_tovaren %>)</i> </li>
+      
+      
+      
+      <!-- Čeká na armádu
+      <li><%= img_kasarna "Obsazená kapacita kasáren" %> !!!</li>
+		  <li><%= img_kosmodrom "Celková kapacita kosmodromů" %> !1000</li> 
+      -->
+      
     </td>
 
     <td>
       <li><%= img_solary "Výnos soláry" %>
         <span class="<%= trida_barvy(@domovska.vynos(current_user, 'solar')) %>"><%= format_mena(@domovska.vynos(current_user, 'solar'), "S",false) %></span>
       </li>
+
       <li><%= img_material "Výnos materiál" %>
         <span class="<%= trida_barvy(@domovska.vynos(current_user, 'material')) %>"><%= format_mena(@domovska.vynos(current_user, 'material'), "kg",false) %></span>
       </li>
+      
       <li><%= img_populace "Výnos populace" %>
         <span class="<%= trida_barvy(@domovska.vynos(current_user, 'population')) %>"><%= format_mena(@domovska.vynos(current_user, 'population'), "k",false) %></span>
       </li>
+      
       <li><%= img_zkusenosti "Výnos zkušenosti" %>
         <span class="<%= trida_barvy(@domovska.vynos(current_user, 'exp')) %>"><%= format_mena(@domovska.vynos(current_user, 'exp'), "exp",false) %></span>
       </li>
+      
+      <li><%= img_vyrobky "Maximalní možná výroba" %> max.  
+      </li>
+      
+      
+      
     </td>
-
+    
     <td>
       <% pt = @domovska.planet_type %>
       <li><%= img_solary "Bonus soláry" %>
@@ -109,7 +113,7 @@
         <%= format_mena((tech_bonus_m + tech_bonus_m_n), "%",false) %>
       </span>
       </li>
-      <li><%= img_melanz "Bonus melange" %>
+      <!--- <li><%= img_melanz "Bonus melange" %>
         <span class="<%= trida_barvy(0) %>"  title="Planetarni bonus">
           <%= format_mena(0, "%",false) %></span>
 
@@ -121,7 +125,7 @@
         <span class="<%= trida_barvy(tech_bonus_j + tech_bonus_j_n) %>"  title="Technologicky bonus">
         <%= format_mena((tech_bonus_j + tech_bonus_j_n), "%",false) %>
       </span>
-      </li>
+      </li>  --->
       <li><%= img_populace "Bonus populace" %>
         <span class="<%= trida_barvy(pt.population_bonus) %>"  title="Planetarni bonus"><%= format_mena(pt.population_bonus, "%",false) %></span>
 
@@ -148,10 +152,14 @@
         <%= format_mena((tech_bonus_e + tech_bonus_e_n), "%",false) %>
       </span>
       </li>
+      
+      
+<!--- Čeká na armádu
       <li><%= img_kasarna "Bonus ke kapacitě kasáren a kosmodromů" %>
         <span class="cervena"> + 0%</span></li>
-    </td>
+--->
 
+    </td>
 
   </tr>
 
