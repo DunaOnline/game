@@ -7,7 +7,8 @@
     <td>
       <a href="#" title="Home">⌂</a> »
       <%= link_to "Imperialní kartografie", systems_path %> »
-      <%= link_to "Seznam vašich lén a planet", fields_path %>
+      <%= link_to "Seznam vašich lén a planet", fields_path %> »
+      <%= link_to "Přesun materiálu", fields_path %>
     </td>
   </tr>
 
@@ -15,13 +16,13 @@
 <%= form_tag :presun_suroviny do %>
     <table class="tab3">
       <tr>
-        <th>
+        <th style="border: solid 1px #696969 !important;" >
           <%= select_tag :source_field, options_for_select(@my_fields.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab", :title => "Zvolte zdrojove léno." %>
           <%= select_tag :presunout_co, options_for_select(@co_poslat.collect { |p| p }, {:include_blank => false}), :class => "tab" %>
           <%= select_tag :target_field, options_for_select(@my_fields.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab", :title => "Zvolte cílové léno." %>
           <%= number_field_tag :amount %>
-          <%= submit_tag 'Přesunout', :name => 'presunout', :class => 'ok4', :title => "PŘESUNOUT SUROVINY" %>
-          <%= check_box_tag 'tof', 'true', false, :class => 'grey_checkbox', :style => "width:50px;" %> Vse
+          <%= check_box_tag 'tof', 'true', false, :class => 'grey_checkbox', :style => "width:20px;" %> Vse
+          <%= submit_tag 'Přesunout', :name => 'presunout', :class => 'ok4', :style => 'float: right', :title => "Přesunout suroviny na vybrané léno" %>
         </th>
       </tr>
     </table>

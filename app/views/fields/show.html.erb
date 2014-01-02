@@ -31,12 +31,12 @@
 <%= form_tag :presun_suroviny do %>
     <table class="tab3">
       <tr>
-        <th>
+        <th style="border: solid 1px #696969 !important;" >
           <%= hidden_field_tag(:source_field, value = @field.id) %>
           <%= select_tag :presunout_co, options_for_select(@co_poslat.collect { |p| p }, {:include_blank => false}), :class => "tab" %>
           <%= select_tag :target_field, options_for_select(@my_fields.order(:name).without_field(@field).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "select_2", :title => "Zvolte cílové léno." %>
           <%= number_field_tag :amount %>
-          <%= submit_tag 'Přesunout', :name => 'presunout', :class => 'ok4', :style => "margin-right: 30px;", :title => "PŘESUNOUT SUROVINY" %>
+          <%= submit_tag 'Přesunout', :name => 'presunout', :class => 'ok4', :style => 'float: right', :title => "PŘESUNOUT SUROVINY" %>
         </th>
       </tr>
     </table>

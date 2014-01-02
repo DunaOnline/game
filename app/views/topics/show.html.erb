@@ -8,12 +8,12 @@
       » <%= link_to @topic.name, '#' %></a>
     </td>
     <% if admin? %>
-      <td class="ne" style="width:50px !important">
+      <td class="ne" style="width:50px !important" >
         <%= link_to " SMAZAT ", @topic, :confirm => 'Opravdu chcete smazat  celé toto vlákno?', :method => :delete %>
       </td>
     <% end %>
     <% if logged_in? %>
-      <td class="ano" style="width:70px !important">
+      <td class="ano" style="width:70px !important" >
         <%= link_to " ODPOVĚDĚT ", "#{new_post_path}?topic=#{@topic.id}" %>
       </td>
     <% end %>
