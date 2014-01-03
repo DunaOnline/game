@@ -394,7 +394,7 @@ class User < ActiveRecord::Base
     self.planets.each do |p|
 	    p.environment.each do |environment|
 	      if environment
-	        msg_pla << ["//**Udalost na planete #{field.planet.name} : #{environment.property.name}**//", environment]
+	        msg_pla << ["//**Udalost na planete #{p.name} : #{environment.property.name}**//", environment]
 	      end
 	    end
     end
@@ -404,7 +404,7 @@ class User < ActiveRecord::Base
   def planets
 	  planets = []
 	  self.fields.each do |p|
-		  planets << p.planet if planets.assoc(p.planet)
+		  planets << p.planet if !planets.assoc(p.planet)
 	  end
 	  planets
   end

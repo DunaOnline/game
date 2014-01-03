@@ -1,0 +1,25 @@
+<div class="udalost content">
+  <div class="row udalost_list">
+    <ul>
+      <li>
+        <%= link_to environment.property.name, udalost_path(:id => environment.id, :typ => "L") %>
+      </li>
+
+      <li>
+        <%= link_to environment.planet.name, planet_path(environment.planet) %>
+      </li>
+
+      <li>
+        Dní do ukončení události : <%= environment.duration %>
+      </li>
+    </ul>
+    <span style="float: right;">
+    <%= form_tag oprava_katastrofy_path(:id => environment.id, :typ => "L"), :class => "inline_list" do %>
+
+        <%= button_to environment.price.to_s + " S", oprava_katastrofy_path(:id => environment, :typ => "L"), data: { confirm: "Jste si jist?" } %>
+
+    <% end %>
+    </span>
+  </div>
+
+</div>

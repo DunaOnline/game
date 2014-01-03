@@ -9,6 +9,7 @@ class Prepocet
       Prepocet.zmen_vudce(order)
       Prepocet.zpristupni_planety
       Prepocet.produkce_suroviny(order)
+      Prepocet.zapis_suroviny
       Arrakis.kontrola_fremenu
       Prepocet.produkce_melanz(order)
 
@@ -46,12 +47,6 @@ class Prepocet
           :date => Date.today,
           :time => Time.now,
           :order => order,
-          :solar_store => user.solar,
-          :exp_store => user.exp,
-          :material_store => user.celkovy_material,
-          :population_store => user.celkova_populace,
-          :melange_store => user.melange,
-          :parts_store => user.celkovy_parts,
           :imperator => User.imperator ? User.imperator.id : {},
           :arrakis => User.spravce_arrakis ? User.spravce_arrakis.id : {},
           :leader => user.house.vudce ? user.house.vudce.id : {},
@@ -74,19 +69,19 @@ class Prepocet
         effect_solar = field.leno_udalost_bonus("S")
         solar_house_exp = narod.vyskumane_narodni_tech("S")
 
-        solar = field.vynos('solar') * solar_exp * solar_house_exp * enviro_solar * effect_solar * nahoda_produkce
+        solar = (field.vynos('solar') * solar_exp * solar_house_exp * enviro_solar * effect_solar * nahoda_produkce).round(2)
 
         enviro_exp = field.planet.udalost_bonus("E")
         effect_exp = field.leno_udalost_bonus("E")
         exp_exp = vlastnik.tech_bonus("E")
         exp_house_exp = narod.vyskumane_narodni_tech("E")
-        exp = (field.vynos('exp') * exp_exp * exp_house_exp * enviro_exp * effect_exp * nahoda_produkce).round
+        exp = (field.vynos('exp') * exp_exp * exp_house_exp * enviro_exp * effect_exp * nahoda_produkce).round(0)
 
         enviro_material = field.planet.udalost_bonus("M")
         effect_material = field.leno_udalost_bonus("M")
         material_exp = vlastnik.tech_bonus("M")
         material_house_exp = narod.vyskumane_narodni_tech("M")
-        material = field.vynos('material') * material_exp * material_house_exp * enviro_material * effect_material * nahoda_produkce
+        material = (field.vynos('material') * material_exp * material_house_exp * enviro_material * effect_material * nahoda_produkce).round(2)
 
         enviro_pop = field.planet.udalost_bonus("L")
         effect_pop = field.leno_udalost_bonus("L")
@@ -94,14 +89,14 @@ class Prepocet
         population_house_exp = narod.vyskumane_narodni_tech("L")
         population = (field.vynos('population') * population_exp * population_house_exp * enviro_pop * effect_pop * nahoda_produkce).round(0)
 
-        parts = field.vynos('parts') #enviro_parts
+        parts = field.vynos('parts').to_i #enviro_parts
 
         vlastnik.update_attributes(
-            :solar => vlastnik.solar + solar,
-            :exp => vlastnik.exp + exp
+            :solar => vlastnik.solar + solar.round(2),
+            :exp => vlastnik.exp + exp.to_i
         )
         field.resource.update_attributes(
-            :material => field.resource.material + material,
+            :material => field.resource.material + material.round(2),
             :population => field.resource.population + population,
             :parts => field.resource.parts + parts
         )
@@ -122,6 +117,22 @@ class Prepocet
     puts "suroviny vyprodukovany "
   end
 
+  def self.zapis_suroviny
+	  User.all.each do |u|
+		  eod = u.eods.where(field_id: nil).last
+			  if eod
+			  eod.update_attributes(:solar_store => u.solar,
+			                        :exp_store => u.exp,
+			                        :material_store => u.celkovy_material,
+			                        :population_store => u.celkova_populace,
+			                        :melange_store => u.melange,
+			                        :parts_store => u.celkovy_parts
+			                        )
+				end
+	  end
+	  puts "Suroviny zapsany do eod po produkcii."
+  end
+
   def self.produkce_melanz(order)
     puts "PRODUKUJI MELANZ"
     arrakis = Arrakis.planeta
@@ -131,7 +142,7 @@ class Prepocet
     user_tech = vlastnik.tech_bonus("J") if vlastnik
     house_tech = vlastnik.house.vyskumane_narodni_tech("J") if vlastnik
     if vlastnik
-      melange = leno.vynos('melange') * user_tech * house_tech * nahoda_produkce
+      melange = (leno.vynos('melange') * user_tech * house_tech * nahoda_produkce).round(2)
     else
       melange = 0.0
     end
