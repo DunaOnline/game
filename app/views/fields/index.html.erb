@@ -48,10 +48,10 @@
     </td>
 
     <td>
-      <li><%= img_solary "Soláry" %> <i style="color:#a9a9a9">globální</i></li>
-      <li><%= img_material "Materiál uložený na planetě" %> <%= @pole_domovska.resource.material %> </li>
       <li><%= img_populace "Populace na planetě" %> <%= @pole_domovska.resource.population %> <i style="color:#a9a9a9"></i> </li>
-      <li><%= img_zkusenosti "Zkušenosti" %> <i style="color:#a9a9a9">globální</i></li>
+
+      <li><%= img_material "Materiál uložený na planetě" %> <%= @pole_domovska.resource.material %> </li>
+
       <li><%= img_vyrobky "Vyrobky uložený na planetě" %> <%= @pole_domovska.resource.parts.to_i %> <i style="color:#a9a9a9">(max. <%= @pole_domovska.kapacita_tovaren %>)</i> </li>
       
       
@@ -80,7 +80,8 @@
         <span class="<%= trida_barvy(@domovska.vynos(current_user, 'exp')) %>"><%= format_mena(@domovska.vynos(current_user, 'exp'), "exp",false) %></span>
       </li>
       
-      <li><%= img_vyrobky "Maximalní možná výroba" %> max.  
+      <li><%= img_vyrobky "Výnos soucastek" %>
+        <span class="<%= trida_barvy(@domovska.vynos(current_user, 'parts')) %>"><%= format_mena(@domovska.vynos(current_user, 'parts'), "ks",false) %></span>
       </li>
       
       

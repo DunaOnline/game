@@ -1,0 +1,25 @@
+<%# encoding: utf-8 %>
+<table class="tab0">
+  <tr>
+    <td>
+      <a href="#" title="Home">⌂</a> »
+      <%= link_to "Imperialní kartografie", systems_path %> »
+      <%= link_to "Události hráče", udalosti_hrace_path %>
+    </td>
+  </tr>
+</table>
+<div class="content">
+  <div class="row">
+
+   <span class="heading"> Události na lénech </span>
+
+
+<%= render :partial => 'udalost_field', :collection => @influences, :as => :influence %>
+
+
+    <span class="heading"> Události na planetách </span>
+
+
+<%= render :partial => 'udalost_planet', :collection => @environments, :as => :environment %>
+  </div>
+</div>

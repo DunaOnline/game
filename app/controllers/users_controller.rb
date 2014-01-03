@@ -122,7 +122,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def udalosti
+  def udalost
     case params[:typ]
       when "L"
         @udalost = Influence.find(params[:id]).effect
@@ -186,14 +186,14 @@ class UsersController < ApplicationController
     if params[:typ] == "L"
       infl = Influence.find(params[:id])
       if infl.odstran_katastrofu(current_user)
-	      redirect_to sprava_path(:id => current_user), :notice => "Zbavili jste se naslednu katastrofy #{infl.effect.name} Zaplatili jste #{infl.effect.price * (infl.duration + 1)}"
+	      redirect_to sprava_path(:id => current_user), :notice => "Zbavili jste se nasledne katastrofy #{infl.effect.name} Zaplatili jste #{infl.effect.price * (infl.duration + 1)} Solaru."
       else
 	      redirect_to :back, :alert => "Nepodarilo sa odstranit katastrofu"
       end
     elsif params[:typ] == "P"
       enviro = Environment.find(params[:id])
       if enviro.odstran_katastrofu(current_user)
-	      redirect_to sprava_path(:id => current_user), :notice => "Zbavili jste se naslednu katastrofy #{enviro.property.name} Zaplatili jste #{enviro.property.price * (enviro.duration + 1)}"
+	      redirect_to sprava_path(:id => current_user), :notice => "Zbavili jste se nasledne katastrofy #{enviro.property.name} Zaplatili jste #{enviro.property.price * (enviro.duration + 1)} Solaru."
       else
 	      redirect_to :back, :alert => "Nepodarilo sa odstranit katastrofu"
       end
@@ -259,7 +259,11 @@ class UsersController < ApplicationController
       msg += "Nezadali ste mnozstvo na presun" if msg == ""
       redirect_to :back, :alert => msg
     end
+  end
 
+  def udalosti_hrace
+	  @influences = current_user.udalosti_field
+	  @environments = current_user.udalosti_planet
 
   end
 

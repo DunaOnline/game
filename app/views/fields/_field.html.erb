@@ -1,0 +1,113 @@
+<tr id="<%= planet.id %>">
+   <th>
+     <a href="#" style="float: left;" class="prevent_def hide_fields"><</a>
+     <%= link_to planet.name, planet %>
+   </th>
+  <th> Kapacita </th>
+  <th> Na lénu </th>
+  <th> Produkce </th>
+  <th style="width:120px"> Bonusy </th>
+
+</tr>
+<% planet.fields.vlastnik(current_user).each do |field| %>
+    <tr class="<%= planet.id %>">
+      <td>
+        <h3><%= link_to field.name, field %></h3>
+      </td>
+      <td>
+
+        <li><%= img_populace "Celková kapacita měst" %> 1000000</li>
+        <li><%= img_vyrobky "Celková kapacita výroby" %> <%= field.kapacita_tovaren %></li>
+        <li><%= img_kasarna "Celková kapacita kasáren" %> 1000</li>
+        <!-- <li><%= img_kosmodrom "Celková kapacita kosmodromů" %> 1000 -->
+      </td>
+
+      <td>
+        <li><%= img_populace "Populace na lénu" %> <%= field.resource.population %> <span style="float: right;"><%= link_to 'na DP', presun_suroviny_path(:tof => true, :presunout_co => 'Population', :source_field => field.id,:target_field => @pole_domovska.id) if @pole_domovska != field %></span></li>
+        <li><%= img_material "Materiál uložený na lénu" %> <%= field.resource.material %><span style="float: right;"><%= link_to 'na DP', presun_suroviny_path(:tof => true, :presunout_co => 'Material', :source_field => field.id,:target_field => @pole_domovska.id) if @pole_domovska != field %></span></li>
+        <li><%= img_vyrobky "Vyrobky uložený na lénu" %><%= field.resource.parts %><span style="float: right;"><%= link_to 'na DP', presun_suroviny_path(:tof => true, :presunout_co => 'Parts', :source_field => field.id,:target_field => @pole_domovska.id) if @pole_domovska != field %></span></li>
+        <!-- <li><%= img_melanz "Melanž uložená na lénu" %> !!!
+		<li><%= img_kasarna "Obsazená kapacita kasáren" %> !!!
+		<li><%= img_kosmodrom "Celková kapacita kosmodromů" %> !1000 -->
+      </td>
+
+      <td>
+        <li><%= img_solary "Výnos soláry" %>
+          <span class="<%= trida_barvy(field.vynos('solar').round) %>"><%= format_mena(field.vynos('solar'), "S") %></span> </li>
+        <li><%= img_material "Výnos materiál" %>
+          <span class="<%= trida_barvy(field.vynos('material').round) %>"><%= format_mena(field.vynos('material'), "kg") %></span></li>
+        <li><%= img_populace "Výnos populace" %>
+          <span class="<%= trida_barvy(field.vynos('population').round) %>"><%= format_mena(field.vynos('population'), "k") %></span></li>
+        <li><%= img_zkusenosti "Výnos zkušenosti" %>
+          <span class="<%= trida_barvy(field.vynos('exp').round) %>"><%= format_mena(field.vynos('exp'), "exp") %></span>  </li>
+        <li><%= img_vyrobky "Výnos parts" %>
+          <span class="<%= trida_barvy(field.vynos('parts').round) %>"><%= format_mena(field.vynos('exp'), "ks") %></span>  </li>
+      </td>
+
+      <td>
+
+        <li><%= img_solary "Bonus soláry" %>
+
+
+      <span class="<%= trida_barvy((field.leno_udalost_bonus("S")-1)*100) %>" title="Bonus udalosti">
+          <%= format_mena((field.leno_udalost_bonus("S")-1)*100, "%",false) %></span>
+
+          <% tech_bonus_s = (current_user.tech_bonus("S")*100)-100 %>
+          <% tech_bonus_s_n = (current_user.house.vyskumane_narodni_tech("S")*100)-100 %>
+          <span class="<%= trida_barvy(tech_bonus_s + tech_bonus_s_n) %>" title="Technologicky bonus">
+        <%= format_mena((tech_bonus_s + tech_bonus_s_n), "%",false) %>
+      </span>
+        </li>
+        <li><%= img_material "Bonus materiál" %>
+
+         <span class="<%= trida_barvy((field.leno_udalost_bonus("M")-1)*100) %>"  title="Bonus udalosti">
+          <%= format_mena((field.leno_udalost_bonus("M")-1)*100, "%",false) %></span>
+
+          <% tech_bonus_m = (current_user.tech_bonus("M")*100)-100 %>
+          <% tech_bonus_m_n = (current_user.house.vyskumane_narodni_tech("M")*100)-100 %>
+          <span class="<%= trida_barvy(tech_bonus_m + tech_bonus_m_n) %>"  title="Technologicky bonus">
+        <%= format_mena((tech_bonus_m + tech_bonus_m_n), "%",false) %>
+      </span>
+        </li>
+        <li><%= img_melanz "Bonus melange" %>
+
+
+        <span class="<%= trida_barvy((field.leno_udalost_bonus("J")-1)*100) %>"  title="Bonus udalosti">
+          <%= format_mena((field.leno_udalost_bonus("J")-1)*100, "%",false) %></span>
+
+          <% tech_bonus_j = (current_user.tech_bonus("J")*100)-100 %>
+          <% tech_bonus_j_n = (current_user.house.vyskumane_narodni_tech("J")*100)-100 %>
+          <span class="<%= trida_barvy(tech_bonus_j + tech_bonus_j_n) %>"  title="Technologicky bonus">
+        <%= format_mena((tech_bonus_j + tech_bonus_j_n), "%",false) %>
+      </span>
+        </li>
+        <li><%= img_populace "Bonus populace" %>
+
+      <span class="<%= trida_barvy((field.leno_udalost_bonus("P")-1)*100) %>"  title="Bonus udalosti">
+          <%= format_mena((field.leno_udalost_bonus("P")-1)*100, "%",false) %></span>
+
+
+          <% tech_bonus_p = (current_user.tech_bonus("P")*100)-100 %>
+          <% tech_bonus_p_n = (current_user.house.vyskumane_narodni_tech("P")*100)-100 %>
+          <span class="<%= trida_barvy(tech_bonus_p + tech_bonus_p_n) %>"  title="Technologicky bonus">
+        <%= format_mena((tech_bonus_p + tech_bonus_p_n), "%",false) %>
+      </span>
+        </li>
+        <li><%= img_zkusenosti "Bonus zkušenosti" %>
+
+      <span class="<%= trida_barvy((field.leno_udalost_bonus("E")-1)*100) %>"  title="Bonus udalosti">
+          <%= format_mena((field.leno_udalost_bonus("E")-1)*100, "%",false) %></span>
+
+
+          <% tech_bonus_e = (current_user.tech_bonus("E")*100)-100 %>
+          <% tech_bonus_e_n = (current_user.house.vyskumane_narodni_tech("E")*100)-100 %>
+          <span class="<%= trida_barvy(tech_bonus_e + tech_bonus_e_n) %>"  title="Technologicky bonus">
+        <%= format_mena((tech_bonus_e + tech_bonus_e_n), "%",false) %>
+      </span>
+        </li>
+        <li><%= img_kasarna "Bonus ke kapacitě kasáren a kosmodromů" %>
+          <span class="cervena"> + 0%</span></li>
+      </td>
+    </tr>
+
+<% end %>

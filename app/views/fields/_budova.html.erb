@@ -44,26 +44,7 @@
   </td>
 
 
-  <td>
-    <% if budova.can_be_upgraded(field) %>
 
-                <%= form_tag vylepsi_budovu_path(:field => field, :budova => budova) do %>
-                <li><%= img_solary %> <%= budova.upg_sol_cost %>
-                <li><%= img_material %> <%= budova.upg_mat_cost %>
-                <% if budova.upg_mel_cost > 0 %>
-                    <li><%= img_melanz %> <%= budova.upg_mel_cost %>
-                <% end %>
-                <li><%= number_field_tag :pocet_budov_vylepseni, nil, :in => -10...11, :step => 1 %></li>
-                <%= submit_tag "Vylepsit", :class => "oktab_95"   %>
-
-        <% end %>
-    <% else %>
-
-
-            Budova sa neda vylepsit
-
-    <% end %>
-  </td>
 
 
 

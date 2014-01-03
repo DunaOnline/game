@@ -223,4 +223,42 @@ class FieldsController < ApplicationController
 
   end
 
+	def list_fields
+		@planets = current_user.osidlene_planety
+		@co_poslat = [["Materiál", "Material"], ["Populace", "Population"], ["Vyrobky", "Parts"]]
+		if current_user.arrakis
+			@my_fields = current_user.fields << Arrakis.leno
+		else
+			@my_fields = current_user.fields
+		end
+		domovska = Planet.domovska(current_user).first
+		@pole_domovska = domovska.fields.vlastnik(current_user).first
+	end
+
+	def stahnout_na_dp
+		domovska = Planet.domovska(current_user).first
+		pole_domovska = domovska.fields.vlastnik(current_user).first
+		planet = Planet.find(params[:planet])
+		temp = false
+		planet.fields.vlastnik(current_user).each do |f|
+			if f.move_resource(pole_domovska, params[:presunout_co], 0, true)
+				  temp = true
+			end
+
+		end
+		if temp
+		flash[:notice] = "Suroviny přesunuty."
+		#if params[:tovarna]
+		#  redirect_to productions_path
+		#else
+		redirect_to :back
+			#end
+		else
+		flash[:error] = str
+		#if params[:tovarna]
+		# redirect_to productions_path
+		#else
+		redirect_to :back
+		end
+end
 end

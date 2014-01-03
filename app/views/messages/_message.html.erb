@@ -1,5 +1,5 @@
 <tr xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" class="opica" data-druh="<%= message.druh if message.druh %>">
-  <td><%= link_to message.created_at.localtime, '#', :class => "message" %>
+  <td><%= link_to message.created_at.localtime, '#', :class => "message prevent_def" %>
 
     <% unless message.proctena(current_user) %>
         <div class="precitanaimg"></div>

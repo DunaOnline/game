@@ -68,6 +68,9 @@ DuneOnline::Application.routes.draw do
   match 'postavit_arrakis' => 'fields#postavit_arrakis', :as => :postavit_arrakis
   match 'presun_suroviny' => 'fields#presun_suroviny', :as => :presun_suroviny
   match 'vylepsi_budovu' => 'fields#vylepsi_budovu', :as => :vylepsi_budovu
+  match 'list_fields' => 'fields#list_fields', :as => :list_fields
+  match 'stahnout_na_dp' => 'fields#stahnout_na_dp', :as => :stahnout_na_dp
+
   resources :properties
 
   resources :planets
@@ -117,12 +120,12 @@ DuneOnline::Application.routes.draw do
   match 'pridel_pravo' => 'users#pridel_pravo', :as => :pridel_pravo
   match 'odeber_pravo' => 'users#odeber_pravo', :as => :odeber_pravo
   match 'posli_suroviny' => 'users#posli_suroviny', :as => :posli_suroviny
-	match 'udalosti' => 'users#udalosti', :as => :udalosti
+	match 'udalost' => 'users#udalost', :as => :udalost
 	match 'oprava_katastrofy' => 'users#oprava_katastrofy', :as => :oprava_katastrofy
   match 'zmena_hesla_f' => 'users#zmena_hesla_f', :as => :zmena_hesla_f
   match 'zmena_hesla' => 'users#zmena_hesla', :as => :zmena_hesla
 	match 'send_products' => 'users#send_products', :as => :send_products
-
+	match 'udalosti_hrace' => 'users#udalosti_hrace', :as => :udalosti_hrace
 
 	mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'
 

@@ -197,10 +197,11 @@ class Planet < ActiveRecord::Base
 
     pocet_tovaren = 0
     self.fields.vlastnik(user).each { |field|
-      leno_s_tovarnou = field.estates.where(:building_id => tovarna.id).first
-      pocet_tovaren += leno_s_tovarnou.number if leno_s_tovarnou
+      #leno_s_tovarnou = field.estates.where(:building_id => tovarna.id).first
+      #pocet_tovaren += leno_s_tovarnou.number if leno_s_tovarnou
+	    pocet_tovaren += field.kapacita_tovaren
     }
-    (pocet_tovaren * Constant.kapacita_tovaren).to_i
+    pocet_tovaren
   end
 
   def self.nahodna_udalost

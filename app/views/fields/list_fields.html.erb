@@ -1,0 +1,35 @@
+<%# encoding: utf-8 %>
+<% title "Fields" %>
+
+<table class="tab0">
+
+  <tr>
+    <td>
+      <a href="#" title="Home">⌂</a> »
+      <%= link_to "Imperialní kartografie", systems_path %> »
+      <%= link_to "Přehled vašich lén a planet", fields_path %> »
+      <%= link_to "Komodity na lénech", list_fields_path %>
+    </td>
+  </tr>
+
+</table>
+<%= form_tag :presun_suroviny do %>
+    <table class="tab3">
+      <tr>
+        <th style="border: solid 1px #696969 !important;" >
+          <%= select_tag :source_field, options_for_select(@my_fields.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab", :title => "Zvolte zdrojove léno." %>
+          <%= select_tag :presunout_co, options_for_select(@co_poslat.collect { |p| p }, {:include_blank => false}), :class => "tab" %>
+          <%= select_tag :target_field, options_for_select(@my_fields.order(:name).all.collect { |p| [p.name, p.id] }, {:include_blank => false}), :class => "tab", :title => "Zvolte cílové léno." %>
+          <%= number_field_tag :amount %>
+          <%= check_box_tag 'tof', 'true', false, :class => 'grey_checkbox', :style => "width:20px;" %> Vse
+          <%= submit_tag 'Přesunout', :name => 'presunout', :class => 'ok4', :style => 'float: right', :title => "Přesunout suroviny na vybrané léno" %>
+        </th>
+      </tr>
+    </table>
+<% end %>
+<table class="tab2">
+
+<%= render :partial => 'field', :collection => @planets, :as => :planet %>
+
+
+</table>

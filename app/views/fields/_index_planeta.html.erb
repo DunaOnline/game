@@ -4,23 +4,13 @@
     <li><%= planet.system_name %>  <%= planet.oznaceni %>
     <li><%= planet.obsazenost %>
   </td>
-  <td>
-    <% for field in planet.fields.vlastnik(current_user) do %>
-        <li><%= link_to field.name, field %>
-    <% end %>
-  </td>
-  <td>
 
-    <li><%= img_populace "Celková kapacita měst" %> 1000000</li>
-    <li><%= img_vyrobky "Celková kapacita výroby" %> <%= planet.kapacita_parts(current_user).to_i %></li>
-    <li><%= img_kasarna "Celková kapacita kasáren" %> 1000</li>
-    <!-- <li><%= img_kosmodrom "Celková kapacita kosmodromů" %> 1000 -->
-  </td>
+
 
   <td>
-    <li><%= img_populace "Populace na planetě" %> <%= planet.celkova_populace(current_user) %>
-    <li><%= img_material "Materiál uložený na planetě" %> <%= planet.celkovy_material(current_user) %>
-    <li><%= img_vyrobky "Vyrobky uložený na planetě" %><%= planet.celkovy_parts(current_user).to_i %></li>
+    <li><%= img_populace "Populace na planetě" %> <%= planet.celkova_populace(current_user) %>  <span style="float: right;"><%= link_to 'na DP', stahnout_na_dp_path(:presunout_co => 'Population', :planet => planet.id) %></span> </li>
+    <li><%= img_material "Materiál uložený na planetě" %> <%= planet.celkovy_material(current_user) %> <span style="float: right;"><%= link_to 'na DP', stahnout_na_dp_path(:presunout_co => 'Material', :planet => planet.id) %></span>  </li>
+    <li><%= img_vyrobky "Vyrobky uložený na planetě" %><%= planet.celkovy_parts(current_user).to_i %> <i style="color:#a9a9a9">(max. <%= planet.kapacita_parts(current_user) %>)</i> <span style="float: right;"><%= link_to 'na DP', stahnout_na_dp_path(:presunout_co => 'Parts', :planet => planet.id) %></span>  </li>
     <!-- <li><%= img_melanz "Melanž uložená na planetě" %> !!!
 		<li><%= img_kasarna "Obsazená kapacita kasáren" %> !!!
 		<li><%= img_kosmodrom "Celková kapacita kosmodromů" %> !1000 -->
@@ -29,12 +19,19 @@
   <td>
     <li><%= img_solary "Výnos soláry" %>
       <span class="<%= trida_barvy(planet.vynos(current_user, 'solar').round) %>"><%= format_mena(planet.vynos(current_user, 'solar'), "S") %></span>
+    </li>
     <li><%= img_material "Výnos materiál" %>
       <span class="<%= trida_barvy(planet.vynos(current_user, 'material').round) %>"><%= format_mena(planet.vynos(current_user, 'material'), "kg") %></span>
+    </li>
     <li><%= img_populace "Výnos populace" %>
       <span class="<%= trida_barvy(planet.vynos(current_user, 'population').round) %>"><%= format_mena(planet.vynos(current_user, 'population'), "k") %></span>
+    </li>
     <li><%= img_zkusenosti "Výnos zkušenosti" %>
       <span class="<%= trida_barvy(planet.vynos(current_user, 'exp').round) %>"><%= format_mena(planet.vynos(current_user, 'exp'), "exp") %></span>
+    </li>
+    <li><%= img_vyrobky "Výnos soucastek" %>
+      <span class="<%= trida_barvy(planet.vynos(current_user, 'parts')) %>"><%= format_mena(planet.vynos(current_user, 'parts'), "ks",false) %></span>
+    </li>
   </td>
 
   <td>

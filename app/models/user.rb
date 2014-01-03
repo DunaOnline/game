@@ -280,6 +280,26 @@ class User < ActiveRecord::Base
     self.operations << Operation.new(:kind => kind, :content => content, :date => Date.today, :time => Time.now)
   end
 
+  def udalosti_field
+	  u = []
+	  self.fields.each do |f|
+		  f.influence.each do |i|
+			  u << i if i
+		  end
+	  end
+	  u
+  end
+
+  def udalosti_planet
+	  p = []
+	  self.osidlene_planety.each do |e|
+		  e.environment.each do |n|
+			 p << n if n
+		  end
+	  end
+	  p
+  end
+
   def vliv
     #cp = self.celkova_populace
     #cp = 20000000.0 if cp > 20000000.0
@@ -786,18 +806,18 @@ class User < ActiveRecord::Base
 	  end
   end
 
-  def upgrades_b_available_by_technology(building)
-	  lvl = 0
-	  if Technology.where(:bonus_type => building.kind).first
-		  tech = Technology.where(:bonus_type => building.kind).first
-		  count = 1
-		  tech.upg_b_levely.each do |t|
-			  lvl = t if building.level == count
-			  count += 1
-		  end
-	  end
-	 	lvl
-  end
+  #def upgrades_b_available_by_technology(building)
+	 # lvl = 0
+	 # if Technology.where(:bonus_type => building.kind).first
+		#  tech = Technology.where(:bonus_type => building.kind).first
+		#  count = 1
+		#  tech.upg_b_levely.each do |t|
+		#	  lvl = t if building.level == count
+		#	  count += 1
+		#  end
+	 # end
+	 #	lvl
+  #end
 
   def pristup_do_is? # Imperialni syselaad
     self.emperor? || self.regent? || self.admin? || self.vezir? || self.court? || self.arrakis?

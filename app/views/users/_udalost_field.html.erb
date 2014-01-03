@@ -1,0 +1,25 @@
+<div class="udalost content">
+  <div class="row udalost_list">
+    <ul>
+      <li>
+        <%= link_to influence.effect.name, udalost_path(:id => influence.id, :typ => "L") %>
+      </li>
+
+      <li>
+        <%= link_to influence.field.name, field_path(influence.field) %>
+      </li>
+
+      <li>
+        Dní do ukončení události : <%= influence.duration %>
+      </li>
+    </ul>
+    <span style="float: right;">
+    <%= form_tag oprava_katastrofy_path(:id => influence.id, :typ => "L"), :class => "inline_list" do %>
+
+        <%= button_to influence.price.to_s + " S", oprava_katastrofy_path(:id => influence, :typ => "L"), data: { confirm: "Jste si jist?" } %>
+
+    <% end %>
+    </span>
+  </div>
+
+</div>

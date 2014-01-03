@@ -21,13 +21,13 @@
       
       <%= f[0] %>
       
-      Více informací najdete <%= link_to "zde.", udalosti_path(:id => f[1], :typ => "L") %>
+      Více informací najdete <%= link_to "zde.", udalost_path(:id => f[1], :typ => "L") %>
     </div>
 <% end %>
 <% planet.each do |p| %>
     <div class="la field_event">
       <%= p[0] %>
-      <%= link_to "udalosti", udalosti_path(:id => p[1], :typ => "P") %>
+      <%= link_to "udalost", udalost_path(:id => p[1], :typ => "P") %>
     </div>
 <% end %>
 
