@@ -585,7 +585,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def move_to_house(suroviny)
+  def move_to_house(suroviny,comment)
     msg = ""
     presun = false
     male = false
@@ -608,7 +608,7 @@ class User < ActiveRecord::Base
         house.update_attributes(:solar => house.solar + h_solar, :material => house.material + h_material, :melange => house.melange + h_melange, :exp => house.exp + h_exp, :parts => house.parts + h_parts)
         self.update_attributes(:solar => self.solar - h_solar, :melange => self.melange - h_melange, :exp => self.exp - h_exp)
         self.domovske_leno.resource.update_attributes(:material => self.domovske_leno.resource.material - h_material, :parts => self.domovske_leno.resource.parts - h_parts)
-        msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_material} kg, #{h_melange} mg, #{h_exp} exp, #{h_parts} dilu od hraca #{self.nick}"
+        msg += "Posláno narodu #{house.name} #{h_solar} solaru, #{h_material} kg, #{h_melange} mg, #{h_exp} exp, #{h_parts} dilu od hraca #{self.nick}.  Poznamka : "+comment
         self.zapis_operaci(msg)
 	      house.zapis_operaci(msg)
       else
@@ -620,7 +620,7 @@ class User < ActiveRecord::Base
     return msg, flag
   end
 
-  def move_to_mr(suroviny)
+  def move_to_mr(suroviny,comment)
     msg = ""
     presun = false
     male = false
@@ -643,7 +643,7 @@ class User < ActiveRecord::Base
         mr.update_attributes(:solar => mr.solar + mr_solar, :melange => mr.melange + mr_melange, :exp => mr.exp + mr_exp, :parts => mr.parts + mr_parts, :material => mr.material + mr_material)
         self.update_attributes(:solar => self.solar - mr_solar, :melange => self.melange - mr_melange, :exp => self.exp - mr_exp)
         self.domovske_leno.resource.update_attributes(:material => self.domovske_leno.resource.material - mr_material, :parts => self.domovske_leno.resource.parts - mr_parts)
-        msg ="Posláno malorodu #{mr.name} #{mr_solar} solaru, #{mr_material} kg, #{mr_melange} mg, #{mr_exp} exp, #{mr_parts} dilu od hraca #{self.nick}"
+        msg ="Posláno malorodu #{mr.name} #{mr_solar} solaru, #{mr_material} kg, #{mr_melange} mg, #{mr_exp} exp, #{mr_parts} dilu od hraca #{self.nick}.  Poznamka : "+comment
         self.zapis_operaci(msg)
 	      mr.zapis_operaci(msg)
       else
@@ -718,10 +718,10 @@ class User < ActiveRecord::Base
     market.zapis_obchodu(self.id, "Bylo poslano na trh zbozi #{market.show_area}, #{amount} ks, za #{market.price * amount} solaru")
   end
 
-  def posli_suroviny(h, mr)
+  def posli_suroviny(h, mr, comment)
     msg = ""
-    sprava, flag = self.move_to_house(h)
-    sprava1, flag1 = self.move_to_mr(mr)
+    sprava, flag = self.move_to_house(h,comment)
+    sprava1, flag1 = self.move_to_mr(mr,comment)
     msg += sprava if sprava
     msg += sprava1 if sprava1
 

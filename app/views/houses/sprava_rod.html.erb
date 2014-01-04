@@ -60,6 +60,14 @@
           <li><%= select_tag :rod_id_suroviny, options_for_select(House.without_house(@house.id).without_house(1).without_house(3).order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %></li>
         </td>
       </tr>
+      <tr>
+        <th>
+          Poznámka :
+        </th>
+        <td colspan="4">
+          <%= text_area_tag 'comment', '', :class => 'full_width' %>
+        </td>
+      </tr>
   <% end %>
 </table>
 

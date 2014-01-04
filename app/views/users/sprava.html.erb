@@ -27,6 +27,7 @@
         <% if @user.subhouse %>
         <th style="width:100px">Poslat Malorodu</th>
         <% end %>
+
         <!--- <th class="r">Projekt [%]</th> -->
       </tr>
       <tr class="break_word">
@@ -67,6 +68,7 @@
 
         </td>
         <% end %>
+
         <!--- <td>
           <li><%= img_solary %>
             <input type="text" size="3" title="Nastavte odvod">
@@ -78,6 +80,14 @@
             <input type="text" size="3" title="Nastavte odvod">
         </td>  --->
 
+      </tr>
+      <tr>
+        <th>
+          Poznámka :
+        </th>
+        <td colspan="4">
+          <%= text_area_tag 'comment', '', :class => 'full_width' %>
+        </td>
       </tr>
   <% end %>
 </table>

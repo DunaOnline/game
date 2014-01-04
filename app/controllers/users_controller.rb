@@ -256,11 +256,12 @@ class UsersController < ApplicationController
 
 
   def posli_suroviny
+	  comment = params[:comment]
     rod = []
     mr = []
     rod << params[:rod_solary].to_f.abs << params[:rod_melanz].to_f.abs << params[:rod_zkusenosti].to_i.abs << params[:rod_material].to_f.abs << params[:rod_vyrobky].to_f.abs
     mr << params[:mr_solary].to_f.abs << params[:mr_melanz].to_f.abs << params[:mr_zkusenosti].to_i.abs << params[:mr_material].to_f.abs << params[:mr_vyrobky].to_f.abs
-    msg, flag = current_user.posli_suroviny(rod, mr)
+    msg, flag = current_user.posli_suroviny(rod, mr,comment)
     if flag
       redirect_to :back, :notice => msg
     else

@@ -107,6 +107,7 @@ class SubhousesController < ApplicationController
   end
 
   def posli_mr_sur
+	  comment = params[:comment]
     malorod = current_user.subhouse
     user = []
     mr = []
@@ -118,7 +119,7 @@ class SubhousesController < ApplicationController
     narod << params[:rodu_solary].to_f.abs << params[:rodu_melanz].to_f.abs << params[:rodu_zkusenosti].to_i.abs << params[:rodu_material].to_f.abs << params[:rodu_parts].to_f.abs
     mr << params[:mr_solary].to_f.abs << params[:mr_melanz].to_f.abs << params[:mr_zkusenosti].to_i.abs << params[:mr_material].to_f.abs << params[:mr_parts].to_f.abs
     unless rodu == "" && useru == "" && mrdu == ""
-	    msg, flag = malorod.posli_mr_suroviny(narod, user, mr, rodu, useru, mrdu, current_user)
+	    msg, flag = malorod.posli_mr_suroviny(narod, user, mr, rodu, useru, mrdu, current_user,comment)
 	      if flag
 
 		      redirect_to sprava_mr_path(:id => malorod), :notice => msg
