@@ -96,6 +96,7 @@ DuneOnline::Application.routes.draw do
   match 'vyhosteni_hrace' => 'houses#vyhosteni_hrace', :as => :vyhosteni_hrace
   match 'vyves_nastenku' => 'houses#vyves_nastenku', :as => :vyves_nastenku
   match 'vyves_imp_nastenku' => 'houses#vyves_imp_nastenku', :as => :vyves_imp_nastenku
+  match 'udalosti_naroda' => 'houses#udalosti_naroda', :as => :udalosti_naroda
 
   resources :discoverables
   

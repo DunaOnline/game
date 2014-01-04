@@ -192,6 +192,14 @@ class Planet < ActiveRecord::Base
     parts
   end
 
+  def pocet_poli_house(house)
+	  u = 0
+	  self.fields.each do |f|
+		  u += 1 if f.user.house == house
+	  end
+	  u
+  end
+
   def kapacita_parts(user)
     tovarna = Building.where(:kind => 'V').first
 

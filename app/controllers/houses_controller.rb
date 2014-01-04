@@ -221,4 +221,12 @@ class HousesController < ApplicationController
 	  end
   end
 
+	def udalosti_naroda
+		if current_user.admin? || current_user.leader? || current_user.mentat?
+		@environments = current_user.house.environments
+		else
+			redirect_to houses_path
+		end
+	end
+
 end

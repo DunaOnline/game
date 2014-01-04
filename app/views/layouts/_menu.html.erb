@@ -144,6 +144,10 @@
               <li><%= link_to "Imperialní kartografie", systems_path %></li>
               <li><%= link_to "Imperiální databáze hráčů", users_path %></li>
               <li><%= link_to "Imperiální databáze národů", houses_path %></li>
+              <% if current_user.admin? || current_user.leader? || current_user.mentat? %>
+              <br>
+              <li><%= link_to "Udalosti na pl. hracu", udalosti_naroda_path %></li>
+              <% end %>
             </ul>
           </li>
         </ul>

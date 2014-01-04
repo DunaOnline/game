@@ -404,7 +404,7 @@ class User < ActiveRecord::Base
   def planets
 	  planets = []
 	  self.fields.each do |p|
-		  planets << p.planet if !planets.assoc(p.planet)
+		  planets << p.planet unless planets.include?(p.planet)
 	  end
 	  planets
   end

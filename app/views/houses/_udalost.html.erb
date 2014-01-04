@@ -1,7 +1,7 @@
 <div class="udalost content">
   <div class="row udalost_list">
     <ul>
-      <li>
+      <li style="width: 30%;">
         <%= link_to environment.property.name, udalost_path(:id => environment.id, :typ => "L") %>
       </li>
 
@@ -10,7 +10,11 @@
       </li>
 
       <li>
-        Dní do ukončení události : <%= environment.duration %>
+        Len zasiahnutych : <%= environment.planet.pocet_poli_house(current_user.house) %>
+      </li>
+
+      <li>
+       Událost končí : <%= environment.duration %> dnu
       </li>
     </ul>
     <% if current_user.admin? || current_user.leader? || current_user.mentat? %>

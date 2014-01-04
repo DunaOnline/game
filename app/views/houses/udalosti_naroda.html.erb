@@ -1,0 +1,19 @@
+<%# encoding: utf-8 %>
+<table class="tab0">
+  <tr>
+    <td>
+      <a href="#" title="Home">⌂</a> »
+      <%= link_to "Imperialní kartografie", systems_path %> »
+      <%= link_to "Události národa", udalosti_naroda_path %>
+    </td>
+  </tr>
+</table>
+<div class="content">
+  <div class="row">
+
+    <span class="heading"> Události na planetách naších spoluobčanu </span>
+
+
+    <%= render :partial => 'udalost', :collection => @environments, :as => :environment %>
+  </div>
+</div>

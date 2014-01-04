@@ -33,7 +33,7 @@
                 <%= button_to @leno.price.to_s + " S", oprava_katastrofy_path(:id => @leno.id, :typ => "L") if @leno && @leno.field.user == current_user%>
               </li>
               <li>
-                <%= button_to @planet.price.to_s + " S", oprava_katastrofy_path(:id => @planet.id, :typ => "P") if @planet && current_user.leader? && current_user.house == @planet.planet.house %>
+                <%= button_to @planet.price.to_s + " S", oprava_katastrofy_path(:id => @planet.id, :typ => "P") if @planet && current_user.admin? || current_user.leader? || current_user.mentat? && current_user.house == @planet.planet.house %>
               </li>
 
              

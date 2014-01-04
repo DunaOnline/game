@@ -486,6 +486,31 @@ class House < ActiveRecord::Base
 	  self.update_attribute(:house_dashboard,content)
   end
 
+  def environments
+	  e = []
+	  planets = []
+	  self.planety_hracu.each do |p|
+
+			  if p.environment
+				  p.environment.each do |b|
+				  e << b unless e.include?(b)
+					end
+			  end
+
+	  end
+	  e
+  end
+
+  def planety_hracu
+	  pla = []
+	  self.users.each do |u|
+		  u.planets.each do |p|
+			 pla << p unless pla.include?(p)
+		  end
+	  end
+	  pla
+  end
+
   scope :without_house, lambda { |house| house ? {:conditions => ["id != ?", house]} : {} }
   scope :playable, where(:playable => true)
 end
