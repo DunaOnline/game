@@ -13,7 +13,7 @@ module ApplicationHelper
     if cas==nil
       ''
     else
-      cas.strftime('%H:%M:%S')
+      cas.in_time_zone(Time.zone).strftime('%H:%M:%S')
     end
   end
 

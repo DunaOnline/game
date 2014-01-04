@@ -2,7 +2,7 @@
 class Imperium
 
   def self.zapis_operaci(content, kind = "I")
-    Operation.new(:kind => kind, :content => content, :date => Date.today, :time => Time.now).save
+    Operation.new(:kind => kind, :content => content, :date => Date.today, :time => Time.zone.now).save
   end
 
   def self.volba_imperatora?
