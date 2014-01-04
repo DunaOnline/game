@@ -18,7 +18,7 @@
 #
 
 class Law < ActiveRecord::Base
-  attr_accessible :label, :title, :content, :state, :position, :submitter, :submitted, :enacted, :signed, :refused
+  attr_accessible :label, :title, :content, :state, :position, :submitter, :submitted, :enacted, :signed, :refused, :druh
 
   has_many :polls
   has_many :users, :through => :polls
@@ -28,6 +28,7 @@ class Law < ActiveRecord::Base
   validates_presence_of :content, :title
 
   STATE = %w(Zarazen Projednavan Schvalen Zamitnut Podepsan Odmitnout Platny)
+  SYSTEM_LAW = %w(odvolanie_imp)
 
 
   def self.create_label
@@ -46,35 +47,71 @@ class Law < ActiveRecord::Base
     return max_pos
   end
 
+  #SYSTEM zakon na odvolanie imp
+  def self.odvolaj_imperatora
+	  Law.new(:submitter => 1, :content => Constant.odvolanie_imperatora_zakon_body, :title => Constant.odvolanie_imperatora_zakon_title, :druh => Law::SYSTEM_LAW[0], :label => self.create_label, :state => Law::STATE[1], :enacted => Date.today).save
+  end
+
+  def self.zakon_navrhnuty(druh)
+	  if Law.where(:druh => druh, :state => Law::STATE[1]).first
+		  true
+	  else
+		  false
+	  end
+  end
+
+
+  #SYSTEM zakony maju submittera 1
+
   def vyhodnot_zakon
-    hlasy_pro = self.polls.pro.count
-    hlasy_proti = self.polls.proti.count
-    zdrzelo_se = self.polls.zdrzelo.count
-
-    celkem = hlasy_pro + hlasy_proti + zdrzelo_se
-
-    puts "pro"
-    puts hlasy_pro
-    puts "proti"
-    puts hlasy_proti
-    puts "zdrzelo se"
-    puts zdrzelo_se
-    puts "celkem"
-    puts celkem
-
-    if (hlasy_pro > hlasy_proti) && (hlasy_pro > ((self.refused? ? 0.6 : 0.5) * celkem))
-	    if self.refused?
-		    self.update_attribute(:state, Law::STATE[6])
-		    Landsraad.zapis_operaci("Byl uzakonen znovu voleny zakon #{self.label} - #{self.title} pomerem: #{self.pomer_hlasu}.")
-	    else
-      self.update_attribute(:state, Law::STATE[2])
-      Landsraad.zapis_operaci("Byl schvalen zakon #{self.label} - #{self.title} pomerem: #{self.pomer_hlasu}.")
-	    end
+    if self.druh
+	    self.handle_system_law
     else
-      self.update_attribute(:state, Law::STATE[3])
-      Landsraad.zapis_operaci("Zakon #{self.label} - #{self.title} byl zamitnut pomerem: #{self.pomer_hlasu}.")
+	    if self.vyhodnot_hlasy
+		    if self.refused?
+			    self.update_attribute(:state, Law::STATE[6])
+			    Landsraad.zapis_operaci("Byl uzakonen znovu voleny zakon #{self.label} - #{self.title} pomerem: #{self.pomer_hlasu}.")
+		    else
+	      self.update_attribute(:state, Law::STATE[2])
+	      Landsraad.zapis_operaci("Byl schvalen zakon #{self.label} - #{self.title} pomerem: #{self.pomer_hlasu}.")
+		    end
+	    else
+	      self.update_attribute(:state, Law::STATE[3])
+	      Landsraad.zapis_operaci("Zakon #{self.label} - #{self.title} byl zamitnut pomerem: #{self.pomer_hlasu}.")
+	    end
     end
+  end
 
+  def vyhodnot_hlasy
+	  hlasy_pro = self.polls.pro.count
+	  hlasy_proti = self.polls.proti.count
+	  zdrzelo_se = self.polls.zdrzelo.count
+
+	  celkem = hlasy_pro + hlasy_proti + zdrzelo_se
+
+	  puts "pro"
+	  puts hlasy_pro
+	  puts "proti"
+	  puts hlasy_proti
+	  puts "zdrzelo se"
+	  puts zdrzelo_se
+	  puts "celkem"
+	  puts celkem
+
+	  hlasy_pro > hlasy_proti && hlasy_pro > ((self.refused? ? 0.6 : 0.5) * celkem)
+  end
+
+  def handle_system_law
+	  case self.druh
+		  when Law::SYSTEM_LAW[0]
+			   if self.vyhodnot_hlasy
+				   self.update_attribute(:state, Law::STATE[6])
+				   User.imperator.update_attribute(:emperor, false)
+				   Imperium.zapis_operaci("Pokus o odvolanie byl uspesny pomerem: #{self.pomer_hlasu}.")
+			   else
+				   Imperium.zapis_operaci("Pokus o odvolanie imperatora byl zamitnut pomerem: #{self.pomer_hlasu}.")
+			   end
+	  end
   end
 
   def pomer_hlasu
@@ -93,6 +130,7 @@ class Law < ActiveRecord::Base
       false
     end
   end
+
 
   def imp_podepis(volba, user)
     if volba == 'Ano'

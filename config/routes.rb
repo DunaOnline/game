@@ -157,7 +157,7 @@ DuneOnline::Application.routes.draw do
   match 'volba_imperatora' => 'landsraad#volba_imperatora', :as => :volba_imperatora
 	match 'imperator_zakony' => 'landsraad#imperator_zakony', :as => :imperator_zakony
 	match 'podepisat_zakon' => 'landsraad#podepisat_zakon', :as => :podepisat_zakon
-
+	match 'odvolat_imperatora_land' => 'landsraad#odvolat_imperatora_land', :as => :odvolat_imperatora_land
   
   
   # The priority is based upon order of creation:

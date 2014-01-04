@@ -119,7 +119,9 @@ Global.create(:setting => 'agrese_fremenu', :cislo => 10)
 Global.create(:setting => 'hranice_harvesteru', :cislo => 30)
 Global.create(:setting => 'pocet_senatoru', :cislo => 20)
 Global.create(:setting => 'start_veku', :datum => Date.today)
-Global.create(:setting => 'odmietnutie_zakona_msg', :slovo => "Vas zakon #{self.label} byl vetovan prosim klikni na link <a href='landsraad_jednani?refused=#{self.id}'>ZAKON</a>")
+Global.create(:setting => 'odmietnutie_zakona_msg', :slovo => "Vas zakon ###self.label byl vetovan prosim klikni na link <a href='landsraad_jednani?refused=self.id>ZAKON</a>")
+Global.create(:setting => 'odvolanie_imperatora_zakon_body', :slovo => "Hlasujte o duvere k imperatorovi .")
+Global.create(:setting => 'odvolanie_imperatora_zakon_title', :slovo => "Ovolanie Imperatora.")
 
 puts 'Global done'
 

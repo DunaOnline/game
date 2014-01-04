@@ -2,7 +2,7 @@
   <div class="row udalost_list">
     <ul>
       <li style="width: 30%;">
-        <%= link_to environment.property.name, udalost_path(:id => environment.id, :typ => "L") %>
+        <%= link_to environment.property.name, udalost_path(:id => environment.id, :typ => "P") %>
       </li>
 
       <li>
@@ -14,7 +14,7 @@
       </li>
 
       <li>
-       Událost končí : <%= environment.duration %> dnu
+       Událost končí : <%= environment.duration + 1 %> dnu
       </li>
     </ul>
     <% if current_user.admin? || current_user.leader? || current_user.mentat? %>

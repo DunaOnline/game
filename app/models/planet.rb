@@ -285,8 +285,8 @@ class Planet < ActiveRecord::Base
       end
     end
 
-    enviro_bonus = enviro_bonus -1 if enviro_bonus > 2
-    enviro_bonus
+    enviro_bonus -1
+
   end
 
 

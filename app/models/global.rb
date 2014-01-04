@@ -30,6 +30,8 @@ class Global < ActiveRecord::Base
         Global.where(:setting => setting).first.slovo
       when 4
         Global.where(:setting => setting).first.cislo
+	    else
+		    0
     end
   end
 

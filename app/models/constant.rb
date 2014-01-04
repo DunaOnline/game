@@ -267,7 +267,15 @@ class Constant
 	end
 
   def self.odmietnutie_zakona_msg
-	  Global.vrat('odmietnutie_zakona_msg', 4)
+	  Global.vrat('odmietnutie_zakona_msg', 3)
+  end
+
+  def self.odvolanie_imperatora_zakon_body
+	  Global.vrat('odvolanie_imperatora_zakon_body', 3)
+  end
+
+  def self.odvolanie_imperatora_zakon_title
+	  Global.vrat('odvolanie_imperatora_zakon_title', 3)
   end
 
 end

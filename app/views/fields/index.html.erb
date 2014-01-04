@@ -93,8 +93,8 @@
       <li><%= img_solary "Bonus soláry" %>
         <span class="<%= trida_barvy(pt.solar_bonus) %>" title="Planetarni bonus"><%= format_mena(pt.solar_bonus, "%",false) %></span>
 
-      <span class="<%= trida_barvy((@domovska.fields.first.leno_udalost_bonus("S")-1)*100) %>" title="Bonus udalosti">
-          <%= format_mena((@domovska.fields.first.leno_udalost_bonus("S")-1)*100, "%",false) %></span>
+      <span class="<%= trida_barvy((@domovska.udalost_bonus("S")-1)*100) %>" title="Bonus udalosti">
+          <%= format_mena((@domovska.udalost_bonus("S")-1)*100, "%",false) %></span>
 
         <% tech_bonus_s = (current_user.tech_bonus("S")*100)-100 %>
         <% tech_bonus_s_n = (current_user.house.vyskumane_narodni_tech("S")*100)-100 %>
@@ -105,8 +105,8 @@
       <li><%= img_material "Bonus materiál" %>
         <span class="<%= trida_barvy(pt.material_bonus) %>"  title="Planetarni bonus"><%= format_mena(pt.material_bonus, "%",false) %></span>
 
-         <span class="<%= trida_barvy((@domovska.fields.first.leno_udalost_bonus("M")-1)*100) %>"  title="Bonus udalosti">
-          <%= format_mena((@domovska.fields.first.leno_udalost_bonus("M")-1)*100, "%",false) %></span>
+,         <span class="<%= trida_barvy((@domovska.udalost_bonus("M")-1)*100) %>"  title="Bonus udalosti">
+          <%= format_mena((@domovska.udalost_bonus("M")-1)*100, "%",false) %></span>
 
         <% tech_bonus_m = (current_user.tech_bonus("M")*100)-100 %>
         <% tech_bonus_m_n = (current_user.house.vyskumane_narodni_tech("M")*100)-100 %>
@@ -118,8 +118,8 @@
         <span class="<%= trida_barvy(0) %>"  title="Planetarni bonus">
           <%= format_mena(0, "%",false) %></span>
 
-        <span class="<%= trida_barvy((@domovska.fields.first.leno_udalost_bonus("J")-1)*100) %>"  title="Bonus udalosti">
-          <%= format_mena((@domovska.fields.first.leno_udalost_bonus("J")-1)*100, "%",false) %></span>
+        <span class="<%= trida_barvy((@domovska.udalost_bonus("J")-1)*100) %>"  title="Bonus udalosti">
+          <%= format_mena((@domovska.udalost_bonus("J")-1)*100, "%",false) %></span>
 
         <% tech_bonus_j = (current_user.tech_bonus("J")*100)-100 %>
         <% tech_bonus_j_n = (current_user.house.vyskumane_narodni_tech("J")*100)-100 %>
@@ -130,8 +130,8 @@
       <li><%= img_populace "Bonus populace" %>
         <span class="<%= trida_barvy(pt.population_bonus) %>"  title="Planetarni bonus"><%= format_mena(pt.population_bonus, "%",false) %></span>
 
-      <span class="<%= trida_barvy((@domovska.fields.first.leno_udalost_bonus("P")-1)*100) %>"  title="Bonus udalosti">
-          <%= format_mena((@domovska.fields.first.leno_udalost_bonus("P")-1)*100, "%",false) %></span>
+      <span class="<%= trida_barvy((@domovska.udalost_bonus("P")-1)*100) %>"  title="Bonus udalosti">
+          <%= format_mena((@domovska.udalost_bonus("P")-1)*100, "%",false) %></span>
 
 
         <% tech_bonus_p = (current_user.tech_bonus("P")*100)-100 %>
@@ -143,8 +143,8 @@
       <li><%= img_zkusenosti "Bonus zkušenosti" %>
         <span class="<%= trida_barvy(pt.exp_bonus) %>"  title="Planetarni bonus"><%= format_mena(pt.exp_bonus, "%",false) %></span>
 
-      <span class="<%= trida_barvy((@domovska.fields.first.leno_udalost_bonus("E")-1)*100) %>"  title="Bonus udalosti">
-          <%= format_mena((@domovska.fields.first.leno_udalost_bonus("E")-1)*100, "%",false) %></span>
+      <span class="<%= trida_barvy((@domovska.udalost_bonus("E")-1)*100) %>"  title="Bonus udalosti">
+          <%= format_mena((@domovska.udalost_bonus("E")-1)*100, "%",false) %></span>
 
 
         <% tech_bonus_e = (current_user.tech_bonus("E")*100)-100 %>
