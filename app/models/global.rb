@@ -31,7 +31,7 @@ class Global < ActiveRecord::Base
       when 4
         Global.where(:setting => setting).first.cislo
 	    else
-		    0
+		    nil
     end
   end
 

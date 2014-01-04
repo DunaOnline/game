@@ -278,4 +278,16 @@ class Constant
 	  Global.vrat('odvolanie_imperatora_zakon_title', 3)
   end
 
+	def self.bezvladi_arrakis
+		Global.vrat('bezvladi_arrakis',2)
+	end
+
+	def self.prepni_bezvladi_arrakis(datum)
+		Global.prepni('bezvladi_arrakis',2, datum)
+	end
+
+  def self.malus_melanz_bezvladi
+	  Global.vrat('malus_melanz_bezvladi',4)
+  end
+
 end

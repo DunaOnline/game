@@ -25,6 +25,10 @@ class Prepocet
         Prepocet.zvol_imperatora
       end
 
+      if User.spravce_arrakis
+	      Constant.prepni_bezvladi_arrakis(nil)
+      end
+
       Prepocet.prepocti_vliv
 
       Prepocet.odemkni
@@ -142,7 +146,7 @@ class Prepocet
     user_tech = vlastnik.tech_bonus("J") if vlastnik
     house_tech = vlastnik.house.vyskumane_narodni_tech("J") if vlastnik
     if vlastnik
-      melange = (leno.vynos('melange') * user_tech * house_tech * nahoda_produkce).round(2)
+      melange = ((leno.vynos('melange') * user_tech * house_tech * nahoda_produkce) * Constant.malus_melanz_bezvladi if Constant.bezvladi_arrakis).round(2)
     else
       melange = 0.0
     end

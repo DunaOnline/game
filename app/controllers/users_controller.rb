@@ -218,6 +218,11 @@ class UsersController < ApplicationController
       when "Vezír"
         komu.stat_se("vezir")
         Imperium.zapis_operaci("#{current_user.nick} jmenoval hráče #{komu.nick} na pozici Vezír.")
+	    when "Spravce"
+		    if !User.spravce_arrakis
+		    komu.stat_se("arrakis")
+		    Imperium.zapis_operaci("#{current_user.nick} odvolal hráče #{komu.nick} z pozice Správce.")
+			  end
     end
     current_user.house.zapis_operaci("#{current_user.nick} jmenoval hráč #{komu.nick} na pozici #{params[:commit]}.")
     komu.zapis_operaci("#{current_user.nick} mě jmenoval na pozici #{params[:commit]}.")
@@ -239,7 +244,10 @@ class UsersController < ApplicationController
       when "Vezir"
         komu.prestat_byt("vezir")
         Imperium.zapis_operaci("#{current_user.nick} odvolal hráče #{komu.nick} z pozice Vezír.")
-
+	    when "Spravce"
+		    komu.prestat_byt("arrakis")
+		    Imperium.zapis_operaci("#{current_user.nick} odvolal hráče #{komu.nick} z pozice Správce.")
+		    Constant.prepni_bezvladi_arrakis(Date.today)
     end
     current_user.house.zapis_operaci("#{current_user.nick} odvolal hráče #{komu.nick} z pozice #{params[:pravo]}.")
     komu.zapis_operaci("#{current_user.nick} mě odvolal z pozice #{params[:pravo]}.")

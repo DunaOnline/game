@@ -128,6 +128,12 @@
 
       </td>
       <td>
+        <% if User.spravce_arrakis %>
+        <li><%= link_to User.spravce_arrakis.nick, User.spravce_arrakis, :class => 'Spravce' %>
+
+          <%= link_to img_cancel_s, :controller => :users, :action => :odeber_pravo, :user_id => User.spravce_arrakis, :pravo => "Spravce" %>
+        </li>
+        <% end %>
       </td>
     </tr>
 <% end %>    
@@ -149,6 +155,12 @@
 
       </td>
       <td>
+        <% if !User.spravce_arrakis %>
+        <%= form_tag :pridel_pravo do %>
+            <%= select_tag :user_id, options_for_select(@hraci.collect { |p| [p.nick, p.id] }, {:include_blank => false}) , :style => "margin-left: 0px !important; width:120px !important" %>
+            <li><%= submit_tag 'Spravce', :class => 'ok6' %>
+        <% end %>
+        <% end %>
       </td>
     </tr>
  
