@@ -1,0 +1,19 @@
+<div style="background-image: url(image/8/jedp1.png)">
+  <%= link_to unit.name, unit_path(unit.id) %>
+  <li>	<span class="attack_button" title="Útok"></span>
+    <span class="defence_button" title="Obrana"></span>
+  </li>
+</div>
+<div>
+  <li><%= unit.description %></li>
+  <li><%= @squad.number ? @squad.number : 0 %></li>
+    <h3>Verbování jednotek:</h3>
+  <li>	<%= number_field_tag 'Pocet' %>
+    <%= submit_tag 'Vybavit', :class => 'ok5' %>
+    <h3>Výbava:</h3>
+  <li>
+    <img title="Zadny equipment" alt="Zadny equipment" class="img_no_equip">
+    <img title="Zadny equipment" alt="Zadny equipment" class="img_no_equip">
+    <img title="Zadny equipment" alt="Zadny equipment" class="img_no_equip">
+
+</div>

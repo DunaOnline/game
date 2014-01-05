@@ -119,6 +119,9 @@ module ApplicationHelper
 	  image_tag("css/obrana-vesmir.png", :alt => title, :title => title)
   end
 
+  def img_from_model(model)
+	  model.img
+  end
 
   def online_users
     @online_users = []

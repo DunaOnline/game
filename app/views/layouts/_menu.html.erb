@@ -115,7 +115,11 @@
         <ul class="menu">
           <li><a class="menuarmada" title="Armádní velitelství"></a>
             <ul>
-
+              <% if current_user.has_kasaren %>
+                  <li><%= link_to 'Verbování jednotek', squad_path(current_user.has_kasaren) %></li>
+                  <% else %>
+                  <li><%= link_to 'Nemate Kasarnu', field_path(current_user.domovske_leno)%></li>
+                  <% end %>
 
               <li><%= link_to 'Rozdělení jednotek', units_path %></li>
               <li><%= link_to 'Rozmiestnenie armady', squads_path %></li>

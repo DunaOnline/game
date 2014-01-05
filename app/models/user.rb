@@ -810,8 +810,8 @@ class User < ActiveRecord::Base
   def has_kasaren
 	  kasarne = 0
 	  kasaren = Building.where(:kind => "VK").first
-	  kasarne = Field.all(:include => :estates, :conditions => { :estates => { :building_id => kasaren.id } }).count if kasaren
-    kasarne > 0
+	  kasarne = Field.all(:include => :estates, :conditions => { :estates => { :building_id => kasaren.id } }).first if kasaren
+    kasarne
   end
 
   #def upgrades_b_available_by_technology(building)

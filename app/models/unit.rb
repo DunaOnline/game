@@ -5,5 +5,8 @@ class Unit < ActiveRecord::Base
 	has_many :equipments
 	belongs_to :squad
 
-  scope :house_units, ->(house) { where("house_id = ?", house.id) }
+
+
+  scope :house_units, ->(house) { where("house_id IN (?) ", [0, house.id]) }
+
 end

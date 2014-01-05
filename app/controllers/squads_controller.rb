@@ -15,14 +15,19 @@ class SquadsController < ApplicationController
 		# GET /units/1.json
 		def show
 			@field = Field.find(params[:id])
-			@lena_s_kasarnou = Field.lena_s_kasarnou
-			@units = Unit.house_units(current_user.house).all
-			@squad = Squad.new
+			if @field.user == current_user
+				@lena_s_kasarnou = Field.lena_s_kasarnou
+				@units = Unit.house_units(current_user.house).all
+
+				@squad = Squad.new
 
 
-			respond_to do |format|
-				format.html # show.html.erb
-				format.json { render json: @squad }
+				respond_to do |format|
+					format.html # show.html.erb
+					format.json { render json: @squad }
+				end
+			else
+				redirect_to :back, :alert => 'No No'
 			end
 		end
 

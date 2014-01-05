@@ -3,6 +3,7 @@ class CreateSquads < ActiveRecord::Migration
     create_table :squads do |t|
       t.integer :field_id
       t.integer :unit_id
+      t.integer :number
 
       t.timestamps
     end

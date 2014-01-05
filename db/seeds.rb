@@ -123,6 +123,7 @@ Global.create(:setting => 'odmietnutie_zakona_msg', :slovo => "Vas zakon ###self
 Global.create(:setting => 'odvolanie_imperatora_zakon_body', :slovo => "Hlasujte o duvere k imperatorovi .")
 Global.create(:setting => 'odvolanie_imperatora_zakon_title', :slovo => "Ovolanie Imperatora.")
 Global.create(:setting => 'malus_melanz_bezvladi', :cislo => 0.9)
+Global.create(:setting => 'kapacita_kasarne', :cislo => 10)
 
 puts 'Global done'
 
@@ -227,12 +228,12 @@ simi.hlasuj(norma, 'leader')
 mino.hlasuj(norma, 'leader')
 puts 'hlasy done'
 
-Unit.create(:name => 'Domobrana', :house_id => nil, :description => 'Jednotka sloužící k ochraně méně důležitých lén.', :attack => 3, :defence => 4, :health => 1, :equipment => 0, :material => 225, :solar => 525, :img => '', :lvl => nil, :druh => '')
-Unit.create(:name => 'Legie', :house_id => nil, :description => '', :attack => 4, :defence => 3, :health => 1, :equipment => 1, :material => 228, :solar => 528, :img => '', :lvl => 3, :druh => 'pechota')
-Unit.create(:name => 'Raketomet', :house_id => nil, :description => '', :attack => 10, :defence => 18, :health => 4, :equipment => 2, :material => 906, :solar => 2106, :img => '', :lvl => 4, :druh => 'armada')
-Unit.create(:name => 'Stíhací tank', :house_id => nil, :description => '', :attack => 16, :defence => 8, :health => 3, :equipment => 3, :material => 684, :solar => 1584, :img => '', :lvl => 3, :druh => 'boj_technika')
-Unit.create(:name => 'Landsraadni garda', :house_id => nil, :description => '', :attack => 5, :defence => 9, :health => 2, :equipment => 2, :material => 456, :solar => 1056, :img => '', :lvl => 3, :druh => 'obr_technika')
-Unit.create(:name => 'Pozemní holtzmanův generátor', :house_id => nil, :description => '', :attack => 7, :defence => 20, :health => 1, :equipment => 2, :material => 831, :solar => 1931, :img => '', :lvl => 10, :druh => 'obr_technika')
+Unit.create(:name => 'Domobrana', :house_id => 0, :description => 'Jednotka sloužící k ochraně méně důležitých lén.', :attack => 3, :defence => 4, :health => 1, :equipment => 0, :material => 225, :solar => 525, :img => '', :lvl => nil, :druh => '')
+Unit.create(:name => 'Legie', :house_id => 0, :description => '', :attack => 4, :defence => 3, :health => 1, :equipment => 1, :material => 228, :solar => 528, :img => '', :lvl => 3, :druh => 'pechota')
+Unit.create(:name => 'Raketomet', :house_id => 0, :description => '', :attack => 10, :defence => 18, :health => 4, :equipment => 2, :material => 906, :solar => 2106, :img => '', :lvl => 4, :druh => 'armada')
+Unit.create(:name => 'Stíhací tank', :house_id => 0, :description => '', :attack => 16, :defence => 8, :health => 3, :equipment => 3, :material => 684, :solar => 1584, :img => '', :lvl => 3, :druh => 'boj_technika')
+Unit.create(:name => 'Landsraadni garda', :house_id => 0, :description => '', :attack => 5, :defence => 9, :health => 2, :equipment => 2, :material => 456, :solar => 1056, :img => '', :lvl => 3, :druh => 'obr_technika')
+Unit.create(:name => 'Pozemní holtzmanův generátor', :house_id => 0, :description => '', :attack => 7, :defence => 20, :health => 1, :equipment => 2, :material => 831, :solar => 1931, :img => '', :lvl => 10, :druh => 'obr_technika')
 Unit.create(:name => 'Sonický tank', :house_id => House.find_by_name('Atreides').id, :description => '', :attack => 18, :defence => 6, :health => 4, :equipment => 3, :material => 789, :solar => 1829, :img => '', :lvl => nil, :druh => '')
 Unit.create(:name => 'Hradní stráž', :house_id => House.find_by_name('Atreides').id, :description => '', :attack => 6, :defence => 6, :health => 2, :equipment => 1, :material => 393, :solar => 913, :img => '', :lvl => nil, :druh => '')
 Unit.create(:name => 'Četa sardaukarů', :house_id => House.find_by_name('Corrino').id, :description => '', :attack => 9, :defence => 9, :health => 3, :equipment => 2, :material => 591, :solar => 1371, :img => '', :lvl => nil, :druh => '')
