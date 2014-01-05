@@ -1,0 +1,39 @@
+<h1>Listing units</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>House</th>
+    <th>Description</th>
+    <th>Attack</th>
+    <th>Defence</th>
+    <th>Health</th>
+    <th>Equipment</th>
+    <th>Material</th>
+    <th>Solar</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @units.each do |unit| %>
+  <tr>
+    <td><%= unit.name %></td>
+    <td><%= unit.house_id %></td>
+    <td><%= unit.description %></td>
+    <td><%= unit.attack %></td>
+    <td><%= unit.defence %></td>
+    <td><%= unit.health %></td>
+    <td><%= unit.equipment %></td>
+    <td><%= unit.material %></td>
+    <td><%= unit.solar %></td>
+    <td><%= link_to 'Show', unit %></td>
+    <td><%= link_to 'Edit', edit_unit_path(unit) %></td>
+    <td><%= link_to 'Destroy', unit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Unit', new_unit_path %>

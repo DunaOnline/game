@@ -1,4 +1,10 @@
 DuneOnline::Application.routes.draw do
+  resources :units
+
+
+  resources :equipment
+
+
   match '/help' => 'help#help', :as => :help
   match '/help/landsraad' => 'help#landsraad', :as => :help_landsraad
   match '/help/suroviny' => 'help#suroviny', :as => :help_suroviny

@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @unit.name %>
+</p>
+
+<p>
+  <b>House:</b>
+  <%= @unit.house_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @unit.description %>
+</p>
+
+<p>
+  <b>Attack:</b>
+  <%= @unit.attack %>
+</p>
+
+<p>
+  <b>Defence:</b>
+  <%= @unit.defence %>
+</p>
+
+<p>
+  <b>Health:</b>
+  <%= @unit.health %>
+</p>
+
+<p>
+  <b>Equipment:</b>
+  <%= @unit.equipment %>
+</p>
+
+<p>
+  <b>Material:</b>
+  <%= @unit.material %>
+</p>
+
+<p>
+  <b>Solar:</b>
+  <%= @unit.solar %>
+</p>
+
+
+<%= link_to 'Edit', edit_unit_path(@unit) %> |
+<%= link_to 'Back', units_path %>

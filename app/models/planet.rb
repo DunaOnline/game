@@ -285,7 +285,7 @@ class Planet < ActiveRecord::Base
       end
     end
 
-    enviro_bonus -1
+    enviro_bonus != 1 ? enviro_bonus - 1 : 1
 
   end
 
