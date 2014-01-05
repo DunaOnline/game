@@ -1,0 +1,55 @@
+<table class="tab0">
+  <tr>	<td>
+    <%= link_to '⌂', help_path %> »
+    <%= link_to 'Armáda', units_path %> »
+    <%= link_to 'Verbování jednotek', recruit_path %>
+  </td>
+
+  </tr>
+</table>
+
+<table class="tab1">
+  </tr><tr>
+  <td class="tdpl img_war_mentat" rowspan="2" style="width:130px; background-image: url(assets/jednotky/warmentat.png)"></td>
+  <th style="min-width:80px;"> Síla armády</th>
+  <th style="min-width:80px;"> Armádní žold</th>
+  <th> Obrana</th>
+  <th class="r"> Útok</th>
+</tr><tr>
+
+  <td>
+    <li><%= img_pozemni_utok %> 100</li>
+    <li><%= img_pozemni_obrana %> 100</li>
+    <li><%= img_vesmir_utok %> 100</li>
+    <li><%= img_vesmir_obrana %> 100</li>
+
+  </td>
+
+  <td>
+    <li><%= img_solary %> <span class="oranzova">- 100.00</span>      </li>
+    <li><%= img_melanz %><span class="oranzova"> - 5.00</span>
+  </td>
+
+  <td>
+    <li>Dnes na vás nebyl veden žádný útok.
+  </td>
+
+  <td>
+    <li>Dobyl jste planetu hráče <a href="profil.htm">Profil</a> (Riches)
+    <li>Neúspěšně jste útočil na hráče <a href="profil.htm">Profil</a> (Riches)
+    <li>Neúspěšně jste útočil na hráče <a href="profil.htm">Profil</a> (Riches)
+  </td>
+
+</tr>
+</table>
+
+<table class="tab4">
+<tr>
+  <th class="thf" colspan="4">
+    Jednotky které lze verbovat
+  </th>
+</tr>
+
+</table>
+
+<%= render :partial => "unit", :collection => @units %>

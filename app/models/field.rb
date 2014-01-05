@@ -23,6 +23,8 @@ class Field < ActiveRecord::Base
   has_many :estates
   has_many :buildings, :through => :estates
 
+  has_many :squads
+
   has_many :influence
   has_many :effect, :through => :influence
 
@@ -205,6 +207,7 @@ class Field < ActiveRecord::Base
 	 #return flag, msg
   #end
 
+
   def postav_availability_check(budova, pocet_budov)
 
     tech = self.user.tech_bonus("L")
@@ -265,6 +268,8 @@ class Field < ActiveRecord::Base
     return message, postaveno
   end
 
+
+
   def vyuzitie_tovaren
     vyrobky = self.resource.productions
     pocet_vyrobkov = 0
@@ -283,6 +288,16 @@ class Field < ActiveRecord::Base
     kapacita = self.estates.where(:building_id => tovarna.id).first
     number = (kapacita.number * Constant.kapacita_tovaren).to_i if kapacita
     number
+  end
+
+  def kasaren_kapacita
+	  kapacita = self.estates.where(:building_id => Building.kasaren.id).first
+	  kapacita
+  end
+
+  def self.lena_s_kasarnou
+	  field = Field.joins(:estates).where("estates.building_id = ?", Building.kasaren.id).all
+	  field
   end
 
   def move_products(co, target, amount)

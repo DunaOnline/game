@@ -3,4 +3,5 @@ class Squad < ActiveRecord::Base
 
 	belongs_to :field
 	belongs_to :unit
+
 end

@@ -103,6 +103,23 @@ module ApplicationHelper
 	  image_tag('css/delete.png', :alt => title, :title => title)
   end
 
+  def img_pozemni_utok(title = "Pozemni utok")
+	  image_tag("css/utok-pozemni.png", :alt => title, :title => title)
+  end
+
+  def img_pozemni_obrana(title = "Pozemni obrana")
+	  image_tag("css/obrana-pozemni.png", :alt => title, :title => title)
+  end
+
+  def img_vesmir_utok(title = "Vesmir utok")
+	  image_tag("css/utok-vesmir.png", :alt => title, :title => title)
+  end
+
+  def img_vesmir_obrana(title = "Vesmir obrana")
+	  image_tag("css/obrana-vesmir.png", :alt => title, :title => title)
+  end
+
+
   def online_users
     @online_users = []
     sessions = Session.order("created_at ASC").all

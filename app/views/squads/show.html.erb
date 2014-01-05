@@ -1,0 +1,254 @@
+<table class="tab0">
+  <tr>	<td>
+    <%= link_to '⌂', help_path %> »
+    <%= link_to 'Armáda', units_path %> »
+    <%= link_to 'Verbování jednotek', squad_path %>
+  </td>
+
+  </tr>
+</table>
+
+<table class="tab1">
+  </tr><tr>
+  <td class="tdpl img_war_mentat" rowspan="2" style="width:130px; background-image: url(assets/jednotky/warmentat.png)"></td>
+  <th style="min-width:80px;"> Síla armády</th>
+  <th style="min-width:80px;"> Armádní žold</th>
+  <th> Obrana</th>
+  <th class="r"> Útok</th>
+</tr><tr>
+
+  <td>
+    <li><%= img_pozemni_utok %> 100</li>
+    <li><%= img_pozemni_obrana %> 100</li>
+    <li><%= img_vesmir_utok %> 100</li>
+    <li><%= img_vesmir_obrana %> 100</li>
+
+  </td>
+
+  <td>
+    <li><%= img_solary %> <span class="oranzova">- 100.00</span>      </li>
+    <li><%= img_melanz %><span class="oranzova"> - 5.00</span>
+  </td>
+
+  <td>
+    <li>Dnes na vás nebyl veden žádný útok.
+  </td>
+
+  <td>
+    <li>Dobyl jste planetu hráče <a href="profil.htm">Profil</a> (Riches)
+    <li>Neúspěšně jste útočil na hráče <a href="profil.htm">Profil</a> (Riches)
+    <li>Neúspěšně jste útočil na hráče <a href="profil.htm">Profil</a> (Riches)
+  </td>
+
+</tr>
+</table>
+
+<table class="tab4">
+<tr>
+  <th class="thf" colspan="4">
+    Jednotky které lze verbovat
+  </th>
+</tr>
+
+<tr>
+  <th style="background-image: url(image/8/jedp1.png)">
+    <a href="army-sablony.htm">Kyborg</a>
+    <li>	<span class="attack_button" title="Útok"></span>
+      <span class="defence_button" title="Obrana"></span>
+    </li>
+  </th>
+  <td>
+    <li>Elitní národní jednotka, která je určena pro pozemní boj.
+    <li>Ve službě je 10 jednotek.
+      <h3>Verbování jednotek:</h3>
+    <li>	<input type="text" >
+      <input type="button" class="ok5" value="Vybavit">
+      <h3>Výbava:</h3>
+    <li>
+      <input type="button" title="Pěchotní zbraně" style="background-image: url(image/imgjednotky/pechotni_zbran.png)" value="2">
+      <input type="button" title="Rychlopalné zbraně" style="background-image: url(image/imgjednotky/rychlopalna_zbran.png)" value="2">
+      <input type="button" title="Kybernetické náhrady" style="background-image: url(image/imgjednotky/kyberneticka_nahrada.png)" value="1">
+  </td>
+
+  <th style="background-image: url(image/8/jedv1.png)">
+    <a href="army-sablony.htm">Obranný satelit</a>
+    <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(image/cssimage/utok-vesmir.png)" value="300">
+      <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(image/cssimage/obrana-vesmir.png)" value="1250">
+  </th>
+  <td>
+    <li>Národní jednotka, sloužící o obraně orbity planet.
+    <li>Ve službě je 10 jednotek.
+      <h3>Verbování jednotek:</h3>
+    <li>	<input type="text" >
+      <input type="button" class="ok5" value="Vybavit">
+      <h3>Výbava:</h3>
+    <li>
+      <input type="button" title="Vesmírné zbraně" style="background-image: url(image/imgjednotky/vesmirna_zbran.png)" value="4">
+      <input type="button" title="Energetická zbraň" style="background-image: url(image/imgjednotky/energeticka_zbran.png)" value="1">
+      <input type="button" title="Hypervodiče" style="background-image: url(image/imgjednotky/hypervodice.png)" value="3">
+      <input type="button" title="Chromatická plastocel" style="background-image: url(image/imgjednotky/chromaticka_plastocel.png)" value="5">
+      <input type="button" title="Holtzmanův generátor" style="background-image: url(image/imgjednotky/holtzmanuv_generator.png)" value="10">
+  </td>
+</tr>
+<tr>
+
+  <th style="background-image: url(image/imgjednotky/jedp2.png)">
+    <a href="army-sablony.htm">Eridanska garda</a>
+    <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(image/cssimage/utok-pozemni.png)" value="1">
+      <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(image/cssimage/obrana-pozemni.png)" value="5">
+  </th>
+  <td>
+    <li>Elitni jednotka sloužící k ochraně hlavních lén.
+    <li>Ve službě je 30 jednotek.
+      <h3>Verbování jednotek:</h3>
+    <li>	<input type="text" >
+      <input type="button" class="ok5" value="Vybavit">
+      <h3>Výbava:</h3>
+    <li>
+      <input type="button" title="Pěchotní zbraně" style="background-image: url(image/imgjednotky/pechotni_zbran.png)" value="1">
+      <input type="button" title="Kybernetické náhrady" style="background-image: url(image/imgjednotky/kyberneticka_nahrada.png)" value="1">
+      <input type="button" title="Pancíř z plastocele" style="background-image: url(image/imgjednotky/pancir_z_plastocele.png)" value="2">
+  </td>
+
+  <th style="background-image: url(image/imgjednotky/jedv13.png)">
+    <a href="army-sablony.htm">Bitevní křižník</a>
+    <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(image/cssimage/utok-vesmir.png)" value="530">
+      <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(image/cssimage/obrana-vesmir.png)" value="300">
+  </th>
+  <td>
+    <li>Hlavní bitevní loď.
+    <li>Ve službě je 7 jednotek.
+      <h3>Verbování jednotek:</h3>
+    <li>	<input type="text" >
+      <input type="button" class="ok5" value="Vybavit">
+
+      <h3>Výbava:</h3>
+    <li>
+      <input type="button" title="Energetická zbraň" style="background-image: url(image/imgjednotky/energeticka_zbran.png)" value="5">
+      <input type="button" title="Hypervodiče" style="background-image: url(image/imgjednotky/hypervodice.png)" value="1">
+      <input type="button" title="Chromatická plastocel" style="background-image: url(image/imgjednotky/chromaticka_plastocel.png)" value="2">
+      <input type="button" title="Holtzmanův generátor" style="background-image: url(image/imgjednotky/holtzmanuv_generator.png)" value="1">
+  </td>
+
+</tr>
+<tr>
+
+  <th style="background-image: url(image/imgjednotky/jedp3.png)">
+    <a href="army-sablony.htm">Domobrana</a>
+    <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(image/cssimage/utok-pozemni.png)" value="10">
+      <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(image/cssimage/obrana-pozemni.png)" value="5">
+  </th>
+  <td>
+    <li>Jednotka sloužící k ochraně méně důležitých lén.
+    <li>Ve službě je 60 jednotek.
+      <h3>Verbování jednotek:</h3>
+    <li>	<input type="text" >
+      <input type="button" class="ok5" value="Vybavit">
+      <h3>Výbava:</h3>
+    <li>
+      <input type="button" title="Pěchotní zbraně" style="background-image: url(image/imgjednotky/pechotni_zbran.png)" value="1">
+      <input type="button" title="Kybernetické náhrady" style="background-image: url(image/imgjednotky/pancir_z_plastocele.png)" value="3">
+  </td>
+
+  <th style="background-image: url(image/imgjednotky/jedv6.png)">
+    <a href="army-sablony.htm">Univerzal X03</a>
+    <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(image/cssimage/utok-vesmir.png)" value="100">
+      <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(image/cssimage/obrana-vesmir.png)" value="100">
+  </th>
+  <td>
+    <li>Malá univerzalní jednotka vhodná jak do obrany tak do útoku.
+    <li>Ve službě je 11 jednotek.
+      <h3>Verbování jednotek:</h3>
+    <li>	<input type="text" >
+      <input type="button" class="ok5" value="Vybavit">
+      <h3>Výbava:</h3>
+    <li>
+      <input type="button" title="Energetická zbraň" style="background-image: url(image/imgjednotky/energeticka_zbran.png)" value="1">
+      <input type="button" title="Hypervodiče" style="background-image: url(image/imgjednotky/hypervodice.png)" value="1">
+      <input type="button" title="Chromatická plastocel" style="background-image: url(image/imgjednotky/chromaticka_plastocel.png)" value="2">
+  </td>
+
+</tr>
+<tr>
+
+  <th style="background-image: url(image/imgjednotky/jedp4.png)">
+    <a href="army-sablony.htm">Jméno (max15zn)</a>
+    <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(image/cssimage/utok-pozemni.png)" value="10">
+      <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(image/cssimage/obrana-pozemni.png)" value="5">
+  </th>
+  <td>
+    <li>Krátký popis od autora šablony. (max 50 znaků).
+    <li>Ve službě je 10 jednotek.
+      <h3>Verbování jednotek:</h3>
+    <li>	<input type="text" >
+      <input type="button" class="ok5" value="Vybavit">
+      <h3>Výbava:</h3>
+    <li>	<input type="button" title="Pěchotní zbraně" style="background-image: url(image/imgjednotky/pechotni_zbran.png)" value="2">
+      <input type="button" title="Rychlopalné zbraně" style="background-image: url(image/imgjednotky/rychlopalna_zbran.png)" value="1">
+      <input type="button" title="Kybernetické náhrady" style="background-image: url(image/imgjednotky/kyberneticka_nahrada.png)" value="1">
+      <input type="button" title="Kybernetické náhrady" style="background-image: url(image/imgjednotky/obrana-pozemni.png)" value="1">
+  </td>
+
+  <th style="background-image: url(image/imgjednotky/jedv4.png)">
+    <a href="army-sablony.htm">Jméno (max15zn)</a>
+    <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(image/cssimage/utok-vesmir.png)" value="100">
+      <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(image/cssimage/obrana-vesmir.png)" value="100">
+  </th>
+  <td>
+    <li>Krátký popis od autora šablony. (max 50 znaků).
+    <li>Ve službě je 10 jednotek.
+      <h3>Verbování jednotek:</h3>
+    <li>	<input type="text" >
+      <input type="button" class="ok5" value="Vybavit">
+      <h3>Výbava:</h3>
+    <li>	<input type="button" title="Pěchotní zbraně" style="background-image: url(image/imgjednotky/utok-pozemni.png)" value="2">
+      <input type="button" title="Rychlopalné zbraně" style="background-image: url(image/imgjednotky/obrana-pozemni.png)" value="1">
+      <input type="button" title="Kybernetické náhrady" style="background-image: url(image/imgjednotky/obrana-pozemni.png)" value="1">
+      <input type="button" title="Kybernetické náhrady" style="background-image: url(image/imgjednotky/obrana-pozemni.png)" value="1">
+  </td>
+
+</tr>
+<tr>
+
+  <th style="background-image: url(image/imgjednotky/jedp5.png)">
+    <a href="army-sablony.htm">Jméno (max15zn)</a>
+    <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(image/cssimage/utok-pozemni.png)" value="10">
+      <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(image/cssimage/obrana-pozemni.png)" value="5">
+  </th>
+  <td>
+    <li>Krátký popis od autora šablony. (max 50 znaků).
+    <li>Ve službě je 10 jednotek.
+      <h3>Verbování jednotek:</h3>
+    <li>	<input type="text" >
+      <input type="button" class="ok5" value="Vybavit">
+      <h3>Výbava:</h3>
+    <li>	<input type="button" title="Pěchotní zbraně" style="background-image: url(image/imgjednotky/utok-pozemni.png)" value="2">
+      <input type="button" title="Rychlopalné zbraně" style="background-image: url(image/imgjednotky/rychlopalna_zbran.png)" value="1">
+      <input type="button" title="Kybernetické náhrady" style="background-image: url(image/imgjednotky/kyberneticka_nahrada.png)" value="1">
+      <input type="button" title="Kybernetické náhrady" style="background-image: url(image/imgjednotky/obrana-pozemni.png)" value="1">
+  </td>
+
+  <th style="background-image: url(image/imgjednotky/jedv5.png)">
+    <a href="army-sablony.htm">Jméno (max15zn)</a>
+    <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(image/cssimage/utok-vesmir.png)" value="100">
+      <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(image/cssimage/obrana-vesmir.png)" value="100">
+  </th>
+  <td>
+    <li>Krátký popis od autora šablony. (max 50 znaků).
+    <li>Ve službě je 10 jednotek.
+      <h3>Verbování jednotek:</h3>
+    <li>	<input type="text" >
+      <input type="button" class="ok5" value="Vybavit">
+      <h3>Výbava:</h3>
+    <li>	<input type="button" title="Pěchotní zbraně" style="background-image: url(image/imgjednotky/utok-pozemni.png)" value="2">
+      <input type="button" title="Rychlopalné zbraně" style="background-image: url(image/imgjednotky/obrana-pozemni.png)" value="1">
+      <input type="button" title="Kybernetické náhrady" style="background-image: url(image/imgjednotky/obrana-pozemni.png)" value="1">
+      <input type="button" title="Kybernetické náhrady" style="background-image: url(image/imgjednotky/obrana-pozemni.png)" value="1">
+    <li>	<input type="button" title="Pěchotní zbraně" style="background-image: url(image/imgjednotky/utok-pozemni.png)" value="2">
+      <input type="button" title="Rychlopalné zbraně" style="background-image: url(image/imgjednotky/obrana-pozemni.png)" value="1">
+      <input type="button" title="Kybernetické náhrady" style="background-image: url(image/imgjednotky/obrana-pozemni.png)" value="1">
+      <input type="button" title="Kybernetické náhrady" style="background-image: url(image/imgjednotky/obrana-pozemni.png)" value="1">
+  </td>
+
+</tr>
+</table>

@@ -3,7 +3,7 @@ class UnitsController < ApplicationController
   # GET /units.json
   def index
     @units = Unit.all
-
+    @squad = Squad.new
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @units }

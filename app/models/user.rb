@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
   belongs_to :house
   belongs_to :subhouse
   has_many :fields
+  has_many :squads, :through => :fields
   has_many :resources, :through => :fields
   has_many :estates, :through => :fields
   has_many :votes, :foreign_key => 'elective'
@@ -804,6 +805,13 @@ class User < ActiveRecord::Base
 		  elsif self.general?
 			  "General"
 	  end
+  end
+
+  def has_kasaren
+	  kasarne = 0
+	  kasaren = Building.where(:kind => "VK").first
+	  kasarne = Field.all(:include => :estates, :conditions => { :estates => { :building_id => kasaren.id } }).count if kasaren
+    kasarne > 0
   end
 
   #def upgrades_b_available_by_technology(building)

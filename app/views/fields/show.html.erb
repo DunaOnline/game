@@ -69,7 +69,7 @@
 
 
     </td>
-
+    <!--#TODO Dat do render partial cez collection nech to tu nieje takto zo selectom na distinct Typ-->
 
     <% for budova in @owner.dovolene_budovy('L') do %>
         <%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'L', :obr => 'mes'} %>
@@ -95,5 +95,8 @@
       <%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'O', :obr => 'pob'} %>
   <% end %>
 
+  <% for budova in @owner.dovolene_budovy('VK') do %>
+      <%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'VK', :obr => 'pob'} %>
+  <% end %>
 
 </table>

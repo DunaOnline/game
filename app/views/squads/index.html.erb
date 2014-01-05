@@ -1,7 +1,8 @@
 <table class="tab0">
   <tbody><tr>	<td>
     <%= link_to '⌂', help_path %> »
-    <%= link_to 'Armáda', units_path %>
+    <%= link_to 'Armáda', units_path %> »
+    <%= link_to 'Rozmiestnenie armady', squads_path %>
   </td>
 
   </tr>
@@ -26,7 +27,7 @@
     <td>
       <li><%= img_solary %> <span class="oranzova">- 100.00</span>      </li>
       <li><%= img_melanz %><span class="oranzova"> - 5.00</span>
-    </li></td>
+      </li></td>
 
     <td>
       <li>Dnes na vás nebyl veden žádný útok.
@@ -45,11 +46,8 @@
   <tbody><tr>
     <th class="thf" colspan="5">
 
-      <select>
-        <option value="planeta">Riches</option>
-
-      </select>
-
+      <%= select_tag 'lena_squad', options_for_select(Field.lena_s_kasarnou.collect { |p| [p.name, p.id] }) %>
+      <%= link_to "Prejdi na leno", '', :class => 'select_squad' %>
       Vaše jednotky na vybraných planetách
     </th>
   </tr>
@@ -61,10 +59,10 @@
         <span class="defence_button" title="Obrana"></span>
       </li>
       <li>
-      <a class="none" href="army-verbovani.htm">
-        <input type="button" title="Celkový počet jednotek tohoto typu">
-      </a>
-    </li><li>  <input type="text" title="Zvolte počet jednotek">
+        <a class="none" href="army-verbovani.htm">
+          <input type="button" title="Celkový počet jednotek tohoto typu">
+        </a>
+      </li><li>  <input type="text" title="Zvolte počet jednotek">
     </li></th>
 
     <th style="background-image: url(assets/jednotky/jedp2.png)">

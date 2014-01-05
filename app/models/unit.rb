@@ -4,4 +4,6 @@ class Unit < ActiveRecord::Base
 	has_many :products, :through => :equipments
 	has_many :equipments
 	belongs_to :squad
+
+  scope :house_units, ->(house) { where("house_id = ?", house.id) }
 end
