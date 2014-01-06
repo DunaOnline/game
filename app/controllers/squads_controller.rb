@@ -107,14 +107,14 @@ class SquadsController < ApplicationController
 						end
 					end
 				elsif params[:zrusit]
-					message, prodat = field.predaj_produktov(par)
+					message, prodano = @field.predaj_jednotiek(par)
 					respond_to do |format|
-						if prodat
-							format.html { redirect_to production_url(@field), notice: message }
-							format.json { render json: @production, status: :created, location: @production }
+						if prodano
+							format.html { redirect_to squad_path(@field.id), notice: message }
+							format.json { render json: message, status: :created, location: squad_path(@field.id) }
 						else
 							format.html { redirect_to production_url(@field), alert: message }
-							format.json { render json: @production, status: :created, location: @production }
+							format.json { render json: message, status: :created, location: squad_path(@field.id) }
 						end
 					end
 				end

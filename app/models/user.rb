@@ -810,7 +810,7 @@ class User < ActiveRecord::Base
   def has_kasaren
 	  kasarne = 0
 	  kasaren = Building.where(:kind => "VK").first
-	  kasarne = Field.all(:include => :estates, :conditions => { :estates => { :building_id => kasaren.id } }).first if kasaren
+	  kasarne = self.fields(:include => :estates, :conditions => { :estates => { :building_id => kasaren.id } }).first if kasaren
     kasarne
   end
 

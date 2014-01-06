@@ -11,6 +11,8 @@ class CreateUnits < ActiveRecord::Migration
       t.float :material
       t.float :melange
       t.integer :solar
+      t.integer :population
+      t.float :salary
       t.string :img
       t.integer :lvl
       t.string :druh

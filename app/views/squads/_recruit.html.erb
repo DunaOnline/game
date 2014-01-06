@@ -10,7 +10,8 @@
     <h3>Verbování jednotek:</h3>
   <li>	<%= number_field_tag(unit.name, nil, :min => 1, :title => "Zadejte množství") %>
     <%= hidden_field_tag 'leno', value = @field.id %>
-    <%= submit_tag 'Vybavit', :class => 'ok5' %>
+    <%= submit_tag 'Vybavit', :class => 'ok' %>
+    <%= submit_tag 'Zrušit zadané množství', :name => "zrusit", :class => "ok" %>
     <h3>Výbava:</h3></li>
   <li>Solary :<%= unit.solar %> S</li>
   <li>Material :<%= unit.material %> kg</li>

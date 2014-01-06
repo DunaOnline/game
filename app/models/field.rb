@@ -505,6 +505,55 @@ class Field < ActiveRecord::Base
 
 	end
 
+	def predaj_jednotiek(units)
+		field = self
+
+		total_material = 0
+		total_melanz = 0
+		total_price = 0
+		total_pocet = 0
+		#total_price
+		number = 0
+		oznamenie = ""
+
+		nemozno_prodat = []
+
+		units.each do |unit|
+			pocet = unit[0][0].to_i.abs
+			total_pocet += pocet
+			jednotka = Unit.where(:name => unit[1][0]).first
+			if jednotka
+				if 0 < jednotka.vlastnim(field) && jednotka.vlastnim(field) >= pocet
+					total_material += (jednotka.material * pocet) / 2
+					total_melanz += (jednotka.melange ? jednotka.melange : 0 * pocet) / 2
+					total_price += (jednotka.solar * pocet) / 2
+					#total_parts += (coho.parts * pocet) / 2
+					number += pocet
+
+					squad = Squad.where(:field_id => field.id, :unit_id => jednotka.id).first
+					squad.update_attributes(:number => squad.number - pocet)
+					field.resource.update_attributes(:material => field.resource.material + total_material)#, :parts => field.resource.parts + total_parts)
+					field.user.update_attributes(:solar => field.user.solar + total_price, :melange => field.user.melange + total_melanz)
+					self.zapis_udalosti(self.user, "Bylo prodano #{pocet} ks #{jednotka.name} za #{(jednotka.material * pocet) / 2} kg, #{(jednotka.melange ? jednotka.melange : 0 * pocet) / 2} mg,
+					#{(jednotka.solar * pocet) / 2} solaru.")
+					nemozno_prodat << squad
+				else
+					nemozno_prodat = nil
+				end
+			end
+
+
+		end
+		if !nemozno_prodat
+			oznamenie = "Tolik vyrobku nemozno prodat"
+		else
+			oznamenie = "Bylo prodano #{number} vyrobku, prodejem sme ziskali #{total_material} kg materialu, #{total_melanz} mg melanze, #{total_price} solaru."
+		end
+
+		return oznamenie, nemozno_prodat
+
+	end
+
 	def verbovanie_jednotiek(units)
 		field = self
 		zdroje_lena = field.resource

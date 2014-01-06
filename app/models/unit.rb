@@ -1,5 +1,5 @@
 class Unit < ActiveRecord::Base
-  attr_accessible :attack, :defence, :description, :equipment, :health, :house_id, :material, :name, :solar, :melange, :img
+  attr_accessible :attack, :defence, :description, :equipment, :health, :house_id, :material, :name, :solar, :melange, :img, :population, :salary
 
 	has_many :products, :through => :equipments
 	has_many :equipments
@@ -10,6 +10,11 @@ class Unit < ActiveRecord::Base
 		 count += f.squads.where('number > 0 AND unit_id = ?',self.id).first.number if f.squads.where('number > 0 AND unit_id = ?',self.id).first
 	  end
 	  count
+  end
+
+  def vlastnim(field)
+	  s = Squad.where(:unit_id => self.id, :field_id => field.id).first
+	  s.number
   end
 
   scope :house_units, ->(house) { where("house_id IN (?) ", [0, house.id]) }

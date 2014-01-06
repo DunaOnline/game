@@ -57,9 +57,9 @@
   </tbody></table>
 
 <%= render :partial => "unit", :collection => @units, :as => 'unit' %>
-
+<% if @field %>
 <%= hidden_field_tag 'leno', value = @field.id %>
-
+<% end %>
     <div>
       Presun jednotiek
     </div>
