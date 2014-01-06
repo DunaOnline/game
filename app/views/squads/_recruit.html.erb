@@ -8,7 +8,8 @@
   <li><%= unit.description %></li>
   <li><%= @squad.number ? @squad.number : 0 %></li>
     <h3>Verbování jednotek:</h3>
-  <li>	<%= number_field_tag 'Pocet' %>
+  <li>	<%= number_field_tag(unit.name, nil, :min => 1, :title => "Zadejte množství") %>
+    <%= hidden_field_tag 'leno', value = @field.id %>
     <%= submit_tag 'Vybavit', :class => 'ok5' %>
     <h3>Výbava:</h3>
   <li>

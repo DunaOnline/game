@@ -290,4 +290,8 @@ class Constant
 	  Global.vrat('malus_melanz_bezvladi',4)
   end
 
+  def self.kapacita_kasaren
+	  Global.vrat('kapacita_kasarne',4)
+  end
+
 end

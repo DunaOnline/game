@@ -33,14 +33,14 @@ class SquadsController < ApplicationController
 
 		# GET /units/new
 		# GET /units/new.json
-		def new
-			@squad = Squad.new
-
-			respond_to do |format|
-				format.html # new.html.erb
-				format.json { render json: @squad }
-			end
-		end
+		#def new
+		#	@squad = Squad.new
+		#
+		#	respond_to do |format|
+		#		format.html # new.html.erb
+		#		format.json { render json: @squad }
+		#	end
+		#end
 
 		# GET /units/1/edit
 		def edit
@@ -50,10 +50,16 @@ class SquadsController < ApplicationController
 		# POST /units
 		# POST /units.json
 		def create
-			@squad = Squad.new(params[:squads])
+			par = []
+			jednotky = Unit.all.map { |x| x.name }
+			@squad = Squad.new(params[:squad])
+			field = Field.find(params[:leno])
+			jednotky.each do |title|
+				par << [([params[title]]), [title]] unless params[title] == ""
+			end
 
 			respond_to do |format|
-				if @unit.save
+				if @squad.save
 					format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
 					format.json { render json: @unit, status: :created, location: @unit }
 				else
