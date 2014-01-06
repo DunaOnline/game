@@ -3,6 +3,11 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
-  $(".select_squad").attr("href", 'squads/'+$("#lena_squad").val())
-  $("#lena_squad").change ->
-    $(".select_squad").attr("href", 'squads/'+$(this).val())
+  if $(".select_squad").attr("href") == 'leno/'
+    $(".select_squad").attr("href", '?leno='+$("#lena_squad").val())
+    $("#lena_squad").change ->
+      $(".select_squad").attr("href", '?leno='+$(this).val())
+  else
+    $(".select_squad").attr("href", $("#lena_squad").val())
+    $("#lena_squad").change ->
+      $(".select_squad").attr("href", $(this).val())

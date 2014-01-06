@@ -46,7 +46,9 @@
 <table class="tab4">
 <tr>
   <th class="thf" colspan="4">
-    Jednotky které lze verbovat
+    <%= select_tag 'lena_squad', options_for_select(Field.lena_s_kasarnou(current_user).collect { |p| [p.name, p.id] }) %>
+    <%= link_to "Prejdi na leno", '', :class => 'select_squad' %>
+    Vaše jednotky na vybraných planetách
   </th>
 </tr>
 

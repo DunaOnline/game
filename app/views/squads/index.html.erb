@@ -45,152 +45,33 @@
 <table class="tab4">
   <tbody><tr>
     <th class="thf" colspan="5">
-
-      <%= select_tag 'lena_squad', options_for_select(Field.lena_s_kasarnou.collect { |p| [p.name, p.id] }) %>
-      <%= link_to "Prejdi na leno", '', :class => 'select_squad' %>
+      <%= form_tag('/move_units') %>
+      <%= select_tag 'lena_squad', options_for_select(Field.lena_s_kasarnou(current_user).collect { |p| [p.name, p.id] }) %>
+      <%= link_to "Prejdi na leno", 'leno/', :class => 'select_squad' %>
       Vaše jednotky na vybraných planetách
     </th>
   </tr>
 
-  <tr>
-    <th style="background-image: url(assets/jednotky/jedp8.png)">
-      <a href="army-sablony.htm">Kyborg</a>
-      <li>	<span class="attack_button" title="Útok"></span>
-        <span class="defence_button" title="Obrana"></span>
-      </li>
-      <li>
-        <a class="none" href="army-verbovani.htm">
-          <input type="button" title="Celkový počet jednotek tohoto typu">
-        </a>
-      </li><li>  <input type="text" title="Zvolte počet jednotek">
-    </li></th>
-
-    <th style="background-image: url(assets/jednotky/jedp2.png)">
-      <a href="army-sablony.htm">Jméno (max15zn)</a>
-      <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(assets/css/utok-pozemni.png)" value="10">
-        <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(assets/css/obrana-pozemni.png)" value="5">
-      </li><li>
-      <a class="none" href="army-verbovani.htm">
-        <input type="button" title="Celkový počet jednotek tohoto typu" style="width: 95px !important; background-image: url(css/jed-pozemni.png)" value="10">
-      </a>
-    </li><li>  <input type="text" title="Zvolte počet jednotek" style="width: 83px !important; background-image: url(css/poslatjednotky.png)">
-    </li></th>
-
-    <th style="background-image: url(assets/jednotky/jedp3.png)">
-      <a href="army-sablony.htm">Jméno (max15zn)</a>
-      <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(assets/css/utok-pozemni.png)" value="10">
-        <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(assets/css/obrana-pozemni.png)" value="5">
-      </li><li>
-      <a class="none" href="army-verbovani.htm">
-        <input type="button" title="Celkový počet jednotek tohoto typu" style="width: 95px !important; background-image: url(css/jed-pozemni.png)" value="10">
-      </a>
-    </li><li>  <input type="text" title="Zvolte počet jednotek" style="width: 83px !important; background-image: url(css/poslatjednotky.png)">
-    </li></th>
-
-    <th style="background-image: url(assets/jednotky/jedp4.png)">
-      <a href="army-sablony.htm">Jméno (max15zn)</a>
-      <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(assets/css/utok-pozemni.png)" value="10">
-        <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(assets/css/obrana-pozemni.png)" value="5">
-      </li><li>
-      <a class="none" href="army-verbovani.htm">
-        <input type="button" title="Celkový počet jednotek tohoto typu" style="width: 95px !important; background-image: url(css/jed-pozemni.png)" value="10">
-      </a>
-    </li><li>  <input type="text" title="Zvolte počet jednotek" style="width: 83px !important; background-image: url(css/poslatjednotky.png)">
-    </li></th>
-
-    <th style="background-image: url(assets/jednotky/jedp5.png)">
-      <a href="army-sablony.htm">Jméno (max15zn)</a>
-      <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(assets/css/utok-pozemni.png)" value="10">
-        <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(assets/css/obrana-pozemni.png)" value="5">
-      </li><li>
-      <a class="none" href="army-verbovani.htm">
-        <input type="button" title="Celkový počet jednotek tohoto typu" style="width: 95px !important; background-image: url(css/jed-pozemni.png)" value="10">
-      </a>
-    </li><li>  <input type="text" title="Zvolte počet jednotek" style="width: 83px !important; background-image: url(css/poslatjednotky.png)">
-    </li></th>
-
-  </tr>
-
-  <tr><th style="background-image: url(assets/jednotky/jedv2.png)">
-    <a href="army-sablony.htm">Obranný satelit</a>
-    <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(assets/css/utok-vesmir.png)" value="10">
-      <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(assets/css/obrana-vesmir.png)" value="5">
-    </li><li>
-    <a class="none" href="army-verbovani.htm">
-      <input type="button" title="Celkový počet jednotek tohoto typu" style="width: 95px !important; background-image: url(css/jed-vesmir.png)" value="10">
-    </a>
-  </li><li>  <input type="text" title="Celkový počet jednotek tohoto typu" style="width: 83px !important; background-image: url(css/poslatjednotky.png)">
-  </li></th>
-
-    <th style="background-image: url(assets/jednotky/jedv3.png)">
-      <a href="army-sablony.htm">Jméno (max15zn)</a>
-      <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(assets/css/utok-vesmir.png)" value="10">
-        <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(assets/css/obrana-vesmir.png)" value="5">
-      </li><li>
-      <a class="none" href="army-verbovani.htm">
-        <input type="button" title="Celkový počet jednotek tohoto typu" style="width: 95px !important; background-image: url(css/jed-vesmir.png)" value="10">
-      </a>
-    </li><li>  <input type="text" title="Celkový počet jednotek tohoto typu" style="width: 83px !important; background-image: url(css/poslatjednotky.png)">
-    </li></th>
-
-    <th style="background-image: url(assets/jednotky/jedv4.png)">
-      <a href="army-sablony.htm">Jméno (max15zn)</a>
-      <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(assets/css/utok-vesmir.png)" value="10">
-        <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(assets/css/obrana-vesmir.png)" value="5">
-      </li><li>
-      <a class="none" href="army-verbovani.htm">
-        <input type="button" title="Celkový počet jednotek tohoto typu" style="width: 95px !important; background-image: url(image/cssimage/jed-vesmir.png)" value="10">
-      </a>
-    </li><li>  <input type="text" title="Celkový počet jednotek tohoto typu" style="width: 83px !important; background-image: url(image/cssimage/poslatjednotky.png)">
-    </li></th>
-
-    <th style="background-image: url(assets/jednotky/jedv5.png)">
-      <a href="army-sablony.htm">Jméno (max15zn)</a>
-      <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(assets/css/utok-vesmir.png)" value="10">
-        <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(assets/css/obrana-vesmir.png)" value="5">
-      </li><li>
-      <a class="none" href="army-verbovani.htm">
-        <input type="button" title="Celkový počet jednotek tohoto typu" style="width: 95px !important; background-image: url(image/cssimage/jed-vesmir.png)" value="10">
-      </a>
-    </li><li>  <input type="text" title="Celkový počet jednotek tohoto typu" style="width: 83px !important; background-image: url(image/cssimage/poslatjednotky.png)">
-    </li></th>
-
-    <th style="background-image: url(assets/jednotky/jedv6.png)">
-      <a href="army-sablony.htm">Jméno (max15zn)</a>
-      <li>	<input type="button" title="Útok" style="margin-top: 100px; background-image: url(assets/css/utok-vesmir.png)" value="10">
-        <input type="button" title="Obrana" style="margin-top: 100px; background-image: url(assets/css/obrana-vesmir.png)" value="5">
-      </li><li>
-      <a class="none" href="army-verbovani.htm">
-        <input type="button" title="Celkový počet jednotek tohoto typu" style="width: 95px !important; background-image: url(image/cssimage/jed-vesmir.png)" value="10">
-      </a>
-    </li><li>  <input type="text" title="Celkový počet jednotek tohoto typu" style="width: 83px !important; background-image: url(image/cssimage/poslatjednotky.png)">
-    </li></th>
-
-  </tr>
-
-  <tr>
-    <td colspan="5" style="vertical-align: middle;">
-
-      Přesunout jednotky na planetu
-
-      <select style="float:none !important">
-        <option value="planeta">Riches</option>
-        <option value="planeta">Planeta</option>
-        <option value="planeta">Planeta</option>
-        <option value="planeta">Planeta</option>
-        <option value="planeta">Planeta</option>
-        <option value="planeta">Planeta</option>
-        <option value="planeta">Planeta</option>
-        <option value="planeta">Planeta</option>
-        <option value="planeta">Planeta</option>
-        <option value="planeta">Planeta</option>
-        <option value="planeta">Planeta</option>
-      </select>
-
-      <input style="float:right !important" type="button" value="Odeslat za 0.005 Melanže" class="ok">
-
-    </td>
-  </tr>
 
 
   </tbody></table>
+
+<%= render :partial => "unit", :collection => @units, :as => 'unit' %>
+
+<%= hidden_field_tag 'leno', value = @field.id %>
+
+    <div>
+      Presun jednotiek
+    </div>
+     <div>
+       <% if @field %>
+      <span>Jste na lene : <%= @field.name %></span>
+      <%= label_tag 'lena_squad', 'Cilove leno' %>
+      <%= select_tag 'lena_squad', options_for_select(Field.lena_s_kasarnou(current_user).collect { |p| [p.name, p.id] }) %>
+
+           <%= submit_tag "Presun" %>
+      <% else %>
+           <span>Jste na lene : nemate vybrate leno</span>
+      <% end %>
+     </div>
+
