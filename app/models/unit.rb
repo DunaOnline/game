@@ -1,7 +1,3 @@
 class Unit < ActiveRecord::Base
-  attr_accessible :attack, :defence, :description, :equipment, :health, :house_id, :material, :name, :solar, :img
-
-	has_many :products, :through => :equipments
-	has_many :equipments
-	belongs_to :squad
+  attr_accessible :attack, :defence, :description, :equipment, :health, :house_id, :material, :name, :solar
 end
