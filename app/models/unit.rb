@@ -1,5 +1,5 @@
 class Unit < ActiveRecord::Base
-  attr_accessible :attack, :defence, :description, :equipment, :health, :house_id, :material, :name, :solar, :img
+  attr_accessible :attack, :defence, :description, :equipment, :health, :house_id, :material, :name, :solar, :melange, :img
 
 	has_many :products, :through => :equipments
 	has_many :equipments

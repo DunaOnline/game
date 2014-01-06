@@ -63,7 +63,7 @@ module ApplicationHelper
     image_tag("css/logo.png", :alt => title, :title => title)
   end
 
-  def img_vyrobky(title = "Výrobky")
+  def img_vyrobky(title = "Dilů")
     image_tag("css/vyrobky.png", :alt => title, :title => title)
   end
 

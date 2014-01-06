@@ -9,6 +9,7 @@ class CreateUnits < ActiveRecord::Migration
       t.integer :health
       t.integer :equipment
       t.float :material
+      t.float :melange
       t.integer :solar
       t.string :img
       t.integer :lvl

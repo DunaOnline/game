@@ -336,7 +336,8 @@ class Field < ActiveRecord::Base
     total_price = 0
     total_parts = 0
     total_pocet = 0
-    vyrobeno = false
+    vyrobeno = []
+    number = 0
 
     vyrobky.each do |vyrobok|
       pocet = vyrobok[0]
@@ -366,32 +367,35 @@ class Field < ActiveRecord::Base
 
 	        produkcia = Production.where(:resource_id => zdroje_lena.id, :product_id => coho.id).first
 	        if produkcia
-	          produkcia.update_attribute(:amount, produkcia.amount + pocet)
+	          produkcia.update_attributes :amount => produkcia.amount + pocet
 	        else
-	          Production.new(
+		        produkcia = Production.new(
 	              :user_id => field.user.id,
 	              :resource_id => zdroje_lena.id,
 	              :product_id => coho.id,
 	              :amount => pocet
 	          ).save
 	        end
+	        number += pocet
+	        vyrobeno << produkcia
 	        self.zapis_udalosti(self.user, "Bylo nakoupeno #{pocet} ks #{coho.title} za #{coho.material * pocet} kg, #{coho.melanz * pocet} mg,
-					#{coho.price * pocet} solaru a #{coho.parts * pocet} vyrobku")
+					#{coho.price * pocet} solaru a #{coho.parts * pocet} dilu")
 	      end
-
+	      oznamenie = "Bylo nakoupeno #{number} ks vyrobku za #{total_material} kg, #{total_melanz} mg,
+	                                 #{total_price} solaru a #{total_parts} dilu"
 	      zdroje_lena.update_attributes(:material => zdroje_lena.material - total_material, :parts => zdroje_lena.parts - total_parts)
 	      field.user.update_attributes(:solar => field.user.solar - total_price, :melange => field.user.melange - total_melanz)
-	      vyrobeno = true
+
 	    else
-	      oznamenie += "Chybi vam "
+	      oznamenie = "Chybi vam "
 	      oznamenie += (total_material - zdroje_lena.material).to_s + " kg materialu " unless material
 	      oznamenie += (total_melanz - field.user.melange).to_s + " mg melanze " unless melanz
-	      oznamenie += (total_parts - zdroje_lena.parts).to_s + " vyrobkov " unless parts
+	      oznamenie += (total_parts - zdroje_lena.parts).to_s + " dilu " unless parts
 	      oznamenie += (total_price - field.user.solar).to_s + " solaru " unless price
 	      oznamenie += "."
 	    end
     else
-	    oznamenie += "Nemate dostatek mista v tovarni"
+	    oznamenie = "Nemate dostatek mista v tovarni"
     end
 
     return oznamenie, vyrobeno
@@ -422,26 +426,97 @@ class Field < ActiveRecord::Base
           number += pocet
 
           produkcia = Production.where(:resource_id => field.resource.id, :product_id => coho.id).first
-          produkcia.update_attribute(:amount, produkcia.amount - pocet)
+          produkcia.update_attributes :amount => produkcia.amount - pocet
           field.resource.update_attributes(:material => field.resource.material + total_material, :parts => field.resource.parts + total_parts)
           field.user.update_attributes(:solar => field.user.solar + total_price, :melange => field.user.melange + total_melanz)
           self.zapis_udalosti(self.user, "Bylo prodano #{pocet} ks #{coho.title} za #{(coho.material * pocet) / 2} kg, #{(coho.melanz * pocet) / 2} mg,
-					#{(coho.price * pocet) / 2} solaru a #{(coho.parts * pocet) / 2} vyrobku")
+					#{(coho.price * pocet) / 2} solaru a #{(coho.parts * pocet) / 2} dilu")
+	        nemozno_prodat << produkcia
         else
-          nemozno_prodat = true
+          nemozno_prodat = false
         end
       end
 
 
     end
-    if nemozno_prodat
-      oznamenie += "Tolik vyrobku nemozno prodat"
+    if !nemozno_prodat
+      oznamenie = "Tolik vyrobku nemozno prodat"
     else
-      oznamenie += "Bylo prodano #{number} vyrobku, prodejem sme ziskali #{total_material} kg materialu, #{total_melanz} mg melanze, #{total_price} solaru a #{total_parts} dilu"
+      oznamenie = "Bylo prodano #{number} vyrobku, prodejem sme ziskali #{total_material} kg materialu, #{total_melanz} mg melanze, #{total_price} solaru a #{total_parts} dilu"
     end
 
     return oznamenie, nemozno_prodat
 
+  end
+
+  def verbovanie_jednotiek(units)
+	  field = self
+	  zdroje_lena = field.resource
+	  total_material = 0
+	  total_melanz = 0
+	  total_price = 0
+	  total_parts = 0
+	  total_pocet = 0
+	  naverbovano = []
+	  number = 0
+
+	  units.each do |unit|
+		  u = unit[0]
+		  pocet = u[0].to_i.abs
+		  total_pocet += pocet
+		  jednotka = Unit.where(:name => u[1]).first
+
+		  total_material += jednotka.material * pocet
+		  total_melanz += jednotka.melange * pocet
+		  total_price += jednotka.price * pocet
+
+	  end
+	  material = zdroje_lena.material >= total_material
+	  melanz = field.user.melange >= total_melanz
+	  price = field.user.solar >= total_price
+
+	  miesto = true #field.kapacita_tovaren > field.vyuzitie_tovaren + total_pocet
+
+
+	  if miesto
+		  if material && melanz && price
+			  units.each do |unit|
+				  u = unit[0]
+				  pocet = pocet[0].to_i
+				  jednotka = Unit.where(:title => u[1]).first
+
+				  squad = Squad.where(:field_id => field.id, :unit_id => jednotka.id).first
+				  if squad
+					  squad.update_attributes :amount => squad.number + pocet
+				  else
+					  squad = Squad.new(
+							  :field_id => field.id,
+							  :unit_id => jednotka.id,
+							  :number => pocet
+					  ).save
+				  end
+				  number += pocet
+				  naverbovano << squad
+				  self.zapis_udalosti(self.user, "Bylo nakoupeno #{pocet} ks #{jednotka.name} za #{jednotka.material * pocet} kg, #{jednotka.melanz * pocet} mg,
+					#{jednotka.price * pocet} solaru.")
+			  end
+			  oznamenie = "Bylo nakoupeno #{number} ks vyrobku za #{total_material} kg, #{total_melanz} mg,
+	                                 #{total_price} solaru."
+			  zdroje_lena.update_attributes(:material => zdroje_lena.material - total_material)
+			  field.user.update_attributes(:solar => field.user.solar - total_price, :melange => field.user.melange - total_melanz)
+
+		  else
+			  oznamenie = "Chybi vam "
+			  oznamenie += (total_material - zdroje_lena.material).to_s + " kg materialu " unless material
+			  oznamenie += (total_melanz - field.user.melange).to_s + " mg melanze " unless melanz
+			  oznamenie += (total_price - field.user.solar).to_s + " solaru " unless price
+			  oznamenie += "."
+		  end
+	  else
+		  oznamenie = "Nemate dostatek mista v kasarni"
+	  end
+
+	  return oznamenie, naverbovano
   end
 
   def suroviny(what)

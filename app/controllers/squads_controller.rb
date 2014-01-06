@@ -51,22 +51,42 @@ class SquadsController < ApplicationController
 		# POST /units.json
 		def create
 			par = []
-			jednotky = Unit.all.map { |x| x.name }
-			@squad = Squad.new(params[:squad])
-			field = Field.find(params[:leno])
+			jednotky = Unit.house_units(current_user.house).all.map { |x| x.name }
+			@field = Field.find(params[:leno])
 			jednotky.each do |title|
 				par << [([params[title]]), [title]] unless params[title] == ""
 			end
+			if par.any?
+				if params[:commit]
+					message, verbovano = field.verbovanie_jednotiek(par)
 
-			respond_to do |format|
-				if @squad.save
-					format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
-					format.json { render json: @unit, status: :created, location: @unit }
-				else
-					format.html { render action: "new" }
-					format.json { render json: @unit.errors, status: :unprocessable_entity }
+				respond_to do |format|
+					if verbovano
+						format.html { redirect_to squad_path(@field.id), notice: message }
+						format.json { render json: verbovano, status: :created, location: squad_path(@field.id) }
+					else
+						format.html { redirect_to :back, alert: message }
+						#format.json { render json: @unit.errors, status: :unprocessable_entity }
+					end
 				end
+				elsif params[:zrusit]
+					message, prodat = field.predaj_produktov(par)
+					respond_to do |format|
+						if prodat
+							format.html { redirect_to production_url(field), notice: message }
+							format.json { render json: @production, status: :created, location: @production }
+						else
+							format.html { redirect_to production_url(field), alert: message }
+							format.json { render json: @production, status: :created, location: @production }
+						end
+					end
+				end
+			else
+
 			end
+
+
+
 		end
 
 		# PUT /units/1
