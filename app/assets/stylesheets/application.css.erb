@@ -123,20 +123,18 @@ div.l select:hover {
 
 div.lista {
     position: absolute;
-    top: 0;
+    top: -125px;
     left: 0;
     width: 100%;
     height: auto;
-    padding: 2px 0 3px 0;
+    padding: 0;
     font-size: 9px !important;
     text-shadow: 0.1em 0.1em #000 !important;
     text-align: right;
     vertical-align: middle;
-    background-image: url(<%= asset_path 'css/td1.png' %>);
+    padding: 2px;
     border: 0;
-    border-bottom: solid 1px #696969;
-    border-top: solid 1px #696969;
-    z-index: 3 !important;
+    z-index: 3 !important;   
 }
 
 div.lista a {
@@ -151,7 +149,7 @@ div.lista input {
     float: right;
     padding: 2px 4px 2px 4px !important;
     margin: 0 1px 0 1px;
-    width: auto !important;
+    width: auto;
     background-color: transparent;
     background-image: url(<%= asset_path 'css/td1.png' %>);
     color: #a2a2a2;
@@ -200,13 +198,13 @@ div.lista input:hover {
 
 .planet {
     position: relative;
-    left: -50px;
-    top: -40px;
+    left: -200px;
+    top: 5px;
     background-image: url(<%= asset_path 'css/arrakis2.png' %> );
     background-repeat: no-repeat;
-    background-position: right;
+    background-position: top;
     z-index: 0 !important;
-    width: 1200px;
+    width: 500px;
     height: 400px;
     border: 0;
 }
@@ -266,7 +264,46 @@ td.prava {
     vertical-align: bottom;
 }
 
-    /* ++++++++++++++++++++ Menu + hlavi?ka ++++++++++++++++++++ */
+
+/* ++++++++++++++++++++ Avatar v hlavicce ++++++++++++++++++++ */
+
+div.avatar {
+    position: absolute;
+    top: 10px;
+    left: 85px;
+    min-width: 150px;
+    text-align: left;
+    background-image: url(<%= asset_path 'css/tseda.png' %>);
+    padding: 3px 7px 3px 7px;
+    border: solid 1px #a9a9a9;
+    -webkit-border-top-right-radius: 2px;
+    -webkit-border-bottom-right-radius: 2px;
+    -moz-border-radius-topright: 2px;
+    -moz-border-radius-bottomright: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+div.avatar img {
+    float:left;
+    width: 85px;
+    height: 85px;
+    margin: -4px 7px -4px -94px;
+    vertical-align: middle;
+    border: solid 1px #a9a9a9;
+    -webkit-border-top-left-radius: 2px;
+    -webkit-border-bottom-left-radius: 2px;
+    -moz-border-radius-topleft: 2px;
+    -moz-border-radius-bottomleft: 2px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+div.avatar li {
+    list-style: none;
+}
+
+/* ++++++++++++++++++++ Menu + hlavicka ++++++++++++++++++++ */
 
 div.suroviny {
     position: absolute;
@@ -290,45 +327,6 @@ div.suroviny img {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
-}
-
-div.inf {
-    position: absolute;
-    top: 21px;
-    left: 0px;
-    width: 253px;
-    height: 90px;
-    background-image: url(<%= asset_path 'css/tseda.png' %>);
-    z-index: 3;
-    font-size: 1em;
-    padding: 7px 0px 7px 0px;
-    vertical-align: middle;
-    border: solid 1px #a9a9a9;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-}
-
-div.inf img {
-    float: left;
-    width: 70px;
-    height: 80px;
-    margin-right: 7px;
-    margin-left: -1px;
-    vertical-align: middle;
-    border: solid 1px #a9a9a9;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-}
-
-div.inf a {
-    text-decoration: none;
-    color: #fff;
-}
-
-div.inf a:hover {
-    color: #ffdb30;
 }
 
 .a1 {
