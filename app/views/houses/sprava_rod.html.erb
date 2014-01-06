@@ -5,14 +5,16 @@
   <%= form_tag :posli_rodove_suroviny do %>
       <tr>
         <td class="tdpl" rowspan="2" style="width:160px; background-image: url(<%= asset_path 'imghra/narodnisklad.png' %>)">
+          <%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok_sur' %>
           <li><h2>Národní sklad</h2></li>
           <li><b>Národ: </b><%= @house.name %></li>
           <li><b>Vliv: </b><%= @house.vliv %></li>
           <li><b>Planet: </b><%= @house.pocet_planet %></li>
           <li><b>Občanů: </b><%= @house.users.count %></li>
-          <br/><br/>
+          <br><br><br><br><br>
+          <%= text_area_tag 'comment', '', :class => 'sur_poznamka', :style => 'width:180px !important;', :placeholder => "Poznámka k zásilce" %>
+        
           <% if current_user.admin? || current_user.leader? || current_user.mentat? %>
-          <li><%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok' %></li>
           <% else %>
 
           <% end %>
@@ -58,14 +60,6 @@
           <li><%= img_zkusenosti %><%= text_field_tag 'rodu_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_vyrobky %><%= text_field_tag 'rodu_parts', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= select_tag :rod_id_suroviny, options_for_select(House.without_house(@house.id).without_house(1).without_house(3).order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %></li>
-        </td>
-      </tr>
-      <tr>
-        <th>
-          Poznámka :
-        </th>
-        <td colspan="4">
-          <%= text_area_tag 'comment', '', :class => 'full_width' %>
         </td>
       </tr>
   <% end %>

@@ -1,27 +1,20 @@
 <table class="tab3">
   <%= form_tag :vyves_nastenku do %>
       <tr>
-        <td rowspan="2" class="tdpl" rowspan="2" style="background-image: url(<%= asset_path 'imghra/narodnisklad.png' %>)">
+        <th>
         
         <img style="float:right" src="<%= asset_path 'css/info2.png' %>" title="Je povoleno maximálne 700 znaků v HTML kódu nástěnky! Mezi povolené znaky se počítají i schválené tagy patří <b>, <a>, <i>, <u>, <h2>, <h3>, <img>, <br>, <li> a jejich prové tagy pro zrušení zrušení.">
         
-        <h2>Národní nástěnka</h2>
+        <%= submit_tag "AKTUALIZOVAT NÁRODNÍ NÁSTĚNKU", :title => "ODESLAT", :class => "ok4" %>
         
         
         
-        
-
-        </td>
-        <th style="width: 536px !important">
-
-          <%= submit_tag "ZVEREJNIT NÁSTENKU", :title => "ODESLAT", :class => "ok4" %>
-
         </th>
-
       </tr>
       <tr>
         <td>
-          <%= text_area_tag 'dashboard', current_user.house.house_dashboard, class: 'text_area' %>
+        <%= text_area_tag 'dashboard', current_user.house.house_dashboard, :class => 'nastenka' %>
+          
         </td>
       </tr>
       <% end %>

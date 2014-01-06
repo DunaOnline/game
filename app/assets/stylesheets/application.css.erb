@@ -198,14 +198,14 @@ div.lista input:hover {
 
 .planet {
     position: relative;
-    left: -200px;
-    top: 5px;
+    top: -35px;
+    left: 100px;
+    height: 400px;
+    width: 100%;
     background-image: url(<%= asset_path 'css/arrakis2.png' %> );
     background-repeat: no-repeat;
-    background-position: top;
+    background-position: right;
     z-index: 0 !important;
-    width: 500px;
-    height: 400px;
     border: 0;
 }
 
@@ -693,6 +693,31 @@ div.ra {
 }
 
 .ok:hover {
+    color: #ffdb30;
+    border: #ffdb30 1px solid;
+}
+
+.ok_sur {
+    float: right;
+    margin: 2px 0 2px 0;
+    padding: 2px 5px 2px 5px !important;
+    background-color: transparent;
+    background-image: url(<%= asset_path 'css/td1.png' %>) !important;
+    background-repeat: repeat !important;
+    width: auto !important;
+    font-size: 12px !important;
+    color: #a2a2a2;
+    text-decoration: none;
+    font-weight: bold !important;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #a2a2a2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.ok_sur:hover {
     color: #ffdb30;
     border: #ffdb30 1px solid;
 }
@@ -1488,9 +1513,9 @@ table.tab0 img {
     margin: 2px 3px 2px 0;
     vertical-align: middle;
     border: solid 1px #a9a9a9;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
 table.tab0 a {
@@ -1504,6 +1529,19 @@ table.tab0 a:hover {
     color: #ffdb30;
     text-decoration: none;
 }
+
+.sur_poznamka {
+    height: 30px !important; 
+    margin: 10px -5px -7px -5px;
+    font-size: 0.8em;
+    border-top: solid 1px #a9a9a9;
+    border: 0;
+    -webkit-border-bottom-left-radius: 2px;
+    -moz-border-radius-bottomleft: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+
 
     /* ++++++++++++++++++++ Tabulky - TAB1 ++++++++++++++++++++ */
 
@@ -1662,6 +1700,14 @@ table.tab2 select {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+}
+
+.nastenka {
+    min-height: 50px; 
+    width:100%;
+    margin: 0;
+    font-size: 0.7em;
+    border: 0;
 }
 
     /* ++++++++++++++++++++ Tabulky - TAB3 ++++++++++++++++++++ */
@@ -2973,9 +3019,8 @@ textarea {
 }
 textarea.vert { resize:vertical; }
 textarea.noResize { resize:none; }
-.full_width {
-    width: 100%;
-}
+
+
 .img_war_mentat{
     width:130px;
     background-image: url(<%= asset_path 'imghra/warmentat.png' %>);
