@@ -15,4 +15,11 @@ class Squad < ActiveRecord::Base
 		end
 	end
 
+	def attack
+		self.unit.attack * self.number
+	end
+
+  def defence
+	  self.unit.defence * self.number
+  end
 end

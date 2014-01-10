@@ -6,6 +6,7 @@ class SquadsController < ApplicationController
 			@squads = Squad.all
 			@units = Unit.house_units(current_user.house).all
 			@squad = Squad.new
+			@user = current_user
 
 			if params[:leno]
 				@field = Field.find(params[:leno])
@@ -20,8 +21,9 @@ class SquadsController < ApplicationController
 		# GET /units/1
 		# GET /units/1.json
 		def show
+			@user = current_user
 			@field = Field.find(params[:id])
-			if @field.user == current_user
+			if @field.user == @user
 				@lena_s_kasarnou = Field.lena_s_kasarnou(current_user)
 				@units = Unit.house_units(current_user.house).all
 				@unit = Unit.new
@@ -98,7 +100,7 @@ class SquadsController < ApplicationController
 				if params[:commit]
 					message, verbovano = @field.verbovanie_jednotiek(par)
 					respond_to do |format|
-						if verbovano
+						if verbovano && verbovano != []
 							format.html { redirect_to squad_path(@field.id), notice: message }
 							format.json { render json: verbovano, status: :created, location: squad_path(@field.id) }
 						else

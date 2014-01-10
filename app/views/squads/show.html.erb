@@ -18,8 +18,8 @@
 </tr><tr>
 
   <td>
-    <li><%= img_pozemni_utok %> 100</li>
-    <li><%= img_pozemni_obrana %> 100</li>
+    <li><%= img_pozemni_utok %> <%= @field.utok_pozemni %></li>
+    <li><%= img_pozemni_obrana %> <%= @field.def_pozemni %></li>
     <li><%= img_vesmir_utok %> 100</li>
     <li><%= img_vesmir_obrana %> 100</li>
 
@@ -42,15 +42,32 @@
 
 </tr>
 </table>
+<div class="img heading resource_list resources">
+  <ul style="font-size: 11px;">
+    <% if @field %>
+        <li><%= img_material @field.resource.material, "vertical-align:middle"  %><%= @field.resource.material %></li>
+        <li><%= img_populace @field.resource.population, "vertical-align:middle" %><%= @field.resource.population %></li>
+    <% end %>
+    <li><%= img_solary @user.solar ,"vertical-align:middle" %><%= @user.solar %></li>
+    <li><%= img_melanz @user.melange ,"vertical-align:middle" %><%= @user.melange %></li>
+    <span class="fright">Kapacita :<%= @field.vyuzitie_kasaren %> /<%= @field.kasaren_kapacita.to_i %></span>
+  </ul>
 
+</div>
 <table class="tab4">
 <tr>
   <th class="thf" colspan="4">
     <%= select_tag 'lena_squad', options_for_select(Field.lena_s_kasarnou(current_user).collect { |p| [p.name, p.id] }) %>
     <%= link_to "Prejdi na leno", '', :class => 'select_squad' %>
-    Vaše jednotky na vybraných planetách
+
   </th>
+
 </tr>
+  <tr>
+    <th class="thf" colspan="4">
+      Vaše jednotky na vybraných planetách
+    </th>
+  </tr>
 
 </table>
 

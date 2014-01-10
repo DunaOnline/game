@@ -290,18 +290,18 @@ class Field < ActiveRecord::Base
 	end
 
 	def kasaren_kapacita
-		kapacita = self.estates.where(:building_id => Building.kasaren.id).first
-		kapacita
+		kapacita = self.estates.where(:building_id => Building.kasaren.id).first.number
+		kapacita * Constant.kapacita_kasaren
 	end
 
 	def self.lena_s_kasarnou(user)
-		field = user.fields.joins(:estates).where("estates.building_id = ?", Building.kasaren.id).all
+		field = user.fields.joins(:estates).where("estates.building_id = ?", Building.kasaren.id)
 		field
 	end
 
 	def move_units(target, units)
 		success = false
-		kapacita = 10
+		kapacita = self.kasaren_kapacita
 		flag = false
 		total_unit = 0
 		units_helper = []
@@ -317,7 +317,7 @@ class Field < ActiveRecord::Base
 			units_helper << [pocet, jednotka]
 		end
 		if self != target
-			if total_unit <= kapacita #self.kasaren_kapacita
+			if total_unit <= kapacita
 				if flag == true
 					units_helper.each do |i|
 						pocet = i[0]
@@ -512,7 +512,7 @@ class Field < ActiveRecord::Base
 		total_melanz = 0
 		total_price = 0
 		total_pocet = 0
-		#total_price
+		total_population = 0
 		number = 0
 		oznamenie = ""
 
@@ -527,27 +527,25 @@ class Field < ActiveRecord::Base
 					total_material += (jednotka.material * pocet) / 2
 					total_melanz += (jednotka.melange ? jednotka.melange : 0 * pocet) / 2
 					total_price += (jednotka.solar * pocet) / 2
-					#total_parts += (coho.parts * pocet) / 2
-					number += pocet
+					total_population += (jednotka.population * pocet) / 2
+					total_pocet += pocet
 
 					squad = Squad.where(:field_id => field.id, :unit_id => jednotka.id).first
 					squad.update_attributes(:number => squad.number - pocet)
-					field.resource.update_attributes(:material => field.resource.material + total_material)#, :parts => field.resource.parts + total_parts)
-					field.user.update_attributes(:solar => field.user.solar + total_price, :melange => field.user.melange + total_melanz)
+					field.resource.update_attributes(:material => field.resource.material + ((jednotka.material * pocet) / 2), :population => field.resource.population + ((jednotka.population * pocet) / 2))
+					field.user.update_attributes(:solar => field.user.solar + ((jednotka.solar * pocet) / 2), :melange => field.user.melange + ((jednotka.melange ? jednotka.melange : 0 * pocet) / 2))
 					self.zapis_udalosti(self.user, "Bylo prodano #{pocet} ks #{jednotka.name} za #{(jednotka.material * pocet) / 2} kg, #{(jednotka.melange ? jednotka.melange : 0 * pocet) / 2} mg,
-					#{(jednotka.solar * pocet) / 2} solaru.")
+					#{(jednotka.solar * pocet) / 2} solaru a #{(jednotka.population * pocet) / 2} populacie.")
 					nemozno_prodat << squad
 				else
 					nemozno_prodat = nil
 				end
 			end
-
-
 		end
 		if !nemozno_prodat
 			oznamenie = "Tolik vyrobku nemozno prodat"
 		else
-			oznamenie = "Bylo prodano #{number} vyrobku, prodejem sme ziskali #{total_material} kg materialu, #{total_melanz} mg melanze, #{total_price} solaru."
+			oznamenie = "Bylo prodano #{total_pocet} vyrobku, prodejem sme ziskali #{total_material} kg materialu, #{total_melanz} mg melanze, #{total_price} solaru a #{total_population} populacie."
 		end
 
 		return oznamenie, nemozno_prodat
@@ -560,10 +558,11 @@ class Field < ActiveRecord::Base
 		total_material = 0
 		total_melanz = 0
 		total_price = 0
-		total_parts = 0
+		total_population = 0
 		total_pocet = 0
 		naverbovano = []
 		number = 0
+		units_msg = ""
 
 		units.each do |unit|
 			pocet = unit[0][0].to_i.abs
@@ -573,17 +572,19 @@ class Field < ActiveRecord::Base
 			total_material += jednotka.material * pocet
 			total_melanz += jednotka.melange ? jednotka.melange : 0 * pocet
 			total_price += jednotka.solar * pocet
+			total_population += jednotka.population * pocet
 
 		end
 		material = zdroje_lena.material >= total_material
 		melanz = field.user.melange >= total_melanz
 		price = field.user.solar >= total_price
+		population = zdroje_lena.population >= total_population
 
-		miesto = true #field.kapacita_tovaren > field.vyuzitie_tovaren + total_pocet
+		miesto = field.kasaren_kapacita >= field.vyuzitie_kasaren + total_pocet
 
 
 		if miesto
-			if material && melanz && price
+			if material && melanz && price && population
 				units.each do |unit|
 					pocet = unit[0][0].to_i.abs
 					jednotka = Unit.where(:name => unit[1][0]).first
@@ -600,27 +601,38 @@ class Field < ActiveRecord::Base
 					end
 					number += pocet
 					naverbovano << squad
-					self.zapis_udalosti(self.user, "Bylo naverbovano #{pocet} ks #{jednotka.name} za #{jednotka.material * pocet} kg, #{jednotka.melange ? jednotka.melange : 0 * pocet} mg,
-					#{jednotka.solar * pocet} solaru.")
+					units_msg += "#{pocet} ks #{jednotka.name}, "
+
 				end
-				oznamenie = "Bylo naverbovano #{number} ks jednotiek za #{total_material} kg, #{total_melanz} mg,
-	                                 #{total_price} solaru."
-				zdroje_lena.update_attributes(:material => zdroje_lena.material - total_material)
+
+				oznamenie = "Bylo naverbovano #{units_msg} za #{total_material} kg, #{total_melanz} mg,
+	                                 #{total_price} solaru a #{total_population}."
+				self.zapis_udalosti(self.user,oznamenie)
+				zdroje_lena.update_attributes(:material => zdroje_lena.material - total_material, :population => zdroje_lena.population - total_population)
 				field.user.update_attributes(:solar => field.user.solar - total_price, :melange => field.user.melange - total_melanz)
 
 			else
 				oznamenie = "Chybi vam "
-				oznamenie += (total_material - zdroje_lena.material).to_s + " kg materialu " unless material
-				oznamenie += (total_melanz - field.user.melange).to_s + " mg melanze " unless melanz
-				oznamenie += (total_price - field.user.solar).to_s + " solaru " unless price
-				oznamenie += "."
+				oznamenie += (total_material - zdroje_lena.material).to_s + " kg materialu, " unless material
+				oznamenie += (total_melanz - field.user.melange).to_s + " mg melanze, " unless melanz
+				oznamenie += (total_price - field.user.solar).to_s + " solaru, " unless price
+				oznamenie += (total_price - field.user.solar).to_s + " solaru, " unless price
+				oznamenie += "Zaridte suroviny."
 				naverbovano = false
 			end
 		else
-			oznamenie = "Nemate dostatek mista v kasarni"
+			oznamenie = "Nemate dostatek mista v kasarni."
 		end
 
 		return oznamenie, naverbovano
+	end
+
+	def vyuzitie_kasaren
+		c = 0
+		self.squads.each do |s|
+			c += s.number
+		end
+		c
 	end
 
 	def suroviny(what)
@@ -800,6 +812,22 @@ class Field < ActiveRecord::Base
 			flag = "I"
 		end
 		flag
+	end
+
+	def utok_pozemni
+		a = 0
+		self.squads.each do |s|
+			a += s.attack
+		end
+		a
+	end
+
+	def def_pozemni
+		d = 0
+		self.squads.each do |s|
+			d += s.defence
+		end
+		d
 	end
 
 	def jednotky(unit)

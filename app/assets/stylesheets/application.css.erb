@@ -3030,10 +3030,11 @@ textarea.noResize { resize:none; }
     width: 44px;
     margin: 2px 2px 1px 2px;
     padding: 3px 5px 3px 5px;
-    font-size: 11px;
+    font-size: 9px;
     color: #fff;
     text-shadow: 0.1em 0.1em #000;
-    text-align: right;
+    float: left;
+    text-align: center;
     vertical-align: middle;
     background-color: #292929;
     background-position: left;
@@ -3042,6 +3043,130 @@ textarea.noResize { resize:none; }
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
+}
+.line_bot{
+    border-bottom: 1px solid #888888;
+}
+.army_unit_blocks{
+    width: 100%;
+}
+.army_unit_blocks input {
+    width: 70%;
+    margin: 20px;
+}
+.army_unit{
+    float:left;
+    height: 200px;
+    width: 19%;
+    margin-left: 2px;
+}
+.army_unit ul{
+    list-style: none;
+    padding-left: 0;
+}
+.army_unit:not(:first-child) {
+    margin-left: 0;
+}
+
+.verb_column {
+    float:left;
+    height: 245px;
+    width: 40%;
+    text-align: center;
+
+}
+.verb_content_colum {
+    padding-left: 3px;
+     float:left;
+
+
+     width: 55%;
+ }
+ .img {
+     padding: 2px;
+     border: solid 1px #888888;
+ }
+
+.verb_content_colum ul{
+   list-style: none;
+   padding-left: 0;
+}
+.verb_content_colum ul li{
+
+}
+
+
+.attack_button {
+    margin-bottom: 10px;
+    margin-left: 15px;
+    width: 44px;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-image: url(<%= asset_path 'css/obrana-pozemni.png' %>);
+    color: #ffffff;
+    float: left;
+}
+.defence_button {
+
+    margin-bottom: 10px;
+    margin-right: 15px;
+    width: 44px;
+    border: solid 1px #a9a9a9;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-image: url(<%= asset_path 'css/utok-pozemni.png' %>);
+    color: #ffffff;
+    float: right;
+}
+
+.half {
+    float: left;
+    width: 50%;
+}
+.wrapper{position:relative;}
+.bottom{position:absolute; bottom:0;}
+.full_width{width: 100%;}
+
+.clear:before,
+.clear:after,
+.attachment .entry-header:before,
+.attachment .entry-header:after,
+.site-footer .widget-area:before,
+.site-footer .widget-area:after,
+.entry-content:before,
+.entry-content:after,
+.page-content:before,
+.page-content:after,
+.navigation:before,
+.navigation:after,
+.nav-links:before,
+.nav-links:after,
+.gallery:before,
+.gallery:after,
+.comment-form-author:before,
+.comment-form-author:after,
+.comment-form-email:before,
+.comment-form-email:after,
+.comment-form-url:before,
+.comment-form-url:after,
+.comment-body:before,
+.comment-body:after {
+    content: "";
+    display: table;
+}
+
+.resource_list ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.resource_list ul li {
+    display: inline-block;
+   margin-left: 14px;
 }
 
 

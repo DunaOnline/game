@@ -1,10 +1,15 @@
-<div style="background-image: url(assets/jednotky/jedp8.png)"><%= link_to unit.name, unit_path(unit.id) %>
-  <li>	<span class="attack_button" title="Útok"><%= unit.attack %></span>
-    <span class="defence_button" title="Obrana"><%= unit.defence %></span>
-  </li>
+
+<div style="background-image: url(assets/jednotky/jedp8.png)" class="img army_unit wrapper" >
+  <span class="heading"><h3><%= link_to unit.name, unit_path(unit.id) %></h3></span>
+
+  <div class="bottom full_width">
+    <span class="attack_button" title="Útok"><h3><%= unit.attack %></h3></span>
+    <span class="defence_button" title="Obrana"><h3><%= unit.defence %></h3></span>
+  </div>
+  <ul>
   <li>
       <% if @field %>
-        <%=  @field.jednotky(unit) ? @field.jednotky(unit).number : 0 %>
+        Clenu armady : <span style="font-weight: bold;"><%=  @field.jednotky(unit) ? @field.jednotky(unit).number : 0 %></span>
         </li><li>  <%= number_field_tag(unit.name, nil, :min => 1, :title => "Zadejte množství") %>
 
       <% else %>
@@ -14,4 +19,11 @@
 
 
 
-</li></div>
+</li></ul></div>
+<% if (unit_counter + 1) % 5 == 0 %>
+    </div>
+    <div class="clear">
+
+    </div>
+    <div class="army_unit_blocks">
+<% end %>

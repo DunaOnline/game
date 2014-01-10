@@ -39,24 +39,24 @@ module ApplicationHelper
     "X"
   end
 
-  def img_solary(title = "Soláry")
-    image_tag("css/solary.png", :alt => title, :title => title)
+  def img_solary(title = "Soláry",style = "")
+    image_tag("css/solary.png", :alt => title, :title => title, :style => style)
   end
 
-  def img_material(title = "Materiál")
-    image_tag("css/material.png", :alt => title, :title => title)
+  def img_material(title = "Materiál",style = "")
+    image_tag("css/material.png", :alt => title, :title => title, :style => style)
   end
 
-  def img_melanz(title = "Melanž")
-    image_tag("css/melanz.png", :alt => title, :title => title)
+  def img_melanz(title = "Melanž",style = "")
+    image_tag("css/melanz.png", :alt => title, :title => title, :style => style)
   end
 
-  def img_populace(title = "Populace")
-    image_tag("css/populace.png", :alt => title, :title => title)
+  def img_populace(title = "Populace",style = "")
+    image_tag("css/populace.png", :alt => title, :title => title, :style => style)
   end
 
-  def img_zkusenosti(title = "Zkušenosti")
-    image_tag("css/zkusenosti.png", :alt => title, :title => title)
+  def img_zkusenosti(title = "Zkušenosti",style = "")
+    image_tag("css/zkusenosti.png", :alt => title, :title => title, :style => style)
   end
 
   def img_logo(title = "Emperor - Duna Online")
