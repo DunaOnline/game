@@ -294,4 +294,24 @@ class Constant
 	  Global.vrat('kapacita_kasarne',4)
   end
 
+	def self.parts_mat_cost
+		Global.vrat('parts_mat_cost',4)
+	end
+
+  def self.town_capacity
+	  Global.vrat('town_capacity',4)
+  end
+  def self.city_capacity
+	  Global.vrat('city_capacity',4)
+  end
+  def self.megalopolis_capacity
+	  Global.vrat('megalopolis_capacity',4)
+  end
+  def self.popka_v_budovach_helper
+	  Global.vrat('popka_v_budovach_helper',4)
+  end
+  def self.set_popka_v_budovach_helper(val)
+	  Global.prepni('popka_v_budovach_helper',4,val)
+  end
+
 end

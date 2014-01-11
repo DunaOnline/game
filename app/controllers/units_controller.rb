@@ -56,6 +56,7 @@ class UnitsController < ApplicationController
   # PUT /units/1
   # PUT /units/1.json
   def update
+	  if current_user.admin?
     @unit = Unit.find(params[:id])
 
     respond_to do |format|
@@ -67,6 +68,9 @@ class UnitsController < ApplicationController
         format.json { render json: @unit.errors, status: :unprocessable_entity }
       end
     end
+	  else
+		  redirect_to :back, :alert => "nemozes menit jedntoku."
+		end
   end
 
   # DELETE /units/1

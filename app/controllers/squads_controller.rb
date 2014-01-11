@@ -93,6 +93,7 @@ class SquadsController < ApplicationController
 			par = []
 			jednotky = Unit.house_units(current_user.house).all.map { |x| x.name }
 			@field = Field.find(params[:leno])
+			if @field.kasaren_kapacita > 0
 			jednotky.each do |title|
 				par << [([params[title]]), [title]] unless params[title] == ""
 			end
@@ -104,7 +105,7 @@ class SquadsController < ApplicationController
 							format.html { redirect_to squad_path(@field.id), notice: message }
 							format.json { render json: verbovano, status: :created, location: squad_path(@field.id) }
 						else
-							format.html { redirect_to :back, alert: message }
+							format.html { redirect_to squad_path(@field.id), alert: message }
 							#format.json { render json: @unit.errors, status: :unprocessable_entity }
 						end
 					end
@@ -115,13 +116,16 @@ class SquadsController < ApplicationController
 							format.html { redirect_to squad_path(@field.id), notice: message }
 							format.json { render json: message, status: :created, location: squad_path(@field.id) }
 						else
-							format.html { redirect_to production_url(@field), alert: message }
+							format.html { redirect_to squad_path(@field), alert: message }
 							format.json { render json: message, status: :created, location: squad_path(@field.id) }
 						end
 					end
 				end
 			else
-
+				redirect_to :back, :alert => "Zadajte mnozstvo."
+			end
+			else
+			  redirect_to :back, :alert => "Nemate postavenu kasaren."
 			end
 		end
 

@@ -22,10 +22,12 @@
       <%= submit_tag 'Vybavit', :class => 'ok' %>
       <%= submit_tag 'Zrušit zadané množství', :name => "zrusit", :class => "ok" %>
       <h3>Výbava:</h3></li>
-    <li>Solary :<%= unit.solar %> S</li>
-    <li>Material :<%= unit.material %> kg</li>
-    <li>Material :<%= unit.population %> pop</li>
-    <li>Melanz :<%= unit.melange ? unit.melange : 0 %></li>
+    <li>Solary : <%= unit.solar %> S</li>
+    <li>Material : <%= unit.material %> kg</li>
+    <li>Material : <%= unit.population %> pop</li>
+    <% if unit.melange %>
+    <li>Melanz : <%= unit.melange%></li>
+    <% end %>
 
     <li>
       <% unit.equipment.times do %>

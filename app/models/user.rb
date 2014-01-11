@@ -184,6 +184,16 @@ class User < ActiveRecord::Base
     mat
   end
 
+  def salary
+	  sal = 0
+	  self.fields.each do |f|
+		  f.squads.each do |s|
+			  sal += s.unit.salary * s.number
+		  end
+	  end
+	  sal.to_i
+  end
+
   def celkova_populace
     pop = 0
     for field in self.fields.includes(:resource) do

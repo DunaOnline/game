@@ -9,8 +9,7 @@
   <ul>
   <li>
       <% if @field %>
-        Clenu armady : <span style="font-weight: bold;"><%=  @field.jednotky(unit) ? @field.jednotky(unit).number : 0 %></span>
-        </li><li>  <%= number_field_tag(unit.name, nil, :min => 1, :title => "Zadejte množství") %>
+        </li><li>  <%= number_field_tag(unit.name, @field.jednotky(unit) ? @field.jednotky(unit).number : 0, :min => 1, :title => "Pocet jednotek") %>
 
       <% else %>
         <%= link_to unit.celkovy_pocet(current_user) %>

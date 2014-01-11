@@ -63,6 +63,7 @@ class Prepocet
 
   def self.produkce_suroviny(order)
     for field in Field.includes(:user, :buildings, :resource).all do
+	    Constant.set_popka_v_budovach_helper(field.resource.population)
       vlastnik = field.user
       narod = vlastnik.house if vlastnik
       if field.planet == Arrakis.planeta
@@ -91,16 +92,35 @@ class Prepocet
         effect_pop = field.leno_udalost_bonus("L")
         population_exp = vlastnik.tech_bonus("L")
         population_house_exp = narod.vyskumane_narodni_tech("L")
-        population = (field.vynos('population') * population_exp * population_house_exp * enviro_pop * effect_pop * nahoda_produkce).round(0)
+        population = (field.vynos('population') * population_exp * population_house_exp * enviro_pop * effect_pop * nahoda_produkce)
 
         parts = field.vynos('parts').to_i #enviro_parts
-
+        temp_mat = material
+        material = material - parts * Constant.parts_mat_cost
+        while field.resource.material + material < 0
+	        parts -= 1
+	        material = temp_mat - parts * Constant.parts_mat_cost
+        end
+        material = material.round(2)
+        solar = (solar - field.salary).round(2)
+        field.squads.each do |s|
+		      while s.number > 0 && vlastnik.solar + solar < 0
+		        field.predaj_jednotiek([[[1],[s.unit.name]]])
+	        end
+        end
+        exp = exp.to_i
+        if field.resource.population + population > field.capacity_population
+	        population = 0
+	        if field.resource.population > field.capacity_population
+		        population = ((field.capacity_population - field.resource.population) / 2).to_i
+	        end
+        end
         vlastnik.update_attributes(
-            :solar => vlastnik.solar + solar.round(2),
-            :exp => vlastnik.exp + exp.to_i
+            :solar => vlastnik.solar + solar,
+            :exp => vlastnik.exp + exp
         )
         field.resource.update_attributes(
-            :material => field.resource.material + material.round(2),
+            :material => field.resource.material + material,
             :population => field.resource.population + population,
             :parts => field.resource.parts + parts
         )
@@ -117,6 +137,7 @@ class Prepocet
             :parts_income =>  parts,
         ).save
       end
+	    Constant.set_popka_v_budovach_helper(0)
     end
     puts "suroviny vyprodukovany "
   end

@@ -71,16 +71,18 @@ class Field < ActiveRecord::Base
 			when 'parts'
 				kind = 'V'
 		end
-		pop = self.resource.population
-		for building in self.buildings.where('kind LIKE ?', '%'+kind+'%') do
+		pop = Constant.popka_v_budovach_helper
+		for building in self.buildings.where('kind LIKE ?', kind) do
 			pocet = self.estates.where(:building_id => building).first.number
 			attr = 'vynos_' + ceho
-			if pop > building.nutna_pop
+			if pop > building.nutna_pop * pocet
+				pop = pop - building.nutna_pop * pocet
 				vynos += building.send(attr) * pocet
 			else
 				vynos += building.send(attr) * pocet * Constant.vynos_bez_pop
 			end
 		end
+		Constant.set_popka_v_budovach_helper(pop)
 		vynos
 	end
 
@@ -122,6 +124,14 @@ class Field < ActiveRecord::Base
 					:number => pocet
 			).save
 		end
+	end
+
+	def salary
+		sal = 0
+		self.squads.each do |s|
+			sal = s.number * s.unit.salary
+		end
+		sal.round(2)
 	end
 
 	#def upgrade_availability_check(budova, pocet_vylepseni)
@@ -290,8 +300,8 @@ class Field < ActiveRecord::Base
 	end
 
 	def kasaren_kapacita
-		kapacita = self.estates.where(:building_id => Building.kasaren.id).first.number
-		kapacita * Constant.kapacita_kasaren
+		kapacita = self.estates.where(:building_id => Building.kasaren.id).first.number if self.estates.where(:building_id => Building.kasaren.id).first
+		kapacita ? kapacita * Constant.kapacita_kasaren : 0
 	end
 
 	def self.lena_s_kasarnou(user)
@@ -532,8 +542,8 @@ class Field < ActiveRecord::Base
 
 					squad = Squad.where(:field_id => field.id, :unit_id => jednotka.id).first
 					squad.update_attributes(:number => squad.number - pocet)
-					field.resource.update_attributes(:material => field.resource.material + ((jednotka.material * pocet) / 2), :population => field.resource.population + ((jednotka.population * pocet) / 2))
-					field.user.update_attributes(:solar => field.user.solar + ((jednotka.solar * pocet) / 2), :melange => field.user.melange + ((jednotka.melange ? jednotka.melange : 0 * pocet) / 2))
+					field.resource.update_attributes(:material => field.resource.material + ((jednotka.material * pocet) / 2).round(2), :population => field.resource.population + ((jednotka.population * pocet) / 2).to_i)
+					field.user.update_attributes(:solar => field.user.solar + ((jednotka.solar * pocet) / 2).round(2), :melange => field.user.melange + ((jednotka.melange ? jednotka.melange : 0 * pocet) / 2).round(2))
 					self.zapis_udalosti(self.user, "Bylo prodano #{pocet} ks #{jednotka.name} za #{(jednotka.material * pocet) / 2} kg, #{(jednotka.melange ? jednotka.melange : 0 * pocet) / 2} mg,
 					#{(jednotka.solar * pocet) / 2} solaru a #{(jednotka.population * pocet) / 2} populacie.")
 					nemozno_prodat << squad
@@ -606,7 +616,7 @@ class Field < ActiveRecord::Base
 				end
 
 				oznamenie = "Bylo naverbovano #{units_msg} za #{total_material} kg, #{total_melanz} mg,
-	                                 #{total_price} solaru a #{total_population}."
+	                                 #{total_price} solaru a #{total_population} populace."
 				self.zapis_udalosti(self.user,oznamenie)
 				zdroje_lena.update_attributes(:material => zdroje_lena.material - total_material, :population => zdroje_lena.population - total_population)
 				field.user.update_attributes(:solar => field.user.solar - total_price, :melange => field.user.melange - total_melanz)
@@ -616,7 +626,7 @@ class Field < ActiveRecord::Base
 				oznamenie += (total_material - zdroje_lena.material).to_s + " kg materialu, " unless material
 				oznamenie += (total_melanz - field.user.melange).to_s + " mg melanze, " unless melanz
 				oznamenie += (total_price - field.user.solar).to_s + " solaru, " unless price
-				oznamenie += (total_price - field.user.solar).to_s + " solaru, " unless price
+				oznamenie += (total_population - zdroje_lena.population).to_s + " pop, " unless population
 				oznamenie += "Zaridte suroviny."
 				naverbovano = false
 			end
@@ -627,12 +637,33 @@ class Field < ActiveRecord::Base
 		return oznamenie, naverbovano
 	end
 
+	def capacity_population
+		pop = 0
+		b = Building.where(:kind => 'L').all.map { |x| x.id }
+		e = self.estates.where(:building_id => b).all
+		e.each do |a|
+			lvl = Building.find(a.building_id).level
+			pop += a.number * Constant.town_capacity if lvl == 1
+			pop += a.number * Constant.city_capacity if lvl == 2
+			pop += a.number * Constant.megalopolis_capacity if lvl == 3
+		end
+		pop.to_i
+	end
+
 	def vyuzitie_kasaren
 		c = 0
 		self.squads.each do |s|
 			c += s.number
 		end
 		c
+	end
+
+	def population_used
+		p = 0
+		self.estates.each do |e|
+		 p = e.number * e.building.population_cost
+		end
+		p
 	end
 
 	def suroviny(what)
@@ -816,16 +847,20 @@ class Field < ActiveRecord::Base
 
 	def utok_pozemni
 		a = 0
-		self.squads.each do |s|
-			a += s.attack
+		if self.squads
+			self.squads.each do |s|
+				a += s.unit.attack * s.number
+			end
 		end
 		a
 	end
 
 	def def_pozemni
 		d = 0
-		self.squads.each do |s|
-			d += s.defence
+		if self.squads
+			self.squads.each do |s|
+				d += s.unit.defence * s.number
+			end
 		end
 		d
 	end

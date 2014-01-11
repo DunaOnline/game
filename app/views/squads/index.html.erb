@@ -25,9 +25,13 @@
     </td>
 
     <td>
-      <li><%= img_solary %> <span class="oranzova">- 100.00</span>      </li>
-      <li><%= img_melanz %><span class="oranzova"> - 5.00</span>
-      </li></td>
+      <% if @field %>
+      <li><%= img_solary %> <span class="oranzova"><%= @field.salary %></span>      </li>
+      <!--<li><%= img_melanz %><span class="oranzova"> - 5.00</span></li>-->
+      <% else %>
+          <li><%= img_solary %> <span class="oranzova"><%= @user.salary %></span>      </li>
+      <% end %>
+      </td>
 
     <td>
       <li>Dnes na vás nebyl veden žádný útok.

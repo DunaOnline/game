@@ -26,8 +26,8 @@
   </td>
 
   <td>
-    <li><%= img_solary %> <span class="oranzova">- 100.00</span>      </li>
-    <li><%= img_melanz %><span class="oranzova"> - 5.00</span>
+    <li><%= img_solary %> <span class="oranzova"><%= @field.salary %></span>      </li>
+    <!--<li><%= img_melanz %><span class="oranzova"> - 5.00</span>-->
   </td>
 
   <td>
@@ -50,7 +50,7 @@
     <% end %>
     <li><%= img_solary @user.solar ,"vertical-align:middle" %><%= @user.solar %></li>
     <li><%= img_melanz @user.melange ,"vertical-align:middle" %><%= @user.melange %></li>
-    <span class="fright">Kapacita :<%= @field.vyuzitie_kasaren %> /<%= @field.kasaren_kapacita.to_i %></span>
+    <span class="fright">Kapacita :<%= @field.vyuzitie_kasaren %> / <%= @field.kasaren_kapacita.to_i %></span>
   </ul>
 
 </div>

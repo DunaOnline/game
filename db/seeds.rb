@@ -124,7 +124,10 @@ Global.create(:setting => 'odvolanie_imperatora_zakon_body', :slovo => "Hlasujte
 Global.create(:setting => 'odvolanie_imperatora_zakon_title', :slovo => "Ovolanie Imperatora.")
 Global.create(:setting => 'malus_melanz_bezvladi', :cislo => 0.9)
 Global.create(:setting => 'kapacita_kasarne', :cislo => 10)
-
+Global.create(:setting => 'parts_mat_cost', :cislo => 3)
+Global.create(:setting => 'town_capacity', :cislo => 7000)
+Global.create(:setting => 'city_capacity', :cislo => 8000)
+Global.create(:setting => 'megalopolis_capacity', :cislo => 9000)
 puts 'Global done'
 
 titania = Planet.find_by_name('Titánia')
