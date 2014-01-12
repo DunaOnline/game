@@ -118,8 +118,9 @@
               <% if current_user.has_kasaren %>
                   <li><%= link_to 'Verbování jednotek', squad_path(current_user.has_kasaren) %></li>
                   <% else %>
-                  <li><%= link_to 'Nemate Kasarnu', '#'%></li>
+                  <li><%= link_to 'Nemate Kasarnu', squad_path(current_user.squads.first.field_id) %></li>
                   <% end %>
+
               <li><%= link_to 'Rozmiestnenie armady', squads_path %></li>
                 <!--<li><a href="#"> Správa šablon jednotek *</a> -->
               <li><a href="#"> Vyslat útok *</a>
