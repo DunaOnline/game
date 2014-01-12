@@ -66,10 +66,12 @@
       <li><%= img_populace "Celková populace na lénu" %><%= @resource.population %>
       <li><%= img_material "Veškerý materiál na lénu" %><%= @resource.material %>
       <li><%= img_vyrobky "Veškerý vyrobky na lénu" %><%= @resource.parts %>
+        <div class="td1">Kapacita mest</div>
+       <%= field.resource.population %> / <%= field.capacity_population %></li>
 
 
     </td>
-
+    <!--#TODO Dat do render partial cez collection nech to tu nieje takto zo selectom na distinct Typ-->
 
     <% for budova in @owner.dovolene_budovy('L') do %>
         <%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'L', :obr => 'mes'} %>
@@ -95,5 +97,8 @@
       <%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'O', :obr => 'pob'} %>
   <% end %>
 
+  <% for budova in @owner.dovolene_budovy('VK') do %>
+      <%= render :partial => 'budova', :locals => {:field => @field, :budova => budova, :typ => 'VK', :obr => 'pob'} %>
+  <% end %>
 
 </table>

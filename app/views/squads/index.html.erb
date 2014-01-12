@@ -1,0 +1,104 @@
+<table class="tab0">
+  <tbody><tr>	<td>
+    <%= link_to '⌂', help_path %> »
+    <%= link_to 'Armáda', units_path %> »
+    <%= link_to 'Rozmiestnenie armady', squads_path %>
+  </td>
+
+  </tr>
+  </tbody></table>
+
+<table class="tab1">
+  <tbody><tr>
+    <td class="tdpl" rowspan="2" style="width:130px; background-image: url(assets/jednotky/warmentat.png)"></td>
+    <th style="min-width:80px;"> Síla armády</th>
+    <th style="min-width:80px;"> Armádní žold</th>
+    <th> Obrana</th>
+    <th class="r"> Útok</th>
+  </tr><tr>
+
+    <td>
+      <li><%= img_pozemni_utok %> <%= @field ? @field.utok_pozemni : current_user.pozemni_utok %></li>
+      <li><%= img_pozemni_obrana %> <%= @field ? @field.def_pozemni : current_user.pozemni_obrana %></li>
+
+    </td>
+
+    <td>
+      <% if @field %>
+      <li><%= img_solary %> <span class="oranzova"><%= @field.salary %></span>      </li>
+      <!--<li><%= img_melanz %><span class="oranzova"> - 5.00</span></li>-->
+      <% else %>
+          <li><%= img_solary %> <span class="oranzova"><%= @user.salary %></span>      </li>
+      <% end %>
+      </td>
+
+    <td>
+      <li>Dnes na vás nebyl veden žádný útok.
+      </li></td>
+
+    <td>
+      <li>Dobyl jste planetu hráče <a href="profil.htm">Profil</a> (Riches)
+      </li><li>Neúspěšně jste útočil na hráče <a href="profil.htm">Profil</a> (Riches)
+    </li><li>Neúspěšně jste útočil na hráče <a href="profil.htm">Profil</a> (Riches)
+    </li></td>
+
+  </tr>
+  </tbody></table>
+  <div class="img heading resource_list resources">
+    <ul style="font-size: 11px;">
+      <% if @field %>
+      <li><%= img_material @field.resource.material, "vertical-align:middle"  %><%= @field.resource.material %></li>
+          <li><%= img_populace @field.resource.population, "vertical-align:middle" %><%= @field.resource.population %></li>
+      <% end %>
+      <li><%= img_solary @user.solar ,"vertical-align:middle" %><%= @user.solar %></li>
+      <li><%= img_melanz @user.melange ,"vertical-align:middle" %><%= @user.melange %></li>
+      <% if @field %>
+      <span class="fright">Kapacita :<%= @field.vyuzitie_kasaren %> /<%= @field.kasaren_kapacita.to_i %></span>
+      <% end %>
+    </ul>
+  </div>
+<table class="tab4">
+  <tbody><tr>
+    <th class="thf left_align" colspan="5">
+      <%= form_tag('/move_units')  %>
+      <%= select_tag 'lena_squad', options_for_select(Field.lena_s_kasarnou(current_user).collect { |p| [p.name, p.id] }) %>
+      <%= link_to "Prejdi na leno", 'leno/', :class => 'select_squad' %>
+
+    </th>
+  </tr>
+  <tr>
+    <th class="thf" colspan="5">
+      <h3>Vaše jednotky na lenu <%= @field ? @field.name : "Nemate vybrate leno, Zobrazene jednotky na vsetkych lenach." %>  </h3>
+    </th>
+  </tr>
+
+
+
+  </tbody></table>
+<div class="army_unit_blocks">
+<%= render :partial => "unit", :collection => @units, :as => 'unit' %>
+</div>
+<div class="clear line_bot">
+
+</div>
+<% if @field %>
+<%= hidden_field_tag 'leno', value = @field.id %>
+<% end %>
+    <div>
+      <h3>Presun jednotiek</h3>
+    </div>
+     <div class="full_width" style="overflow:auto">
+       <% if @field %>
+      <span style="font-weight: bold;">Jste na lene : <%= @field.name %></span>
+
+           <span class="fright">
+             <%= label_tag 'lena_squad', 'Cilove leno :' %>
+      <%= select_tag 'lena_squad', options_for_select(Field.lena_s_kasarnou(current_user).collect { |p| [p.name, p.id] }) %>
+
+           <%= submit_tag "Presun" %>
+               </span>
+      <% else %>
+           <span>Jste na lene : nemate vybrate leno</span>
+      <% end %>
+     </div>
+

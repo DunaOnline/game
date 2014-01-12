@@ -1,19 +1,18 @@
 <tr xmlns="http://www.w3.org/1999/html">
   <td class="tdpl" style="background-image: url(<%= asset_path cesta_budovy(@owner.house.name, obr) %>)"></td>
   <td>
-    <h3><%= budova.name %> (<%= budova.level %>) <%= "("+budova.actual_upgrade(field).to_s+")" if budova.can_be_upgraded(field) %></h3>
+    <h3><%= budova.name %> (<%= budova.level %>)</h3>
     <li><%= budova.description %>
     <li><%= img_budovy %> <%= field.postaveno(budova) %>
 
 
-      <!-- Zde bude vliv budovy. Tedy celkoví kapacita měst, celková výroba ap)
+      <!-- Zde bude vliv budovy. Tedy celkoví kapacita měst, celková výroba ap) -->
+    <ul>
+      </ul>
  
-    <li><%= img_populace "Kapacita měst" %> <font class="zelena">+ 10 000</font>
-    <li><%= img_solary "Výnos soláry" %>
-    <li><%= img_material "Výnos materiál" %>
-    <li><%= img_zkusenosti "Výnos zkušenosti" %>
 
--->
+
+
 
 
   </td>

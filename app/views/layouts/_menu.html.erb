@@ -90,14 +90,14 @@
         <ul class="menu">
           <li><a class="menuvyzkum" title="Ekonomika a výzkum"></a>
             <ul>
-              <li><%= link_to "Statistika přepočtů", zobraz_eod_path %>
+              <li><%= link_to "Statistika přepočtů", zobraz_eod_path %> </li>
               
               <br>
               
               <li><%= link_to ' Váš výzkum', technologies_path %></li>
 
               <% if current_user.admin? || current_user.leader? || current_user.mentat? %>
-              <li><%= link_to 'Národní výzkum', narodni_vyskum_path %>
+              <li><%= link_to 'Národní výzkum', narodni_vyskum_path %> </li>
               <% end %>
               
               <li><%= link_to ' Výroba a transport výrobků', productions_path %></li>
@@ -115,8 +115,16 @@
         <ul class="menu">
           <li><a class="menuarmada" title="Armádní velitelství"></a>
             <ul>
-              <li><a href="#"> Verbování jednotek *</a>
-              <li><a href="#"> Rozdělení jednotek *</a>
+              <% if current_user.has_kasaren %>
+                  <li><%= link_to 'Verbování jednotek', squad_path(current_user.has_kasaren) %></li>
+                  <% else %>
+                  <li>
+                    <%= link_to 'Nemate Kasarnu', squad_path(current_user.squads.first.field_id) if current_user.squads.first %>
+                    <%= link_to 'Nemate Kasarnu', '#' if !current_user.squads.first %>
+                  </li>
+                  <% end %>
+
+              <li><%= link_to 'Rozmiestnenie armady', squads_path %></li>
                 <!--<li><a href="#"> Správa šablon jednotek *</a> -->
               <li><a href="#"> Vyslat útok *</a>
                 <br>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 46) do
+ActiveRecord::Schema.define(:version => 55) do
 
   create_table "app_logy", :force => true do |t|
     t.datetime "cas",                      :null => false
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(:version => 46) do
     t.integer  "planet_id",                             :null => false
     t.integer  "property_id",                           :null => false
     t.integer  "duration",                              :null => false
-    t.date     "started_at",  :default => '2013-12-24'
+    t.date     "started_at",  :default => '2013-10-12'
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
@@ -118,8 +118,8 @@ ActiveRecord::Schema.define(:version => 46) do
   create_table "eods", :force => true do |t|
     t.integer  "user_id",                                                                              :null => false
     t.integer  "field_id"
-    t.date     "date",                                              :default => '2013-12-24',          :null => false
-    t.time     "time",                                              :default => '2000-01-01 21:32:14', :null => false
+    t.date     "date",                                              :default => '2013-10-12',          :null => false
+    t.time     "time",                                              :default => '2000-01-01 19:16:15', :null => false
     t.integer  "order",                                                                                :null => false
     t.float    "solar_income",                                      :default => 0.0
     t.integer  "exp_income",                                        :default => 0
@@ -145,6 +145,13 @@ ActiveRecord::Schema.define(:version => 46) do
     t.float    "parts_store",                                       :default => 0.0
     t.float    "parts_income",                                      :default => 0.0
     t.float    "parts_expense",                                     :default => 0.0
+  end
+
+  create_table "equipment", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "unit_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "estates", :force => true do |t|
@@ -205,7 +212,7 @@ ActiveRecord::Schema.define(:version => 46) do
     t.integer  "effect_id",                            :null => false
     t.integer  "field_id",                             :null => false
     t.integer  "duration",                             :null => false
-    t.date     "started_at", :default => '2013-12-24'
+    t.date     "started_at", :default => '2013-10-12'
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
   end
@@ -227,6 +234,8 @@ ActiveRecord::Schema.define(:version => 46) do
     t.datetime "signed"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "refused"
+    t.string   "druh"
   end
 
   create_table "market_histories", :force => true do |t|
@@ -268,8 +277,8 @@ ActiveRecord::Schema.define(:version => 46) do
     t.integer  "subhouse_id"
     t.string   "kind"
     t.string   "content"
-    t.date     "date",        :default => '2013-12-24'
-    t.time     "time",        :default => '2000-01-01 21:32:14'
+    t.date     "date",        :default => '2013-10-12'
+    t.time     "time",        :default => '2000-01-01 19:16:15'
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
   end
@@ -296,7 +305,7 @@ ActiveRecord::Schema.define(:version => 46) do
     t.string   "system_name"
     t.integer  "position"
     t.boolean  "available_to_all", :default => false
-    t.date     "discovered_at",    :default => '2013-12-24'
+    t.date     "discovered_at",    :default => '2013-10-12'
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
   end
@@ -400,6 +409,13 @@ ActiveRecord::Schema.define(:version => 46) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
+  create_table "squads", :force => true do |t|
+    t.integer  "field_id"
+    t.integer  "unit_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "subhouses", :force => true do |t|
     t.string   "name"
     t.integer  "house_id"
@@ -411,10 +427,39 @@ ActiveRecord::Schema.define(:version => 46) do
     t.datetime "created_at",                                                      :null => false
     t.datetime "updated_at",                                                      :null => false
     t.integer  "pocet_vyhosteni",                                :default => 0
+    t.text     "dashboard"
   end
 
   add_index "subhouses", ["house_id"], :name => "index_subhouses_on_house_id"
   add_index "subhouses", ["name"], :name => "index_subhouses_on_name"
+
+  create_table "survey_histories", :force => true do |t|
+    t.text     "content"
+    t.integer  "house_id"
+    t.integer  "subhouse_id"
+    t.integer  "user_id"
+    t.integer  "pro"
+    t.integer  "proti"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "survey_responses", :force => true do |t|
+    t.integer  "survey_id"
+    t.boolean  "response"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "surveys", :force => true do |t|
+    t.text     "content"
+    t.integer  "house_id"
+    t.integer  "subhouse_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "syselaads", :force => true do |t|
     t.integer  "house_id"
@@ -460,6 +505,23 @@ ActiveRecord::Schema.define(:version => 46) do
     t.datetime "last_post_at"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "units", :force => true do |t|
+    t.string   "name"
+    t.integer  "house_id"
+    t.text     "description"
+    t.integer  "attack"
+    t.integer  "defence"
+    t.integer  "health"
+    t.integer  "equipment"
+    t.float    "material"
+    t.integer  "solar"
+    t.string   "img"
+    t.integer  "lvl"
+    t.string   "druh"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|

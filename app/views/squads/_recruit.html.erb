@@ -1,0 +1,46 @@
+<div class="half">
+
+
+<div style="background-image: url(<%= asset_path 'jednotky/jedp2.png' %>)" class="verb_column img wrapper">
+  <span class="heading"><h3><%= link_to unit.name, unit_path(unit.id) %></h3></span>
+
+  <div class="bottom full_width">
+    <span class="attack_button" title="Útok"><h3><%= unit.attack %></h3></span>
+    <span class="defence_button" title="Obrana"><h3><%= unit.defence %></h3></span>
+</div>
+
+</div>
+<div class="verb_content_colum">
+
+  <%= unit.description %>
+ <%= @field.jednotky(unit) ? @field.jednotky(unit).number : 0 %>
+  <ul>
+    <li><h3>Verbování jednotek:</h3></li>
+
+    <li>	<%= number_field_tag(unit.name, nil, :min => 1, :title => "Zadejte množství") %>
+      <%= hidden_field_tag 'leno', value = @field.id %>
+      <%= submit_tag 'Vybavit', :class => 'ok' %>
+      <%= submit_tag 'Zrušit zadané množství', :name => "zrusit", :class => "ok" %>
+      <h3>Výbava:</h3></li>
+    <li>Solary : <%= unit.solar %> S</li>
+    <li>Material : <%= unit.material %> kg</li>
+    <li>Material : <%= unit.population %> pop</li>
+    <% if unit.melange %>
+    <li>Melanz : <%= unit.melange%></li>
+    <% end %>
+
+    <li>
+      <% unit.equipment.times do %>
+          <span class="img_no_equip" title="Mozny equipment">Mozny equip</span>
+          <% end %>
+    </li>
+  </ul>
+
+</div>
+</div>
+
+<% if (unit_counter + 1).even? %>
+    <div class="clear line_bot">
+
+    </div>
+<% end %>

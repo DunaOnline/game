@@ -82,11 +82,13 @@
     <th style="width:80px">Datum</th>
     <th style="width:80px">Cas</th>
   </tr>
+  <% if @house == current_user.house %>
   <% for operation in @operations %>
       <tr>
         <td><%= operation.content %></td>
         <td><%= format_date(operation.date) %></td>
         <td><%= format_time(operation.time) %></td>
       </tr>
+  <% end %>
   <% end %>
 </table>

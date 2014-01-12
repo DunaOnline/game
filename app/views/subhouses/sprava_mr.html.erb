@@ -12,18 +12,20 @@
   <%= form_tag :posli_mr_sur do %>
       <tr>
         <td class="tdpl" rowspan="2" style="width:160px; background-image: url(<%= asset_path 'imghra/narodnisklad.png' %>)">
+          <%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok_sur' %>
           <li><h2>Malorodni sklad</h2></li>
           <li><b>Národ: </b><%= @subhouse.house.name %></li>
           <li><b>Malorod: </b><%= @subhouse.name %></li>
           <li><b>Členů: </b><%= @subhouse.users.count %> / <%= Constant.max_u_mr %> </li>
-          <br/><br/><br/><br/><br/><br/>
-          <li><%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok' %></li>
+          <br><br><br><br><br><br>
+          <%= text_area_tag 'comment', '', :class => 'sur_poznamka', :style => 'width:180px !important;', :placeholder => "Poznámka k zásilce" %>
+        
         </td>
 
-        <th style="width:120px">Stav skladu</th>
-        <th style="width:120px">Zaslat hráči</th>
-        <th style="width:120px">Zaslat Malorodu</th>
-        <th class="r">Zaslat Velkorodu</th>
+        <th >Stav skladu</th>
+        <th style="width:100px">Zaslat hráči</th>
+        <th style="width:100px">Zaslat Malorodu</th>
+        <th style="width:100px">Zaslat Velkorodu</th>
       </tr>
 
       <tr>
@@ -42,7 +44,7 @@
           <li><%= img_melanz %><%= text_field_tag 'user_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'user_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
           <li><%= img_vyrobky %><%= text_field_tag 'user_parts', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
-          <li><%= select_tag :user_id_suroviny, options_for_select(@subhouse.users.order(:nick).all.collect { |p| [p.nick, p.id] }), :class => "tab", :include_blank => true %> </li>
+          <li><%= select_tag :user_id_suroviny, options_for_select(@subhouse.users.order(:nick).all.collect { |p| [p.nick, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %> </li>
         </td>
         <td>
           <li><%= img_solary %><%= text_field_tag 'mr_solary', '0.00', :size => "3", :title => "Zadejte množství" %></li>
@@ -50,7 +52,7 @@
           <li><%= img_melanz %><%= text_field_tag 'mr_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'mr_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
           <li><%= img_vyrobky %><%= text_field_tag 'mr_parts', '0.00', :size => "3", :title => "Zadejte množství" %> </li>
-          <li><%= select_tag :mr_id_suroviny, options_for_select(Subhouse.by_house(current_user.house).without_subhouse(@subhouse).order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :include_blank => true %> </li>
+          <li><%= select_tag :mr_id_suroviny, options_for_select(Subhouse.by_house(current_user.house).without_subhouse(@subhouse).order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %> </li>
 
         </td>
         <td>
@@ -59,15 +61,7 @@
           <li><%= img_melanz %><%= text_field_tag 'rodu_melanz', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_zkusenosti %><%= text_field_tag 'rodu_zkusenosti', '0.00', :size => "3", :title => "Zadejte množství" %></li>
           <li><%= img_vyrobky %><%= text_field_tag 'rodu_parts', '0.00', :size => "3", :title => "Zadejte množství" %></li>
-          <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :include_blank => true %></li>
-        </td>
-      </tr>
-      <tr>
-        <th>
-          Poznámka :
-        </th>
-        <td colspan="4">
-          <%= text_area_tag 'comment', '', :class => 'full_width' %>
+          <li><%= select_tag :rod_id_suroviny, options_for_select(House.playable.order(:name).all.collect { |p| [p.name, p.id] }), :class => "tab", :style => "margin-left: 0px !important; width:96px !important", :include_blank => true %></li>
         </td>
       </tr>
   <% end %>

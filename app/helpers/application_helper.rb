@@ -39,31 +39,31 @@ module ApplicationHelper
     "X"
   end
 
-  def img_solary(title = "Soláry")
-    image_tag("css/solary.png", :alt => title, :title => title)
+  def img_solary(title = "Soláry",style = "")
+    image_tag("css/solary.png", :alt => title, :title => title, :style => style)
   end
 
-  def img_material(title = "Materiál")
-    image_tag("css/material.png", :alt => title, :title => title)
+  def img_material(title = "Materiál",style = "")
+    image_tag("css/material.png", :alt => title, :title => title, :style => style)
   end
 
-  def img_melanz(title = "Melanž")
-    image_tag("css/melanz.png", :alt => title, :title => title)
+  def img_melanz(title = "Melanž",style = "")
+    image_tag("css/melanz.png", :alt => title, :title => title, :style => style)
   end
 
-  def img_populace(title = "Populace")
-    image_tag("css/populace.png", :alt => title, :title => title)
+  def img_populace(title = "Populace",style = "")
+    image_tag("css/populace.png", :alt => title, :title => title, :style => style)
   end
 
-  def img_zkusenosti(title = "Zkušenosti")
-    image_tag("css/zkusenosti.png", :alt => title, :title => title)
+  def img_zkusenosti(title = "Zkušenosti",style = "")
+    image_tag("css/zkusenosti.png", :alt => title, :title => title, :style => style)
   end
 
   def img_logo(title = "Emperor - Duna Online")
     image_tag("css/logo.png", :alt => title, :title => title)
   end
 
-  def img_vyrobky(title = "Výrobky")
+  def img_vyrobky(title = "Dilů")
     image_tag("css/vyrobky.png", :alt => title, :title => title)
   end
 
@@ -101,6 +101,26 @@ module ApplicationHelper
 
   def img_trash(title = "Odstranit zpr�vu")
 	  image_tag('css/delete.png', :alt => title, :title => title)
+  end
+
+  def img_pozemni_utok(title = "Pozemni utok")
+	  image_tag("css/utok-pozemni.png", :alt => title, :title => title)
+  end
+
+  def img_pozemni_obrana(title = "Pozemni obrana")
+	  image_tag("css/obrana-pozemni.png", :alt => title, :title => title)
+  end
+
+  def img_vesmir_utok(title = "Vesmir utok")
+	  image_tag("css/utok-vesmir.png", :alt => title, :title => title)
+  end
+
+  def img_vesmir_obrana(title = "Vesmir obrana")
+	  image_tag("css/obrana-vesmir.png", :alt => title, :title => title)
+  end
+
+  def img_from_model(model)
+	  model.img
   end
 
   def online_users
@@ -244,9 +264,13 @@ module ApplicationHelper
     end
   end
 
-  def sortable(column, title = nil)
+  def sortable(column, title = nil, desc = false)
 	  title ||= column.titleize
-	  direction = (column == params[:sort] && params[:direction] == "asc") ? "desc" : "asc"
+	  if desc
+		  direction = (column == params[:sort] && params[:direction] == "desc") ? "asc" : "desc"
+	  else
+		  direction = (column == params[:sort] && params[:direction] == "asc") ? "desc" : "asc"
+	  end
 	  link_to title, :sort => column, :direction => direction
   end
 

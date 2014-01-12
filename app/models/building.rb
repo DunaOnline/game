@@ -93,6 +93,10 @@ class Building < ActiveRecord::Base
     self.population_cost * Constant.kpv
   end
 
+  def self.kasaren
+	  Building.where(:kind => "VK").first
+  end
+
 	def can_be_upgraded(field)
 		self.melange_bonus && self.solar_bonus && self.material_bonus && self.max_upg_lvl
 	end

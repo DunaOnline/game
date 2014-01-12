@@ -1,0 +1,74 @@
+<table class="tab0">
+  <tr>	<td>
+    <%= link_to '⌂', help_path %> »
+    <%= link_to 'Armáda', units_path %> »
+    <%= link_to 'Verbování jednotek', squad_path %>
+  </td>
+
+  </tr>
+</table>
+
+<table class="tab1">
+  </tr><tr>
+  <td class="tdpl img_war_mentat" rowspan="2" style="width:130px; background-image: url(jednotky/warmentat.png)"></td>
+  <th style="min-width:80px;"> Síla armády</th>
+  <th style="min-width:80px;"> Armádní žold</th>
+  <th> Obrana</th>
+  <th class="r"> Útok</th>
+</tr><tr>
+
+  <td>
+    <li><%= img_pozemni_utok %> <%= @field.utok_pozemni %></li>
+    <li><%= img_pozemni_obrana %> <%= @field.def_pozemni %></li>
+
+  </td>
+
+  <td>
+    <li><%= img_solary %> <span class="oranzova"><%= @field.salary %></span>      </li>
+    <!--<li><%= img_melanz %><span class="oranzova"> - 5.00</span>-->
+  </td>
+
+  <td>
+    <li>Dnes na vás nebyl veden žádný útok.
+  </td>
+
+  <td>
+    <li>Dobyl jste planetu hráče <a href="profil.htm">Profil</a> (Riches)
+    <li>Neúspěšně jste útočil na hráče <a href="profil.htm">Profil</a> (Riches)
+    <li>Neúspěšně jste útočil na hráče <a href="profil.htm">Profil</a> (Riches)
+  </td>
+
+</tr>
+</table>
+<div class="img heading resource_list resources">
+  <ul style="font-size: 11px;">
+    <% if @field %>
+        <li><%= img_material @field.resource.material, "vertical-align:middle"  %><%= @field.resource.material %></li>
+        <li><%= img_populace @field.resource.population, "vertical-align:middle" %><%= @field.resource.population %></li>
+    <% end %>
+    <li><%= img_solary @user.solar ,"vertical-align:middle" %><%= @user.solar %></li>
+    <li><%= img_melanz @user.melange ,"vertical-align:middle" %><%= @user.melange %></li>
+    <span class="fright">Kapacita :<%= @field.vyuzitie_kasaren %> / <%= @field.kasaren_kapacita.to_i %></span>
+  </ul>
+
+</div>
+<table class="tab4">
+<tr>
+  <th class="thf" colspan="4">
+    <%= select_tag 'lena_squad', options_for_select(Field.lena_s_kasarnou(current_user).collect { |p| [p.name, p.id] }) %>
+    <%= link_to "Prejdi na leno", '', :class => 'select_squad' %>
+
+  </th>
+
+</tr>
+  <tr>
+    <th class="thf" colspan="4">
+      Vaše jednotky na vybraných planetách
+    </th>
+  </tr>
+
+</table>
+
+<%= form_for(@squad) do %>
+<%= render :partial => "recruit", :collection => @units, :as => 'unit' %>
+<% end %>

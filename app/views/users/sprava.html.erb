@@ -13,12 +13,14 @@
   <%= form_tag :posli_suroviny do %>
       <tr>
         <td class="tdpl" rowspan="2" style="width:170px; background-image: url(<%= asset_path 'imghra/hracsklad.png' %>)">
+          <%= submit_tag 'Poslat', :name => 'poslat', :class => 'ok_sur' %>
           <li><h2>Vaše panství</h2>
           <li><b>Vliv v Impériu: </b><%= @user.influence %>
           <li><b>Planet: </b><%= @planets.count %>
           <li><b>Celkem lén: </b><%= @user.fields.count %>
-            <br><br><br><br><br>
-          <li>    <%= submit_tag 'Poslat zvolené', :name => 'poslat', :class => 'ok' %>
+          
+          <br><br><br><br>
+          <%= text_area_tag 'comment', '', :class => 'sur_poznamka', :style => 'width:180px !important;', :placeholder => "Poznámka k zásilce" %>
         </td>
         <th>Stav skladu</th>
         <!-- <th>Poslat Malorodu</th>
@@ -81,14 +83,7 @@
         </td>  --->
 
       </tr>
-      <tr>
-        <th>
-          Poznámka :
-        </th>
-        <td colspan="4">
-          <%= text_area_tag 'comment', '', :class => 'full_width' %>
-        </td>
-      </tr>
+   
   <% end %>
 </table>
 
@@ -146,7 +141,10 @@
           <%= select_tag("volit_id", options_for_select(@user.house.users.order(:nick).collect { |p| [p.nick, p.id] })) %><%= submit_tag 'Ξ', :name => 'leader', :class => 'oki' %>
           <p>Váš hlas: <%= @user.koho_jsem_volil('leader') %></p>
 
-          <h3>Aktuální pořadí</h3>
+          <h3 class="descr" title="<%for user in @user.house.poradi_hlasu('leader',@user.house.users.count) %>
+              <%= user[0].nick %> - <%= user[1] %>
+           <% end %> "
+          >Aktuální pořadí</h3>
           <% for user in @user.house.poradi_hlasu('leader') %>
               <li><%= user[0].nick %> - <%= user[1] %></li>
           <% end %>
@@ -174,7 +172,10 @@
               <%= select_tag("volit_id", options_for_select(@user.subhouse.users.order(:nick).collect { |p| [p.nick, p.id] })) %><%= submit_tag 'Ξ', :name => 'general', :class => 'oki' %>
               <p>Váš hlas: <%= @user.koho_jsem_volil('general') %></p>
 
-              <h3>Aktuální pořadí</h3>
+              <h3 class="descr" title="<%for user in @user.house.poradi_hlasu('general',@user.house.users.count) %>
+              <%= user[0].nick %> - <%= user[1] %>
+           <% end %> "
+              >Aktuální pořadí</h3>
               <% for user in @user.subhouse.poradi_hlasu('general') %>
                   <li><%= user[0].nick %> - <%= user[1] %></li>
               <% end %>

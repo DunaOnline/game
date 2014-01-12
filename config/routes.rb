@@ -1,10 +1,26 @@
 DuneOnline::Application.routes.draw do
+<<<<<<< HEAD
   resources :units
 
 
   resources :equipment
 
 
+=======
+  resources :ships
+
+
+  resources :orbits
+
+
+  resources :units
+
+  resources :equipment
+
+  resources :squads
+  match '/move_units' => 'squads#move_units', :as => :move_units
+
+>>>>>>> origin/Units
   match '/help' => 'help#help', :as => :help
   match '/help/landsraad' => 'help#landsraad', :as => :help_landsraad
   match '/help/suroviny' => 'help#suroviny', :as => :help_suroviny

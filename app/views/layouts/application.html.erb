@@ -9,12 +9,15 @@
 </head>
 <body>
 
-<%= render 'layouts/lista' -%>
+
 
 <div id="body_wrapper">
   <div class="planet"></div>
   <div id="body_container">
+    <%= render 'layouts/lista' -%>
+    
     <div id="body_container_b">
+      
       <% if current_user -%>
           <%= render 'layouts/hlavicka' -%>
       <% else %>

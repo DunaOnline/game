@@ -1,10 +1,27 @@
-<div class="inf">
+<div class="avatar">
+  
+  <%= obrazek_budovy(current_user.house.name, "erb") %>
+  <li>Nick: <%= link_to current_user.nick, current_user, :class => current_user.barvicky, :title => current_user.barvicky %></li>
+  <li>Národ: <%= link_to current_user.house.name, current_user.house %></li>
+  <% if current_user.subhouse %>
+  <li>Malorod: <%= link_to current_user.subhouse.name, current_user.subhouse if current_user.subhouse %></li>
+  <% else %>
+  Nejste členem Malorodu
+  <% end %>
+  <li>Vliv: </li>
+  <li>Lén: </li>
+  
+  
+</div>
+
+<!--- <div class="inf">
   <%= obrazek_budovy(current_user.house.name, "erb") %>
   <%= link_to current_user.nick, current_user, :class => current_user.barvicky, :title => current_user.barvicky %>
   <br>
   <% for hodnost in current_user.najdi_hodnosti do %>
       <a><%= hodnost %></a>
   <% end %>
-  <br>Národ: <%= link_to current_user.house.name, current_user.house %>
-  <br>Malorod: <%= link_to current_user.subhouse.name, current_user.subhouse if current_user.subhouse %>
+  <br>
+  <br>
 </div>
+---->

@@ -9,7 +9,17 @@ class CreateUnits < ActiveRecord::Migration
       t.integer :health
       t.integer :equipment
       t.float :material
+<<<<<<< HEAD
       t.integer :solar
+=======
+      t.float :melange
+      t.integer :solar
+      t.integer :population
+      t.float :salary
+      t.string :img
+      t.integer :lvl
+      t.string :druh
+>>>>>>> origin/Units
 
       t.timestamps
     end

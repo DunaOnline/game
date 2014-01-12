@@ -68,11 +68,11 @@ class ProductionsController < ApplicationController
 
         respond_to do |format|
           if vyrobeno
-            format.html { redirect_to production_url(field), notice: 'Vyrobky byli vyrobeny' }
-            format.json { render json: @production, status: :created, location: @production }
+            format.html { redirect_to production_url(field), notice: message }
+            format.json { render json: vyrobeno, status: :created, location: vyrobeno }
           else
             format.html { redirect_to production_url(field), alert: message }
-            format.json { render json: @production, status: :created, location: @production }
+            #format.json { render json: vyrobeno, status: :created, location: vyrobeno }
           end
         end
       elsif params[:zrusit]
@@ -80,7 +80,7 @@ class ProductionsController < ApplicationController
         respond_to do |format|
           if prodat
             format.html { redirect_to production_url(field), notice: message }
-            format.json { render json: @production, status: :created, location: @production }
+            format.json { render json: prodat, status: :created, location: prodat }
           else
             format.html { redirect_to production_url(field), alert: message }
             format.json { render json: @production, status: :created, location: @production }
