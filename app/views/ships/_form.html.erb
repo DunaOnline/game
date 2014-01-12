@@ -1,0 +1,57 @@
+<%= form_for(@ship) do |f| %>
+  <% if @ship.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ship.errors.count, "error") %> prohibited this ship from being saved:</h2>
+
+      <ul>
+      <% @ship.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :equipment %><br />
+    <%= f.number_field :equipment %>
+  </div>
+  <div class="field">
+    <%= f.label :attack %><br />
+    <%= f.number_field :attack %>
+  </div>
+  <div class="field">
+    <%= f.label :defence %><br />
+    <%= f.number_field :defence %>
+  </div>
+  <div class="field">
+    <%= f.label :health %><br />
+    <%= f.number_field :health %>
+  </div>
+  <div class="field">
+    <%= f.label :population %><br />
+    <%= f.number_field :population %>
+  </div>
+  <div class="field">
+    <%= f.label :material %><br />
+    <%= f.text_field :material %>
+  </div>
+  <div class="field">
+    <%= f.label :solar %><br />
+    <%= f.text_field :solar %>
+  </div>
+  <div class="field">
+    <%= f.label :salary %><br />
+    <%= f.text_field :salary %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

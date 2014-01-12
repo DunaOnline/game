@@ -1,0 +1,27 @@
+<h1>Listing orbits</h1>
+
+<table>
+  <tr>
+    <th>Planet</th>
+    <th>Ship</th>
+    <th>Number</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @orbits.each do |orbit| %>
+  <tr>
+    <td><%= orbit.planet_id %></td>
+    <td><%= orbit.ship_id %></td>
+    <td><%= orbit.number %></td>
+    <td><%= link_to 'Show', orbit %></td>
+    <td><%= link_to 'Edit', edit_orbit_path(orbit) %></td>
+    <td><%= link_to 'Destroy', orbit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Orbit', new_orbit_path %>

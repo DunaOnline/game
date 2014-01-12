@@ -1,0 +1,29 @@
+<%= form_for(@orbit) do |f| %>
+  <% if @orbit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@orbit.errors.count, "error") %> prohibited this orbit from being saved:</h2>
+
+      <ul>
+      <% @orbit.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :planet_id %><br />
+    <%= f.number_field :planet_id %>
+  </div>
+  <div class="field">
+    <%= f.label :ship_id %><br />
+    <%= f.number_field :ship_id %>
+  </div>
+  <div class="field">
+    <%= f.label :number %><br />
+    <%= f.number_field :number %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

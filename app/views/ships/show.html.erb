@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @ship.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @ship.description %>
+</p>
+
+<p>
+  <b>Equipment:</b>
+  <%= @ship.equipment %>
+</p>
+
+<p>
+  <b>Attack:</b>
+  <%= @ship.attack %>
+</p>
+
+<p>
+  <b>Defence:</b>
+  <%= @ship.defence %>
+</p>
+
+<p>
+  <b>Health:</b>
+  <%= @ship.health %>
+</p>
+
+<p>
+  <b>Population:</b>
+  <%= @ship.population %>
+</p>
+
+<p>
+  <b>Material:</b>
+  <%= @ship.material %>
+</p>
+
+<p>
+  <b>Solar:</b>
+  <%= @ship.solar %>
+</p>
+
+<p>
+  <b>Salary:</b>
+  <%= @ship.salary %>
+</p>
+
+
+<%= link_to 'Edit', edit_ship_path(@ship) %> |
+<%= link_to 'Back', ships_path %>

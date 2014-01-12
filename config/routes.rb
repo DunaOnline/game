@@ -1,4 +1,10 @@
 DuneOnline::Application.routes.draw do
+  resources :ships
+
+
+  resources :orbits
+
+
   resources :units
 
   resources :equipment

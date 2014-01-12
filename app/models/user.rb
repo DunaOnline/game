@@ -818,10 +818,18 @@ class User < ActiveRecord::Base
   end
 
   def has_kasaren
-	  kasarne = 0
+
 	  kasaren = Building.where(:kind => "VK").first
-	  kasarne = self.fields(:include => :estates, :conditions => { :estates => { :building_id => kasaren.id } }).first if kasaren
-    kasarne
+	  kasarne = self.fields(:include => :estates, :conditions => { :estates => { :building_id => kasaren.id } }).all if kasaren
+
+	  kasarne.each do |f|
+		  e = f.estates.where(:building_id => kasaren.id).first.number
+		  if e > 0
+			   return f.id
+		  else
+			  return nil
+		  end
+	  end
   end
 
   #def upgrades_b_available_by_technology(building)
