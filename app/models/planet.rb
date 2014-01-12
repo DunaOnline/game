@@ -287,8 +287,7 @@ class Planet < ActiveRecord::Base
     end
 
     enviro_bonus != 1 ? enviro_bonus - 1 : 1
-<<<<<<< HEAD
-=======
+
 
   end
 
@@ -322,7 +321,7 @@ class Planet < ActiveRecord::Base
 		  sal += a.ship.salary * a.number
 	  end
 	  sal
->>>>>>> origin/Units
+
 
   end
 

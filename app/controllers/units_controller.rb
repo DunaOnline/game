@@ -3,11 +3,8 @@ class UnitsController < ApplicationController
   # GET /units.json
   def index
     @units = Unit.all
-<<<<<<< HEAD
-
-=======
     @squad = Squad.new
->>>>>>> origin/Units
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @units }
@@ -60,10 +57,8 @@ class UnitsController < ApplicationController
   # PUT /units/1
   # PUT /units/1.json
   def update
-<<<<<<< HEAD
-=======
 	  if current_user.admin?
->>>>>>> origin/Units
+
     @unit = Unit.find(params[:id])
 
     respond_to do |format|
@@ -75,12 +70,11 @@ class UnitsController < ApplicationController
         format.json { render json: @unit.errors, status: :unprocessable_entity }
       end
     end
-<<<<<<< HEAD
-=======
+
 	  else
 		  redirect_to :back, :alert => "nemozes menit jedntoku."
 		end
->>>>>>> origin/Units
+
   end
 
   # DELETE /units/1

@@ -1,7 +1,5 @@
 class Unit < ActiveRecord::Base
-<<<<<<< HEAD
-  attr_accessible :attack, :defence, :description, :equipment, :health, :house_id, :material, :name, :solar
-=======
+
   attr_accessible :attack, :defence, :description, :equipment, :health, :house_id, :material, :name, :solar, :melange, :img, :population, :salary
 
 	has_many :products, :through => :equipments
@@ -22,5 +20,4 @@ class Unit < ActiveRecord::Base
 
   scope :house_units, ->(house) { where("house_id IN (?) ", [0, house.id]) }
 
->>>>>>> origin/Units
 end
