@@ -1,0 +1,33 @@
+
+<div style="background-image: url(assets/jednotky/jedp9.png)" class="img army_unit wrapper" >
+  <span class="heading"><h3><%= link_to ship.name, ship_path(ship.id) %></h3></span>
+
+  <div class="bottom full_width">
+    <span class="space_attack_button" title="Útok"><h3><%= ship.attack %></h3></span>
+    <span class="space_defence_button" title="Obrana"><h3><%= ship.defence %></h3></span>
+  </div>
+  <ul>
+    <li>
+      <% if @field %>
+          </li><li>  <%= number_field_tag(ship.name, @planet.jednotky(ship) ? @planet.jednotky(unit).number : 0, :min => 1, :title => "Pocet jednotek") %>
+
+      <% else %>
+          <%= link_to ship.celkovy_pocet(current_user) %>
+          </li><li>  Celkovy prehlad => zvol planetu na presun flotily ;)
+      <% end %>
+      <li>
+
+        <span class="img_no_equip" title="Mozny equipment"><%= ship.equipment %></span>
+
+      </li>
+
+
+
+      </li></ul></div>
+<% if (ship_counter + 1) % 5 == 0 %>
+    </div>
+    <div class="clear">
+
+    </div>
+    <div class="army_unit_blocks">
+<% end %>

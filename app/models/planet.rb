@@ -21,6 +21,7 @@ class Planet < ActiveRecord::Base
   belongs_to :house
   belongs_to :planet_type
   belongs_to :system, :primary_key => 'system_name', :foreign_key => 'system_name'
+  has_many :orbits
   has_many :fields
   has_many :environment
   has_many :property, :through => :environment
@@ -286,6 +287,39 @@ class Planet < ActiveRecord::Base
     end
 
     enviro_bonus != 1 ? enviro_bonus - 1 : 1
+
+  end
+
+  def jednotky(ship)
+	  s = self.orbits.where(:ship_id => ship.id).first
+	  s
+  end
+
+  def attack(user)
+	  a = 0
+	  o = self.orbits.where(:user_id => user.id).all
+	  o.each do |a|
+		  a += a.ship.attack * a.number
+	  end
+	  a
+  end
+
+  def defence(user)
+	  d = 0
+	  o = self.orbits.where(:user_id => user.id).all
+	  o.each do |a|
+		  d += a.ship.defence * a.number
+	  end
+	  d
+  end
+
+  def salary(user)
+	  sal = 0
+	  o = self.orbits.where(:user_id => user.id).all
+	  o.each do |a|
+		  sal += a.ship.salary * a.number
+	  end
+	  sal
 
   end
 

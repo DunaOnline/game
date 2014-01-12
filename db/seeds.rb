@@ -128,6 +128,7 @@ Global.create(:setting => 'parts_mat_cost', :cislo => 3)
 Global.create(:setting => 'town_capacity', :cislo => 7000)
 Global.create(:setting => 'city_capacity', :cislo => 8000)
 Global.create(:setting => 'megalopolis_capacity', :cislo => 9000)
+Global.create(:setting => 'popka_v_budovach_helper', :cislo => 0)
 puts 'Global done'
 
 titania = Planet.find_by_name('Titánia')
@@ -252,7 +253,14 @@ Unit.create(:name => 'Laserové dělo',:salary => 36.99, :house_id => House.find
 Unit.create(:name => 'Slídič',:salary => 10.27, :house_id => House.find_by_name('Vernio').id, :population => 1778, :description => 'Elitní národní jednotka, která je určena pro napadení ze zálohy.', :attack => 4, :defence => 2, :health => 1, :equipment => 1, :material => 198, :solar => 458, :img => '', :lvl => nil, :druh => '')
 Unit.create(:name => 'Štítonoši',:salary => 30.82, :house_id => House.find_by_name('Vernio').id, :population => 5556, :description => 'Univerzální národní jednotka vhodná pro boj i obranu.', :attack => 3, :defence => 3, :health => 1, :equipment => 1, :material => 204, :solar => 464, :img => '', :lvl => nil, :druh => '')
 Unit.create(:name => 'Imperiální garda',:salary => 28.08, :house_id => House.find_by_name('Impérium').id, :population => 4667, :description => 'Jednotka pro pravého císaře školena na Ginazu.', :attack => 10, :defence => 5, :health => 3, :equipment => 1, :material => 507, :solar => 1167, :img => '', :lvl => nil, :druh => '')
+puts 'Units done'
 
+Ship.create(:name => 'Lehký stíhač', :description => '', :equipment => '1', :attack => '18', :defence => '16', :health => '2', :population => '1893', :material => '14400', :solar => '28800', :salary => '78.90')
+Ship.create(:name => 'Obranný satelit', :description => 'Malá technická vymoženost použivaná na obranu orbity mnoha světů.', :equipment => '3', :attack => '50', :defence => '60', :health => '8', :population => '6480', :material => '46800', :solar => '93600', :salary => '256.44')
+Ship.create(:name => 'Křižník', :description => 'První velká jednotka flotily vhodná jak do obrany tak do útoku.', :equipment => '10', :attack => '300', :defence => '300', :health => '40', :population => '34400', :material => '252000', :solar => '504000', :salary => '1380.82')
+Ship.create(:name => 'Bitevní křižník', :description => 'Křižník, který určený na  jedinnou věc - ničení. ', :equipment => '15', :attack => '400', :defence => '250', :health => '30', :population => '34133', :material => '272000', :solar => '544000', :salary => '1490.41')
+Ship.create(:name => 'Mateřská loď', :description => 'Skutečně majestátní ochrana mateřských světů a ničitel celých flotil.', :equipment => '30', :attack => '600', :defence => '1000', :health => '110', :population => '94933', :material => '674000', :solar => '1348000', :salary => '3693.15')
+puts 'Ships done'
 
 Building.create(:kind => "L", :level => 1, :name => "Město", :description => "Města slouží k ubytování vaší populace.", :population_bonus => 20.0, :pop_limit_bonus => 20.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 35.0, :solar_cost => 30.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 Building.create(:kind => "L", :level => 2, :name => "Velkoměsto", :description => "Velkoměsta slouží k ubytování vaší populace.", :population_bonus => 30.0, :pop_limit_bonus => 30.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 36.0, :solar_cost => 32.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")

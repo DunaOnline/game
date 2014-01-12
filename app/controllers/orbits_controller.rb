@@ -2,7 +2,14 @@ class OrbitsController < ApplicationController
   # GET /orbits
   # GET /orbits.json
   def index
-    @orbits = Orbit.all
+	  @orbits = Orbit.all
+	  @ships = Ship.all
+	  @orbit = Orbit.new
+	  @user = current_user
+
+	  if params[:planet]
+		  @planet = Planet.find(params[:planet])
+	  end
 
     respond_to do |format|
       format.html # index.html.erb

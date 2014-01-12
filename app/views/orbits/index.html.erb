@@ -1,27 +1,98 @@
-<h1>Listing orbits</h1>
+<table class="tab0">
+  <tbody><tr>	<td>
+    <%= link_to '⌂', help_path %> »
+    <%= link_to 'Armáda', units_path %> »
+    <%= link_to 'Rozmiestnenie armady', squads_path %>
+  </td>
 
-<table>
+  </tr>
+  </tbody></table>
+
+<table class="tab1">
+  <tbody><tr>
+    <td class="tdpl" rowspan="2" style="width:130px; background-image: url(assets/jednotky/warmentat.png)"></td>
+    <th style="min-width:80px;"> Síla armády</th>
+    <th style="min-width:80px;"> Armádní žold</th>
+    <th> Obrana</th>
+    <th class="r"> Útok</th>
+  </tr><tr>
+
+    <td>
+      <li><%= img_vesmir_utok %> <%= @planet ? @planet.attack(@user) : current_user.vesmirny_utok %></li>
+      <li><%= img_vesmir_obrana %> <%= @planet ? @planet.defence(@user) : current_user.vesmirna_obrana %></li>
+    </td>
+
+    <td>
+      <% if @planet %>
+          <li><%= img_solary %> <span class="oranzova"><%= @planet.salary(@user) %></span>      </li>
+          <!--<li><%= img_melanz %><span class="oranzova"> - 5.00</span></li>-->
+      <% else %>
+          <li><%= img_solary %> <span class="oranzova"><%= @user.salary %></span>      </li>
+      <% end %>
+    </td>
+
+    <td>
+      <li>Dnes na vás nebyl veden žádný útok.
+      </li></td>
+
+    <td>
+      <li>Dobyl jste planetu hráče <a href="profil.htm">Profil</a> (Riches)
+      </li><li>Neúspěšně jste útočil na hráče <a href="profil.htm">Profil</a> (Riches)
+    </li><li>Neúspěšně jste útočil na hráče <a href="profil.htm">Profil</a> (Riches)
+    </li></td>
+
+  </tr>
+  </tbody></table>
+<div class="img heading resource_list resources">
+  <ul style="font-size: 11px;">
+    <% if @planet %>
+        <!--<li><%= img_material @planet.resource.material, "vertical-align:middle"  %><%= @field.resource.material %></li>-->
+        <!--<li><%= img_populace @planet.resource.population, "vertical-align:middle" %><%= @field.resource.population %></li>-->
+    <% end %>
+    <li><%= img_solary @user.solar ,"vertical-align:middle" %><%= @user.solar %></li>
+    <li><%= img_melanz @user.melange ,"vertical-align:middle" %><%= @user.melange %></li>
+    <% if @planet %>
+
+    <% end %>
+  </ul>
+</div>
+<table class="tab4">
+  <tbody><tr>
+    <th class="thf left_align" colspan="5">
+
+
+    </th>
+  </tr>
   <tr>
-    <th>Planet</th>
-    <th>Ship</th>
-    <th>Number</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th class="thf" colspan="5">
+      <h3>Vaše jednotky na lenu <%= @planet ? @planet.name : "Nemate vybratou planetu, Zobrazene jednotky na vsetkych planetach." %>  </h3>
+    </th>
   </tr>
 
-<% @orbits.each do |orbit| %>
-  <tr>
-    <td><%= orbit.planet_id %></td>
-    <td><%= orbit.ship_id %></td>
-    <td><%= orbit.number %></td>
-    <td><%= link_to 'Show', orbit %></td>
-    <td><%= link_to 'Edit', edit_orbit_path(orbit) %></td>
-    <td><%= link_to 'Destroy', orbit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+
+
+  </tbody></table>
+<div class="army_unit_blocks">
+  <%= render :partial => "ship", :collection => @ships, :as => 'ship' %>
+</div>
+<div class="clear line_bot">
+
+</div>
+<% if @planet %>
+    <%= hidden_field_tag 'planet', value = @planet.id %>
 <% end %>
-</table>
+<div>
+  <h3>Presun jednotiek</h3>
+</div>
+<div class="full_width" style="overflow:auto">
+  <% if @planet %>
+      <span style="font-weight: bold;">Jste na planete : <%= @planet.name %></span>
 
-<br />
+           <span class="fright">
 
-<%= link_to 'New Orbit', new_orbit_path %>
+               </span>
+  <% else %>
+      <span>Jste na planete : nemate vybratou planete</span>
+  <% end %>
+</div>
+

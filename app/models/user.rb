@@ -53,6 +53,7 @@ class User < ActiveRecord::Base
 
   belongs_to :house
   belongs_to :subhouse
+  has_many :orbits
   has_many :fields
   has_many :squads, :through => :fields
   has_many :resources, :through => :fields
@@ -822,13 +823,48 @@ class User < ActiveRecord::Base
 	  kasarne = self.fields(:include => :estates, :conditions => { :estates => { :building_id => kasaren.id } }).all if kasaren
 
 	  kasarne.each do |f|
-		  e = f.estates.where(:building_id => kasaren.id).first.number
+		  e = f.estates.where(:building_id => kasaren.id).first ? f.estates.where(:building_id => kasaren.id).first.number : 0
 		  if e > 0
 			   return f.id
 		  else
 			  return nil
 		  end
 	  end
+  end
+
+  def pozemni_utok
+	  a= 0
+	  self.fields.each do |f|
+		  f.squads.each do |s|
+			  a += s.number * s.unit.attack
+		  end
+	  end
+	  a
+  end
+
+  def pozemni_obrana
+	  d= 0
+	  self.fields.each do |f|
+		  f.squads.each do |s|
+			  d += s.number * s.unit.defence
+		  end
+	  end
+	  d
+  end
+
+  def vesmirny_utok
+	  a= 0
+	  self.orbits.each do |o|
+		  a += o.number * o.ship.attack
+	  end
+	  a
+  end
+  def vesmirna_obrana
+	  d= 0
+	  self.orbits.each do |o|
+		  d += o.number * s.ship.defence
+	  end
+	  d
   end
 
   #def upgrades_b_available_by_technology(building)

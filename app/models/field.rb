@@ -127,12 +127,17 @@ class Field < ActiveRecord::Base
 	end
 
 	def salary
+		num = 0
 		sal = 0
 		self.squads.each do |s|
-			sal = s.number * s.unit.salary
+			num += s.number
+			if self.kasaren_kapacita >= num
+			sal += s.number * s.unit.salary
+			else
+				sal += (s.number * s.unit.salary) * 2
+			end
 		end
-		sal.round(2) if self.kasaren_kapacita == 0
-		(sal * 2).round(2) if self.kasaren_kapacita > 0
+		sal.round(2)
 	end
 
 	#def upgrade_availability_check(budova, pocet_vylepseni)

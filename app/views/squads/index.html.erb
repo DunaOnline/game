@@ -18,10 +18,9 @@
   </tr><tr>
 
     <td>
-      <li><%= img_pozemni_utok %> 100</li>
-      <li><%= img_pozemni_obrana %> 100</li>
-      <li><%= img_vesmir_utok %> 100</li>
-      <li><%= img_vesmir_obrana %> 100</li>
+      <li><%= img_pozemni_utok %> <%= @field ? @field.utok_pozemni : current_user.pozemni_utok %></li>
+      <li><%= img_pozemni_obrana %> <%= @field ? @field.def_pozemni : current_user.pozemni_obrana %></li>
+
     </td>
 
     <td>

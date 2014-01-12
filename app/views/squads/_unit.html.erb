@@ -13,12 +13,16 @@
 
       <% else %>
         <%= link_to unit.celkovy_pocet(current_user) %>
-        </li><li>  Celkovy prehlad => zvol leno na presun vojsk ;)
+        </li><li>  Celkovy prehlad => zvol planetu na presun flotily ;)
       <% end %>
+    <li>
+
+        <span class="img_no_equip" title="Mozny equipment"><%= unit.equipment %></span>
+
+    </li>
 
 
-
-</li></ul></div>
+</ul></div>
 <% if (unit_counter + 1) % 5 == 0 %>
     </div>
     <div class="clear">
