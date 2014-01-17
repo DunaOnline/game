@@ -821,15 +821,16 @@ class User < ActiveRecord::Base
   def has_kasaren
 	  kasaren = Building.where(:kind => "VK").first
 	  kasarne = self.fields(:include => :estates, :conditions => { :estates => { :building_id => kasaren.id } }).all if kasaren
-
-	  kasarne.each do |f|
-		  e = f.estates.where(:building_id => kasaren.id).first ? f.estates.where(:building_id => kasaren.id).first.number : 0
-		  if e > 0
-			   return f.id
-		  else
-			  return nil
+	  if kasarne
+		  kasarne.each do |f|
+			  e = f.estates.where(:building_id => kasaren.id).first ? f.estates.where(:building_id => kasaren.id).first.number : 0
+			  if e > 0
+				   return f.id
+			  else
+				  return nil
+			  end
 		  end
-	  end
+		end
   end
 
   def pozemni_utok
