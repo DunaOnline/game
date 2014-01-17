@@ -2,7 +2,8 @@ class OrbitsController < ApplicationController
   # GET /orbits
   # GET /orbits.json
   def index
-	  @orbits = Orbit.all
+	  @planet_with_orbits = current_user.planets_with_orbit
+	  @orbits = current_user.orbits
 	  @ships = Ship.all
 	  @orbit = Orbit.new
 	  @user = current_user
@@ -17,26 +18,37 @@ class OrbitsController < ApplicationController
     end
   end
 
+  def move_orbits
+
+  end
+
   # GET /orbits/1
   # GET /orbits/1.json
   def show
-    @orbit = Orbit.find(params[:id])
+	  @user = current_user
+	  @planet = Planet.find(params[:id])
+    @orbit = Orbit.new
+	  @ships = Ship.all
+	  if @planet.vlastni_pole(current_user)
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @orbit }
     end
+	  else
+		  redirect_to :back, :alert => 'No no'
+	  end
   end
 
   # GET /orbits/new
   # GET /orbits/new.json
   def new
     @orbit = Orbit.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @orbit }
     end
+
   end
 
   # GET /orbits/1/edit
@@ -47,8 +59,18 @@ class OrbitsController < ApplicationController
   # POST /orbits
   # POST /orbits.json
   def create
+	  par = []
     @orbit = Orbit.new(params[:orbit])
+    lode = Ship.all.map { |x| x.name }
+    @planet = Planet.find(params[:planet])
+    lode.each do |title|
+	    par << [([params[title]]), [title]] unless params[title] == ""
+    end
+    if params[:commit]
+    if @planet.verbovat_ship(par,current_user)
 
+    end
+    end
     respond_to do |format|
       if @orbit.save
         format.html { redirect_to @orbit, notice: 'Orbit was successfully created.' }

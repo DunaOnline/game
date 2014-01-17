@@ -53,7 +53,7 @@ class Ability
         #can [:update], User, :id => user.id
         can [:read, :osidlit_pole, :zobraz_arrakis], Planet
         can [:read], House
-        can [:read, :update, :prejmenuj_pole, :postavit_budovu, :presun_suroviny, :vylepsi_budovu], Field, :user_id => user.id
+        can [:read, :update, :prejmenuj_pole, :postavit_budovu, :presun_suroviny, :vylepsi_budovu, :stahnout_na_dp, :list_fields], Field, :user_id => user.id
         can [:read, :update], Resource
         can [:read, :create], Vote
         cannot [:update, :delete], Operation

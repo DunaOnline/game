@@ -314,4 +314,8 @@ class Constant
 	  Global.prepni('popka_v_budovach_helper',4,val)
   end
 
+  def self.kapacita_kosmodromu
+	  Global.vrat('kapacita_kosmodromu',4)
+  end
+
 end

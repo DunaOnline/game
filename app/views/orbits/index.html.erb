@@ -59,6 +59,9 @@
 <table class="tab4">
   <tbody><tr>
     <th class="thf left_align" colspan="5">
+      <%= form_tag('/move_orbits')  %>
+      <%= select_tag 'orbits_select', options_for_select(@planet_with_orbits.collect { |p| [p.planet.name, p.id] }) %>
+      <%= link_to "Prejdi na leno", 'orbits', :class => 'select_orbit' %>
 
 
     </th>

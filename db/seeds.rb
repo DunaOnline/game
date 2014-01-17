@@ -129,6 +129,7 @@ Global.create(:setting => 'town_capacity', :cislo => 7000)
 Global.create(:setting => 'city_capacity', :cislo => 8000)
 Global.create(:setting => 'megalopolis_capacity', :cislo => 9000)
 Global.create(:setting => 'popka_v_budovach_helper', :cislo => 0)
+Global.create(:setting => 'kapacita_kosmodromu', :cislo => 10)
 puts 'Global done'
 
 titania = Planet.find_by_name('Titánia')
@@ -278,6 +279,7 @@ Building.create(:kind => "E", :level => 3, :name => "Chrám vědy", :description
 Building.create(:kind => "O", :level => 1, :name => "PO", :description => "Planetarni obrana.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 70.0, :solar_cost => 100.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 Building.create(:kind => "V", :level => 1, :name => "Továrna", :description => "Produkuje vyrobky.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 0.0, :material_cost => 75.0, :solar_cost => 50.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 Building.create(:kind => "VK", :level => 1, :name => "Kasarna", :description => "Produkuje vojaky.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 5.0, :material_cost => 75.0, :solar_cost => 50.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
+Building.create(:kind => "K", :level => 1, :name => "Kosmodrom", :description => "Produkuje vesmirne lode.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 0.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 200.0, :melange_cost => 5.0, :material_cost => 75.0, :solar_cost => 50.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 
 Building.create(:kind => "J", :level => 1, :name => "Továrna na koření", :description => "Produkuje koreni.", :population_bonus => 0.0, :pop_limit_bonus => 0.0, :melange_bonus => 100.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 20.0, :melange_cost => 3.0, :material_cost => 50.0, :solar_cost => 100.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")
 Building.create(:kind => "JL", :level => 1, :name => "Arraken", :description => "Sídelní město, astroport.", :population_bonus => 10.0, :pop_limit_bonus => 0.0, :melange_bonus => 300.0, :material_bonus => 0.0, :solar_bonus => 0.0, :exp_bonus => 0.0, :population_cost => 0.0, :melange_cost => 0.0, :material_cost => 0.0, :solar_cost => 0.0, :exp_cost => 0.0, :prerequisity_1 => "", :prerequisity_2 => "", :prerequisity_3 => "")

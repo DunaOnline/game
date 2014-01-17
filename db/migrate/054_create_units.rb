@@ -13,10 +13,11 @@ class CreateUnits < ActiveRecord::Migration
       t.float :melange
       t.integer :solar
       t.integer :population
-      t.float :salary
+
       t.string :img
       t.integer :lvl
       t.string :druh
+      t.float :salary
 
 
       t.timestamps

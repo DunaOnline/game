@@ -275,7 +275,7 @@ class Prepocet
     puts "hra uzamcena"
   end
 
-  #######################################
+
 
   def self.prepocti_vliv
     for h in House.playable do

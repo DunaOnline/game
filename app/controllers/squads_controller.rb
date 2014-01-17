@@ -8,7 +8,7 @@ class SquadsController < ApplicationController
 			@squad = Squad.new
 			@user = current_user
 
-			if params[:leno]
+			if params[:leno] && params[:leno] != "null"
 				@field = Field.find(params[:leno])
 			end
 

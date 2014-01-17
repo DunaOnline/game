@@ -169,6 +169,23 @@ class Planet < ActiveRecord::Base
     end
   end
 
+  def kapacita_kosmodromu(user)
+	  n = 0
+	  b = Building.where(:kind => 'K').first
+	  self.fields.where(:user_id => user.id).each do |f|
+		  n += f.estates.where(:building_id => b.id).first.number if f.estates.where(:building_id => b.id).first
+	  end
+	  n * Constant.kapacita_kosmodromu
+  end
+
+  def vyuzitie_kosmodromu(user)
+    n = 0
+	  self.orbits.where(:user_id => user.id).each do |o|
+		   n += o.number
+	  end
+	  n
+  end
+
   def celkova_populace(user)
     pop = 0.0
     for field in self.fields.vlastnik(user).includes(:resource) do
@@ -291,8 +308,9 @@ class Planet < ActiveRecord::Base
 
   end
 
-  def jednotky(ship)
-	  s = self.orbits.where(:ship_id => ship.id).first
+
+  def jednotky(ship,user)
+	  s = self.orbits.where(:ship_id => ship.id, :user_id => user.id).first
 	  s
   end
 
@@ -320,11 +338,86 @@ class Planet < ActiveRecord::Base
 	  o.each do |a|
 		  sal += a.ship.salary * a.number
 	  end
-	  sal
-
-
+	  sal.round(2)
   end
 
+  def verbovat_ship(ships,user)
+	  planet = self
+	  a=b=total_material=total_price=total_population=total_pocet=number = 0
+	  naverbovano = []
+	  ships_msg = ""
+	  ships.each do |ship|
+		  pocet = ship[0][0].to_i.abs
+		  total_pocet += pocet
+		  lod = Ship.where(:name => ship[1][0]).first
+		  total_material += lod.material * pocet
+		  total_price += lod.solar * pocet
+		  total_population += lod.population * pocet
+	  end
+	  material = planet.celkovy_material(user) >= total_material
+	  price = user.solar >= total_price
+	  population = planet.celkova_populace(user) >= total_population
+	  miesto = true #planet.kapacita_kosmodromu(user) >= planet.vyuzitie_kosmodromu(user) + total_pocet
+	  if miesto
+		  if material && price && population
+			  ships.each do |ship|
+				  pocet = ship[0][0].to_i.abs
+				  lod = Ship.where(:name => ship[1][0]).first
+				  orbit = Orbit.where(:planet_id => self.id, :ship_id => lod.id).first
+				  if orbit
+					  orbit.update_attributes(:number => orbit.number + pocet)
+				  else
+					  orbit = Orbit.new(
+							  :planet_id => planet.id,
+							  :ship_id => lod.id,
+							  :number => pocet
+					  ).save
+				  end
+				  number += pocet
+				  naverbovano << orbit
+				  ships_msg += "#{pocet} ks #{lod.name}, "
+			  end
+			  oznamenie = "Bylo naverbovano #{ships_msg} za #{total_material} kg, #{total_price} solaru a #{total_population} populace."
+			  user.zapis_operaci(oznamenie)
+			  mat_helper = total_material
+			  pop_helper = total_population
+			  fields = planet.fields
+			  begin
+			  if mat_helper <= fields[a].resource.material
+				  fields[a].resource.update_attributes(:material => fields[a].resource.material - mat_helper)
+				  mat_helper = 0
+			  else
+				  fields[a].resource.update_attributes(:material => 0)
+				  mat_helper -= fields[a].resource.material
+			  end
+			  a += 1
+			  end while mat_helper != 0
+
+			  begin
+				  if pop_helper <= fields[b].resource.population
+					  fields[b].resource.update_attributes(:population => fields[b].resource.population - pop_helper)
+					  pop_helper = 0
+				  else
+					  fields[a].resource.update_attributes(:population => 0)
+					  pop_helper -= fields[b].resource.population
+				  end
+				  b += 1
+			  end while pop_helper != 0
+
+			  user.update_attributes(:solar => user.solar - total_price)
+		  else
+			  oznamenie = "Chybi vam "
+			  oznamenie += (total_material - planet.celkovy_material(user)).to_s + " kg materialu, " unless material
+			  oznamenie += (total_price - user.solar).to_s + " solaru, " unless price
+			  oznamenie += (total_population - planet.celkova_populace(user)).to_s + " pop, " unless population
+			  oznamenie += "Zaridte suroviny."
+			  naverbovano = false
+		  end
+	  else
+		  oznamenie = "Nemate dostatek mista v kosmodromu."
+	  end
+	  return oznamenie, naverbovano
+  end
 
   scope :domovska, lambda { |user| where(:house_id => user.house.id, :planet_type_id => PlanetType.find_by_name('Domovská')) }
   scope :domovska_rodu, lambda { |house| where(:house_id => house.id, :planet_type_id => PlanetType.find_by_name('Domovská')) }

@@ -867,6 +867,16 @@ class User < ActiveRecord::Base
 	  d
   end
 
+  def planets_with_orbit
+	  a = []
+	  self.orbits.each do |p|
+		  if a.assoc(p.planet) == nil
+			  a << [p.planet]
+		  end
+	  end
+	  a
+  end
+
   #def upgrades_b_available_by_technology(building)
 	 # lvl = 0
 	 # if Technology.where(:bonus_type => building.kind).first

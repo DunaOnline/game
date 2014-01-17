@@ -8,6 +8,7 @@ DuneOnline::Application.routes.draw do
 
 
   resources :orbits
+  match '/move_orbits' => 'orbits#move_units', :as => :move_units
 
   resources :units
 

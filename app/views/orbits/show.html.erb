@@ -1,20 +1,74 @@
-<p id="notice"><%= notice %></p>
+<table class="tab0">
+  <tr>	<td>
+    <%= link_to '⌂', help_path %> »
+    <%= link_to 'Armáda', units_path %> »
+    <%= link_to 'Verbování jednotek', squad_path %>
+  </td>
 
-<p>
-  <b>Planet:</b>
-  <%= @orbit.planet_id %>
-</p>
+  </tr>
+</table>
 
-<p>
-  <b>Ship:</b>
-  <%= @orbit.ship_id %>
-</p>
+<table class="tab1">
+  </tr><tr>
+  <td class="tdpl img_war_mentat" rowspan="2" style="width:130px; background-image: url(jednotky/warmentat.png)"></td>
+  <th style="min-width:80px;"> Síla armády</th>
+  <th style="min-width:80px;"> Armádní žold</th>
+  <th> Obrana</th>
+  <th class="r"> Útok</th>
+</tr><tr>
 
-<p>
-  <b>Number:</b>
-  <%= @orbit.number %>
-</p>
+  <td>
+    <li><%= img_vesmir_utok %> <%= @planet.attack(@user) %></li>
+    <li><%= img_vesmir_obrana %> <%= @planet.defence(@user) %></li>
 
+  </td>
 
-<%= link_to 'Edit', edit_orbit_path(@orbit) %> |
-<%= link_to 'Back', orbits_path %>
+  <td>
+    <li><%= img_solary %> <span class="oranzova"><%= @planet.salary(@user) %></span>      </li>
+    <!--<li><%= img_melanz %><span class="oranzova"> - 5.00</span>-->
+  </td>
+
+  <td>
+    <li>Dnes na vás nebyl veden žádný útok.
+  </td>
+
+  <td>
+    <li>Dobyl jste planetu hráče <a href="profil.htm">Profil</a> (Riches)
+    <li>Neúspěšně jste útočil na hráče <a href="profil.htm">Profil</a> (Riches)
+    <li>Neúspěšně jste útočil na hráče <a href="profil.htm">Profil</a> (Riches)
+  </td>
+
+</tr>
+</table>
+<div class="img heading resource_list resources">
+  <ul style="font-size: 11px;">
+    <% if @planet %>
+        <li><%= img_material @planet.celkovy_material(@user), "vertical-align:middle"  %><%=  @planet.celkovy_material(@user) %></li>
+        <li><%= img_populace @planet.celkova_populace(@user), "vertical-align:middle" %><%= @planet.celkova_populace(@user) %></li>
+    <% end %>
+    <li><%= img_solary @user.solar ,"vertical-align:middle" %><%= @user.solar %></li>
+    <li><%= img_melanz @user.melange ,"vertical-align:middle" %><%= @user.melange %></li>
+    <span class="fright">Kapacita :<%= @planet.vyuzitie_kosmodromu(@user) %> / <%= @planet.kapacita_kosmodromu(@user).to_i %></span>
+  </ul>
+
+</div>
+<table class="tab4">
+  <tr>
+    <th class="thf" colspan="4">
+      <%= select_tag 'lena_squad', options_for_select(Field.lena_s_kasarnou(current_user).collect { |p| [p.name, p.id] }) %>
+      <%= link_to "Prejdi na leno", '', :class => 'select_squad' %>
+
+    </th>
+
+  </tr>
+  <tr>
+    <th class="thf" colspan="4">
+      Vaše jednotky na vybraných planetách
+    </th>
+  </tr>
+
+</table>
+
+<%= form_for(@orbit) do %>
+    <%= render :partial => "recruit", :collection => @ships, :as => 'ship' %>
+<% end %>
