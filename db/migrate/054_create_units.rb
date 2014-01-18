@@ -12,12 +12,10 @@ class CreateUnits < ActiveRecord::Migration
       t.integer :solar
       t.float :melange
       t.integer :solar
-      t.integer :population
 
-      t.string :img
-      t.integer :lvl
-      t.string :druh
-      t.float :salary
+
+
+
 
 
       t.timestamps
