@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 55) do
+ActiveRecord::Schema.define(:version => 59) do
 
   create_table "app_logy", :force => true do |t|
     t.datetime "cas",                      :null => false
@@ -154,6 +154,21 @@ ActiveRecord::Schema.define(:version => 55) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "error_messages", :force => true do |t|
+    t.text     "class_name"
+    t.text     "message"
+    t.text     "trace"
+    t.text     "params"
+    t.text     "target_url"
+    t.text     "referer_url"
+    t.text     "user_agent"
+    t.string   "user_info"
+    t.string   "app_name"
+    t.string   "doc_root"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "estates", :force => true do |t|
     t.integer  "building_id",                :null => false
     t.integer  "field_id",                   :null => false
@@ -283,6 +298,15 @@ ActiveRecord::Schema.define(:version => 55) do
     t.datetime "updated_at",                                     :null => false
   end
 
+  create_table "orbits", :force => true do |t|
+    t.integer  "planet_id"
+    t.integer  "ship_id"
+    t.integer  "number"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "planet_types", :force => true do |t|
     t.string   "name",                                                             :null => false
     t.decimal  "fields",           :precision => 4,  :scale => 0, :default => 0
@@ -408,6 +432,21 @@ ActiveRecord::Schema.define(:version => 55) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "ships", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "equipment"
+    t.integer  "attack"
+    t.integer  "defence"
+    t.integer  "health"
+    t.integer  "population"
+    t.float    "material"
+    t.float    "solar"
+    t.float    "salary"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "squads", :force => true do |t|
     t.integer  "field_id"

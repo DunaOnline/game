@@ -37,11 +37,4 @@ DuneOnline::Application.configure do
   # }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-
-  config.middleware.use ExceptionNotification::Rack,
-                        :email => {
-                            :email_prefix => "Error DO ",
-                            :sender_address => %{"DuneOnline" <error@duneonline.cz>},
-                            :exception_recipients => %w{doktoros@gmail.com}
-                        }
 end

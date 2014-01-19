@@ -1,4 +1,5 @@
 DuneOnline::Application.routes.draw do
+  mount RailsExceptionHandlerAdmin::Engine, :at => '/errors' if defined?(RailsExceptionHandlerAdmin::Engine)
 
   resources :units
 

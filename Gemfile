@@ -72,4 +72,7 @@ gem 'execjs'
 gem 'newrelic_rpm'
 #gem 'therubyracer'
 
-gem 'exception_notification'
+group :production do
+  gem 'rails_exception_handler', "~> 2"
+  gem 'rails_exception_handler_admin'
+end
