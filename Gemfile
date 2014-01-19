@@ -71,3 +71,5 @@ gem 'execjs'
 
 gem 'newrelic_rpm'
 #gem 'therubyracer'
+
+gem 'exception_notification'
