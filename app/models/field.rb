@@ -45,7 +45,16 @@ class Field < ActiveRecord::Base
 
 	def oznaceni
 		self.planet.id.to_s + "." + self.id.to_s + "." + self.souradnice
-	end
+  end
+
+  def popka_v_budovach_helper
+    @popka
+    #Global.vrat('popka_v_budovach_helper',4)
+  end
+  def set_popka_v_budovach_helper(val)
+    @popka = val
+    #Global.prepni('popka_v_budovach_helper',4,val)
+  end
 
 	def drzitel(user)
 		if user.admin?
@@ -57,6 +66,8 @@ class Field < ActiveRecord::Base
 
 	def vynos(ceho)
 		vynos = 0.0
+    pop = self.popka_v_budovach_helper
+    pop = self.resource.population if pop.nil?
 		case ceho
 			when 'solar'
 				kind = 'S'
@@ -68,10 +79,10 @@ class Field < ActiveRecord::Base
 				kind = 'L'
 			when 'melange'
 				kind = 'J'
+        pop = 99999999
 			when 'parts'
 				kind = 'V'
 		end
-		pop = Constant.popka_v_budovach_helper
 		for building in self.buildings.where('kind LIKE ?', kind) do
 			pocet = self.estates.where(:building_id => building).first.number
 			attr = 'vynos_' + ceho
@@ -82,7 +93,7 @@ class Field < ActiveRecord::Base
 				vynos += building.send(attr) * pocet * Constant.vynos_bez_pop
 			end
 		end
-		Constant.set_popka_v_budovach_helper(pop)
+		self.set_popka_v_budovach_helper(pop)
 		vynos
 	end
 

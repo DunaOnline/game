@@ -63,12 +63,20 @@ class Prepocet
 
   def self.produkce_suroviny(order)
     for field in Field.includes(:user, :buildings, :resource).all do
-	    Constant.set_popka_v_budovach_helper(field.resource.population)
+	    field.set_popka_v_budovach_helper(field.resource.population)
       vlastnik = field.user
       narod = vlastnik.house if vlastnik
       if field.planet == Arrakis.planeta
 
       else
+        enviro_pop = field.planet.udalost_bonus("L")
+        effect_pop = field.leno_udalost_bonus("L")
+        population_exp = vlastnik.tech_bonus("L")
+        population_house_exp = narod.vyskumane_narodni_tech("L")
+        population = (field.vynos('population') * population_exp * population_house_exp * enviro_pop * effect_pop * nahoda_produkce)
+        #field.resource.update_attributes(:population => field.resource.population + population)
+        field.set_popka_v_budovach_helper(field.resource.population + population)
+
         solar_exp = vlastnik.tech_bonus("S")
         enviro_solar = field.planet.udalost_bonus("S")
         effect_solar = field.leno_udalost_bonus("S")
@@ -88,12 +96,6 @@ class Prepocet
         material_house_exp = narod.vyskumane_narodni_tech("M")
         material = (field.vynos('material') * material_exp * material_house_exp * enviro_material * effect_material * nahoda_produkce).round(2)
 
-        enviro_pop = field.planet.udalost_bonus("L")
-        effect_pop = field.leno_udalost_bonus("L")
-        population_exp = vlastnik.tech_bonus("L")
-        population_house_exp = narod.vyskumane_narodni_tech("L")
-        population = (field.vynos('population') * population_exp * population_house_exp * enviro_pop * effect_pop * nahoda_produkce)
-
         parts = field.vynos('parts').to_i #enviro_parts
         temp_mat = material
         material = material - parts * Constant.parts_mat_cost
@@ -112,7 +114,7 @@ class Prepocet
         if field.resource.population + population > field.capacity_population
 	        population = 0
 	        if field.resource.population > field.capacity_population
-		        population = ((field.capacity_population - field.resource.population) / 2).to_i
+		        population = ((field.capacity_population - field.resource.population) / 2).to_i.abs * (-1)
 	        end
         end
         vlastnik.update_attributes(
@@ -137,7 +139,7 @@ class Prepocet
             :parts_income =>  parts,
         ).save
       end
-	    Constant.set_popka_v_budovach_helper(0)
+	    field.set_popka_v_budovach_helper(0)
     end
     puts "suroviny vyprodukovany "
   end

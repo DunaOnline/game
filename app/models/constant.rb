@@ -307,12 +307,6 @@ class Constant
   def self.megalopolis_capacity
 	  Global.vrat('megalopolis_capacity',4)
   end
-  def self.popka_v_budovach_helper
-	  Global.vrat('popka_v_budovach_helper',4)
-  end
-  def self.set_popka_v_budovach_helper(val)
-	  Global.prepni('popka_v_budovach_helper',4,val)
-  end
 
   def self.kapacita_kosmodromu
 	  Global.vrat('kapacita_kosmodromu',4)
