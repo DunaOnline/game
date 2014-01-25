@@ -115,6 +115,8 @@ class Prepocet
 	        population = 0
 	        if field.resource.population > field.capacity_population
 		        population = ((field.capacity_population - field.resource.population) / 2).to_i.abs * (-1)
+	        else
+		        population = (field.capacity_population - field.resource.population).to_i
 	        end
         end
         vlastnik.update_attributes(
