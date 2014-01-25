@@ -18,19 +18,19 @@
 
   <td>
     <li><%= img_solary "Výnos soláry" %>
-      <span class="<%= trida_barvy(planet.vynos(current_user, 'solar').round) %>"><%= format_mena(planet.vynos(current_user, 'solar'), "S") %></span>
+      <span class="<%= trida_barvy(planet.vynos(current_user, 'solar').round) %>"><%= format_mena(planet.vynos(current_user, 'solar'), "S", false) %></span>
     </li>
     <li><%= img_material "Výnos materiál" %>
-      <span class="<%= trida_barvy(planet.vynos(current_user, 'material').round) %>"><%= format_mena(planet.vynos(current_user, 'material'), "kg") %></span>
+      <span class="<%= trida_barvy(planet.vynos(current_user, 'material').round) %>"><%= format_mena(planet.vynos(current_user, 'material'), "kg", false) %></span>
     </li>
     <li><%= img_populace "Výnos populace" %>
-      <span class="<%= trida_barvy(planet.vynos(current_user, 'population').round) %>"><%= format_mena(planet.vynos(current_user, 'population'), "k") %></span>
+      <span class="<%= trida_barvy(planet.vynos(current_user, 'population').round) %>"><%= format_mena(planet.vynos(current_user, 'population'), "k", false) %></span>
     </li>
     <li><%= img_zkusenosti "Výnos zkušenosti" %>
-      <span class="<%= trida_barvy(planet.vynos(current_user, 'exp').round) %>"><%= format_mena(planet.vynos(current_user, 'exp'), "exp") %></span>
+      <span class="<%= trida_barvy(planet.vynos(current_user, 'exp').round) %>"><%= format_mena(planet.vynos(current_user, 'exp'), "exp", false) %></span>
     </li>
     <li><%= img_vyrobky "Výnos soucastek" %>
-      <span class="<%= trida_barvy(planet.vynos(current_user, 'parts')) %>"><%= format_mena(planet.vynos(current_user, 'parts'), "ks",false) %></span>
+      <span class="<%= trida_barvy(planet.vynos(current_user, 'parts')) %>"><%= format_mena(planet.vynos(current_user, 'parts'), "ks", false) %></span>
     </li>
   </td>
 

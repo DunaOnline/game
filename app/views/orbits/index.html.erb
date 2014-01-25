@@ -46,8 +46,8 @@
 <div class="img heading resource_list resources">
   <ul style="font-size: 11px;">
     <% if @planet %>
-        <!--<li><%= img_material @planet.resource.material, "vertical-align:middle"  %><%= @field.resource.material %></li>-->
-        <!--<li><%= img_populace @planet.resource.population, "vertical-align:middle" %><%= @field.resource.population %></li>-->
+        <li><%= img_material @planet.celkovy_material(@user), "vertical-align:middle"  %><%= @planet.celkovy_material(@user) %></li>
+        <li><%= img_populace @planet.celkova_populace(@user), "vertical-align:middle" %><%= @planet.celkova_populace(@user) %></li>
     <% end %>
     <li><%= img_solary @user.solar ,"vertical-align:middle" %><%= @user.solar %></li>
     <li><%= img_melanz @user.melange ,"vertical-align:middle" %><%= @user.melange %></li>
@@ -60,7 +60,7 @@
   <tbody><tr>
     <th class="thf left_align" colspan="5">
       <%= form_tag('/move_orbits')  %>
-      <%= select_tag 'orbits_select', options_for_select(@planet_with_orbits.collect { |p| [p.planet.name, p.id] }) %>
+      <%= select_tag 'orbits_select', options_for_select(@planet_with_orbits.collect { |p| [p.name, p.id] }) %>
       <%= link_to "Prejdi na leno", 'orbits', :class => 'select_orbit' %>
 
 

@@ -315,12 +315,12 @@ class Planet < ActiveRecord::Base
   end
 
   def attack(user)
-	  a = 0
+	  c = 0
 	  o = self.orbits.where(:user_id => user.id).all
 	  o.each do |a|
-		  a += a.ship.attack * a.number
+		  c += a.ship.attack * a.number
 	  end
-	  a
+	  c
   end
 
   def defence(user)
@@ -370,7 +370,8 @@ class Planet < ActiveRecord::Base
 					  orbit = Orbit.new(
 							  :planet_id => planet.id,
 							  :ship_id => lod.id,
-							  :number => pocet
+							  :number => pocet,
+					      :user_id => user.id
 					  ).save
 				  end
 				  number += pocet
@@ -381,7 +382,7 @@ class Planet < ActiveRecord::Base
 			  user.zapis_operaci(oznamenie)
 			  mat_helper = total_material
 			  pop_helper = total_population
-			  fields = planet.fields
+			  fields = planet.fields.where(:user_id => user)
 			  begin
 			  if mat_helper <= fields[a].resource.material
 				  fields[a].resource.update_attributes(:material => fields[a].resource.material - mat_helper)

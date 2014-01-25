@@ -450,7 +450,7 @@ class User < ActiveRecord::Base
 			field.update_attribute(:planet_id, Planet.domovska_rodu(House.renegat).first.id)
 			self.house.zapis_operaci("Hrac #{self.nick} byl vyhosten hracem #{kym}.")
 			self.update_attribute(:house_id, House.renegat.id)
-			self.zapis_operaci("Byl jste vyhosten z naroda #{narod.name}.")
+			self.zapis_operaci("Byl jste vyhosten z naroda #{narod.name} hracem #{kym}.")
 			Influence.new(
 					:field_id => field.id,
 					:effect_id => Effect.find_by_typ("M").id,
@@ -854,16 +854,16 @@ class User < ActiveRecord::Base
   end
 
   def vesmirny_utok
-	  a= 0
+	  a = 0
 	  self.orbits.each do |o|
 		  a += o.number * o.ship.attack
 	  end
 	  a
   end
   def vesmirna_obrana
-	  d= 0
+	  d = 0
 	  self.orbits.each do |o|
-		  d += o.number * s.ship.defence
+		  d += o.number * o.ship.defence
 	  end
 	  d
   end
@@ -877,6 +877,29 @@ class User < ActiveRecord::Base
 	  end
 	  a
   end
+
+  def planets_with_kosmodrom
+	  planets = []
+	  kosmodrom = Building.where(:kind => 'K').first
+	  self.fields.each do |f|
+		  a = f.estates.where(:building_id => kosmodrom.id).first
+		  if a
+			  if planets.assoc(f.planet) == nil
+				  planets << f.planet
+				end
+		  end
+	  end
+	  planets
+  end
+
+  def orbit_salary
+	  s = 0
+	  self.orbits.each do |o|
+		  s += o.number * o.ship.salary
+	  end
+	  s
+  end
+
 
   #def upgrades_b_available_by_technology(building)
 	 # lvl = 0
