@@ -221,7 +221,7 @@ class UsersController < ApplicationController
 	    when "Spravce"
 		    if !User.spravce_arrakis
 		    komu.stat_se("arrakis")
-		    Imperium.zapis_operaci("#{current_user.nick} odvolal hráče #{komu.nick} z pozice Správce.")
+		    Imperium.zapis_operaci("#{current_user.nick} jmenoval hráče #{komu.nick} na pozici Správce.")
 			  end
     end
     current_user.house.zapis_operaci("#{current_user.nick} jmenoval hráč #{komu.nick} na pozici #{params[:commit]}.")
