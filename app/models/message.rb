@@ -130,7 +130,8 @@ class Message < ActiveRecord::Base
       self.vytvor_postu(self.user, recipient.id)
     end
     if komu && !self.nil?
-      komu.split(",").each do |recipient|
+	    komu_arr = komu.split(",").collect(&:strip)
+	    komu_arr.uniq.each do |recipient|
         recipient = recipient.strip
         #user = nil
         user = self.zisti_id_prijemcu(recipient) if recipient != "" && recipient != nil && self.zisti_id_prijemcu(recipient)
