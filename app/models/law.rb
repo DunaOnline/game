@@ -48,8 +48,8 @@ class Law < ActiveRecord::Base
   end
 
   #SYSTEM zakon na odvolanie imp
-  def self.odvolaj_imperatora
-	  Law.new(:submitter => 1, :content => Constant.odvolanie_imperatora_zakon_body, :title => Constant.odvolanie_imperatora_zakon_title, :druh => Law::SYSTEM_LAW[0], :label => self.create_label, :state => Law::STATE[1], :enacted => Date.today).save
+  def self.odvolej_imperatora(submitter)
+	  Law.new(:submitter => submitter.id, :content => Constant.odvolanie_imperatora_zakon_body, :title => Constant.odvolanie_imperatora_zakon_title, :druh => Law::SYSTEM_LAW[0], :label => self.create_label, :state => Law::STATE[1], :enacted => Date.today).save
   end
 
   def self.zakon_navrhnuty(druh)
@@ -107,9 +107,13 @@ class Law < ActiveRecord::Base
 			   if self.vyhodnot_hlasy
 				   self.update_attribute(:state, Law::STATE[6])
 				   User.imperator.update_attribute(:emperor, false)
-				   Imperium.zapis_operaci("Pokus o odvolanie byl uspesny pomerem: #{self.pomer_hlasu}.")
+           User.clenove_dvora.each { |u|
+             u.zapis_operaci('Imperátor a jeho dvůr byl odvolán')
+           }
+           User.clenove_dvora.update_all(:court => false, :vezir => false)
+				   Imperium.zapis_operaci("Pokus o odvolání byl úspěšný poměrem: #{self.pomer_hlasu}.")
 			   else
-				   Imperium.zapis_operaci("Pokus o odvolanie imperatora byl zamitnut pomerem: #{self.pomer_hlasu}.")
+				   Imperium.zapis_operaci("Pokus o odvolání Imperátora byl zamítnut pomárem: #{self.pomer_hlasu}.")
 			   end
 	  end
   end

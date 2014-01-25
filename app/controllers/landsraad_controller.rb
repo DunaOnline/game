@@ -61,10 +61,11 @@ class LandsraadController < ApplicationController
   end
 
   def odvolat_imperatora_land
-	  if Law.odvolaj_imperatora && current_user.admin? || current_user.landsraad?
-	    redirect_to :back, :notice => 'Zakon o odvolani imperatora zarazen k projednavani'
+	  if current_user.admin? || current_user.landsraad?
+      Law.odvolej_imperatora(current_user)
+	    redirect_to :back, :notice => 'Zákon o odvolání Imperátora zařazen k projednávání'
 	  else
-		  redirect_to :back, :Alert => 'Zakon nemozete podat'
+		  redirect_to :back, :Alert => 'Zákon nemůžete podat.'
 		end
   end
 
