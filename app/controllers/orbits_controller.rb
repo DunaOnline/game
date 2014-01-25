@@ -2,7 +2,7 @@ class OrbitsController < ApplicationController
   # GET /orbits
   # GET /orbits.json
   def index
-	  @planet_with_orbits = current_user.planets_with_orbit
+	  @planet_with_orbits = current_user.planets_with_kosmodrom
 	  @orbits = current_user.orbits
 	  @ships = Ship.all
 	  @orbit = Orbit.new
@@ -29,14 +29,14 @@ class OrbitsController < ApplicationController
 	  @planet = Planet.find(params[:id])
     @orbit = Orbit.new
 	  @ships = Ship.all
-	  if @planet.vlastni_pole(current_user)
+	  if @planet.vlastni_pole(current_user).first
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @orbit }
     end
 	  else
-		  redirect_to :back, :alert => 'No no'
+		  redirect_to orbits_path, :alert => 'Nemate pole na teto plante.'
 	  end
   end
 
@@ -67,19 +67,29 @@ class OrbitsController < ApplicationController
 	    par << [([params[title]]), [title]] unless params[title] == ""
     end
     if params[:commit]
-    if @planet.verbovat_ship(par,current_user)
-
+    msg, flag = @planet.verbovat_ship(par,current_user)
+		  if flag
+			  redirect_to orbit_path(@planet), :notice => msg
+		  else
+			  redirect_to :back, :alert => msg
+	    end
+	  elsif params[:zrusit]
+	  msg, flag = @planet.verbovat_ship(par,current_user)
+		  if flag
+			  redirect_to orbit_path(@planet), :notice => msg
+		  else
+			  redirect_to :back, :alert => msg
+		  end
     end
-    end
-    respond_to do |format|
-      if @orbit.save
-        format.html { redirect_to @orbit, notice: 'Orbit was successfully created.' }
-        format.json { render json: @orbit, status: :created, location: @orbit }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @orbit.errors, status: :unprocessable_entity }
-      end
-    end
+    #respond_to do |format|
+    #  if @orbit.save
+    #    format.html { redirect_to @orbit, notice: 'Orbit was successfully created.' }
+    #    format.json { render json: @orbit, status: :created, location: @orbit }
+    #  else
+    #    format.html { render action: "new" }
+    #    format.json { render json: @orbit.errors, status: :unprocessable_entity }
+    #  end
+    #end
   end
 
   # PUT /orbits/1

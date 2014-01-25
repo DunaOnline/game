@@ -8,8 +8,8 @@
   </div>
   <ul>
     <li>
-      <% if @field %>
-          </li><li>  <%= number_field_tag(ship.name, @planet.jednotky(ship) ? @planet.jednotky(unit).number : 0, :min => 1, :title => "Pocet jednotek") %>
+      <% if @planet %>
+          </li><li>  <%= number_field_tag(ship.name, @planet.jednotky(ship,@user) ? @planet.jednotky(ship,@user).number : 0, :min => 1, :title => "Pocet jednotek") %>
 
       <% else %>
           <%= link_to ship.celkovy_pocet(current_user) %>
@@ -23,7 +23,7 @@
 
 
 
-      </li></ul></div>
+      </ul></div>
 <% if (ship_counter + 1) % 5 == 0 %>
     </div>
     <div class="clear">

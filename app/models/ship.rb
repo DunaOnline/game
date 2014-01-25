@@ -5,7 +5,7 @@ class Ship < ActiveRecord::Base
 
   def celkovy_pocet(user)
 	  n = 0
-	 user.orbits.each do |o|
+	 user.orbits.where(:unit_id => self.id).each do |o|
 		 n += o.number
 	 end
 	  n

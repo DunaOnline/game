@@ -9,6 +9,7 @@ class Prepocet
       Prepocet.zmen_vudce(order)
       Prepocet.zpristupni_planety
       Prepocet.produkce_suroviny(order)
+      Prepocet.orbit_salary(order)
       Prepocet.zapis_suroviny
       Arrakis.kontrola_fremenu
       Prepocet.produkce_melanz(order)
@@ -144,6 +145,23 @@ class Prepocet
 	    field.set_popka_v_budovach_helper(0)
     end
     puts "suroviny vyprodukovany "
+  end
+
+  def self.orbit_salary(order)
+	  User.all.each do |u|
+		  u.orbit_salary
+		  Eod.new(
+				  :user_id => u.id,
+				  :date => Date.today,
+				  :time => Time.now,
+				  :order => order,
+				  :solar_income => u.orbit_salary * (-1),
+				  :exp_income => 0,
+				  :material_income => 0,
+				  :population_income => 0,
+				  :parts_income =>  0,
+		  ).save
+		end
   end
 
   def self.zapis_suroviny

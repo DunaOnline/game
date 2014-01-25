@@ -8,8 +8,8 @@
   <% else %>
   Nejste členem Malorodu
   <% end %>
-  <li>Vliv: </li>
-  <li>Lén: </li>
+  <li>Vliv: <%= current_user.vliv %> </li>
+  <li>Lén: <%= current_user.fields.count %> </li>
   
   
 </div>

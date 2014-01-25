@@ -127,16 +127,21 @@ class HousesController < ApplicationController
 	end
 
 	def vyhosteni_hrace
-		if current_user.leader || current_user.mentat
+
+		if current_user.leader || current_user.mentat || current_user.admin
 			user = User.find(params[:user_id])
-			if current_user.house.pocet_vyhosteni != Constant.vyhostenie_hraca_n_max_per_day && !user.leader?
-				if user.vyhostit_hrace(user.nick)
+			if user.house == current_user.house
+			if  current_user.house.pocet_vyhosteni != Constant.vyhostenie_hraca_n_max_per_day && !user.leader?
+				if user.vyhostit_hrace(user)
 					redirect_to :back, :notice => "Hrac byl vyhosten."
 				else
 					redirect_to :back, :notice => "Nepodarilo sa vyhostit hrace."
 				end
 			else
 				redirect_to :back, :notice => "Dosiahli jste limit na vyhosteni hracu na prepocet."
+			end
+			else
+				redirect_to :back, :alert => "Hrac nieje vo vasom rode."
 			end
 		else
 			redirect_to :back, :notice => "Nemate opravneni."
