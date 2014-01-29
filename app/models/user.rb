@@ -128,10 +128,10 @@ class User < ActiveRecord::Base
 
   def hlasuj(koho, typ)
     if vote = Vote.where(:house_id => self.house.id, :elector => self.id, :typ => typ).first
-      self.zapis_operaci("Ve volbe na pozici #{typ} jsi zmenil hlas z #{User.find(vote.elective).nick} na #{User.find(koho).nick}.")
+      self.zapis_operaci("Ve volbě na pozici #{typ} jsi změnil hlas z #{User.find(vote.elective).nick} na #{User.find(koho).nick}.")
       vote.update_attribute(:elective, koho.id)
     else
-      self.zapis_operaci("Ve volbe na pozici #{typ} jsi hlasoval pro #{User.find(koho).nick}.")
+      self.zapis_operaci("Ve volbě na pozici #{typ} jsi hlasoval pro #{User.find(koho).nick}.")
       Vote.new(:house_id => self.house.id, :elector => self.id, :elective => koho.id, :typ => typ).save
     end
   end
@@ -425,9 +425,9 @@ class User < ActiveRecord::Base
     narod = self.house
     field = self.domovske_leno
     field.update_attribute(:planet_id, Planet.domovska_rodu(House.renegat).first.id)
-    self.house.zapis_operaci("Hrac #{self.nick} opustil narod.")
+    self.house.zapis_operaci("Hráč #{self.nick} opustil národ.")
     self.update_attribute(:house_id, House.renegat.id)
-    self.zapis_operaci("Opustili jste narod #{narod.name}")
+    self.zapis_operaci("Opustili jste národ #{narod.name}")
     Influence.new(
         :field_id => field.id,
         :effect_id => Effect.find_by_typ("M").id,
@@ -448,9 +448,9 @@ class User < ActiveRecord::Base
 			field = self.domovske_leno
 			narod.update_attribute(:pocet_vyhosteni, (narod.pocet_vyhosteni + 1))
 			field.update_attribute(:planet_id, Planet.domovska_rodu(House.renegat).first.id)
-			self.house.zapis_operaci("Hrac #{self.nick} byl vyhosten hracem #{kym}.")
+			self.house.zapis_operaci("Hráč #{self.nick} byl vyhoštěn hráčem #{kym}.")
 			self.update_attribute(:house_id, House.renegat.id)
-			self.zapis_operaci("Byl jste vyhosten z naroda #{narod.name} hracem #{kym}.")
+			self.zapis_operaci("Byl jste vyhoštěn z národa #{narod.name} hráčem #{kym}.")
 			Influence.new(
 					:field_id => field.id,
 					:effect_id => Effect.find_by_typ("M").id,
@@ -484,8 +484,8 @@ class User < ActiveRecord::Base
 	    if subhouse.users.count == 0
 		    subhouse.house.update_attributes(:solar => subhouse.house.solar + subhouse.solar, :material => subhouse.house.material + subhouse.material,
 		                                     :melange => subhouse.house.melange + subhouse.melange, :exp => subhouse.house.exp + subhouse.exp, :parts => subhouse.house.parts + subhouse.parts)
-		    self.house.zapis_operaci("Byl rozpusten malorod #{subhouse.name} do narodnych skladu pribudlo #{subhouse.solar} solaru, #{subhouse.material} materialu, #{subhouse.melange} mg,
-	                                #{subhouse.exp} expu a #{subhouse.parts} dilu")
+		    self.house.zapis_operaci("Byl rozpuštěn malorod #{subhouse.name} do národních skladů přibylo #{subhouse.solar} solárů, #{subhouse.material} materiálu, #{subhouse.melange} mg,
+	                                #{subhouse.exp} expu a #{subhouse.parts} dílů.")
 		    subhouse.delete
 	    end
 	  end
@@ -499,13 +499,13 @@ class User < ActiveRecord::Base
       if  infl.started_at + Constant.dni_v_renegatoch.days <= Date.today
 
         self.update_attributes(:house_id => House.renegat.id, :ziadost_house => house_id)
-        self.zapis_operaci("Podali sme zadosti o prijeti do naroda #{house.name}")
-        return "Podali sme zadosti o prijeti do naroda #{house.name}"
+        self.zapis_operaci("Žádosti o přijetí do národa #{house.name} podána.")
+        return "Žádosti o přijetí do národa #{house.name} podána."
       else
-        return "Musite pockat este #{((infl.started_at + Constant.dni_v_renegatoch.days) - Date.today ).to_i } dnu. "
+        return "Musíš počkat ještě #{((infl.started_at + Constant.dni_v_renegatoch.days) - Date.today ).to_i } dní. "
       end
     else
-      return "Nieste renegat"
+      return "Nejsi renegát"
     end
 
   end
@@ -627,7 +627,7 @@ class User < ActiveRecord::Base
         msg += sprava
       end
     else
-	    msg = "Zadane mnozstvo je moc male" if male
+	    msg = "Zadané množství je moc malé." if male
     end
     return msg, flag
   end
@@ -662,7 +662,7 @@ class User < ActiveRecord::Base
         msg += sprava
       end
     else
-	    msg = "Zadane mnozstvo je moc male" if male
+	    msg = "Zadane množství je moc malé." if male
     end
     return msg, flag
   end
@@ -727,7 +727,7 @@ class User < ActiveRecord::Base
   end
 
   def bylo_poslano_trh(market, amount)
-    market.zapis_obchodu(self.id, "Bylo poslano na trh zbozi #{market.show_area}, #{amount} ks, za #{market.price * amount} solaru")
+    market.zapis_obchodu(self.id, "Bylo posláno na trh zboží #{market.show_area}, #{amount} ks, za #{market.price * amount} solárů.")
   end
 
   def posli_suroviny(h, mr, comment)
@@ -752,12 +752,12 @@ class User < ActiveRecord::Base
       flag = true
     else
       flag = false
-      msg += "Chybi vam "
-      msg += "#{sol - self.solar} solaru" unless bsol
-      msg += "#{mat - self.domovske_leno.resource.material} materialu" unless bmat
-      msg += "#{mel - self.melange} materialu" unless bmel
+      msg += "Chybí vám "
+      msg += "#{sol - self.solar} solárů" unless bsol
+      msg += "#{mat - self.domovske_leno.resource.material} materiálu" unless bmat
+      msg += "#{mel - self.melange} materiálu" unless bmel
       msg += "#{exp - self.exp} exp" unless bexp
-      msg += "#{par - self.domovske_leno.resource.parts} dilu" unless bpar
+      msg += "#{par - self.domovske_leno.resource.parts} dílů" unless bpar
     end
     return msg, flag
   end
@@ -781,10 +781,10 @@ class User < ActiveRecord::Base
           flag = true
         end
       else
-        msg = "Nemozete presunut vyrobky"
+        msg = "Nemůžete přesunout výrobky."
       end
     else
-      msg = "Musite zadat pocet vyrobkov na presun"
+      msg = "Musíte zadat počet výrobků na přesun."
     end
     return msg, flag
   end

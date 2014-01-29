@@ -40,13 +40,13 @@ class SubhousesController < ApplicationController
 	        current_user.zapis_operaci("Založili jste malorod #{@subhouse.name}")
 	        redirect_to :back, :notice => 'Malorod úspěšně založený.'
 	      else
-		      redirect_to :back, :alert => "Prosim vyplnte jmeno mezi 3 az 8 pismenami. "
+		      redirect_to :back, :alert => "Prosím vyplňte jméno mezi 3 až 8 pismeny. "
 		    end
 	    else
 	      redirect_to :back, :alert => 'Nemůžete založit malorod dokud nejsou naplněné již existující.'
 	    end
     else
-	    redirect_to :back, :alert => 'Jiz jste clenem malorodu.'
+	    redirect_to :back, :alert => 'Již jste členem malorodu.'
 	  end
   end
 
@@ -77,8 +77,8 @@ class SubhousesController < ApplicationController
 	  content = params[:dashboard]
 
 	  if current_user.subhouse.edit_dashboard(content)
-		  current_user.subhouse.zapis_operaci("Nastenka byla upravena hracem #{current_user.nick}")
-		  redirect_to :back, :notice => "Nastenka upravena"
+		  current_user.subhouse.zapis_operaci("Nástěnka byla upravena hráčem #{current_user.nick}")
+		  redirect_to :back, :notice => "Nástěnka upravena"
 	  end
 
   end
@@ -96,7 +96,7 @@ class SubhousesController < ApplicationController
 	      redirect_to :back, :alert => "Nemůžeš vyhostit hráče #{user.nick}"
 	    end
     else
-	    redirect_to :back, :alert => "Nemuzes vyhodit vice hracu za den."
+	    redirect_to :back, :alert => "Nemůžeš vyhodit více hráču za den."
 	  end
   end
 
@@ -104,9 +104,9 @@ class SubhousesController < ApplicationController
     user = User.find(params[:id])
     if user.prijat_do_mr(current_user.subhouse)
       user.hlasuj(current_user.subhouse.users.general.first, 'general')
-      redirect_to :back, :notice => "Prijali jste hrace"
+      redirect_to :back, :notice => "Přijali jste hráče"
     else
-      redirect_to :back, :alert => "Mate maximalni pocet hracu"
+      redirect_to :back, :alert => "Máte maximální počet hráču"
     end
   end
 
@@ -141,14 +141,14 @@ class SubhousesController < ApplicationController
 	    user = User.find(params[:vicegeneral])
 	    if user
 		    user.menuj_vice
-		    redirect_to :back, :notice => "Hrac #{user.nick} bol zvoleny za Vicegenerala"
+		    redirect_to :back, :notice => "Hráč #{user.nick} byl zvolený za Vícegenerála"
 		  else
-			  redirect_to :back, :alert => "Hlasovani se nezdarilo"
+			  redirect_to :back, :alert => "Hlasováni se nezdařilo"
 	    end
 	  else
 	    user = User.find(params[:id])
 		  user.zober_vice
-	    redirect_to :back, :notice => "Hraci #{user.nick} byl odebran titul Vicegenerala"
+	    redirect_to :back, :notice => "Hráči #{user.nick} byl odebrán titul Vícegenerála"
 		end
   end
 
