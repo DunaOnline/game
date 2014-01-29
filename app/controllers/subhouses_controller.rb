@@ -7,11 +7,11 @@ class SubhousesController < ApplicationController
   end
 
   def show
-    @subhouse = Subhouse.where(params[:id]).first
-    if !@subhouse
-	    redirect_to subhouses_path
+    @subhouse = Subhouse.where(:id => params[:id]).first
+    if @subhouse
+      @operations = @subhouse.operations.malorodni.seradit.limit(5)
     else
-	    @operations = @subhouse.operations.malorodni.seradit.limit(5)
+      redirect_to subhouses_path
     end
   end
 
