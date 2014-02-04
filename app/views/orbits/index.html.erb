@@ -91,8 +91,11 @@
   <% if @planet %>
       <span style="font-weight: bold;">Jste na planete : <%= @planet.name %></span>
 
-           <span class="fright">
+            <span class="fright">
+             <%= label_tag 'planet_orbit', 'Cilova planeta :' %>
+              <%= select_tag 'planet_orbit', options_for_select(@planet_with_orbits.collect { |p| [p.name, p.id] }) %>
 
+              <%= submit_tag "Presun" %>
                </span>
   <% else %>
       <span>Jste na planete : nemate vybratou planete</span>

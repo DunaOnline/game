@@ -264,6 +264,10 @@ module ApplicationHelper
     end
   end
 
+  def order_by_fields
+	  User.order_by_fields
+  end
+
   def sortable(column, title = nil, desc = false)
 	  title ||= column.titleize
 	  if desc

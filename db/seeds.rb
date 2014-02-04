@@ -130,6 +130,7 @@ Global.create(:setting => 'city_capacity', :cislo => 8000)
 Global.create(:setting => 'megalopolis_capacity', :cislo => 9000)
 Global.create(:setting => 'popka_v_budovach_helper', :cislo => 0)
 Global.create(:setting => 'kapacita_kosmodromu', :cislo => 10)
+Global.create(:setting => 'ship_movement_cost', :cislo => 0.3)
 puts 'Global done'
 
 titania = Planet.find_by_name('Titánia')

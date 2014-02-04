@@ -4,4 +4,11 @@ class Orbit < ActiveRecord::Base
 	belongs_to :planet
 	belongs_to :ship
 	belongs_to :user
+
+
+  def check_ships_move_avail(user, pocet)
+	  pocet * Constant.ship_movement_cost <= user.solar
+  end
+
+
 end

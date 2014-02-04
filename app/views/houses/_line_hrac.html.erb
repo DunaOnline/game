@@ -2,10 +2,10 @@
   <td><%= link_to user.nick, user, :class => user.barvicky, :title => user.barvicky  %></td>
   <td><%= link_to user.subhouse.name, user.subhouse if user.subhouse %></td>
   <td>5%*</td>
-  <td>11111*</td>
-  <td>11111*</td>
+  <td><%= user.pozemni_utok %></td>
+  <td><%= user.vesmirny_utok %></td>
   <td><%= user.influence %></td>
-  <td><%= user.fields.count %></td>
+  <td><%= user.field_count %></td>
   <td class="left_align">
     <%= link_to img_posta, new_message_path(:nick => user.nick), :title => "Napsat hráči"%>
 

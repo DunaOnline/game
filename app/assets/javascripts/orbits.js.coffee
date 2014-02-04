@@ -2,6 +2,11 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(document).ready ->
-  $(".select_orbit").attr("href", '?planet='+$("#orbits_select").val())
-  $("#orbits_select").change ->
-    $(".select_orbit").attr("href", '?planet='+$(this).val())
+  if $(".select_orbit").attr("href") == 'orbits'
+    $(".select_orbit").attr("href", 'orbits?planet='+$("#orbits_select").val())
+    $("#orbits_select").change ->
+      $(".select_orbit").attr("href", '?planet='+$(this).val())
+  else
+    $(".select_orbit").attr("href", $("#orbits_select").val())
+    $("#orbits_select").change ->
+      $(".select_orbit").attr("href", $(this).val())

@@ -18,7 +18,7 @@ class FieldsController < ApplicationController
 
   def show
     @field = Field.find_by_id(params[:id])
-    if @field
+    if @field && @field != Arrakis.leno
       @owner = @field.user
       user_lvl = @owner.tech_bonus("L")
       house_lvl = @owner.house.vyskumane_narodni_tech("L")

@@ -23,7 +23,12 @@ class HousesController < ApplicationController
 		@diplomate = @house.diplomate
 		@poslanci = @house.poslanci
 		@generalove = @house.generalove
-		@hraci = @house.users.order(:nick)
+		if params[:sort] == nil
+			@hraci = @house.users.order("created_at DESC")
+		else
+			@hraci = @house.users.order(params[:sort] + ' ' + params[:direction])
+		end
+		#@hraci = @house.users.order(:nick)
 		@rody = House.playable.order(:name)
 		@operations = @house.operations.narodni.seradit.limit(5)
 	end

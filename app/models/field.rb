@@ -16,7 +16,7 @@
 class Field < ActiveRecord::Base
 	attr_accessible :user_id, :planet_id, :name, :pos_x, :pos_y
 
-	belongs_to :user
+	belongs_to :user, :counter_cache => true
 	has_one :house, :through => :user
 	belongs_to :planet
 	has_one :resource
@@ -364,12 +364,9 @@ class Field < ActiveRecord::Base
 							source_squad.update_attribute(:number, source_squad.number - pocet)
 							target_squad.update_attribute(:number, target_squad.number + pocet)
 							self.zapis_udalosti(self.user, "Bylo presunuto #{pocet} ks #{jednotka.name} z #{self.name} na #{target.name} leno, Za presun zaplaceno #{Constant.presun_vyrobku * pocet} solaru.")
-
 						end
-
 					end
 					msg = "Bylo presunuto #{total_unit} ks z #{self.name} na #{target.name} leno, Za presun zaplaceno #{Constant.presun_vyrobku * total_unit} solaru."
-
 				else
 					msg = flag
 				end
@@ -379,7 +376,6 @@ class Field < ActiveRecord::Base
 		else
 			msg = "Nemuzes presouvat medzi stejnym lenem."
 		end
-
 		return success, msg
 	end
 
@@ -534,7 +530,6 @@ class Field < ActiveRecord::Base
 
 	def predaj_jednotiek(units)
 		field = self
-
 		total_material = 0
 		total_melanz = 0
 		total_price = 0
@@ -542,9 +537,7 @@ class Field < ActiveRecord::Base
 		total_population = 0
 		number = 0
 		oznamenie = ""
-
 		nemozno_prodat = []
-
 		units.each do |unit|
 			pocet = unit[0][0].to_i.abs
 			total_pocet += pocet
@@ -556,7 +549,6 @@ class Field < ActiveRecord::Base
 					total_price += (jednotka.solar * pocet) / 2
 					total_population += (jednotka.population * pocet) / 2
 					total_pocet += pocet
-
 					squad = Squad.where(:field_id => field.id, :unit_id => jednotka.id).first
 					squad.update_attributes(:number => squad.number - pocet)
 					field.resource.update_attributes(:material => field.resource.material + ((jednotka.material * pocet) / 2).round(2), :population => field.resource.population + ((jednotka.population * pocet) / 2).to_i)
@@ -574,9 +566,7 @@ class Field < ActiveRecord::Base
 		else
 			oznamenie = "Bylo prodano #{total_pocet} vyrobku, prodejem sme ziskali #{total_material} kg materialu, #{total_melanz} mg melanze, #{total_price} solaru a #{total_population} populacie."
 		end
-
 		return oznamenie, nemozno_prodat
-
 	end
 
 	def verbovanie_jednotiek(units)

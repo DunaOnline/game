@@ -12,8 +12,10 @@
 </div>
 <div class="verb_content_colum">
 
+  <article title="Vlastnime <%= @field.jednotky(unit) ? @field.jednotky(unit).number : 0 %> <%= unit.description %>">
   <%= unit.description %>
- <%= @field.jednotky(unit) ? @field.jednotky(unit).number : 0 %>
+ (<%= @field.jednotky(unit) ? @field.jednotky(unit).number : 0 %>)
+  </article>
   <ul>
     <li><h3>Verbování jednotek:</h3></li>
 
@@ -24,7 +26,7 @@
       <h3>Výbava:</h3></li>
     <li>Solary : <%= unit.solar %> S</li>
     <li>Material : <%= unit.material %> kg</li>
-    <li>Material : <%= unit.population %> pop</li>
+    <li>Populace : <%= unit.population %> pop</li>
     <% if unit.melange %>
     <li>Melanz : <%= unit.melange%></li>
     <% end %>

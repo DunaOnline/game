@@ -25,18 +25,19 @@ class OrbitsController < ApplicationController
   # GET /orbits/1
   # GET /orbits/1.json
   def show
+	  @planet_with_orbits = current_user.planets_with_kosmodrom
 	  @user = current_user
 	  @planet = Planet.find(params[:id])
     @orbit = Orbit.new
 	  @ships = Ship.all
-	  if @planet.vlastni_pole(current_user).first
+	  if @planet.vlastni_pole(current_user).first && @planet.kapacita_kosmodromu(@user) != 0
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @orbit }
     end
 	  else
-		  redirect_to orbits_path, :alert => 'Nemate pole na teto plante.'
+		  redirect_to orbits_path, :alert => 'Nemate kosmodrom na teto plante.'
 	  end
   end
 
@@ -74,7 +75,7 @@ class OrbitsController < ApplicationController
 			  redirect_to :back, :alert => msg
 	    end
 	  elsif params[:zrusit]
-	  msg, flag = @planet.verbovat_ship(par,current_user)
+	  msg, flag = @planet.sell_ship(par,current_user)
 		  if flag
 			  redirect_to orbit_path(@planet), :notice => msg
 		  else
@@ -90,6 +91,38 @@ class OrbitsController < ApplicationController
     #    format.json { render json: @orbit.errors, status: :unprocessable_entity }
     #  end
     #end
+  end
+
+  def move_orbits
+	  par = []
+	  ships = Ship.all.map { |x| x.name }
+	  source_planet = Planet.find(params[:planet])
+	  target_planet = Planet.find(params[:planet_orbit])
+	  if target_planet.kapacita_kosmodromu(current_user)
+		  if source_planet.vlastni_pole(current_user) && target_planet.vlastni_pole(current_user)
+			  ships.each do |title|
+				  par << [([params[title]]), [title]] unless params[title] == nil || params[title] == "0" || params[title] == ""
+			  end
+			  if par.any?
+				  done, msg = source_planet.move_units(target_field,par)
+				  respond_to do |format|
+					  if done
+						  format.html { redirect_to squads_path(:leno => source_field.id), notice: msg }
+						  format.json { render json: msg, status: :created, location: squad_path(source_field.id) }
+					  else
+						  format.html { redirect_to :back, alert: msg }
+						  #format.json { render json: @unit.errors, status: :unprocessable_entity }
+					  end
+				  end
+			  else
+				  redirect_to :back, :alert => "Nezadali ste jednotky na presun."
+			  end
+		  else
+			  redirect_to :back, :alert => 'Nemate orbitu na planete vam nepatri.'
+		  end
+	  else
+		  redirect_to :back, :alert => 'Na tom lenu nemate kasaren.'
+	  end
   end
 
   # PUT /orbits/1

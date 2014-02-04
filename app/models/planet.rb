@@ -384,23 +384,26 @@ class Planet < ActiveRecord::Base
 			  pop_helper = total_population
 			  fields = planet.fields.where(:user_id => user)
 			  begin
-			  if mat_helper <= fields[a].resource.material
-				  fields[a].resource.update_attributes(:material => fields[a].resource.material - mat_helper)
-				  mat_helper = 0
-			  else
-				  fields[a].resource.update_attributes(:material => 0)
-				  mat_helper -= fields[a].resource.material
-			  end
-			  a += 1
+				  a = 0
+				  if mat_helper <= fields[a].resource.material
+					  fields[a].resource.update_attributes(:material => fields[a].resource.material - mat_helper)
+					  mat_helper = 0
+				  else
+					  mat_helper -= fields[a].resource.material
+					  fields[a].resource.update_attributes(:material => 0)
+				  end
+				  a += 1
 			  end while mat_helper != 0
 
 			  begin
+				  b = 0
 				  if pop_helper <= fields[b].resource.population
 					  fields[b].resource.update_attributes(:population => fields[b].resource.population - pop_helper)
 					  pop_helper = 0
 				  else
-					  fields[a].resource.update_attributes(:population => 0)
 					  pop_helper -= fields[b].resource.population
+					  fields[b].resource.update_attributes(:population => 0)
+
 				  end
 				  b += 1
 			  end while pop_helper != 0
@@ -418,6 +421,99 @@ class Planet < ActiveRecord::Base
 		  oznamenie = "Nemate dostatek mista v kosmodromu."
 	  end
 	  return oznamenie, naverbovano
+  end
+
+  def sell_ship(ships,user)
+	  planet = self
+	  total_material = 0
+	  total_price = 0
+	  total_pocet = 0
+	  total_population = 0
+	  number = 0
+	  oznamenie = ""
+	  nemozno_prodat = []
+	  ships.each do |ship|
+		  pocet = ship[0][0].to_i.abs
+		  total_pocet += pocet
+		  lod = Ship.where(:name => ship[1][0]).first
+		  if lod
+			  if 0 < lod.vlastnim(user,planet) && lod.vlastnim(user,planet) >= pocet
+				  total_material += (lod.material * pocet) / 2
+				  total_price += (lod.solar * pocet) / 2
+				  total_population += (lod.population * pocet) / 2
+				  total_pocet += pocet
+				  orbit = Orbit.where(:planet_id => planet.id, :ship_id => lod.id).first
+				  orbit.update_attributes(:number => orbit.number - pocet)
+				  fields = planet.fields.where(:user_id => user.id)
+				  fields.first.resource.update_attributes(:material => fields.first.resource.material + ((lod.material * pocet) / 2).round(2), :population => fields.first.resource.population + ((lod.population * pocet) / 2).to_i)
+				  user.update_attributes(:solar => user.solar + ((lod.solar * pocet) / 2).round(2))
+				  fields.first.zapis_udalosti(user, "Bylo prodano #{pocet} ks #{lod.name} za #{(lod.material * pocet) / 2} kg, #{(lod.solar * pocet) / 2} solaru a #{(lod.population * pocet) / 2} populacie.")
+				  nemozno_prodat << orbit
+			  else
+				  nemozno_prodat = nil
+			  end
+		  end
+	  end
+	  if !nemozno_prodat
+		  oznamenie = "Tolik vyrobku nemozno prodat."
+	  else
+		  oznamenie = "Bylo prodano #{total_pocet} vyrobku, prodejem sme ziskali #{total_material} kg materialu, #{total_price} solaru a #{total_population} populacie."
+	  end
+	  return oznamenie, nemozno_prodat
+  end
+
+
+  def move_ships(target, ships, user)
+	  success = false
+	  kapacita = self.kapacita_kosmodromu(user)
+	  flag = false
+	  total_unit = 0
+	  units_helper = []
+	  ships.each do |par|
+		  pocet = par[0][0].to_i.abs
+		  ship = Ship.where(:name => par[1][0]).first
+		  total_ships += pocet
+		  source_orbit = self.orbits.where(:ship_id => ship.id, :user_id => user.id).first
+		  flag = source_orbit.check_ships_move_avail(user, pocet)
+		  if flag != true
+			  break
+		  end
+		  ships_helper << [pocet, ship]
+	  end
+	  if self != target
+		  if total_unit <= kapacita
+			  if flag == true
+				  units_helper.each do |i|
+					  pocet = i[0]
+					  jednotka = i[1]
+					  source_squad = self.squads.where(:unit_id => jednotka.id).first
+					  target_squad = target.squads.where(:unit_id => jednotka.id).first
+
+					  if source_squad
+						  unless target_squad
+							  target_squad = Squad.new(
+									  :unit_id => jednotka.id,
+									  :field_id => target.id,
+									  :number => 0
+							  )
+						  end
+						  success = true
+						  source_squad.update_attribute(:number, source_squad.number - pocet)
+						  target_squad.update_attribute(:number, target_squad.number + pocet)
+						  self.zapis_udalosti(self.user, "Bylo presunuto #{pocet} ks #{jednotka.name} z #{self.name} na #{target.name} leno, Za presun zaplaceno #{Constant.presun_vyrobku * pocet} solaru.")
+					  end
+				  end
+				  msg = "Bylo presunuto #{total_unit} ks z #{self.name} na #{target.name} leno, Za presun zaplaceno #{Constant.presun_vyrobku * total_unit} solaru."
+			  else
+				  msg = flag
+			  end
+		  else
+			  msg = "Nemate dostatek mista na prichozim lenu."
+		  end
+	  else
+		  msg = "Nemuzes presouvat medzi stejnou planetou."
+	  end
+	  return success, msg
   end
 
   scope :domovska, lambda { |user| where(:house_id => user.house.id, :planet_type_id => PlanetType.find_by_name('Domovská')) }

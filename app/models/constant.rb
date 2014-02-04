@@ -312,4 +312,7 @@ class Constant
 	  Global.vrat('kapacita_kosmodromu',4)
   end
 
+  def self.ship_movement_cost
+	  Global.vrat('ship_movement_cost',4)
+  end
 end
