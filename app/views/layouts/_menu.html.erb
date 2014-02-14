@@ -24,8 +24,6 @@
               <% end %>
               <!-- <li><a href="#"> Multifórum *</a>  -->
               <li><%= link_to "Systémový Syselaad", syselaad_path(:kind => 'S') %></li>
-              <br/>
-              <li><%= link_to 'Změna hesla', zmena_hesla_f_path %></li>
             </ul>
           </li>
         </ul>
@@ -50,7 +48,7 @@
               
               <% if can? :sprava_rod, House %>
                   <li><%= link_to 'Správa Velkorodu', sprava_rod_path(:id => current_user.house) %>
-                  <li><%= link_to 'Velkorod', current_user.house %></li>
+                  <li><%= link_to 'Národní databáze hráčů', current_user.house %></li>
               <% else %>
                   <li><%= link_to 'Velkorod', current_user.house %></li>
               <% end %>
@@ -60,6 +58,9 @@
               <% else %>
                   <li><%= link_to 'Impérium', imperium_path %></li>
               <% end %>
+              <li><%= link_to "Produkce na Arrakis", zobraz_arrakis_path %>
+                  
+              <br>
               
               <% if current_user.landsraad? || current_user.admin? %>
                   <li><%= link_to 'Zasedání Landsraadu', landsraad_jednani_path %></li>
@@ -72,10 +73,10 @@
               <% end %>
               
               
-              <br>
+              
               <li><%= link_to 'Archiv Landsraadu', laws_path %></li>
               <% if current_user.subhouse %>
-                <li><%= link_to 'Seznam Malorodů', subhouses_path %></li>
+                
               <% else %>
                 <li><%= link_to 'Vstoupit do Malorodu', subhouses_path %></li>
               <% end %>
@@ -143,8 +144,6 @@
               <li><%= link_to "Seznam vašich lén ", list_fields_path %>
               <li><%= link_to "Zástavba lén", current_user.domovske_leno %>
               <li><%= link_to "Léna k osídlení", planets_path %>
-                <br>
-              <li><%= link_to "Arrakis", zobraz_arrakis_path %>
               <% if can? :sprava_rod, House %>
                   <li><%= link_to "Kolonizovat planetu", kolonizuj_path %></li>
               <% end %>
@@ -154,7 +153,9 @@
               <li><%= link_to "Imperiální databáze národů", houses_path %></li>
               <% if current_user.admin? || current_user.leader? || current_user.mentat? %>
               <br>
-              <li><%= link_to "Udalosti na pl. hracu", udalosti_naroda_path %></li>
+              <li><%= link_to 'Národní databáze Malorodů', subhouses_path %></li>
+              <li><%= link_to 'Národní databáze hráčů', current_user.house %></li>
+              <li><%= link_to 'Národní databáze událostí', udalosti_naroda_path %></li>
               <% end %>
             </ul>
           </li>
