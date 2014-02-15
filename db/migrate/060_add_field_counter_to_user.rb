@@ -9,6 +9,6 @@ class AddFieldCounterToUser < ActiveRecord::Migration
 	end
 
 	def self.down
-		remove_column :fields, :field_count
+		remove_column :users, :field_count
 	end
 end
