@@ -2,6 +2,7 @@ class OrbitsController < ApplicationController
   # GET /orbits
   # GET /orbits.json
   def index
+	  @title = 'Jednotky na orbite.'
 	  @planet_with_orbits = current_user.planets_with_kosmodrom
 	  @orbits = current_user.orbits
 	  @ships = Ship.all
@@ -26,6 +27,7 @@ class OrbitsController < ApplicationController
   # GET /orbits/1
   # GET /orbits/1.json
   def show
+	  @title = 'Verbovani vesmirnych jednotek.'
 	  @planet_with_orbits = current_user.planets_with_kosmodrom
 	  @user = current_user
 	  @planet = Planet.find(params[:id])

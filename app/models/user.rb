@@ -919,7 +919,7 @@ class User < ActiveRecord::Base
   end
 
   def pristup_do_ls? # Landsraadni syselaad
-    self.emperor? || self.regent? || self.admin? || self.vezir? || self.leader? || self.diplomat?
+    self.emperor? || self.regent? || self.admin? || self.vezir? || self.leader? || self.diplomat? || self.landsraad?
   end
 
   private
