@@ -2,6 +2,7 @@ class OrbitsController < ApplicationController
   # GET /orbits
   # GET /orbits.json
   def index
+	  @title = 'Jednotky na orbite.'
 	  @planet_with_orbits = current_user.planets_with_kosmodrom
 	  @orbits = current_user.orbits
 	  @ships = Ship.all
@@ -9,7 +10,8 @@ class OrbitsController < ApplicationController
 	  @user = current_user
 
 	  if params[:planet]
-		  @planet = Planet.find(params[:planet])
+		  planet = Planet.where(params[:planet]).first
+		  @planet = planet if planet && planet.vlastni_pole(current_user)
 	  end
 
     respond_to do |format|
@@ -25,6 +27,7 @@ class OrbitsController < ApplicationController
   # GET /orbits/1
   # GET /orbits/1.json
   def show
+	  @title = 'Verbovani vesmirnych jednotek.'
 	  @planet_with_orbits = current_user.planets_with_kosmodrom
 	  @user = current_user
 	  @planet = Planet.find(params[:id])
@@ -77,7 +80,7 @@ class OrbitsController < ApplicationController
 	  elsif params[:zrusit]
 	  msg, flag = @planet.sell_ship(par,current_user)
 		  if flag
-			  redirect_to orbit_path(@planet), :notice => msg
+			  redirect_to orbit_path(@planet), :alert => msg
 		  else
 			  redirect_to :back, :alert => msg
 		  end

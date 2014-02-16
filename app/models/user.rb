@@ -882,7 +882,7 @@ class User < ActiveRecord::Base
 	  planets = []
 	  kosmodrom = Building.where(:kind => 'K').first
 	  self.fields.each do |f|
-		  a = f.estates.where(:building_id => kosmodrom.id).first
+		  a = f.estates.where(:building_id => kosmodrom.id).first if kosmodrom
 		  if a
 			  if planets.assoc(f.planet) == nil
 				  planets << f.planet
@@ -919,7 +919,7 @@ class User < ActiveRecord::Base
   end
 
   def pristup_do_ls? # Landsraadni syselaad
-    self.emperor? || self.regent? || self.admin? || self.vezir? || self.leader? || self.diplomat?
+    self.emperor? || self.regent? || self.admin? || self.vezir? || self.leader? || self.diplomat? || self.landsraad?
   end
 
   private
