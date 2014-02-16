@@ -1,48 +1,67 @@
-<div class="half">
 
+<div class="kartajednotky" style="background-image: url(<%= asset_path 'jednotky/jedp2.png' %>); ">
+        
+        <div class="kartaequip">
+          <span class="attack_button" title="Útočná síla" style="background-image: url(<%= asset_path 'css/utok-pozemni.png' %>) !important;"><%= unit.attack %></span>
+          <br><span class="attack_button" title="Obraná síla" style="background-image: url(<%= asset_path 'css/obrana-pozemni.png' %>) !important;"><%= unit.defence %></span>
+          <br><span class="attack_button" title="Obraná síla" style="background-image: url(<%= asset_path 'css/jednotek.png' %>) !important;">
+                  <article title="Vlastnime <%= @field.jednotky(unit) ? @field.jednotky(unit).number : 0 %>">
+                   <%= @field.jednotky(unit) ? @field.jednotky(unit).number : 0 %>
+                  </article>
+              </span>
+        </div>
+        
+      <span style="height: 75px !important">
 
-<div style="background-image: url(<%= asset_path 'jednotky/jedp2.png' %>)" class="verb_column img wrapper">
-  <span class="heading"><h3><%= link_to unit.name, unit_path(unit.id) %></h3></span>
+        <h2 style="margin-top:-5px;"><%= link_to unit.name, unit_path(unit.id) %></h2>
+        <%= unit.description %>
 
-  <div class="bottom full_width">
-    <span class="attack_button" title="Útok"><h3><%= unit.attack %></h3></span>
-    <span class="defence_button" title="Obrana"><h3><%= unit.defence %></h3></span>
-</div>
-
-</div>
-<div class="verb_content_colum">
-
-  <article title="Vlastnime <%= @field.jednotky(unit) ? @field.jednotky(unit).number : 0 %> <%= unit.description %>">
-  <%= unit.description %>
- (<%= @field.jednotky(unit) ? @field.jednotky(unit).number : 0 %>)
-  </article>
-  <ul>
-    <li><h3>Verbování jednotek:</h3></li>
-
-    <li>	<%= number_field_tag(unit.name, nil, :min => 1, :title => "Zadejte množství") %>
-      <%= hidden_field_tag 'leno', value = @field.id %>
-      <%= submit_tag 'Vybavit', :class => 'ok' %>
-      <%= submit_tag 'Zrušit zadané množství', :name => "zrusit", :class => "ok" %>
-      <h3>Výbava:</h3></li>
-    <li>Solary : <%= unit.solar %> S</li>
-    <li>Material : <%= unit.material %> kg</li>
-    <li>Populace : <%= unit.population %> pop</li>
-    <% if unit.melange %>
-    <li>Melanz : <%= unit.melange%></li>
-    <% end %>
-
-    <li>
-      <% unit.equipment.times do %>
-          <span class="img_no_equip" title="Mozny equipment">Mozny equip</span>
+      </span>
+    
+    
+    
+    <!---- Toto část se má ukázat po najetí na kartu jednotky, jinak je skrytá--->
+    
+      <span>
+          <div class="kartaequip" style="width:60px !important; margin: -5px 0 0 0;">
+            <% unit.equipment.times do %>
+                <li><span class="attack_button" title="Mozny equipment" style="width:60px !important; margin:1px -5px 0 0;">Neobsazeno</span></li>
+            <% end %>
+          </div>
+          
+          <h3>Sprava jednotky</h3>
+      
+          <li><%= img_solary %><%= unit.solar %> S</li>
+          <li><%= img_material %><%= unit.material %> kg</li>
+          <li><%= img_populace %><%= unit.population %> pop</li>
+          <li><% if unit.melange %>
+          <li><%= img_melanz %><%= unit.melange%></li>
           <% end %>
-    </li>
-  </ul>
+          
+          <br>  <%= number_field_tag(unit.name, nil, :min => 1, :title => "Zadejte množství") %>
+                <%= hidden_field_tag 'leno', value = @field.id %>
+                <%= submit_tag '+', :class => 'ok' %> <%= submit_tag '−', :name => "zrusit", :class => "ok" %>
+      
 
-</div>
+      
+      </span>
+      
+      <!---- Konec objevování --->
+    
+        <div class="bottom_full_width">
+            
+        </div>
+    
 </div>
 
-<% if (unit_counter + 1).even? %>
+<!----  Nevím jak to presne funguje, ale dela to bordylek :D 
+
+<% if (unit_counter + 0).even? %>
+
     <div class="clear line_bot">
 
     </div>
+    
 <% end %>
+
+---->

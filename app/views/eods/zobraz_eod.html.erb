@@ -103,10 +103,9 @@
   <tr>
 
     <td class="tdpl" rowspan="2" style="width:120px; background-image: url(<%= asset_path 'planety/landmentat.png' %>) !important">
-      <th> Imperátor</th>
-      <th> Držitel Arrakis</th>
-      <th> Vůdce národa</th>
-      <th class="r"> Mentaté národa</th>
+      <th> Imperátor </th>
+      <th> Držitel Arrakis </th>
+      <th> Vůdce národa </th>
 
   </tr>
   <tr>
@@ -129,14 +128,6 @@
       <li><img src="<%= asset_path 'imghra/leader.png' %>" alt="" class="tdimg">
       <li><%= @leader.house.leader if @leader %>
       <li><%= link_to @leader.nick, @leader if @leader %> (<%= link_to @leader.house.name, @leader.house if @leader %>)
-    </td>
-
-    <td>
-      <% if @mentats %>
-          <% for mentat in @mentats do %>
-              <li><%= link_to mentat.nick, mentat %></li>
-          <% end %>
-      <% end %>
     </td>
 
   </tr>
