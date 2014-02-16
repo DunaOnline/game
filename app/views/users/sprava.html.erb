@@ -1,3 +1,5 @@
+<%# encoding: utf-8 %>
+<%= title 'Sprava hrace' %>
 <table class="tab0">
   <tr>
     <td class="drob">
@@ -207,7 +209,7 @@
           <% @subhouses.each do |s| %>
             <tr>
             <td>
-              <span><%= s.name %> </span>
+              <span><%= link_to s.name, subhouse_path(s.id) %> </span>
             </td>
             <td>
               <span><%= s.pocet_userov %> / <%= Constant.max_u_mr.to_i %></span>
