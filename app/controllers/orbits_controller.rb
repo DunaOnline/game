@@ -10,7 +10,7 @@ class OrbitsController < ApplicationController
 	  @user = current_user
 
 	  if params[:planet]
-		  planet = Planet.where(params[:planet]).first
+		  planet = Planet.where(:id => params[:planet]).first
 		  @planet = planet if planet && planet.vlastni_pole(current_user)
 	  end
 
@@ -18,10 +18,6 @@ class OrbitsController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @orbits }
     end
-  end
-
-  def move_orbits
-
   end
 
   # GET /orbits/1
@@ -107,24 +103,24 @@ class OrbitsController < ApplicationController
 				  par << [([params[title]]), [title]] unless params[title] == nil || params[title] == "0" || params[title] == ""
 			  end
 			  if par.any?
-				  done, msg = source_planet.move_units(target_field,par)
+				  done, msg = source_planet.move_ships(target_planet,par,current_user)
 				  respond_to do |format|
 					  if done
-						  format.html { redirect_to squads_path(:leno => source_field.id), notice: msg }
-						  format.json { render json: msg, status: :created, location: squad_path(source_field.id) }
+						  format.html { redirect_to orbits_path(:planet => source_planet.id), notice: msg }
+						  format.json { render json: msg, status: :created, location: orbits_path(source_planet.id) }
 					  else
 						  format.html { redirect_to :back, alert: msg }
 						  #format.json { render json: @unit.errors, status: :unprocessable_entity }
 					  end
 				  end
 			  else
-				  redirect_to :back, :alert => "Nezadali ste jednotky na presun."
+				  redirect_to :back, :alert => 'Nezadali ste jednotky na presun.'
 			  end
 		  else
-			  redirect_to :back, :alert => 'Nemate orbitu na planete vam nepatri.'
+			  redirect_to :back, :alert => 'Nemate orbitu na planete.'
 		  end
 	  else
-		  redirect_to :back, :alert => 'Na tom lenu nemate kasaren.'
+		  redirect_to :back, :alert => 'Na teto planete nemate kosmodrom.'
 	  end
   end
 

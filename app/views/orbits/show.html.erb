@@ -6,7 +6,13 @@
     <%= link_to 'Armáda', units_path %> »
     <%= link_to 'Verbování jednotek', squad_path %>
   </td>
+    <td class="tdd">
+      <ul class="menud">
+        <li><%= link_to 'Pozemne jednotky »', squads_path , :title => 'Zobrazit jednotky na lenach.' %>
 
+        </li>
+      </ul>
+    </td>
   </tr>
 </table>
 
@@ -58,7 +64,7 @@
   <tr>
     <th class="thf" colspan="4">
       <%= select_tag 'orbits_select', options_for_select(@planet_with_orbits.collect { |p| [p.name, p.id] }) %>
-      <%= link_to "Prejdi na leno", '', :class => 'select_orbit' %>
+      <%= link_to "Prejdi na orbitu", '', :class => 'select_orbit' %>
 
     </th>
 

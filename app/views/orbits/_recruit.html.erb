@@ -1,44 +1,64 @@
-<div class="half">
 
+<div class="kartajednotky" style="background-image: url(<%= asset_path 'jednotky/jedp2.png' %>); ">
 
-  <div style="background-image: url(<%= asset_path 'jednotky/jedp2.png' %>)" class="verb_column img wrapper">
-    <span class="heading"><h3><%= link_to ship.name, ship_path(ship.id) %></h3></span>
-
-    <div class="bottom full_width">
-      <span class="space_attack_button" title="Útok"><h3><%= ship.attack %></h3></span>
-      <span class="space_defence_button" title="Obrana"><h3><%= ship.defence %></h3></span>
-    </div>
-
+  <div class="kartaequip">
+    <span class="attack_button" title="Útočná síla" style="background-image: url(<%= asset_path 'css/utok-vesmirny' %>) !important;"><%= ship.attack %></span>
+    <br><span class="attack_button" title="Obraná síla" style="background-image: url(<%= asset_path 'css/obrana-vesmirny.png' %>) !important;"><%= ship.defence %></span>
+    <br><span class="attack_button" title="Obraná síla" style="background-image: url(<%= asset_path 'css/jednotek.png' %>) !important;">
+                  <article title="Vlastnime <%= @planet.jednotky(ship,@user) ? @planet.jednotky(ship,@user).number : 0 %>">
+                    <%= @planet.jednotky(ship,@user) ? @planet.jednotky(ship,@user).number : 0 %>
+                  </article>
+              </span>
   </div>
-  <div class="verb_content_colum">
+        
+      <span style="height: 75px !important">
 
-    <%= ship.description %>
-    <%= @planet.jednotky(ship,@user) ? @planet.jednotky(ship,@user).number : 0 %>
-    <ul>
-      <li><h3>Verbování jednotek:</h3></li>
+        <h2 style="margin-top:-5px;"><%= link_to ship.name, ship_path(ship.id) %></h2>
+        <%= ship.description %>
 
-      <li>	<%= number_field_tag(ship.name, nil, :min => 1, :title => "Zadejte množství") %>
+      </span>
+
+
+
+  <!---- Toto část se má ukázat po najetí na kartu jednotky, jinak je skrytá--->
+    
+      <span>
+          <div class="kartaequip" style="width:60px !important; margin: -5px 0 0 0;">
+            <% ship.equipment.times do %>
+                <li><span class="attack_button" title="Mozny equipment" style="width:60px !important; margin:1px -5px 0 0;">Neobsazeno</span></li>
+            <% end %>
+          </div>
+          
+          <h3>Sprava jednotky</h3>
+      
+          <li><%= img_solary %><%= ship.solar %> S</li>
+          <li><%= img_material %><%= ship.material %> kg</li>
+          <li><%= img_populace %><%= ship.population %> pop</li>
+
+
+        <br>  <%= number_field_tag(ship.name, nil, :min => 1, :title => "Zadejte množství") %>
         <%= hidden_field_tag 'planet', value = @planet.id %>
-        <%= submit_tag 'Vybavit', :class => 'ok' %>
-        <%= submit_tag 'Zrušit zadané množství', :name => "zrusit", :class => "ok" %>
-        <h3>Výbava:</h3></li>
-      <li>Solary : <%= ship.solar %> S</li>
-      <li>Material : <%= ship.material %> kg</li>
-      <li>Populacia : <%= ship.population %> pop</li>
+        <%= submit_tag '+', :class => 'ok' %> <%= submit_tag '−', :name => "zrusit", :class => "ok" %>
+      
 
+      
+      </span>
 
-      <li>
+  <!---- Konec objevování --->
 
-            <span class="img_no_equip" title="Mozny equipment">Mozny equip <%= ship.equipment %></span>
-
-      </li>
-    </ul>
+  <div class="bottom_full_width">
 
   </div>
+
 </div>
 
-<% if (ship_counter + 1).even? %>
+
+
+<% if (ship_counter + 1) % 3 == 0 %>
+
     <div class="clear line_bot">
 
     </div>
+
 <% end %>
+

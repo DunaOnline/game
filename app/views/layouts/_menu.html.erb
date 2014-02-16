@@ -118,14 +118,23 @@
             <ul>
               <% if current_user.has_kasaren %>
                   <li><%= link_to 'Verbování jednotek', squad_path(current_user.has_kasaren) %></li>
-                  <% else %>
+              <% else %>
                   <li>
                     <%= link_to 'Nemate Kasarnu', squad_path(current_user.squads.first.field_id) if current_user.squads.first %>
                     <%= link_to 'Nemate Kasarnu', '#' if !current_user.squads.first %>
                   </li>
-                  <% end %>
+              <% end %>
 
+              <% if current_user.planets_with_kosmodrom %>
+                  <li><%= link_to 'Verbování vesmirnych jednotek', orbit_path(current_user.planets_with_kosmodrom.first.id) %></li>
+              <% else %>
+                  <li>
+                    <%= link_to 'Nemate Kosmodrom', orbit_path(current_user.planets_with_kosmodrom.first.id) if current_user.planets_with_kosmodrom.first %>
+                    <%= link_to 'Nemate Kosmodrom', '#' if !current_user.planets_with_kosmodrom.first %>
+                  </li>
+              <% end %>
               <li><%= link_to 'Rozmiestnenie armady', squads_path %></li>
+              <li><%= link_to 'Rozmiestnenie Vesmirnej armady', orbits_path %></li>
                 <!--<li><a href="#"> Správa šablon jednotek *</a> -->
               <li><a href="#"> Vyslat útok *</a>
                 <br>

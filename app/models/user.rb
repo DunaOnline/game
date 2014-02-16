@@ -833,7 +833,7 @@ class User < ActiveRecord::Base
 		end
   end
 
-  def pozemni_utok
+   def pozemni_utok
 	  a= 0
 	  self.fields.each do |f|
 		  f.squads.each do |s|

@@ -7,7 +7,7 @@ class Orbit < ActiveRecord::Base
 
 
   def check_ships_move_avail(user, pocet)
-	  pocet * Constant.ship_movement_cost <= user.solar
+	  pocet * Constant.ship_movement_cost <= user.solar && self.number >= pocet
   end
 
 

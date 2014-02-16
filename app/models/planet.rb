@@ -467,8 +467,8 @@ class Planet < ActiveRecord::Base
 	  success = false
 	  kapacita = self.kapacita_kosmodromu(user)
 	  flag = false
-	  total_unit = 0
-	  units_helper = []
+	  total_ships = 0
+	  ships_helper = []
 	  ships.each do |par|
 		  pocet = par[0][0].to_i.abs
 		  ship = Ship.where(:name => par[1][0]).first
@@ -481,34 +481,33 @@ class Planet < ActiveRecord::Base
 		  ships_helper << [pocet, ship]
 	  end
 	  if self != target
-		  if total_unit <= kapacita
+		  if total_ships + target.vyuzitie_kosmodromu(user) <= kapacita
 			  if flag == true
-				  units_helper.each do |i|
+				  ships_helper.each do |i|
 					  pocet = i[0]
 					  jednotka = i[1]
-					  source_squad = self.squads.where(:unit_id => jednotka.id).first
-					  target_squad = target.squads.where(:unit_id => jednotka.id).first
-
-					  if source_squad
-						  unless target_squad
-							  target_squad = Squad.new(
-									  :unit_id => jednotka.id,
-									  :field_id => target.id,
-									  :number => 0
-							  )
+					  source_orbit = self.orbits.where(:ship_id => jednotka.id, :user_id => user.id).first
+					  target_orbit = target.orbits.where(:ship_id => jednotka.id, :user_id => user.id).first
+					  if source_orbit
+						  unless target_orbit
+							  target_orbit = Orbit.new(
+									  :ship_id => jednotka.id,
+									  :planet_id => target.id,
+									  :number => 0,
+							      :user_id => user.id)
 						  end
 						  success = true
-						  source_squad.update_attribute(:number, source_squad.number - pocet)
-						  target_squad.update_attribute(:number, target_squad.number + pocet)
-						  self.zapis_udalosti(self.user, "Bylo presunuto #{pocet} ks #{jednotka.name} z #{self.name} na #{target.name} leno, Za presun zaplaceno #{Constant.presun_vyrobku * pocet} solaru.")
+						  source_orbit.update_attribute(:number, source_orbit.number - pocet)
+						  target_orbit.update_attribute(:number, target_orbit.number + pocet)
+						  user.zapis_operaci(user, "Bylo presunuto #{pocet} ks #{jednotka.name} z #{self.name} na #{target.name} leno, Za presun zaplaceno #{Constant.presun_vyrobku * pocet} solaru.")
 					  end
 				  end
-				  msg = "Bylo presunuto #{total_unit} ks z #{self.name} na #{target.name} leno, Za presun zaplaceno #{Constant.presun_vyrobku * total_unit} solaru."
+				  msg = "Bylo presunuto #{total_ships} ks z planety #{self.name} na planetu #{target.name}, Za presun zaplaceno #{Constant.ship_movement_cost * total_ships} solaru."
 			  else
 				  msg = flag
 			  end
 		  else
-			  msg = "Nemate dostatek mista na prichozim lenu."
+			  msg = "Nemate dostatek mista na prichozi planete."
 		  end
 	  else
 		  msg = "Nemuzes presouvat medzi stejnou planetou."
