@@ -14,6 +14,7 @@ class Prepocet
       Arrakis.kontrola_fremenu
       Prepocet.produkce_melanz(order)
 
+      Prepocet.reset_vyhosteni
       Prepocet.udalosti
 
       Prepocet.kontrola_zakonu
@@ -60,6 +61,12 @@ class Prepocet
     end
     puts "Eody vyvtoreny"
     return order
+  end
+
+  def self.reset_vyhosteni
+	  House.all.each do |h|
+		  h.update_attribute 'pocet_vyhosteni', 0 if h.pocet_vyhosteni > 0
+	  end
   end
 
   def self.produkce_suroviny(order)

@@ -322,7 +322,7 @@ class Field < ActiveRecord::Base
 	end
 
 	def self.lena_s_kasarnou(user)
-		field = user.fields.joins(:estates).where("estates.building_id = ?", Building.kasaren.id)
+		field = user.fields.joins(:estates).where("estates.building_id = ?", Building.kasaren.id) if Building.kasaren
 		field
 	end
 
