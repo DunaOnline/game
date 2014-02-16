@@ -2,7 +2,7 @@
   <tbody><tr>	<td>
     <%= link_to '⌂', help_path %> »
     <%= link_to 'Armáda', units_path %> »
-    <%= link_to 'Rozmiestnenie armady', squads_path %>
+    <%= link_to 'Rozmiestnenie Vzdusnej armady', orbits_path %>
   </td>
 
   </tr>
@@ -61,14 +61,14 @@
     <th class="thf left_align" colspan="5">
       <%= form_tag('/move_orbits')  %>
       <%= select_tag 'orbits_select', options_for_select(@planet_with_orbits.collect { |p| [p.name, p.id] }) %>
-      <%= link_to "Prejdi na leno", 'orbits', :class => 'select_orbit' %>
+      <%= link_to "Prejdi na planetu", 'orbits', :class => 'select_orbit' %>
 
 
     </th>
   </tr>
   <tr>
     <th class="thf" colspan="5">
-      <h3>Vaše jednotky na lenu <%= @planet ? @planet.name : "Nemate vybratou planetu, Zobrazene jednotky na vsetkych planetach." %>  </h3>
+      <h3>Vaše jednotky na planete <%= @planet ? @planet.name : "Nemate vybratou planetu, Zobrazene jednotky na vsetkych planetach." %>  </h3>
     </th>
   </tr>
 

@@ -40,14 +40,16 @@
 <table class="tab3" style="height:18px;">
   <% for post in @posts %>
     <tr>
-        <td class="tdpl" style="word-break:break-all; padding: 0px !important; width:130px !important; background-image: url(<%= cesta_rod(post.user.house.name, "dom") %>) !important; background-repeat: repeat;">
-        <div class="poster" ><b><a class=""><%= link_to post.user.nick, user_url(post.user), :class => post.user.barvicky, :title => post.user.barvicky %></a></b>
+        <td class="tdpl" style="word-break:break-all; padding: 0px !important; width:130px !important; background-image: url(<%= cesta_rod(post.user ? post.user.house.name : 'Zmazan' , "dom") %>) !important; background-repeat: repeat;">
+        <div class="poster" ><b><a class=""><%= link_to post.user ? post.user.nick : 'Zmazan', post.user ? user_url(post.user) : '#', :class => post.user ? post.user.barvicky : {}, :title => post.user ? post.user.barvicky : {} %></a></b>
         <br><%= format_date_time post.created_at %>
-        <% if logged_in? %> 
-            <% if admin_or_owner?(post.user.id) %>
-                <br><%= link_to  "Editovat", edit_post_path(post) %> |
-                <%= link_to "Smazat", post, :confirm => 'Opravdu smazat příspěvek?', :method => :delete %>
-              <% end %>
+        <% if logged_in? %>
+            <% if post.user %>
+                <% if admin_or_owner?(post.user.id) %>
+                    <br><%= link_to  "Editovat", edit_post_path(post) %> |
+                    <%= link_to "Smazat", post, :confirm => 'Opravdu smazat příspěvek?', :method => :delete %>
+                  <% end %>
+                <% end %>
           <% end %>
           </div>
           

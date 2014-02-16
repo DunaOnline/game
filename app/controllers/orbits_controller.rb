@@ -9,7 +9,8 @@ class OrbitsController < ApplicationController
 	  @user = current_user
 
 	  if params[:planet]
-		  @planet = Planet.find(params[:planet])
+		  planet = Planet.where(params[:planet]).first
+		  @planet = planet if planet && planet.vlastni_pole(current_user)
 	  end
 
     respond_to do |format|
@@ -77,7 +78,7 @@ class OrbitsController < ApplicationController
 	  elsif params[:zrusit]
 	  msg, flag = @planet.sell_ship(par,current_user)
 		  if flag
-			  redirect_to orbit_path(@planet), :notice => msg
+			  redirect_to orbit_path(@planet), :alert => msg
 		  else
 			  redirect_to :back, :alert => msg
 		  end
