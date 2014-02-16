@@ -19,16 +19,27 @@ class Market < ActiveRecord::Base
       if self.buy_check(user, amount)
         self.b_goods_u(amount, user) if self.s_goods(amount)
       else
-        enough_for = (solary / self.price).round(2) if amount <= self.amount
-        enough_for = self.amount if amount > self.amount
-        enough_for -= 0.01 if enough_for * self.price > solary
+	      if self.area == "E" || self.area == "P"
+		      enough_for = (solary / self.price).round(0) if amount <= self.amount
+		      enough_for = self.amount if amount > self.amount
+		      while enough_for * self.price > solary do
+			      enough_for -= 1
+		      end
+	      else
+		      enough_for = (solary / self.price).round(2) if amount <= self.amount
+		      enough_for = self.amount if amount > self.amount
+		      while enough_for * self.price > solary do
+			      enough_for -= 0.01
+		      end
+	      end
+
         self.b_goods_u(enough_for, user) if self.s_goods(enough_for)
       end
     end
   end
 
   def b_goods_u(amount, user)
-    user.update_attribute(:solar, (user.solar - amount * self.price).round(2))
+    user.update_attribute(:solar, (user.solar - (amount * self.price).round(2)))
     user.goods_to_buyer(self.area, amount)
     self.update_attribute(:amount, self.amount - amount)
     MarketHistory.new(
@@ -36,7 +47,7 @@ class Market < ActiveRecord::Base
         :market_id => self.id,
         :user_id => user.id
     ).save
-    self.zapis_obchodu(user.id, "Bylo nakoupeno #{amount} #{self.show_area} za celkem #{amount * self.price} solaru")
+    self.zapis_obchodu(user.id, "Bylo nakoupeno #{amount} #{self.show_area} za celkem #{(amount * self.price).round(2)} solaru")
   end
 
   def buy_goods_house(amount, house)
@@ -45,25 +56,37 @@ class Market < ActiveRecord::Base
       if self.buy_check(buyer_house, amount)
         self.b_goods_h(amount, buyer_house) if self.s_goods(amount)
       else
-        enough_for = (buyer_house.solar / self.price).round(2)
-        enough_for = self.amount if enough_for > self.amount
-        enough_for -= 0.01 if enough_for * self.price > buyer_house.solar
+	      if self.area == "E" || self.area == "P"
+		      enough_for = (buyer_house.solar / self.price).round(0) if amount <= self.amount
+		      enough_for = self.amount if amount > self.amount
+		      while enough_for * self.price > buyer_house.solar do
+			      enough_for -= 1
+		      end
+	      else
+	        enough_for = (buyer_house.solar / self.price).round(2)
+	        enough_for = self.amount if enough_for > self.amount
+	        while enough_for * self.price > buyer_house.solar do
+		        enough_for -= 0.01
+	        end
+        end
         self.b_goods_h(enough_for, buyer_house) if self.s_goods(enough_for)
       end
     end
   end
 
   def s_goods(amount)
-    flag = self.user.update_attribute(:solar, self.user.solar + amount * self.price) if self.user_id > 0
-    self.user.zapis_operaci("Bylo prodano #{amount} #{self.show_area} za celkem #{amount * self.price} solaru") if self.user_id > 0
-    flag = self.subhouse.update_attribute(:solar, self.subhouse.solar + amount * self.price) if self.subhouse
-    self.subhouse.zapis_operaci("Bylo prodano #{amount} #{self.show_area} za celkem #{amount * self.price} solaru") if self.subhouse
-    flag = self.house.update_attribute(:solar, self.house.solar + amount * self.price) if self.house
-    self.house.zapis_operaci("Bylo prodano #{amount} #{self.show_area} za celkem #{amount * self.price} solaru") if self.house
+	  sum = (amount * self.price).round(2)
+    flag = self.user.update_attribute(:solar, self.user.solar + sum) if self.user_id > 0 && amount > 0
+    self.user.zapis_operaci("Bylo prodano #{amount} #{self.show_area} za celkem #{sum} solaru") if self.user_id > 0
+    flag = self.subhouse.update_attribute(:solar, self.subhouse.solar + sum) if self.subhouse
+    self.subhouse.zapis_operaci("Bylo prodano #{amount} #{self.show_area} za celkem #{sum} solaru") if self.subhouse
+    flag = self.house.update_attribute(:solar, self.house.solar + sum) if self.house
+    self.house.zapis_operaci("Bylo prodano #{amount} #{self.show_area} za celkem #{sum} solaru") if self.house
     flag
   end
 
   def b_goods_h(amount, buyer_house)
+
     buyer_house.update_attribute(:solar, (buyer_house.solar - amount * self.price).round(2))
     buyer_house.goods_to_buyer(self.area, amount)
     self.update_attribute(:amount, self.amount - amount)
@@ -72,7 +95,7 @@ class Market < ActiveRecord::Base
         :market_id => self.id,
         :house_id => buyer_house.id
     ).save
-    buyer_house.zapis_operaci("Bylo nakoupeno #{amount} #{self.show_area} za celkem #{amount * self.price} solaru")
+    buyer_house.zapis_operaci("Bylo nakoupeno #{amount} #{self.show_area} za celkem #{(amount * self.price).round(2)} solaru")
   end
 
   def buy_goods_subhouse(amount, subhouse)
@@ -81,10 +104,20 @@ class Market < ActiveRecord::Base
       if self.buy_check(buyer_suhouse, amount)
         self.b_goods_mr(amount, buyer_suhouse) if self.s_goods(amount)
       else
-        enough_for = (buyer_suhouse.solar / self.price).round(2) if amount <= self.amount
-        enough_for = self.amount if amount > self.amount
-        enough_for -= 0.01 if enough_for * self.price > buyer_suhouse.solar
-        self.b_goods_mr(enough_for, buyer_suhouse) if self.s_goods(enough_for)
+	      if self.area == "E" || self.area == "P"
+		      enough_for = (buyer_suhouse.solar / self.price).round(0) if amount <= self.amount
+		      enough_for = self.amount if amount > self.amount
+		      while enough_for * self.price > buyer_suhouse.solar do
+			      enough_for -= 1
+		      end
+		    else
+	        enough_for = (buyer_suhouse.solar / self.price).round(2) if amount <= self.amount
+	        enough_for = self.amount if amount > self.amount
+	        while enough_for * self.price > buyer_suhouse.solar do
+		        enough_for -= 0.01
+	        end
+		    end
+	      self.b_goods_mr(enough_for, buyer_suhouse) if self.s_goods(enough_for)
       end
     end
   end
@@ -147,7 +180,7 @@ class Market < ActiveRecord::Base
   end
 
   def before_buy_check(who, amount)
-    who.solar > 0 && self.amount > 0
+    who.solar > 0 && amount > 0
   end
 
   def discount

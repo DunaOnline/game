@@ -7,6 +7,10 @@ class PlanetTypesController < ApplicationController
 
   def show
     @planet_type = PlanetType.find(params[:id])
+	  respond_to do |format|
+		  format.html # show.html.erb
+		  format.json { render json: @planet_type }
+	  end
   end
 
   def new

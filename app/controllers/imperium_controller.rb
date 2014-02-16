@@ -87,8 +87,8 @@ class ImperiumController < ApplicationController
 		    end
 
 		    flash[:notice] = msg
-		    Imperium.zapis_operaci(msg + " hracem #{current_user.nick}.")
-		    rodu.zapis_operaci(msg.gsub("Rodu #{rodu.name} poslano ", "Obdrzeno z imperialni pokladny ") + " od hrace #{current_user.nick}.")
+		    Imperium.zapis_operaci(msg + " hracem #{current_user.nick}.  Poznamka : " + params[:comment])
+		    rodu.zapis_operaci(msg.gsub("Rodu #{rodu.name} poslano ", "Obdrzeno z imperialni pokladny ") + " od hrace #{current_user.nick}.  Poznamka : " + params[:comment])
 		    redirect_to sprava_imperia_path
 	    else
 		    flash[:alert] = "Nemuzes posilat nulu."

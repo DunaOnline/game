@@ -18,6 +18,10 @@ class PlanetsController < ApplicationController
       global_bonus = Constant.cena_noveho_lena * f_count
       @cena_noveho_lena_melanz = (@planet.cena_noveho_lena_mel * nar_tech_bonus * tech_bonus * global_bonus).round(2)
       @cena_noveho_lena_solary = (@planet.cena_noveho_lena_sol * nar_tech_bonus * tech_bonus * global_bonus).round(2)
+      respond_to do |format|
+	      format.html # show.html.erb
+	      format.json { render json: @planet }
+      end
     end
   end
 

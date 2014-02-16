@@ -21,7 +21,7 @@
   <tr>
     <th class="l"><%= sortable 'nick', 'Jméno hráče' %></th>
     <th><%= sortable 'house_id', 'Národ'  %></th>
-    <th>Celková síla</th>
+    <th>Pozemny utok</th>
     <th><%= sortable 'influence', 'Vliv' %></th>
     <th style="width:80px">Počet lén</th>
     <th class="r" style="width:75px">Akce</th>
@@ -31,7 +31,7 @@
       <tr>
         <td><%= link_to user.nick, user, :class => user.barvicky, :title => user.barvicky %></td>
         <td><%= link_to user.house.name, user.house %></td>
-        <td>11111***</td>
+        <td><%= user.pozemni_utok %></td>
         <td><%= user.influence %></td>
         <td><%= user.fields.count %></td>
         <td>
