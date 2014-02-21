@@ -125,7 +125,7 @@
                   </li>
               <% end %>
 
-              <% if current_user.planets_with_kosmodrom %>
+              <% if current_user.planets_with_kosmodrom.first %>
                   <li><%= link_to 'Verbování vesmirnych jednotek', orbit_path(current_user.planets_with_kosmodrom.first.id) %></li>
               <% else %>
                   <li>
